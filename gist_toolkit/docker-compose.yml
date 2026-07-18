@@ -1,0 +1,114 @@
+version: '3.8'
+
+services:
+  # 1. Database: PostgreSQL with Persistent Storage
+  postgres:
+    image: postgres:15-alpine
+    container_name: production_postgres
+    environment:
+      POSTGRES_USER: admin_user
+      POSTGRES_PASSWORD: secure_db_password
+      POSTGRES_DB: main_database
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin_user -d main_database"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - app_network
+
+  # 2. Cache & Message Broker: Redis
+  redis:
+    image: redis:7-alpine
+    container_name: production_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - app_network
+
+  # 3. Backend: FastAPI Application
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.backend
+    container_name: production_backend
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+    volumes:
+      - ./backend:/app
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://admin_user:secure_db_password@postgres:5432/main_database
+      - REDIS_URL=redis://redis:6379/0
+      - ENVIRONMENT=development
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    networks:
+      - app_network
+
+  # 4. Background Workers: Celery (Running heavy tasks)
+  worker:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.backend
+    container_name: production_worker
+    command: celery -A tasks.celery_app worker --loglevel=info
+    volumes:
+      - ./backend:/app
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://admin_user:secure_db_password@postgres:5432/main_database
+      - REDIS_URL=redis://redis:6379/0
+    depends_on:
+      - redis
+      - postgres
+    networks:
+      - app_network
+
+  # 5. Frontend Development Server: React + Vite
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.frontend
+    container_name: production_frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - VITE_API_URL=http://localhost:8000/api/v1
+    depends_on:
+      - backend
+    networks:
+      - app_network
+
+  # 6. Database Client interface: pgAdmin
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin_console
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@platform.com
+      PGADMIN_DEFAULT_PASSWORD: adminpassword123
+    ports:
+      - "8080:80"
+    depends_on:
+      - postgres
+    networks:
+      - app_network
+
+networks:
+  app_network:
+    driver: bridge
+
+volumes:
+  pg_data:
+  redis_data:

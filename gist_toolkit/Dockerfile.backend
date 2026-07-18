@@ -1,0 +1,56 @@
+# Gist: Dockerfile.backend
+# Multi-stage production Dockerfile using Astral's UV compiler for speed and security.
+
+# ==========================================
+# Stage 1: Build & Dependency Resolution
+# ==========================================
+FROM python:3.11-slim-bookworm AS builder
+
+# 1. Install uv compiler globally
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
+
+# 2. Set environment variables
+ENV UV_COMPILE_BYTECODE=1
+ENV UV_LINK_MODE=copy
+
+WORKDIR /app
+
+# 3. Copy project definition locks
+COPY pyproject.toml uv.lock ./
+
+# 4. Compile dependencies to build a virtual environment
+# We install with --no-install-project to cache the compiled layers separately from source code changes
+RUN --mount=type=cache,target=/root/.cache/uv \
+    uv venv /opt/venv && \
+    . /opt/venv/bin/activate && \
+    uv sync --no-install-project --no-dev
+
+# ==========================================
+# Stage 2: Production Execution (Minimal Layer)
+# ==========================================
+FROM python:3.11-slim-bookworm AS runner
+
+# 1. Set environment variables
+ENV PYTHONUNBUFFERED=1
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PATH="/opt/venv/bin:$PATH"
+
+WORKDIR /app
+
+# 2. Copy virtual environment compiled in Builder stage
+COPY --from=builder /opt/venv /opt/venv
+
+# 3. Copy application source code
+COPY . .
+
+# 4. Create non-privileged user for security compliance
+RUN groupadd -g 999 appuser && \
+    useradd -r -u 999 -g appuser appuser && \
+    chown -R appuser:appuser /app
+
+USER appuser
+
+EXPOSE 8000
+
+# Execute server using compiled virtual environment binary paths
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]

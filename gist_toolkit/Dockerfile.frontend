@@ -1,0 +1,48 @@
+# Gist: Dockerfile.frontend
+# Multi-stage production Dockerfile compiling Vite assets and hosting on Nginx.
+
+# ==========================================
+# Stage 1: Build & Compile Assets
+# ==========================================
+FROM node:18-alpine AS builder
+
+WORKDIR /app
+
+# 1. Copy package definitions and install dependencies
+COPY package.json package-lock.json ./
+RUN npm ci --silent
+
+# 2. Copy source and build static bundle
+COPY . .
+RUN npm run build
+
+# ==========================================
+# Stage 2: Production Nginx Server
+# ==========================================
+FROM nginx:1.23-alpine AS runner
+
+# 1. Copy custom Nginx configuration to support SPA routing (fallback to index.html)
+COPY <<EOF /etc/nginx/conf.d/default.conf
+server {
+    listen 80;
+    server_name localhost;
+
+    location / {
+        root /usr/share/nginx/html;
+        index index.html index.htm;
+        try_files \$uri \$uri/ /index.html; # Redirect non-file URLs to React index
+    }
+
+    error_page 500 502 503 504 /50x.html;
+    location = /50x.html {
+        root /usr/share/nginx/html;
+    }
+}
+EOF
+
+# 2. Copy compiled static files from builder
+COPY --from=builder /app/dist /usr/share/nginx/html
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
