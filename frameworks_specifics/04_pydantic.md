@@ -1,132 +1,127 @@
-# Pydantic v2 Specification
+# Pydantic v2 validation Specification (Comprehensive Masterclass)
 
-A deep-dive reference guide to Pydantic v2's core architecture, validation lifecycles, strict parsing, serialization, and FastAPI schema configurations.
+Pydantic is Python's leading data validation and serialization library. Pydantic v2 represents a complete rewrite in Rust, offering massive performance gains and a redesigned validation API.
 
 ---
 
-## 1. Validation Mechanics & Rust Core (Why & What)
+## 1. Core Validation Mechanics (Why & What)
 
-### Why Pydantic v2?
-Pydantic is the leading validation library for Python. Version 2.0 was a complete rewrite, with the core validation logic moved to a Rust library (`pydantic-core`), making it 5-50x faster.
+### Why Use Pydantic?
+FastAPI uses Pydantic to parse and validate incoming JSON payloads. It maps strings to integers, parses ISO date strings to datetime objects, and converts dictionaries to typed class objects.
+* **Lax vs. Strict Validation Mode**:
+  * **Lax Mode (Default)**: Pydantic attempts to coerce data to match the target type (e.g. converting the string `"123"` to the integer `123`, or `"true"` to the boolean `True`).
+  * **Strict Mode**: Pydantic does not perform data coercion, raising a validation error if types do not match exactly. Enforcing strict mode prevents bugs caused by accidental type conversions.
 
-### Strict vs. Lax Validation Mode
-* **Lax Mode (Default)**: Pydantic tries to coerce types. If a field expects a string and receives an integer (`123`), Pydantic converts it to `"123"`.
-* **Strict Mode**: Pydantic forbids type coercion. If a field is typed as `str` and receives an integer, validation fails instantly. This prevents silent bugs (like accidentally accepting floats into integer IDs).
+### Model Configurations & Aliases
+Web frameworks often accept API payloads using camelCase (`transactionAmount`), but Python style guides (PEP-8) dictate using snake_case variables (`transaction_amount`). Pydantic handles this mismatch using field aliases and serialization mappings.
 
-### The Validation and Hook Lifecycle
-When data is fed to a Pydantic model:
-1. **Pydantic Core (Rust)** parses input JSON/Dict keys, verifying basic structures.
-2. **Before Field Validators** (`@field_validator(..., mode='before')`) allow custom changes to the raw input (e.g. trimming whitespaces, parsing stringified dates) before type coercion.
-3. **Pydantic Type Check** validates matching types.
-4. **After Field Validators** (`@field_validator(..., mode='after')`) perform validation checks on the validated type (e.g., verifying if an email domain matches allowed domains).
-5. **Model-level Validators** (`@model_validator(mode='after')`) compare multiple fields (e.g., checking that `password` equals `confirm_password`).
+---
 
-```mermaid
-graph TD
-    Input[Raw Input Data] --> RustCore[1. Pydantic Core Parser]
-    RustCore --> ValBefore[2. @field_validator mode='before']
-    ValBefore --> TypeCoercion[3. Type Coercion & Core Checks]
-    TypeCoercion --> ValAfter[4. @field_validator mode='after']
-    ValAfter --> ModelVal[5. @model_validator mode='after']
-    ModelVal --> ModelObject[Valid Model Instance]
+## 2. Basic Validation & Field Constraints (How)
+
+### Declaring Basic Models
+Set constraints using the `Field` helper to enforce bounds and pattern matching on input parameters.
+
+```python
+from typing import Optional
+from pydantic import BaseModel, Field, EmailStr
+
+class UserProfile(BaseModel):
+    # Enforce type checking strictly, allowing serialization using aliases
+    model_config = {
+        "strict": True,
+        "populate_by_name": True  # Allows instantiating model using snake_case or alias key
+    }
+
+    username: str = Field(..., min_length=3, max_length=50)
+    email: EmailStr  # Built-in RFC validation
+    age: int = Field(..., ge=18, le=120)  # Must be >= 18 and <= 120
+    postal_code: str = Field(..., pattern=r"^\d{5}$")  # Exact 5 digit regex pattern
+    company_name: Optional[str] = Field(None, alias="companyName")
 ```
 
 ---
 
-## 2. Validation Blueprint (How)
+## 3. Advanced Custom Validation & Serialization (How)
 
-### Gist: pydantic_v2_validation.py
-A complete Pydantic model blueprint illustrating strict validation, aliases, before/after validators, model-level validation, and serialization control.
+### Gist: advanced_pydantic_validation.py
+Demonstrates field validators, model validators, aliases mapping, and serialization outputs.
 
 ```python
-# Gist: pydantic_v2_validation.py
+# Gist: advanced_pydantic_validation.py
 from datetime import datetime
 from typing import List, Optional
-from pydantic import BaseModel, Field, EmailStr, field_validator, model_validator, ValidationError
+from pydantic import BaseModel, Field, field_validator, model_validator, field_serializer
 
-# 1. Custom Address Schema
-class UserAddress(BaseModel):
-    street: str
-    city: str
-    postal_code: str = Field(..., pattern=r"^\d{5}(-\d{4})?$")  # Enforces ZIP pattern
+class TransactionRequest(BaseModel):
+    model_config = {
+        "strict": True,
+        "populate_by_name": True
+    }
 
-# 2. Main User Schema (Strict Validation Enabled)
-class UserRegistrationSchema(BaseModel):
-    # Enforces strict mode globally for this model (no type coercions allowed)
-    model_config = {"strict": True, "populate_by_name": True}
+    account_id: int = Field(..., alias="accountId")
+    amount: float = Field(..., gt=0.0)
+    transaction_type: str = Field(..., alias="transactionType")
+    signature: str
+    timestamp: Optional[datetime] = None
 
-    # Field mappings and configuration
-    email: EmailStr
-    username: str = Field(..., min_length=3, max_length=50)
-    
-    # Aliasing: Map 'accessKey' from incoming JSON payload to 'access_key'
-    access_key: str = Field(..., alias="accessKey")
-    
-    password: str = Field(..., min_length=8)
-    confirm_password: str = Field(..., min_length=8)
-    
-    # Nested configurations
-    address: Optional[UserAddress] = None
-    created_at: Optional[datetime] = None
-
-    # ---------------------------------------------------------
-    # FIELD VALIDATORS
-    # ---------------------------------------------------------
-    @field_validator("username", mode="before")
+    # 1. FIELD VALIDATOR (mode='before')
+    # Why: Cleans up input strings before standard type-checking runs
+    @field_validator("transaction_type", mode="before")
     @classmethod
-    def clean_username(cls, v: str) -> str:
-        # Why: Clean up inputs before type checking
+    def clean_transaction_type(cls, v: str) -> str:
         if isinstance(v, str):
             return v.strip().lower()
         return v
 
-    @field_validator("password", mode="after")
+    # 2. FIELD VALIDATOR (mode='after')
+    # Why: Runs validation checks on the resolved type
+    @field_validator("transaction_type", mode="after")
     @classmethod
-    def verify_password_complexity(cls, v: str) -> str:
-        # Why: Runs validation logic after standard type validations pass
-        special_chars = "!@#$%^&*(),.?\":{}|<>"
-        if not any(char in special_chars for char in v):
-            raise ValueError("Password must contain at least one special character")
+    def validate_type_options(cls, v: str) -> str:
+        options = ["deposit", "withdrawal"]
+        if v not in options:
+            raise ValueError(f"transactionType must be one of: {options}")
         return v
 
-    # ---------------------------------------------------------
-    # MODEL-LEVEL VALIDATORS
-    # ---------------------------------------------------------
+    # 3. MODEL VALIDATOR (mode='after')
+    # Why: Cross-compares multiple fields after all fields resolve
     @model_validator(mode="after")
-    def verify_password_match(self) -> "UserRegistrationSchema":
-        # Why: Cross-field checks must happen at the model level
-        if self.password != self.confirm_password:
-            raise ValueError("password and confirm_password must match")
+    def verify_withdrawal_limits(self) -> "TransactionRequest":
+        if self.transaction_type == "withdrawal" and self.amount > 10000.0:
+            raise ValueError("Withdrawals cannot exceed $10,000 in a single transaction")
         return self
 
-# ---------------------------------------------------------
-# EXECUTION TESTING
-# ---------------------------------------------------------
-if __name__ == "__main__":
-    valid_payload = {
-        "email": "alice@innovate.com",
-        "username": "  AliceSmith  ",
-        "accessKey": "secret_key_123",
-        "password": "SecurePassword123!",
-        "confirm_password": "SecurePassword123!",
-        "address": {
-            "street": "123 Main St",
-            "city": "Boston",
-            "postal_code": "02108"
-        }
-    }
+    # 4. CUSTOM FIELD SERIALIZER
+    # Why: Formats output data structures during serialization (model.model_dump())
+    @field_serializer("timestamp")
+    def serialize_timestamp(self, dt: Optional[datetime]) -> Optional[str]:
+        if dt:
+            return dt.strftime("%Y-%m-%dT%H:%M:%SZ")
+        return None
 
-    try:
-        user = UserRegistrationSchema(**valid_payload)
-        # Serialization: model_dump ignores aliases, returning pythonic snake_case
-        print("Validated Model Dump:")
-        print(user.model_dump())
-        
-        # Serialization: model_dump_json serializes fields back using original alias names
-        print("\nJSON Output (with aliases):")
-        print(user.model_dump_json(by_alias=True, indent=2))
-        
-    except ValidationError as e:
-        print("Validation errors encountered:")
-        print(e.json(indent=2))
+# Usage & Testing
+try:
+    # Invalid amount validation test
+    tx = TransactionRequest(
+        accountId=101,
+        amount=-5.0,
+        transactionType=" Deposit ",
+        signature="sha256hash"
+    )
+except Exception as e:
+    # e.errors() returns a structured list of validation errors
+    print("Validation failed:", e)
+
+# Valid instance mapping using camelCase input keys
+valid_tx = TransactionRequest(
+    accountId=101,
+    amount=250.0,
+    transactionType=" deposit ", # gets cleaned to "deposit"
+    signature="sha256hash",
+    timestamp=datetime.utcnow()
+)
+
+print(valid_tx.model_dump_json(by_alias=True))
+# Returns: {"accountId": 101, "amount": 250.0, "transactionType": "deposit", ...}
 ```

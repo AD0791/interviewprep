@@ -1,141 +1,170 @@
-# SWR and Axios Client Specification
+# SWR and Axios Integration Specification (Comprehensive Masterclass)
 
-A deep-dive reference guide to SWR caching keys, optimistic mutations, dependent fetching, and Axios interceptor configurations.
+SWR (Stale-While-Revalidate) is a React hook library for data fetching. It simplifies network state by returning cached data first (stale), then sending a fetch request in the background (revalidate), and finally updating the UI with the fresh data. Axios acts as the underlying HTTP client managing HTTP requests and token interception.
 
 ---
 
-## 1. Network Caching & Client Architecture (Why & What)
+## 1. Caching Philosophy & Interception Architecture (Why & What)
 
-### Why Combine SWR and Axios?
-SWR manages cache states, timing configurations, background revalidations, and connection recovery. Axios handles connection setups, HTTP verb configurations, serializations, and header interceptions. Combining them creates a clean, robust data-fetching layer.
-
-### SWR Cache Key Design
-SWR resolves cache entries based on the **key** passed as the first argument to `useSWR(key, fetcher)`.
-* **String Keys**: Simple endpoints (e.g., `"/users"`).
-* **Object / Array Keys**: Encompasses complex filter dependencies (e.g., `["/metrics", tenantId, dateRange]`). If any parameter in the key changes, SWR automatically invalidates the cache and fetches new data.
-* **Function Keys**: Dynamic endpoints. If the function throws or returns a falsy value, SWR suspends execution. This is essential for **dependent fetching** (waiting for User ID before fetching User Profiles).
+### Stale-While-Revalidate Lifecycle
+SWR eliminates the need for global state managers (like Redux) to store server data. 
+1. **Request**: SWR identifies a request by a unique "cache key" string (typically the API URL).
+2. **Stale Delivery**: If the key exists in the cache, SWR instantly returns the cached data, allowing the page to load with no spinner delay.
+3. **Revalidation**: SWR fetches fresh data from the server in the background.
+4. **Update**: Once the request resolves, SWR updates the cache and re-renders the component.
 
 ```mermaid
 graph TD
-    KeyCheck{SWR Key changed?} -->|Yes| CacheCheck{Key exists in Cache Map?}
-    CacheCheck -->|Yes| StaleRender[1. Render Stale Cached Data]
-    CacheCheck -->|No| ShowLoading[1. Show Loading State]
-    StaleRender --> BackgroundFetch[2. Execute Axios fetcher in background]
-    ShowLoading --> BackgroundFetch
-    BackgroundFetch --> UpdateCache[3. Write Response to Cache]
-    UpdateCache --> UpdateUI[4. Re-render UI with Fresh Data]
+    Key[Key: /api/users] --> CacheCheck{Key in local cache?}
+    CacheCheck -->|Yes| Stale[Return stale cached data instantly]
+    CacheCheck -->|No| Fetch[Trigger fetcher function]
+    Stale --> Fetch
+    Fetch --> Network[Query backend API via Axios]
+    Network --> Update[Update cache & re-render component]
 ```
+
+### Axios Interceptor Architecture
+Axios allows you to configure interceptors to run before requests are sent or after responses are received.
+* **Why**: Inject authorization tokens (JWT) into outgoing headers, catch expired tokens (401 Unauthorized), and handle automatic logouts or token refreshes without duplicating authentication logic across individual API calls.
 
 ---
 
-## 2. Implementation Blueprint (How)
+## 2. Basic Setup & Client Configuration (How)
 
-### Gist: swr_axios_integration.ts
-A complete TypeScript module configuring Axios clients with JWT token insertion, error interceptors, and custom SWR hooks for dependent fetching.
+### Step 1: Axios Client with Interceptors
+Create a centralized HTTP client instance.
 
 ```typescript
-// Gist: swr_axios_integration.ts
-import axios, { AxiosError } from 'axios';
-import useSWR from 'swr';
+import axios from 'axios';
 
-// ---------------------------------------------------------
-// 1. AXIOS CLIENT SETUP WITH INTERCEPTORS
-// ---------------------------------------------------------
-export const httpClient = axios.create({
+export const bankingClient = axios.create({
   baseURL: 'http://localhost:8000/api/v1',
+  headers: { 'Content-Type': 'application/json' },
   timeout: 5000,
 });
 
-// Request Interceptor: Inject JWT token into authorization headers
-httpClient.interceptors.request.use(
-  (config) => {
-    const token = localStorage.getItem('access_token');
-    if (token && config.headers) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-  },
-  (error) => Promise.reject(error)
-);
+// Request Interceptor: Inject JWT token from localStorage
+bankingClient.interceptors.request.use((config) => {
+  const token = localStorage.getItem('token');
+  if (token && config.headers) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
 
-// Response Interceptor: Intercept 401 Unauthorized errors to trigger logout/refresh
-httpClient.interceptors.response.use(
+// Response Interceptor: Redirect to login on 401 errors
+bankingClient.interceptors.response.use(
   (response) => response,
-  (error: AxiosError) => {
+  (error) => {
     if (error.response?.status === 401) {
-      localStorage.removeItem('access_token');
+      localStorage.removeItem('token');
       window.location.href = '/login';
     }
     return Promise.reject(error);
   }
 );
 
-// Generic SWR Fetcher using Axios Client
-export const apiFetcher = (url: string) => 
-  httpClient.get(url).then((res) => res.data);
+// Generic SWR Fetcher
+export const swrFetcher = (url: string) => 
+  bankingClient.get(url).then((res) => res.data);
+```
 
-// ---------------------------------------------------------
-// 2. CUSTOM SWR HOOKS (Conditional & Dependent Fetching)
-// ---------------------------------------------------------
-interface UserProfile {
-  id: number;
-  name: string;
-  organization_id: number;
+---
+
+## 3. Advanced Mutation & Infinite Loading (How)
+
+### Gist: swr_mutations_infinite.ts
+A production-grade implementation of local optimistic updates and infinite scrolling lists.
+
+```typescript
+// Gist: swr_mutations_infinite.ts
+import useSWR, { useSWRConfig } from 'swr';
+import useSWRInfinite from 'swr/infinite';
+import { bankingClient, swrFetcher } from './httpClient';
+
+interface LedgerItem {
+  id: string;
+  amount: number;
+  description: string;
 }
 
-interface OrgStats {
-  member_count: number;
-  active_projects: number;
-}
+// ---------------------------------------------------------
+// 1. MUTATION & OPTIMISTIC UPDATES HOOK
+// ---------------------------------------------------------
+export const useLedger = () => {
+  const { mutate } = useSWRConfig();
+  const cacheKey = '/banking/ledger';
+  const { data, error, mutate: localMutate } = useSWR<LedgerItem[]>(cacheKey, swrFetcher);
 
-// Dependent Fetch Hook
-export const useOrganizationAnalytics = () => {
-  // Step 1: Fetch User Profile
-  const { data: userProfile, error: userError } = useSWR<UserProfile>(
-    '/users/me', 
-    apiFetcher
-  );
+  const postLedgerEntry = async (newEntry: Omit<LedgerItem, 'id'>) => {
+    if (!data) return;
 
-  // Step 2: Fetch Organization Analytics, dependent on userProfile loading successfully
-  // Why Function Key: SWR checks if the function returns null/falsy.
-  // If userProfile isn't loaded yet, it returns null and SWR suspends the request.
-  const { data: orgStats, error: statsError, mutate } = useSWR<OrgStats>(
-    () => (userProfile ? `/orgs/${userProfile.organization_id}/stats` : null),
-    apiFetcher,
-    {
-      revalidateOnFocus: false, // Prevents aggressive refresh on tab change
-      dedupingInterval: 10000,   // Cache is considered fresh for 10 seconds
-    }
-  );
+    // A. Create optimistic dummy object
+    const optimisticEntry: LedgerItem = { ...newEntry, id: `temp-${Date.now()}` };
+    const updatedData = [...data, optimisticEntry];
 
-  // Optimistic Cache Mutation
-  const incrementProjectCount = async () => {
-    if (!orgStats || !userProfile) return;
-
-    const targetUrl = `/orgs/${userProfile.organization_id}/stats`;
-
-    // 1. Optimistic Update (increment projects locally immediately)
-    const optimisticData = { ...orgStats, active_projects: orgStats.active_projects + 1 };
-    mutate(optimisticData, false);
+    // B. Write to local cache instantly, disabling background validation for now
+    localMutate(updatedData, false);
 
     try {
-      // 2. API Write Request
-      await httpClient.post(`/orgs/${userProfile.organization_id}/projects/create`);
-      // 3. Force revalidation
-      mutate();
+      // C. Run actual network write call
+      await bankingClient.post('/banking/ledger', newEntry);
+      
+      // D. Force trigger global cache re-validation to sync state
+      mutate(cacheKey);
     } catch (err) {
-      // 4. Rollback to original stats on error
-      mutate(orgStats, true);
+      // E. Rollback local cache to original data state on network failure
+      localMutate(data, true);
       throw err;
     }
   };
 
   return {
-    userProfile,
-    orgStats,
-    isLoading: !userProfile && !userError && !orgStats && !statsError,
-    isError: !!userError || !!statsError,
-    incrementProjectCount,
+    ledger: data,
+    isLoading: !data && !error,
+    postLedgerEntry,
+  };
+};
+
+// ---------------------------------------------------------
+// 2. INFINITE SCROLLING PAGINATION HOOK
+// ---------------------------------------------------------
+export const useInfiniteLedger = (pageSize = 10) => {
+  // Key generator function mapping page index to URL query params
+  const getKey = (pageIndex: number, previousPageData: LedgerItem[] | null) => {
+    // End reached
+    if (previousPageData && !previousPageData.length) return null;
+    // Returns key URL
+    return `/banking/ledger/infinite?page=${pageIndex + 1}&limit=${pageSize}`;
+  };
+
+  const { data, error, size, setSize, isValidating } = useSWRInfinite<LedgerItem[]>(
+    getKey,
+    swrFetcher,
+    { revalidateFirstPage: false }
+  );
+
+  // Flatten nested pages array into single flat list
+  const ledgerItems = data ? data.flat() : [];
+  const isLoadingMore =
+    isLoading || (size > 0 && data && typeof data[size - 1] === 'undefined');
+  const isReachedEnd =
+    data && (data[data.length - 1]?.length < pageSize);
+
+  const loadMore = () => {
+    if (!isLoadingMore && !isReachedEnd) {
+      setSize(size + 1);
+    }
+  };
+
+  const isLoading = !data && !error;
+
+  return {
+    ledgerItems,
+    isLoading,
+    isLoadingMore,
+    isReachedEnd,
+    loadMore,
   };
 };
 ```

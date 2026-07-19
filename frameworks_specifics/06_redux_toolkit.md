@@ -1,120 +1,191 @@
-# Redux Toolkit (RTK) Specification
+# Redux Toolkit Specification (Comprehensive Masterclass)
 
-A deep-dive reference guide to Redux Toolkit architecture, state immutability with Immer, slice mapping, selectors, and store configuration.
+Redux Toolkit (RTK) is the official, opinionated toolset for efficient Redux state management. It solves legacy Redux boilerplates by integrating Immer.js for mutating state declarations and standardizing middleware configurations.
 
 ---
 
-## 1. State Management Architecture (Why & What)
+## 1. Redux Architecture & Immer Integration (Why & What)
 
-### Why Use Redux Toolkit?
-Legacy Redux required massive boilerplate (actions, action creators, reducers, constants, middleware setup). Redux Toolkit (RTK) simplifies this by providing APIs like `createSlice` and `configureStore`, automatically configuring dev tools and middleware (like Redux Thunk).
-
-### Immer Integration Under the Hood
-In standard Redux, reducers must never mutate state. You had to copy objects using spread operators (`...state`). RTK’s `createSlice` integrates **Immer.js**. Immer wraps state changes in a "Draft" proxy, allowing you to write mutating code (e.g. `state.items.push(x)`) while translating it into a secure, immutable update under the hood.
-
-### Memoized Selectors (`createSelector`)
-When components select data from the store (`useSelector`), they re-render if the returned value changes. If your selector performs calculations (like filtering an array), it returns a new array reference every time, causing re-renders even if the underlying data didn't change. Memoized selectors cache their outputs, only recalculating if inputs change.
+### Redux Core Flow
+Redux enforces a unidirectional data flow to make state changes predictable:
+1. **Components** query global state using selectors and dispatch **Actions** to trigger changes.
+2. **Actions** represent payload structures detailing what occurred.
+3. **Reducers** accept the current State and Action, computing the new State.
+4. The **Store** holds the global state tree, notifying subscribed components to re-render.
 
 ```mermaid
 graph LR
-    Comp[React Component] -->|Dispatch Action| Slice[Reducer slice: mutates draft using Immer]
-    Slice -->|Update State| Store[Global Redux Store]
-    Store -->|Select state| Selector[Memoized Selector: createSelector]
-    Selector -->|Updated Value| Comp
+    Component[React Component] -->|1. Dispatch Action| Action[Action Creator]
+    Action -->|2. Send Action| Reducer[Reducer Engine]
+    Reducer -->|3. Compute state mutation| Store[Store State]
+    Store -->|4. Trigger Selector update| Component
+```
+
+### Why Choose Redux Toolkit?
+Legacy Redux required writing massive boilerplate code (actions, action creators, constants, reducers, and immutable copy operations using spread operators `...state`). 
+
+RTK resolves this using:
+* **`createSlice`**: Consolidates action creators and reducers into a single interface.
+* **Immer.js Integration**: Under the hood, RTK wraps your reducer logic in Immer. You can write standard JavaScript mutating syntax (e.g. `state.todos.push(todo)`) inside your reducers. Immer intercepts these operations and converts them to safe, immutable copy updates.
+* **Middleware Integration**: Automatically configures Redux DevTools and mounts `redux-thunk` by default to handle asynchronous operations.
+
+---
+
+## 2. Basic Setup & Slice Creation (How)
+
+### Step 1: Create a Slice
+Use `createSlice` to declare state properties, synchronous actions, and Immer-driven mutators.
+
+```typescript
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
+interface UserState {
+  id: number | null;
+  name: string;
+  isLoggedIn: boolean;
+}
+
+const initialState: UserState = {
+  id: null,
+  name: '',
+  isLoggedIn: false,
+};
+
+const userSlice = createSlice({
+  name: 'user',
+  initialState,
+  reducers: {
+    loginUser: (state, action: PayloadAction<{ id: number; name: string }>) => {
+      // Immer allows direct mutations safely
+      state.id = action.payload.id;
+      state.name = action.payload.name;
+      state.isLoggedIn = true;
+    },
+    logoutUser: (state) => {
+      state.id = null;
+      state.name = '';
+      state.isLoggedIn = false;
+    },
+  },
+});
+
+export const { loginUser, logoutUser } = userSlice.actions;
+export const userReducer = userSlice.reducer;
+```
+
+### Step 2: Configure Global Store
+Combine reducers and register middlewares.
+
+```typescript
+import { configureStore } from '@reduxjs/toolkit';
+
+export const store = configureStore({
+  reducer: {
+    user: userReducer,
+  },
+  // DevTools and Thunk middlewares are pre-configured automatically
+});
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
 ```
 
 ---
 
-## 2. Store Configuration Blueprint (How)
+## 3. Advanced Async Thunks & Selectors (How)
 
-### Gist: redux_store_setup.ts
-A complete Redux Toolkit setup demonstrating store configuration, IMMER-driven slices, async thunks, and memoized selectors.
+### Gist: rtk_thunks_selectors.ts
+A production-grade implementation of asynchronous side-effects using `createAsyncThunk` and memoized selector composition.
 
 ```typescript
-// Gist: redux_store_setup.ts
-import { configureStore, createSlice, createSelector, PayloadAction } from '@reduxjs/toolkit';
+// Gist: rtk_thunks_selectors.ts
+import { createSlice, createAsyncThunk, createSelector, PayloadAction } from '@reduxjs/toolkit';
+import axios from 'axios';
 
-// ---------------------------------------------------------
-// 1. STATE DEFINITION & SLICE
-// ---------------------------------------------------------
-interface Notification {
+interface Transaction {
   id: string;
-  message: string;
-  type: 'info' | 'error' | 'success';
+  amount: number;
+  status: 'pending' | 'success' | 'failed';
 }
 
-interface SystemState {
-  notifications: Notification[];
-  loadingState: 'idle' | 'pending' | 'succeeded' | 'failed';
+interface BankingState {
+  transactions: Transaction[];
+  loading: boolean;
+  error: string | null;
 }
 
-const initialState: SystemState = {
-  notifications: [],
-  loadingState: 'idle',
+const initialState: BankingState = {
+  transactions: [],
+  loading: false,
+  error: null,
 };
 
-const systemSlice = createSlice({
-  name: 'system',
-  initialState,
-  reducers: {
-    // Why Immer: We can use array.push() directly. Immer translates it to an immutable copy.
-    addNotification: (state, action: PayloadAction<Omit<Notification, 'id'>>) => {
-      const newNotification = {
-        ...action.payload,
-        id: Math.random().toString(36).substring(7),
-      };
-      state.notifications.push(newNotification);
-    },
-    removeNotification: (state, action: PayloadAction<string>) => {
-      state.notifications = state.notifications.filter((n) => n.id !== action.payload);
-    },
-    clearAllNotifications: (state) => {
-      state.notifications = [];
-    },
-    setLoadingState: (state, action: PayloadAction<SystemState['loadingState']>) => {
-      state.loadingState = action.payload;
-    },
-  },
-});
-
-// Export slice actions
-export const {
-  addNotification,
-  removeNotification,
-  clearAllNotifications,
-  setLoadingState,
-} = systemSlice.actions;
-
-// ---------------------------------------------------------
-// 2. STORE CONFIGURATION
-// ---------------------------------------------------------
-export const store = configureStore({
-  reducer: {
-    system: systemSlice.reducer,
-  },
-  // DevTools and Redux Thunk middleware are pre-configured automatically
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
-});
-
-// Infer RootState and AppDispatch types
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
-
-// ---------------------------------------------------------
-// 3. MEMOIZED SELECTORS
-// ---------------------------------------------------------
-const selectSystemState = (state: RootState) => state.system;
-
-// Select raw notifications
-export const selectNotifications = createSelector(
-  [selectSystemState],
-  (system) => system.notifications
+// 1. CREATE ASYNCHRONOUS THUNK ACTION
+// Why: Encapsulates network operations, auto-dispatching pending/fulfilled/rejected actions
+export const fetchTransactions = createAsyncThunk(
+  'banking/fetchTransactions',
+  async (accountId: number, { rejectWithValue }) => {
+    try {
+      const response = await axios.get<Transaction[]>(`/api/v1/accounts/${accountId}/transactions`);
+      return response.data;
+    } catch (err: any) {
+      return rejectWithValue(err.response?.data?.detail || 'Network transaction fetch failed');
+    }
+  }
 );
 
-// Select filtered notifications (Memoized to prevent unnecessary component re-renders)
-// Why: Only recalculates if notifications array changes, ignoring loadingState changes
-export const selectErrorNotifications = createSelector(
-  [selectNotifications],
-  (notifications) => notifications.filter((n) => n.type === 'error')
+// 2. CREATE SLICE REGISTERING EXTRA REDUCERS
+const bankingSlice = createSlice({
+  name: 'banking',
+  initialState,
+  reducers: {
+    clearTransactions: (state) => {
+      state.transactions = [];
+    },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchTransactions.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchTransactions.fulfilled, (state, action: PayloadAction<Transaction[]>) => {
+        state.loading = false;
+        state.transactions = action.payload; // Replaces state cache
+      })
+      .addCase(fetchTransactions.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      });
+  },
+});
+
+export const { clearTransactions } = bankingSlice.actions;
+export const bankingReducer = bankingSlice.reducer;
+
+// ---------------------------------------------------------
+// 3. MEMOIZED SELECTOR COMPOSITION
+// ---------------------------------------------------------
+interface RootStoreState {
+  banking: BankingState;
+}
+
+const selectBankingState = (state: RootStoreState) => state.banking;
+
+// Select raw transactions
+export const selectAllTransactions = createSelector(
+  [selectBankingState],
+  (banking) => banking.transactions
+);
+
+// Memoized Sub-Selector: filters transactions dynamically
+// Why: This selector only recalculates if transactions array changes. If other state
+// fields update (like loading flags), the cached result is returned directly, avoiding re-renders.
+export const selectSuccessfulTransactions = createSelector(
+  [selectAllTransactions],
+  (transactions) => {
+    console.log('Filtering successful transactions...');
+    return transactions.filter((tx) => tx.status === 'success');
+  }
 );
 ```
