@@ -3,9 +3,11 @@
 This file governs the behavior of all agents operating in this workspace.
 
 ## Context & Objectives
-* **Goal:** Prepare the user for a 30-minute technical interview for a Fullstack Python role at BairesDev.
-* **Timeline:** Wednesday, July 22, 2026, at 11:30 AM EST.
-* **Focus Area:** Dashboards, data aggregation, real-time metrics, performance, and scaling.
+* **Goal:** Prepare the user for a 30-minute interview for a Fullstack Python role at BairesDev.
+* **Timeline:** Wednesday, July 22, 2026, at 11:30 AM EST (some notes say 11:00 — confirm the invite).
+* **Interview shape:** The first call is a **recruiter screening**, conducted entirely in English: a ~90-second pitch, CV-coherence probes, brief theory questions (core stack, basic architecture, agile — no live coding), salary expectations, and the BairesDev staffing-model overview. The next stage is automated online tests (CCAT-style cognitive + technical MCQs), then technical interviews. Screening-specific material lives in `03_mock_interviews_and_scenarios/` files 05–08; the technical depth material remains essential because a screen can turn technical at any moment.
+* **Focus Area (technical):** Dashboards, data aggregation, real-time metrics, performance, and scaling.
+* **CV source of truth:** `../curiculum-vitae-and-letter/alexandrodislaResume.tex` (English; `alexandro.disla_cv.tex` is the French twin). Any pitch or CV-walkthrough material must match it exactly — never invent claims. The stray `1784116314338.pdf` at the repo root is a third-party caching guide, not the CV.
 * **Tech Stack:**
   * **Backend:** Python, FastAPI, SQLAlchemy, Alembic, Pydantic, Postgres.
   * **Frontend:** React, Redux Toolkit, SWR/Axios, Zod, Formik, TailwindCSS, ChakraUI, TypeScript, Vite.

@@ -4,6 +4,8 @@ A four-day battle plan. Deep understanding is built Sunday–Tuesday; Wednesday 
 
 **The one rule:** every study block ends with you *saying the answers out loud*. Interviews are verbal; reading is not rehearsal.
 
+**The recruiter-screen addendum (added Monday):** the first call is likely a recruiter screen, not a technical interview — see the [README](README.md) for its shape. That adds four short items to the remaining days: the [90-second pitch](05_ninety_second_pitch_and_cv_walkthrough.md) rehearsed out loud every day from today until the call, the [agile primer](07_agile_scrum_speakable_primer.md) Monday evening, the [salary and BairesDev-model script](06_recruiter_screen_salary_and_bairesdev_model.md) Tuesday (fill in your real salary range before Tuesday night), and the [CCAT primer](08_ccat_and_online_tests_primer.md) only after the screen unless you finish everything else early. The technical schedule below stays as the backbone — the screen can still turn technical at any moment.
+
 ---
 
 ## Sunday, July 19 — Backend Depth Day
