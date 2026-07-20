@@ -1,6 +1,6 @@
 # FastAPI Framework Specification (Comprehensive Masterclass)
 
-FastAPI is a high-performance web framework for building APIs with Python 3.8+ based on standard Python type hints. This guide covers its architecture, async execution mechanics, dependency injection, and core parameters.
+FastAPI (latest stable v0.139.2 in 2026) is a high-performance web framework for building APIs with Python 3.10+ (fully compatible with Python 3.14) based on standard Python type hints. This guide covers its architecture, async execution mechanics, dependency injection, and core parameters.
 
 ---
 
@@ -8,7 +8,7 @@ FastAPI is a high-performance web framework for building APIs with Python 3.8+ b
 
 ### Why Choose FastAPI?
 FastAPI is built on top of two robust libraries:
-1. **Starlette**: A lightweight ASGI framework/toolkit, which provides asynchronous web routing, WebSockets, and middleware management.
+1. **Starlette**: A lightweight ASGI framework/toolkit, which provides asynchronous web routing, WebSockets, and middleware management. In v0.139+, Starlette introduces optimized `app.frontend()` Vite build routing paths.
 2. **Pydantic**: A data validation and settings management library using Python type annotations.
 
 Key architectural benefits include:

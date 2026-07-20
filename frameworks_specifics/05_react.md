@@ -1,6 +1,6 @@
 # React Framework Specification (Comprehensive Masterclass)
 
-React is a declarative component-based UI library. Understanding its core rendering phases, reconciliation engine (React Fiber), and hook dependencies is critical to building performant dashboards.
+React (latest stable v19.2.7 in 2026) is a declarative component-based UI library. React 19 introduces the React Compiler (automatic memoization of `useMemo`/`useCallback`), Actions (asynchronous state mutation handlers), the new `use` hook, and simplified ref passing (no `forwardRef` needed). Understanding these core mechanics is critical for building performant dashboards.
 
 ---
 

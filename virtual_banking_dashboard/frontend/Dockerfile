@@ -1,5 +1,5 @@
 # Multi-Stage Build React application
-FROM node:20-alpine AS builder
+FROM node:22-alpine AS builder
 
 WORKDIR /app
 
@@ -16,7 +16,7 @@ ENV VITE_APP_ENV=production
 RUN npm run build
 
 # Server runner stage using lightweight nginx
-FROM nginx:1.25-alpine
+FROM nginx:1.27-alpine
 
 COPY --from=builder /app/dist /usr/share/nginx/html
 # Copy standard custom nginx configuration

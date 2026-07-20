@@ -1,6 +1,6 @@
 # Alembic Migrations Specification (Comprehensive Masterclass)
 
-Alembic is a lightweight database migration tool for usage with SQLAlchemy. It tracks database schema evolution, auto-generates migration scripts from SQLAlchemy models, and manages execution version branches.
+Alembic (v1.18.5 in 2026) is a lightweight database migration tool for usage with SQLAlchemy. It tracks database schema evolution, auto-generates migration scripts from SQLAlchemy models, and manages execution version branches.
 
 ---
 

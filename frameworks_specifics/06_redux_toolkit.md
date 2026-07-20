@@ -1,6 +1,6 @@
 # Redux Toolkit Specification (Comprehensive Masterclass)
 
-Redux Toolkit (RTK) is the official, opinionated toolset for efficient Redux state management. It solves legacy Redux boilerplates by integrating Immer.js for mutating state declarations and standardizing middleware configurations.
+Redux Toolkit (RTK v2.12.0 stable in 2026) is the official, opinionated toolset for efficient Redux state management. It solves legacy Redux boilerplates by integrating Immer.js for mutating state declarations and standardizing middleware configurations.
 
 ---
 

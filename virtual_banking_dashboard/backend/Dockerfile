@@ -1,5 +1,5 @@
 # Multi-Stage Build using UV package manager
-FROM ghcr.io/astral-sh/uv:python3.11-alpine AS builder
+FROM ghcr.io/astral-sh/uv:python3.14-alpine AS builder
 
 WORKDIR /app
 
@@ -14,12 +14,12 @@ RUN --mount=type=cache,target=/root/.cache/uv \
     uv pip install --no-cache -r requirements.txt
 
 # Final runner stage
-FROM python:3.11-slim-bookworm
+FROM python:3.14-slim-bookworm
 
 WORKDIR /app
 
 # Copy installed packages from builder
-COPY --from=builder /usr/local/lib/python3.11/site-packages /usr/local/lib/python3.11/site-packages
+COPY --from=builder /usr/local/lib/python3.14/site-packages /usr/local/lib/python3.14/site-packages
 COPY --from=builder /usr/local/bin /usr/local/bin
 
 COPY . .

@@ -1,6 +1,6 @@
 # Zod and Formik Integration Specification (Comprehensive Masterclass)
 
-Formik is React's leading library for managing form state (tracking values, touched states, validation errors, and submission lifecycles). Zod is a TypeScript-first schema declaration and validation library. Integrating them provides a type-safe form validation pipeline.
+Formik (v2.4.6 in 2026) is a React form-management library, while Zod (v4.4.3 stable in 2026) is a high-performance TypeScript-first schema validation library. Integrating them provides a type-safe form validation pipeline. *Note: In 2026, while Formik remains functional for legacy forms, React Hook Form (RHF) and TanStack Form are the industry standards for new development due to their uncontrolled-component architectures and superior rendering performance.*
 
 ---
 

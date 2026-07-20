@@ -1,6 +1,6 @@
 # TailwindCSS and Chakra UI Specification (Comprehensive Masterclass)
 
-TailwindCSS and Chakra UI are two distinct styling systems. Tailwind is a utility-first utility class compiler, while Chakra UI is a component-driven CSS-in-JS library. Understanding their architectural trade-offs allows you to use them together in a performant, accessible dashboard.
+TailwindCSS (v4.3.3 in 2026) is a high-performance utility-first compiler featuring a "CSS-First" configuration philosophy. Chakra UI (v3.x in 2026) is a component-driven design system built on top of a zero-runtime CSS-in-JS system (utilizing Panda CSS and Ark UI). Understanding their architectures is key for a performant, modern frontend.
 
 ---
 

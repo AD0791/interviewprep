@@ -1,6 +1,6 @@
-# SQLAlchemy 2.0 ORM Specification (Comprehensive Masterclass)
+# SQLAlchemy 2.0/2.1 ORM Specification (Comprehensive Masterclass)
 
-SQLAlchemy is Python's premier Object Relational Mapper (ORM). SQLAlchemy 2.0 introduces a modernized, type-safe API that enforces explicit select queries and native Python type annotations (`Mapped` and `mapped_column`).
+SQLAlchemy (v2.0.51 stable / v2.1 beta in 2026) is Python's premier Object Relational Mapper (ORM). SQLAlchemy 2.0/2.1 introduces a modernized, type-safe API that enforces explicit select queries and native Python type annotations (`Mapped` and `mapped_column`), alongside optimizations like `selectinload` chunking and plain tuple row processing.
 
 ---
 

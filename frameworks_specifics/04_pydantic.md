@@ -1,6 +1,6 @@
 # Pydantic v2 validation Specification (Comprehensive Masterclass)
 
-Pydantic is Python's leading data validation and serialization library. Pydantic v2 represents a complete rewrite in Rust, offering massive performance gains and a redesigned validation API.
+Pydantic (v2.12+ stable in 2026) is Python's leading data validation and serialization library. Pydantic v2 represents a complete rewrite in Rust, offering massive performance gains, full compatibility with Python 3.14 type annotations, and a redesigned validation API.
 
 ---
 

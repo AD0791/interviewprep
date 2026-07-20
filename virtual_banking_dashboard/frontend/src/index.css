@@ -1,9 +1,13 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-@layer base {
-  body {
-    @apply bg-[#030712] text-[#f3f4f6] font-sans antialiased;
-  }
+@theme {
+  --color-banking-dark: #030712;
+  --color-banking-card: #111827;
+  --color-banking-accent: #3b82f6;
+  --color-banking-border: #1f2937;
+  --color-banking-text: #f3f4f6;
+}
+
+body {
+  @apply bg-banking-dark text-banking-text font-sans antialiased;
 }

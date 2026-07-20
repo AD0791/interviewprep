@@ -4,7 +4,7 @@
 # ==========================================
 # Stage 1: Build & Dependency Resolution
 # ==========================================
-FROM python:3.11-slim-bookworm AS builder
+FROM python:3.14-slim-bookworm AS builder
 
 # 1. Install uv compiler globally
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
@@ -28,7 +28,7 @@ RUN --mount=type=cache,target=/root/.cache/uv \
 # ==========================================
 # Stage 2: Production Execution (Minimal Layer)
 # ==========================================
-FROM python:3.11-slim-bookworm AS runner
+FROM python:3.14-slim-bookworm AS runner
 
 # 1. Set environment variables
 ENV PYTHONUNBUFFERED=1

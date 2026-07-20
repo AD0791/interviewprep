@@ -1,6 +1,6 @@
 # SWR and Axios Integration Specification (Comprehensive Masterclass)
 
-SWR (Stale-While-Revalidate) is a React hook library for data fetching. It simplifies network state by returning cached data first (stale), then sending a fetch request in the background (revalidate), and finally updating the UI with the fresh data. Axios acts as the underlying HTTP client managing HTTP requests and token interception.
+SWR (v2.4.2 stable / v2.5.0-beta.0 in 2026) is a React hook library for data fetching. It simplifies network state by returning cached data first (stale), then sending a fetch request in the background (revalidate), and finally updating the UI with the fresh data. Axios (v1.7.9 in 2026) acts as the underlying HTTP client managing HTTP requests and token interception. SWR v2.5+ introduces RSC cache prefilling.
 
 ---
 
