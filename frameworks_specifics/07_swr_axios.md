@@ -1,170 +1,225 @@
-# SWR and Axios Integration Specification (Comprehensive Masterclass)
+# SWR + Axios, From Zero
 
-SWR (v2.4.2 stable / v2.5.0-beta.0 in 2026) is a React hook library for data fetching. It simplifies network state by returning cached data first (stale), then sending a fetch request in the background (revalidate), and finally updating the UI with the fresh data. Axios (v1.7.9 in 2026) acts as the underlying HTTP client managing HTTP requests and token interception. SWR v2.5+ introduces RSC cache prefilling.
+You have never used SWR. This article starts from the code you would write without it, shows where that code betrays you, and then builds up the SWR + Axios setup a real dashboard uses — one piece at a time, each one runnable.
 
 ---
 
-## 1. Caching Philosophy & Interception Architecture (Why & What)
+## 1. The Problem: Fetching by Hand
 
-### Stale-While-Revalidate Lifecycle
-SWR eliminates the need for global state managers (like Redux) to store server data. 
-1. **Request**: SWR identifies a request by a unique "cache key" string (typically the API URL).
-2. **Stale Delivery**: If the key exists in the cache, SWR instantly returns the cached data, allowing the page to load with no spinner delay.
-3. **Revalidation**: SWR fetches fresh data from the server in the background.
-4. **Update**: Once the request resolves, SWR updates the cache and re-renders the component.
+Without any library, fetching data in React looks like this. You've probably written it:
+
+```tsx
+// The hand-rolled version — read it, then we'll break it
+function TransactionList({ accountId }: { accountId: number }) {
+  const [data, setData] = useState<Transaction[] | null>(null);
+  const [error, setError] = useState<Error | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setLoading(true);
+    fetch(`/api/v1/accounts/${accountId}/transactions`)
+      .then((res) => {
+        if (!res.ok) throw new Error(`API ${res.status}`);
+        return res.json();
+      })
+      .then(setData)
+      .catch(setError)
+      .finally(() => setLoading(false));
+  }, [accountId]);
+
+  if (loading) return <Spinner />;
+  if (error) return <p>Something broke</p>;
+  return <ul>{data!.map((t) => <li key={t.id}>{t.amount}</li>)}</ul>;
+}
+```
+
+It works in the demo. Then four problems surface, roughly in this order:
+
+1. **You write it again. And again.** Every component that needs data repeats the three-state dance (`data`, `error`, `loading`). Twenty components in, you have twenty slightly different copies.
+2. **Duplicate requests.** The summary card and the chart both need the account list, so they both fetch it. Same URL, two network calls, and briefly two different answers on one screen.
+3. **The data goes stale silently.** The user opens your dashboard Monday, leaves the tab open, comes back Wednesday. The numbers are two days old and nothing will ever refresh them.
+4. **The race condition.** The user clicks account 1, then quickly account 2. Two requests are now in flight. If account 1's response arrives *last* — slow query, cold cache, bad luck — it overwrites account 2's data. The screen shows account 2 selected and account 1's transactions. This bug is timing-dependent, so it passes review and appears in production.
+
+None of these are exotic. They are the default behavior of hand-rolled fetching, and fixing all four by hand means building a caching layer. SWR *is* that caching layer.
+
+## 2. The Same Component With SWR
+
+```bash
+npm install swr axios
+```
+
+```tsx
+import useSWR from 'swr';
+
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
+
+function TransactionList({ accountId }: { accountId: number }) {
+  const { data, error, isLoading } = useSWR<Transaction[]>(
+    `/api/v1/accounts/${accountId}/transactions`,
+    fetcher
+  );
+
+  if (isLoading) return <Spinner />;
+  if (error) return <p>Something broke</p>;
+  return <ul>{data!.map((t) => <li key={t.id}>{t.amount}</li>)}</ul>;
+}
+```
+
+Two arguments. The first is the **key** — a string identifying *what data this is*. The second is the **fetcher** — any function that takes the key and returns a promise of data. SWR calls the fetcher, hands you `data`, `error`, and `isLoading`, and the three-state dance is gone.
+
+That alone only solves problem 1. The other three are solved by the thing the key unlocks: a cache.
+
+## 3. The Mental Model: A Cache With a Refresh Policy (Why)
+
+SWR keeps a global, in-memory cache, and **the key is the cache address**. Everything interesting follows from that one design decision.
+
+**Duplicate requests disappear.** When the summary card and the chart both call `useSWR('/api/v1/accounts', fetcher)`, they hit the same cache entry. SWR sees two subscribers and one key, makes **one** network request, and both components receive the same answer. You don't coordinate the components; using the same key *is* the coordination.
+
+**Staleness is handled by the name of the library.** SWR stands for *stale-while-revalidate*: when a component asks for data that's already cached, SWR returns the cached (possibly stale) version **immediately** — no spinner — and quietly refetches in the background. If the fresh response differs, the component re-renders with it. Your Monday-to-Wednesday user alt-tabs back, sees the dashboard instantly with Monday's numbers, and one second later the numbers are Wednesday's. Out of the box, SWR revalidates when a component mounts, when the window regains focus, and when the network reconnects; add `refreshInterval` for live-ish polling.
+
+**The race condition dies by design.** When `accountId` changes from 1 to 2, the *key changes*, and the component is now subscribed to a different cache entry. Whatever eventually arrives for account 1's key lands in account 1's cache slot — it cannot overwrite what's on screen, because the screen is no longer reading that slot. The bug that required a careful `AbortController` cleanup in the hand-rolled version (see the effect discussion in [05_react.md](05_react.md)) simply has no place to happen.
 
 ```mermaid
 graph TD
-    Key[Key: /api/users] --> CacheCheck{Key in local cache?}
-    CacheCheck -->|Yes| Stale[Return stale cached data instantly]
-    CacheCheck -->|No| Fetch[Trigger fetcher function]
-    Stale --> Fetch
-    Fetch --> Network[Query backend API via Axios]
-    Network --> Update[Update cache & re-render component]
+    K["Key: /api/v1/accounts/2/transactions"] --> C{In cache?}
+    C -->|yes| Stale[Return cached data instantly]
+    C -->|no| F[Call fetcher]
+    Stale --> F2[Revalidate in background]
+    F --> U[Update cache]
+    F2 --> U
+    U --> R[Re-render every subscriber of this key]
 ```
 
-### Axios Interceptor Architecture
-Axios allows you to configure interceptors to run before requests are sent or after responses are received.
-* **Why**: Inject authorization tokens (JWT) into outgoing headers, catch expired tokens (401 Unauthorized), and handle automatic logouts or token refreshes without duplicating authentication logic across individual API calls.
+One tie to the rest of your stack worth making out loud in an interview: this stale-first-then-refresh trade appears three times in a well-built system — SWR in the browser, Redis serve-stale in the API tier ([04/08](../04_architecture_and_system_design/08_redis_caching_strategies.md)), and materialized views in Postgres ([01/04](../01_fastapi_sqlalchemy_postgres/04_explain_analyze_partitioning_matviews.md)). Same idea each time: accept bounded staleness, buy latency.
 
----
+## 4. Axios: One Configured Client Instead of Twenty fetch Calls (How)
 
-## 2. Basic Setup & Client Configuration (How)
-
-### Step 1: Axios Client with Interceptors
-Create a centralized HTTP client instance.
+Plain `fetch` works, but every call needs the full URL, its own error handling, and its own auth header. Axios lets you build a **configured instance** once and give every request the same behavior:
 
 ```typescript
+// Gist: src/api/httpClient.ts
 import axios from 'axios';
 
-export const bankingClient = axios.create({
-  baseURL: 'http://localhost:8000/api/v1',
-  headers: { 'Content-Type': 'application/json' },
+export const httpClient = axios.create({
+  baseURL: import.meta.env.VITE_API_URL, // e.g. http://localhost:8000/api/v1
   timeout: 5000,
+  headers: { 'Content-Type': 'application/json' },
 });
 
-// Request Interceptor: Inject JWT token from localStorage
-bankingClient.interceptors.request.use((config) => {
-  const token = localStorage.getItem('token');
-  if (token && config.headers) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
+// The one fetcher every useSWR call in the app shares.
+// Axios also throws on 4xx/5xx by default, which is exactly what SWR's
+// `error` return value wants (fetch does NOT throw on HTTP errors).
+export const fetcher = <T>(url: string): Promise<T> =>
+  httpClient.get<T>(url).then((res) => res.data);
+```
+
+Now components write `useSWR('/accounts/2/transactions', fetcher)` with relative paths, and switching environments means changing one env var.
+
+The reason Axios earns its place, though, is **interceptors** — functions that run on every request or response. This is where authentication stops being every component's problem.
+
+The request side is one line of intent: before each request goes out, attach the access token.
+
+```typescript
+httpClient.interceptors.request.use((config) => {
+  const token = getAccessToken(); // in-memory accessor — see the note below
+  if (token) config.headers.Authorization = `Bearer ${token}`;
   return config;
 });
+```
 
-// Response Interceptor: Redirect to login on 401 errors
-bankingClient.interceptors.response.use(
+The response side is where the craft is. Access tokens expire on purpose after a few minutes ([04/07](../04_architecture_and_system_design/07_oauth2_jwt_lifecycle.md) explains why). So mid-session, some request will come back 401. The naive interceptor redirects to the login page, logging out a user whose session is perfectly refreshable. The right behavior is: catch the 401, call the refresh endpoint, then **replay the original request** with the new token — invisibly.
+
+There's a subtlety that separates a working implementation from a broken one. A dashboard fires several requests at once, so when the token expires, *five* requests may fail together. If each one triggers its own refresh call, and your backend rotates refresh tokens (each one is single-use), the first refresh succeeds and the other four burn dead tokens — logging the user out. The fix is **single-flight**: all concurrent 401s share one refresh promise.
+
+```typescript
+// Gist: src/api/httpClient.ts (continued)
+let refreshPromise: Promise<string> | null = null;
+
+httpClient.interceptors.response.use(
   (response) => response,
-  (error) => {
-    if (error.response?.status === 401) {
-      localStorage.removeItem('token');
-      window.location.href = '/login';
+  async (error) => {
+    const original = error.config;
+    if (error.response?.status === 401 && !original._retried) {
+      original._retried = true; // each request retries once, never loops
+      // First 401 creates the refresh promise; the other four await the SAME one.
+      refreshPromise ??= refreshAccessToken().finally(() => (refreshPromise = null));
+      try {
+        const newToken = await refreshPromise;
+        original.headers.Authorization = `Bearer ${newToken}`;
+        return httpClient(original); // replay the original request
+      } catch {
+        window.location.href = '/login'; // only a failed REFRESH ends the session
+      }
     }
     return Promise.reject(error);
   }
 );
-
-// Generic SWR Fetcher
-export const swrFetcher = (url: string) => 
-  bankingClient.get(url).then((res) => res.data);
 ```
 
----
+A note on `getAccessToken()`: tutorials read the token from `localStorage`, and you shouldn't — anything in `localStorage` is readable by any script that gets injected into your page. Keep the access token in a module-level variable (memory) and let the refresh token live in an HttpOnly cookie the browser attaches automatically. The storage argument is made properly in [02/02](../02_react_redux_swr_dashboard/02_browser_apis_and_storage.md).
 
-## 3. Advanced Mutation & Infinite Loading (How)
+## 5. Writing Data: Mutations (How)
 
-### Gist: swr_mutations_infinite.ts
-A production-grade implementation of local optimistic updates and infinite scrolling lists.
+SWR reads; for writes you call the API yourself, then tell SWR its cache is out of date. The simplest correct version:
 
 ```typescript
-// Gist: swr_mutations_infinite.ts
-import useSWR, { useSWRConfig } from 'swr';
-import useSWRInfinite from 'swr/infinite';
-import { bankingClient, swrFetcher } from './httpClient';
+import { useSWRConfig } from 'swr';
 
-interface LedgerItem {
-  id: string;
-  amount: number;
-  description: string;
-}
-
-// ---------------------------------------------------------
-// 1. MUTATION & OPTIMISTIC UPDATES HOOK
-// ---------------------------------------------------------
-export const useLedger = () => {
+function useCreateTransaction(accountId: number) {
   const { mutate } = useSWRConfig();
-  const cacheKey = '/banking/ledger';
-  const { data, error, mutate: localMutate } = useSWR<LedgerItem[]>(cacheKey, swrFetcher);
+  const key = `/accounts/${accountId}/transactions`;
 
-  const postLedgerEntry = async (newEntry: Omit<LedgerItem, 'id'>) => {
-    if (!data) return;
+  return async (tx: NewTransaction) => {
+    await httpClient.post(key, tx);
+    mutate(key); // "this key is stale — refetch it"
+  };
+}
+```
 
-    // A. Create optimistic dummy object
-    const optimisticEntry: LedgerItem = { ...newEntry, id: `temp-${Date.now()}` };
-    const updatedData = [...data, optimisticEntry];
+That's honest and slow: the user waits a round-trip before seeing their row. The **optimistic** version shows the change instantly and repairs the cache if the server disagrees:
 
-    // B. Write to local cache instantly, disabling background validation for now
-    localMutate(updatedData, false);
-
-    try {
-      // C. Run actual network write call
-      await bankingClient.post('/banking/ledger', newEntry);
-      
-      // D. Force trigger global cache re-validation to sync state
-      mutate(cacheKey);
-    } catch (err) {
-      // E. Rollback local cache to original data state on network failure
-      localMutate(data, true);
-      throw err;
+```typescript
+// Gist: src/features/transactions/useCreateTransaction.ts
+const createTransaction = async (tx: NewTransaction) => {
+  await mutate(
+    key,
+    async (current: Transaction[] = []) => {
+      const saved = await httpClient.post<Transaction>(key, tx).then((r) => r.data);
+      return [...current, saved];
+    },
+    {
+      optimisticData: (current = []) => [...current, { ...tx, id: 'temp', pending: true }],
+      rollbackOnError: true, // POST failed -> cache snaps back, UI shows the truth
+      revalidate: true,      // afterwards, re-sync with the server's version
     }
-  };
-
-  return {
-    ledger: data,
-    isLoading: !data && !error,
-    postLedgerEntry,
-  };
-};
-
-// ---------------------------------------------------------
-// 2. INFINITE SCROLLING PAGINATION HOOK
-// ---------------------------------------------------------
-export const useInfiniteLedger = (pageSize = 10) => {
-  // Key generator function mapping page index to URL query params
-  const getKey = (pageIndex: number, previousPageData: LedgerItem[] | null) => {
-    // End reached
-    if (previousPageData && !previousPageData.length) return null;
-    // Returns key URL
-    return `/banking/ledger/infinite?page=${pageIndex + 1}&limit=${pageSize}`;
-  };
-
-  const { data, error, size, setSize, isValidating } = useSWRInfinite<LedgerItem[]>(
-    getKey,
-    swrFetcher,
-    { revalidateFirstPage: false }
   );
-
-  // Flatten nested pages array into single flat list
-  const ledgerItems = data ? data.flat() : [];
-  const isLoadingMore =
-    isLoading || (size > 0 && data && typeof data[size - 1] === 'undefined');
-  const isReachedEnd =
-    data && (data[data.length - 1]?.length < pageSize);
-
-  const loadMore = () => {
-    if (!isLoadingMore && !isReachedEnd) {
-      setSize(size + 1);
-    }
-  };
-
-  const isLoading = !data && !error;
-
-  return {
-    ledgerItems,
-    isLoading,
-    isLoadingMore,
-    isReachedEnd,
-    loadMore,
-  };
 };
 ```
+
+Read the options as a promise to the user: *you'll see your row immediately; if the server rejects it, it will vanish rather than lie; and the final state always comes from the server.* That last clause is the invariant to say in an interview: an optimistic cache may lead the server briefly, but it must never *end* in a state the server didn't confirm.
+
+## 6. Two Everyday Patterns
+
+**Don't fetch yet.** Pass `null` as the key and SWR does nothing. This is how "wait until we know the user" works without effect gymnastics:
+
+```typescript
+const { data: user } = useSWR('/me', fetcher);
+// Second request waits for the first: key is null until user exists.
+const { data: accounts } = useSWR(user ? `/users/${user.id}/accounts` : null, fetcher);
+```
+
+When `user` arrives, the key becomes real and the second fetch fires on its own. Dependent requests become a data declaration instead of choreography.
+
+**Keys with parameters.** Once a request depends on several values, use an array key: `useSWR(['/transactions', accountId, range], ([url, id, r]) => fetcher(`${url}?account=${id}&range=${r}`))`. The array is compared element-wise, so each distinct combination gets its own cache entry — which is exactly what "the filter changed, this is different data" should mean.
+
+## 7. When SWR Is the Wrong Tool
+
+SWR assumes the server owns data that the client periodically re-asks for. That breaks down in three places. Live streams — prices ticking, transactions flowing in — want the server to *push*, which is SSE/WebSocket territory ([05/01](../05_networking_and_data_transport/01_networking_protocols_dashboard.md)); polling with `refreshInterval` is a stopgap, not the design. One-shot commands ("export this report") aren't cacheable data, so just call Axios directly. And client-owned state — filters, wizard steps — has no server to revalidate against; that's local state or Redux ([06_redux_toolkit.md](06_redux_toolkit.md)). The boundary sentence: **SWR manages what the server owns; Redux manages what the client owns.**
+
+## 8. Interview Angles
+
+**"Two widgets need the same endpoint — how do you avoid fetching twice?"** By doing nothing: give them the same SWR key and they share one cache entry and one deduplicated request. The mistake would be lifting the data into a parent or a store "to share it," which hand-rebuilds what the cache already does.
+
+**"Walk me through an optimistic update, including the failure path."** Write the expected result into the cache immediately so the UI responds, fire the real request, roll the cache back if the request fails, and revalidate afterwards so the server has the last word. Then name the invariant: the cache may briefly lead the server, but it must never *end* somewhere the server didn't confirm.
+
+**"How does your app survive an expired access token mid-session?"** The response interceptor catches the 401, refreshes once — a single shared promise even if five requests failed together, because rotated refresh tokens are single-use — then replays the original requests with the new token. The user notices nothing; only a failed refresh logs them out. The backend half of this handshake is in [04/07](../04_architecture_and_system_design/07_oauth2_jwt_lifecycle.md).

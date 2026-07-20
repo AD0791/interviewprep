@@ -1,181 +1,162 @@
-# SQLAlchemy 2.0/2.1 ORM Specification (Comprehensive Masterclass)
+# SQLAlchemy 2.0, From Zero
 
-SQLAlchemy (v2.0.51 stable / v2.1 beta in 2026) is Python's premier Object Relational Mapper (ORM). SQLAlchemy 2.0/2.1 introduces a modernized, type-safe API that enforces explicit select queries and native Python type annotations (`Mapped` and `mapped_column`), alongside optimizations like `selectinload` chunking and plain tuple row processing.
-
----
-
-## 1. Core Mechanics & Session Lifecycle (Why & What)
-
-### The Session States
-An ORM object exists in one of five states relative to the active `Session` (Unit of Work):
-
-1. **Transient**: The object is created in memory but is not associated with any database session and has no database row.
-   * *Example*: `user = User(name="John")` (No ID assigned).
-2. **Pending**: The object has been added to the session using `session.add()`. It will be written to the database during the next flush.
-   * *Example*: `session.add(user)`.
-3. **Persistent**: The object is associated with a database row. A flush has occurred (or database read), mapping the database fields to properties.
-   * *Example*: After `await session.flush()` or `await session.commit()`.
-4. **Deleted**: The object has been marked for deletion inside the session via `session.delete(user)`, but has not yet been flushed.
-5. **Detached**: The session has been closed or expired, but the Python object still exists. Accessing lazily-loaded relationships on a detached object throws a `DetachedInstanceError`.
-
-```mermaid
-stateDiagram-v2
-    [*] --> Transient : New instance
-    Transient --> Pending : session.add()
-    Pending --> Persistent : session.flush() / commit()
-    Persistent --> Detached : session.close() / expire
-    Persistent --> Deleted : session.delete()
-    Deleted --> Detached : session.commit()
-    Detached --> Persistent : session.add() / merge()
-```
-
-### Async Mechanics
-In async environments, SQLAlchemy delegates standard database operations to the `greenlet` library, wrapping synchronous drivers (like `asyncpg` for PostgreSQL or `aiosqlite` for SQLite). 
-* **Rule**: You must use async equivalents for connection and transactions. Call `await session.execute()` instead of legacy `query()`.
+You know SQL and Python. This article explains what an ORM actually buys you, builds a working async setup from nothing, and then makes you deliberately hit the two failures every SQLAlchemy interview probes: the N+1 problem and the async lazy-load crash. Watching them happen is how you earn the right to explain them.
 
 ---
 
-## 2. Basic Mapping & Core CRUD Operations (How)
+## 1. The Problem: Rows Are Not Objects
 
-### Declaring Models with 2.0 Syntax
-SQLAlchemy 2.0 uses PEP-484 typing annotations via `Mapped` and `mapped_column` to declare schema mappings.
+Talk to Postgres directly and you write string SQL, get back tuples, and map them to your domain by hand:
 
 ```python
+row = cursor.execute("SELECT id, balance FROM accounts WHERE id = %s", (7,)).fetchone()
+account = {"id": row[0], "balance": row[1]}   # position-based, untyped, repeated everywhere
+```
+
+This works, and for some workloads it's even right (we'll come back to that). But at application scale it has three chronic costs: the mapping code is duplicated and drifts; there is no type checking between your SQL strings and your Python code, so a renamed column becomes a runtime error; and relationships ("this account's transactions") mean hand-writing joins and re-assembling nested structures everywhere you need them.
+
+An ORM — Object Relational Mapper — maintains the mapping in one place: a class per table, an attribute per column, typed. SQLAlchemy is Python's standard one, and version 2.0 made the mapping *statically typed*, so your editor and mypy know that `account.balance` is a float before anything runs.
+
+## 2. Models and the Engine (How)
+
+```bash
+pip install "sqlalchemy[asyncio]" asyncpg
+```
+
+```python
+# Gist: models.py
 from datetime import datetime
-from typing import List, Optional
-from sqlalchemy import String, ForeignKey, DateTime
+from sqlalchemy import ForeignKey, String, func
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 
 class Base(DeclarativeBase):
     pass
 
-class Company(Base):
-    __tablename__ = "companies"
+class Account(Base):
+    __tablename__ = "accounts"
 
     id: Mapped[int] = mapped_column(primary_key=True)
-    name: Mapped[str] = mapped_column(String(100), nullable=False)
-    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
+    owner: Mapped[str] = mapped_column(String(100))
+    balance: Mapped[float] = mapped_column(default=0.0)
 
-    # One-to-Many Relationship: Eager load raises error if lazy loading occurs
-    employees: Mapped[List["Employee"]] = relationship(
-        back_populates="company",
-        cascade="all, delete-orphan",
-        lazy="raise"
+    # One account has many transactions. lazy="raise" is explained in section 5 —
+    # it turns a silent performance bug into a loud error.
+    transactions: Mapped[list["Transaction"]] = relationship(
+        back_populates="account", lazy="raise"
     )
 
-class Employee(Base):
-    __tablename__ = "employees"
+class Transaction(Base):
+    __tablename__ = "transactions"
 
     id: Mapped[int] = mapped_column(primary_key=True)
-    name: Mapped[str] = mapped_column(String(100))
-    company_id: Mapped[int] = mapped_column(ForeignKey("companies.id", ondelete="CASCADE"))
+    account_id: Mapped[int] = mapped_column(ForeignKey("accounts.id"), index=True)
+    amount: Mapped[float]
+    created_at: Mapped[datetime] = mapped_column(server_default=func.now())
 
-    company: Mapped["Company"] = relationship(back_populates="employees")
+    account: Mapped["Account"] = relationship(back_populates="transactions")
 ```
 
-### Basic CRUD Execution (Async API)
-```python
-from sqlalchemy import select, update, delete
-from sqlalchemy.ext.asyncio import AsyncSession
+`Mapped[int]` does double duty: it tells SQLAlchemy the column type *and* tells your type checker the attribute type. `Mapped[list["Transaction"]]` declares the one-to-many; `back_populates` makes the two sides aware of each other, so setting `tx.account` also appends to `account.transactions` in memory.
 
-# 1. Create (Insert)
-async def create_company(session: AsyncSession, name: str) -> Company:
-    new_company = Company(name=name)
-    session.add(new_company)
-    await session.commit()
-    return new_company
-
-# 2. Read (Select with joins and filters)
-async def get_company_by_name(session: AsyncSession, target_name: str) -> Optional[Company]:
-    stmt = select(Company).where(Company.name == target_name)
-    result = await session.execute(stmt)
-    return result.scalar_one_or_none()
-
-# 3. Update
-async def update_company_name(session: AsyncSession, company_id: int, new_name: str):
-    stmt = (
-        update(Company)
-        .where(Company.id == company_id)
-        .values(name=new_name)
-    )
-    await session.execute(stmt)
-    await session.commit()
-
-# 4. Delete
-async def delete_company(session: AsyncSession, company_id: int):
-    stmt = delete(Company).where(Company.id == company_id)
-    await session.execute(stmt)
-    await session.commit()
-```
-
----
-
-## 3. Advanced Querying & Eager Loading (How)
-
-### Eager Loading Strategies
-When fetching parent objects that have relationships, you must tell SQLAlchemy how to load child records. Failing to load them correctly causes **N+1 query bottlenecks**.
-
-| Strategy | Function | SQL Implementation | Use Case |
-|---|---|---|---|
-| **Joined Load** | `joinedload()` | Performs a SQL `LEFT OUTER JOIN` in the same query. | **Many-to-One** relationships (e.g. fetching employee + company details). |
-| **Select In Load** | `selectinload()` | Emits a second SELECT query using an `IN` clause with parent IDs. | **One-to-Many** or **Many-to-Many** collections (e.g. fetching company + employee list). |
-| **Subquery Load** | `subqueryload()` | Emits a second query duplicating the entire parent select as a subquery. | Deprecated for most use cases; slower than `selectinload`. |
-
-### Gist: eager_loading_mastery.py
-Demonstrates joined loads, selectin loads, aggregations, and transaction rollbacks.
+Connecting takes two objects with different lifetimes:
 
 ```python
-# Gist: eager_loading_mastery.py
-from sqlalchemy import select, func
-from sqlalchemy.orm import joinedload, selectinload
-from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, AsyncSession
-from app.models import Company, Employee  # Assume models are imported
+# Gist: database.py
+from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker
 
-# 1. Setup Async Engine
-DATABASE_URL = "postgresql+asyncpg://user:pass@localhost:5432/dbname"
-engine = create_async_engine(DATABASE_URL, echo=True)
-AsyncSessionLocal = async_sessionmaker(bind=engine, expire_on_commit=False)
-
-# 2. SELECTINLOAD Example (One-to-Many list fetching)
-async def get_company_with_employees(session: AsyncSession, company_id: int) -> Company:
-    # Emits exactly 2 queries:
-    # 1. SELECT * FROM companies WHERE id = :id
-    # 2. SELECT * FROM employees WHERE company_id IN (:id)
-    stmt = (
-        select(Company)
-        .options(selectinload(Company.employees))
-        .where(Company.id == company_id)
-    )
-    result = await session.execute(stmt)
-    company = result.scalar_one()
-    return company
-
-# 3. JOINEDLOAD Example (Many-to-One mapping)
-async def get_employee_with_company(session: AsyncSession, employee_id: int) -> Employee:
-    # Emits exactly 1 query using a LEFT OUTER JOIN:
-    # SELECT employees.*, companies.* FROM employees LEFT OUTER JOIN companies ...
-    stmt = (
-        select(Employee)
-        .options(joinedload(Employee.company))
-        .where(Employee.id == employee_id)
-    )
-    result = await session.execute(stmt)
-    employee = result.scalar_one()
-    return employee
-
-# 4. Aggregations and Complex Queries
-async def get_companies_with_employee_counts(session: AsyncSession):
-    # Emits 1 query returning aggregated columns
-    stmt = (
-        select(
-            Company.id,
-            Company.name,
-            func.count(Employee.id).label("employee_count")
-        )
-        .outerjoin(Employee, Company.id == Employee.company_id)
-        .group_by(Company.id, Company.name)
-        .having(func.count(Employee.id) > 5)
-    )
-    result = await session.execute(stmt)
-    return result.all()
+engine = create_async_engine(
+    "postgresql+asyncpg://app:secret@localhost:5432/bank",
+    echo=True,  # log every SQL statement — leave this on while learning
+)
+SessionLocal = async_sessionmaker(engine, expire_on_commit=False)
 ```
+
+The **engine** is created once per process. It owns the connection pool — a set of open Postgres connections that get borrowed and returned, because opening a fresh connection per request is far too expensive ([01/03](../01_fastapi_sqlalchemy_postgres/03_connection_pools_locking_and_concurrency.md) covers sizing it). A **session**, which `SessionLocal()` creates, is the short-lived workspace for one unit of work — in a web app, one request. Engine: application lifetime. Session: request lifetime. Mixing those up is a classic review catch.
+
+## 3. The Session Is a Staging Area, Not a Connection (Why)
+
+Here's the mental model that unlocks everything else. A session is like **git's staging area for database rows**. You stage changes; nothing hits the database until a flush; nothing is permanent until a commit.
+
+```python
+async with SessionLocal() as session:
+    account = Account(owner="Alexandro")   # 1. plain object — DB knows nothing
+    session.add(account)                   # 2. staged ("pending") — still no SQL
+    await session.flush()                  # 3. INSERT executes; account.id now exists
+    print(account.id)                      #    ...but it's inside an open transaction
+    await session.commit()                 # 4. COMMIT — now it's real and visible to others
+```
+
+Run this with `echo=True` and watch the log: nothing at step 2, the `INSERT` at step 3, `COMMIT` at step 4. The distinction between flush and commit is a favorite interview probe, and now you've *seen* it: **flush sends SQL** (so the database can assign the primary key, which is why repositories flush when they need an id mid-transaction), while **commit ends the transaction** (making the changes durable and visible to other connections). Between the two, your own session can read its own writes; nobody else can.
+
+The session also keeps an **identity map**: within one session, the row with primary key 7 is always the *same Python object*. Query it twice, get the same instance — so two parts of your request handler can't hold diverging copies of one account. That's a big part of what "unit of work" means: the session tracks every object you've touched and, at flush, computes the minimal SQL to persist exactly what changed. You rarely write `UPDATE` by hand — you mutate the object (`account.balance -= 50`) and flush.
+
+Reading uses `select()` — the same construct for simple and complex queries:
+
+```python
+from sqlalchemy import select
+
+result = await session.execute(
+    select(Account).where(Account.balance > 1000).order_by(Account.balance.desc())
+)
+rich_accounts = result.scalars().all()   # scalars() unwraps 1-column rows to objects
+```
+
+## 4. Break It On Purpose #1: The N+1 Problem
+
+Now the failure everyone asks about. Render a page of 50 accounts, each with its transactions. The natural code:
+
+```python
+result = await session.execute(select(Account).limit(50))
+for account in result.scalars():
+    print(account.owner, len(account.transactions))   # innocent-looking line
+```
+
+With default settings, that innocent attribute access triggers **lazy loading**: the ORM notices transactions weren't loaded and quietly runs `SELECT * FROM transactions WHERE account_id = ?` — *per account*. One query became 51. With `echo=True` you'll see them scroll by, which is exactly how you'd catch it in development. The nasty part is the shape of the failure: 51 fast queries feel fine on your laptop and melt under production concurrency, because the cost is round-trips, not row count.
+
+Our model declared `lazy="raise"`, so instead of 51 silent queries you get an immediate exception — the bug announces itself in dev. The fix is telling SQLAlchemy your access pattern up front:
+
+```python
+from sqlalchemy.orm import selectinload
+
+result = await session.execute(
+    select(Account).options(selectinload(Account.transactions)).limit(50)
+)
+# Exactly 2 queries, always:
+#   SELECT ... FROM accounts LIMIT 50
+#   SELECT ... FROM transactions WHERE account_id IN (1, 2, ..., 50)
+```
+
+Two strategies cover nearly everything, and the choice follows the relationship's direction. **`selectinload`** issues that second `IN` query — right for one-to-many collections, because a join would duplicate each parent row once per child. **`joinedload`** folds the related row into the original query with a LEFT OUTER JOIN — right for many-to-one (each transaction's single account), where the join duplicates nothing. Collection: `selectinload`. Single parent: `joinedload`. The deeper treatment, including when to skip the ORM and aggregate in SQL, is [01/01](../01_fastapi_sqlalchemy_postgres/01_postgres_aggregation_sqlalchemy.md).
+
+## 5. Break It On Purpose #2: The Async Lazy-Load Crash
+
+The async story is mostly "same API with `await`" — but one crash is so common it deserves its own section, because explaining it well is a senior signal.
+
+By default, `session.commit()` **expires** every loaded object: the next attribute access re-fetches from the database, to guarantee freshness. In sync code that's a hidden query. In async code, a plain attribute access like `account.owner` *cannot* await anything — so when it tries to do I/O, SQLAlchemy raises the infamous `MissingGreenlet` error. The sequence: commit, then touch an attribute, then crash with an error message that names none of those things.
+
+That's why our sessionmaker set `expire_on_commit=False` — objects stay readable after commit — and why relationships get `lazy="raise"` plus explicit `selectinload`. Both settings enforce the same philosophy: **in async code, all I/O must be explicit and awaited; anything that does hidden I/O on attribute access is a landmine.** Say that sentence in the interview and the follow-ups take care of themselves.
+
+For transaction control, the cleanest shape makes scope visible in the code:
+
+```python
+async with session.begin():        # opens a transaction
+    src = await session.get(Account, 1)
+    dst = await session.get(Account, 2)
+    src.balance -= 100
+    dst.balance += 100
+# clean exit: COMMIT (both changes or neither) — exception: ROLLBACK
+```
+
+That's atomicity from the code's shape. What it does *not* give you is protection from a concurrent request modifying the same rows — that needs row locking (`with_for_update`) or optimistic versioning, built up properly in [01/03](../01_fastapi_sqlalchemy_postgres/03_connection_pools_locking_and_concurrency.md).
+
+## 6. When to Skip the ORM
+
+The unit of work earns its overhead when you *mutate* what you read. When you don't, it's pure cost. Fetching 100,000 rows to aggregate them builds 100,000 tracked Python objects that you'll throw away; the answer is to aggregate in SQL and read plain tuples — `select(func.sum(...))`, window functions, labeled columns — or bulk-insert with `insert().values([...])` instead of `session.add()` in a loop. The rule of thumb: **objects for behavior, tuples for analytics.** A candidate who volunteers when *not* to use the ORM is instantly more credible than one who ORMs everything.
+
+## 7. Interview Angles
+
+**"Walk me through what happens between `session.add(obj)` and the row being visible to another request."** Nothing at `add` — the object is only staged in the identity map. At flush (explicit, or automatic before a query, or as part of commit) the INSERT executes and the primary key comes back, but the open transaction means only your session sees the row. At commit it becomes durable and visible to everyone. Being precise about which step emits SQL and which step publishes it is the whole answer.
+
+**"Your API is slow and the DB log shows hundreds of tiny queries per request. Diagnose."** That's the N+1 signature: a parent query followed by one child query per row, caused by lazy-loading a relationship in a loop. Confirm with the query log, fix with `selectinload` for collections or `joinedload` for many-to-one, and prevent recurrence with `lazy="raise"` so the next accidental lazy load fails loudly in development instead of silently in production.
+
+**"Why does `expire_on_commit=False` matter in async apps?"** Because the default expires objects at commit, and the refresh that fires on next attribute access is hidden I/O — which async attribute access can't perform, so it crashes with `MissingGreenlet`. Disabling expiry keeps committed objects readable, and pairing it with eager loading keeps all I/O explicit and awaited, which is the discipline async database code lives by.

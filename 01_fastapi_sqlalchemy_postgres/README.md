@@ -2,6 +2,13 @@
 
 This directory is dedicated to reviewing database performance, aggregations, window functions, and FastAPI structures.
 
+## Documents in This Folder
+
+1. [01_postgres_aggregation_sqlalchemy.md](01_postgres_aggregation_sqlalchemy.md) — Window functions, CTEs, N+1/eager loading, async SQLAlchemy 2.0 analytics endpoint.
+2. [02_fastapi_runtime_internals.md](02_fastapi_runtime_internals.md) — Event-loop contract, sync-in-async escape hatches, lifespan, StreamingResponse.
+3. [03_connection_pools_locking_and_concurrency.md](03_connection_pools_locking_and_concurrency.md) — Pool tuning & sizing math, diagnosing exhaustion, `SELECT FOR UPDATE`, optimistic versioning.
+4. [04_explain_analyze_partitioning_matviews.md](04_explain_analyze_partitioning_matviews.md) — Reading query plans, Seq Scan → Index Only Scan worked example, range partitioning, materialized views.
+
 ## Key Study Topics
 
 ### 1. Postgres Data Aggregations & Window Functions

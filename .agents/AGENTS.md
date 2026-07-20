@@ -11,11 +11,23 @@ This file governs the behavior of all agents operating in this workspace.
   * **Frontend:** React, Redux Toolkit, SWR/Axios, Zod, Formik, TailwindCSS, ChakraUI, TypeScript, Vite.
 
 ## Output & Documentation Standards
-All documentation and summaries generated for studying must follow these guidelines:
-1. **University-Level Explanations & Software Guides:** Structure answers to clearly address **Why** (the underlying theory and decisions), **What** (the concepts/technologies), and **How** (implementation steps, trade-offs).
-2. **Visual Workflow Representation:** Use **Mermaid diagrams** inside markdown files to explain system architecture, database relationships, data flow, state changes, and component logic.
-3. **Gist-Style Code Snippets:** Provide production-ready, clean, well-commented code snippets formatted like GitHub Gists, demonstrating minimal but complete implementations.
-4. **Prompt Writing:** Write prompts inside markdown files that can be easily copy-pasted or referenced to guide LLMs or other agents in performing code gen and research.
+
+### The Default Style: "From Zero" Teaching Articles
+Every study document in this repo is written as a teaching article for a reader who has **never used the tool**, in the register of a good engineering blog (think Dan Abramov or Julia Evans): patient, concrete, conversational but precise. The reference implementations of this style are the nine `frameworks_specifics/` articles — match them. The contract:
+
+1. **Open with the problem, not the tool.** Show life *without* the tool first — the pain, in concrete code — so the reader feels why the tool exists before meeting it. A definition the reader can only understand if they already know the tool is a failed opening.
+2. **Build one real thing, incrementally.** Complete, runnable code at every step (banking-domain examples preferred: accounts, transfers, transactions). Narrate *around* the code in prose — the explanation lives in paragraphs, not only in code comments. No step may depend on code the reader hasn't seen.
+3. **Break it on purpose.** Show the classic failure actually happening (the N+1 query log scrolling by, the list-key bug putting a note on the wrong row, the stale closure freezing a counter) *before* explaining the fix. Watching it fail is how the reader earns the explanation.
+4. **Trace what the machine does.** At least once per article, walk one interaction through the system in plain words: "trace one click," "the life of a request." Cause and effect, step by step.
+5. **Teach mental models through analogies.** The session is git's staging area; the Redux store is a bank ledger; the SWR key is a cache address. One good analogy per core concept, carried through the article.
+6. **Close with `## Interview Angles`.** Two or three real interview questions, each answered in flowing prose exactly as a person would speak it — a complete answer the reader can rehearse aloud.
+7. **Link, don't repeat.** When a topic is covered deeply elsewhere (numbered deep-dive folders), state the one-sentence version and cross-link with a relative Markdown link. Verify every link target exists.
+
+**Prose rules (non-negotiable):** complete sentences everywhere; never fragment bullets, arrow chains (`A → B → fails`), or "Skeleton:" outlines; bullets and tables only for genuinely enumerable facts, with the reasoning in surrounding prose; Mermaid diagrams only where a picture genuinely clarifies (sequence diagrams for protocols and races, graphs for topology) — never as decoration.
+
+### Supporting Standards
+1. **Gist-Style Code Snippets:** name code blocks (`# Gist: filename.py`) and keep them minimal but complete — a reader should be able to paste and run them. Standalone snippets live in `usable_gists/` with a header comment stating Use Case, Purpose, and Key features.
+2. **Prompt Writing:** prompts written for LLM/agent use may keep a terse imperative format — the From-Zero contract governs *study material*, not prompt files.
 
 ## Agent Personas
 All agents must act according to their specific persona defined in their respective skills:

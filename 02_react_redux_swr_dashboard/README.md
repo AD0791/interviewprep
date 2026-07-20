@@ -2,6 +2,12 @@
 
 This directory is dedicated to frontend preparation, focused on building highly responsive dashboards, state management, and data-fetching.
 
+## Documents in This Folder
+
+1. [01_react_dashboard_rendering_state.md](01_react_dashboard_rendering_state.md) — Server-cache vs client-state boundary, memoization rules, list virtualization.
+2. [02_browser_apis_and_storage.md](02_browser_apis_and_storage.md) — Client storage comparison, HttpOnly cookies vs localStorage, token security.
+3. [03_error_boundaries_suspense_profiling.md](03_error_boundaries_suspense_profiling.md) — Per-widget error boundaries with SWR reset, Suspense for data, React Profiler workflow.
+
 ## Key Study Topics
 
 ### 1. Data Fetching & Caching
