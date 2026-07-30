@@ -2,6 +2,8 @@
 
 *Piste ACTED — Assistant Base de Données (Réf. ASSISTBDD_2607). Base d'exercice fournie : `meal_haiti.db` (SQLite) et son dump `meal_haiti.sql`. Toutes les requêtes de ce module ont été exécutées sur cette base ; les résultats affichés sont réels.*
 
+> **Où ce module se situe dans le parcours.** Il couvre le SQL de l'analyste et les fondamentaux de gestion. Le poste ACTED va au-delà : la conception d'un schéma est traitée dans [Modélisation et conception](02_modelisation_et_conception.md), l'administration complète — sauvegarde, restauration, permissions, maintenance — dans [Administration de base de données](03_administration_bdd.md), et la protection des données bénéficiaires dans [Sécurité et protection des données](04_securite_protection_donnees.md). Ces trois modules travaillent sur une seconde base, `exercices/acted_bdd.db`, calquée sur un projet WASH et sécurité alimentaire réel avec ménages, assistances, enquêtes PDM et plaintes. Le présent module reste sur `meal_haiti.db`, plus simple, qui suffit à apprendre le SQL lui-même.
+
 ---
 
 ## Pourquoi ce module est différent des autres
@@ -433,11 +435,114 @@ Encore le même fil : contrainte dans le formulaire, contrainte dans le schéma,
 
 ---
 
-## 6. Gestion et performance de base de données
+## 6. Écrire dans la base : DDL, DML et transactions
+
+Les sections précédentes lisent. Le poste ACTED demande aussi d'écrire, et c'est là que les erreurs coûtent cher, parce qu'une requête de lecture ratée ne détruit rien.
+
+### 6.1 Les deux familles d'instructions
+
+Le **DDL**, *data definition language*, définit la structure : `CREATE`, `ALTER`, `DROP`, `TRUNCATE`. Le **DML**, *data manipulation language*, manipule le contenu : `INSERT`, `UPDATE`, `DELETE`, `SELECT`. La distinction n'est pas académique : dans la plupart des moteurs, le DDL déclenche une validation implicite, ce qui veut dire qu'un `ALTER TABLE` ne s'annule pas par un `ROLLBACK`. SQLite et PostgreSQL font exception et savent annuler du DDL ; MySQL ne le sait pas. C'est une différence que peu de candidats connaissent.
+
+Il faut aussi distinguer `DELETE` de `TRUNCATE`. Le premier supprime ligne à ligne, se filtre par une clause `WHERE`, déclenche les déclencheurs et s'annule. Le second vide la table d'un coup, ne se filtre pas, ne déclenche rien et, dans la plupart des moteurs, ne s'annule pas. Sur une table de bénéficiaires, `TRUNCATE` ne doit jamais être tapé.
+
+### 6.2 La transaction, démontrée
+
+Une transaction regroupe plusieurs opérations en une unité atomique : tout réussit, ou rien n'a lieu. C'est ce qui permet de corriger une donnée **et** de journaliser la correction sans risquer que l'une des deux passe sans l'autre.
+
+Le relevé de l'école EC016 en semaine 6 affiche 155 élèves présents pour 201 inscrits, et le coordonnateur confirme que le bon chiffre est 175.
+
+```sql
+BEGIN TRANSACTION;
+
+UPDATE suivi_hebdo
+SET eleves_presents = 175
+WHERE code_ecole = 'EC016' AND semaine = 6;
+
+INSERT INTO journal_corrections
+  (code_ecole, semaine, champ, ancienne_valeur, nouvelle_valeur, motif, horodatage)
+VALUES
+  ('EC016', 6, 'eleves_presents', '155', '175',
+   'confirme par coordonnateur', datetime('now'));
+
+ROLLBACK;   -- ou COMMIT
+```
+
+Après le `ROLLBACK`, une vérification montre que `eleves_presents` vaut toujours 155 **et** que la table `journal_corrections` est vide. Les deux opérations ont disparu ensemble : c'est l'atomicité. Si l'on avait écrit `COMMIT`, les deux seraient présentes ensemble.
+
+La discipline pratique qui en découle vaut d'être énoncée à l'oral. Avant toute écriture sur des données réelles, on ouvre une transaction, on exécute, on **vérifie par un `SELECT` à l'intérieur de la transaction**, et on ne valide qu'après. Un `ROLLBACK` coûte zéro ; une restauration de sauvegarde coûte une demi-journée.
+
+### 6.3 La règle du SELECT avant le DELETE
+
+C'est la règle la plus importante de cette section, et elle tient en une phrase : **on écrit toujours le `SELECT` avec exactement la même clause `WHERE` avant de la transformer en `DELETE` ou en `UPDATE`.**
+
+```sql
+-- 1. On regarde
+SELECT COUNT(*) FROM eleves WHERE statut = 'abandon' AND date_inscription < '2025-01-01';
+-- 2. Seulement ensuite, et dans une transaction
+BEGIN;
+DELETE FROM eleves WHERE statut = 'abandon' AND date_inscription < '2025-01-01';
+COMMIT;
+```
+
+Le piège classique, qui a détruit plus de bases que n'importe quelle panne matérielle, est le `UPDATE` dont la clause `WHERE` a été oubliée ou tronquée. `UPDATE eleves SET statut = 'actif'` sans `WHERE` met 3 148 lignes à jour en une milliseconde et rien ne prévient. La parade est la transaction, et la vérification du nombre de lignes affectées : si le moteur annonce 3 148 lignes modifiées alors qu'on en attendait douze, on annule.
+
+### 6.4 L'insertion avec gestion de conflit
+
+Le besoin est constant en import : on reçoit un lot de relevés dont certains existent déjà. Insérer bêtement viole la contrainte d'unicité et interrompt tout le traitement.
+
+```sql
+INSERT INTO suivi_hebdo (code_ecole, semaine, eleves_inscrits, eleves_presents)
+VALUES ('EC001', 1, 200, 180);
+-- Runtime error: UNIQUE constraint failed: suivi_hebdo.code_ecole, suivi_hebdo.semaine
+```
+
+Trois solutions existent, et le choix dépend de l'intention. `INSERT OR IGNORE` passe silencieusement la ligne en conflit, ce qui convient quand la donnée déjà présente fait foi. `ON CONFLICT ... DO NOTHING` fait la même chose de façon explicite et lisible, et c'est la forme à préférer. `ON CONFLICT ... DO UPDATE`, appelé *upsert*, met à jour la ligne existante avec les nouvelles valeurs.
+
+```sql
+INSERT INTO suivi_hebdo (code_ecole, semaine, eleves_inscrits, eleves_presents)
+VALUES ('EC001', 1, 200, 180)
+ON CONFLICT (code_ecole, semaine)
+DO UPDATE SET eleves_presents = excluded.eleves_presents;
+```
+
+Le mot-clé `excluded` désigne la ligne qu'on tentait d'insérer. Après exécution, la ligne affiche `eleves_presents = 180` mais `eleves_inscrits = 141`, sa valeur d'origine : **seules les colonnes citées dans le `DO UPDATE` sont modifiées.** C'est un piège classique — on croit avoir remplacé la ligne, on n'en a remplacé qu'une colonne.
+
+L'équivalent MySQL s'écrit `INSERT ... ON DUPLICATE KEY UPDATE`. L'intérêt de ce motif pour le poste est direct : c'est lui qui rend un import **idempotent**, c'est-à-dire rejouable sans créer de doublon, propriété indispensable en bureau terrain où l'on relance un traitement parce qu'on ne sait plus s'il a abouti.
+
+### 6.5 Les opérations ensemblistes
+
+`UNION` empile deux résultats en éliminant les doublons ; `UNION ALL` les empile sans dédoublonner et coûte moins cher. `INTERSECT` garde ce qui est dans les deux ; `EXCEPT`, appelé `MINUS` sous Oracle, garde ce qui est dans le premier et pas dans le second.
+
+```sql
+SELECT 'propre' AS source, COUNT(*) FROM suivi_hebdo
+UNION ALL
+SELECT 'sale',            COUNT(*) FROM staging_data_center;
+```
+
+| source | count |
+|---|---|
+| propre | 360 |
+| sale | 356 |
+
+C'est le motif du tableau de bord de validation : une ligne par contrôle, empilées par `UNION ALL`, chacune devant afficher zéro. Le module [Administration](03_administration_bdd.md) en donne la version complète.
+
+`EXCEPT` a un usage précieux en réconciliation : la liste des couples école-semaine attendus moins la liste des couples reçus donne exactement les relevés manquants, sans écrire de jointure.
+
+### 6.6 Dates et chaînes, les fonctions qui servent vraiment
+
+Le traitement des dates est la source d'erreur numéro un des imports. En SQLite, `strftime('%Y-%m', date_saisie)` extrait le mois, ce qui permet de grouper par période, et `julianday(a) - julianday(b)` donne un écart en jours, utilisé pour mesurer un délai entre annonce et distribution. `date('now', '-7 days')` calcule une borne glissante. En PostgreSQL, on écrit `date_trunc('month', d)` et `age(a, b)` ; en MySQL, `DATE_FORMAT` et `DATEDIFF`.
+
+Côté chaînes, cinq fonctions couvrent l'essentiel du nettoyage : `TRIM` retire les espaces de bord, `UPPER` et `LOWER` uniformisent la casse, `REPLACE` supprime la ponctuation, `SUBSTR` extrait un fragment, `LENGTH` détecte les valeurs tronquées, et `||` concatène — `CONCAT` sous MySQL. La combinaison `UPPER(TRIM(REPLACE(REPLACE(nom,'-',''),' ','')))` produit la clé normalisée qui sert à rapprocher « Jean-Baptiste », « Jean Baptiste » et « JEAN BAPTISTE ».
+
+Le rappel qui accompagne toujours ces fonctions : **appliquer une fonction à une colonne dans une clause `WHERE` annule l'usage de l'index**. Si l'on doit filtrer souvent sur une valeur normalisée, on stocke la colonne normalisée à côté, ou l'on crée un index fonctionnel.
+
+---
+
+## 7. Gestion et performance de base de données
 
 Cette section adresse directement les affirmations de ta lettre ACTED.
 
-### 6.1 Les index
+### 7.1 Les index
 
 Un index est une structure auxiliaire — typiquement un arbre B — qui permet de retrouver des lignes sans parcourir toute la table. L'analogie : l'index d'un livre, qui évite de lire les 400 pages pour trouver un mot.
 
@@ -459,7 +564,7 @@ Ce qu'il faut savoir expliquer :
 
 **Une fonction appliquée à la colonne annule l'index.** Écrire `WHERE UPPER(nom) = 'JEAN'` empêche l'usage d'un index sur `nom` ; il faut soit créer un index fonctionnel, soit réécrire la condition.
 
-### 6.2 Lire un plan d'exécution
+### 7.2 Lire un plan d'exécution
 
 ```sql
 EXPLAIN QUERY PLAN
@@ -481,7 +586,7 @@ En PostgreSQL on écrit `EXPLAIN ANALYZE`, qui exécute réellement la requête 
 
 En MySQL, la commande est `EXPLAIN` et l'on regarde les colonnes `type` (où `ALL` signale un parcours complet), `key` (l'index effectivement utilisé) et `rows` (l'estimation de lignes lues).
 
-### 6.3 Le problème N+1
+### 7.3 Le problème N+1
 
 C'est l'affirmation la plus technique de ta lettre — il faut pouvoir l'expliquer sans hésiter.
 
@@ -509,7 +614,7 @@ En ORM, la correction s'appelle le chargement anticipé : `selectinload` ou `joi
 
 **Ta version parlée, calibrée sur ta lettre** : « Sur le projet Steam The Streets, la page de connexion mettait trente-six secondes. Le journal des requêtes montrait la même requête répétée des centaines de fois : un N+1 classique, une requête par élément de la liste. J'ai remplacé la boucle par une jointure unique avec agrégation, et ajouté le chargement anticipé côté ORM. Le temps est passé sous la demi-seconde. »
 
-### 6.4 Transactions, verrous et blocages
+### 7.4 Transactions, verrous et blocages
 
 Une **transaction** regroupe des opérations en une unité atomique. Les propriétés **ACID** : *Atomicité* (tout ou rien), *Cohérence* (les contraintes restent respectées), *Isolation* (les transactions concurrentes ne se marchent pas dessus), *Durabilité* (une transaction validée survit à une panne).
 
@@ -528,7 +633,7 @@ Un **verrou** protège une ressource pendant une modification. Un **blocage mutu
 
 **Ta version parlée** : « Lors d'accès concurrents massifs, nous observions des blocages mutuels sur les mises à jour. Deux causes : les transactions verrouillaient plus de lignes que nécessaire faute d'index adapté, et l'ordre d'accès aux tables variait selon les chemins de code. J'ai ajouté des index composites pour que les verrous portent sur des lignes ciblées plutôt que sur des plages entières, uniformisé l'ordre d'accès, et raccourci les transactions. Les blocages ont disparu. »
 
-### 6.5 Vues et vues matérialisées
+### 7.5 Vues et vues matérialisées
 
 Une **vue** est une requête enregistrée sous un nom, recalculée à chaque appel. Elle sert à masquer la complexité et à restreindre l'accès.
 
@@ -547,7 +652,7 @@ GROUP BY r.nom_region, s.semaine;
 
 Une **vue matérialisée** (PostgreSQL, Oracle) stocke physiquement le résultat et se rafraîchit à la demande. Elle convient parfaitement à un tableau de bord consulté cent fois par jour sur des données qui ne changent qu'une fois par semaine : on paie le calcul une fois au lieu de cent. MySQL ne les propose pas nativement — on émule avec une table de synthèse rafraîchie par tâche planifiée.
 
-### 6.6 Sauvegarde, permissions, migrations
+### 7.6 Sauvegarde, permissions, migrations
 
 La sauvegarde se fait par export logique (`pg_dump`, `mysqldump`) ou copie physique, avec une distinction à connaître entre sauvegarde complète, différentielle et incrémentale, et la notion de restauration à un instant donné. **La règle à énoncer : une sauvegarde jamais testée en restauration n'est pas une sauvegarde.**
 
@@ -555,13 +660,13 @@ Les permissions suivent le principe du moindre privilège : `GRANT SELECT` pour 
 
 Les **migrations** versionnent l'évolution du schéma. Alembic pour SQLAlchemy, Flyway ou Liquibase ailleurs. La règle : jamais de modification manuelle du schéma en production, toujours par script versionné et réversible.
 
-### 6.7 MySQL et PostgreSQL
+### 7.7 MySQL et PostgreSQL
 
 Ta lettre mentionne MySQL, alors sache situer les deux. MySQL avec InnoDB est très répandu, rapide en lecture, propose `SOUNDEX` nativement, et son isolation par défaut est *Repeatable Read*. PostgreSQL est plus strict sur les types et le standard SQL, propose des types avancés (JSONB, tableaux, types géographiques via PostGIS), les vues matérialisées, les index partiels et fonctionnels, les extensions comme `pg_trgm`, et son isolation par défaut est *Read Committed*. En contexte humanitaire, PostgreSQL est souvent préféré pour les données géospatiales et la rigueur transactionnelle.
 
 ---
 
-## 7. Trente exercices sur la base fournie
+## 8. Trente exercices sur la base fournie
 
 **Fondamentaux.** Lister les écoles de l'Ouest triées par nombre de salles décroissant. Compter les élèves par sexe. Trouver les écoles sans cantine. Afficher les cinq écoles ayant le plus d'élèves parrainés. Compter les élèves ayant abandonné, par région.
 
@@ -576,6 +681,8 @@ Ta lettre mentionne MySQL, alors sache situer les deux. MySQL avec InnoDB est tr
 **Avancé.** Produire le tableau croisé région × période avec `CASE`. Écrire une CTE listant les écoles sous la moyenne nationale. Construire une vue d'indicateurs mensuels. Écrire la requête de détection des repas constants, puis la corriger pour éliminer les faux positifs des écoles sans cantine. Comparer taux pondéré et non pondéré par région et commenter l'écart.
 
 Le dernier exercice est le plus formateur : il relie SQL, statistiques et méthode.
+
+**Écriture et transactions**, à faire sur une copie de la base et jamais sur l'original. Corriger un relevé dans une transaction avec journalisation, puis annuler et vérifier que rien n'a bougé. Écrire l'`UPSERT` qui recharge un lot de relevés sans créer de doublon, et démontrer l'idempotence en le rejouant. Construire le tableau de bord de validation par `UNION ALL`, avec cinq contrôles devant tous renvoyer zéro. Produire par `EXCEPT` la liste des couples école-semaine attendus mais absents. Écrire la requête de suppression des élèves en abandon inscrits avant 2025, précédée de son `SELECT` de contrôle.
 
 ---
 
@@ -595,4 +702,6 @@ Je ne devine pas, je mesure. Je commence par le plan d'exécution, avec `EXPLAIN
 
 ---
 
-*Module lié côté PMEL : [Excel et le Data Center](../assitant_pmel/04_excel_data_center.md) · [Statistiques](../assitant_pmel/02_statistiques_pmel.md) · [Le processus MEAL](../assitant_pmel/01_meal_processus.md)*
+*Suite du parcours ACTED : [Modélisation et conception](02_modelisation_et_conception.md) · [Administration de base de données](03_administration_bdd.md) · [Sécurité et protection des données](04_securite_protection_donnees.md) · [Examen blanc corrigé](08_examen_blanc_corrige.md) · [Fiche de révision](00_fiche_revision_examen.md)*
+
+*Modules liés côté PMEL : [Excel et le Data Center](../assitant_pmel/04_excel_data_center.md) · [Statistiques](../assitant_pmel/02_statistiques_pmel.md) · [Le processus MEAL](../assitant_pmel/01_meal_processus.md)*

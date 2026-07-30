@@ -26,3 +26,7 @@ Thumbs.db
 .docker_temp/
 pgdata/
 redisdata/
+
+# Practice databases — derived artifacts, rebuilt by the generator scripts
+# (acted_bdd/exercices/generer_base_acted.py, remote_leverage_data_analyst/practice/build_dataset.py)
+*.duckdb
