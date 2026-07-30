@@ -108,9 +108,9 @@ QUALIFY ROW_NUMBER() OVER (PARTITION BY client_id ORDER BY opened_date) = 1;
 
 | client_id | vacancy_id | opened_date | role_family |
 |---|---|---|---|
-| C0001 | V00001 | 2026-03-15 | Bookkeeping |
-| C0002 | V00002 | 2025-02-11 | Marketing VA |
-| C0003 | V00003 | 2025-03-03 | Executive VA |
+| C0001 | V00002 | 2025-05-25 | Bookkeeping |
+| C0002 | V00003 | 2025-08-04 | Technical |
+| C0003 | V00004 | 2025-03-19 | Technical |
 
 That deduplication pattern — partition by the business key, order by a keep-rule, keep row number one — is the same one you already use. It is the most reusable four lines in analytics: latest record per entity, first touch per customer, deduplicating a replayed load.
 
@@ -164,10 +164,10 @@ ORDER BY month DESC;
 
 | month | fees | mom_growth_pct |
 |---|---|---|
-| 2026-07 | 135 660 | 53,3 |
-| 2026-06 | 88 515 | 34,2 |
-| 2026-05 | 65 956 | −9,9 |
-| 2026-04 | 73 206 | 43,3 |
+| 2026-07 | 132 890 | 62,6 |
+| 2026-06 | 81 743 | −12,8 |
+| 2026-05 | 93 701 | 103,6 |
+| 2026-04 | 46 011 | −9,9 |
 
 One caution the practice data will teach you: some `start_date` values fall **after** today, because a placement is agreed before the VA actually starts. A month-to-date revenue chart that includes future start dates is wrong. Filter with `WHERE start_date <= CURRENT_DATE()` and say why.
 

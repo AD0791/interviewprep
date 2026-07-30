@@ -18,20 +18,23 @@ Then: dashboards in Power BI and Looker Studio · ETL in Apache Beam moving Mong
 
 | | |
 |---|---|
-| Funnel | 3 396 submittals → 1 575 interviews → 417 offers → 330 hires |
-| Ratios | 46,4 % submittal→interview · 28,6 % interview→offer · 79,1 % acceptance |
-| Time to fill | 29 days Technical, 17 days Sales VA |
+| Funnel | 3 918 submittals → 1 835 interviews → 482 offers → 362 hires |
+| Ratios | 46,8 % submittal→interview · 28,0 % interview→offer · 75,1 % acceptance |
+| Time to fill | 28 days Technical, 17 days Customer Support |
 | Time to **first submittal** | 5 days Technical, 2 days Support — the metric the client feels |
-| English effect | B1 3,5 % hire rate → C1 13,0 % → C2 14,8 % |
-| Paid Social | $131 301 spend → $72 206 fees → **ROAS 0,55** |
-| Paid Search | $178 910 → $272 299 → ROAS 1,52 |
-| CPL vs CAC | Outbound cheapest CPL $88,53 · Paid Social CAC $3 647 vs Search $1 542 |
-| Referral | 21,8 % lead→client, ~3× search, zero recorded spend |
-| Repeat clients | 56,6 % opened a second requisition |
-| Censoring | July fill rate 15,2 % vs stable ~55 % — cohort too young |
-| Fixed-window fix | Filled-within-30-days: stable 47–55 % across months |
+| English effect | B1 2,9 % hire rate → C1 13,4 % → C2 13,4 % |
+| …but acceptance reverses | C2 accept 63,2 % of offers vs B2 78,9 % — competing offers |
+| Paid Social | $134 127 spend → $80 027 fees → **ROAS 0,60** |
+| Paid Search | $181 124 → $325 109 → ROAS 1,79 |
+| CPL vs CAC | Outbound cheapest CPL $83,78 · Paid Social CAC $3 625 vs Search $1 362 |
+| Referral | 22,3 % lead→client, ~2,6× search, zero recorded spend |
+| Sales reps | Best closer 11,1 % win rate vs 8,2 % worst · nobody hits quota (68 % best) |
+| Leads never worked | 256, or 6,5 % — paid for, never contacted |
+| Repeat clients | 58,7 % opened a second requisition |
+| Censoring | July fill rate 11,9 % vs stable ~55 % — cohort too young |
+| Fixed-window fix | Filled-within-30-days: 42–51 % across months, no collapse |
 | Reconciliation | **12 vacancies marked filled with no placement record** |
-| Pipeline | `ads_spend` fails 8 % of runs, schema drift — and it feeds the CAC dashboard |
+| Pipeline | `ads_spend` fails 10 % of runs, schema drift — and it feeds the CAC dashboard |
 
 Prefix with: *"in the dataset I've been practising on…"*
 
@@ -50,6 +53,7 @@ Prefix with: *"in the dataset I've been practising on…"*
 ## Lines to land
 
 - "Cheap leads that don't convert are expensive — I optimise for CAC, not CPL."
+- "Six and a half percent of your leads were never contacted — that's paid demand thrown away."
 - "I'd never trend fill rate on the current month without handling censoring."
 - "Status columns overwrite history; event tables preserve it."
 - "What's the grain of this table?"

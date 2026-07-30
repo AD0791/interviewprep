@@ -41,7 +41,7 @@ Compensation is $1,920–$2,080 a month. That is the LatAm placement band; treat
 
 **Friday 31 — 3 hours.** [Module 03](03_tableau_in_five_days.md), then build Tableau sheets 1 and 2 — the funnel and time-to-fill. Expect the first hour to be frustrating; the interface is the only real obstacle. Twenty minutes of English drills.
 
-**Saturday 1 August — 4 hours.** Finish the Tableau dashboard: aging, channel economics, monthly trend with the censored month marked. Assemble, add one filter action, **publish and save the link**. Then [module 04](04_positioning_and_mock_interview.md) and update the CV title line.
+**Saturday 1 August — 4 hours.** Finish the Tableau dashboard: aging, channel economics, monthly trend with the censored month marked. Assemble, add one filter action, **publish and save the link**. Then [module 04](04_positioning_and_mock_interview.md) and [module 06](06_sales_lens_and_objections.md) — the sales vocabulary and the rehearsed answer to "you've never worked in sales". Update the CV title line.
 
 **Sunday 2 August — 3 hours.** Full mock interview out loud, timed, recorded. Play it back. Redo the three answers that came out worst. Re-run the module 01 queries from memory. Re-read this page. Stop by 8 p.m.
 
@@ -55,19 +55,22 @@ All from the practice dataset — say "in the dataset I've been practising on" w
 
 | Metric | Value |
 |---|---|
-| Funnel | 3 396 submittals → 1 575 interviews scheduled → 1 460 completed → 417 offers → 330 hires |
-| Submittal → interview | 46,4 % |
-| Interview → offer | 28,6 % |
-| Offer acceptance | 79,1 % |
-| Median time to fill | 29 days Technical, 17 days Sales VA — a 12-day spread |
-| Fill rate | 49,9 % filled, 21,6 % open, 20,0 % cancelled, 8,5 % on hold |
-| English level effect | B1 3,5 % hire rate → C1 13,0 % → C2 14,8 % — nearly 4× from B1 to C1 |
-| CPL vs CAC | Outbound cheapest lead at $88,53; Paid Social $146,38 CPL but $3 647 CAC vs Paid Search $1 542 |
-| Channel P&L | Paid Social spent $131 301, returned $72 206 in fees — loses money |
-| Referral | 21,8 % lead-to-client, ~3× Paid Search, at zero recorded spend |
-| Censoring | July fill rate 15,2 % vs a stable ~55 % — nothing is wrong, the cohort is too young |
+| Funnel | 3 918 submittals → 1 835 interviews scheduled → 1 719 completed → 482 offers → 362 hires |
+| Submittal → interview | 46,8 % |
+| Interview → offer | 28,0 % |
+| Offer acceptance | 75,1 % |
+| Median time to fill | 28 days Technical, 17 days Customer Support — an 11-day spread |
+| Fill rate | 49,4 % filled, 20,2 % open, 21,6 % cancelled, 8,9 % on hold |
+| English level effect | B1 2,9 % hire rate → C1 13,4 % → C2 13,4 % — more than 4× from B1 |
+| Acceptance reverses | C2 accept only 63,2 % of offers vs B2 78,9 % — competing offers |
+| CPL vs CAC | Outbound cheapest lead at $83,78; Paid Social $146,27 CPL but $3 625 CAC vs Paid Search $1 362 |
+| Channel P&L | Paid Social spent $134 127, returned $80 027 in fees — ROAS 0,60 |
+| Referral | 22,3 % lead-to-client, ~2,6× Paid Search, at zero recorded spend |
+| Sales | Best closer wins 11,1 % of closed deals vs 8,2 % worst; nobody hits quota (68 % best) |
+| Never worked | 256 leads — 6,5 % — were paid for and never contacted |
+| Censoring | July fill rate 11,9 % vs a stable ~55 % — nothing is wrong, the cohort is too young |
 | Reconciliation | 12 vacancies marked filled with no placement record — potentially uninvoiced fees |
-| Pipeline health | `ads_spend` fails 8 % of runs, mostly schema drift — and it feeds the CAC dashboard |
+| Pipeline health | `ads_spend` fails 10 % of runs, mostly schema drift — and it feeds the CAC dashboard |
 
 ---
 

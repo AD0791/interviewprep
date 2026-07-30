@@ -16,6 +16,7 @@ Remote Leverage is a Florida-based virtual-assistant placement agency recruiting
 | 03 | [Tableau in five days](03_tableau_in_five_days.md) | Friday | LOD, order of operations, extract vs live, Power BI → Tableau map |
 | 04 | [Positioning and mock interview](04_positioning_and_mock_interview.md) | Saturday | 90-second pitch, CV coherence, honest answers, full mock |
 | 05 | [SQL drills with answers](05_sql_drills_with_answers.md) | Sunday | Twelve drills, verified outputs — self-check |
+| 06 | [Sales lens and objection handling](06_sales_lens_and_objections.md) | Saturday | Rep-level sales metrics, and the "you've never worked in sales" objection |
 | 99 | [During-call one pager](99_during_call_one_pager.md) | **Monday only** | One screen to keep open while you talk |
 
 The cheat sheet (00) is for Sunday revision. The one-pager (99) is for the call itself. Do not confuse them.
@@ -35,13 +36,15 @@ python3 practice/build_dataset.py     # regenerate from scratch (deterministic)
 | Table | Rows | Grain |
 |---|---|---|
 | `marketing_spend` | 1 716 | day × paid channel |
-| `leads` | 3 824 | inbound enquiry |
-| `clients` | 302 | converted client |
-| `vacancies` | 635 | requisition |
+| `leads` | 3 933 | inbound enquiry, with owner and deal stage |
+| `sales_reps` | 5 | closer, with monthly quota |
+| `sales_activities` | 26 564 | call, email or demo logged by a rep |
+| `clients` | 327 | converted client |
+| `vacancies` | 709 | requisition |
 | `candidates` | 4 240 | registered candidate |
-| `submittals` | 3 396 | candidate presented to a vacancy |
-| `interviews` | 1 575 | interview scheduled |
-| `placements` | 314 | successful hire |
+| `submittals` | 3 918 | candidate presented to a vacancy |
+| `interviews` | 1 835 | interview scheduled |
+| `placements` | 347 | successful hire |
 | `pipeline_runs` | 3 432 | ETL job execution |
 
 `practice/csv/` holds the same tables as CSV — **Tableau Public opens these directly**, which is what the Friday and Saturday build uses.
@@ -55,7 +58,8 @@ Seven data-quality defects are injected deliberately (orphan placements, impossi
 | Gap | Severity | Where |
 |---|---|---|
 | **Tableau** — not on your CV, first responsibility in the posting | Decisive | [03](03_tableau_in_five_days.md) — honest script + weekend build |
-| **Domain vocabulary** — your language is MEAL, theirs is sales/recruiting | Decisive | [01](01_recruiting_sales_marketing_metrics.md) |
+| **Domain vocabulary** — your language is MEAL, theirs is sales/recruiting | Decisive | [01](01_recruiting_sales_marketing_metrics.md) · [06](06_sales_lens_and_objections.md) |
+| **No commercial-sector experience** — the objection you'll actually get | Decisive | [06](06_sales_lens_and_objections.md) |
 | **Positioning** — titles read "engineer" and "M&E", not "Data Analyst" | Decisive | [04](04_positioning_and_mock_interview.md) |
 | BigQuery as analyst rather than pipeline engineer | Likely probed | [02](02_bigquery_for_analysts.md) |
 | n8n — none | Minor, preferred only | [04](04_positioning_and_mock_interview.md) §6 |

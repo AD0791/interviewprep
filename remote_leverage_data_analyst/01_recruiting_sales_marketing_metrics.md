@@ -72,7 +72,7 @@ Retention at 30, 60 and 90 days; replacement rate; client repeat rate, meaning t
 
 ## 3. The data model
 
-Nine tables, which is roughly what an agency's warehouse looks like once the ATS, the CRM, Stripe, GA4 and the ad platforms have been landed in BigQuery.
+Eleven tables, which is roughly what an agency's warehouse looks like once the ATS, the CRM, Stripe, GA4 and the ad platforms have been landed in BigQuery.
 
 ```mermaid
 erDiagram
@@ -84,20 +84,25 @@ erDiagram
     submittals ||--o{ interviews      : "schedules"
     vacancies  ||--o| placements      : "results in"
     candidates ||--o{ placements      : "is placed as"
-    pipeline_runs ||--|| pipeline_runs : "monitored separately"
+    sales_reps ||--o{ leads          : "owns"
+    leads      ||--o{ sales_activities : "is worked through"
 ```
 
 | Table | Rows | Grain |
 |---|---|---|
 | `marketing_spend` | 1 716 | one row per day × paid channel |
-| `leads` | 3 824 | one row per inbound enquiry |
-| `clients` | 302 | one row per converted client |
-| `vacancies` | 635 | one row per requisition |
+| `leads` | 3 933 | one row per inbound enquiry, with owner and deal stage |
+| `sales_reps` | 5 | one row per closer, with monthly quota |
+| `sales_activities` | 26 564 | one row per call, email or demo |
+| `clients` | 327 | one row per converted client |
+| `vacancies` | 709 | one row per requisition |
 | `candidates` | 4 240 | one row per registered candidate |
-| `submittals` | 3 396 | one row per candidate presented to a vacancy |
-| `interviews` | 1 575 | one row per interview scheduled |
-| `placements` | 314 | one row per successful hire |
+| `submittals` | 3 918 | one row per candidate presented to a vacancy |
+| `interviews` | 1 835 | one row per interview scheduled |
+| `placements` | 347 | one row per successful hire |
 | `pipeline_runs` | 3 432 | one row per ETL job execution |
+
+The sales side of the model — reps, deal stages and logged activity — is covered in [module 06](06_sales_lens_and_objections.md); this module stays on marketing acquisition and the recruiting funnel.
 
 **Say the word "grain" in the interview.** Asking "what's the grain of this table?" before writing a query is the single clearest signal that someone has done this professionally. It is also how you avoid the fan-out that doubles your revenue numbers.
 
@@ -137,9 +142,9 @@ FROM funnel;
 
 | submittals | scheduled | completed | offers | hires | submittal→interview | interview→offer | offer acceptance |
 |---|---|---|---|---|---|---|---|
-| 3 396 | 1 575 | 1 460 | 417 | 330 | 46,4 % | 28,6 % | 79,1 % |
+| 3 918 | 1 835 | 1 719 | 482 | 362 | 46,8 % | 28,0 % | 75,1 % |
 
-Read it as a business story. Just under half of presented candidates earn an interview, which is a decent shortlist quality. Under a third of completed interviews produce an offer. Four out of five offers are accepted, which is healthy — below about 70 % you would suspect a rate-expectation problem.
+Read it as a business story. Just under half of presented candidates earn an interview, which is decent shortlist quality. Under a third of completed interviews produce an offer. Three out of four offers are accepted, which is acceptable — below about 70 % you would suspect a rate-expectation problem, and [module 05](05_sql_drills_with_answers.md) shows that this headline hides a sharp split by English level.
 
 **This is a story worth telling on Monday**, because it demonstrates three things at once: you know the funnel vocabulary, you check the grain before trusting a column, and you know that status fields overwrite history while event tables preserve it.
 
@@ -157,14 +162,14 @@ GROUP BY 1 ORDER BY n DESC;
 
 | reject_reason | n | pct |
 |---|---|---|
-| Candidate withdrew | 517 | 17,2 |
-| Skill mismatch | 438 | 14,6 |
-| English level | 435 | 14,5 |
-| Rate expectation | 434 | 14,5 |
+| Candidate withdrew | 592 | 16,9 |
+| Client cancelled | 507 | 14,5 |
+| English level | 494 | 14,1 |
+| Rate expectation | 488 | 14,0 |
 
 Note the window function inside an aggregate: `SUM(COUNT(*)) OVER ()` gives the grand total without a second pass or a subquery. It is a small thing that looks fluent.
 
-The read: candidate withdrawal is the largest single loss, which points at speed. A candidate who withdraws has usually taken another offer, and that is a time-to-fill problem disguised as a candidate problem.
+The read: candidate withdrawal is the largest single loss at 16,9 %, which points at speed. A candidate who withdraws has usually taken another offer, so this is a time-to-fill problem disguised as a candidate problem. Client cancellation, second at 14,5 %, is a different animal entirely — it is a qualification problem at intake, not a sourcing problem.
 
 ---
 
@@ -185,14 +190,16 @@ ORDER BY median_days DESC;
 
 | role_family | filled | avg_days | median_days |
 |---|---|---|---|
-| Technical | 45 | 29,2 | 29,0 |
-| Bookkeeping | 45 | 21,6 | 20,0 |
-| Executive VA | 67 | 20,5 | 19,0 |
-| Marketing VA | 57 | 18,5 | 17,0 |
-| Customer Support | 50 | 17,8 | 17,0 |
-| Sales VA | 47 | 17,5 | 17,0 |
+| Technical | 49 | 26,4 | 28,0 |
+| Bookkeeping | 53 | 23,7 | 22,0 |
+| Executive VA | 59 | 20,3 | 19,0 |
+| Marketing VA | 51 | 18,9 | 18,0 |
+| Sales VA | 65 | 18,3 | 18,0 |
+| Customer Support | 67 | 17,6 | 17,0 |
 
-Technical roles take **twelve days longer** than sales roles. That is an operational fact with a commercial consequence: either you start sourcing technical candidates before the requisition opens, or you set the client's expectation at four weeks instead of two.
+Technical roles take **eleven days longer** than customer support roles — 28 against 17 at the median. That is an operational fact with a commercial consequence: either you start sourcing technical candidates before the requisition opens, or you set the client's expectation at four weeks instead of two.
+
+Notice also that Technical is the only family where the median exceeds the mean, which tells you the distribution is left-skewed there — a cluster of slow fills rather than a few extreme outliers.
 
 Report the **median** alongside the mean. Time-to-fill distributions have a long right tail — a handful of roles that took four months drag the average up and describe nobody's actual experience.
 
@@ -211,14 +218,14 @@ GROUP BY 1 ORDER BY 1 DESC LIMIT 6;
 
 | cohort_month | opened | filled | fill_rate_pct |
 |---|---|---|---|
-| 2026-07 | 112 | 17 | 15,2 |
-| 2026-06 | 88 | 54 | 61,4 |
-| 2026-05 | 63 | 37 | 58,7 |
-| 2026-04 | 61 | 33 | 54,1 |
-| 2026-03 | 53 | 29 | 54,7 |
-| 2026-02 | 36 | 20 | 55,6 |
+| 2026-07 | 101 | 12 | 11,9 |
+| 2026-06 | 104 | 56 | 53,8 |
+| 2026-05 | 72 | 43 | 59,7 |
+| 2026-04 | 55 | 30 | 54,5 |
+| 2026-03 | 50 | 23 | 46,0 |
+| 2026-02 | 33 | 20 | 60,6 |
 
-July's fill rate looks catastrophic — 15 % against a stable 55 %. **Nothing is wrong.** July's vacancies are on average younger than the twenty-day median time-to-fill, so most of them simply have not had time to close yet. This is **right-censoring**, and a dashboard that plots this trend without handling it will trigger a panic meeting every single month.
+July's fill rate looks catastrophic — 12 % against a band that otherwise sits around 50 to 60 %. **Nothing is wrong.** July's vacancies are on average younger than the median time-to-fill, so most of them simply have not had time to close yet. This is **right-censoring**, and a dashboard that plots this trend without handling it will trigger a panic meeting every single month.
 
 Three ways to handle it, and knowing all three is the mark of an analyst rather than a report-writer. You can exclude cohorts younger than your 90th-percentile time-to-fill. You can report a fixed-window rate — "share filled within 30 days of opening" — which is comparable across cohorts by construction. Or you can plot the metric with the incomplete cohort visibly greyed out and labelled.
 
@@ -245,16 +252,18 @@ FROM f GROUP BY 1 ORDER BY 1;
 
 | english_level | submittals | to_interview_pct | hire_rate_pct |
 |---|---|---|---|
-| B1 | 541 | 26,8 | 3,5 |
-| B2 | 1 435 | 42,4 | 8,4 |
-| C1 | 1 042 | 56,7 | 13,0 |
-| C2 | 378 | 61,1 | 14,8 |
+| B1 | 725 | 28,7 | 2,9 |
+| B2 | 1 598 | 45,4 | 7,9 |
+| C1 | 1 171 | 55,9 | 13,4 |
+| C2 | 424 | 58,3 | 13,4 |
 
-English level is the strongest single driver of placement success in the whole dataset: a C1 candidate is **almost four times** more likely to be hired than a B1, and the effect is monotonic across all four levels.
+English level is the strongest single driver of placement success in the whole dataset: a C1 candidate is **more than four times** more likely to be hired than a B1, and the effect rises steadily across the levels before flattening between C1 and C2.
 
 That is not a curiosity — it is the company's entire value proposition ("English-speaking VAs") expressed as a number. And it converts directly into a recommendation with a dollar sign attached: if B1 candidates convert at 3,5 %, every B1 submittal consumes recruiter time and client goodwill for almost no return. Either raise the screening bar to B2 minimum, or invest in English assessment earlier in sourcing.
 
-**Careful with the causal claim, and say so out loud.** English level is correlated with hire rate; it may also be correlated with experience, with role family, and with which recruiter handled the file. The honest phrasing is: *"English level is strongly associated with hire rate — four-fold between B1 and C1. Before acting on it I'd check whether it holds within role family and seniority, because it could partly be a proxy."* That sentence is worth more in an interview than the finding itself.
+**Careful with the causal claim, and say so out loud.** English level is correlated with hire rate; it may also be correlated with experience, with role family, and with which recruiter handled the file. The honest phrasing is: *"English level is strongly associated with hire rate — more than four-fold between B1 and C1. Before acting on it I'd check whether it holds within role family and seniority, because it could partly be a proxy."* That sentence is worth more in an interview than the finding itself.
+
+And there is a twist that makes the story better: the same variable **reverses** at the offer stage, where stronger candidates decline more often because they hold competing offers. [Module 05](05_sql_drills_with_answers.md) drill D7 has the numbers.
 
 ---
 
@@ -278,17 +287,17 @@ ORDER BY clients DESC;
 
 | channel | leads | clients | lead→client | spend | CPL | CAC |
 |---|---|---|---|---|---|---|
-| Paid Search | 1 507 | 116 | 7,7 % | $178 910 | $118,72 | $1 542 |
-| Referral | 335 | 73 | 21,8 % | $0 | $0 | $0 |
-| Organic | 637 | 54 | 8,5 % | $0 | $0 | $0 |
-| Paid Social | 897 | 36 | 4,0 % | $131 301 | $146,38 | $3 647 |
-| Outbound | 448 | 23 | 5,1 % | $39 661 | $88,53 | $1 724 |
+| Paid Search | 1 554 | 133 | 8,6 % | $181 124 | $116,55 | $1 362 |
+| Referral | 345 | 77 | 22,3 % | $0 | $0 | $0 |
+| Organic | 632 | 48 | 7,6 % | $0 | $0 | $0 |
+| Paid Social | 917 | 37 | 4,0 % | $134 127 | $146,27 | $3 625 |
+| Outbound | 485 | 32 | 6,6 % | $40 633 | $83,78 | $1 270 |
 
 Three readings, in increasing order of usefulness.
 
-**CPL ranks the channels wrongly.** Outbound has the cheapest leads at $88,53 and Paid Social the most expensive at $146,38 — a gap of 65 %. But look at conversion: Paid Social converts at 4,0 % against Paid Search's 7,7 %, so Paid Social's CAC is **$3 647 against $1 542**, more than double. *Optimising for CPL buys you cheap leads that never become clients.* This is the classic marketing-analytics trap and being able to state it cleanly is worth a lot.
+**CPL ranks the channels wrongly.** Outbound has the cheapest leads at $83,78 and Paid Social the most expensive at $146,27 — a gap of 75 %. But look at conversion: Paid Social converts at 4,0 % against Paid Search's 8,6 %, so Paid Social's CAC is **$3 625 against $1 362**, nearly three times as much. *Optimising for CPL buys you cheap leads that never become clients.* This is the classic marketing-analytics trap and being able to state it cleanly is worth a lot.
 
-**Referral is the best channel and has no CAC line.** It converts at 21,8 %, nearly three times Paid Search, at zero recorded spend. That "zero" is an artefact of the data, not of reality — referral programmes have costs (incentives, account-management time) that simply are not in the ad-spend table. The honest statement is that referral's *recorded* CAC is zero and its true CAC is unknown but low, and the actionable question is not "how do we spend less on ads" but **"what would it take to double referral volume?"**
+**Referral is the best channel and has no CAC line.** It converts at 22,3 %, more than two and a half times Paid Search, at zero recorded spend. That "zero" is an artefact of the data, not of reality — referral programmes have costs (incentives, account-management time) that simply are not in the ad-spend table. The honest statement is that referral's *recorded* CAC is zero and its true CAC is unknown but low, and the actionable question is not "how do we spend less on ads" but **"what would it take to double referral volume?"**
 
 **Distinguish paid CAC from blended CAC.** Paid CAC divides paid spend by clients from paid channels. Blended CAC divides total spend by *all* new clients, including free ones, which flatters the number. Founders quote blended; analysts must label which one they are showing. Say this if CAC comes up — it is a two-second answer that signals real experience.
 
@@ -306,13 +315,13 @@ GROUP BY 1 ORDER BY fee_revenue_usd DESC;
 
 | channel | clients | placements | fee_revenue_usd |
 |---|---|---|---|
-| Paid Search | 116 | 120 | $272 299 |
-| Referral | 73 | 85 | $196 222 |
-| Organic | 54 | 57 | $129 446 |
-| Paid Social | 36 | 34 | $72 206 |
-| Outbound | 23 | 18 | $41 940 |
+| Paid Search | 133 | 149 | $325 109 |
+| Referral | 77 | 89 | $198 434 |
+| Organic | 48 | 44 | $101 303 |
+| Paid Social | 37 | 35 | $80 027 |
+| Outbound | 32 | 30 | $70 404 |
 
-Paid Social spent $131 301 to generate $72 206 in fees. **It loses money.** Paid Search spent $178 910 to generate $272 299 — profitable before overhead. Referral generated $196 222 from 73 clients at essentially no acquisition cost, and produces 1,16 placements per client, the highest repeat rate of any channel.
+Paid Social spent $134 127 to generate $80 027 in fees. **It loses money.** Paid Search spent $181 124 to generate $325 109 — profitable before overhead. Referral generated $198 434 from 77 clients at essentially no acquisition cost, and produces 1,16 placements per client, the highest ratio of any channel.
 
 If they ask what you would do first with their data, that is your answer: reallocate Paid Social budget toward Paid Search and build a referral engine, then verify with a proper payback analysis rather than a single-period comparison.
 
@@ -331,14 +340,14 @@ GROUP BY 1 ORDER BY open_now DESC;
 
 | role_family | open_now | avg_age_days | older_than_30d |
 |---|---|---|---|
-| Technical | 32 | 40 | 9 |
-| Marketing VA | 25 | 25 | 9 |
-| Executive VA | 22 | 25 | 7 |
-| Customer Support | 21 | 16 | 2 |
-| Sales VA | 20 | 32 | 4 |
-| Bookkeeping | 17 | 18 | 3 |
+| Technical | 30 | 49 | 14 |
+| Executive VA | 28 | 35 | 9 |
+| Bookkeeping | 26 | 35 | 9 |
+| Customer Support | 22 | 21 | 4 |
+| Marketing VA | 19 | 47 | 4 |
+| Sales VA | 18 | 14 | 2 |
 
-Technical roles are both the slowest to fill and the largest open bucket, with nine of them past thirty days — well beyond the 29-day median. Those nine are the ones a delivery lead needs on a Monday morning screen, sorted by age descending with the client name attached. **That is the dashboard, not a chart of averages.**
+Technical roles are both the slowest to fill and the largest open bucket, with fourteen of them past thirty days — well beyond the 28-day median, and an average age of 49 days. Those fourteen are the ones a delivery lead needs on a Monday morning screen, sorted by age descending with the client name attached. **That is the dashboard, not a chart of averages.**
 
 An operations dashboard answers "what do I do today", which means it lists rows and sorts by urgency. An executive dashboard answers "how are we doing", which means it aggregates and trends. Building one when they asked for the other is the most common dashboard failure, and naming the distinction out loud is a strong move.
 
@@ -375,7 +384,7 @@ FROM marketing_spend WHERE campaign IS NULL OR campaign = '';
 | DQ4 non-positive monthly rate | 7 |
 | DQ5 duplicate submittals | 15 |
 | DQ6 duplicate candidate emails | 40 |
-| DQ7 ad spend with no campaign | 39 |
+| DQ7 ad spend with no campaign | 42 |
 
 Each line is a different *kind* of problem, and saying which kind is the skill.
 
@@ -385,7 +394,7 @@ DQ3 and DQ4 are **impossible values** that a constraint should have prevented at
 
 DQ5 and DQ6 are **duplicates**, and they need different treatment. Duplicate submittals inflate the denominator of every funnel ratio. Duplicate candidate emails inflate the candidate pool and, worse, can cause the same person to be presented twice to the same client, which is embarrassing in front of a customer.
 
-DQ7 is **missing dimension data**, which silently breaks attribution: thirty-nine days of spend that cannot be assigned to a campaign.
+DQ7 is **missing dimension data**, which silently breaks attribution: forty-two days of spend that cannot be assigned to a campaign.
 
 The framing to use out loud is one you already own from your humanitarian work: *"Constraints prevent what can be prevented; checks detect what cannot. I run the check suite before every reporting cycle and every line must return zero — anything that does not is either a fix or a documented exception."*
 
@@ -406,14 +415,14 @@ FROM pipeline_runs GROUP BY 1 ORDER BY success_pct;
 
 | pipeline_name | runs | failures | success_pct | avg_seconds |
 |---|---|---|---|---|
-| ads_spend | 572 | 48 | 91,61 | 214 |
-| hubspot_leads | 572 | 29 | 94,93 | 206 |
-| ga4_sessions | 572 | 20 | 96,50 | 668 |
-| ats_submittals | 572 | 7 | 98,78 | 210 |
-| ats_vacancies | 572 | 5 | 99,13 | 213 |
-| stripe_invoices | 572 | 1 | 99,83 | 212 |
+| ads_spend | 572 | 58 | 89,86 | 217 |
+| hubspot_leads | 572 | 23 | 95,98 | 214 |
+| ga4_sessions | 572 | 13 | 97,73 | 680 |
+| ats_submittals | 572 | 11 | 98,08 | 210 |
+| ats_vacancies | 572 | 6 | 98,95 | 210 |
+| stripe_invoices | 572 | 6 | 98,95 | 207 |
 
-`ads_spend` fails roughly one day in twelve, and its dominant error in recent months is *"Schema drift: new column"* — the ad platform changed its export format and the loader was not tolerant of it. `ga4_sessions` runs three times longer than everything else, which is a cost and a lateness risk rather than a failure.
+`ads_spend` fails roughly one day in ten, and its dominant error is *"Schema drift: new column"* — the ad platform changed its export format and the loader was not tolerant of it. `ga4_sessions` runs three times longer than everything else, which is a cost and a lateness risk rather than a failure.
 
 The connection to make explicit: **`ads_spend` is the least reliable pipeline and it feeds the CAC analysis in section 7.** A marketing dashboard is only as trustworthy as its worst upstream job, which is why a pipeline-health tile belongs *on* the dashboard — a small freshness indicator saying "spend data last loaded successfully on X" — rather than in a separate monitoring tool nobody opens.
 
@@ -445,11 +454,11 @@ Produce a single "Monday morning" query: every open vacancy older than 30 days, 
 
 **"What metrics would you track for a staffing business like ours?"**
 
-I'd organise them into three funnels, because the levers are different in each. On the acquisition side: leads by channel, cost per lead, conversion rate from lead to client, and customer acquisition cost — and I'd be explicit about whether I'm quoting paid CAC or blended CAC, because the blended number includes free channels and flatters paid performance. The one thing I'd insist on there is not optimising for cost per lead in isolation. In the dataset I've been practising on, the cheapest leads come from outbound at eighty-nine dollars, but paid social generates leads at a hundred and forty-six dollars that convert at four percent instead of paid search's eight, so its acquisition cost per client is more than double. Cheap leads that don't convert are expensive. On the recruiting side: time to fill and, just as important, time to first submittal, because that's the metric the client actually experiences; then the funnel ratios — submittal to interview, interview to offer, offer acceptance — and fill rate, and aging on open requisitions. On delivery: retention at thirty, sixty and ninety days, replacement rate inside the guarantee window, and client repeat rate, which in a one-time-fee model is the closest thing you have to a satisfaction score. And I'd track one thing that isn't a business metric: pipeline freshness, because a marketing dashboard is only as good as its least reliable upstream job.
+I'd organise them into three funnels, because the levers are different in each. On the acquisition side: leads by channel, cost per lead, conversion rate from lead to client, and customer acquisition cost — and I'd be explicit about whether I'm quoting paid CAC or blended CAC, because the blended number includes free channels and flatters paid performance. The one thing I'd insist on there is not optimising for cost per lead in isolation. In the dataset I've been practising on, the cheapest leads come from outbound at eighty-four dollars, but paid social generates leads at a hundred and forty-six dollars that convert at four percent instead of paid search's nine, so its acquisition cost per client is nearly three times higher. Cheap leads that don't convert are expensive. On the recruiting side: time to fill and, just as important, time to first submittal, because that's the metric the client actually experiences; then the funnel ratios — submittal to interview, interview to offer, offer acceptance — and fill rate, and aging on open requisitions. On delivery: retention at thirty, sixty and ninety days, replacement rate inside the guarantee window, and client repeat rate, which in a one-time-fee model is the closest thing you have to a satisfaction score. And I'd track one thing that isn't a business metric: pipeline freshness, because a marketing dashboard is only as good as its least reliable upstream job.
 
 **"How would you investigate a drop in fill rate?"**
 
-My first move is to check whether the drop is real, because the most common cause is measurement rather than performance. Fill rate on recent cohorts is right-censored: requisitions opened this month haven't had time to close, so the current month always looks terrible. In the dataset I've been working with, July shows a fifteen percent fill rate against a stable fifty-five, and nothing is wrong at all — the median time to fill is twenty days and most of July's requisitions are younger than that. So I'd either restrict to cohorts old enough to have closed, or switch to a fixed-window metric like "filled within thirty days", which is comparable by construction. If the drop survives that test, I decompose it. I'd cut by role family first, because mix shifts explain a lot — technical roles take twelve days longer than sales roles in this data, so a month with more technical requisitions will look slower without anything having changed. Then I'd walk the funnel stage by stage to find where the leak is: if submittal-to-interview fell, it's a shortlist quality or sourcing problem; if interview-to-offer fell, it's a screening or client-expectation problem; if offer acceptance fell, it's usually rate expectations or speed, and I'd look at candidate withdrawal reasons, which are already the largest single loss reason here at seventeen percent. Only then would I look at people and process — recruiter load, a new client with unusual requirements, a change in the intake form. And before presenting any of it I'd run the reconciliation checks, because I've found twelve vacancies marked filled with no placement record, and that kind of gap moves the numerator on its own.
+My first move is to check whether the drop is real, because the most common cause is measurement rather than performance. Fill rate on recent cohorts is right-censored: requisitions opened this month haven't had time to close, so the current month always looks terrible. In the dataset I've been working with, July shows a twelve percent fill rate against a band that otherwise sits between fifty and sixty, and nothing is wrong at all — most of July's requisitions are younger than the median time to fill. So I'd either restrict to cohorts old enough to have closed, or switch to a fixed-window metric like "filled within thirty days", which is comparable by construction. If the drop survives that test, I decompose it. I'd cut by role family first, because mix shifts explain a lot — technical roles take eleven days longer than customer support roles in this data, so a month with more technical requisitions will look slower without anything having changed. Then I'd walk the funnel stage by stage to find where the leak is: if submittal-to-interview fell, it's a shortlist quality or sourcing problem; if interview-to-offer fell, it's a screening or client-expectation problem; if offer acceptance fell, it's usually rate expectations or speed, and I'd look at candidate withdrawal, which is already the largest single loss reason here at nearly seventeen percent. Only then would I look at people and process — recruiter load, a new client with unusual requirements, a change in the intake form. And before presenting any of it I'd run the reconciliation checks, because I've found twelve vacancies marked filled with no placement record, and that kind of gap moves the numerator on its own.
 
 **"You have access to our data on day one. What do you look at first?"**
 

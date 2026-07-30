@@ -72,6 +72,21 @@ REJECT_REASONS = ["English level", "Rate expectation", "Availability",
 PIPELINES = ["ats_submittals", "ats_vacancies", "stripe_invoices",
              "ga4_sessions", "ads_spend", "hubspot_leads"]
 
+# Les commerciaux : nom, facteur de reussite, quota mensuel de clients signes,
+# date d'entree. Les facteurs different volontairement pour que le classement par
+# taux de conversion soit exploitable — et le piege est que le meilleur taux
+# n'appartient pas au commercial qui signe le plus de clients.
+SALES_REPS = [
+    dict(rep="Dana Whitfield",  skill=1.35, quota=8, hired="2025-01-01"),
+    dict(rep="Marcus Lee",      skill=1.10, quota=8, hired="2025-01-01"),
+    dict(rep="Priya Raman",     skill=0.95, quota=8, hired="2025-03-01"),
+    dict(rep="Tomas Ferreira",  skill=0.80, quota=6, hired="2025-06-01"),
+    dict(rep="Alicia Moreno",   skill=1.05, quota=6, hired="2025-09-15"),
+]
+
+LOST_REASONS = ["Price", "Went with competitor", "No budget", "Timing",
+                "No response", "Not a fit"]
+
 PRENOMS = ["Maria", "Juan", "Camila", "Andres", "Sofia", "Diego", "Valentina",
            "Carlos", "Ana", "Luis", "Isabella", "Miguel", "Daniela", "Jose",
            "Angelica", "Ricardo", "Paula", "Jorge", "Laura", "Fernando"]
@@ -145,10 +160,16 @@ def construire_marketing():
         }
         for canal, n in volumes.items():
             for _ in range(max(0, n)):
+                # Le lead est attribue a un commercial deja en poste ce jour-la.
+                disponibles = [r for r in SALES_REPS if date.fromisoformat(r["hired"]) <= d]
+                proprietaire = random.choice(disponibles) if disponibles else SALES_REPS[0]
                 leads.append(dict(lead_id=f"L{id_lead:05d}", created_date=d.isoformat(),
                                   channel=canal, campaign=random.choice(CAMPAIGNS[canal]),
                                   company_size=random.choice(SIZES),
                                   industry=random.choice(INDUSTRIES),
+                                  owner=proprietaire["rep"],
+                                  stage="new", first_contact_date="", demo_date="",
+                                  closed_date="", lost_reason="",
                                   converted=0, converted_date="", client_id=""))
                 id_lead += 1
     return spend, leads
@@ -164,10 +185,12 @@ def construire_clients(leads):
     qu'un dashboard d'acquisition doit rendre visible."""
     taux = {"Paid Search": 0.085, "Paid Social": 0.042, "Organic": 0.075,
             "Referral": 0.230, "Outbound": 0.055}
+    competence = {r["rep"]: r["skill"] for r in SALES_REPS}
     clients = []
     id_client = 1
     for lead in leads:
-        if random.random() > taux[lead["channel"]]:
+        # Le canal fixe la qualite du lead, le commercial module la conversion.
+        if random.random() > taux[lead["channel"]] * competence[lead["owner"]]:
             continue
         cree = date.fromisoformat(lead["created_date"])
         delai = max(1, int(random.gauss(11, 6)))
@@ -196,6 +219,79 @@ def construire_clients(leads):
             status="churned" if churned else "active", churn_date=churn_date))
         id_client += 1
     return clients
+
+
+# --------------------------------------------------------------------------------------
+# 2b. Sales pipeline — stage progression and rep activity
+# --------------------------------------------------------------------------------------
+
+def construire_pipeline_ventes(leads):
+    """Fait progresser chaque lead dans les etapes commerciales et journalise l'activite.
+
+    Le modele est celui d'un CRM ordinaire : new -> contacted -> demo -> won ou lost.
+    Un lead recent et non conclu reste 'open', ce qui est indispensable pour que la
+    notion de pipeline ouvert ait un sens — et pour que le calcul du taux de reussite
+    pose la meme question de censure que le taux de pourvoi des postes.
+    """
+    activites = []
+    id_act = 1
+    for lead in leads:
+        cree = date.fromisoformat(lead["created_date"])
+
+        # 8 % des leads ne sont jamais travailles : c'est un vrai chiffre de gestion.
+        if random.random() < 0.08 and lead["converted"] == 0:
+            lead["stage"] = "new"
+            continue
+
+        contact = cree + timedelta(days=max(0, int(random.gauss(1.6, 1.2))))
+        if contact > FIN:
+            lead["stage"] = "new"
+            continue
+        lead["first_contact_date"] = contact.isoformat()
+        lead["stage"] = "contacted"
+
+        n_appels = max(1, int(random.gauss(3.2, 1.6)))
+        n_emails = max(1, int(random.gauss(4.5, 2.0)))
+        for i in range(n_appels + n_emails):
+            quand = contact + timedelta(days=random.randint(0, 21))
+            if quand > FIN:
+                continue
+            activites.append(dict(
+                activity_id=f"A{id_act:06d}", lead_id=lead["lead_id"],
+                rep=lead["owner"], activity_date=quand.isoformat(),
+                activity_type="call" if i < n_appels else "email",
+                connected=1 if (i < n_appels and random.random() < 0.34) else 0))
+            id_act += 1
+
+        # Une demo est le vrai point de bascule du cycle de vente.
+        a_demo = lead["converted"] == 1 or random.random() < 0.38
+        if a_demo:
+            demo = contact + timedelta(days=max(1, int(random.gauss(5.5, 3.0))))
+            if demo <= FIN:
+                lead["demo_date"] = demo.isoformat()
+                lead["stage"] = "demo"
+                activites.append(dict(
+                    activity_id=f"A{id_act:06d}", lead_id=lead["lead_id"],
+                    rep=lead["owner"], activity_date=demo.isoformat(),
+                    activity_type="demo", connected=1))
+                id_act += 1
+
+        if lead["converted"] == 1:
+            lead["stage"] = "won"
+            lead["closed_date"] = lead["converted_date"]
+        else:
+            age = (FIN - cree).days
+            # Sous 45 jours l'affaire est encore en cours : la marquer perdue
+            # fausserait le taux de reussite exactement comme la censure a droite
+            # fausse le taux de pourvoi des postes.
+            if age < 45:
+                lead["stage"] = "open" if lead["stage"] != "new" else "new"
+            else:
+                perdu = cree + timedelta(days=random.randint(10, min(90, age)))
+                lead["stage"] = "lost"
+                lead["closed_date"] = perdu.isoformat()
+                lead["lost_reason"] = random.choice(LOST_REASONS)
+    return activites
 
 
 # --------------------------------------------------------------------------------------
@@ -312,7 +408,14 @@ def construire_recrutement(clients, candidats):
 
                         if offre:
                             jour_offre = jour_entretien + timedelta(days=max(1, int(random.gauss(4, 2))))
-                            acceptee = random.random() < 0.78
+                            # Effet de selection volontairement encode : un candidat
+                            # au meilleur anglais recoit des offres concurrentes et
+                            # decline plus souvent. L'anglais augmente donc la
+                            # probabilite d'ATTEINDRE une offre et diminue celle de
+                            # la CONCLURE — les deux sont vrais et se mesurent.
+                            p_acceptation = {"B1": 0.90, "B2": 0.82,
+                                             "C1": 0.72, "C2": 0.65}[cand["english_level"]]
+                            acceptee = random.random() < p_acceptation
                             if acceptee and jour_offre <= FIN:
                                 stage, date_stage = "hired", jour_offre
                                 embauche, date_embauche = cand, jour_offre
@@ -468,6 +571,7 @@ def charger_duckdb(tables):
 def main():
     spend, leads = construire_marketing()
     clients = construire_clients(leads)
+    activites = construire_pipeline_ventes(leads)
     candidats = construire_candidats()
     vacancies, submittals, interviews, placements = construire_recrutement(clients, candidats)
     injecter_defauts(vacancies, submittals, placements)
@@ -475,6 +579,9 @@ def main():
 
     tables = {
         "marketing_spend": spend, "leads": leads, "clients": clients,
+        "sales_reps": [dict(rep=r["rep"], monthly_quota_clients=r["quota"],
+                            hired_date=r["hired"]) for r in SALES_REPS],
+        "sales_activities": activites,
         "candidates": candidats, "vacancies": vacancies, "submittals": submittals,
         "interviews": interviews, "placements": placements, "pipeline_runs": runs,
     }

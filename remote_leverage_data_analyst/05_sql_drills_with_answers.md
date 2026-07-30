@@ -24,9 +24,9 @@ FROM vacancies WHERE status = 'open';
 
 | open_vacancies | oldest_opened | max_age_days |
 |---|---|---|
-| 137 | 2025-08-11 | 349 |
+| 143 | 2025-03-02 | 511 |
 
-A requisition open for 349 days is not open, it is abandoned. The analyst's instinct here is to question the *status field itself*: if nobody closes stale requisitions, every aging metric is polluted. Worth saying out loud — noticing that a status is unmaintained is a real finding.
+A requisition open for 511 days is not open, it is abandoned. The analyst's instinct here is to question the *status field itself*: if nobody closes stale requisitions, every aging metric is polluted. Worth saying out loud — noticing that a status is unmaintained is a real finding.
 
 ---
 
@@ -50,16 +50,16 @@ FROM f GROUP BY 1 ORDER BY s2i_pct DESC;
 
 | role_family | submittals | s2i_pct |
 |---|---|---|
-| Marketing VA | 530 | 50,2 |
-| Executive VA | 710 | 46,2 |
-| Technical | 567 | 46,2 |
-| Customer Support | 566 | 46,1 |
-| Bookkeeping | 484 | 45,0 |
-| Sales VA | 539 | 44,5 |
+| Marketing VA | 553 | 50,6 |
+| Technical | 585 | 49,9 |
+| Sales VA | 711 | 46,4 |
+| Bookkeeping | 627 | 45,8 |
+| Customer Support | 719 | 45,5 |
+| Executive VA | 723 | 44,1 |
 
 The inner CTE exists to **collapse to one row per submittal** before counting. Without it, a submittal with two interview records would be counted twice and the ratio would exceed 100 %. That is the fan-out problem, and pre-empting it is exactly the kind of thing to narrate while you type.
 
-The finding itself is a non-finding: 44,5 % to 50,2 % is a narrow band, so shortlist quality is consistent across role families. **Reporting "no meaningful difference" is a legitimate result** and saying so confidently is a mark of maturity — juniors invent a story.
+The finding itself is close to a non-finding: 44,1 % to 50,6 % is a narrow band, so shortlist quality is broadly consistent across role families. **Reporting "no meaningful difference" is a legitimate result** and saying so confidently is a mark of maturity — juniors invent a story.
 
 ---
 
@@ -77,13 +77,13 @@ GROUP BY 1 ORDER BY fees DESC LIMIT 5;
 
 | company_name | placements | fees |
 |---|---|---|
-| Lakeshore Media | 10 | 22 696 |
-| Clearview Realty | 9 | 21 773 |
-| Cedar Creek Group | 9 | 20 220 |
-| Northgate Capital | 6 | 17 578 |
-| Ironwood Capital | 9 | 16 802 |
+| Pinnacle Partners | 13 | 25 830 |
+| Oakfield Solutions | 9 | 22 006 |
+| Westbrook Solutions | 10 | 21 325 |
+| Redstone LLC | 8 | 19 706 |
+| Pinnacle Media | 8 | 18 537 |
 
-Note Northgate: six placements but higher fees than Ironwood's nine, so its average fee is materially larger. **Concentration is the question worth asking next** — if the top five clients are a large share of revenue, losing one is a business risk, and that is the analysis a founder actually wants.
+Note Oakfield: nine placements but higher fees than Westbrook's ten, so its average fee is materially larger. **Concentration is the question worth asking next** — if the top five clients are a large share of revenue, losing one is a business risk, and that is the analysis a founder actually wants.
 
 ---
 
@@ -102,11 +102,11 @@ GROUP BY 1 ORDER BY 1 DESC LIMIT 5;
 
 | month | placements | delta |
 |---|---|---|
-| 2026-07 | 52 | +12 |
-| 2026-06 | 40 | +12 |
-| 2026-05 | 28 | −5 |
-| 2026-04 | 33 | +10 |
-| 2026-03 | 23 | −6 |
+| 2026-07 | 50 | +12 |
+| 2026-06 | 38 | −1 |
+| 2026-05 | 39 | +18 |
+| 2026-04 | 21 | −4 |
+| 2026-03 | 25 | +1 |
 
 Two things are being tested. `LAG` over an aggregate — a window function applied on top of `COUNT(*)`, which is legal and idiomatic. And the `WHERE` clause: **some start dates are in the future**, because a placement is agreed before the VA begins. Without that filter the current month is inflated by people who have not started. Catching it unprompted is worth more than the query.
 
@@ -154,11 +154,11 @@ ORDER BY v.filled_date;
 
 | vacancy_id | company_name | role_title | filled_date |
 |---|---|---|---|
-| V00015 | Westbrook Partners | Accounts Payable Clerk | 2025-06-20 |
-| V00127 | Lakeshore Media | Accounts Payable Clerk | 2025-07-10 |
-| V00121 | Westbrook LLC | Customer Support Agent | 2025-09-17 |
-| V00220 | Blue Harbor Group | Data Analyst | 2025-10-16 |
-| V00270 | Blue Harbor Group | Cold Caller | 2025-12-05 |
+| V00071 | Westbrook Capital | Helpdesk Agent | 2025-04-03 |
+| V00040 | Redstone Solutions | Automation Specialist | 2025-08-28 |
+| V00400 | Cedar Creek Partners | Executive Assistant | 2025-12-14 |
+| V00361 | Summit Capital | Data Analyst | 2026-01-09 |
+| V00178 | Summit Partners | Email Marketer | 2026-02-07 |
 
 Twelve rows in total. The `LEFT JOIN ... WHERE right side IS NULL` anti-join is the most reusable pattern in this whole document — "who is in A but not in B" answers a third of all analyst questions.
 
@@ -185,16 +185,16 @@ FROM offers GROUP BY 1 ORDER BY 1;
 
 | english_level | offers | accepted | accept_pct |
 |---|---|---|---|
-| B1 | 20 | 18 | 90,0 |
-| B2 | 144 | 118 | 81,9 |
-| C1 | 178 | 134 | 75,3 |
-| C2 | 75 | 56 | 74,7 |
+| B1 | 20 | 20 | 100,0 |
+| B2 | 161 | 127 | 78,9 |
+| C1 | 214 | 157 | 73,4 |
+| C2 | 87 | 55 | 63,2 |
 
 This **reverses** the direction from [module 01](01_recruiting_sales_marketing_metrics.md), where stronger English meant a far higher hire rate. Here, stronger English means a *lower* acceptance rate, and both are true.
 
 The explanation is a selection effect: C1 and C2 candidates receive competing offers and can decline, while a B1 candidate who reaches an offer has fewer alternatives. So English level raises your odds of *reaching* an offer and lowers your odds of *closing* it — which has a real operational consequence, namely that speed matters most on your strongest candidates.
 
-Then the discipline: **B1 has only 20 offers.** With that denominator the 90 % could move several points on two decisions. The honest sentence is *"the direction is plausible and consistent with competing offers, but I wouldn't act on the B1 figure with an n of twenty — I'd want a longer window before I trusted the size of it."*
+Then the discipline: **B1 shows 100 %, and it has only 20 offers.** A rate of exactly 100 % should always make you look at the denominator before you look at the finding — two declines would drop it to 90 %. The honest sentence is *"the direction is plausible and consistent with competing offers, but I wouldn't quote the B1 number at all with an n of twenty — what I'd stand behind is the gap between B2 at seventy-nine percent and C2 at sixty-three, where the denominators are large enough to mean something."*
 
 Being able to hold both "here is the pattern" and "here is why I don't fully trust it yet" in the same breath is, more than any syntax, what a good analyst sounds like.
 
@@ -220,13 +220,13 @@ ORDER BY net DESC;
 
 | channel | clients | spend | fees | net | roas |
 |---|---|---|---|---|---|
-| Referral | 73 | 0 | 196 222 | +196 222 | — |
-| Organic | 54 | 0 | 129 446 | +129 446 | — |
-| Paid Search | 116 | 178 910 | 272 299 | +93 389 | 1,52 |
-| Outbound | 23 | 39 661 | 41 940 | +2 279 | 1,06 |
-| Paid Social | 36 | 131 301 | 72 206 | −59 095 | 0,55 |
+| Referral | 77 | 0 | 198 434 | +198 434 | — |
+| Paid Search | 133 | 181 124 | 325 109 | +143 985 | 1,79 |
+| Organic | 48 | 0 | 101 303 | +101 303 | — |
+| Outbound | 32 | 40 633 | 70 404 | +29 771 | 1,73 |
+| Paid Social | 37 | 134 127 | 80 027 | −54 100 | 0,60 |
 
-Paid Social returns fifty-five cents per dollar. Outbound is break-even at 1,06 before any labour cost, which almost certainly makes it loss-making once you count the person sending the emails. Paid Search is the only paid channel clearly working.
+Paid Social returns sixty cents per dollar. Paid Search returns 1,79 and Outbound 1,73 — but outbound's figure excludes the salary of the person sending the emails, which is its dominant cost, so its true return is materially lower than the table suggests. Paid Search is the only paid channel unambiguously working.
 
 Three caveats to voice, because the recommendation is only as good as its assumptions. The revenue here is **fees to date**, not lifetime — a channel with slower but repeat clients looks worse than it is. Referral and Organic show zero spend because their costs simply are not in the ad-spend table, not because they are free. And this is **last-touch attribution**: a client who saw a paid social ad and later arrived through search is credited entirely to search.
 
@@ -247,12 +247,12 @@ GROUP BY 1 ORDER BY fails DESC LIMIT 4;
 
 | month | fails |
 |---|---|
-| 2025-09 | 5 |
-| 2026-05 | 4 |
-| 2025-10 | 4 |
-| 2026-03 | 4 |
+| 2025-12 | 6 |
+| 2026-07 | 5 |
+| 2025-03 | 5 |
+| 2026-01 | 5 |
 
-Failures are **spread evenly**, not clustered. That matters diagnostically: a spike in one month suggests a one-off breaking change, while a steady four or five a month suggests a chronically fragile job — here, mostly schema drift and rate limiting.
+Failures are **spread evenly**, not clustered. That matters diagnostically: a spike in one month suggests a one-off breaking change, while a steady five or six a month suggests a chronically fragile job — here, mostly schema drift and rate limiting.
 
 The fix follows the diagnosis. Chronic drift means the loader should tolerate new columns rather than fail on them; chronic rate limiting means backoff and retry. And since this pipeline feeds the channel analysis in D8, its unreliability is not an infrastructure footnote — it is a caveat on the recommendation.
 
@@ -270,11 +270,11 @@ FROM (SELECT client_id FROM vacancies GROUP BY 1 HAVING COUNT(*) >= 2);
 
 | clients_with_2plus | pct |
 |---|---|
-| 171 | 56,6 |
+| 192 | 58,7 |
 
-In a one-time-fee business this is the closest thing to a satisfaction score, and 56,6 % is healthy: more than half of clients came back. It is also the number that justifies acquisition spend, because a client worth two placements tolerates twice the acquisition cost.
+In a one-time-fee business this is the closest thing to a satisfaction score, and 58,7 % is healthy: well over half of clients came back. It is also the number that justifies acquisition spend, because a client worth two placements tolerates twice the acquisition cost.
 
-The natural follow-up, and a good exercise: does repeat rate differ by acquisition channel? Referral produced 85 placements from 73 clients in D8, the highest ratio of any channel — which is the argument for investing there.
+The natural follow-up, and a good exercise: does repeat rate differ by acquisition channel? Referral produced 89 placements from 77 clients in D8, the highest ratio of any channel — which is the argument for investing there.
 
 ---
 
@@ -295,13 +295,13 @@ GROUP BY 1 ORDER BY median_days DESC;
 | role_family | median_days |
 |---|---|
 | Technical | 5,0 |
-| Marketing VA | 3,0 |
+| Bookkeeping | 4,0 |
 | Executive VA | 3,0 |
-| Bookkeeping | 3,0 |
-| Sales VA | 2,5 |
+| Sales VA | 3,0 |
+| Marketing VA | 3,0 |
 | Customer Support | 2,0 |
 
-Time to first submittal is the metric the **client experiences**, and it is very different from time to fill. Technical roles take 29 days to fill but only 5 days to first submittal, so the delay is not sourcing — it is the number of iterations before a match. That distinction changes what you would fix: better intake and expectation-setting, not more sourcing capacity.
+Time to first submittal is the metric the **client experiences**, and it is very different from time to fill. Technical roles take 28 days to fill but only 5 days to first submittal, so the delay is not sourcing — it is the number of iterations before a match. That distinction changes what you would fix: better intake and expectation-setting, not more sourcing capacity.
 
 Bringing an unasked-for metric like this into an interview shows you think about *who consumes the number*, not just how to compute it.
 
@@ -325,13 +325,13 @@ GROUP BY 1 ORDER BY 1 DESC LIMIT 5;
 
 | cohort | opened | filled_30d | pct |
 |---|---|---|---|
-| 2026-06 | 77 | 42 | 54,5 |
-| 2026-05 | 63 | 30 | 47,6 |
-| 2026-04 | 61 | 29 | 47,5 |
-| 2026-03 | 53 | 25 | 47,2 |
-| 2026-02 | 36 | 17 | 47,2 |
+| 2026-06 | 88 | 43 | 48,9 |
+| 2026-05 | 72 | 37 | 51,4 |
+| 2026-04 | 55 | 26 | 47,3 |
+| 2026-03 | 50 | 21 | 42,0 |
+| 2026-02 | 33 | 14 | 42,4 |
 
-Compare with the raw fill rate from [module 01](01_recruiting_sales_marketing_metrics.md), where July collapsed to 15,2 % against a stable 55 % for no reason at all. Here the series is stable in the high forties and **June's genuine improvement to 54,5 % is visible** instead of being drowned by censoring noise.
+Compare with the raw fill rate from [module 01](01_recruiting_sales_marketing_metrics.md), where July collapsed to 11,9 % for no reason at all. Here the series moves in a plausible band between 42 % and 51 % with **no collapse at the recent end**, so a real change would be visible instead of being drowned by censoring noise.
 
 Two design choices carry that: the fixed 30-day window makes every cohort measured identically, and the `WHERE` clause excludes cohorts too young to have had their full 30 days. Both must be present — the window alone still lets an immature cohort in.
 
@@ -343,7 +343,7 @@ This is the drill that best demonstrates the difference between computing a metr
 
 Rewrite D2, D7 and D12 in BigQuery dialect using `COUNTIF`, `SAFE_DIVIDE`, `DATE_DIFF(b, a, DAY)` and `APPROX_QUANTILES(x, 2)[OFFSET(1)]` — the translation table is in [module 02](02_bigquery_for_analysts.md) §9.
 
-Then take D6 and D8 into Tableau as two sheets, because those are the two you would most want to show someone.
+Then take D6 and D8 into Tableau as two sheets, because those are the two you would most want to show someone. And work [module 06](06_sales_lens_and_objections.md), which drills the same skills on the sales side of the funnel — reps, quotas and deal stages.
 
 ---
 
