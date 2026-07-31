@@ -17,9 +17,13 @@ Remote Leverage is a Florida-based virtual-assistant placement agency recruiting
 | 04 | [Positioning and mock interview](04_positioning_and_mock_interview.md) | Saturday | 90-second pitch, CV coherence, honest answers, full mock |
 | 05 | [SQL drills with answers](05_sql_drills_with_answers.md) | Sunday | Twelve drills, verified outputs — self-check |
 | 06 | [Sales lens and objection handling](06_sales_lens_and_objections.md) | Saturday | Rep-level sales metrics, and the "you've never worked in sales" objection |
-| 99 | [During-call one pager](99_during_call_one_pager.md) | **Monday only** | One screen to keep open while you talk |
+| 07 | [**Question bank**](07_question_bank/README.md) | Sat–Sun | 126 questions and 10 cases, answers written to be spoken — plus a no-answer quiz to drill from |
+| 98 | [Monday morning review](98_monday_morning_review.md) | **Monday, T-90** | The timed ninety minutes before the call |
+| 99 | [During-call one pager](99_during_call_one_pager.md) | **Monday, during** | One screen to keep open while you talk |
 
-The cheat sheet (00) is for Sunday revision. The one-pager (99) is for the call itself. Do not confuse them.
+Four files do four different jobs and the distinction matters more as the days shorten. Modules **01–06** teach the material; they are organised by topic and they are for Wednesday through Saturday. The **question bank (07)** inverts that — question first, spoken answer underneath — and is what you rehearse from on Saturday and Sunday, working out of its [no-answer quiz](07_question_bank/08_quiz_no_answers.md) rather than reading the answers. The **cheat sheet (00)** is Sunday revision. The **morning review (98)** is the ninety minutes before the call. The **one-pager (99)** is the only thing on screen during it.
+
+By Sunday evening you should be working almost entirely from 07 and 00. By Monday morning, only from 98 and then 99.
 
 ---
 

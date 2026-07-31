@@ -43,9 +43,9 @@ Compensation is $1,920–$2,080 a month. That is the LatAm placement band; treat
 
 **Saturday 1 August — 4 hours.** Finish the Tableau dashboard: aging, channel economics, monthly trend with the censored month marked. Assemble, add one filter action, **publish and save the link**. Then [module 04](04_positioning_and_mock_interview.md) and [module 06](06_sales_lens_and_objections.md) — the sales vocabulary and the rehearsed answer to "you've never worked in sales". Update the CV title line.
 
-**Sunday 2 August — 3 hours.** Full mock interview out loud, timed, recorded. Play it back. Redo the three answers that came out worst. Re-run the module 01 queries from memory. Re-read this page. Stop by 8 p.m.
+**Sunday 2 August — 3 hours.** Work the [question bank](07_question_bank/README.md), and work it from the [no-answer quiz](07_question_bank/08_quiz_no_answers.md) rather than reading the answers — recognition is not retrieval. Answer out loud, in English, then check. Record the five decisive ones (Q1, Q91, Q47, Q35, C6) and play them back. Re-run the module 01 queries from memory. Re-read this page. Stop by 8 p.m.
 
-**Monday 3 August — morning.** Re-read sections 4, 5 and 6 of this page only. Test camera, microphone and connection an hour before. Have the Tableau link, the practice dataset and a notepad open. Do not cram.
+**Monday 3 August — morning.** Follow [98 — the ninety minutes before](98_monday_morning_review.md), which is timed backwards from the call: numbers aloud, the three decisive answers, a rapid self-quiz, the machine, the pitch twice, then stop. At T-5 close everything and open only [99](99_during_call_one_pager.md). Do not cram, and do not open modules 01–06 at all.
 
 ---
 
