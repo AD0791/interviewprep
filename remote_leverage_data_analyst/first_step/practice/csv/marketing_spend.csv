@@ -1,0 +1,1717 @@
+spend_date,channel,campaign,spend_usd,impressions,clicks
+2025-01-01,Paid Search,gs_va_hire,435.57,3333,140
+2025-01-01,Paid Social,li_agency_owners,241.26,9368,178
+2025-01-01,Outbound,cold_email_q2,74.63,0,0
+2025-01-02,Paid Search,gs_va_hire,339.06,2595,109
+2025-01-02,Paid Social,fb_founders,335.73,13052,248
+2025-01-02,Outbound,cold_email_q1,82.47,0,0
+2025-01-03,Paid Search,gs_latam_talent,373.36,2857,120
+2025-01-03,Paid Social,fb_retarget,222.54,8631,164
+2025-01-03,Outbound,linkedin_dm,68.51,0,0
+2025-01-04,Paid Search,gs_va_hire,77.03,571,24
+2025-01-04,Paid Social,fb_retarget,80.42,3105,59
+2025-01-04,Outbound,linkedin_dm,23.81,0,0
+2025-01-05,Paid Search,gs_competitor,101.08,761,32
+2025-01-05,Paid Social,fb_retarget,78.26,3000,57
+2025-01-05,Outbound,linkedin_dm,22.57,0,0
+2025-01-06,Paid Search,gs_competitor,270.7,2071,87
+2025-01-06,Paid Social,fb_retarget,339.21,13210,251
+2025-01-06,Outbound,cold_email_q1,87.83,0,0
+2025-01-07,Paid Search,,299.57,2285,96
+2025-01-07,Paid Social,li_agency_owners,213.71,8315,158
+2025-01-07,Outbound,linkedin_dm,68.86,0,0
+2025-01-08,Paid Search,gs_va_hire,440.34,3380,142
+2025-01-08,Paid Social,fb_retarget,185.01,7210,137
+2025-01-08,Outbound,cold_email_q2,69.54,0,0
+2025-01-09,Paid Search,gs_latam_talent,329.5,2523,106
+2025-01-09,Paid Social,li_agency_owners,250.32,9736,185
+2025-01-09,Outbound,linkedin_dm,58.18,0,0
+2025-01-10,Paid Search,gs_latam_talent,416.63,3190,134
+2025-01-10,Paid Social,fb_retarget,257.36,10000,190
+2025-01-10,Outbound,linkedin_dm,87.97,0,0
+2025-01-11,Paid Search,gs_competitor,99.74,761,32
+2025-01-11,Paid Social,,67.93,2631,50
+2025-01-11,Outbound,cold_email_q2,23.52,0,0
+2025-01-12,Paid Search,gs_competitor,67.62,499,21
+2025-01-12,Paid Social,fb_retarget,63.17,2421,46
+2025-01-12,Outbound,linkedin_dm,24.68,0,0
+2025-01-13,Paid Search,gs_latam_talent,332.26,2547,107
+2025-01-13,Paid Social,fb_retarget,298.92,11631,221
+2025-01-13,Outbound,linkedin_dm,65.01,0,0
+2025-01-14,Paid Search,gs_va_hire,260.14,1976,83
+2025-01-14,Paid Social,fb_founders,271.99,10578,201
+2025-01-14,Outbound,cold_email_q1,77.25,0,0
+2025-01-15,Paid Search,gs_competitor,412.86,3166,133
+2025-01-15,Paid Social,fb_founders,239.73,9315,177
+2025-01-15,Outbound,linkedin_dm,84.92,0,0
+2025-01-16,Paid Search,gs_competitor,271.71,2071,87
+2025-01-16,Paid Social,li_agency_owners,224.39,8736,166
+2025-01-16,Outbound,cold_email_q1,96.6,0,0
+2025-01-17,Paid Search,gs_competitor,304.05,2333,98
+2025-01-17,Paid Social,fb_founders,294.69,11473,218
+2025-01-17,Outbound,linkedin_dm,86.31,0,0
+2025-01-18,Paid Search,gs_va_hire,72.66,547,23
+2025-01-18,Paid Social,fb_retarget,56.85,2210,42
+2025-01-18,Outbound,linkedin_dm,16.01,0,0
+2025-01-19,Paid Search,,63.54,476,20
+2025-01-19,Paid Social,fb_founders,64.24,2473,47
+2025-01-19,Outbound,cold_email_q2,25.64,0,0
+2025-01-20,Paid Search,gs_latam_talent,376.91,2880,121
+2025-01-20,Paid Social,li_agency_owners,266.91,10368,197
+2025-01-20,Outbound,,71.65,0,0
+2025-01-21,Paid Search,gs_va_hire,300.58,2285,96
+2025-01-21,Paid Social,li_agency_owners,231.88,9000,171
+2025-01-21,Outbound,cold_email_q2,83.3,0,0
+2025-01-22,Paid Search,gs_latam_talent,358.08,2738,115
+2025-01-22,Paid Social,fb_founders,325.04,12631,240
+2025-01-22,Outbound,cold_email_q1,58.96,0,0
+2025-01-23,Paid Search,gs_competitor,435.61,3333,140
+2025-01-23,Paid Social,fb_founders,331.0,12894,245
+2025-01-23,Outbound,linkedin_dm,72.48,0,0
+2025-01-24,Paid Search,gs_latam_talent,452.5,3452,145
+2025-01-24,Paid Social,fb_founders,289.98,11263,214
+2025-01-24,Outbound,cold_email_q1,64.33,0,0
+2025-01-25,Paid Search,gs_latam_talent,112.07,857,36
+2025-01-25,Paid Social,fb_founders,76.54,2947,56
+2025-01-25,Outbound,linkedin_dm,24.79,0,0
+2025-01-26,Paid Search,gs_va_hire,105.51,809,34
+2025-01-26,Paid Social,fb_founders,69.81,2684,51
+2025-01-26,Outbound,cold_email_q1,21.74,0,0
+2025-01-27,Paid Search,gs_latam_talent,417.25,3190,134
+2025-01-27,Paid Social,li_agency_owners,338.43,13157,250
+2025-01-27,Outbound,cold_email_q2,93.62,0,0
+2025-01-28,Paid Search,gs_va_hire,448.12,3428,144
+2025-01-28,Paid Social,li_agency_owners,341.06,13263,252
+2025-01-28,Outbound,linkedin_dm,84.16,0,0
+2025-01-29,Paid Search,gs_competitor,251.22,1928,81
+2025-01-29,Paid Social,li_agency_owners,282.11,10947,208
+2025-01-29,Outbound,linkedin_dm,92.5,0,0
+2025-01-30,Paid Search,gs_latam_talent,385.05,2952,124
+2025-01-30,Paid Social,li_agency_owners,237.04,9210,175
+2025-01-30,Outbound,cold_email_q2,77.27,0,0
+2025-01-31,Paid Search,gs_latam_talent,327.05,2500,105
+2025-01-31,Paid Social,li_agency_owners,320.95,12473,237
+2025-01-31,Outbound,linkedin_dm,70.43,0,0
+2025-02-01,Paid Search,gs_va_hire,122.48,928,39
+2025-02-01,Paid Social,fb_founders,56.0,2157,41
+2025-02-01,Outbound,cold_email_q2,25.26,0,0
+2025-02-02,Paid Search,gs_latam_talent,108.31,809,34
+2025-02-02,Paid Social,li_agency_owners,72.51,2789,53
+2025-02-02,Outbound,cold_email_q2,27.0,0,0
+2025-02-03,Paid Search,gs_competitor,355.35,2714,114
+2025-02-03,Paid Social,,259.1,10052,191
+2025-02-03,Outbound,cold_email_q1,91.8,0,0
+2025-02-04,Paid Search,gs_competitor,468.31,3595,151
+2025-02-04,Paid Social,fb_retarget,222.55,8631,164
+2025-02-04,Outbound,cold_email_q2,118.08,0,0
+2025-02-05,Paid Search,gs_latam_talent,504.5,3857,162
+2025-02-05,Paid Social,fb_founders,288.81,11210,213
+2025-02-05,Outbound,cold_email_q1,86.36,0,0
+2025-02-06,Paid Search,gs_competitor,519.71,3976,167
+2025-02-06,Paid Social,fb_retarget,271.77,10578,201
+2025-02-06,Outbound,cold_email_q2,108.02,0,0
+2025-02-07,Paid Search,gs_latam_talent,405.22,3095,130
+2025-02-07,Paid Social,fb_retarget,314.7,12263,233
+2025-02-07,Outbound,cold_email_q1,118.32,0,0
+2025-02-08,Paid Search,gs_va_hire,79.69,595,25
+2025-02-08,Paid Social,fb_founders,78.63,3052,58
+2025-02-08,Outbound,cold_email_q1,17.8,0,0
+2025-02-09,Paid Search,gs_va_hire,104.05,785,33
+2025-02-09,Paid Social,fb_founders,88.35,3421,65
+2025-02-09,Outbound,cold_email_q2,26.04,0,0
+2025-02-10,Paid Search,gs_latam_talent,347.49,2666,112
+2025-02-10,Paid Social,li_agency_owners,368.22,14315,272
+2025-02-10,Outbound,cold_email_q1,83.73,0,0
+2025-02-11,Paid Search,gs_latam_talent,296.75,2261,95
+2025-02-11,Paid Social,fb_retarget,300.84,11684,222
+2025-02-11,Outbound,cold_email_q2,108.39,0,0
+2025-02-12,Paid Search,gs_va_hire,396.15,3023,127
+2025-02-12,Paid Social,fb_founders,390.96,15210,289
+2025-02-12,Outbound,cold_email_q2,66.8,0,0
+2025-02-13,Paid Search,gs_latam_talent,448.18,3428,144
+2025-02-13,Paid Social,fb_retarget,318.25,12368,235
+2025-02-13,Outbound,linkedin_dm,87.38,0,0
+2025-02-14,Paid Search,gs_va_hire,385.28,2952,124
+2025-02-14,Paid Social,fb_founders,388.24,15105,287
+2025-02-14,Outbound,cold_email_q2,108.65,0,0
+2025-02-15,Paid Search,gs_latam_talent,132.17,999,42
+2025-02-15,Paid Social,fb_retarget,86.08,3315,63
+2025-02-15,Outbound,cold_email_q1,21.81,0,0
+2025-02-16,Paid Search,gs_va_hire,101.35,761,32
+2025-02-16,Paid Social,fb_founders,56.57,2157,41
+2025-02-16,Outbound,linkedin_dm,27.85,0,0
+2025-02-17,Paid Search,gs_va_hire,442.93,3380,142
+2025-02-17,Paid Social,fb_retarget,283.4,11000,209
+2025-02-17,Outbound,cold_email_q2,79.72,0,0
+2025-02-18,Paid Search,gs_va_hire,426.09,3261,137
+2025-02-18,Paid Social,fb_retarget,350.9,13631,259
+2025-02-18,Outbound,cold_email_q1,73.77,0,0
+2025-02-19,Paid Search,gs_competitor,520.29,3976,167
+2025-02-19,Paid Social,fb_retarget,317.37,12368,235
+2025-02-19,Outbound,cold_email_q1,78.28,0,0
+2025-02-20,Paid Search,gs_competitor,451.48,3452,145
+2025-02-20,Paid Social,li_agency_owners,330.22,12842,244
+2025-02-20,Outbound,linkedin_dm,78.05,0,0
+2025-02-21,Paid Search,gs_competitor,401.43,3071,129
+2025-02-21,Paid Social,,383.31,14894,283
+2025-02-21,Outbound,cold_email_q2,93.99,0,0
+2025-02-22,Paid Search,gs_competitor,73.64,547,23
+2025-02-22,Paid Social,fb_retarget,75.23,2894,55
+2025-02-22,Outbound,cold_email_q2,24.76,0,0
+2025-02-23,Paid Search,gs_competitor,100.52,761,32
+2025-02-23,Paid Social,fb_founders,68.39,2631,50
+2025-02-23,Outbound,cold_email_q2,30.35,0,0
+2025-02-24,Paid Search,gs_va_hire,320.3,2452,103
+2025-02-24,Paid Social,li_agency_owners,287.67,11210,213
+2025-02-24,Outbound,cold_email_q2,76.93,0,0
+2025-02-25,Paid Search,gs_latam_talent,379.04,2904,122
+2025-02-25,Paid Social,fb_retarget,399.66,15578,296
+2025-02-25,Outbound,cold_email_q1,118.58,0,0
+2025-02-26,Paid Search,gs_competitor,372.21,2857,120
+2025-02-26,Paid Social,li_agency_owners,248.11,9631,183
+2025-02-26,Outbound,cold_email_q2,90.6,0,0
+2025-02-27,Paid Search,gs_va_hire,373.19,2857,120
+2025-02-27,Paid Social,li_agency_owners,317.14,12315,234
+2025-02-27,Outbound,cold_email_q2,118.25,0,0
+2025-02-28,Paid Search,gs_competitor,363.26,2785,117
+2025-02-28,Paid Social,fb_retarget,302.92,11789,224
+2025-02-28,Outbound,cold_email_q1,79.87,0,0
+2025-03-01,Paid Search,gs_latam_talent,133.27,999,42
+2025-03-01,Paid Social,li_agency_owners,82.56,3210,61
+2025-03-01,Outbound,linkedin_dm,21.52,0,0
+2025-03-02,Paid Search,gs_competitor,136.33,1023,43
+2025-03-02,Paid Social,li_agency_owners,56.73,2210,42
+2025-03-02,Outbound,cold_email_q2,21.78,0,0
+2025-03-03,Paid Search,gs_va_hire,432.3,3309,139
+2025-03-03,Paid Social,fb_founders,391.68,15263,290
+2025-03-03,Outbound,cold_email_q2,84.15,0,0
+2025-03-04,Paid Search,gs_latam_talent,519.45,3976,167
+2025-03-04,Paid Social,li_agency_owners,288.19,11210,213
+2025-03-04,Outbound,cold_email_q2,95.33,0,0
+2025-03-05,Paid Search,gs_va_hire,314.93,2404,101
+2025-03-05,Paid Social,fb_retarget,306.43,11894,226
+2025-03-05,Outbound,cold_email_q1,114.73,0,0
+2025-03-06,Paid Search,gs_latam_talent,371.77,2833,119
+2025-03-06,Paid Social,li_agency_owners,270.9,10526,200
+2025-03-06,Outbound,linkedin_dm,107.89,0,0
+2025-03-07,Paid Search,gs_va_hire,502.5,3857,162
+2025-03-07,Paid Social,fb_founders,299.12,11631,221
+2025-03-07,Outbound,cold_email_q1,113.23,0,0
+2025-03-08,Paid Search,gs_latam_talent,111.43,833,35
+2025-03-08,Paid Social,fb_retarget,88.55,3421,65
+2025-03-08,Outbound,cold_email_q1,20.67,0,0
+2025-03-09,Paid Search,gs_va_hire,128.77,976,41
+2025-03-09,Paid Social,fb_retarget,77.6,3000,57
+2025-03-09,Outbound,linkedin_dm,19.45,0,0
+2025-03-10,Paid Search,gs_competitor,466.5,3571,150
+2025-03-10,Paid Social,fb_founders,223.14,8684,165
+2025-03-10,Outbound,cold_email_q1,76.93,0,0
+2025-03-11,Paid Search,gs_competitor,321.76,2452,103
+2025-03-11,Paid Social,fb_retarget,254.23,9894,188
+2025-03-11,Outbound,linkedin_dm,118.48,0,0
+2025-03-12,Paid Search,gs_competitor,475.46,3642,153
+2025-03-12,Paid Social,fb_founders,334.92,13052,248
+2025-03-12,Outbound,cold_email_q1,109.91,0,0
+2025-03-13,Paid Search,gs_competitor,394.34,3023,127
+2025-03-13,Paid Social,li_agency_owners,360.72,14052,267
+2025-03-13,Outbound,cold_email_q1,71.07,0,0
+2025-03-14,Paid Search,gs_competitor,332.14,2547,107
+2025-03-14,Paid Social,li_agency_owners,221.18,8578,163
+2025-03-14,Outbound,cold_email_q1,74.91,0,0
+2025-03-15,Paid Search,gs_latam_talent,74.38,547,23
+2025-03-15,Paid Social,fb_founders,56.16,2157,41
+2025-03-15,Outbound,cold_email_q2,24.55,0,0
+2025-03-16,Paid Search,gs_latam_talent,100.9,761,32
+2025-03-16,Paid Social,fb_founders,68.7,2631,50
+2025-03-16,Outbound,cold_email_q1,22.86,0,0
+2025-03-17,Paid Search,gs_va_hire,421.74,3238,136
+2025-03-17,Paid Social,li_agency_owners,401.69,15631,297
+2025-03-17,Outbound,linkedin_dm,113.28,0,0
+2025-03-18,Paid Search,gs_competitor,360.24,2761,116
+2025-03-18,Paid Social,li_agency_owners,279.26,10842,206
+2025-03-18,Outbound,linkedin_dm,89.36,0,0
+2025-03-19,Paid Search,gs_va_hire,327.08,2500,105
+2025-03-19,Paid Social,fb_founders,377.55,14684,279
+2025-03-19,Outbound,cold_email_q2,115.44,0,0
+2025-03-20,Paid Search,gs_va_hire,448.11,3428,144
+2025-03-20,Paid Social,fb_founders,316.5,12315,234
+2025-03-20,Outbound,linkedin_dm,90.95,0,0
+2025-03-21,Paid Search,gs_competitor,434.93,3333,140
+2025-03-21,Paid Social,li_agency_owners,361.12,14052,267
+2025-03-21,Outbound,cold_email_q1,71.66,0,0
+2025-03-22,Paid Search,gs_latam_talent,133.5,1023,43
+2025-03-22,Paid Social,fb_retarget,62.97,2421,46
+2025-03-22,Outbound,cold_email_q1,26.95,0,0
+2025-03-23,Paid Search,gs_latam_talent,76.62,571,24
+2025-03-23,Paid Social,fb_founders,99.89,3842,73
+2025-03-23,Outbound,linkedin_dm,26.61,0,0
+2025-03-24,Paid Search,gs_latam_talent,397.86,3047,128
+2025-03-24,Paid Social,fb_retarget,274.69,10684,203
+2025-03-24,Outbound,cold_email_q2,91.34,0,0
+2025-03-25,Paid Search,gs_latam_talent,361.45,2761,116
+2025-03-25,Paid Social,fb_retarget,232.99,9052,172
+2025-03-25,Outbound,linkedin_dm,112.91,0,0
+2025-03-26,Paid Search,gs_latam_talent,441.34,3380,142
+2025-03-26,Paid Social,li_agency_owners,239.15,9315,177
+2025-03-26,Outbound,cold_email_q1,81.84,0,0
+2025-03-27,Paid Search,gs_va_hire,317.05,2428,102
+2025-03-27,Paid Social,fb_founders,353.58,13736,261
+2025-03-27,Outbound,cold_email_q2,68.55,0,0
+2025-03-28,Paid Search,gs_va_hire,517.98,3976,167
+2025-03-28,Paid Social,li_agency_owners,290.97,11315,215
+2025-03-28,Outbound,linkedin_dm,112.07,0,0
+2025-03-29,Paid Search,gs_competitor,121.98,928,39
+2025-03-29,Paid Social,li_agency_owners,93.73,3631,69
+2025-03-29,Outbound,cold_email_q2,24.26,0,0
+2025-03-30,Paid Search,gs_latam_talent,83.84,642,27
+2025-03-30,Paid Social,fb_founders,92.07,3578,68
+2025-03-30,Outbound,cold_email_q2,30.66,0,0
+2025-03-31,Paid Search,gs_latam_talent,488.49,3738,157
+2025-03-31,Paid Social,fb_founders,316.4,12315,234
+2025-03-31,Outbound,linkedin_dm,93.5,0,0
+2025-04-01,Paid Search,gs_va_hire,412.05,3142,132
+2025-04-01,Paid Social,fb_founders,377.83,14684,279
+2025-04-01,Outbound,cold_email_q2,119.05,0,0
+2025-04-02,Paid Search,gs_competitor,540.2,4142,174
+2025-04-02,Paid Social,li_agency_owners,283.36,11000,209
+2025-04-02,Outbound,cold_email_q2,101.78,0,0
+2025-04-03,Paid Search,gs_competitor,532.56,4071,171
+2025-04-03,Paid Social,fb_retarget,259.82,10105,192
+2025-04-03,Outbound,cold_email_q1,70.87,0,0
+2025-04-04,Paid Search,gs_va_hire,433.55,3309,139
+2025-04-04,Paid Social,li_agency_owners,220.64,8578,163
+2025-04-04,Outbound,cold_email_q1,77.69,0,0
+2025-04-05,Paid Search,gs_latam_talent,94.47,714,30
+2025-04-05,Paid Social,fb_founders,88.9,3421,65
+2025-04-05,Outbound,linkedin_dm,25.6,0,0
+2025-04-06,Paid Search,gs_competitor,94.06,714,30
+2025-04-06,Paid Social,fb_retarget,80.42,3105,59
+2025-04-06,Outbound,cold_email_q2,21.29,0,0
+2025-04-07,Paid Search,gs_va_hire,446.1,3404,143
+2025-04-07,Paid Social,fb_founders,380.98,14842,282
+2025-04-07,Outbound,linkedin_dm,68.69,0,0
+2025-04-08,Paid Search,gs_competitor,456.7,3500,147
+2025-04-08,Paid Social,fb_founders,300.93,11684,222
+2025-04-08,Outbound,linkedin_dm,76.5,0,0
+2025-04-09,Paid Search,gs_va_hire,489.56,3738,157
+2025-04-09,Paid Social,fb_founders,346.66,13473,256
+2025-04-09,Outbound,linkedin_dm,112.26,0,0
+2025-04-10,Paid Search,gs_va_hire,500.14,3833,161
+2025-04-10,Paid Social,li_agency_owners,275.56,10736,204
+2025-04-10,Outbound,cold_email_q2,69.41,0,0
+2025-04-11,Paid Search,gs_competitor,335.53,2571,108
+2025-04-11,Paid Social,fb_founders,289.15,11263,214
+2025-04-11,Outbound,linkedin_dm,70.17,0,0
+2025-04-12,Paid Search,gs_latam_talent,82.13,619,26
+2025-04-12,Paid Social,li_agency_owners,89.51,3473,66
+2025-04-12,Outbound,linkedin_dm,19.07,0,0
+2025-04-13,Paid Search,gs_latam_talent,75.23,571,24
+2025-04-13,Paid Social,fb_founders,73.52,2842,54
+2025-04-13,Outbound,linkedin_dm,22.24,0,0
+2025-04-14,Paid Search,gs_va_hire,497.45,3809,160
+2025-04-14,Paid Social,li_agency_owners,316.37,12315,234
+2025-04-14,Outbound,cold_email_q2,86.78,0,0
+2025-04-15,Paid Search,gs_va_hire,502.45,3857,162
+2025-04-15,Paid Social,fb_founders,273.63,10631,202
+2025-04-15,Outbound,cold_email_q1,112.82,0,0
+2025-04-16,Paid Search,gs_competitor,412.3,3166,133
+2025-04-16,Paid Social,li_agency_owners,392.33,15263,290
+2025-04-16,Outbound,linkedin_dm,116.19,0,0
+2025-04-17,Paid Search,gs_latam_talent,346.32,2642,111
+2025-04-17,Paid Social,,362.42,14105,268
+2025-04-17,Outbound,cold_email_q2,69.6,0,0
+2025-04-18,Paid Search,gs_latam_talent,505.48,3880,163
+2025-04-18,Paid Social,fb_retarget,257.82,10000,190
+2025-04-18,Outbound,cold_email_q1,98.43,0,0
+2025-04-19,Paid Search,gs_competitor,80.86,619,26
+2025-04-19,Paid Social,fb_founders,67.53,2631,50
+2025-04-19,Outbound,cold_email_q1,27.43,0,0
+2025-04-20,Paid Search,gs_competitor,89.96,690,29
+2025-04-20,Paid Social,li_agency_owners,78.43,3052,58
+2025-04-20,Outbound,linkedin_dm,18.77,0,0
+2025-04-21,Paid Search,gs_va_hire,321.93,2452,103
+2025-04-21,Paid Social,fb_founders,341.94,13315,253
+2025-04-21,Outbound,cold_email_q2,106.68,0,0
+2025-04-22,Paid Search,gs_latam_talent,440.45,3380,142
+2025-04-22,Paid Social,li_agency_owners,375.7,14631,278
+2025-04-22,Outbound,cold_email_q2,71.6,0,0
+2025-04-23,Paid Search,gs_va_hire,360.5,2761,116
+2025-04-23,Paid Social,fb_retarget,376.27,14631,278
+2025-04-23,Outbound,cold_email_q1,114.78,0,0
+2025-04-24,Paid Search,gs_latam_talent,396.42,3023,127
+2025-04-24,Paid Social,fb_founders,262.43,10210,194
+2025-04-24,Outbound,cold_email_q2,111.29,0,0
+2025-04-25,Paid Search,gs_competitor,457.19,3500,147
+2025-04-25,Paid Social,li_agency_owners,375.11,14578,277
+2025-04-25,Outbound,cold_email_q2,90.52,0,0
+2025-04-26,Paid Search,gs_latam_talent,76.97,571,24
+2025-04-26,Paid Social,fb_founders,86.29,3315,63
+2025-04-26,Outbound,cold_email_q1,23.58,0,0
+2025-04-27,Paid Search,gs_va_hire,88.95,666,28
+2025-04-27,Paid Social,li_agency_owners,66.62,2578,49
+2025-04-27,Outbound,linkedin_dm,20.22,0,0
+2025-04-28,Paid Search,gs_va_hire,540.17,4142,174
+2025-04-28,Paid Social,fb_founders,254.88,9894,188
+2025-04-28,Outbound,cold_email_q1,121.77,0,0
+2025-04-29,Paid Search,gs_competitor,488.57,3738,157
+2025-04-29,Paid Social,fb_founders,254.16,9894,188
+2025-04-29,Outbound,linkedin_dm,79.04,0,0
+2025-04-30,Paid Search,gs_va_hire,420.78,3214,135
+2025-04-30,Paid Social,fb_founders,342.48,13315,253
+2025-04-30,Outbound,cold_email_q1,107.54,0,0
+2025-05-01,Paid Search,gs_va_hire,340.21,2595,109
+2025-05-01,Paid Social,fb_founders,314.12,12210,232
+2025-05-01,Outbound,cold_email_q2,84.27,0,0
+2025-05-02,Paid Search,gs_va_hire,516.24,3952,166
+2025-05-02,Paid Social,li_agency_owners,240.28,9315,177
+2025-05-02,Outbound,cold_email_q2,92.72,0,0
+2025-05-03,Paid Search,gs_latam_talent,108.9,833,35
+2025-05-03,Paid Social,fb_retarget,86.76,3368,64
+2025-05-03,Outbound,linkedin_dm,23.27,0,0
+2025-05-04,Paid Search,gs_va_hire,85.67,642,27
+2025-05-04,Paid Social,fb_founders,69.87,2684,51
+2025-05-04,Outbound,cold_email_q1,17.01,0,0
+2025-05-05,Paid Search,gs_va_hire,375.75,2880,121
+2025-05-05,Paid Social,li_agency_owners,314.21,12210,232
+2025-05-05,Outbound,cold_email_q2,85.18,0,0
+2025-05-06,Paid Search,gs_competitor,541.88,4142,174
+2025-05-06,Paid Social,fb_retarget,317.05,12315,234
+2025-05-06,Outbound,cold_email_q2,107.21,0,0
+2025-05-07,Paid Search,gs_competitor,421.39,3214,135
+2025-05-07,Paid Social,li_agency_owners,310.75,12105,230
+2025-05-07,Outbound,linkedin_dm,115.42,0,0
+2025-05-08,Paid Search,gs_competitor,375.73,2880,121
+2025-05-08,Paid Social,,222.88,8684,165
+2025-05-08,Outbound,cold_email_q1,77.89,0,0
+2025-05-09,Paid Search,gs_competitor,370.94,2833,119
+2025-05-09,Paid Social,li_agency_owners,359.24,14000,266
+2025-05-09,Outbound,linkedin_dm,79.11,0,0
+2025-05-10,Paid Search,gs_va_hire,86.49,642,27
+2025-05-10,Paid Social,li_agency_owners,56.56,2157,41
+2025-05-10,Outbound,cold_email_q2,21.99,0,0
+2025-05-11,Paid Search,gs_latam_talent,97.99,738,31
+2025-05-11,Paid Social,fb_founders,94.11,3631,69
+2025-05-11,Outbound,cold_email_q2,24.94,0,0
+2025-05-12,Paid Search,gs_va_hire,296.59,2261,95
+2025-05-12,Paid Social,li_agency_owners,391.58,15263,290
+2025-05-12,Outbound,linkedin_dm,109.08,0,0
+2025-05-13,Paid Search,gs_competitor,544.64,4166,175
+2025-05-13,Paid Social,fb_founders,378.71,14736,280
+2025-05-13,Outbound,cold_email_q2,112.06,0,0
+2025-05-14,Paid Search,gs_va_hire,339.06,2595,109
+2025-05-14,Paid Social,fb_founders,380.83,14842,282
+2025-05-14,Outbound,linkedin_dm,95.59,0,0
+2025-05-15,Paid Search,gs_competitor,444.79,3404,143
+2025-05-15,Paid Social,fb_retarget,312.98,12157,231
+2025-05-15,Outbound,linkedin_dm,68.96,0,0
+2025-05-16,Paid Search,gs_latam_talent,478.88,3666,154
+2025-05-16,Paid Social,li_agency_owners,237.75,9263,176
+2025-05-16,Outbound,cold_email_q2,122.07,0,0
+2025-05-17,Paid Search,gs_competitor,80.75,619,26
+2025-05-17,Paid Social,fb_founders,90.26,3473,66
+2025-05-17,Outbound,cold_email_q2,24.58,0,0
+2025-05-18,Paid Search,gs_latam_talent,81.96,619,26
+2025-05-18,Paid Social,fb_founders,84.47,3263,62
+2025-05-18,Outbound,linkedin_dm,20.99,0,0
+2025-05-19,Paid Search,gs_competitor,512.74,3928,165
+2025-05-19,Paid Social,fb_founders,333.13,12947,246
+2025-05-19,Outbound,cold_email_q2,88.93,0,0
+2025-05-20,Paid Search,gs_latam_talent,529.87,4047,170
+2025-05-20,Paid Social,fb_founders,380.52,14789,281
+2025-05-20,Outbound,linkedin_dm,77.23,0,0
+2025-05-21,Paid Search,gs_latam_talent,300.06,2285,96
+2025-05-21,Paid Social,fb_founders,314.17,12210,232
+2025-05-21,Outbound,linkedin_dm,99.13,0,0
+2025-05-22,Paid Search,gs_latam_talent,332.97,2547,107
+2025-05-22,Paid Social,li_agency_owners,370.43,14421,274
+2025-05-22,Outbound,cold_email_q1,115.78,0,0
+2025-05-23,Paid Search,gs_competitor,312.56,2380,100
+2025-05-23,Paid Social,fb_founders,225.13,8736,166
+2025-05-23,Outbound,cold_email_q2,80.05,0,0
+2025-05-24,Paid Search,gs_latam_talent,74.54,571,24
+2025-05-24,Paid Social,fb_retarget,75.6,2894,55
+2025-05-24,Outbound,cold_email_q2,19.06,0,0
+2025-05-25,Paid Search,gs_va_hire,89.59,666,28
+2025-05-25,Paid Social,li_agency_owners,67.6,2631,50
+2025-05-25,Outbound,linkedin_dm,17.9,0,0
+2025-05-26,Paid Search,gs_latam_talent,522.31,3999,168
+2025-05-26,Paid Social,,256.01,9947,189
+2025-05-26,Outbound,cold_email_q2,81.12,0,0
+2025-05-27,Paid Search,gs_latam_talent,367.18,2809,118
+2025-05-27,Paid Social,li_agency_owners,389.97,15157,288
+2025-05-27,Outbound,cold_email_q2,75.1,0,0
+2025-05-28,Paid Search,gs_latam_talent,500.79,3833,161
+2025-05-28,Paid Social,fb_retarget,310.5,12052,229
+2025-05-28,Outbound,cold_email_q1,121.0,0,0
+2025-05-29,Paid Search,gs_va_hire,503.24,3857,162
+2025-05-29,Paid Social,li_agency_owners,255.46,9947,189
+2025-05-29,Outbound,cold_email_q2,122.31,0,0
+2025-05-30,Paid Search,gs_latam_talent,380.84,2904,122
+2025-05-30,Paid Social,li_agency_owners,261.69,10157,193
+2025-05-30,Outbound,cold_email_q1,79.86,0,0
+2025-05-31,Paid Search,gs_va_hire,134.69,1023,43
+2025-05-31,Paid Social,fb_founders,72.62,2789,53
+2025-05-31,Outbound,cold_email_q1,25.05,0,0
+2025-06-01,Paid Search,gs_competitor,125.13,952,40
+2025-06-01,Paid Social,li_agency_owners,84.41,3263,62
+2025-06-01,Outbound,cold_email_q2,18.59,0,0
+2025-06-02,Paid Search,gs_competitor,543.54,4166,175
+2025-06-02,Paid Social,fb_retarget,346.75,13473,256
+2025-06-02,Outbound,linkedin_dm,114.34,0,0
+2025-06-03,Paid Search,gs_competitor,514.8,3952,166
+2025-06-03,Paid Social,fb_founders,387.7,15105,287
+2025-06-03,Outbound,linkedin_dm,81.65,0,0
+2025-06-04,Paid Search,gs_competitor,374.22,2857,120
+2025-06-04,Paid Social,fb_retarget,347.33,13526,257
+2025-06-04,Outbound,cold_email_q1,93.29,0,0
+2025-06-05,Paid Search,gs_competitor,376.08,2880,121
+2025-06-05,Paid Social,li_agency_owners,312.59,12157,231
+2025-06-05,Outbound,cold_email_q1,98.08,0,0
+2025-06-06,Paid Search,gs_competitor,430.62,3285,138
+2025-06-06,Paid Social,fb_founders,272.13,10578,201
+2025-06-06,Outbound,cold_email_q1,76.25,0,0
+2025-06-07,Paid Search,gs_va_hire,136.13,1023,43
+2025-06-07,Paid Social,li_agency_owners,96.99,3736,71
+2025-06-07,Outbound,cold_email_q1,24.19,0,0
+2025-06-08,Paid Search,gs_competitor,79.38,595,25
+2025-06-08,Paid Social,li_agency_owners,83.45,3210,61
+2025-06-08,Outbound,linkedin_dm,23.57,0,0
+2025-06-09,Paid Search,gs_latam_talent,442.42,3380,142
+2025-06-09,Paid Social,fb_retarget,323.68,12578,239
+2025-06-09,Outbound,cold_email_q2,101.4,0,0
+2025-06-10,Paid Search,gs_va_hire,359.77,2761,116
+2025-06-10,Paid Social,fb_retarget,283.12,11000,209
+2025-06-10,Outbound,cold_email_q2,88.02,0,0
+2025-06-11,Paid Search,gs_va_hire,331.92,2547,107
+2025-06-11,Paid Social,fb_founders,272.45,10578,201
+2025-06-11,Outbound,cold_email_q1,93.06,0,0
+2025-06-12,Paid Search,gs_latam_talent,333.67,2547,107
+2025-06-12,Paid Social,fb_retarget,295.72,11526,219
+2025-06-12,Outbound,linkedin_dm,89.48,0,0
+2025-06-13,Paid Search,gs_va_hire,511.26,3904,164
+2025-06-13,Paid Social,fb_founders,394.97,15368,292
+2025-06-13,Outbound,cold_email_q2,101.16,0,0
+2025-06-14,Paid Search,gs_va_hire,92.48,690,29
+2025-06-14,Paid Social,fb_retarget,61.88,2368,45
+2025-06-14,Outbound,cold_email_q1,26.9,0,0
+2025-06-15,Paid Search,gs_va_hire,77.51,595,25
+2025-06-15,Paid Social,fb_retarget,75.49,2894,55
+2025-06-15,Outbound,cold_email_q1,23.32,0,0
+2025-06-16,Paid Search,gs_va_hire,302.02,2309,97
+2025-06-16,Paid Social,fb_retarget,399.31,15526,295
+2025-06-16,Outbound,cold_email_q2,83.49,0,0
+2025-06-17,Paid Search,gs_latam_talent,333.82,2547,107
+2025-06-17,Paid Social,li_agency_owners,221.8,8631,164
+2025-06-17,Outbound,cold_email_q2,121.26,0,0
+2025-06-18,Paid Search,gs_competitor,435.99,3333,140
+2025-06-18,Paid Social,fb_retarget,366.69,14263,271
+2025-06-18,Outbound,linkedin_dm,77.32,0,0
+2025-06-19,Paid Search,gs_latam_talent,399.32,3047,128
+2025-06-19,Paid Social,li_agency_owners,229.4,8894,169
+2025-06-19,Outbound,cold_email_q1,82.2,0,0
+2025-06-20,Paid Search,gs_latam_talent,511.83,3928,165
+2025-06-20,Paid Social,fb_founders,268.45,10421,198
+2025-06-20,Outbound,linkedin_dm,83.18,0,0
+2025-06-21,Paid Search,gs_latam_talent,110.79,833,35
+2025-06-21,Paid Social,fb_retarget,75.25,2894,55
+2025-06-21,Outbound,cold_email_q1,30.71,0,0
+2025-06-22,Paid Search,gs_latam_talent,97.98,738,31
+2025-06-22,Paid Social,li_agency_owners,87.77,3421,65
+2025-06-22,Outbound,cold_email_q2,22.36,0,0
+2025-06-23,Paid Search,gs_latam_talent,427.66,3261,137
+2025-06-23,Paid Social,fb_retarget,336.9,13105,249
+2025-06-23,Outbound,linkedin_dm,106.34,0,0
+2025-06-24,Paid Search,gs_va_hire,301.69,2309,97
+2025-06-24,Paid Social,li_agency_owners,291.64,11368,216
+2025-06-24,Outbound,cold_email_q1,92.97,0,0
+2025-06-25,Paid Search,gs_competitor,335.81,2571,108
+2025-06-25,Paid Social,fb_founders,371.9,14473,275
+2025-06-25,Outbound,cold_email_q2,103.58,0,0
+2025-06-26,Paid Search,gs_latam_talent,523.29,3999,168
+2025-06-26,Paid Social,fb_founders,354.76,13789,262
+2025-06-26,Outbound,cold_email_q2,119.5,0,0
+2025-06-27,Paid Search,gs_va_hire,414.76,3166,133
+2025-06-27,Paid Social,fb_founders,286.71,11157,212
+2025-06-27,Outbound,cold_email_q1,80.84,0,0
+2025-06-28,Paid Search,gs_competitor,79.48,595,25
+2025-06-28,Paid Social,fb_founders,67.85,2631,50
+2025-06-28,Outbound,cold_email_q1,19.3,0,0
+2025-06-29,Paid Search,gs_competitor,125.22,952,40
+2025-06-29,Paid Social,fb_retarget,76.59,2947,56
+2025-06-29,Outbound,cold_email_q2,24.47,0,0
+2025-06-30,Paid Search,gs_va_hire,440.64,3380,142
+2025-06-30,Paid Social,fb_retarget,226.73,8789,167
+2025-06-30,Outbound,cold_email_q1,72.86,0,0
+2025-07-01,Paid Search,gs_competitor,307.54,2357,99
+2025-07-01,Paid Social,fb_retarget,355.55,13842,263
+2025-07-01,Outbound,cold_email_q2,93.64,0,0
+2025-07-02,Paid Search,gs_latam_talent,269.62,2047,86
+2025-07-02,Paid Social,,321.92,12526,238
+2025-07-02,Outbound,linkedin_dm,70.94,0,0
+2025-07-03,Paid Search,gs_latam_talent,289.41,2214,93
+2025-07-03,Paid Social,,357.01,13894,264
+2025-07-03,Outbound,linkedin_dm,73.91,0,0
+2025-07-04,Paid Search,gs_latam_talent,415.93,3190,134
+2025-07-04,Paid Social,li_agency_owners,220.83,8578,163
+2025-07-04,Outbound,cold_email_q1,68.13,0,0
+2025-07-05,Paid Search,gs_competitor,105.06,785,33
+2025-07-05,Paid Social,fb_retarget,59.08,2263,43
+2025-07-05,Outbound,linkedin_dm,16.72,0,0
+2025-07-06,Paid Search,gs_competitor,104.72,785,33
+2025-07-06,Paid Social,fb_retarget,55.58,2157,41
+2025-07-06,Outbound,linkedin_dm,20.55,0,0
+2025-07-07,Paid Search,gs_va_hire,354.21,2714,114
+2025-07-07,Paid Social,li_agency_owners,221.97,8631,164
+2025-07-07,Outbound,cold_email_q2,78.15,0,0
+2025-07-08,Paid Search,gs_competitor,438.45,3357,141
+2025-07-08,Paid Social,li_agency_owners,322.66,12578,239
+2025-07-08,Outbound,cold_email_q2,85.75,0,0
+2025-07-09,Paid Search,gs_latam_talent,477.32,3642,153
+2025-07-09,Paid Social,li_agency_owners,255.83,9947,189
+2025-07-09,Outbound,linkedin_dm,101.2,0,0
+2025-07-10,Paid Search,gs_latam_talent,387.78,2976,125
+2025-07-10,Paid Social,fb_founders,312.27,12157,231
+2025-07-10,Outbound,cold_email_q2,78.16,0,0
+2025-07-11,Paid Search,gs_latam_talent,323.07,2476,104
+2025-07-11,Paid Social,fb_founders,296.27,11526,219
+2025-07-11,Outbound,cold_email_q1,89.03,0,0
+2025-07-12,Paid Search,gs_competitor,91.27,690,29
+2025-07-12,Paid Social,li_agency_owners,50.0,1947,37
+2025-07-12,Outbound,linkedin_dm,16.6,0,0
+2025-07-13,Paid Search,gs_competitor,113.62,857,36
+2025-07-13,Paid Social,li_agency_owners,52.2,2000,38
+2025-07-13,Outbound,cold_email_q1,22.18,0,0
+2025-07-14,Paid Search,gs_competitor,267.42,2047,86
+2025-07-14,Paid Social,fb_retarget,208.42,8105,154
+2025-07-14,Outbound,cold_email_q2,72.46,0,0
+2025-07-15,Paid Search,gs_competitor,350.66,2690,113
+2025-07-15,Paid Social,fb_founders,293.2,11421,217
+2025-07-15,Outbound,cold_email_q1,99.53,0,0
+2025-07-16,Paid Search,gs_latam_talent,330.28,2523,106
+2025-07-16,Paid Social,li_agency_owners,275.28,10684,203
+2025-07-16,Outbound,cold_email_q2,81.65,0,0
+2025-07-17,Paid Search,gs_latam_talent,394.52,3023,127
+2025-07-17,Paid Social,fb_retarget,343.78,13368,254
+2025-07-17,Outbound,linkedin_dm,64.55,0,0
+2025-07-18,Paid Search,gs_va_hire,467.36,3571,150
+2025-07-18,Paid Social,li_agency_owners,348.92,13578,258
+2025-07-18,Outbound,linkedin_dm,77.05,0,0
+2025-07-19,Paid Search,gs_va_hire,107.68,809,34
+2025-07-19,Paid Social,fb_retarget,82.23,3157,60
+2025-07-19,Outbound,cold_email_q2,22.21,0,0
+2025-07-20,Paid Search,gs_latam_talent,84.25,642,27
+2025-07-20,Paid Social,fb_founders,59.92,2315,44
+2025-07-20,Outbound,cold_email_q1,16.88,0,0
+2025-07-21,Paid Search,gs_latam_talent,332.99,2547,107
+2025-07-21,Paid Social,fb_founders,213.53,8315,158
+2025-07-21,Outbound,cold_email_q2,69.64,0,0
+2025-07-22,Paid Search,gs_latam_talent,363.41,2785,117
+2025-07-22,Paid Social,fb_founders,288.91,11263,214
+2025-07-22,Outbound,cold_email_q1,61.44,0,0
+2025-07-23,Paid Search,gs_va_hire,367.61,2809,118
+2025-07-23,Paid Social,fb_retarget,209.51,8157,155
+2025-07-23,Outbound,cold_email_q1,109.44,0,0
+2025-07-24,Paid Search,gs_va_hire,290.19,2214,93
+2025-07-24,Paid Social,li_agency_owners,227.42,8842,168
+2025-07-24,Outbound,cold_email_q1,90.07,0,0
+2025-07-25,Paid Search,gs_va_hire,290.78,2214,93
+2025-07-25,Paid Social,li_agency_owners,346.43,13473,256
+2025-07-25,Outbound,linkedin_dm,93.61,0,0
+2025-07-26,Paid Search,gs_latam_talent,91.94,690,29
+2025-07-26,Paid Social,fb_founders,63.0,2421,46
+2025-07-26,Outbound,linkedin_dm,20.25,0,0
+2025-07-27,Paid Search,gs_va_hire,84.32,642,27
+2025-07-27,Paid Social,fb_founders,55.8,2157,41
+2025-07-27,Outbound,cold_email_q1,15.8,0,0
+2025-07-28,Paid Search,gs_va_hire,483.44,3690,155
+2025-07-28,Paid Social,fb_founders,243.09,9473,180
+2025-07-28,Outbound,linkedin_dm,59.86,0,0
+2025-07-29,Paid Search,gs_competitor,456.28,3500,147
+2025-07-29,Paid Social,fb_founders,349.55,13578,258
+2025-07-29,Outbound,linkedin_dm,108.04,0,0
+2025-07-30,Paid Search,gs_competitor,295.75,2261,95
+2025-07-30,Paid Social,fb_retarget,325.08,12631,240
+2025-07-30,Outbound,cold_email_q1,74.89,0,0
+2025-07-31,Paid Search,gs_competitor,374.48,2857,120
+2025-07-31,Paid Social,fb_founders,226.02,8789,167
+2025-07-31,Outbound,cold_email_q1,86.76,0,0
+2025-08-01,Paid Search,gs_competitor,420.14,3214,135
+2025-08-01,Paid Social,fb_retarget,275.25,10684,203
+2025-08-01,Outbound,cold_email_q2,112.85,0,0
+2025-08-02,Paid Search,gs_competitor,82.95,619,26
+2025-08-02,Paid Social,li_agency_owners,63.33,2421,46
+2025-08-02,Outbound,cold_email_q2,17.69,0,0
+2025-08-03,Paid Search,gs_va_hire,79.23,595,25
+2025-08-03,Paid Social,fb_retarget,78.18,3000,57
+2025-08-03,Outbound,cold_email_q1,22.7,0,0
+2025-08-04,Paid Search,gs_latam_talent,485.93,3714,156
+2025-08-04,Paid Social,fb_founders,277.25,10789,205
+2025-08-04,Outbound,linkedin_dm,65.26,0,0
+2025-08-05,Paid Search,gs_va_hire,460.68,3523,148
+2025-08-05,Paid Social,fb_founders,345.93,13473,256
+2025-08-05,Outbound,cold_email_q1,64.5,0,0
+2025-08-06,Paid Search,gs_latam_talent,516.96,3952,166
+2025-08-06,Paid Social,li_agency_owners,371.96,14473,275
+2025-08-06,Outbound,cold_email_q2,99.88,0,0
+2025-08-07,Paid Search,gs_va_hire,381.64,2928,123
+2025-08-07,Paid Social,li_agency_owners,216.59,8421,160
+2025-08-07,Outbound,linkedin_dm,96.12,0,0
+2025-08-08,Paid Search,gs_va_hire,454.83,3476,146
+2025-08-08,Paid Social,li_agency_owners,345.41,13421,255
+2025-08-08,Outbound,cold_email_q1,101.16,0,0
+2025-08-09,Paid Search,gs_va_hire,108.77,833,35
+2025-08-09,Paid Social,li_agency_owners,74.32,2894,55
+2025-08-09,Outbound,linkedin_dm,28.6,0,0
+2025-08-10,Paid Search,gs_latam_talent,73.99,547,23
+2025-08-10,Paid Social,fb_founders,68.66,2631,50
+2025-08-10,Outbound,cold_email_q1,20.07,0,0
+2025-08-11,Paid Search,gs_competitor,364.99,2785,117
+2025-08-11,Paid Social,fb_founders,370.54,14421,274
+2025-08-11,Outbound,cold_email_q1,76.65,0,0
+2025-08-12,Paid Search,gs_latam_talent,466.57,3571,150
+2025-08-12,Paid Social,li_agency_owners,346.74,13473,256
+2025-08-12,Outbound,cold_email_q2,67.93,0,0
+2025-08-13,Paid Search,gs_va_hire,511.64,3928,165
+2025-08-13,Paid Social,li_agency_owners,280.78,10894,207
+2025-08-13,Outbound,cold_email_q1,116.77,0,0
+2025-08-14,Paid Search,,362.64,2761,116
+2025-08-14,Paid Social,li_agency_owners,376.34,14631,278
+2025-08-14,Outbound,linkedin_dm,82.7,0,0
+2025-08-15,Paid Search,gs_competitor,442.12,3380,142
+2025-08-15,Paid Social,fb_founders,374.79,14578,277
+2025-08-15,Outbound,cold_email_q1,105.51,0,0
+2025-08-16,Paid Search,gs_competitor,97.42,738,31
+2025-08-16,Paid Social,fb_retarget,64.76,2473,47
+2025-08-16,Outbound,cold_email_q2,26.33,0,0
+2025-08-17,Paid Search,gs_latam_talent,115.8,880,37
+2025-08-17,Paid Social,fb_founders,93.82,3631,69
+2025-08-17,Outbound,cold_email_q1,16.1,0,0
+2025-08-18,Paid Search,gs_competitor,430.03,3285,138
+2025-08-18,Paid Social,li_agency_owners,259.52,10105,192
+2025-08-18,Outbound,cold_email_q1,111.56,0,0
+2025-08-19,Paid Search,gs_competitor,421.21,3214,135
+2025-08-19,Paid Social,fb_founders,315.21,12263,233
+2025-08-19,Outbound,cold_email_q1,89.97,0,0
+2025-08-20,Paid Search,gs_competitor,452.33,3452,145
+2025-08-20,Paid Social,fb_retarget,364.0,14157,269
+2025-08-20,Outbound,cold_email_q1,101.59,0,0
+2025-08-21,Paid Search,gs_va_hire,284.24,2166,91
+2025-08-21,Paid Social,fb_retarget,240.75,9368,178
+2025-08-21,Outbound,linkedin_dm,87.05,0,0
+2025-08-22,Paid Search,gs_competitor,419.78,3214,135
+2025-08-22,Paid Social,li_agency_owners,382.49,14894,283
+2025-08-22,Outbound,cold_email_q2,85.43,0,0
+2025-08-23,Paid Search,gs_latam_talent,72.56,547,23
+2025-08-23,Paid Social,fb_founders,77.39,3000,57
+2025-08-23,Outbound,cold_email_q2,23.9,0,0
+2025-08-24,Paid Search,gs_competitor,109.35,833,35
+2025-08-24,Paid Social,fb_retarget,95.63,3684,70
+2025-08-24,Outbound,cold_email_q1,20.69,0,0
+2025-08-25,Paid Search,gs_competitor,413.88,3166,133
+2025-08-25,Paid Social,fb_retarget,295.77,11526,219
+2025-08-25,Outbound,cold_email_q1,117.01,0,0
+2025-08-26,Paid Search,gs_va_hire,498.39,3809,160
+2025-08-26,Paid Social,fb_retarget,335.94,13052,248
+2025-08-26,Outbound,cold_email_q1,78.01,0,0
+2025-08-27,Paid Search,gs_latam_talent,451.62,3452,145
+2025-08-27,Paid Social,fb_retarget,307.52,11947,227
+2025-08-27,Outbound,linkedin_dm,102.47,0,0
+2025-08-28,Paid Search,gs_va_hire,457.93,3500,147
+2025-08-28,Paid Social,li_agency_owners,358.2,13947,265
+2025-08-28,Outbound,cold_email_q2,103.55,0,0
+2025-08-29,Paid Search,gs_va_hire,452.74,3476,146
+2025-08-29,Paid Social,li_agency_owners,244.86,9526,181
+2025-08-29,Outbound,cold_email_q1,78.11,0,0
+2025-08-30,Paid Search,gs_competitor,94.58,714,30
+2025-08-30,Paid Social,fb_retarget,92.32,3578,68
+2025-08-30,Outbound,cold_email_q2,27.0,0,0
+2025-08-31,Paid Search,gs_competitor,87.35,666,28
+2025-08-31,Paid Social,fb_retarget,83.84,3263,62
+2025-08-31,Outbound,cold_email_q1,18.05,0,0
+2025-09-01,Paid Search,gs_va_hire,365.91,2809,118
+2025-09-01,Paid Social,fb_founders,231.97,9000,171
+2025-09-01,Outbound,cold_email_q2,119.8,0,0
+2025-09-02,Paid Search,gs_competitor,415.15,3166,133
+2025-09-02,Paid Social,li_agency_owners,238.74,9263,176
+2025-09-02,Outbound,cold_email_q2,118.38,0,0
+2025-09-03,Paid Search,gs_va_hire,307.67,2357,99
+2025-09-03,Paid Social,fb_founders,269.15,10473,199
+2025-09-03,Outbound,linkedin_dm,122.1,0,0
+2025-09-04,Paid Search,gs_latam_talent,397.25,3047,128
+2025-09-04,Paid Social,fb_founders,319.83,12421,236
+2025-09-04,Outbound,cold_email_q1,109.06,0,0
+2025-09-05,Paid Search,gs_va_hire,443.8,3404,143
+2025-09-05,Paid Social,fb_founders,394.63,15368,292
+2025-09-05,Outbound,cold_email_q1,98.52,0,0
+2025-09-06,Paid Search,gs_competitor,122.61,928,39
+2025-09-06,Paid Social,fb_founders,62.03,2368,45
+2025-09-06,Outbound,cold_email_q1,20.14,0,0
+2025-09-07,Paid Search,gs_latam_talent,103.43,785,33
+2025-09-07,Paid Social,fb_retarget,56.36,2157,41
+2025-09-07,Outbound,linkedin_dm,25.06,0,0
+2025-09-08,Paid Search,gs_va_hire,401.58,3071,129
+2025-09-08,Paid Social,fb_retarget,260.11,10105,192
+2025-09-08,Outbound,cold_email_q1,96.46,0,0
+2025-09-09,Paid Search,gs_latam_talent,340.48,2595,109
+2025-09-09,Paid Social,fb_founders,364.05,14157,269
+2025-09-09,Outbound,linkedin_dm,71.85,0,0
+2025-09-10,Paid Search,,296.74,2261,95
+2025-09-10,Paid Social,fb_retarget,380.26,14789,281
+2025-09-10,Outbound,linkedin_dm,76.42,0,0
+2025-09-11,Paid Search,gs_competitor,495.98,3785,159
+2025-09-11,Paid Social,fb_retarget,226.43,8789,167
+2025-09-11,Outbound,cold_email_q1,100.89,0,0
+2025-09-12,Paid Search,gs_va_hire,471.02,3595,151
+2025-09-12,Paid Social,fb_founders,383.29,14894,283
+2025-09-12,Outbound,cold_email_q2,120.02,0,0
+2025-09-13,Paid Search,gs_latam_talent,130.76,999,42
+2025-09-13,Paid Social,fb_founders,87.77,3421,65
+2025-09-13,Outbound,cold_email_q2,30.46,0,0
+2025-09-14,Paid Search,gs_va_hire,90.46,690,29
+2025-09-14,Paid Social,fb_retarget,66.09,2526,48
+2025-09-14,Outbound,cold_email_q1,20.37,0,0
+2025-09-15,Paid Search,gs_competitor,545.55,4166,175
+2025-09-15,Paid Social,fb_retarget,392.66,15263,290
+2025-09-15,Outbound,linkedin_dm,111.82,0,0
+2025-09-16,Paid Search,gs_latam_talent,543.92,4166,175
+2025-09-16,Paid Social,fb_retarget,363.96,14157,269
+2025-09-16,Outbound,cold_email_q1,119.11,0,0
+2025-09-17,Paid Search,gs_competitor,462.12,3547,149
+2025-09-17,Paid Social,fb_retarget,313.51,12210,232
+2025-09-17,Outbound,cold_email_q1,104.71,0,0
+2025-09-18,Paid Search,gs_latam_talent,484.89,3714,156
+2025-09-18,Paid Social,li_agency_owners,255.47,9947,189
+2025-09-18,Outbound,linkedin_dm,69.85,0,0
+2025-09-19,Paid Search,gs_va_hire,544.47,4166,175
+2025-09-19,Paid Social,li_agency_owners,397.39,15473,294
+2025-09-19,Outbound,linkedin_dm,67.88,0,0
+2025-09-20,Paid Search,gs_va_hire,94.1,714,30
+2025-09-20,Paid Social,fb_founders,99.37,3842,73
+2025-09-20,Outbound,cold_email_q2,30.11,0,0
+2025-09-21,Paid Search,gs_va_hire,99.04,738,31
+2025-09-21,Paid Social,li_agency_owners,94.52,3684,70
+2025-09-21,Outbound,cold_email_q2,26.73,0,0
+2025-09-22,Paid Search,gs_latam_talent,453.96,3476,146
+2025-09-22,Paid Social,,247.4,9631,183
+2025-09-22,Outbound,cold_email_q2,86.4,0,0
+2025-09-23,Paid Search,gs_latam_talent,378.7,2904,122
+2025-09-23,Paid Social,fb_founders,388.1,15105,287
+2025-09-23,Outbound,cold_email_q2,92.67,0,0
+2025-09-24,Paid Search,gs_competitor,431.87,3309,139
+2025-09-24,Paid Social,li_agency_owners,382.85,14894,283
+2025-09-24,Outbound,linkedin_dm,81.8,0,0
+2025-09-25,Paid Search,gs_latam_talent,313.5,2404,101
+2025-09-25,Paid Social,li_agency_owners,384.61,14947,284
+2025-09-25,Outbound,cold_email_q1,114.92,0,0
+2025-09-26,Paid Search,gs_va_hire,410.09,3142,132
+2025-09-26,Paid Social,fb_retarget,388.32,15105,287
+2025-09-26,Outbound,cold_email_q2,121.93,0,0
+2025-09-27,Paid Search,gs_latam_talent,116.88,880,37
+2025-09-27,Paid Social,fb_founders,94.68,3684,70
+2025-09-27,Outbound,linkedin_dm,26.85,0,0
+2025-09-28,Paid Search,gs_va_hire,85.33,642,27
+2025-09-28,Paid Social,fb_founders,58.17,2263,43
+2025-09-28,Outbound,linkedin_dm,21.79,0,0
+2025-09-29,Paid Search,gs_latam_talent,478.46,3666,154
+2025-09-29,Paid Social,fb_retarget,308.33,12000,228
+2025-09-29,Outbound,linkedin_dm,122.58,0,0
+2025-09-30,Paid Search,gs_va_hire,376.53,2880,121
+2025-09-30,Paid Social,fb_retarget,387.44,15052,286
+2025-09-30,Outbound,cold_email_q1,69.87,0,0
+2025-10-01,Paid Search,gs_va_hire,482.64,3690,155
+2025-10-01,Paid Social,li_agency_owners,295.82,11526,219
+2025-10-01,Outbound,linkedin_dm,95.9,0,0
+2025-10-02,Paid Search,gs_va_hire,537.27,4119,173
+2025-10-02,Paid Social,fb_founders,285.8,11105,211
+2025-10-02,Outbound,linkedin_dm,103.66,0,0
+2025-10-03,Paid Search,gs_latam_talent,500.06,3833,161
+2025-10-03,Paid Social,fb_retarget,305.24,11894,226
+2025-10-03,Outbound,cold_email_q2,108.96,0,0
+2025-10-04,Paid Search,gs_latam_talent,96.47,738,31
+2025-10-04,Paid Social,li_agency_owners,71.32,2736,52
+2025-10-04,Outbound,,29.46,0,0
+2025-10-05,Paid Search,gs_latam_talent,112.84,857,36
+2025-10-05,Paid Social,li_agency_owners,100.38,3894,74
+2025-10-05,Outbound,linkedin_dm,25.53,0,0
+2025-10-06,Paid Search,gs_competitor,404.43,3095,130
+2025-10-06,Paid Social,li_agency_owners,309.32,12052,229
+2025-10-06,Outbound,linkedin_dm,85.28,0,0
+2025-10-07,Paid Search,gs_competitor,459.48,3523,148
+2025-10-07,Paid Social,li_agency_owners,302.06,11736,223
+2025-10-07,Outbound,cold_email_q2,119.89,0,0
+2025-10-08,Paid Search,gs_va_hire,430.33,3285,138
+2025-10-08,Paid Social,li_agency_owners,258.84,10052,191
+2025-10-08,Outbound,cold_email_q2,108.38,0,0
+2025-10-09,Paid Search,gs_latam_talent,307.71,2357,99
+2025-10-09,Paid Social,fb_founders,319.06,12421,236
+2025-10-09,Outbound,linkedin_dm,120.86,0,0
+2025-10-10,Paid Search,gs_va_hire,500.73,3833,161
+2025-10-10,Paid Social,fb_founders,392.47,15263,290
+2025-10-10,Outbound,cold_email_q1,77.22,0,0
+2025-10-11,Paid Search,,97.04,738,31
+2025-10-11,Paid Social,fb_retarget,70.24,2736,52
+2025-10-11,Outbound,cold_email_q2,26.01,0,0
+2025-10-12,Paid Search,gs_va_hire,121.88,928,39
+2025-10-12,Paid Social,fb_founders,100.51,3894,74
+2025-10-12,Outbound,cold_email_q1,21.59,0,0
+2025-10-13,Paid Search,gs_competitor,510.25,3904,164
+2025-10-13,Paid Social,fb_retarget,371.85,14473,275
+2025-10-13,Outbound,cold_email_q1,110.97,0,0
+2025-10-14,Paid Search,gs_competitor,385.65,2952,124
+2025-10-14,Paid Social,li_agency_owners,384.56,14947,284
+2025-10-14,Outbound,cold_email_q2,111.23,0,0
+2025-10-15,Paid Search,gs_va_hire,312.68,2380,100
+2025-10-15,Paid Social,,231.83,9000,171
+2025-10-15,Outbound,cold_email_q1,117.54,0,0
+2025-10-16,Paid Search,gs_latam_talent,341.35,2619,110
+2025-10-16,Paid Social,li_agency_owners,332.54,12947,246
+2025-10-16,Outbound,cold_email_q2,75.71,0,0
+2025-10-17,Paid Search,gs_competitor,341.22,2619,110
+2025-10-17,Paid Social,fb_founders,299.82,11684,222
+2025-10-17,Outbound,cold_email_q1,91.25,0,0
+2025-10-18,Paid Search,gs_competitor,124.76,952,40
+2025-10-18,Paid Social,fb_retarget,84.78,3263,62
+2025-10-18,Outbound,cold_email_q2,26.28,0,0
+2025-10-19,Paid Search,gs_latam_talent,87.84,666,28
+2025-10-19,Paid Social,fb_founders,90.14,3473,66
+2025-10-19,Outbound,linkedin_dm,24.73,0,0
+2025-10-20,Paid Search,gs_competitor,540.37,4142,174
+2025-10-20,Paid Social,li_agency_owners,329.28,12789,243
+2025-10-20,Outbound,linkedin_dm,112.05,0,0
+2025-10-21,Paid Search,gs_va_hire,316.99,2428,102
+2025-10-21,Paid Social,fb_founders,357.41,13894,264
+2025-10-21,Outbound,cold_email_q1,71.25,0,0
+2025-10-22,Paid Search,gs_latam_talent,454.31,3476,146
+2025-10-22,Paid Social,li_agency_owners,219.49,8526,162
+2025-10-22,Outbound,cold_email_q2,105.48,0,0
+2025-10-23,Paid Search,gs_competitor,457.52,3500,147
+2025-10-23,Paid Social,fb_retarget,397.88,15473,294
+2025-10-23,Outbound,cold_email_q1,107.4,0,0
+2025-10-24,Paid Search,gs_va_hire,386.73,2952,124
+2025-10-24,Paid Social,fb_retarget,223.18,8684,165
+2025-10-24,Outbound,cold_email_q2,79.08,0,0
+2025-10-25,Paid Search,gs_competitor,89.61,666,28
+2025-10-25,Paid Social,fb_founders,65.09,2526,48
+2025-10-25,Outbound,linkedin_dm,23.47,0,0
+2025-10-26,Paid Search,gs_va_hire,135.86,1023,43
+2025-10-26,Paid Social,fb_retarget,55.29,2105,40
+2025-10-26,Outbound,linkedin_dm,17.67,0,0
+2025-10-27,Paid Search,gs_latam_talent,448.72,3428,144
+2025-10-27,Paid Social,fb_founders,266.5,10368,197
+2025-10-27,Outbound,cold_email_q1,82.6,0,0
+2025-10-28,Paid Search,gs_va_hire,454.1,3476,146
+2025-10-28,Paid Social,fb_retarget,229.35,8894,169
+2025-10-28,Outbound,linkedin_dm,113.68,0,0
+2025-10-29,Paid Search,gs_competitor,307.17,2357,99
+2025-10-29,Paid Social,fb_founders,386.57,15052,286
+2025-10-29,Outbound,linkedin_dm,107.93,0,0
+2025-10-30,Paid Search,gs_competitor,359.63,2761,116
+2025-10-30,Paid Social,fb_founders,346.78,13473,256
+2025-10-30,Outbound,linkedin_dm,68.59,0,0
+2025-10-31,Paid Search,gs_competitor,510.93,3904,164
+2025-10-31,Paid Social,li_agency_owners,241.4,9368,178
+2025-10-31,Outbound,cold_email_q2,97.37,0,0
+2025-11-01,Paid Search,gs_competitor,107.86,809,34
+2025-11-01,Paid Social,li_agency_owners,65.49,2526,48
+2025-11-01,Outbound,cold_email_q2,22.73,0,0
+2025-11-02,Paid Search,gs_competitor,106.87,809,34
+2025-11-02,Paid Social,fb_founders,91.12,3526,67
+2025-11-02,Outbound,linkedin_dm,28.12,0,0
+2025-11-03,Paid Search,gs_competitor,513.56,3928,165
+2025-11-03,Paid Social,fb_founders,241.78,9421,179
+2025-11-03,Outbound,cold_email_q1,98.48,0,0
+2025-11-04,Paid Search,gs_competitor,430.63,3285,138
+2025-11-04,Paid Social,li_agency_owners,273.06,10631,202
+2025-11-04,Outbound,cold_email_q2,104.35,0,0
+2025-11-05,Paid Search,gs_latam_talent,304.88,2333,98
+2025-11-05,Paid Social,li_agency_owners,265.42,10315,196
+2025-11-05,Outbound,cold_email_q2,114.61,0,0
+2025-11-06,Paid Search,gs_latam_talent,409.84,3142,132
+2025-11-06,Paid Social,fb_retarget,399.62,15578,296
+2025-11-06,Outbound,cold_email_q1,76.61,0,0
+2025-11-07,Paid Search,gs_competitor,372.53,2857,120
+2025-11-07,Paid Social,fb_retarget,383.9,14947,284
+2025-11-07,Outbound,cold_email_q1,71.86,0,0
+2025-11-08,Paid Search,,78.1,595,25
+2025-11-08,Paid Social,fb_founders,69.26,2684,51
+2025-11-08,Outbound,linkedin_dm,19.75,0,0
+2025-11-09,Paid Search,gs_va_hire,96.87,738,31
+2025-11-09,Paid Social,li_agency_owners,89.75,3473,66
+2025-11-09,Outbound,cold_email_q2,30.05,0,0
+2025-11-10,Paid Search,gs_latam_talent,421.13,3214,135
+2025-11-10,Paid Social,li_agency_owners,357.03,13894,264
+2025-11-10,Outbound,cold_email_q2,94.06,0,0
+2025-11-11,Paid Search,gs_va_hire,539.41,4142,174
+2025-11-11,Paid Social,fb_founders,363.7,14157,269
+2025-11-11,Outbound,cold_email_q1,91.37,0,0
+2025-11-12,Paid Search,gs_competitor,523.73,3999,168
+2025-11-12,Paid Social,fb_retarget,361.97,14105,268
+2025-11-12,Outbound,cold_email_q1,81.27,0,0
+2025-11-13,Paid Search,gs_va_hire,417.38,3190,134
+2025-11-13,Paid Social,li_agency_owners,394.52,15368,292
+2025-11-13,Outbound,linkedin_dm,75.38,0,0
+2025-11-14,Paid Search,gs_latam_talent,470.84,3595,151
+2025-11-14,Paid Social,fb_founders,396.22,15421,293
+2025-11-14,Outbound,cold_email_q2,110.91,0,0
+2025-11-15,Paid Search,gs_va_hire,133.82,1023,43
+2025-11-15,Paid Social,fb_retarget,54.91,2105,40
+2025-11-15,Outbound,,23.33,0,0
+2025-11-16,Paid Search,gs_latam_talent,105.37,785,33
+2025-11-16,Paid Social,,78.63,3052,58
+2025-11-16,Outbound,cold_email_q2,17.47,0,0
+2025-11-17,Paid Search,gs_va_hire,490.93,3761,158
+2025-11-17,Paid Social,fb_founders,372.97,14526,276
+2025-11-17,Outbound,cold_email_q2,83.21,0,0
+2025-11-18,Paid Search,gs_va_hire,397.9,3047,128
+2025-11-18,Paid Social,,389.06,15157,288
+2025-11-18,Outbound,cold_email_q2,102.82,0,0
+2025-11-19,Paid Search,gs_competitor,542.87,4166,175
+2025-11-19,Paid Social,fb_founders,250.59,9736,185
+2025-11-19,Outbound,linkedin_dm,104.38,0,0
+2025-11-20,Paid Search,gs_latam_talent,432.42,3309,139
+2025-11-20,Paid Social,li_agency_owners,371.03,14421,274
+2025-11-20,Outbound,cold_email_q2,122.2,0,0
+2025-11-21,Paid Search,,353.2,2690,113
+2025-11-21,Paid Social,fb_retarget,369.75,14368,273
+2025-11-21,Outbound,linkedin_dm,119.87,0,0
+2025-11-22,Paid Search,gs_va_hire,117.89,904,38
+2025-11-22,Paid Social,fb_retarget,58.66,2263,43
+2025-11-22,Outbound,cold_email_q1,29.9,0,0
+2025-11-23,Paid Search,gs_competitor,105.43,809,34
+2025-11-23,Paid Social,li_agency_owners,92.85,3578,68
+2025-11-23,Outbound,linkedin_dm,29.69,0,0
+2025-11-24,Paid Search,gs_latam_talent,456.09,3500,147
+2025-11-24,Paid Social,fb_founders,368.19,14315,272
+2025-11-24,Outbound,cold_email_q1,91.87,0,0
+2025-11-25,Paid Search,gs_va_hire,391.29,3000,126
+2025-11-25,Paid Social,fb_retarget,376.17,14631,278
+2025-11-25,Outbound,cold_email_q2,99.11,0,0
+2025-11-26,Paid Search,gs_va_hire,480.54,3690,155
+2025-11-26,Paid Social,fb_retarget,369.69,14368,273
+2025-11-26,Outbound,linkedin_dm,112.14,0,0
+2025-11-27,Paid Search,gs_va_hire,530.44,4071,171
+2025-11-27,Paid Social,fb_founders,391.15,15210,289
+2025-11-27,Outbound,cold_email_q1,94.83,0,0
+2025-11-28,Paid Search,gs_va_hire,537.44,4119,173
+2025-11-28,Paid Social,fb_founders,262.83,10210,194
+2025-11-28,Outbound,linkedin_dm,74.95,0,0
+2025-11-29,Paid Search,,107.48,809,34
+2025-11-29,Paid Social,fb_retarget,67.19,2578,49
+2025-11-29,Outbound,cold_email_q2,29.67,0,0
+2025-11-30,Paid Search,gs_va_hire,87.92,666,28
+2025-11-30,Paid Social,,83.86,3263,62
+2025-11-30,Outbound,linkedin_dm,22.39,0,0
+2025-12-01,Paid Search,gs_latam_talent,324.98,2476,104
+2025-12-01,Paid Social,li_agency_owners,196.12,7631,145
+2025-12-01,Outbound,cold_email_q1,54.2,0,0
+2025-12-02,Paid Search,gs_latam_talent,177.84,1357,57
+2025-12-02,Paid Social,fb_founders,134.04,5210,99
+2025-12-02,Outbound,cold_email_q1,61.46,0,0
+2025-12-03,Paid Search,gs_va_hire,248.24,1904,80
+2025-12-03,Paid Social,fb_founders,154.03,6000,114
+2025-12-03,Outbound,linkedin_dm,68.66,0,0
+2025-12-04,Paid Search,gs_va_hire,244.08,1857,78
+2025-12-04,Paid Social,li_agency_owners,225.63,8789,167
+2025-12-04,Outbound,linkedin_dm,42.48,0,0
+2025-12-05,Paid Search,gs_latam_talent,254.69,1952,82
+2025-12-05,Paid Social,li_agency_owners,175.02,6789,129
+2025-12-05,Outbound,cold_email_q2,72.65,0,0
+2025-12-06,Paid Search,gs_competitor,67.56,499,21
+2025-12-06,Paid Social,fb_founders,37.59,1421,27
+2025-12-06,Outbound,cold_email_q2,11.16,0,0
+2025-12-07,Paid Search,gs_va_hire,47.51,357,15
+2025-12-07,Paid Social,fb_retarget,48.02,1842,35
+2025-12-07,Outbound,linkedin_dm,15.06,0,0
+2025-12-08,Paid Search,gs_competitor,273.52,2095,88
+2025-12-08,Paid Social,li_agency_owners,233.5,9052,172
+2025-12-08,Outbound,cold_email_q1,54.39,0,0
+2025-12-09,Paid Search,gs_latam_talent,290.34,2214,93
+2025-12-09,Paid Social,fb_founders,172.48,6684,127
+2025-12-09,Outbound,cold_email_q2,73.28,0,0
+2025-12-10,Paid Search,gs_competitor,253.68,1928,81
+2025-12-10,Paid Social,li_agency_owners,164.7,6368,121
+2025-12-10,Outbound,cold_email_q2,70.69,0,0
+2025-12-11,Paid Search,gs_latam_talent,326.22,2500,105
+2025-12-11,Paid Social,fb_retarget,226.3,8789,167
+2025-12-11,Outbound,cold_email_q1,73.0,0,0
+2025-12-12,Paid Search,gs_latam_talent,252.5,1928,81
+2025-12-12,Paid Social,li_agency_owners,170.01,6578,125
+2025-12-12,Outbound,linkedin_dm,57.74,0,0
+2025-12-13,Paid Search,gs_latam_talent,56.42,428,18
+2025-12-13,Paid Social,li_agency_owners,52.72,2052,39
+2025-12-13,Outbound,linkedin_dm,16.08,0,0
+2025-12-14,Paid Search,gs_va_hire,69.97,523,22
+2025-12-14,Paid Social,fb_retarget,57.31,2210,42
+2025-12-14,Outbound,cold_email_q1,12.61,0,0
+2025-12-15,Paid Search,,200.15,1523,64
+2025-12-15,Paid Social,,218.25,8473,161
+2025-12-15,Outbound,cold_email_q1,47.89,0,0
+2025-12-16,Paid Search,gs_competitor,241.4,1833,77
+2025-12-16,Paid Social,fb_founders,174.52,6789,129
+2025-12-16,Outbound,cold_email_q2,45.43,0,0
+2025-12-17,Paid Search,gs_competitor,192.73,1476,62
+2025-12-17,Paid Social,fb_retarget,211.37,8210,156
+2025-12-17,Outbound,linkedin_dm,71.29,0,0
+2025-12-18,Paid Search,gs_latam_talent,262.07,1999,84
+2025-12-18,Paid Social,fb_retarget,193.68,7526,143
+2025-12-18,Outbound,linkedin_dm,58.43,0,0
+2025-12-19,Paid Search,gs_competitor,190.64,1452,61
+2025-12-19,Paid Social,fb_retarget,196.46,7631,145
+2025-12-19,Outbound,cold_email_q1,73.83,0,0
+2025-12-20,Paid Search,gs_competitor,55.93,428,18
+2025-12-20,Paid Social,fb_retarget,35.94,1368,26
+2025-12-20,Outbound,cold_email_q1,10.79,0,0
+2025-12-21,Paid Search,gs_va_hire,77.91,595,25
+2025-12-21,Paid Social,fb_founders,34.21,1315,25
+2025-12-21,Outbound,linkedin_dm,12.68,0,0
+2025-12-22,Paid Search,gs_competitor,224.37,1714,72
+2025-12-22,Paid Social,,132.53,5157,98
+2025-12-22,Outbound,cold_email_q1,58.9,0,0
+2025-12-23,Paid Search,gs_competitor,187.6,1428,60
+2025-12-23,Paid Social,fb_retarget,183.34,7105,135
+2025-12-23,Outbound,cold_email_q2,73.24,0,0
+2025-12-24,Paid Search,gs_va_hire,232.93,1785,75
+2025-12-24,Paid Social,fb_retarget,234.71,9105,173
+2025-12-24,Outbound,cold_email_q2,40.69,0,0
+2025-12-25,Paid Search,gs_va_hire,188.73,1428,60
+2025-12-25,Paid Social,fb_retarget,238.1,9263,176
+2025-12-25,Outbound,cold_email_q1,43.47,0,0
+2025-12-26,Paid Search,gs_va_hire,322.82,2476,104
+2025-12-26,Paid Social,fb_founders,166.0,6421,122
+2025-12-26,Outbound,cold_email_q2,43.49,0,0
+2025-12-27,Paid Search,gs_latam_talent,50.23,380,16
+2025-12-27,Paid Social,fb_retarget,32.88,1263,24
+2025-12-27,Outbound,linkedin_dm,12.4,0,0
+2025-12-28,Paid Search,gs_va_hire,80.88,619,26
+2025-12-28,Paid Social,li_agency_owners,51.54,2000,38
+2025-12-28,Outbound,linkedin_dm,11.2,0,0
+2025-12-29,Paid Search,gs_latam_talent,318.8,2428,102
+2025-12-29,Paid Social,fb_founders,191.83,7473,142
+2025-12-29,Outbound,linkedin_dm,66.75,0,0
+2025-12-30,Paid Search,gs_latam_talent,193.35,1476,62
+2025-12-30,Paid Social,fb_founders,187.61,7263,138
+2025-12-30,Outbound,cold_email_q1,70.75,0,0
+2025-12-31,Paid Search,gs_competitor,291.45,2238,94
+2025-12-31,Paid Social,li_agency_owners,158.04,6157,117
+2025-12-31,Outbound,cold_email_q2,70.4,0,0
+2026-01-01,Paid Search,gs_va_hire,390.76,3000,126
+2026-01-01,Paid Social,fb_founders,313.34,12210,232
+2026-01-01,Outbound,cold_email_q2,99.29,0,0
+2026-01-02,Paid Search,gs_va_hire,394.59,3023,127
+2026-01-02,Paid Social,fb_retarget,226.81,8842,168
+2026-01-02,Outbound,cold_email_q2,74.5,0,0
+2026-01-03,Paid Search,gs_competitor,107.41,809,34
+2026-01-03,Paid Social,fb_founders,84.87,3263,62
+2026-01-03,Outbound,linkedin_dm,24.04,0,0
+2026-01-04,Paid Search,gs_competitor,65.78,499,21
+2026-01-04,Paid Social,li_agency_owners,53.24,2052,39
+2026-01-04,Outbound,cold_email_q1,21.85,0,0
+2026-01-05,Paid Search,gs_va_hire,434.06,3333,140
+2026-01-05,Paid Social,li_agency_owners,307.45,11947,227
+2026-01-05,Outbound,cold_email_q2,74.29,0,0
+2026-01-06,Paid Search,gs_va_hire,455.79,3500,147
+2026-01-06,Paid Social,li_agency_owners,259.71,10105,192
+2026-01-06,Outbound,cold_email_q1,62.27,0,0
+2026-01-07,Paid Search,gs_va_hire,449.75,3452,145
+2026-01-07,Paid Social,li_agency_owners,339.77,13210,251
+2026-01-07,Outbound,linkedin_dm,81.43,0,0
+2026-01-08,Paid Search,gs_competitor,264.77,2023,85
+2026-01-08,Paid Social,fb_retarget,283.75,11052,210
+2026-01-08,Outbound,cold_email_q2,90.86,0,0
+2026-01-09,Paid Search,gs_competitor,439.65,3357,141
+2026-01-09,Paid Social,fb_retarget,255.21,9947,189
+2026-01-09,Outbound,cold_email_q1,104.52,0,0
+2026-01-10,Paid Search,gs_latam_talent,86.57,642,27
+2026-01-10,Paid Social,,65.84,2526,48
+2026-01-10,Outbound,linkedin_dm,22.01,0,0
+2026-01-11,Paid Search,gs_competitor,89.98,690,29
+2026-01-11,Paid Social,li_agency_owners,49.16,1894,36
+2026-01-11,Outbound,cold_email_q2,24.77,0,0
+2026-01-12,Paid Search,gs_latam_talent,463.7,3547,149
+2026-01-12,Paid Social,li_agency_owners,337.26,13105,249
+2026-01-12,Outbound,linkedin_dm,70.86,0,0
+2026-01-13,Paid Search,gs_va_hire,440.39,3380,142
+2026-01-13,Paid Social,,271.4,10578,201
+2026-01-13,Outbound,cold_email_q1,90.7,0,0
+2026-01-14,Paid Search,gs_va_hire,266.73,2047,86
+2026-01-14,Paid Social,li_agency_owners,197.62,7684,146
+2026-01-14,Outbound,linkedin_dm,71.2,0,0
+2026-01-15,Paid Search,gs_competitor,398.21,3047,128
+2026-01-15,Paid Social,fb_retarget,218.07,8473,161
+2026-01-15,Outbound,linkedin_dm,92.65,0,0
+2026-01-16,Paid Search,gs_va_hire,344.77,2642,111
+2026-01-16,Paid Social,fb_founders,258.49,10052,191
+2026-01-16,Outbound,linkedin_dm,65.05,0,0
+2026-01-17,Paid Search,gs_competitor,87.67,666,28
+2026-01-17,Paid Social,fb_founders,48.25,1842,35
+2026-01-17,Outbound,cold_email_q1,25.46,0,0
+2026-01-18,Paid Search,gs_va_hire,113.65,857,36
+2026-01-18,Paid Social,li_agency_owners,52.5,2000,38
+2026-01-18,Outbound,cold_email_q1,22.04,0,0
+2026-01-19,Paid Search,gs_competitor,358.3,2738,115
+2026-01-19,Paid Social,li_agency_owners,231.11,9000,171
+2026-01-19,Outbound,linkedin_dm,77.17,0,0
+2026-01-20,Paid Search,gs_latam_talent,255.34,1952,82
+2026-01-20,Paid Social,fb_retarget,316.96,12315,234
+2026-01-20,Outbound,cold_email_q1,87.97,0,0
+2026-01-21,Paid Search,gs_latam_talent,263.25,1999,84
+2026-01-21,Paid Social,fb_retarget,214.19,8315,158
+2026-01-21,Outbound,cold_email_q2,60.1,0,0
+2026-01-22,Paid Search,gs_va_hire,351.65,2690,113
+2026-01-22,Paid Social,fb_founders,252.59,9842,187
+2026-01-22,Outbound,linkedin_dm,59.58,0,0
+2026-01-23,Paid Search,gs_latam_talent,437.81,3357,141
+2026-01-23,Paid Social,fb_retarget,209.19,8105,154
+2026-01-23,Outbound,cold_email_q1,100.82,0,0
+2026-01-24,Paid Search,gs_va_hire,66.76,499,21
+2026-01-24,Paid Social,fb_retarget,85.37,3315,63
+2026-01-24,Outbound,linkedin_dm,17.74,0,0
+2026-01-25,Paid Search,gs_va_hire,110.48,833,35
+2026-01-25,Paid Social,li_agency_owners,63.15,2421,46
+2026-01-25,Outbound,cold_email_q1,24.15,0,0
+2026-01-26,Paid Search,gs_competitor,288.03,2190,92
+2026-01-26,Paid Social,li_agency_owners,293.1,11421,217
+2026-01-26,Outbound,linkedin_dm,61.8,0,0
+2026-01-27,Paid Search,gs_latam_talent,411.18,3142,132
+2026-01-27,Paid Social,fb_retarget,305.4,11894,226
+2026-01-27,Outbound,linkedin_dm,83.91,0,0
+2026-01-28,Paid Search,gs_latam_talent,396.74,3023,127
+2026-01-28,Paid Social,fb_founders,233.23,9052,172
+2026-01-28,Outbound,cold_email_q2,97.69,0,0
+2026-01-29,Paid Search,gs_va_hire,259.8,1976,83
+2026-01-29,Paid Social,li_agency_owners,226.64,8789,167
+2026-01-29,Outbound,cold_email_q1,64.35,0,0
+2026-01-30,Paid Search,gs_va_hire,319.56,2452,103
+2026-01-30,Paid Social,fb_retarget,229.54,8947,170
+2026-01-30,Outbound,cold_email_q2,84.42,0,0
+2026-01-31,Paid Search,gs_latam_talent,62.95,476,20
+2026-01-31,Paid Social,li_agency_owners,54.84,2105,40
+2026-01-31,Outbound,cold_email_q1,19.85,0,0
+2026-02-01,Paid Search,gs_competitor,95.81,714,30
+2026-02-01,Paid Social,fb_retarget,57.66,2210,42
+2026-02-01,Outbound,cold_email_q1,22.28,0,0
+2026-02-02,Paid Search,gs_latam_talent,509.51,3904,164
+2026-02-02,Paid Social,fb_retarget,238.82,9263,176
+2026-02-02,Outbound,linkedin_dm,122.07,0,0
+2026-02-03,Paid Search,gs_va_hire,496.03,3809,160
+2026-02-03,Paid Social,li_agency_owners,356.19,13842,263
+2026-02-03,Outbound,linkedin_dm,86.19,0,0
+2026-02-04,Paid Search,gs_va_hire,374.86,2857,120
+2026-02-04,Paid Social,li_agency_owners,254.68,9894,188
+2026-02-04,Outbound,linkedin_dm,112.24,0,0
+2026-02-05,Paid Search,gs_latam_talent,329.43,2523,106
+2026-02-05,Paid Social,li_agency_owners,302.32,11736,223
+2026-02-05,Outbound,cold_email_q1,97.35,0,0
+2026-02-06,Paid Search,gs_va_hire,431.92,3309,139
+2026-02-06,Paid Social,fb_retarget,310.27,12052,229
+2026-02-06,Outbound,cold_email_q1,80.59,0,0
+2026-02-07,Paid Search,gs_competitor,92.02,690,29
+2026-02-07,Paid Social,fb_retarget,64.41,2473,47
+2026-02-07,Outbound,cold_email_q2,21.99,0,0
+2026-02-08,Paid Search,gs_va_hire,126.5,952,40
+2026-02-08,Paid Social,fb_retarget,68.27,2631,50
+2026-02-08,Outbound,cold_email_q2,19.1,0,0
+2026-02-09,Paid Search,gs_latam_talent,515.23,3952,166
+2026-02-09,Paid Social,fb_founders,397.58,15473,294
+2026-02-09,Outbound,cold_email_q1,119.61,0,0
+2026-02-10,Paid Search,gs_competitor,470.62,3595,151
+2026-02-10,Paid Social,li_agency_owners,398.19,15473,294
+2026-02-10,Outbound,cold_email_q2,122.28,0,0
+2026-02-11,Paid Search,gs_latam_talent,518.41,3976,167
+2026-02-11,Paid Social,li_agency_owners,381.97,14842,282
+2026-02-11,Outbound,cold_email_q2,80.98,0,0
+2026-02-12,Paid Search,gs_competitor,542.06,4142,174
+2026-02-12,Paid Social,li_agency_owners,289.82,11263,214
+2026-02-12,Outbound,cold_email_q2,97.08,0,0
+2026-02-13,Paid Search,gs_va_hire,440.43,3380,142
+2026-02-13,Paid Social,fb_retarget,360.2,14000,266
+2026-02-13,Outbound,cold_email_q1,94.54,0,0
+2026-02-14,Paid Search,gs_va_hire,130.63,999,42
+2026-02-14,Paid Social,li_agency_owners,72.27,2789,53
+2026-02-14,Outbound,linkedin_dm,22.15,0,0
+2026-02-15,Paid Search,gs_va_hire,87.74,666,28
+2026-02-15,Paid Social,fb_founders,77.13,3000,57
+2026-02-15,Outbound,linkedin_dm,18.48,0,0
+2026-02-16,Paid Search,gs_latam_talent,406.09,3095,130
+2026-02-16,Paid Social,li_agency_owners,299.08,11631,221
+2026-02-16,Outbound,cold_email_q2,102.77,0,0
+2026-02-17,Paid Search,gs_competitor,345.75,2642,111
+2026-02-17,Paid Social,fb_retarget,265.24,10315,196
+2026-02-17,Outbound,linkedin_dm,67.04,0,0
+2026-02-18,Paid Search,gs_latam_talent,443.97,3404,143
+2026-02-18,Paid Social,fb_retarget,323.93,12578,239
+2026-02-18,Outbound,cold_email_q1,82.69,0,0
+2026-02-19,Paid Search,gs_va_hire,459.94,3523,148
+2026-02-19,Paid Social,fb_retarget,253.92,9894,188
+2026-02-19,Outbound,cold_email_q1,122.18,0,0
+2026-02-20,Paid Search,gs_competitor,445.49,3404,143
+2026-02-20,Paid Social,fb_retarget,399.81,15578,296
+2026-02-20,Outbound,cold_email_q2,111.88,0,0
+2026-02-21,Paid Search,gs_latam_talent,103.65,785,33
+2026-02-21,Paid Social,fb_founders,89.81,3473,66
+2026-02-21,Outbound,cold_email_q1,26.58,0,0
+2026-02-22,Paid Search,gs_va_hire,103.87,785,33
+2026-02-22,Paid Social,li_agency_owners,70.73,2736,52
+2026-02-22,Outbound,linkedin_dm,22.65,0,0
+2026-02-23,Paid Search,gs_va_hire,455.59,3476,146
+2026-02-23,Paid Social,li_agency_owners,285.81,11105,211
+2026-02-23,Outbound,cold_email_q1,115.79,0,0
+2026-02-24,Paid Search,gs_va_hire,381.16,2904,122
+2026-02-24,Paid Social,fb_founders,221.86,8631,164
+2026-02-24,Outbound,cold_email_q1,117.47,0,0
+2026-02-25,Paid Search,gs_latam_talent,393.8,3023,127
+2026-02-25,Paid Social,fb_founders,279.28,10842,206
+2026-02-25,Outbound,cold_email_q1,91.68,0,0
+2026-02-26,Paid Search,gs_competitor,473.11,3619,152
+2026-02-26,Paid Social,li_agency_owners,359.99,14000,266
+2026-02-26,Outbound,linkedin_dm,95.97,0,0
+2026-02-27,Paid Search,gs_latam_talent,498.04,3809,160
+2026-02-27,Paid Social,fb_retarget,293.94,11421,217
+2026-02-27,Outbound,cold_email_q2,92.29,0,0
+2026-02-28,Paid Search,gs_va_hire,97.21,738,31
+2026-02-28,Paid Social,fb_founders,71.87,2789,53
+2026-02-28,Outbound,cold_email_q2,24.58,0,0
+2026-03-01,Paid Search,gs_competitor,117.77,880,37
+2026-03-01,Paid Social,fb_founders,96.64,3736,71
+2026-03-01,Outbound,cold_email_q2,24.32,0,0
+2026-03-02,Paid Search,gs_va_hire,533.84,4095,172
+2026-03-02,Paid Social,fb_founders,283.73,11052,210
+2026-03-02,Outbound,cold_email_q1,79.93,0,0
+2026-03-03,Paid Search,gs_competitor,417.25,3190,134
+2026-03-03,Paid Social,li_agency_owners,330.96,12894,245
+2026-03-03,Outbound,cold_email_q2,99.03,0,0
+2026-03-04,Paid Search,gs_latam_talent,441.84,3380,142
+2026-03-04,Paid Social,li_agency_owners,246.44,9578,182
+2026-03-04,Outbound,cold_email_q2,87.92,0,0
+2026-03-05,Paid Search,gs_va_hire,384.21,2928,123
+2026-03-05,Paid Social,fb_founders,295.64,11473,218
+2026-03-05,Outbound,cold_email_q1,89.89,0,0
+2026-03-06,Paid Search,gs_latam_talent,391.79,3000,126
+2026-03-06,Paid Social,li_agency_owners,284.73,11052,210
+2026-03-06,Outbound,linkedin_dm,108.15,0,0
+2026-03-07,Paid Search,gs_latam_talent,83.3,619,26
+2026-03-07,Paid Social,fb_retarget,94.89,3684,70
+2026-03-07,Outbound,,29.43,0,0
+2026-03-08,Paid Search,gs_va_hire,109.11,833,35
+2026-03-08,Paid Social,li_agency_owners,77.5,3000,57
+2026-03-08,Outbound,cold_email_q2,20.68,0,0
+2026-03-09,Paid Search,gs_competitor,340.07,2595,109
+2026-03-09,Paid Social,li_agency_owners,331.73,12894,245
+2026-03-09,Outbound,cold_email_q2,86.84,0,0
+2026-03-10,Paid Search,,514.58,3928,165
+2026-03-10,Paid Social,fb_founders,296.62,11526,219
+2026-03-10,Outbound,cold_email_q1,96.48,0,0
+2026-03-11,Paid Search,gs_latam_talent,362.74,2785,117
+2026-03-11,Paid Social,li_agency_owners,375.08,14578,277
+2026-03-11,Outbound,linkedin_dm,70.81,0,0
+2026-03-12,Paid Search,gs_competitor,369.63,2833,119
+2026-03-12,Paid Social,li_agency_owners,376.26,14631,278
+2026-03-12,Outbound,cold_email_q1,82.02,0,0
+2026-03-13,Paid Search,gs_latam_talent,514.26,3928,165
+2026-03-13,Paid Social,fb_founders,270.38,10526,200
+2026-03-13,Outbound,cold_email_q1,119.27,0,0
+2026-03-14,Paid Search,gs_va_hire,122.63,928,39
+2026-03-14,Paid Social,li_agency_owners,61.88,2368,45
+2026-03-14,Outbound,cold_email_q2,21.44,0,0
+2026-03-15,Paid Search,gs_competitor,82.6,619,26
+2026-03-15,Paid Social,fb_founders,81.15,3157,60
+2026-03-15,Outbound,linkedin_dm,22.83,0,0
+2026-03-16,Paid Search,gs_va_hire,401.6,3071,129
+2026-03-16,Paid Social,fb_retarget,244.72,9526,181
+2026-03-16,Outbound,cold_email_q1,120.72,0,0
+2026-03-17,Paid Search,gs_latam_talent,418.93,3214,135
+2026-03-17,Paid Social,fb_retarget,297.01,11578,220
+2026-03-17,Outbound,cold_email_q2,72.88,0,0
+2026-03-18,Paid Search,,469.16,3595,151
+2026-03-18,Paid Social,fb_retarget,226.45,8789,167
+2026-03-18,Outbound,linkedin_dm,87.25,0,0
+2026-03-19,Paid Search,gs_latam_talent,390.37,2976,125
+2026-03-19,Paid Social,fb_founders,386.17,15052,286
+2026-03-19,Outbound,linkedin_dm,88.08,0,0
+2026-03-20,Paid Search,gs_competitor,410.41,3142,132
+2026-03-20,Paid Social,li_agency_owners,354.8,13789,262
+2026-03-20,Outbound,cold_email_q1,110.16,0,0
+2026-03-21,Paid Search,gs_latam_talent,88.49,666,28
+2026-03-21,Paid Social,,64.8,2473,47
+2026-03-21,Outbound,cold_email_q2,23.8,0,0
+2026-03-22,Paid Search,gs_latam_talent,121.04,928,39
+2026-03-22,Paid Social,li_agency_owners,65.19,2526,48
+2026-03-22,Outbound,linkedin_dm,18.28,0,0
+2026-03-23,Paid Search,gs_competitor,451.69,3452,145
+2026-03-23,Paid Social,fb_retarget,338.45,13157,250
+2026-03-23,Outbound,cold_email_q2,77.49,0,0
+2026-03-24,Paid Search,gs_latam_talent,496.35,3809,160
+2026-03-24,Paid Social,fb_retarget,358.14,13947,265
+2026-03-24,Outbound,linkedin_dm,66.94,0,0
+2026-03-25,Paid Search,gs_va_hire,476.02,3642,153
+2026-03-25,Paid Social,fb_founders,375.68,14631,278
+2026-03-25,Outbound,cold_email_q2,94.33,0,0
+2026-03-26,Paid Search,gs_latam_talent,497.18,3809,160
+2026-03-26,Paid Social,fb_founders,221.06,8578,163
+2026-03-26,Outbound,cold_email_q1,120.35,0,0
+2026-03-27,Paid Search,gs_latam_talent,421.45,3214,135
+2026-03-27,Paid Social,li_agency_owners,275.02,10684,203
+2026-03-27,Outbound,cold_email_q1,117.81,0,0
+2026-03-28,Paid Search,gs_va_hire,102.6,785,33
+2026-03-28,Paid Social,fb_founders,91.67,3526,67
+2026-03-28,Outbound,cold_email_q1,26.33,0,0
+2026-03-29,Paid Search,gs_competitor,98.19,738,31
+2026-03-29,Paid Social,li_agency_owners,67.98,2631,50
+2026-03-29,Outbound,linkedin_dm,16.66,0,0
+2026-03-30,Paid Search,gs_competitor,507.85,3880,163
+2026-03-30,Paid Social,fb_founders,265.06,10315,196
+2026-03-30,Outbound,cold_email_q2,73.85,0,0
+2026-03-31,Paid Search,gs_va_hire,385.3,2952,124
+2026-03-31,Paid Social,fb_retarget,365.34,14210,270
+2026-03-31,Outbound,linkedin_dm,116.09,0,0
+2026-04-01,Paid Search,gs_latam_talent,352.67,2690,113
+2026-04-01,Paid Social,fb_founders,270.6,10526,200
+2026-04-01,Outbound,linkedin_dm,100.54,0,0
+2026-04-02,Paid Search,gs_va_hire,403.94,3095,130
+2026-04-02,Paid Social,li_agency_owners,338.81,13157,250
+2026-04-02,Outbound,linkedin_dm,116.51,0,0
+2026-04-03,Paid Search,gs_va_hire,356.11,2714,114
+2026-04-03,Paid Social,fb_retarget,271.14,10526,200
+2026-04-03,Outbound,cold_email_q1,117.02,0,0
+2026-04-04,Paid Search,gs_competitor,135.35,1023,43
+2026-04-04,Paid Social,fb_retarget,91.36,3526,67
+2026-04-04,Outbound,linkedin_dm,19.34,0,0
+2026-04-05,Paid Search,gs_va_hire,122.93,928,39
+2026-04-05,Paid Social,fb_founders,98.98,3842,73
+2026-04-05,Outbound,cold_email_q2,19.39,0,0
+2026-04-06,Paid Search,gs_va_hire,477.68,3666,154
+2026-04-06,Paid Social,fb_founders,287.95,11210,213
+2026-04-06,Outbound,cold_email_q2,109.14,0,0
+2026-04-07,Paid Search,gs_va_hire,518.52,3976,167
+2026-04-07,Paid Social,fb_retarget,254.61,9894,188
+2026-04-07,Outbound,cold_email_q1,76.74,0,0
+2026-04-08,Paid Search,gs_competitor,530.8,4071,171
+2026-04-08,Paid Social,li_agency_owners,377.08,14684,279
+2026-04-08,Outbound,linkedin_dm,97.76,0,0
+2026-04-09,Paid Search,gs_competitor,523.34,3999,168
+2026-04-09,Paid Social,fb_founders,369.72,14368,273
+2026-04-09,Outbound,linkedin_dm,85.54,0,0
+2026-04-10,Paid Search,gs_competitor,527.68,4047,170
+2026-04-10,Paid Social,fb_retarget,315.83,12263,233
+2026-04-10,Outbound,linkedin_dm,101.52,0,0
+2026-04-11,Paid Search,gs_competitor,83.82,642,27
+2026-04-11,Paid Social,li_agency_owners,79.94,3105,59
+2026-04-11,Outbound,cold_email_q1,17.37,0,0
+2026-04-12,Paid Search,gs_competitor,95.77,714,30
+2026-04-12,Paid Social,li_agency_owners,57.2,2210,42
+2026-04-12,Outbound,cold_email_q1,26.44,0,0
+2026-04-13,Paid Search,gs_latam_talent,467.62,3571,150
+2026-04-13,Paid Social,fb_founders,302.58,11789,224
+2026-04-13,Outbound,cold_email_q1,99.17,0,0
+2026-04-14,Paid Search,gs_va_hire,324.04,2476,104
+2026-04-14,Paid Social,fb_retarget,334.15,13000,247
+2026-04-14,Outbound,linkedin_dm,115.04,0,0
+2026-04-15,Paid Search,gs_competitor,398.25,3047,128
+2026-04-15,Paid Social,fb_retarget,263.92,10263,195
+2026-04-15,Outbound,cold_email_q1,77.86,0,0
+2026-04-16,Paid Search,gs_va_hire,297.87,2285,96
+2026-04-16,Paid Social,fb_founders,312.32,12157,231
+2026-04-16,Outbound,linkedin_dm,99.08,0,0
+2026-04-17,Paid Search,gs_va_hire,362.05,2761,116
+2026-04-17,Paid Social,fb_retarget,321.24,12473,237
+2026-04-17,Outbound,cold_email_q2,71.39,0,0
+2026-04-18,Paid Search,gs_latam_talent,82.02,619,26
+2026-04-18,Paid Social,fb_retarget,76.3,2947,56
+2026-04-18,Outbound,linkedin_dm,27.61,0,0
+2026-04-19,Paid Search,gs_competitor,125.78,952,40
+2026-04-19,Paid Social,fb_founders,74.51,2894,55
+2026-04-19,Outbound,cold_email_q1,28.85,0,0
+2026-04-20,Paid Search,gs_va_hire,303.45,2309,97
+2026-04-20,Paid Social,fb_founders,227.99,8842,168
+2026-04-20,Outbound,linkedin_dm,85.59,0,0
+2026-04-21,Paid Search,gs_va_hire,305.57,2333,98
+2026-04-21,Paid Social,li_agency_owners,288.46,11210,213
+2026-04-21,Outbound,cold_email_q1,107.01,0,0
+2026-04-22,Paid Search,gs_latam_talent,522.53,3999,168
+2026-04-22,Paid Social,fb_retarget,341.11,13263,252
+2026-04-22,Outbound,cold_email_q2,75.17,0,0
+2026-04-23,Paid Search,gs_competitor,413.81,3166,133
+2026-04-23,Paid Social,li_agency_owners,311.69,12105,230
+2026-04-23,Outbound,linkedin_dm,72.32,0,0
+2026-04-24,Paid Search,gs_competitor,448.52,3428,144
+2026-04-24,Paid Social,fb_retarget,291.55,11315,215
+2026-04-24,Outbound,cold_email_q2,67.74,0,0
+2026-04-25,Paid Search,gs_competitor,134.13,1023,43
+2026-04-25,Paid Social,li_agency_owners,98.34,3789,72
+2026-04-25,Outbound,linkedin_dm,30.08,0,0
+2026-04-26,Paid Search,gs_latam_talent,132.37,999,42
+2026-04-26,Paid Social,fb_retarget,59.95,2315,44
+2026-04-26,Outbound,cold_email_q2,18.5,0,0
+2026-04-27,Paid Search,gs_va_hire,496.62,3809,160
+2026-04-27,Paid Social,fb_retarget,259.74,10105,192
+2026-04-27,Outbound,cold_email_q1,79.89,0,0
+2026-04-28,Paid Search,gs_va_hire,498.78,3809,160
+2026-04-28,Paid Social,fb_founders,302.5,11789,224
+2026-04-28,Outbound,cold_email_q2,116.18,0,0
+2026-04-29,Paid Search,gs_va_hire,470.74,3595,151
+2026-04-29,Paid Social,fb_founders,232.04,9000,171
+2026-04-29,Outbound,linkedin_dm,87.57,0,0
+2026-04-30,Paid Search,gs_competitor,379.79,2904,122
+2026-04-30,Paid Social,li_agency_owners,354.88,13789,262
+2026-04-30,Outbound,linkedin_dm,120.76,0,0
+2026-05-01,Paid Search,gs_va_hire,457.84,3500,147
+2026-05-01,Paid Social,fb_founders,290.48,11315,215
+2026-05-01,Outbound,cold_email_q2,77.29,0,0
+2026-05-02,Paid Search,gs_va_hire,124.13,952,40
+2026-05-02,Paid Social,fb_founders,65.88,2526,48
+2026-05-02,Outbound,linkedin_dm,24.23,0,0
+2026-05-03,Paid Search,gs_va_hire,99.94,761,32
+2026-05-03,Paid Social,fb_founders,73.79,2842,54
+2026-05-03,Outbound,cold_email_q1,30.61,0,0
+2026-05-04,Paid Search,gs_latam_talent,454.65,3476,146
+2026-05-04,Paid Social,li_agency_owners,286.71,11157,212
+2026-05-04,Outbound,cold_email_q1,112.15,0,0
+2026-05-05,Paid Search,gs_competitor,483.52,3690,155
+2026-05-05,Paid Social,,294.56,11473,218
+2026-05-05,Outbound,linkedin_dm,98.13,0,0
+2026-05-06,Paid Search,gs_latam_talent,494.63,3785,159
+2026-05-06,Paid Social,fb_retarget,360.24,14000,266
+2026-05-06,Outbound,cold_email_q1,119.98,0,0
+2026-05-07,Paid Search,gs_latam_talent,478.52,3666,154
+2026-05-07,Paid Social,fb_founders,320.5,12473,237
+2026-05-07,Outbound,cold_email_q1,119.96,0,0
+2026-05-08,Paid Search,gs_competitor,497.99,3809,160
+2026-05-08,Paid Social,li_agency_owners,235.8,9157,174
+2026-05-08,Outbound,cold_email_q2,69.01,0,0
+2026-05-09,Paid Search,gs_latam_talent,135.49,1023,43
+2026-05-09,Paid Social,fb_retarget,57.17,2210,42
+2026-05-09,Outbound,linkedin_dm,20.45,0,0
+2026-05-10,Paid Search,gs_latam_talent,127.75,976,41
+2026-05-10,Paid Social,fb_retarget,58.0,2210,42
+2026-05-10,Outbound,cold_email_q2,18.26,0,0
+2026-05-11,Paid Search,gs_latam_talent,537.64,4119,173
+2026-05-11,Paid Social,li_agency_owners,256.77,10000,190
+2026-05-11,Outbound,cold_email_q1,119.82,0,0
+2026-05-12,Paid Search,gs_va_hire,420.23,3214,135
+2026-05-12,Paid Social,li_agency_owners,255.58,9947,189
+2026-05-12,Outbound,linkedin_dm,93.95,0,0
+2026-05-13,Paid Search,gs_latam_talent,399.91,3071,129
+2026-05-13,Paid Social,fb_retarget,359.11,14000,266
+2026-05-13,Outbound,linkedin_dm,109.18,0,0
+2026-05-14,Paid Search,gs_competitor,431.46,3309,139
+2026-05-14,Paid Social,li_agency_owners,390.08,15157,288
+2026-05-14,Outbound,linkedin_dm,90.25,0,0
+2026-05-15,Paid Search,gs_latam_talent,306.26,2333,98
+2026-05-15,Paid Social,fb_retarget,306.94,11947,227
+2026-05-15,Outbound,linkedin_dm,115.11,0,0
+2026-05-16,Paid Search,gs_competitor,99.55,761,32
+2026-05-16,Paid Social,fb_founders,66.83,2578,49
+2026-05-16,Outbound,cold_email_q1,27.22,0,0
+2026-05-17,Paid Search,gs_competitor,104.99,785,33
+2026-05-17,Paid Social,li_agency_owners,70.31,2736,52
+2026-05-17,Outbound,cold_email_q2,22.05,0,0
+2026-05-18,Paid Search,gs_latam_talent,302.47,2309,97
+2026-05-18,Paid Social,li_agency_owners,390.75,15210,289
+2026-05-18,Outbound,linkedin_dm,101.14,0,0
+2026-05-19,Paid Search,gs_va_hire,529.87,4047,170
+2026-05-19,Paid Social,li_agency_owners,350.96,13631,259
+2026-05-19,Outbound,cold_email_q2,68.57,0,0
+2026-05-20,Paid Search,gs_competitor,366.9,2809,118
+2026-05-20,Paid Social,fb_retarget,285.24,11105,211
+2026-05-20,Outbound,linkedin_dm,110.33,0,0
+2026-05-21,Paid Search,gs_latam_talent,503.44,3857,162
+2026-05-21,Paid Social,li_agency_owners,299.91,11684,222
+2026-05-21,Outbound,cold_email_q1,69.77,0,0
+2026-05-22,Paid Search,gs_latam_talent,369.23,2833,119
+2026-05-22,Paid Social,li_agency_owners,309.99,12052,229
+2026-05-22,Outbound,cold_email_q2,88.26,0,0
+2026-05-23,Paid Search,gs_va_hire,110.85,833,35
+2026-05-23,Paid Social,li_agency_owners,67.63,2631,50
+2026-05-23,Outbound,cold_email_q2,28.34,0,0
+2026-05-24,Paid Search,gs_latam_talent,121.47,928,39
+2026-05-24,Paid Social,li_agency_owners,89.11,3473,66
+2026-05-24,Outbound,linkedin_dm,25.62,0,0
+2026-05-25,Paid Search,gs_va_hire,459.72,3523,148
+2026-05-25,Paid Social,fb_retarget,352.21,13684,260
+2026-05-25,Outbound,cold_email_q2,107.51,0,0
+2026-05-26,Paid Search,gs_va_hire,305.15,2333,98
+2026-05-26,Paid Social,li_agency_owners,360.9,14052,267
+2026-05-26,Outbound,linkedin_dm,76.21,0,0
+2026-05-27,Paid Search,gs_va_hire,527.52,4047,170
+2026-05-27,Paid Social,fb_founders,392.35,15263,290
+2026-05-27,Outbound,cold_email_q1,104.87,0,0
+2026-05-28,Paid Search,gs_va_hire,520.95,3999,168
+2026-05-28,Paid Social,fb_retarget,225.25,8736,166
+2026-05-28,Outbound,cold_email_q1,67.02,0,0
+2026-05-29,Paid Search,gs_va_hire,340.12,2595,109
+2026-05-29,Paid Social,fb_founders,386.89,15052,286
+2026-05-29,Outbound,cold_email_q1,107.45,0,0
+2026-05-30,Paid Search,gs_competitor,128.97,976,41
+2026-05-30,Paid Social,fb_founders,73.7,2842,54
+2026-05-30,Outbound,linkedin_dm,24.76,0,0
+2026-05-31,Paid Search,gs_competitor,125.89,952,40
+2026-05-31,Paid Social,li_agency_owners,88.18,3421,65
+2026-05-31,Outbound,cold_email_q1,26.78,0,0
+2026-06-01,Paid Search,gs_competitor,465.46,3571,150
+2026-06-01,Paid Social,fb_founders,360.9,14052,267
+2026-06-01,Outbound,linkedin_dm,101.58,0,0
+2026-06-02,Paid Search,gs_competitor,312.36,2380,100
+2026-06-02,Paid Social,fb_retarget,281.14,10947,208
+2026-06-02,Outbound,linkedin_dm,71.99,0,0
+2026-06-03,Paid Search,gs_competitor,470.36,3595,151
+2026-06-03,Paid Social,li_agency_owners,226.27,8789,167
+2026-06-03,Outbound,cold_email_q2,98.02,0,0
+2026-06-04,Paid Search,gs_va_hire,402.34,3071,129
+2026-06-04,Paid Social,li_agency_owners,328.49,12789,243
+2026-06-04,Outbound,cold_email_q2,95.39,0,0
+2026-06-05,Paid Search,gs_latam_talent,406.12,3119,131
+2026-06-05,Paid Social,li_agency_owners,238.61,9263,176
+2026-06-05,Outbound,linkedin_dm,114.3,0,0
+2026-06-06,Paid Search,gs_latam_talent,100.78,761,32
+2026-06-06,Paid Social,fb_founders,72.48,2789,53
+2026-06-06,Outbound,cold_email_q1,24.2,0,0
+2026-06-07,Paid Search,gs_latam_talent,101.95,761,32
+2026-06-07,Paid Social,fb_retarget,59.57,2315,44
+2026-06-07,Outbound,,19.42,0,0
+2026-06-08,Paid Search,gs_va_hire,337.9,2571,108
+2026-06-08,Paid Social,fb_founders,244.57,9526,181
+2026-06-08,Outbound,cold_email_q1,75.0,0,0
+2026-06-09,Paid Search,gs_competitor,358.97,2738,115
+2026-06-09,Paid Social,li_agency_owners,292.84,11368,216
+2026-06-09,Outbound,cold_email_q1,87.27,0,0
+2026-06-10,Paid Search,gs_va_hire,362.87,2785,117
+2026-06-10,Paid Social,fb_founders,331.89,12894,245
+2026-06-10,Outbound,,96.42,0,0
+2026-06-11,Paid Search,gs_latam_talent,313.95,2404,101
+2026-06-11,Paid Social,li_agency_owners,268.24,10421,198
+2026-06-11,Outbound,cold_email_q1,88.8,0,0
+2026-06-12,Paid Search,gs_latam_talent,365.16,2785,117
+2026-06-12,Paid Social,fb_retarget,366.87,14263,271
+2026-06-12,Outbound,cold_email_q1,90.08,0,0
+2026-06-13,Paid Search,gs_latam_talent,92.25,690,29
+2026-06-13,Paid Social,fb_founders,59.61,2315,44
+2026-06-13,Outbound,cold_email_q1,29.52,0,0
+2026-06-14,Paid Search,gs_va_hire,109.0,833,35
+2026-06-14,Paid Social,fb_founders,71.68,2789,53
+2026-06-14,Outbound,cold_email_q1,25.41,0,0
+2026-06-15,Paid Search,gs_competitor,350.38,2690,113
+2026-06-15,Paid Social,,393.57,15315,291
+2026-06-15,Outbound,cold_email_q2,75.05,0,0
+2026-06-16,Paid Search,gs_va_hire,462.48,3547,149
+2026-06-16,Paid Social,fb_retarget,346.11,13473,256
+2026-06-16,Outbound,cold_email_q1,91.75,0,0
+2026-06-17,Paid Search,gs_latam_talent,449.28,3428,144
+2026-06-17,Paid Social,fb_retarget,253.75,9842,187
+2026-06-17,Outbound,linkedin_dm,117.03,0,0
+2026-06-18,Paid Search,gs_competitor,458.61,3500,147
+2026-06-18,Paid Social,fb_retarget,329.27,12789,243
+2026-06-18,Outbound,linkedin_dm,71.52,0,0
+2026-06-19,Paid Search,gs_competitor,300.63,2285,96
+2026-06-19,Paid Social,fb_retarget,272.35,10578,201
+2026-06-19,Outbound,cold_email_q1,97.84,0,0
+2026-06-20,Paid Search,gs_latam_talent,75.45,571,24
+2026-06-20,Paid Social,fb_retarget,77.05,3000,57
+2026-06-20,Outbound,cold_email_q1,27.87,0,0
+2026-06-21,Paid Search,gs_va_hire,121.83,928,39
+2026-06-21,Paid Social,fb_retarget,66.63,2578,49
+2026-06-21,Outbound,linkedin_dm,24.26,0,0
+2026-06-22,Paid Search,gs_va_hire,526.37,4023,169
+2026-06-22,Paid Social,fb_founders,293.44,11421,217
+2026-06-22,Outbound,cold_email_q2,82.36,0,0
+2026-06-23,Paid Search,gs_va_hire,424.63,3238,136
+2026-06-23,Paid Social,,221.71,8631,164
+2026-06-23,Outbound,cold_email_q1,87.95,0,0
+2026-06-24,Paid Search,gs_latam_talent,335.04,2571,108
+2026-06-24,Paid Social,li_agency_owners,358.76,13947,265
+2026-06-24,Outbound,linkedin_dm,113.83,0,0
+2026-06-25,Paid Search,gs_competitor,309.86,2357,99
+2026-06-25,Paid Social,li_agency_owners,232.17,9000,171
+2026-06-25,Outbound,linkedin_dm,119.69,0,0
+2026-06-26,Paid Search,gs_va_hire,421.65,3238,136
+2026-06-26,Paid Social,li_agency_owners,330.09,12842,244
+2026-06-26,Outbound,cold_email_q2,71.04,0,0
+2026-06-27,Paid Search,gs_latam_talent,130.99,999,42
+2026-06-27,Paid Social,fb_retarget,70.46,2736,52
+2026-06-27,Outbound,cold_email_q2,18.36,0,0
+2026-06-28,Paid Search,gs_va_hire,74.48,571,24
+2026-06-28,Paid Social,li_agency_owners,62.73,2421,46
+2026-06-28,Outbound,cold_email_q2,25.44,0,0
+2026-06-29,Paid Search,gs_va_hire,462.05,3547,149
+2026-06-29,Paid Social,fb_founders,313.09,12157,231
+2026-06-29,Outbound,linkedin_dm,93.68,0,0
+2026-06-30,Paid Search,gs_competitor,457.55,3500,147
+2026-06-30,Paid Social,fb_founders,370.97,14421,274
+2026-06-30,Outbound,cold_email_q2,86.81,0,0
+2026-07-01,Paid Search,gs_latam_talent,282.69,2166,91
+2026-07-01,Paid Social,fb_retarget,296.41,11526,219
+2026-07-01,Outbound,,107.14,0,0
+2026-07-02,Paid Search,gs_competitor,480.69,3690,155
+2026-07-02,Paid Social,fb_founders,277.24,10789,205
+2026-07-02,Outbound,cold_email_q2,105.13,0,0
+2026-07-03,Paid Search,gs_latam_talent,448.3,3428,144
+2026-07-03,Paid Social,fb_founders,236.27,9210,175
+2026-07-03,Outbound,cold_email_q1,74.75,0,0
+2026-07-04,Paid Search,,72.1,547,23
+2026-07-04,Paid Social,li_agency_owners,87.48,3368,64
+2026-07-04,Outbound,linkedin_dm,23.45,0,0
+2026-07-05,Paid Search,gs_competitor,104.66,785,33
+2026-07-05,Paid Social,,79.72,3105,59
+2026-07-05,Outbound,cold_email_q2,23.03,0,0
+2026-07-06,Paid Search,gs_competitor,430.56,3285,138
+2026-07-06,Paid Social,li_agency_owners,287.1,11157,212
+2026-07-06,Outbound,linkedin_dm,96.4,0,0
+2026-07-07,Paid Search,gs_latam_talent,282.23,2166,91
+2026-07-07,Paid Social,fb_founders,330.81,12894,245
+2026-07-07,Outbound,cold_email_q2,109.72,0,0
+2026-07-08,Paid Search,gs_va_hire,360.56,2761,116
+2026-07-08,Paid Social,fb_founders,307.83,12000,228
+2026-07-08,Outbound,cold_email_q2,72.09,0,0
+2026-07-09,Paid Search,gs_va_hire,491.06,3761,158
+2026-07-09,Paid Social,li_agency_owners,238.07,9263,176
+2026-07-09,Outbound,linkedin_dm,110.97,0,0
+2026-07-10,Paid Search,gs_va_hire,305.53,2333,98
+2026-07-10,Paid Social,fb_founders,305.05,11842,225
+2026-07-10,Outbound,linkedin_dm,75.49,0,0
+2026-07-11,Paid Search,gs_latam_talent,120.97,928,39
+2026-07-11,Paid Social,fb_founders,54.37,2105,40
+2026-07-11,Outbound,linkedin_dm,15.99,0,0
+2026-07-12,Paid Search,gs_latam_talent,98.06,738,31
+2026-07-12,Paid Social,fb_founders,80.32,3105,59
+2026-07-12,Outbound,linkedin_dm,22.46,0,0
+2026-07-13,Paid Search,gs_latam_talent,281.91,2142,90
+2026-07-13,Paid Social,li_agency_owners,262.57,10210,194
+2026-07-13,Outbound,cold_email_q1,92.77,0,0
+2026-07-14,Paid Search,gs_va_hire,444.87,3404,143
+2026-07-14,Paid Social,fb_retarget,208.26,8105,154
+2026-07-14,Outbound,cold_email_q1,79.43,0,0
+2026-07-15,Paid Search,gs_competitor,299.84,2285,96
+2026-07-15,Paid Social,fb_retarget,207.59,8052,153
+2026-07-15,Outbound,cold_email_q2,92.39,0,0
+2026-07-16,Paid Search,gs_competitor,276.95,2119,89
+2026-07-16,Paid Social,fb_founders,362.68,14105,268
+2026-07-16,Outbound,cold_email_q2,61.91,0,0
+2026-07-17,Paid Search,,377.75,2880,121
+2026-07-17,Paid Social,li_agency_owners,204.33,7947,151
+2026-07-17,Outbound,linkedin_dm,65.85,0,0
+2026-07-18,Paid Search,gs_va_hire,101.32,761,32
+2026-07-18,Paid Social,fb_founders,86.9,3368,64
+2026-07-18,Outbound,cold_email_q1,22.48,0,0
+2026-07-19,Paid Search,gs_va_hire,67.25,499,21
+2026-07-19,Paid Social,li_agency_owners,73.89,2842,54
+2026-07-19,Outbound,cold_email_q2,18.76,0,0
+2026-07-20,Paid Search,gs_latam_talent,301.5,2309,97
+2026-07-20,Paid Social,fb_retarget,265.35,10315,196
+2026-07-20,Outbound,cold_email_q2,70.49,0,0
+2026-07-21,Paid Search,gs_competitor,450.58,3452,145
+2026-07-21,Paid Social,li_agency_owners,283.05,11000,209
+2026-07-21,Outbound,linkedin_dm,93.35,0,0
+2026-07-22,Paid Search,gs_va_hire,322.62,2476,104
+2026-07-22,Paid Social,fb_retarget,311.47,12105,230
+2026-07-22,Outbound,linkedin_dm,88.73,0,0
+2026-07-23,Paid Search,gs_latam_talent,484.6,3714,156
+2026-07-23,Paid Social,fb_founders,334.9,13052,248
+2026-07-23,Outbound,cold_email_q2,106.73,0,0
+2026-07-24,Paid Search,gs_latam_talent,482.02,3690,155
+2026-07-24,Paid Social,fb_founders,258.89,10052,191
+2026-07-24,Outbound,cold_email_q1,71.4,0,0
+2026-07-25,Paid Search,gs_latam_talent,102.78,785,33
+2026-07-25,Paid Social,fb_founders,90.2,3473,66
+2026-07-25,Outbound,cold_email_q2,22.18,0,0
+2026-07-26,Paid Search,gs_competitor,75.33,571,24
+2026-07-26,Paid Social,fb_retarget,64.41,2473,47
+2026-07-26,Outbound,cold_email_q1,23.63,0,0
