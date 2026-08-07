@@ -57,6 +57,6 @@ Do not open a SQLite or DuckDB file directly from a synced folder — copy it lo
 
 ## Conventions
 
-Study material follows the "From Zero" writing contract in `.agents/AGENTS.md`: open with the problem before naming the tool, build one real thing incrementally with complete runnable code, show the classic failure before explaining the fix, trace what the machine does in plain words, and close with interview-ready answers written as they would be spoken. Complete sentences throughout — no fragment bullets, no arrow chains.
+Study material follows the "From Zero" writing contract in [`AGENTS.md`](AGENTS.md): open with the problem before naming the tool, build one real thing incrementally with complete runnable code, show the classic failure before explaining the fix, trace what the machine does in plain words, and close with interview-ready answers written as they would be spoken. Complete sentences throughout — no fragment bullets, no arrow chains.
 
 Numbers in the modules are real outputs, not illustrations. When quoting them aloud in an interview, say "in the dataset I've been practising on" — they are realistic, not the employer's actual data.

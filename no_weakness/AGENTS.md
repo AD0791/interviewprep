@@ -1,6 +1,6 @@
 # AGENTS.md — the textbook contract
 
-This file governs everything inside `no_weakness/`. It supersedes `interviewprep/.agents/AGENTS.md` wherever the two conflict.
+This file governs everything inside `no_weakness/`. It supersedes [`interviewprep/AGENTS.md`](../AGENTS.md) wherever the two conflict.
 
 **Read this before writing or editing a single module.**
 

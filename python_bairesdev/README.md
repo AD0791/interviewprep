@@ -62,6 +62,6 @@ Both are reused in [`../acted_bdd/`](../acted_bdd/README.md) and [`../remote_lev
 
 ## Conventions
 
-Study material follows the "From Zero" contract set out in `.agents/AGENTS.md`: open with the problem before the tool, build one real thing incrementally with runnable code, break it on purpose before explaining the fix, trace what the machine does, teach through banking-domain analogies, and close with `## Interview Angles` answered in speakable prose. No fragment bullets, no arrow chains.
+Study material follows the "From Zero" contract set out in [`AGENTS.md`](../AGENTS.md): open with the problem before the tool, build one real thing incrementally with runnable code, break it on purpose before explaining the fix, trace what the machine does, teach through banking-domain analogies, and close with `## Interview Angles` answered in speakable prose. No fragment bullets, no arrow chains.
 
 CV source of truth: `../../curiculum-vitae-and-letter/alexandrodislaResume.tex`. The stray `1784116314338.pdf` at the folder root is a third-party caching guide, not a CV.
