@@ -1,0 +1,234 @@
+# TOC — Teach Yourself Shell Programming in 24 Hours.pdf
+
+*Extracted by `_tools/extract_toc.py` (outline). 230 entries. Machine-generated — do not hand-edit.*
+
+- Shell Programming Book
+  - Table Of Contents  · p1
+  - Copyright  · p7
+  - Introduction  · p8
+    - How This Book Is Organized  · p8
+    - Conventions Used in This Book  · p12
+    - About the Author  · p13
+    - Dedication  · p14
+    - Acknowledgments  · p15
+  - Hour 1: Shell Basics  · p16
+    - What Is a Command?  · p16
+    - What Is the Shell?  · p21
+    - Summary  · p27
+    - Questions  · p28
+    - Terms  · p29
+  - Hour 2: Script Basics  · p30
+    - The UNIX System  · p30
+    - Shell Initialization  · p33
+    - Getting Help  · p39
+    - Summary  · p43
+    - Questions  · p44
+    - Terms  · p45
+  - Hour 3: Working with Files  · p47
+    - Listing Files  · p47
+    - Viewing the Content of a File  · p52
+    - Manipulating Files  · p57
+    - Summary  · p62
+    - Questions  · p63
+    - Terms  · p64
+  - Hour 4: Working With Directories  · p65
+    - The Directory Tree  · p65
+    - Switching Directories  · p70
+    - Listing Files and Directories  · p73
+    - Manipulating Directories  · p76
+    - Summary  · p84
+    - Questions  · p85
+  - Hour 5: Manipulating File Attributes  · p86
+    - File Types  · p86
+    - Owners, Groups, and Permissions  · p92
+    - Summary  · p101
+    - Questions  · p102
+  - Hour 6: Processes  · p103
+    - Starting a Process  · p103
+    - Listing Running Processes  · p111
+    - Killing a Process (kill Command)  · p115
+    - Parent and Child Processes  · p117
+    - Summary  · p120
+    - Questions  · p121
+    - Terms  · p122
+  - Hour 7: Variables  · p124
+    - Defining Variables  · p124
+    - Unsetting Variables  · p132
+    - Environment Variables  · p133
+    - Summary  · p136
+    - Questions  · p137
+    - Terms  · p138
+  - Hour 8: Substitution  · p139
+    - Filename Substitution (Globbing)  · p139
+    - Variable Substitution  · p146
+    - Command and Arithmetic Substitution  · p149
+    - Summary  · p152
+    - Questions  · p153
+  - Hour 9: Quoting  · p154
+    - Quoting with Backslashes  · p154
+    - Using Single Quotes  · p157
+    - Using Double Quotes  · p159
+    - Quoting Rules and Situations  · p162
+    - Summary  · p167
+    - Questions  · p168
+    - Terms  · p169
+  - Hour 10: Flow Control  · p170
+    - The if Statement  · p170
+    - The case Statement  · p183
+    - Summary  · p186
+    - Questions  · p187
+  - Hour 11: Loops  · p188
+    - The while Loop  · p188
+    - The for and select Loops  · p194
+    - Loop Control  · p199
+    - Summary  · p202
+    - Questions  · p203
+    - Terms  · p204
+  - Hour 12: Parameters  · p205
+    - Special Variables  · p205
+    - Options and Arguments  · p209
+    - Option Parsing in Shell Scripts  · p214
+    - Conclusion  · p219
+    - Questions  · p220
+  - Hour 13: Input/Output  · p221
+    - Output  · p221
+    - Input  · p232
+    - File Descriptors  · p236
+    - Summary  · p242
+    - Questions  · p243
+    - Terms  · p244
+  - Hour 14: Functions  · p245
+    - Creating and Using Functions  · p245
+    - Sharing Data Between Functions, an Example  · p250
+    - Conclusion  · p255
+    - Questions  · p256
+  - Hour 15: Text Filters  · p257
+    - The head and tail Commands  · p257
+    - Using grep  · p261
+    - Counting Words  · p266
+    - Summary  · p274
+    - Questions  · p275
+  - Hour 16: Filtering Text Using Regular Expressions  · p277
+    - The Basics of awk and sed  · p277
+    - Using sed  · p286
+    - Summary  · p293
+    - Questions  · p294
+  - Hour 17: Filtering Text with awk  · p296
+    - What is awk?  · p296
+    - Using awk Features  · p304
+    - Summary  · p317
+    - Questions  · p318
+    - Terms  · p321
+  - Hour 18: Miscellaneous Tools  · p322
+    - The eval Command  · p322
+    - The : Command  · p324
+    - The type Command  · p326
+    - The sleep Command  · p328
+    - The find Command  · p330
+    - xargs  · p337
+    - The expr Command  · p339
+    - The bc Command  · p342
+    - remsh/rsh/rcmd/remote (Remote Shell)  · p344
+    - Summary  · p346
+    - Questions  · p347
+    - Terms  · p348
+  - Hour 19: Dealing with Signals  · p349
+    - How Are Signal Represented?  · p349
+    - Dealing with Signals  · p353
+    - Conclusion  · p360
+    - Questions  · p361
+  - Hour 20: Debugging  · p362
+    - Enabling Debugging  · p362
+    - Syntax Checking  · p366
+    - Shell Tracing  · p371
+    - Summary  · p379
+    - Questions  · p380
+  - Hour 21: Problem Solving with Functions  · p381
+    - Creating a Library of Functions  · p381
+    - Useful Functions  · p385
+    - Summary  · p402
+    - Questions  · p403
+    - Terms  · p405
+  - Hour 22: Problem Solving with Shell Scripts  · p406
+    - Moving Directories  · p406
+    - Maintaining an Address Book  · p414
+    - Summary  · p425
+    - Questions  · p426
+    - Terms  · p428
+  - Hour 23: Scripting and UNIX Versions  · p429
+    - Determining UNIX Versions  · p429
+    - Techniques for Increasing Portability  · p435
+    - Summary  · p440
+    - Questions  · p441
+    - Terms  · p442
+  - Hour 24: Shell Programming FAQs  · p443
+    - Shell and Command Questions  · p443
+    - Variable and Argument Questions  · p447
+    - File and Directory Questions  · p450
+    - Summary  · p454
+  - Appendix A: Command Quick Reference  · p455
+    - Reserved Words and Built-in Shell Commands  · p455
+    - Conditional Expressions  · p459
+    - Arithmetic Expressions (Korn/Bash Only)  · p462
+    - Parameters and Variables  · p464
+    - Parameter Substitution  · p467
+    - Pattern Matching  · p469
+    - I/O  · p471
+    - Miscellaneous Command Summaries  · p473
+    - Regular Expression Wildcards  · p475
+    - Summary  · p477
+    - Questions  · p478
+  - Appendix B: Glossary  · p479
+  - Appendix C: Quiz Answers  · p487
+    - Chapter 1  · p487
+    - Chapter 2  · p488
+    - Chapter 3  · p489
+    - Chapter 4  · p490
+    - Chapter 5  · p491
+    - Chapter 6  · p493
+    - Chapter 7  · p494
+    - Chapter 8  · p495
+    - Chapter 9  · p496
+    - Chapter 10  · p497
+    - Chapter 11  · p498
+    - Chapter 12  · p500
+    - Chapter 13  · p503
+    - Chapter 14  · p505
+    - Chapter 15  · p507
+    - Chapter 16  · p510
+    - Chapter 17  · p512
+    - Chapter 18  · p515
+    - Chapter 19  · p516
+    - Chapter 20  · p518
+    - Chapter 21  · p520
+    - Chapter 22  · p523
+    - Chapter 23  · p525
+    - Appendix A  · p526
+  - Index  · p527
+    - A  · p527
+    - B  · p530
+    - C  · p532
+    - D  · p539
+    - E  · p542
+    - F  · p544
+    - G  · p549
+    - H  · p551
+    - I  · p552
+    - J  · p554
+    - K  · p555
+    - L  · p556
+    - M  · p558
+    - N  · p560
+    - O  · p562
+    - P  · p564
+    - Q  · p568
+    - R  · p569
+    - S  · p571
+    - T  · p577
+    - U  · p579
+    - V  · p581
+    - W  · p583
+    - X  · p585
+    - Y  · p586
+    - Z  · p587
+    - Symbols  · p588

@@ -1,0 +1,351 @@
+# TOC — dokumen.pub_mastering-concurrency-in-python-9781789341362.pdf
+
+*Extracted by `_tools/extract_toc.py` (outline). 347 entries. Machine-generated — do not hand-edit.*
+
+- Cover  · p1
+- Title Page  · p2
+- Copyright and Credits  · p3
+- Dedication  · p4
+- About Packt  · p5
+- Contributors  · p6
+- Table of Contents  · p8
+- Preface  · p17
+- Chapter 1: Advanced Introduction to Concurrent and Parallel Programming  · p24
+  - Technical requirements  · p25
+  - What is concurrency?  · p25
+    - Concurrent versus sequential  · p25
+    - Example 1 – checking whether a non-negative number is prime  · p26
+    - Concurrent versus parallel  · p29
+      - A quick metaphor  · p30
+  - Not everything should be made concurrent  · p30
+    - Embarrassingly parallel  · p31
+    - Inherently sequential  · p31
+      - Example 2 – inherently sequential tasks  · p32
+    - I/O bound  · p34
+  - The history, present, and future of concurrency  · p34
+    - The history of concurrency  · p35
+    - The present  · p36
+    - The future  · p38
+  - A brief overview of mastering concurrency in Python  · p40
+    - Why Python?  · p41
+  - Setting up your Python environment  · p43
+    - General setup  · p43
+    - Downloading example code  · p44
+  - Summary  · p45
+  - Questions  · p46
+  - Further reading  · p46
+- Chapter 2: Amdahl's Law  · p47
+  - Technical requirements  · p47
+  - Amdahl's Law  · p48
+    - Terminology  · p48
+  - Formula and interpretation  · p49
+    - The formula for Amdahl's Law  · p49
+      - A quick example  · p50
+    - Implications  · p50
+  - Amdahl's Law's relationship to the law of diminishing returns  · p51
+  - How to simulate in Python  · p52
+  - Practical applications of Amdahl's Law  · p56
+  - Summary  · p57
+  - Questions  · p58
+  - Further reading  · p58
+- Chapter 3: Working with Threads in Python  · p59
+  - Technical requirements  · p60
+  - The concept of a thread  · p60
+    - Threads versus processes  · p60
+    - Multithreading  · p61
+    - An example in Python  · p63
+  - An overview of the threading module  · p67
+    - The thread module in Python 2  · p67
+    - The threading module in Python 3  · p67
+  - Creating a new thread in Python  · p68
+    - Starting a thread with the thread module  · p69
+    - Starting a thread with the threading module  · p71
+  - Synchronizing threads  · p74
+    - The concept of thread synchronization  · p74
+    - The threading.Lock class  · p75
+    - An example in Python  · p75
+  - Multithreaded priority queue  · p77
+    - A connection between real-life and programmatic queues  · p77
+    - The queue module  · p78
+    - Queuing in concurrent programming  · p79
+    - Multithreaded priority queue  · p83
+  - Summary  · p84
+  - Questions  · p85
+  - Further reading  · p85
+- Chapter 4: Using the with Statement in Threads  · p86
+  - Technical requirements  · p86
+  - Context management  · p87
+    - Starting from managing files  · p87
+    - The with statement as a context manager  · p88
+    - The syntax of the with statement  · p90
+  - The with statement in concurrent programming  · p90
+    - Example of deadlock handling  · p91
+  - Summary  · p93
+  - Questions  · p93
+  - Further reading  · p94
+- Chapter 5: Concurrent Web Requests  · p95
+  - Technical requirements  · p95
+  - The basics of web requests  · p96
+    - HTML  · p96
+    - HTTP requests  · p98
+    - HTTP status code  · p99
+  - The requests module  · p100
+    - Making a request in Python  · p101
+    - Running a ping test  · p103
+  - Concurrent web requests  · p104
+    - Spawning multiple threads  · p105
+    - Refactoring request logic  · p107
+  - The problem of timeout  · p109
+    - Support from httpstat.us and simulation in Python  · p109
+    - Timeout specifications  · p110
+  - Good practices in making web requests  · p114
+    - Consider the terms of service and data-collecting policies  · p114
+    - Error handling  · p114
+    - Update your program regularly  · p115
+    - Avoid making a large number of requests  · p115
+  - Summary  · p117
+  - Questions  · p117
+  - Further reading  · p117
+- Chapter 6: Working with Processes in Python  · p118
+  - Technical requirements  · p119
+  - The concept of a process  · p119
+    - Processes versus threads  · p121
+    - Multiprocessing  · p122
+    - Introductory example in Python  · p124
+  - An overview of the multiprocessing module  · p126
+    - The process class  · p126
+    - The Pool class  · p127
+    - Determining the current process, waiting, and terminating processes  · p128
+      - Determining the current process  · p128
+      - Waiting for processes  · p131
+      - Terminating processes  · p134
+  - Interprocess communication  · p134
+    - Message passing for a single worker  · p135
+    - Message passing between several workers  · p137
+  - Summary  · p143
+  - Questions  · p144
+  - Further reading  · p144
+- Chapter 7: Reduction Operators in Processes  · p145
+  - Technical requirements  · p145
+  - The concept of reduction operators  · p146
+    - Properties of a reduction operator  · p146
+    - Examples and non-examples  · p147
+  - Example implementation in Python  · p149
+  - Real-life applications of concurrent reduction operators  · p154
+  - Summary  · p154
+  - Questions  · p155
+  - Further reading  · p155
+- Chapter 8: Concurrent Image Processing  · p156
+  - Technical requirements  · p156
+  - Image processing fundamentals  · p157
+    - Python as an image processing tool  · p157
+      - Installing OpenCV and NumPy  · p158
+    - Computer image basics  · p159
+      - RGB values  · p159
+      - Pixels and image files  · p160
+      - Coordinates inside an image  · p160
+    - OpenCV API  · p161
+    - Image processing techniques  · p163
+      - Grayscaling  · p164
+      - Thresholding  · p166
+  - Applying concurrency to image processing  · p171
+  - Good concurrent image processing practices  · p175
+    - Choosing the correct way (out of many)  · p175
+    - Spawning an appropriate number of processes  · p178
+    - Processing input/output concurrently  · p178
+  - Summary  · p178
+  - Questions  · p179
+  - Further reading  · p179
+- Chapter 9: Introduction to Asynchronous Programming  · p180
+  - Technical requirements  · p180
+  - A quick analogy  · p181
+  - Asynchronous versus other programming models  · p182
+    - Asynchronous versus synchronous programming  · p183
+    - Asynchronous versus threading and multiprocessing  · p184
+  - An example in Python  · p185
+  - Summary  · p188
+  - Questions  · p188
+  - Further reading  · p189
+- Chapter 10: Implementing Asynchronous Programming in Python  · p190
+  - Technical requirements  · p190
+  - The asyncio module  · p191
+    - Coroutines, event loops, and futures  · p191
+    - Asyncio API  · p193
+  - The asyncio framework in action  · p194
+    - Asynchronously counting down  · p195
+    - A note about blocking functions  · p199
+    - Asynchronous prime-checking  · p200
+    - Improvements from Python 3.7  · p204
+    - Inherently blocking tasks  · p205
+  - concurrent.futures as a solution for blocking tasks  · p206
+    - Changes in the framework  · p207
+    - Examples in Python  · p207
+  - Summary  · p211
+  - Questions  · p212
+  - Further reading  · p213
+- Chapter 11: Building Communication Channels with asyncio  · p214
+  - Technical requirements  · p215
+  - The ecosystem of communication channels  · p215
+    - Communication protocol layers  · p215
+    - Asynchronous programming for communication channels  · p217
+    - Transports and protocols in asyncio  · p218
+    - The big picture of asyncio's server client  · p220
+  - Python example  · p221
+    - Starting a server  · p221
+    - Installing Telnet  · p223
+    - Simulating a connection channel  · p224
+    - Sending messages back to clients  · p225
+    - Closing the transports  · p226
+  - Client-side communication with aiohttp  · p228
+    - Installing aiohttp and aiofiles  · p229
+    - Fetching a website's HTML code  · p229
+    - Writing files asynchronously  · p231
+  - Summary  · p233
+  - Questions  · p234
+  - Further reading  · p234
+- Chapter 12: Deadlocks  · p235
+  - Technical requirements  · p235
+  - The concept of deadlock  · p236
+    - The Dining Philosophers problem  · p236
+    - Deadlock in a concurrent system  · p239
+    - Python simulation  · p240
+  - Approaches to deadlock situations  · p244
+    - Implementing ranking among resources  · p244
+    - Ignoring locks and sharing resources  · p250
+      - An additional note about locks  · p252
+      - Concluding note on deadlock solutions  · p253
+  - The concept of livelock  · p253
+  - Summary  · p256
+  - Questions  · p256
+  - Further reading  · p256
+- Chapter 13: Starvation  · p257
+  - Technical requirements  · p257
+  - The concept of starvation  · p258
+    - What is starvation?  · p258
+    - Scheduling  · p259
+    - Causes of starvation  · p260
+    - Starvation's relationship to deadlock  · p261
+  - The readers-writers problem  · p262
+    - Problem statement  · p262
+    - The first readers-writers problem  · p263
+    - The second readers-writers problem  · p267
+    - The third readers-writers problem  · p270
+  - Solutions to starvation  · p272
+  - Summary  · p273
+  - Questions  · p274
+  - Further reading  · p274
+- Chapter 14: Race Conditions  · p275
+  - Technical requirements  · p275
+  - The concept of race conditions  · p276
+    - Critical sections  · p276
+    - How race conditions occur  · p277
+  - Simulating race conditions in Python  · p279
+  - Locks as a solution to race conditions  · p281
+    - The effectiveness of locks  · p281
+    - Implementation in Python  · p283
+    - The downside of locks  · p284
+      - Turning a concurrent program sequential  · p285
+      - Locks do not lock anything  · p287
+  - Race conditions in real life  · p288
+    - Security  · p288
+    - Operating systems  · p289
+    - Networking  · p290
+  - Summary  · p291
+  - Questions  · p291
+  - Further reading  · p292
+- Chapter 15: The Global Interpreter Lock  · p293
+  - Technical requirements  · p293
+  - An introduction to the Global Interpreter Lock  · p294
+    - An analysis of memory management in Python  · p294
+    - The problem that the GIL addresses  · p297
+    - Problems raised by the GIL  · p298
+  - The potential removal of the GIL from Python  · p300
+  - How to work with the GIL  · p300
+    - Implementing multiprocessing, rather than multithreading  · p301
+    - Getting around the GIL with native extensions  · p303
+    - Utilizing a different Python interpreter  · p303
+  - Summary  · p303
+  - Questions  · p304
+  - Further reading  · p304
+- Chapter 16: Designing Lock-Based and Mutex-Free Concurrent Data Structures  · p305
+  - Technical requirements  · p306
+  - Lock-based concurrent data structures in Python  · p306
+    - LocklessCounter and race conditions  · p306
+    - Embedding locks in the data structure of the counter  · p309
+    - The concept of scalability  · p311
+    - Analysis of the scalability of the counter data structure  · p313
+    - Approximate counters as a solution for scalability  · p316
+      - The idea behind approximate counters  · p316
+      - Implementing approximate counters in Python  · p318
+      - A few considerations for approximate counter designs  · p324
+  - Mutex-free concurrent data structures in Python  · p324
+    - The impossibility of being lock-free in Python  · p325
+    - Introduction to the network data structure  · p326
+    - Implementing a simple network data structure in Python and race conditions  · p327
+    - RCU as a solution  · p331
+  - Building on simple data structures  · p334
+  - Summary  · p335
+  - Questions  · p335
+  - Further reading  · p336
+- Chapter 17: Memory Models and Operations on Atomic Types  · p337
+  - Technical requirements  · p337
+  - Python memory model  · p338
+    - The components of Python memory manager  · p338
+    - Memory model as a labeled directed graph  · p339
+    - In the context of concurrency  · p341
+  - Atomic operations in Python  · p342
+    - What does it mean to be atomic?  · p342
+    - The GIL reconsidered  · p343
+    - Innate atomicity in Python  · p344
+      - Atomic versus nonatomic  · p344
+      - Simulation in Python  · p345
+  - Summary  · p348
+  - Questions  · p348
+  - Further reading  · p349
+- Chapter 18: Building a Server from Scratch  · p350
+  - Technical requirements  · p350
+  - Low-level network programming via the socket module  · p351
+    - The theory of server-side communication  · p351
+    - The API of the socket module  · p353
+    - Building a simple echo server  · p354
+  - Building a calculator server with the socket module  · p358
+    - The underlying calculation logic  · p358
+    - Implementing the calculator server  · p359
+  - Building a non-blocking server  · p362
+    - Analyzing the concurrency of the server  · p362
+    - Generators in Python  · p366
+    - Asynchronous generators and the send method  · p368
+    - Making the server non-blocking  · p370
+  - Summary  · p376
+  - Questions  · p376
+  - Further reading  · p377
+- Chapter 19: Testing, Debugging, and Scheduling Concurrent Applications  · p378
+  - Technical requirements  · p378
+  - Scheduling with APScheduler  · p379
+    - Installing APScheduler  · p379
+    - Not a scheduling service  · p380
+    - APScheduler functionalities  · p380
+    - APScheduler API  · p382
+      - Scheduler classes  · p382
+      - Executor classes  · p382
+      - Trigger keywords  · p383
+      - Common scheduler methods  · p383
+    - Examples in Python  · p384
+      - Blocking scheduler  · p384
+      - Background scheduler  · p385
+      - Executor pool  · p386
+      - Running on the cloud  · p388
+  - Testing and concurrency in Python  · p389
+    - Testing concurrent programs  · p390
+      - Unit testing  · p390
+      - Static code analysis  · p392
+    - Testing programs concurrently  · p392
+  - Debugging concurrent programs  · p396
+    - Debugging tools and techniques  · p396
+    - Debugging and concurrency  · p397
+  - Summary  · p398
+  - Questions  · p399
+  - Further reading  · p400
+- Assessments  · p401
+- Other Books You May Enjoy  · p426
+- Index  · p429

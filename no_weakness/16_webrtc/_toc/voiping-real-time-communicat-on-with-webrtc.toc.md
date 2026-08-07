@@ -1,0 +1,76 @@
+# TOC — voiping-Real-Time-Communicat-on-with-WebRTC.pdf
+
+*Extracted by `_tools/extract_toc.py` (outline). 72 entries. Machine-generated — do not hand-edit.*
+
+- Copyright  · p4
+- Table of Contents  · p7
+- Preface  · p9
+  - Conventions Used in This Book  · p11
+  - Using Code Examples  · p11
+  - Safari® Books Online  · p12
+  - How to Contact Us  · p13
+  - Acknowledgments  · p13
+- Chapter 1. Introduction  · p15
+  - Web Architecture  · p15
+  - WebRTC Architecture  · p16
+  - WebRTC in the Browser  · p17
+  - Signaling  · p19
+  - WebRTC API  · p19
+    - MediaStream  · p20
+    - PeerConnection  · p21
+    - DataChannel  · p22
+  - A Simple Example  · p23
+- Chapter 2. Handling Media in the Browser  · p25
+  - WebRTC in 10 Steps  · p25
+  - Media Capture and Streams  · p26
+    - MediaStream API  · p26
+    - Obtaining Local Multimedia Content  · p27
+    - URL  · p27
+  - Playing with the getUserMedia() API  · p27
+  - The Media Model  · p33
+    - Media Constraints  · p33
+    - Using Constraints  · p33
+- Chapter 3. Building the Browser RTC Trapezoid: A Local Perspective  · p39
+  - Using PeerConnection Objects Locally: An Example  · p41
+    - Starting the Application  · p46
+    - Placing a Call  · p50
+    - Hanging Up  · p58
+  - Adding a DataChannel to a Local PeerConnection  · p60
+    - Starting Up the Application  · p65
+    - Streaming Text Across the Data Channel  · p71
+    - Closing the Application  · p74
+- Chapter 4. The Need for a Signaling Channel  · p77
+  - Building Up a Simple Call Flow  · p77
+  - Creating the Signaling Channel  · p86
+  - Joining the Signaling Channel  · p90
+  - Starting a Server-Mediated Conversation  · p93
+  - Continuing to Chat Across the Channel  · p96
+  - Closing the Signaling Channel  · p99
+- Chapter 5. Putting It All Together: Your First WebRTC System from Scratch  · p105
+  - A Complete WebRTC Call Flow  · p105
+  - Initiator Joining the Channel  · p118
+  - Joiner Joining the Channel  · p124
+  - Initiator Starting Negotiation  · p126
+  - Joiner Managing Initiator’s Offer  · p129
+  - ICE Candidate Exchanging  · p131
+  - Joiner’s Answer  · p135
+  - Going Peer-to-Peer!  · p137
+    - Using the Data Channel  · p139
+  - A Quick Look at the Chrome WebRTC Internals Tool  · p143
+- Chapter 6. An Introduction to WebRTC API’s Advanced Features  · p147
+  - Conferencing  · p147
+  - Identity and Authentication  · p148
+  - Peer-to-Peer DTMF  · p149
+  - Statistics Model  · p150
+- Appendix A. WebRTC 1.0 APIs  · p153
+  - RTCPeerConnection API  · p153
+    - Configuration  · p153
+    - Constructor  · p154
+    - Methods  · p154
+    - Attributes  · p155
+    - State Definition  · p155
+  - Peer-to-Peer Data API  · p156
+    - Interface RTCDataChannel Interface Methods  · p156
+    - RTCDataChannel Interface Attributes  · p157
+- Index  · p159
+- About the Authors  · p163

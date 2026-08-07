@@ -1,0 +1,69 @@
+# TOC — dokumen.pub_the-road-to-react-the-reactjs-19-with-hooks-in-javascript-book-2025-edition.pdf
+
+*Extracted by `_tools/extract_toc.py` (outline). 65 entries. Machine-generated — do not hand-edit.*
+
+- Table of Contents  · p4
+- Foreword  · p6
+  - About the Author  · p7
+  - FAQ  · p8
+  - Who is this book for?  · p9
+  - How to read the book?  · p10
+- Fundamentals of React  · p11
+  - Hello React  · p12
+  - Requirements  · p14
+  - Setting up a React Project  · p16
+  - Project Structure  · p18
+  - npm Scripts  · p20
+  - Meet the React Component  · p22
+  - React JSX  · p26
+  - Lists in React  · p31
+  - Meet another React Component  · p37
+  - React Component Instantiation  · p41
+  - React DOM  · p44
+  - React Component Declaration  · p46
+  - Handler Function in JSX  · p50
+  - React Props  · p53
+  - React State  · p57
+  - Callback Handlers in JSX  · p62
+  - Lifting State in React  · p65
+  - React Controlled Components  · p71
+  - Props Handling (Advanced)  · p74
+  - React Side-Effects  · p85
+  - React Custom Hooks (Advanced)  · p89
+  - React Fragments  · p94
+  - Reusable React Component  · p97
+  - React Component Composition  · p100
+  - Imperative React  · p103
+  - Inline Handler in JSX  · p109
+  - React Asynchronous Data  · p116
+  - React Conditional Rendering  · p119
+  - React Advanced State  · p124
+  - React Impossible States  · p129
+  - Data Fetching with React  · p134
+  - Data Re-Fetching in React  · p137
+  - Memoized Functions in React (Advanced)  · p141
+  - Explicit Data Fetching with React  · p144
+  - Third-Party Libraries in React  · p148
+  - Async/Await in React  · p151
+  - Forms in React  · p154
+  - Forms with Actions  · p158
+- A Roadmap for React  · p160
+- Styling in React  · p164
+  - CSS in React  · p167
+  - CSS Modules in React  · p173
+  - Styled Components in React  · p179
+  - SVGs in React  · p185
+- React Maintenance  · p188
+  - Performance in React (Advanced)  · p189
+  - TypeScript in React  · p200
+  - Testing in React  · p213
+  - React Project Structure  · p243
+- Real World React (Advanced)  · p249
+  - Sorting  · p250
+  - Reverse Sort  · p256
+  - Remember Last Searches  · p259
+  - Paginated Fetch  · p269
+- Deploying a React Application  · p279
+  - Build Process  · p280
+  - Deploy to Firebase  · p281
+- Outline  · p284

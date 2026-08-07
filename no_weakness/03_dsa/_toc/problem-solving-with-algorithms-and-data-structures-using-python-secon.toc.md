@@ -1,0 +1,71 @@
+# TOC — Problem-Solving-with-Algorithms-and-Data-Structures-Using-Python-SECOND-EDITION.pdf
+
+*Extracted by `_tools/extract_toc.py` (outline). 67 entries. Machine-generated — do not hand-edit.*
+
+- Introduction  · p7
+  - Objectives  · p7
+  - Getting Started  · p7
+  - What Is Computer Science?  · p8
+  - Review of Basic Python  · p12
+  - Summary  · p42
+  - Key Terms  · p42
+  - Programming Exercises  · p42
+- Algorithm Analysis  · p45
+  - Objectives  · p45
+  - What Is Algorithm Analysis?  · p45
+  - Performance of Python Data Structures  · p56
+  - Summary  · p63
+  - Key Terms  · p63
+  - Discussion Questions  · p63
+  - Programming Exercises  · p64
+- Basic Data Structures  · p65
+  - Objectives  · p65
+  - What Are Linear Structures?  · p65
+  - Stacks  · p66
+  - The Stack Abstract Data Type  · p68
+  - Queues  · p86
+  - Deques  · p98
+  - Lists  · p101
+  - The Unordered List Abstract Data Type  · p102
+  - Implementing an Unordered List: Linked Lists  · p102
+  - The Ordered List Abstract Data Type  · p112
+  - Summary  · p115
+  - Key Terms  · p116
+  - Discussion Questions  · p116
+  - Programming Exercises  · p117
+- Recursion  · p121
+  - Objectives  · p121
+  - What is Recursion?  · p121
+  - Stack Frames: Implementing Recursion  · p127
+  - Visualising Recursion  · p129
+  - Complex Recursive Problems  · p137
+  - Exploring a Maze  · p139
+  - Summary  · p148
+  - Key Terms  · p149
+  - Discussion Questions  · p149
+  - Programming Exercises  · p149
+- Sorting and Searching  · p151
+  - Objectives  · p151
+  - Searching  · p151
+  - Sorting  · p167
+  - Summary  · p185
+  - Key Terms  · p186
+  - Discussion Questions  · p186
+  - Programming Exercises  · p187
+- Trees and Tree Algorithms  · p189
+  - Objectives  · p189
+  - Examples Of Trees  · p189
+  - Vocabulary and Definitions  · p192
+  - Implementation  · p194
+  - Priority Queues with Binary Heaps  · p202
+  - Binary Tree Applications  · p210
+  - Tree Traversals  · p216
+  - Binary Search Trees  · p219
+  - Summary  · p235
+  - Key Terms  · p236
+  - Discussion Questions  · p236
+  - Programming Exercises  · p237
+- JSON  · p239
+  - Objectives  · p239
+  - What is JSON?  · p239
+  - The JSON Syntax  · p239

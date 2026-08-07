@@ -1,0 +1,378 @@
+# TOC — Kafka The Definitive Guide Real-Time Data and Stream Processing at Scale, Second Edition by Gwen Shapira, Todd Palino, Rajini Sivaram, Krit Petty (z-lib.org).pdf
+
+*Extracted by `_tools/extract_toc.py` (outline). 374 entries. Machine-generated — do not hand-edit.*
+
+- Foreword to the Second Edition  · p7
+- Foreword to the First Edition  · p10
+- Preface  · p14
+  - Who Should Read This Book  · p15
+  - Conventions Used in This Book  · p16
+  - Using Code Examples  · p17
+  - O’Reilly Online Learning  · p18
+  - How to Contact Us  · p18
+  - Acknowledgments  · p19
+- 1. Meet Kafka  · p22
+  - Publish/Subscribe Messaging  · p22
+    - How It Starts  · p23
+    - Individual Queue Systems  · p25
+  - Enter Kafka  · p26
+    - Messages and Batches  · p27
+    - Schemas  · p28
+    - Topics and Partitions  · p29
+    - Producers and Consumers  · p30
+    - Brokers and Clusters  · p32
+    - Multiple Clusters  · p34
+  - Why Kafka?  · p35
+    - Multiple Producers  · p35
+    - Multiple Consumers  · p36
+    - Disk-Based Retention  · p36
+    - Scalable  · p37
+    - High Performance  · p37
+    - Platform Features  · p37
+  - The Data Ecosystem  · p38
+    - Use Cases  · p39
+  - Kafka’s Origin  · p42
+    - LinkedIn’s Problem  · p42
+    - The Birth of Kafka  · p44
+    - Open Source  · p45
+    - Commercial Engagement  · p45
+    - The Name  · p46
+  - Getting Started with Kafka  · p46
+- 2. Installing Kafka  · p48
+  - Environment Setup  · p48
+    - Choosing an Operating System  · p48
+    - Installing Java  · p48
+    - Installing ZooKeeper  · p49
+  - Installing a Kafka Broker  · p54
+  - Configuring the Broker  · p55
+    - General Broker Parameters  · p56
+    - Topic Defaults  · p60
+  - Selecting Hardware  · p69
+    - Disk Throughput  · p70
+    - Disk Capacity  · p71
+    - Memory  · p71
+    - Networking  · p72
+    - CPU  · p73
+  - Kafka in the Cloud  · p73
+    - Microsoft Azure  · p74
+    - Amazon Web Services  · p75
+  - Configuring Kafka Clusters  · p75
+    - How Many Brokers?  · p76
+    - Broker Configuration  · p78
+    - OS Tuning  · p78
+  - Production Concerns  · p84
+    - Garbage Collector Options  · p85
+    - Datacenter Layout  · p87
+    - Colocating Applications on ZooKeeper  · p88
+  - Summary  · p90
+- 3. Kafka Producers: Writing Messages to Kafka  · p91
+  - Producer Overview  · p92
+  - Constructing a Kafka Producer  · p95
+  - Sending a Message to Kafka  · p98
+    - Sending a Message Synchronously  · p99
+    - Sending a Message Asynchronously  · p101
+  - Configuring Producers  · p102
+    - client.id  · p103
+    - acks  · p103
+    - Message Delivery Time  · p105
+    - linger.ms  · p109
+    - buffer.memory  · p109
+    - compression.type  · p110
+    - batch.size  · p110
+    - max.in.flight.requests.per.connection  · p110
+    - max.request.size  · p111
+    - receive.buffer.bytes and send.buffer.bytes  · p112
+    - enable.idempotence  · p112
+  - Serializers  · p113
+    - Custom Serializers  · p113
+    - Serializing Using Apache Avro  · p116
+    - Using Avro Records with Kafka  · p119
+  - Partitions  · p123
+  - Headers  · p127
+  - Interceptors  · p127
+  - Quotas and Throttling  · p130
+  - Summary  · p133
+- 4. Kafka Consumers: Reading Data from Kafka  · p135
+  - Kafka Consumer Concepts  · p135
+    - Consumers and Consumer Groups  · p135
+    - Consumer Groups and Partition Rebalance  · p143
+    - Static Group Membership  · p146
+  - Creating a Kafka Consumer  · p148
+  - Subscribing to Topics  · p149
+  - The Poll Loop  · p150
+    - Thread Safety  · p152
+  - Configuring Consumers  · p153
+    - fetch.min.bytes  · p154
+    - fetch.max.wait.ms  · p154
+    - fetch.max.bytes  · p155
+    - max.poll.records  · p155
+    - max.partition.fetch.bytes  · p155
+    - session.timeout.ms and heartbeat.interval.ms  · p156
+    - max.poll.interval.ms  · p157
+    - default.api.timeout.ms  · p158
+    - request.timeout.ms  · p158
+    - auto.offset.reset  · p158
+    - enable.auto.commit  · p159
+    - partition.assignment.strategy  · p159
+    - client.id  · p161
+    - client.rack  · p162
+    - group.instance.id  · p162
+    - receive.buffer.bytes and send.buffer.bytes  · p162
+    - offsets.retention.minutes  · p162
+  - Commits and Offsets  · p163
+    - Automatic Commit  · p165
+    - Commit Current Offset  · p166
+    - Asynchronous Commit  · p168
+    - Combining Synchronous and Asynchronous Commits  · p170
+    - Committing a Specified Offset  · p171
+  - Rebalance Listeners  · p173
+  - Consuming Records with Specific Offsets  · p177
+  - But How Do We Exit?  · p178
+  - Deserializers  · p180
+    - Custom Deserializers  · p182
+    - Using Avro Deserialization with Kafka Consumer  · p184
+  - Standalone Consumer: Why and How to Use a Consumer Without a Group  · p186
+  - Summary  · p187
+- 5. Managing Apache Kafka Programmatically  · p189
+  - AdminClient Overview  · p190
+    - Asynchronous and Eventually Consistent API  · p190
+    - Options  · p191
+    - Flat Hierarchy  · p192
+    - Additional Notes  · p192
+  - AdminClient Lifecycle: Creating, Configuring, and Closing  · p193
+    - client.dns.lookup  · p194
+    - request.timeout.ms  · p196
+  - Essential Topic Management  · p197
+  - Configuration Management  · p202
+  - Consumer Group Management  · p205
+    - Exploring Consumer Groups  · p205
+    - Modifying Consumer Groups  · p208
+  - Cluster Metadata  · p210
+  - Advanced Admin Operations  · p211
+    - Adding Partitions to a Topic  · p211
+    - Deleting Records from a Topic  · p212
+    - Leader Election  · p213
+    - Reassigning Replicas  · p215
+  - Testing  · p216
+  - Summary  · p220
+- 6. Kafka Internals  · p221
+  - Cluster Membership  · p221
+  - The Controller  · p222
+    - KRaft: Kafka’s New Raft-Based Controller  · p225
+  - Replication  · p228
+  - Request Processing  · p232
+    - Produce Requests  · p237
+    - Fetch Requests  · p238
+    - Other Requests  · p241
+  - Physical Storage  · p244
+    - Tiered Storage  · p245
+    - Partition Allocation  · p247
+    - File Management  · p250
+    - File Format  · p251
+    - Indexes  · p254
+    - Compaction  · p255
+    - How Compaction Works  · p256
+    - Deleted Events  · p259
+    - When Are Topics Compacted?  · p260
+  - Summary  · p261
+- 7. Reliable Data Delivery  · p263
+  - Reliability Guarantees  · p264
+  - Replication  · p265
+  - Broker Configuration  · p268
+    - Replication Factor  · p268
+    - Unclean Leader Election  · p271
+    - Minimum In-Sync Replicas  · p273
+    - Keeping Replicas In Sync  · p274
+    - Persisting to Disk  · p275
+  - Using Producers in a Reliable System  · p276
+    - Send Acknowledgments  · p278
+    - Configuring Producer Retries  · p279
+    - Additional Error Handling  · p280
+  - Using Consumers in a Reliable System  · p281
+    - Important Consumer Configuration Properties for Reliable Processing  · p283
+    - Explicitly Committing Offsets in Consumers  · p285
+  - Validating System Reliability  · p288
+    - Validating Configuration  · p288
+    - Validating Applications  · p290
+    - Monitoring Reliability in Production  · p291
+  - Summary  · p294
+- 8. Exactly-Once Semantics  · p295
+  - Idempotent Producer  · p296
+    - How Does the Idempotent Producer Work?  · p297
+    - Limitations of the Idempotent Producer  · p300
+    - How Do I Use the Kafka Idempotent Producer?  · p301
+  - Transactions  · p302
+    - Transactions Use Cases  · p303
+    - What Problems Do Transactions Solve?  · p304
+    - How Do Transactions Guarantee Exactly-Once?  · p306
+    - What Problems Aren’t Solved by Transactions?  · p310
+    - How Do I Use Transactions?  · p314
+    - Transactional IDs and Fencing  · p318
+    - How Transactions Work  · p320
+  - Performance of Transactions  · p324
+  - Summary  · p325
+- 9. Building Data Pipelines  · p327
+  - Considerations When Building Data Pipelines  · p328
+    - Timeliness  · p329
+    - Reliability  · p329
+    - High and Varying Throughput  · p330
+    - Data Formats  · p331
+    - Transformations  · p332
+    - Security  · p334
+    - Failure Handling  · p336
+    - Coupling and Agility  · p336
+  - When to Use Kafka Connect Versus Producer and Consumer  · p338
+  - Kafka Connect  · p339
+    - Running Kafka Connect  · p340
+    - Connector Example: File Source and File Sink  · p344
+    - Connector Example: MySQL to Elasticsearch  · p347
+    - Single Message Transformations  · p356
+    - A Deeper Look at Kafka Connect  · p360
+  - Alternatives to Kafka Connect  · p366
+    - Ingest Frameworks for Other Datastores  · p366
+    - GUI-Based ETL Tools  · p366
+    - Stream Processing Frameworks  · p367
+  - Summary  · p367
+- 10. Cross-Cluster Data Mirroring  · p369
+  - Use Cases of Cross-Cluster Mirroring  · p370
+  - Multicluster Architectures  · p372
+    - Some Realities of Cross-Datacenter Communication  · p372
+    - Hub-and-Spoke Architecture  · p374
+    - Active-Active Architecture  · p377
+    - Active-Standby Architecture  · p380
+    - Stretch Clusters  · p389
+  - Apache Kafka’s MirrorMaker  · p392
+    - Configuring MirrorMaker  · p394
+    - Multicluster Replication Topology  · p399
+    - Securing MirrorMaker  · p400
+    - Deploying MirrorMaker in Production  · p401
+    - Tuning MirrorMaker  · p408
+  - Other Cross-Cluster Mirroring Solutions  · p412
+    - Uber uReplicator  · p412
+    - LinkedIn Brooklin  · p413
+    - Confluent Cross-Datacenter Mirroring Solutions  · p414
+  - Summary  · p418
+- 11. Securing Kafka  · p420
+  - Locking Down Kafka  · p421
+  - Security Protocols  · p425
+  - Authentication  · p427
+    - SSL  · p428
+    - SASL  · p435
+    - Reauthentication  · p453
+    - Security Updates Without Downtime  · p455
+  - Encryption  · p457
+    - End-to-End Encryption  · p458
+  - Authorization  · p461
+    - AclAuthorizer  · p461
+    - Customizing Authorization  · p467
+    - Security Considerations  · p470
+  - Auditing  · p471
+  - Securing ZooKeeper  · p472
+    - SASL  · p473
+    - SSL  · p474
+    - Authorization  · p475
+  - Securing the Platform  · p475
+    - Password Protection  · p476
+  - Summary  · p479
+- 12. Administering Kafka  · p482
+  - Topic Operations  · p482
+    - Creating a New Topic  · p483
+    - Listing All Topics in a Cluster  · p485
+    - Describing Topic Details  · p486
+    - Adding Partitions  · p488
+    - Reducing Partitions  · p490
+    - Deleting a Topic  · p490
+  - Consumer Groups  · p492
+    - List and Describe Groups  · p492
+    - Delete Group  · p494
+    - Offset Management  · p495
+  - Dynamic Configuration Changes  · p497
+    - Overriding Topic Configuration Defaults  · p497
+    - Overriding Client and User Configuration Defaults  · p501
+    - Overriding Broker Configuration Defaults  · p503
+    - Describing Configuration Overrides  · p503
+    - Removing Configuration Overrides  · p504
+  - Producing and Consuming  · p505
+    - Console Producer  · p505
+    - Console Consumer  · p509
+  - Partition Management  · p514
+    - Preferred Replica Election  · p514
+    - Changing a Partition’s Replicas  · p516
+    - Dumping Log Segments  · p523
+    - Replica Verification  · p526
+  - Other Tools  · p527
+  - Unsafe Operations  · p528
+    - Moving the Cluster Controller  · p529
+    - Removing Topics to Be Deleted  · p530
+    - Deleting Topics Manually  · p530
+  - Summary  · p531
+- 13. Monitoring Kafka  · p533
+  - Metric Basics  · p533
+    - Where Are the Metrics?  · p534
+    - What Metrics Do I Need?  · p536
+    - Application Health Checks  · p538
+  - Service-Level Objectives  · p539
+    - Service-Level Definitions  · p539
+    - What Metrics Make Good SLIs?  · p541
+    - Using SLOs in Alerting  · p543
+  - Kafka Broker Metrics  · p544
+    - Diagnosing Cluster Problems  · p545
+    - The Art of Under-Replicated Partitions  · p547
+    - Broker Metrics  · p555
+    - Topic and Partition Metrics  · p570
+    - JVM Monitoring  · p574
+    - OS Monitoring  · p576
+    - Logging  · p578
+  - Client Monitoring  · p580
+    - Producer Metrics  · p580
+    - Consumer Metrics  · p585
+    - Quotas  · p590
+  - Lag Monitoring  · p591
+  - End-to-End Monitoring  · p593
+  - Summary  · p594
+- 14. Stream Processing  · p596
+  - What Is Stream Processing?  · p598
+  - Stream Processing Concepts  · p603
+    - Topology  · p603
+    - Time  · p604
+    - State  · p607
+    - Stream-Table Duality  · p609
+    - Time Windows  · p611
+    - Processing Guarantees  · p613
+  - Stream Processing Design Patterns  · p614
+    - Single-Event Processing  · p614
+    - Processing with Local State  · p615
+    - Multiphase Processing/Repartitioning  · p618
+    - Processing with External Lookup: Stream-Table Join  · p619
+    - Table-Table Join  · p622
+    - Streaming Join  · p623
+    - Out-of-Sequence Events  · p625
+    - Reprocessing  · p627
+    - Interactive Queries  · p628
+  - Kafka Streams by Example  · p629
+    - Word Count  · p630
+    - Stock Market Statistics  · p633
+    - ClickStream Enrichment  · p637
+  - Kafka Streams: Architecture Overview  · p641
+    - Building a Topology  · p641
+    - Optimizing a Topology  · p642
+    - Testing a Topology  · p643
+    - Scaling a Topology  · p644
+    - Surviving Failures  · p649
+  - Stream Processing Use Cases  · p651
+  - How to Choose a Stream Processing Framework  · p653
+  - Summary  · p656
+- A. Installing Kafka on Other Operating Systems  · p658
+  - Installing on Windows  · p658
+    - Using Windows Subsystem for Linux  · p658
+    - Using Native Java  · p659
+  - Installing on macOS  · p662
+    - Using Homebrew  · p663
+    - Installing Manually  · p664
+- B. Additional Kafka Tools  · p666
+  - Comprehensive Platforms  · p666
+  - Cluster Deployment and Management  · p668
+  - Monitoring and Data Exploration  · p670
+  - Client Libraries  · p672
+  - Stream Processing  · p673
+- Index  · p675

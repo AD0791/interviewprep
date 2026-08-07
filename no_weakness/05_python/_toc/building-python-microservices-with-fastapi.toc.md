@@ -1,0 +1,324 @@
+# TOC — Building Python Microservices with FastAPI.pdf
+
+*Extracted by `_tools/extract_toc.py` (outline). 320 entries. Machine-generated — do not hand-edit.*
+
+- Cover  · p1
+- Title Page  · p2
+- Copyright  · p3
+- Dedication  · p4
+- Contributors  · p5
+- Table of Contents  · p8
+- Preface  · p18
+- Part 1: Application-Related Architectural Concepts for FastAPI microservice development  · p24
+- Chapter 1: Setting Up FastAPI for Starters  · p26
+  - Technical requirements  · p27
+  - Setting up the development environment  · p27
+  - Initializing and configuring FastAPI  · p28
+  - Designing and implementing REST APIs  · p29
+  - Managing user requests and server response  · p33
+    - Parameter type declaration  · p33
+    - Path parameters  · p33
+    - Query parameters  · p35
+    - Default parameters  · p37
+    - Optional parameters  · p38
+    - Mixing all types of parameters  · p39
+    - Request body  · p40
+    - Request headers  · p42
+    - Response data  · p43
+  - Handling form parameters  · p45
+  - Managing cookies  · p46
+  - Summary  · p47
+- Chapter 2: Exploring the Core Features  · p48
+  - Technical requirements  · p49
+  - Structuring and organizing huge projects  · p49
+    - Implementing the API services  · p50
+    - Importing the module components  · p51
+    - Implementing the new main.py file  · p52
+  - Managing API-related exceptions  · p53
+    - A single status code response  · p53
+    - Multiple status codes  · p55
+    - Raising HTTPException  · p56
+    - Custom exceptions  · p57
+    - A default handler override  · p60
+  - Converting objects to JSON-compatible types  · p61
+  - Managing API responses  · p62
+  - Creating background processes  · p64
+  - Using asynchronous path operations  · p66
+  - Applying middleware to filter path operations  · p67
+  - Summary  · p69
+- Chapter 3: Investigating Dependency Injection  · p70
+  - Technical requirements  · p71
+  - Applying IoC/DI  · p71
+    - Injecting a dependency function  · p72
+    - Injecting a callable class  · p73
+    - Building nested dependencies  · p74
+    - Caching the dependencies  · p76
+    - Declaring Depends() parameter types  · p77
+    - Injecting asynchronous dependencies  · p78
+  - Exploring ways of injecting dependencies  · p79
+    - Dependency injection on services  · p79
+    - Dependency injection on path operators  · p80
+    - Dependency injection on routers  · p81
+    - Dependency injection on main.py  · p84
+  - Organizing a project based on dependencies  · p85
+    - The model layer  · p86
+    - The repository layer  · p87
+    - The repository factory methods  · p89
+    - The service layer  · p90
+    - The REST API and the service layer  · p90
+    - The actual project structure  · p91
+  - Using third-party containers  · p92
+    - Using configurable containers – Dependency Injector  · p92
+    - Using a simple configuration – Lagom  · p97
+    - The FastAPI and Lagom integration  · p97
+  - Scoping of dependables  · p98
+  - Summary  · p99
+- Chapter 4: Building the Microservice Application  · p100
+  - Technical requirements  · p101
+  - Applying the decomposition pattern  · p101
+    - Creating the sub-applications  · p103
+  - Mounting the submodules  · p104
+  - Creating a common gateway  · p105
+  - Implementing the main endpoint  · p105
+  - Evaluating the microservice ID  · p106
+  - Applying the exception handlers  · p107
+  - Centralizing the logging mechanism  · p109
+    - Utilizing the Loguru module  · p109
+  - Building the logging middleware  · p111
+    - Consuming the REST API services  · p113
+  - Using the httpx module  · p114
+  - Using the requests module  · p115
+  - Applying the domain modeling approach  · p117
+  - Creating the layers  · p117
+  - Identifying the domain models  · p118
+  - Building the repository and service layers  · p120
+    - Using the factory method pattern  · p123
+  - Managing a microservice’s configuration details  · p123
+    - Storing settings as class attributes  · p124
+    - Storing settings in the properties file  · p125
+  - Summary  · p127
+- Part 2: Data-Centric and Communication-Focused Microservices Concerns and Issues  · p128
+- Chapter 5: Connecting to a Relational Database  · p130
+  - Technical requirements  · p131
+  - Preparing for database connectivity  · p131
+  - Creating CRUD transactions using SQLAlchemy  · p133
+    - Installing the database driver  · p133
+    - Setting up the database connection  · p133
+    - Initializing the session factory  · p134
+    - Defining the Base class  · p135
+    - Building the model layer  · p135
+    - Implementing the repository layer  · p139
+    - Running the transactions  · p143
+    - Creating tables  · p146
+  - Implementing async CRUD transactions using SQLAlchemy  · p147
+    - Installing the asyncio-compliant database drivers  · p147
+    - Setting up the database’s connection  · p147
+    - Creating the session factory  · p148
+    - Creating the Base class and the model layer  · p148
+    - Building the repository layer  · p149
+    - Running the CRUD transactions  · p152
+  - Using GINO for async transactions  · p153
+    - Installing the database driver  · p154
+    - Establishing the database connection  · p154
+    - Building the model layer  · p154
+    - Implementing the CRUD transactions  · p158
+    - Running the CRUD transactions  · p161
+    - Creating the tables  · p162
+  - Using Pony ORM for the repository layer  · p163
+    - Installing the database driver  · p163
+    - Creating the database’s connectivity  · p164
+    - Defining the model classes  · p164
+    - Implementing the CRUD transactions  · p167
+    - Running the repository transactions  · p171
+    - Creating the tables  · p171
+  - Building the repository using Peewee  · p171
+    - Installing the database driver  · p171
+    - Creating the database connection  · p172
+    - Creating the tables and the domain layer  · p173
+    - Implementing the CRUD transactions  · p176
+    - Running the CRUD transaction  · p178
+  - Applying the CQRS design pattern  · p179
+    - Defining the handler interfaces  · p179
+    - Creating the command and query classes  · p179
+    - Creating the command and query handlers  · p180
+    - Accessing the handlers  · p181
+  - Summary  · p183
+- Chapter 6: Using a Non-Relational Database  · p184
+  - Technical requirements  · p185
+  - Setting up the database environment  · p185
+  - Applying the PyMongo driver for synchronous connections  · p188
+    - Setting up the database connectivity  · p188
+    - Building the model layer  · p189
+    - Implementing the repository layer  · p197
+    - Running the transactions  · p202
+  - Creating async CRUD transactions using Motor  · p205
+    - Setting up the database connectivity  · p205
+    - Creating the model layer  · p206
+    - Running the CRUD transactions  · p208
+  - Implementing CRUD transactions using MongoEngine  · p209
+    - Establishing database connection  · p210
+    - Building the model layer  · p210
+    - Implementing the CRUD transactions  · p213
+    - Running the CRUD transactions  · p217
+  - Implementing async transactions using Beanie  · p218
+    - Creating the database connection  · p218
+    - Defining the model classes  · p219
+    - Implementing the CRUD transactions  · p221
+    - Running the repository transactions  · p223
+  - Building async repository for FastAPI using ODMantic  · p223
+    - Creating the database connection  · p224
+    - Creating the model layer  · p224
+    - Implementing the CRUD transactions  · p225
+    - Running the CRUD transaction  · p228
+  - Creating CRUD transactions using MongoFrames  · p229
+    - Creating the database connection  · p229
+    - Building the model layer  · p230
+    - Creating the repository layer  · p231
+    - Applying the repository layer  · p234
+  - Summary  · p235
+- Chapter 7: Securing the REST APIs  · p236
+  - Technical requirements  · p237
+  - Implementing Basic and Digest authentication  · p237
+    - Using Basic authentication  · p237
+    - Using Digest authentication  · p241
+  - Implementing password-based authentication  · p245
+    - Installing the python-multipart module  · p245
+    - Using OAuth2PasswordBearer and OAuth2PasswordRequestForm  · p245
+    - Executing the login transaction  · p246
+    - Securing the endpoints  · p249
+  - Applying JWTs  · p251
+    - Generating the secret key  · p251
+    - Creating the access_token  · p251
+    - Creating the login transaction  · p252
+    - Accessing the secured endpoints  · p253
+  - Creating scope-based authorization  · p254
+    - Customizing the OAuth2 class  · p254
+    - Building the permission dictionary  · p255
+    - Implementing the login transaction  · p256
+    - Applying the scopes to endpoints  · p257
+  - Building the authorization code flow  · p259
+    - Applying OAuth2AuthorizationCodeBearer  · p259
+    - Implementing the authorization request  · p260
+    - Implementing the authorization code response  · p261
+  - Applying the OpenID Connect specification  · p263
+    - Using HTTPBearer  · p263
+    - Installing and configuring the Keycloak environment  · p263
+    - Setting the Keycloak realm and clients  · p263
+    - Creating users and user roles  · p265
+    - Assigning roles to clients  · p266
+    - Creating user permissions through scopes  · p267
+    - Integrating Keycloak with FastAPI  · p268
+    - Implementing the token verification  · p270
+    - Integrating Auth0 with FastAPI  · p272
+    - Integrating Okta with FastAPI  · p273
+  - Using built-in middlewares for authentication  · p273
+  - Summary  · p274
+- Chapter 8: Creating Coroutines, Events, and Message-Driven Transactions  · p276
+  - Technical requirements  · p277
+  - Implementing coroutines  · p277
+    - Applying coroutine switching  · p277
+    - Designing asynchronous transactions  · p281
+    - Using the HTTP/2 protocol  · p284
+  - Creating asynchronous background tasks  · p284
+    - Using the coroutines  · p284
+    - Creating multiple tasks  · p286
+  - Understanding Celery tasks  · p286
+    - Creating and configuring the Celery instance  · p287
+    - Creating the task  · p289
+    - Calling the task  · p290
+    - Starting the worker server  · p290
+    - Monitoring the tasks  · p291
+  - Building message-driven transactions using RabbitMQ  · p292
+    - Creating the Celery instance  · p292
+    - Monitoring AMQP messaging  · p292
+  - Building publish/subscribe messaging using Kafka  · p293
+    - Running the Kafka broker and server  · p294
+    - Creating the topic  · p294
+    - Implementing the publisher  · p294
+    - Running a consumer on a console  · p295
+  - Implementing asynchronous Server-Sent Events (SSE)  · p296
+  - Building an asynchronous WebSocket  · p298
+    - Implementing the asynchronous WebSocket endpoint  · p298
+    - Implementing the WebSocket client  · p299
+  - Applying reactive programming in tasks  · p300
+    - Creating the Observable data using coroutines  · p301
+    - Creating background process  · p303
+    - Accessing API resources  · p304
+  - Customizing events  · p306
+    - Defining the startup event  · p306
+    - Defining shutdown events  · p307
+  - Summary  · p307
+- Part 3: Infrastructure-Related Issues, Numerical and Symbolic Computations, and Testing Microservices  · p308
+- Chapter 9: Utilizing Other Advanced Features  · p310
+  - Technical requirements  · p311
+  - Applying session management  · p311
+    - Creating user sessions  · p311
+    - Managing session data  · p314
+    - Removing the sessions  · p315
+    - Customizing BaseHTTPMiddleware  · p316
+  - Managing the CORS mechanism  · p318
+  - Customizing APIRoute and Request  · p320
+    - Managing body, form, or JSON data  · p320
+    - Encrypting and decrypting the message body  · p323
+  - Choosing the appropriate responses  · p325
+    - Setting up the Jinja2 template engine  · p330
+    - Setting up the static resources  · p330
+    - Creating the template layout  · p331
+    - Using ORJSONResponse and UJSONResponse  · p333
+  - Applying the OpenAPI 3.x specification  · p334
+    - Extending the OpenAPI schema definition  · p334
+    - Using the internal code base properties  · p337
+    - Using the Query, Form, Body, and Path functions  · p339
+  - Testing the API endpoints  · p343
+    - Writing the unit test cases  · p344
+    - Mocking the dependencies  · p344
+    - Running test methods  · p346
+  - Summary  · p347
+- Chapter 10: Solving Numerical, Symbolic, and Graphical Problems  · p348
+  - Technical requirements  · p349
+  - Setting up the projects  · p349
+    - Using the Piccolo ORM  · p349
+    - The Beanie ODM  · p354
+  - Implementing symbolic computations  · p354
+    - Creating symbolic expressions  · p354
+    - Solving linear expressions  · p355
+    - Solving non-linear expressions  · p356
+    - Solving linear and non-linear inequalities  · p356
+  - Creating arrays and DataFrames  · p357
+    - Applying NumPy’s linear system operations  · p358
+    - Applying the pandas module  · p359
+  - Performing statistical analysis  · p360
+  - Generating CSV and XLSX reports  · p361
+  - Plotting data models  · p365
+  - Simulating a BPMN workflow  · p369
+    - Designing the BPMN workflow  · p369
+    - Implementing the workflow  · p371
+  - Using GraphQL queries and mutations  · p373
+    - Setting up the GraphQL platform  · p373
+    - Creating the record insertion, update, and deletion  · p373
+    - Implementing the query transactions  · p376
+    - Running the CRUD transactions  · p376
+  - Utilizing the Neo4j graph database  · p378
+    - Setting the Neo4j database  · p379
+    - Creating the CRUD transactions  · p379
+  - Summary  · p383
+- Chapter 11: Adding Other Microservice Features  · p384
+  - Technical requirements  · p385
+  - Setting up the virtual environment  · p385
+  - Checking the API properties  · p387
+  - Implementing open tracing mechanisms  · p388
+  - Setting up service registry and client-side service discovery  · p392
+    - Implementing client-side service discovery  · p393
+    - Setting up the Netflix Eureka service registry  · p394
+  - Deploying and running applications using Docker  · p395
+    - Generating the requirements.txt file  · p395
+    - Creating the Docker image  · p396
+    - Using the Mongo Docker image  · p397
+    - Creating the containers  · p397
+  - Using Docker Compose for deployment  · p398
+  - Using NGINX as an API Gateway  · p399
+  - Integrating Flask and Django sub-applications  · p400
+  - Summary  · p403
+- Index  · p404
+- About Packt  · p416
+- Other Books You May Enjoy  · p417

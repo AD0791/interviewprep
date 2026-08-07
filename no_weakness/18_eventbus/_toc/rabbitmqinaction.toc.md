@@ -1,0 +1,207 @@
+# TOC — RabbitMQinAction.pdf
+
+*Extracted by `_tools/extract_toc.py` (outline). 203 entries. Machine-generated — do not hand-edit.*
+
+- brief contents  · p8
+- contents  · p10
+- foreword  · p16
+- preface  · p18
+- acknowledgments  · p20
+  - Alvaro  · p21
+  - Jason  · p21
+- about this book  · p22
+  - Roadmap  · p23
+  - Code conventions and downloads  · p24
+    - Author Online  · p24
+    - About the authors  · p24
+- about the cover illustration  · p25
+- 1 Pulling RabbitMQ out of the hat  · p26
+  - 1.1 Living in other people’s dungeons  · p28
+  - 1.2 AMQP to the rescue  · p30
+  - 1.3 A brief history of RabbitMQ  · p30
+  - 1.4 Picking RabbitMQ out of the hat (and other open options)  · p33
+  - 1.5 Installing RabbitMQ on Unix systems  · p33
+    - 1.5.1 Why environment matters—living la vida Erlang  · p33
+    - 1.5.2 Getting the package  · p34
+    - 1.5.3 Setting up the folder structure  · p34
+    - 1.5.4 Firing Rabbit up for the first time  · p34
+  - 1.6 Summary  · p35
+- 2 Understanding messaging  · p37
+  - 2.1 Consumers and producers (not an economics lesson)  · p38
+  - 2.2 Building from the bottom: queues  · p41
+  - 2.3 Getting together: exchanges and bindings  · p45
+  - 2.4 Multiple tenants: virtual hosts and separation  · p49
+  - 2.5 Where’s my message? Durability and you  · p50
+  - 2.6 Putting it all together: a day in the life of a message  · p53
+  - 2.7 Using publisher confirms to verify delivery  · p58
+  - 2.8 Summary  · p60
+- 3 Running and administering Rabbit  · p62
+  - 3.1 Server management  · p63
+    - 3.1.1 Starting nodes  · p63
+    - 3.1.2 Stopping nodes  · p64
+    - 3.1.3 Stopping and restarting the application: what’s the difference?  · p65
+    - 3.1.4 Rabbit configuration files  · p66
+  - 3.2 Asking permission  · p68
+    - 3.2.1 Managing users  · p68
+    - 3.2.2 Rabbit’s permissions system  · p69
+  - 3.3 Checking up  · p72
+    - 3.3.1 Viewing statistics  · p72
+    - 3.3.2 Understanding RabbitMQ’s logs  · p77
+  - 3.4 Fixing a bad Rabbit: troubleshooting  · p80
+    - 3.4.1 badrpc,nodedown and other Erlang-induced problems  · p80
+  - 3.5 Summary  · p84
+- 4 Solving problems with Rabbit: coding and patterns  · p85
+  - 4.1 A decoupling story: what pushes us to messaging  · p86
+    - 4.1.1 An asynchronous state of mind (separating requests and actions)  · p86
+    - 4.1.2 Affording scale: a world without load balancers  · p88
+    - 4.1.3 Zero-effort APIs: why be locked into just one language?  · p89
+  - 4.2 Fire-and-forget models  · p90
+    - 4.2.1 Sending alerts  · p90
+    - 4.2.2 Parallel processing  · p99
+  - 4.3 Remember me: RPC over RabbitMQ and waiting for answers  · p105
+    - 4.3.1 Private queues and sending acknowledgements  · p106
+    - 4.3.2 Simple JSON RPC with reply_to  · p107
+  - 4.4 Summary  · p111
+- 5 Clustering and dealing with failure  · p112
+  - 5.1 Batteries included: RabbitMQ clustering  · p113
+  - 5.2 Architecture of a cluster  · p114
+    - 5.2.1 Queues in a cluster  · p114
+    - 5.2.2 Distributing exchanges  · p116
+    - 5.2.3 Am I RAM or a disk?  · p117
+  - 5.3 Setting up a cluster on your laptop  · p119
+  - 5.4 Distributing the nodes to more machines  · p122
+  - 5.5 Upgrading cluster nodes  · p125
+  - 5.6 Mirrored queues and preserving messages  · p126
+    - 5.6.1 Declaring and using mirrored queues  · p126
+    - 5.6.2 Under the hood with mirrored queues  · p129
+  - 5.7 Summary  · p130
+- 6 Writing code that survives failure  · p132
+  - 6.1 Load balancing your Rabbits  · p133
+    - 6.1.1 Installing HAProxy  · p135
+    - 6.1.2 Configuring HAProxy  · p135
+  - 6.2 Lost connections and failing clients between servers  · p137
+  - 6.3 Summary  · p144
+- 7 Warrens and Shovels: failover and replication  · p145
+  - 7.1 Warrens: another way of clustering  · p146
+  - 7.2 Setting up load balancer–based master/slave clusters  · p148
+  - 7.3 Long-distance communication and replication  · p151
+    - 7.3.1 Shoveling your Rabbits: an introduction to the Shovel plugin  · p151
+    - 7.3.2 Installing Shovel  · p154
+    - 7.3.3 Configuring and running Shovel  · p155
+  - 7.4 Summary  · p161
+- 8 Administering RabbitMQ from the Web  · p162
+  - 8.1 Beyond rabbitmqctl: the RabbitMQ Management plugin  · p163
+    - 8.1.1 Why you need the Management plugin  · p163
+    - 8.1.2 Management plugin features  · p163
+    - 8.1.3 Enabling the Management plugin  · p164
+  - 8.2 Managing RabbitMQ from the web console  · p166
+    - 8.2.1 Monitoring the Erlang VM  · p166
+    - 8.2.2 Importing configuration from JSON files  · p167
+  - 8.3 Managing users from the web console  · p168
+    - 8.3.1 Creating users  · p168
+    - 8.3.2 Managing users’ permissions  · p170
+  - 8.4 Managing exchanges and queues from the web console  · p171
+    - 8.4.1 Listing queues  · p173
+    - 8.4.2 Creating queues  · p174
+  - 8.5 Back to the command line  · p175
+    - 8.5.1 Why another CLI?  · p175
+    - 8.5.2 CLI administration the easier way  · p176
+    - 8.5.3 Installing rabbitmqadmin script  · p177
+    - 8.5.4 Purging queues, creating exchanges, and more  · p177
+  - 8.6 Summary  · p178
+- 9 Controlling Rabbit with the REST API  · p179
+  - 9.1 What can you do with the RabbitMQ REST API?  · p180
+  - 9.2 Granting your clients access  · p182
+  - 9.3 Accessing statistics  · p183
+  - 9.4 Automating vhost and user provisioning  · p186
+  - 9.5 Summary  · p190
+- 10 Monitoring: Houston, we have a problem  · p192
+  - 10.1 RabbitMQ monitoring: keeping an eye on your warren  · p193
+    - 10.1.1 Writing health checks for Nagios  · p193
+    - 10.1.2 Checking that RabbitMQ is alive with AMQP simulation checks  · p195
+    - 10.1.3 Checking aliveness with the REST API  · p197
+    - 10.1.4 Creating a watchdog for configuration changes  · p201
+    - 10.1.5 Monitoring your cluster status  · p205
+  - 10.2 Making sure consumers are consuming  · p210
+    - 10.2.1 Monitoring queue levels through AMQP  · p211
+    - 10.2.2 Using the REST API to watch queue levels  · p215
+    - 10.2.3 Rules of thumb for establishing a queue count baseline  · p218
+  - 10.3 Summary  · p219
+- 11 Supercharging and securing your Rabbit  · p220
+  - 11.1 The need for speed  · p221
+    - 11.1.1 Message durability  · p221
+    - 11.1.2 Message acknowledgment  · p222
+    - 11.1.3 Routing algorithm and bindings  · p222
+    - 11.1.4 Delivering messages  · p223
+  - 11.2 Memory usage and process limits  · p225
+    - 11.2.1 Memory usage  · p226
+    - 11.2.2 Erlang process count  · p228
+  - 11.3 SSL connections  · p229
+    - 11.3.1 SSL certificates  · p229
+    - 11.3.2 Setting up a certificate authority  · p231
+    - 11.3.3 Generating the root certificate  · p234
+    - 11.3.4 Generating the server certificates  · p235
+    - 11.3.5 Generating the client certificates  · p236
+    - 11.3.6 Enabling SSL listeners in RabbitMQ  · p236
+    - 11.3.7 Testing your RabbitMQ SSL setup  · p238
+  - 11.4 Summary  · p240
+- 12 Smart Rabbits: extending RabbitMQ  · p241
+  - 12.1 RabbitMQ plugins  · p242
+    - 12.1.1 What can you do with plugins?  · p242
+    - 12.1.2 Where do you find plugins?  · p243
+    - 12.1.3 Installing plugins  · p243
+    - 12.1.4 Removing plugins  · p245
+  - 12.2 Making your own plugins  · p246
+    - 12.2.1 Getting the RabbitMQ Public Umbrella  · p247
+    - 12.2.2 Setting up the folder structure  · p248
+    - 12.2.3 Including the plugin build system  · p248
+    - 12.2.4 Creating the Erlang application file  · p249
+  - 12.3 Creating your custom exchange module  · p250
+    - 12.3.1 Registering your exchange with RabbitMQ  · p252
+    - 12.3.2 Implementing the exchange behaviour  · p255
+    - 12.3.3 Compiling your custom exchange  · p261
+    - 12.3.4 Taking your plugin for a test drive  · p264
+  - 12.4 Summary  · p268
+- appendix A Using Rabbit from Java and .NET  · p269
+  - A.1 Saying hello again (library options and Hello World)  · p270
+  - A.2 Alerting revisited: porting the alert app to event-oriented .NET  · p279
+  - A.3 RPC with your coffee: implementing AMQP RPC with Java  · p281
+    - A.3.1 Obtaining the Java libraries  · p282
+    - A.3.2 Setting up the class path  · p282
+    - A.3.3 Creating an RPC Server  · p283
+    - A.3.4 Creating your RPC client  · p288
+    - A.3.5 Testing your RPC client and server  · p293
+  - A.4 Summary  · p294
+- Appendix B Online resources  · p295
+  - B.1 Websites you should know  · p295
+  - B.2 Blogs  · p296
+  - B.3 AMQP libraries and related OSS projects  · p296
+    - B.3.1 Client libraries  · p296
+  - B.4 Discussions and mailing lists  · p298
+  - B.5 Summary  · p299
+- Appendix C Installing RabbitMQ on Windows  · p300
+- index  · p304
+  - A  · p304
+  - B  · p304
+  - C  · p305
+  - D  · p306
+  - E  · p306
+  - F  · p307
+  - G  · p307
+  - H  · p307
+  - I  · p307
+  - J  · p308
+  - K  · p308
+  - L  · p308
+  - M  · p308
+  - N  · p309
+  - O  · p310
+  - P  · p310
+  - Q  · p310
+  - R  · p311
+  - S  · p312
+  - T  · p312
+  - U  · p312
+  - V  · p313
+  - W  · p313
+  - X  · p313

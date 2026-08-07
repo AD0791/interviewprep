@@ -1,0 +1,554 @@
+# TOC — PythonMastery.pdf
+
+*Extracted by `_tools/extract_toc.py` (slides[1-550]). 550 entries. Machine-generated — do not hand-edit.*
+
+- Advanced Python  · p1
+- 0. Course Setup  · p2
+- About the Author  · p3
+- Course License and Usage  · p4
+- About This Course  · p5
+- Target Audience  · p6
+- System Requirements  · p7
+- Prerequisites  · p8
+- Section 0  · p9
+- Required Files  · p10
+- Working Environment  · p11
+- Class Exercises  · p12
+- Class Exercises  · p13
+- General Tips  · p14
+- Section 1  · p15
+- Overview  · p16
+- All Things Python  · p17
+- Running Python  · p18
+- Interactive Mode  · p19
+- Creating Programs  · p20
+- Running Programs  · p21
+- python -i  · p22
+- Exercise 1.1  · p23
+- Program Execution  · p24
+- Comments  · p25
+- Variables  · p26
+- A Bit More on Names  · p27
+- Naming Conventions  · p28
+- Expressions  · p29
+- Conditionals  · p30
+- Relations  · p31
+- Looping  · p32
+- Looping Control-Flow  · p33
+- Printing  · p34
+- Formatted Printing  · p35
+- pass statement  · p36
+- Core Python Objects  · p37
+- Manipulating Objects  · p38
+- Exercise 1.2  · p39
+- File Input and Output  · p40
+- Closing Files  · p41
+- Common Idioms  · p42
+- Text Data  · p43
+- Binary Data  · p44
+- Exercise 1.3  · p45
+- Simple Functions  · p46
+- Simple Functions  · p47
+- Exception Handling  · p48
+- Exceptions  · p49
+- Exceptions  · p50
+- Exception Values  · p51
+- Catching Multiple Errors  · p52
+- finally statement  · p53
+- Exercise 1.4  · p54
+- Objects  · p55
+- Classes  · p56
+- Instances  · p57
+- __init__ method  · p58
+- Methods  · p59
+- Exercise 1.5  · p60
+- Modules  · p61
+- Namespaces  · p62
+- Globals Revisited  · p63
+- import as statement  · p64
+- from module import  · p65
+- from module import *  · p66
+- from module import *  · p67
+- Main Module  · p68
+- __main__ check  · p69
+- Locating Modules  · p70
+- Module Search Path  · p71
+- Summary  · p72
+- Exercise 1.6  · p73
+- Section 2  · p74
+- Core Topics  · p75
+- Data Structures  · p76
+- Data Structures  · p77
+- Tuples  · p78
+- Dictionaries  · p79
+- User-Defined Classes  · p80
+- Variations on Classes  · p81
+- Classes and Slots  · p82
+- Dataclasses  · p83
+- Named Tuples  · p84
+- Named Tuples  · p85
+- Exercise 2.1  · p86
+- Containers  · p87
+- Lists  · p88
+- Sets  · p89
+- Dicts  · p90
+- Dicts, Composite Keys  · p91
+- Comprehensions  · p92
+- Comprehensions  · p93
+- Comprehension Examples  · p94
+- Collections Module  · p95
+- defaultdict  · p96
+- Counter  · p97
+- deque  · p98
+- Keeping a History  · p99
+- Multi-Search  · p100
+- Commentary  · p101
+- Exercise 2.2  · p102
+- Iteration  · p103
+- Iterating on Tuples  · p104
+- Iterating on Varying Records  · p105
+- zip() function  · p106
+- Keeping a Running Count  · p107
+- Iterating on Integers  · p108
+- Sequence Reductions  · p109
+- Unpacking Iterables  · p110
+- Unpacking Dictionaries  · p111
+- Argument Passing  · p112
+- Generator Expressions  · p113
+- Generators  · p114
+- Using Generators  · p115
+- Generator Arguments  · p116
+- Generator Functions  · p117
+- Exercise 2.3  · p118
+- Secrets of the Builtins  · p119
+- What is a Builtin?  · p120
+- Under the Hood  · p121
+- Builtin Representation  · p122
+- String Representation  · p123
+- Memory Overhead  · p124
+- Operation of the Builtins  · p125
+- Object Protocols  · p126
+- Making New "Builtins"  · p127
+- Exercise 2.4  · p128
+- Container Representation  · p129
+- Over-allocation  · p130
+- Example : List Memory  · p131
+- Container Growth  · p132
+- Set/Dict Hashing  · p133
+- Key Restrictions  · p134
+- Dict Layout  · p135
+- Collision Resolution  · p136
+- Container Protocols  · p137
+- Container Taxonomy  · p138
+- Exercise 2.5  · p139
+- Understanding Assignment  · p140
+- Assignment Example  · p141
+- Assignment Caution  · p142
+- Call by Object  · p143
+- Reassigning Names  · p144
+- Identity and References  · p145
+- Exploiting Immutability  · p146
+- Shallow Copies  · p147
+- Deep Copying  · p148
+- Everything is an object  · p149
+- Example: Emulating Cases  · p150
+- Exercise 2.6  · p151
+- Section 3  · p152
+- When to use Objects?  · p153
+- An Example  · p154
+- The class statement  · p155
+- Instances  · p156
+- Instance Data  · p157
+- Instance Methods  · p158
+- Attributes  · p159
+- History Lesson  · p160
+- Class Scoping  · p161
+- Exercise 3.1  · p162
+- Manipulating Instances  · p163
+- Attribute Access Functions  · p164
+- Method Invocation  · p165
+- Bound Methods  · p166
+- Bound Methods  · p167
+- Exercise 3.2  · p168
+- More on Class Definitions  · p169
+- Class Variables  · p170
+- Using Class Variables  · p171
+- Class Methods  · p172
+- Using Class Methods  · p173
+- Using Class Methods  · p174
+- Static Methods  · p175
+- Using Static Methods  · p176
+- Exercise 3.3  · p177
+- Classes and Encapsulation  · p178
+- Python Encapsulation  · p179
+- Private Attributes  · p180
+- Complication  · p181
+- Avoiding Name Collisions  · p182
+- Problem: Simple Attributes  · p183
+- Managed Attributes  · p184
+- Properties  · p185
+- Properties  · p186
+- Properties  · p187
+- Properties  · p188
+- Properties  · p189
+- __slots__ Attribute  · p190
+- __slots__ Cautions  · p191
+- Commentary  · p192
+- Exercise 3.4  · p193
+- Inheritance  · p194
+- Inheritance  · p195
+- Inheritance Example  · p196
+- Inheritance Example  · p197
+- Inheritance and Overriding  · p198
+- Inheritance and __init__  · p199
+- "is a" relationship  · p200
+- object base class  · p201
+- Multiple Inheritance  · p202
+- Using Inheritance  · p203
+- Exercise 3.5  · p204
+- Special Methods  · p205
+- String Conversions  · p206
+- String Conversions  · p207
+- Methods: Item Access  · p208
+- Methods: Mathematics  · p209
+- Instance Creation  · p210
+- Using __new__  · p211
+- Defining __new__  · p212
+- __del__ method  · p213
+- __del__ method  · p214
+- Weak References  · p215
+- weakref module  · p216
+- Using Weak References  · p217
+- Context Managers  · p218
+- Context Managers  · p219
+- Exercise 3.6  · p220
+- Code Reuse  · p221
+- Interfaces  · p222
+- Abstract Base Classes  · p223
+- Abstract Base Classes  · p224
+- Handler Classes  · p225
+- Handler Classes  · p226
+- Handler Classes  · p227
+- Handler Classes  · p228
+- Commentary  · p229
+- Classes as a Template  · p230
+- Template Example  · p231
+- Template Example  · p232
+- Prefer Functions  · p233
+- Exercise 3.7  · p234
+- Advanced Inheritance  · p235
+- Multiple Inheritance  · p236
+- Cooperative Inheritance  · p237
+- Cooperative Inheritance  · p238
+- Cooperative Inheritance  · p239
+- An Odd Code Reuse  · p240
+- Mixin Classes  · p241
+- Mixin Example  · p242
+- How it works  · p243
+- Use of Mixins  · p244
+- Exercise 3.8  · p245
+- Section 4  · p246
+- Overview  · p247
+- Dictionaries Revisited  · p248
+- Dicts and Objects  · p249
+- Dicts and Instances  · p250
+- Dicts and Instances  · p251
+- Dicts and Classes  · p252
+- Instances and Classes  · p253
+- Instances and Classes  · p254
+- Attribute Access  · p255
+- Modifying Instances  · p256
+- Reading Attributes  · p257
+- Reading Attributes  · p258
+- Exercise 4.1  · p259
+- How Inheritance Works  · p260
+- Reading Attributes  · p261
+- Single Inheritance  · p262
+- The MRO  · p263
+- Multiple Inheritance  · p264
+- Multiple Inheritance  · p265
+- Multiple Inheritance  · p266
+- Multiple Inheritance  · p267
+- Why super()?  · p268
+- super() Explained  · p269
+- Designing for Inheritance  · p270
+- Designing for Inheritance  · p271
+- Designing for Inheritance  · p272
+- Exercise 4.2  · p273
+- Dicts and Classes (Reprise)  · p274
+- Reading Attributes (Reprise)  · p275
+- Attribute Binding  · p276
+- Descriptor Protocol  · p277
+- Descriptor Demo  · p278
+- Descriptor Demo  · p279
+- Descriptor Demo  · p280
+- Descriptor Storage  · p281
+- Descriptor Binding  · p282
+- Who Cares?  · p283
+- Descriptors in Action  · p284
+- Descriptors in Action  · p285
+- Descriptors and Properties  · p286
+- Descriptors and __slots__  · p287
+- Descriptor Commentary  · p288
+- Descriptor Application  · p289
+- Descriptor Application  · p290
+- Tricky Bits with __get__  · p291
+- Tricky Bits with __get__  · p292
+- Method Descriptors  · p293
+- Descriptor Naming  · p294
+- Descriptor Conflicts  · p295
+- Exercise 4.3  · p296
+- Attribute Access Methods  · p297
+- __getattribute__()  · p298
+- __getattr__() method  · p299
+- __setattr__() method  · p300
+- __delattr__() method  · p301
+- Customizing Access  · p302
+- Example : Proxy  · p303
+- Example : Proxy  · p304
+- Example: Delegation  · p305
+- Delegation Caution  · p306
+- Exercise 4.4  · p307
+- Section 5  · p308
+- Overview  · p309
+- Functions  · p310
+- Function Design  · p311
+- Function Invocation  · p312
+- Naming Conventions  · p313
+- Default Arguments  · p314
+- Keyword Arguments  · p315
+- Default Values  · p316
+- Default Values  · p317
+- Optional Values  · p318
+- Argument Transformation  · p319
+- Argument Transforms  · p320
+- Doc Strings  · p321
+- Type Hints (PEP 484)  · p322
+- Commentary on Type Hints  · p323
+- Exercise 5.1  · p324
+- Function Results  · p325
+- Returning Optionals  · p326
+- Concurrency  · p327
+- Futures  · p328
+- Future Example  · p329
+- Exercise 5.2  · p330
+- Functional Programming  · p331
+- Higher Order Functions  · p332
+- Functions as Input  · p333
+- Functions as Input  · p334
+- Lambda Functions  · p335
+- Partial Application  · p336
+- Map-Reduce  · p337
+- Map-Reduce  · p338
+- Commentary  · p339
+- Exercise 5.3  · p340
+- Returning Functions  · p341
+- Nested Scopes  · p342
+- Closures  · p343
+- Closures  · p344
+- Closures  · p345
+- Closures and Mutability  · p346
+- Using Closures  · p347
+- Exercise 5.4  · p348
+- Function Error Checking  · p349
+- What Exceptions to Handle?  · p350
+- Example  · p351
+- Catching All Errors  · p352
+- Ignoring Errors  · p353
+- Reraising Exceptions  · p354
+- Wrapped Exceptions  · p355
+- Managing Resources  · p356
+- What Exceptions to Raise?  · p357
+- Return Codes  · p358
+- Logging  · p359
+- Exercise 5.5  · p360
+- Testing Rocks,  · p361
+- Example Code  · p362
+- Assertions/Contracts  · p363
+- Assertions/Contracts  · p364
+- unittest Module  · p365
+- Using unittest  · p366
+- Using unittest  · p367
+- Using unittest  · p368
+- Running unittests  · p369
+- unittest comments  · p370
+- Exercise 5.6  · p371
+- Section 6  · p372
+- Overview  · p373
+- Function Arguments  · p374
+- Variable Arguments  · p375
+- Variable Arguments  · p376
+- Variable Arguments  · p377
+- Passing Tuples and Dicts  · p378
+- Exercise 6.1  · p379
+- Scoping Rules  · p380
+- Statement Execution  · p381
+- Modifying Globals  · p382
+- globals() and locals()  · p383
+- builtins module  · p384
+- Exercise 6.2  · p385
+- Function Objects  · p386
+- Documentation Strings  · p387
+- Annotations/Type Hints  · p388
+- Function Attributes  · p389
+- Function Inspection  · p390
+- inspect Module  · p391
+- Signature Binding  · p392
+- Exercise 6.3  · p393
+- eval() and exec()  · p394
+- eval() and exec()  · p395
+- eval/exec Caution  · p396
+- Exercise 6.4  · p397
+- Callable Objects  · p398
+- Defining Callables  · p399
+- Exercise 6.5  · p400
+- Section 7  · p401
+- Introduction  · p402
+- Metaprogramming  · p403
+- Python Metaprogramming  · p404
+- Decorators  · p405
+- Wrapper Functions  · p406
+- Creating Wrappers  · p407
+- Wrappers as Replacements  · p408
+- Decorator Concept  · p409
+- Decorator Syntax  · p410
+- Decorator Syntax  · p411
+- Using Decorators  · p412
+- Timing Measurements  · p413
+- Exercise 7.1  · p414
+- Advanced Decorators  · p415
+- Multiple Decorators  · p416
+- Function Metadata  · p417
+- The Metadata Problem  · p418
+- Copying Metadata  · p419
+- Decorators with Args  · p420
+- Decorators with Args  · p421
+- Decorators with Args  · p422
+- Decorators with Args  · p423
+- Decorators with Args  · p424
+- Exercise 7.2  · p425
+- Class Decorators  · p426
+- Class Decorators  · p427
+- Example  · p428
+- Example  · p429
+- Decoration via Inheritance  · p430
+- Exercise 7.3  · p431
+- Disclaimer  · p432
+- Types  · p433
+- Type Constructor  · p434
+- Types and Classes  · p435
+- Types of Classes  · p436
+- Creating Types  · p437
+- Classes Deconstructed  · p438
+- Creating a Class  · p439
+- Class Definition Process  · p440
+- Class Definition Process  · p441
+- Class Definition Process  · p442
+- Class Definition Process  · p443
+- Exercise 7.4  · p444
+- Metaclasses Defined  · p445
+- The Metaclass Hook  · p446
+- Metaclass Selection  · p447
+- Metaclass Selection  · p448
+- Metaclass Inheritance  · p449
+- Creating a New Metaclass  · p450
+- Using a Metaclass  · p451
+- Exercise 7.5  · p452
+- Typical Applications  · p453
+- Using a Metaclass  · p454
+- Example: Duplicate Check  · p455
+- Example: Decoration  · p456
+- Example: Instance Creation  · p457
+- Commentary  · p458
+- Exercise 7.6  · p459
+- Section 8  · p460
+- Iteration  · p461
+- Iteration: Protocol  · p462
+- Iteration: Protocol  · p463
+- Delegating Iteration  · p464
+- Generators  · p465
+- Generator Functions  · p466
+- Generator Functions  · p467
+- Generator Functions  · p468
+- Reusing Generators  · p469
+- Reusable Generators  · p470
+- Exercise 8.1  · p471
+- Producers & Consumers  · p472
+- Generator Pipelines  · p473
+- Generator Pipelines  · p474
+- Generator Pipelines  · p475
+- Generator Pipelines  · p476
+- Generator Pipelines  · p477
+- Exercise 8.2  · p478
+- Yield as an Expression  · p479
+- Coroutines  · p480
+- Coroutine Execution  · p481
+- Coroutine Priming  · p482
+- Using a Decorator  · p483
+- Processing Pipelines  · p484
+- An Example  · p485
+- An Example  · p486
+- Dataflow  · p487
+- Exercise 8.3  · p488
+- Generator Control Flow  · p489
+- Closing a Generator  · p490
+- Raising Exceptions  · p491
+- Exercise 8.4  · p492
+- Managed Generators  · p493
+- Managed Generators  · p494
+- Managed Generators  · p495
+- Example : Concurrency  · p496
+- Example : Concurrency  · p497
+- Example : Concurrency  · p498
+- Exercise 8.5  · p499
+- Delegating Generation  · p500
+- Delegating Generation  · p501
+- Delegating Generation  · p502
+- Async/Await  · p503
+- Async/Await  · p504
+- More Information  · p505
+- Exercise 8.6  · p506
+- Section 9  · p507
+- Introduction  · p508
+- Modules Revisited  · p509
+- Module Objects  · p510
+- Special Variables  · p511
+- Import Implementation  · p512
+- import statement  · p513
+- Module Cache  · p514
+- Import Caching  · p515
+- from module import  · p516
+- from module import *  · p517
+- Module Reloading  · p518
+- Module Reloading Danger  · p519
+- Locating Modules  · p520
+- Module Search Path  · p521
+- Exercise 9.1  · p522
+- Organizing Libraries  · p523
+- Creating a Package  · p524
+- Creating a Package  · p525
+- Using a Package  · p526
+- Fixing Relative Imports  · p527
+- Absolute Imports  · p528
+- Package Relative Imports  · p529
+- Package Environment  · p530
+- Exercise 9.2  · p531
+- __init__.py Usage  · p532
+- Module Assembly  · p533
+- Module Assembly  · p534
+- Module Assembly  · p535
+- Case Study  · p536
+- Controlling Exports  · p537
+- Module Splitting  · p538
+- Module Splitting  · p539
+- Module Splitting  · p540
+- Exercise 9.3  · p541
+- Circular Imports  · p542
+- Circular Imports  · p543
+- Main Modules  · p544
+- Main Entry Point  · p545
+- Executable Subpackages  · p546
+- Exercise 9.4  · p547
+- More Information  · p548
+- Preparing For Distribution  · p549
+- That's it!  · p550

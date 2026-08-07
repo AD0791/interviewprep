@@ -1,0 +1,73 @@
+# TOC — dokumen.pub_you-dont-know-js-yet-scope-amp-closures-2nbsped-9781647862213.pdf
+
+*Extracted by `_tools/extract_toc.py` (outline). 69 entries. Machine-generated — do not hand-edit.*
+
+- Table of Contents  · p6
+- Foreword  · p10
+- Preface  · p12
+  - The Parts  · p12
+  - The Title?  · p14
+  - The Mission  · p15
+  - The Path  · p16
+- Chapter 1: What's the Scope?  · p19
+  - About This Book  · p19
+  - Compiled vs. Interpreted  · p20
+  - Compiling Code  · p22
+  - Compiler Speak  · p29
+  - Cheating: Runtime Scope Modifications  · p33
+  - Lexical Scope  · p34
+- Chapter 2: Illustrating Lexical Scope  · p36
+  - Marbles, and Buckets, and Bubbles… Oh My!  · p36
+  - A Conversation Among Friends  · p42
+  - Nested Scope  · p48
+  - Continue the Conversation  · p53
+- Chapter 3: The Scope Chain  · p55
+  - ``Lookup'' Is (Mostly) Conceptual  · p56
+  - Shadowing  · p58
+  - Function Name Scope  · p67
+  - Arrow Functions  · p70
+  - Backing Out  · p72
+- Chapter 4: Around the Global Scope  · p73
+  - Why Global Scope?  · p73
+  - Where Exactly is this Global Scope?  · p78
+  - Global This  · p88
+  - Globally Aware  · p91
+- Chapter 5: The (Not So) Secret Lifecycle of Variables  · p92
+  - When Can I Use a Variable?  · p92
+  - Hoisting: Yet Another Metaphor  · p96
+  - Re-declaration?  · p99
+  - Uninitialized Variables (aka, TDZ)  · p111
+  - Finally Initialized  · p116
+- Chapter 6: Limiting Scope Exposure  · p118
+  - Least Exposure  · p118
+  - Hiding in Plain (Function) Scope  · p121
+  - Scoping with Blocks  · p129
+  - Function Declarations in Blocks (FiB)  · p142
+  - Blocked Over  · p148
+- Chapter 7: Using Closures  · p149
+  - See the Closure  · p150
+  - The Closure Lifecycle and Garbage Collection (GC)  · p168
+  - An Alternative Perspective  · p176
+  - Why Closure?  · p180
+  - Closer to Closure  · p185
+- Chapter 8: The Module Pattern  · p186
+  - Encapsulation and Least Exposure (POLE)  · p187
+  - What Is a Module?  · p188
+  - Node CommonJS Modules  · p195
+  - Modern ES Modules (ESM)  · p198
+  - Exit Scope  · p202
+- Appendix A: Exploring Further  · p203
+  - Implied Scopes  · p204
+  - Anonymous vs. Named Functions  · p209
+  - Hoisting: Functions and Variables  · p220
+  - The Case for var  · p225
+  - What's the Deal with TDZ?  · p232
+  - Are Synchronous Callbacks Still Closures?  · p236
+  - Classic Module Variations  · p243
+- Appendix B: Practice  · p248
+  - Buckets of Marbles  · p248
+  - Closure (PART 1)  · p249
+  - Closure (PART 2)  · p253
+  - Closure (PART 3)  · p254
+  - Modules  · p258
+  - Suggested Solutions  · p261

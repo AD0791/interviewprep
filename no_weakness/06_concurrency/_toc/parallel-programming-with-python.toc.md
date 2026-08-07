@@ -1,0 +1,104 @@
+# TOC — Parallel Programming with Python.pdf
+
+*Extracted by `_tools/extract_toc.py` (outline). 100 entries. Machine-generated — do not hand-edit.*
+
+- Cover  · p1
+- Copyright  · p3
+- Credits  · p4
+- About the Author  · p5
+- Acknowledgments  · p6
+- About the Reviewers  · p7
+- www.PacktPub.com
+- Table of Contents  · p12
+- Preface  · p16
+- Chapter 1: Contextualizing Parallel, Concurrent, and Distributed Programming  · p22
+  - Why use parallel programming?  · p24
+  - Exploring common forms of parallelization  · p24
+  - Communicating in parallel programming  · p26
+    - Understanding shared state  · p27
+    - Understanding message passing  · p27
+  - Identifying parallel programming problems  · p28
+    - Deadlock  · p28
+    - Starvation  · p28
+    - Race conditions  · p29
+  - Discovering Python's parallel programming tools  · p30
+    - The Python threading module  · p30
+    - The Python multiprocessing module  · p30
+    - The parallel Python module  · p31
+    - Celery – a distributed task queue  · p31
+  - Taking care of Python GIL  · p31
+  - Summary  · p32
+- Chapter 2: Designing Parallel Algorithms  · p34
+  - The divide and conquer technique  · p34
+  - Using data decomposition  · p35
+  - Decomposing tasks with pipeline  · p36
+  - Processing and mapping  · p37
+    - Identifying independent tasks  · p37
+    - Identifying the tasks that require data exchange  · p37
+    - Load balance  · p38
+  - Summary  · p38
+- Chapter 3: Identifying a Parallelizable Problem  · p40
+  - Obtaining the highest Fibonacci value for multiple inputs  · p40
+  - Crawling the Web  · p42
+  - Summary  · p43
+- Chapter 4: Using the threading and concurrent.futures Modules  · p44
+  - Defining threads  · p44
+    - Advantages and disadvantages of using threads  · p45
+    - Understanding different kinds of threads  · p45
+    - Defining the states of a thread  · p46
+    - Choosing between threading and _thread  · p47
+  - Using threading to obtain the Fibonacci series term with multiple inputs  · p47
+  - Crawling the Web using the concurrent.futures module  · p51
+  - Summary  · p55
+- Chapter 5: Using Multiprocessing and ProcessPoolExecutor  · p56
+  - Understanding the concept of a process  · p56
+    - Understanding the process model  · p57
+      - Defining the states of a process  · p57
+  - Implementing multiprocessing communication  · p57
+    - Using multiprocessing.Pipe  · p58
+    - Understanding multiprocessing.Queue  · p60
+  - Using multiprocessing to compute Fibonacci series terms with multiple inputs  · p60
+  - Crawling the Web using ProcessPoolExecutor  · p63
+  - Summary  · p66
+- Chapter 6: Utilizing Parallel Python  · p68
+  - Understanding interprocess communication  · p68
+    - Exploring named pipes  · p69
+    - Using named pipes with Python  · p69
+      - Writing in a named pipe  · p70
+      - Reading named pipes  · p71
+  - Discovering PP  · p72
+  - Using PP to calculate the Fibonacci series term on SMP architecture  · p74
+  - Using PP to make a distributed Web crawler  · p76
+  - Summary  · p81
+- Chapter 7: Distributing Tasks with Celery  · p82
+  - Understanding Celery  · p82
+    - Why use Celery?  · p83
+  - Understanding Celery's architecture  · p83
+    - Working with tasks  · p84
+    - Discovering message transport (broker)  · p85
+    - Understanding workers  · p85
+    - Understanding result backends  · p86
+  - Setting up the environment  · p86
+    - Setting up the client machine  · p86
+    - Setting up the server machine  · p88
+  - Dispatching a simple task  · p88
+  - Using Celery to obtain a Fibonacci series term  · p91
+  - Defining queues by task types  · p94
+  - Using Celery to make a distributed Web crawler  · p96
+  - Summary  · p99
+- Chapter 8: Doing Things Asynchronously  · p100
+  - Understanding blocking, nonblocking, and asynchronous operations  · p100
+    - Understanding blocking operations  · p101
+    - Understanding nonblocking operations  · p101
+    - Understanding asynchronous operations  · p101
+  - Understanding event loop  · p102
+    - Polling functions  · p102
+    - Using event loops  · p104
+  - Using asyncio  · p104
+    - Understanding coroutines and futures  · p105
+      - Using coroutine and asyncio.Future  · p105
+      - Using asyncio.Task  · p107
+      - Using an incompatible library with asyncio  · p108
+  - Summary  · p111
+- Index  · p114
+  - Uploaded by [StormRG]  · p118

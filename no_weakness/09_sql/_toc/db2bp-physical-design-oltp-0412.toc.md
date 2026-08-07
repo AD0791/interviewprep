@@ -1,0 +1,94 @@
+# TOC — DB2BP_Physical_Design_OLTP_0412.pdf
+
+*Extracted by `_tools/extract_toc.py` (outline). 90 entries. Machine-generated — do not hand-edit.*
+
+- Contents  · p5
+- Figures  · p7
+- Executive Summary  · p9
+- Introduction to physical database design  · p11
+- OLTP workload characteristics  · p13
+- Physical database design  · p15
+- Data modeling  · p17
+  - IBM InfoSphere Data Architect  · p18
+  - Logical to Physical database design  · p18
+  - Best practices  · p18
+- Storage systems  · p19
+  - Disk arrays  · p19
+  - Best practices  · p20
+- Table spaces and Buffer pools  · p21
+  - Table space design for OLTP workloads  · p21
+  - Buffer pool design  · p23
+  - Best practices  · p25
+- Data types  · p27
+  - Data type selection  · p27
+  - Best practices  · p30
+- Tables  · p31
+  - Base tables  · p31
+  - Splitting tables  · p31
+    - Range partitioned tables  · p32
+    - MDC tables  · p32
+    - RCT tables  · p33
+  - Temporary tables  · p34
+  - Table storage and performance  · p34
+  - Best practices  · p35
+- Indexes  · p37
+  - Types of indexes  · p37
+  - Index guidelines for OLTP workload  · p37
+  - Indexes for range partitioned tables  · p39
+  - Clustering indexes  · p39
+  - Indexes for tables with XML data  · p40
+  - Adjust indexes design  · p40
+  - Best practices  · p41
+- Database transaction logs  · p43
+  - Configuring transaction logging  · p44
+  - Mirror log path  · p44
+  - Data and index compression  · p45
+  - Best practices  · p45
+- Data and index compression  · p47
+  - Row compression  · p47
+  - Index compression  · p51
+  - Best practices  · p52
+- Query design  · p53
+  - OLTP workload queries  · p53
+  - Isolation levels  · p53
+  - Application deadlocks  · p54
+  - Performance and monitoring  · p55
+  - Best practices  · p57
+- Database sizing and capacity management  · p59
+  - Estimating system resources and designing a balanced system  · p59
+  - Self-tuning memory manager (STMM)  · p62
+  - DB2 Configuration Advisor  · p63
+  - Best practices  · p65
+- Reliability, availability, and scalability  · p67
+  - DB2 High Availability Disaster Recovery feature  · p68
+  - DB2 pureScale feature  · p69
+  - Best practices  · p71
+- Operation and maintenance of your database systems  · p73
+  - Recovery strategy  · p73
+  - Maintenance window  · p74
+  - Performance monitoring and tuning  · p74
+  - Testing environments  · p74
+  - Best practices  · p75
+- Best practices summary  · p77
+- Conclusion  · p83
+- Important references  · p85
+- Contributors  · p87
+- Notices  · p89
+  - Trademarks  · p91
+- Index  · p93
+  - A  · p93
+  - B  · p93
+  - C  · p93
+  - D  · p93
+  - E  · p93
+  - I  · p93
+  - L  · p93
+  - M  · p93
+  - O  · p94
+  - P  · p94
+  - Q  · p94
+  - R  · p94
+  - S  · p94
+  - T  · p94
+  - W  · p95
+  - X  · p95

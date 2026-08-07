@@ -1,0 +1,206 @@
+# TOC — Sets, Logic and Maths for Computing.pdf
+
+*Extracted by `_tools/extract_toc.py` (outline). 202 entries. Machine-generated — do not hand-edit.*
+
+- Cover  · p1
+- Sets, Logic and Mathsfor Computing  · p4
+- Preface  · p6
+- Acknowledgements  · p14
+- Contents  · p16
+- List of Figures  · p22
+- 1 Collecting Things Together: Sets  · p24
+  - 1.1 The Intuitive Concept of a Set  · p24
+  - 1.2 Basic Relations Between Sets  · p25
+    - 1.2.1 Inclusion  · p25
+    - 1.2.2 Identity and Proper Inclusion  · p26
+    - 1.2.3 Diagrams  · p30
+    - 1.2.4 Ways of Defining a Set  · p32
+  - 1.3 The Empty Set  · p33
+    - 1.3.1 Emptiness  · p33
+    - 1.3.2 Disjoint Sets  · p34
+  - 1.4 Boolean Operations on Sets  · p34
+    - 1.4.1 Intersection  · p34
+    - 1.4.2 Union  · p36
+    - 1.4.3 Difference and Complement  · p39
+  - 1.5 Generalized Union and Intersection  · p41
+  - 1.6 Power Sets  · p43
+  - Selected Reading  · p48
+- 2 Comparing Things: Relations  · p49
+  - 2.1 Ordered Tuples, Cartesian Products and Relations  · p49
+    - 2.1.1 Ordered Tuples  · p50
+    - 2.1.2 Cartesian Products  · p50
+    - 2.1.3 Relations  · p52
+  - 2.2 Tables and Digraphs for Relations  · p54
+    - 2.2.1 Tables  · p55
+    - 2.2.2 Digraphs  · p55
+  - 2.3 Operations on Relations  · p56
+    - 2.3.1 Converse  · p57
+    - 2.3.2 Join, Projection, Selection  · p58
+    - 2.3.3 Composition  · p60
+    - 2.3.4 Image  · p62
+  - 2.4 Reflexivity and Transitivity  · p63
+    - 2.4.1 Reflexivity  · p64
+    - 2.4.2 Transitivity  · p65
+  - 2.5 Equivalence Relations and Partitions  · p66
+    - 2.5.1 Symmetry  · p66
+    - 2.5.2 Equivalence Relations  · p66
+    - 2.5.3 Partitions  · p68
+    - 2.5.4 The Partition/Equivalence Correspondence  · p69
+  - 2.6 Relations for Ordering  · p71
+    - 2.6.1 Partial Order  · p71
+    - 2.6.2 Linear Orderings  · p72
+    - 2.6.3 Strict Orderings  · p72
+  - 2.7 Closing with Relations  · p74
+    - 2.7.1 Transitive Closure of a Relation  · p74
+    - 2.7.2 Closure of a Set Under a Relation  · p76
+  - Selected Reading  · p78
+- 3 Associating One Item with Another: Functions  · p79
+  - 3.1 What Is a Function?  · p79
+  - 3.2 Operations on Functions  · p82
+    - 3.2.1 Domain and Range  · p82
+    - 3.2.2 Restriction, Image, Closure  · p83
+    - 3.2.3 Composition  · p84
+    - 3.2.4 Inverse  · p85
+  - 3.3 Injections, Surjections, Bijections  · p86
+    - 3.3.1 Injectivity  · p86
+    - 3.3.2 Surjectivity  · p87
+    - 3.3.3 Bijective Functions  · p89
+  - 3.4 Using Functions to Compare Size  · p90
+    - 3.4.1 Equinumerosity  · p90
+    - 3.4.2 Cardinal Comparison  · p92
+    - 3.4.3 The Pigeonhole Principle  · p92
+  - 3.5 Some Handy Functions  · p94
+    - 3.5.1 Identity Functions  · p94
+    - 3.5.2 Constant Functions  · p94
+    - 3.5.3 Projection Functions  · p95
+    - 3.5.4 Characteristic Functions  · p95
+  - 3.6 Families and Sequences  · p96
+    - 3.6.1 Families of Sets  · p96
+    - 3.6.2 Sequences and Suchlike  · p97
+  - Selected Reading  · p100
+- 4 Recycling Outputs as Inputs: Induction and Recursion  · p101
+  - 4.1 What Are Induction and Recursion?  · p101
+  - 4.2 Proof by Simple Induction on the Positive Integers  · p102
+    - 4.2.1 An Example  · p103
+    - 4.2.2 The Principle Behind the Example  · p104
+  - 4.3 Definition by Simple Recursion on the Positive Integers  · p107
+  - 4.4 Evaluating Functions Defined by Recursion  · p109
+  - 4.5 Cumulative Induction and Recursion  · p111
+    - 4.5.1 Cumulative Recursive Definitions  · p111
+    - 4.5.2 Proof by Cumulative Induction  · p112
+    - 4.5.3 Simultaneous Recursion and Induction  · p114
+  - 4.6 Structural Recursion and Induction  · p115
+    - 4.6.1 Defining Sets by Structural Recursion  · p116
+    - 4.6.2 Proof by Structural Induction  · p119
+    - 4.6.3 Defining Functions by Structural Recursion on Their Domains  · p120
+  - 4.7 Recursion and Induction on Well-Founded Sets*  · p124
+    - 4.7.1 Well-Founded Sets  · p124
+    - 4.7.2 Proof by Well-Founded Induction  · p126
+    - 4.7.3 Defining Functions by Well-Founded Recursion on Their Domains  · p129
+    - 4.7.4 Recursive Programs  · p130
+  - Selected Reading  · p133
+- 5 Counting Things: Combinatorics  · p134
+  - 5.1 Basic Principles for Addition and Multiplication  · p134
+    - 5.1.1 Principles Considered Separately  · p135
+    - 5.1.2 Using the Two Principles Together  · p138
+  - 5.2 Four Ways of Selecting k Items Out of n  · p138
+    - 5.2.1 Order and Repetition  · p139
+    - 5.2.2 Connections with Functions  · p140
+  - 5.3 Counting Formulae: Permutations and Combinations  · p143
+    - 5.3.1 The Formula for Permutations  · p143
+    - 5.3.2 Counting Combinations  · p145
+  - 5.4 Selections Allowing Repetition  · p147
+    - 5.4.1 Permutations with Repetition Allowed  · p148
+    - 5.4.2 Combinations with Repetition Allowed  · p149
+  - 5.5 Rearrangements and Partitions*  · p151
+    - 5.5.1 Rearrangements  · p151
+    - 5.5.2 Counting Configured Partitions  · p153
+  - Selected Reading  · p157
+- 6 Weighing the Odds: Probability  · p158
+  - 6.1 Finite Probability Spaces  · p158
+    - 6.1.1 Basic Definitions  · p159
+    - 6.1.2 Properties of Probability Functions  · p160
+  - 6.2 Philosophy and Applications  · p162
+    - 6.2.1 Philosophical Interpretations  · p162
+    - 6.2.2 The Art of Applying Probability Theory  · p164
+    - 6.2.3 Digression: A Glimpse of the Infinite Case*  · p164
+  - 6.3 SomeSimpleProblems  · p165
+  - 6.4 Conditional Probability  · p168
+    - 6.4.1 The Ratio Definition  · p168
+    - 6.4.2 Applying Conditional Probability  · p170
+  - 6.5 Interlude: Simpson’s Paradox*  · p174
+  - 6.6 Independence  · p176
+  - 6.7 Bayes’ Theorem  · p178
+  - 6.8 Expectation*  · p180
+  - Selected Reading  · p185
+- 7 Squirrel Math: Trees  · p186
+  - 7.1 My First Tree  · p186
+  - 7.2 Rooted Trees  · p188
+    - 7.2.1 Explicit Definition  · p188
+    - 7.2.2 Recursive Definition  · p191
+  - 7.3 Working with Trees  · p192
+    - 7.3.1 Trees Grow Everywhere  · p192
+    - 7.3.2 Labelled and Ordered Trees  · p193
+  - 7.4 Interlude: Parenthesis-Free Notation  · p196
+  - 7.5 Binary Trees  · p197
+  - 7.6 Unrooted Trees  · p201
+    - 7.6.1 Definition  · p201
+    - 7.6.2 Properties  · p202
+    - 7.6.3 Spanning Trees  · p206
+  - Selected Reading  · p209
+- 8 Yea and Nay: Propositional Logic  · p210
+  - 8.1 What Is Logic?  · p210
+  - 8.2 Truth-Functional Connectives  · p211
+  - 8.3 Tautological Relations  · p214
+    - 8.3.1 The Language of Propositional Logic  · p215
+    - 8.3.2 Tautological Implication  · p216
+    - 8.3.3 Tautological Equivalence  · p218
+    - 8.3.4 Tautologies and Contradictions  · p221
+  - 8.4 Normal Forms  · p223
+    - 8.4.1 Disjunctive Normal Form  · p223
+    - 8.4.2 Conjunctive Normal Form*  · p225
+    - 8.4.3 Eliminating Redundant Letters  · p227
+    - 8.4.4 Most Modular Version  · p228
+  - 8.5 Semantic Decomposition Trees  · p230
+  - Selected Reading  · p236
+- 9 Something About Everything: Quantificational Logic  · p237
+  - 9.1 The Language of Quantifiers  · p237
+    - 9.1.1 Some Examples  · p238
+    - 9.1.2 Systematic Presentation of the Language  · p239
+    - 9.1.3 Freedom and Bondage  · p243
+  - 9.2 Some Basic Logical Equivalences  · p244
+    - 9.2.1 Quantifier Interchange  · p244
+    - 9.2.2 Distribution  · p245
+    - 9.2.3 Vacuity and Relettering  · p246
+  - 9.3 Two Semantics for Quantificational Logic  · p247
+    - 9.3.1 The Common Part of the Two Semantics  · p247
+    - 9.3.2 Substitutional Reading  · p249
+    - 9.3.3 The x-Variant Reading  · p251
+  - 9.4 Semantic Analysis  · p253
+    - 9.4.1 Logical Implication  · p253
+    - 9.4.2 Clean Substitutions  · p256
+    - 9.4.3 Fundamental Rules  · p256
+    - 9.4.4 Identity  · p258
+  - Selected Reading  · p261
+- 10 Just Supposing: Proof and Consequence  · p262
+  - 10.1 Elementary Derivations  · p262
+    - 10.1.1 My First Derivation  · p262
+    - 10.1.2 The Logic Behind Chaining  · p264
+  - 10.2 Consequence Relations  · p266
+    - 10.2.1 The Tarski Conditions  · p266
+    - 10.2.2 Consequence and Chaining  · p268
+    - 10.2.3 Consequence as an Operation*  · p270
+  - 10.3 A Higher-Level Proof Strategy  · p271
+    - 10.3.1 Informal Conditional Proof  · p271
+    - 10.3.2 Conditional Proof as a Formal Rule  · p273
+    - 10.3.3 Flattening Split-Level Proofs  · p275
+  - 10.4 Other Higher-Level Proof Strategies  · p276
+    - 10.4.1 Disjunctive Proof and Proof by Cases  · p276
+    - 10.4.2 Proof by Contradiction  · p279
+    - 10.4.3 Rules with Quantifiers  · p282
+  - 10.5 Proofs as Recursive Structures*  · p285
+    - 10.5.1 Second-Level Proofs  · p285
+    - 10.5.2 Split-Level Proofs  · p287
+    - 10.5.3 Four Views of Mount Fuji  · p288
+  - Selected Reading  · p293
+- Index  · p294

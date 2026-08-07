@@ -1,0 +1,130 @@
+# TOC — app-design-workbook-AU.pdf
+
+*Extracted by `_tools/extract_toc.py` (slides[1-127]). 126 entries. Machine-generated — do not hand-edit.*
+
+- Welcome  · p2
+- How to Use This Workbook  · p3
+- What You’ll Need  · p4
+- Keynote Basics  · p5
+- App Design Cycle  · p6
+- Define  · p7
+- Define !  · p8
+- Are there questions you or others think about often?  · p9
+- Explore Code  · p10
+- create a new playground.  · p11
+- Add a line of code that will display text in Swift code:  · p12
+- Hello, World! Your playground page should now look like this:  · p13
+- Example  · p14
+- Explore Your Users Who is this person? How do they describe themselves?  · p15
+- Consider Diversity Ages Genders  · p16
+- Example  · p17
+- Summarise Your Audience What’s the most important concern in a solution?  · p18
+- Define !  · p19
+- Example  · p20
+- Analyse Causes Users are having this problem:  · p21
+- This app is interesting because: I like/dislike this app because:  · p22
+- Map Bluetooth®  · p23
+- Explore Code  · p24
+- Create a new page and add code to create If it’s not showing, open the sidebar by  · p25
+- Map This is the right code to create a map, but MKMapView is in a specialised framework.  · p26
+- and display the map. the rst line:  · p27
+- Map Your completed exercise should now look like this:  · p28
+- Define !  · p29
+- Our app will be di erent from these apps by:  · p30
+- Explore Code  · p31
+- Model and View Enter the following line of Swift code:  · p32
+- the beginning of your playground:  · p33
+- Code!" by assigning it to a new variable.  · p34
+- Model and View Your completed exercise should now look like this:  · p35
+- Example  · p36
+- De ne Features Current have focused primarily on  · p37
+- Explore Code  · p38
+- "No Palm Oil Challenge"  · p39
+- "\(name) Challenge" … is like … "________ Challenge"  · p40
+- Strings Your completed exercise should now look like this:  · p41
+- Example  · p42
+- Example  · p43
+- Describe Key Functions For this feature:  · p44
+- Example  · p45
+- Prototype  · p46
+- Prototype  · p47
+- Example  · p48
+- Outline Screens  · p49
+- 1. Create a new Keynote le.  · p50
+- Explore Code  · p51
+- RecyclingItem and Achievement. By convention, the name of a type always begins with a  · p52
+- or diagram can help:  · p53
+- Data and Naming Your completed exercise should now look like this:  · p54
+- Example  · p55
+- Group Screens  · p56
+- 1. Order the screen  · p57
+- Explore Code  · p58
+- struct Challenge {  · p59
+- Make an instance of a struct by supplying open parenthesis (:  · p60
+- instance. print(noStrawsChallenge.title)  · p61
+- Types and Properties Your completed exercise should now look like this:  · p62
+- Link Screens  · p63
+- Link Screens  · p64
+- For each item that  · p65
+- Prototype  · p66
+- Example  · p67
+- Set up a global tab bar.  · p68
+- Create a tab bar for each main screen.  · p69
+- Example  · p70
+- For each screen in your prototype:  · p71
+- Example  · p72
+- Prototype  · p73
+- Add Interface Elements  · p74
+- 1. Review the UI elements in the  · p75
+- Explore Code  · p76
+- Create a button that prints to the console. import PlaygroundSupport  · p77
+- Create a variable that the button will update.  · p78
+- the new value on the existing value of numberCompleted. You might think to assign 1 to  · p79
+- Update the variable when the button is clicked. looks like this:  · p80
+- Event-Based Programming Your completed exercise should now look like this:  · p81
+- Prototype  · p82
+- Tap Targets  · p83
+- Many actions in iOS require the user to  · p84
+- Weight and Balance  · p85
+- Explore Code  · p86
+- Composing Views Start by importing your two favourite frameworks:  · p87
+- with a VStack that arranges three di erently coloured views.  · p88
+- Nest stacks. with the code below and click Run My Code.  · p89
+- Composing Views Your completed exercise should now look like this:  · p90
+- Alignment  · p91
+- Prototype  · p92
+- Personality Primary colour Icon set Imagery examples  · p93
+- 1. Update important elements in your app (for  · p94
+- Icon  · p95
+- 1. Create a tap target link of your icon.  · p96
+- Test  · p97
+- Test  · p98
+- Example  · p99
+- De ne Tests Users want to do this with our app:  · p100
+- Create User Journeys  · p101
+- Example  · p102
+- De ne a Process We plan on testing these user journeys:  · p103
+- Create an introduction that you’ll use with  · p104
+- Test  · p105
+- Example  · p106
+- Describe each test and the order in which  · p107
+- Example  · p108
+- Write Scripts We want to understand more about:  · p109
+- Make a plan for what you’ll do when the  · p110
+- Test  · p111
+- Gather Users Participant’s name Date and time Location  · p112
+- Last Check  · p113
+- Validate  · p114
+- Example  · p115
+- Gather Notes  · p116
+- Example  · p117
+- Form Key Insights  · p118
+- Example  · p119
+- Draw Conclusions We tested this task:  · p120
+- Iterate  · p121
+- Example  · p122
+- Go Back: De ne If you heard comments like these: Revisit these sections in De ne  · p123
+- Go Back: Prototype If you heard comments like these: Revisit these sections in Prototype  · p124
+- Go Back: Test If you heard comments like these: Revisit these sections in Test  · p125
+- Learn to Code with Apple.  · p126
+- any use of such marks by Apple is under licence. May 2021  · p127

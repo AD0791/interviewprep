@@ -1,0 +1,255 @@
+# TOC — Data-Structures-and-Algorithms-Narasimha-Karumanchi.pdf
+
+*Extracted by `_tools/extract_toc.py` (outline). 251 entries. Machine-generated — do not hand-edit.*
+
+- Title Page  · p2
+- Copyright Page  · p3
+- Acknowledgements  · p4
+- Preface  · p5
+- Other Books by Narasimha Karumanchi  · p7
+- Table of Contents  · p8
+- 1. Introduction  · p16
+- 1.1 Variables  · p16
+- 1.2 Data Types  · p17
+- 1.3 Data Structures  · p18
+- 1.4 Abstract Data Types (ADTs)  · p18
+- 1.5 What is an Algorithm?  · p19
+- 1.6 Why the Analysis of Algorithms?  · p19
+- 1.7 Goal of the Analysis of Algorithms  · p20
+- 1.8 What is Running Time Analysis?  · p20
+- 1.9 How to Compare Algorithms  · p20
+- 1.10 What is Rate of Growth?  · p20
+- 1.11 Commonly Used Rates of Growth  · p21
+- 1.12 Types of Analysis  · p23
+- 1.13 Asymptotic Notation  · p24
+- 1.14 Big-O Notation [Upper Bounding Function]  · p24
+- 1.15 Omega-Q Notation [Lower Bounding Function]  · p26
+- 1.16 Theta-Θ Notation [Order Function]  · p28
+- 1.17 Important Notes  · p29
+- 1.18 Why is it called Asymptotic Analysis?  · p29
+- 1.19 Guidelines for Asymptotic Analysis  · p30
+- 1.20 Simplyfying properties of asymptotic notations  · p32
+- 1.21 Commonly used Logarithms and Summations  · p32
+- 1.22 Master Theorem for Divide and Conquer Recurrences  · p33
+- 1.23 Divide and Conquer Master Theorem: Problems & Solutions  · p34
+- 1.24 Master Theorem for Subtract and Conquer Recurrences  · p35
+- 1.25 Variant of Subtraction and Conquer Master Theorem  · p36
+- 1.26 Method of Guessing and Confirming  · p36
+- 1.27 Amortized Analysis  · p38
+- 1.28 Algorithms Analysis: Problems & Solutions  · p39
+- 2. Recursion and Backtracking  · p62
+- 2.1 Introduction  · p62
+- 2.2 What is Recursion?  · p62
+- 2.3 Why Recursion?  · p63
+- 2.4 Format of a Recursive Function  · p63
+- 2.5 Recursion and Memory (Visualization)  · p64
+- 2.6 Recursion versus Iteration  · p65
+- 2.7 Notes on Recursion  · p66
+- 2.8 Example Algorithms of Recursion  · p66
+- 2.9 Recursion: Problems & Solutions  · p67
+- 2.10 What is Backtracking?  · p68
+- 2.11 Example Algorithms of Backtracking  · p69
+- 2.12 Backtracking: Problems & Solutions  · p69
+- 3. Linked Lists  · p74
+- 3.1 What is a Linked List?  · p74
+- 3.2 Linked Lists ADT  · p75
+- 3.3 Why Linked Lists?  · p75
+- 3.4 Arrays Overview  · p75
+- 3.5 Comparison of Linked Lists with Arrays & Dynamic Arrays  · p77
+- 3.6 Singly Linked Lists  · p78
+- 3.7 Doubly Linked Lists  · p88
+- 3.8 Circular Linked Lists  · p96
+- 3.9 A Memory-efficient Doubly Linked List  · p107
+- 3.10 Unrolled Linked Lists  · p109
+- 3.11 Skip Lists  · p118
+- 3.12 Linked Lists: Problems & Solutions  · p123
+- 4. Stacks  · p163
+- 4.1 What is a Stack?  · p163
+- 4.2 How Stacks are used  · p164
+- 4.3 Stack ADT  · p164
+- 4.4 Applications  · p165
+- 4.5 Implementation  · p165
+- 4.6 Comparison of Implementations  · p173
+- 4.7 Stacks: Problems & Solutions  · p174
+- 5. Queues  · p205
+- 5.1 What is a Queue?  · p205
+- 5.2 How are Queues Used?  · p206
+- 5.3 Queue ADT  · p206
+- 5.4 Exceptions  · p206
+- 5.5 Applications  · p207
+- 5.6 Implementation  · p207
+- 5.7 Queues: Problems & Solutions  · p214
+- 6. Trees  · p224
+- 6.1 What is a Tree?  · p224
+- 6.2 Glossary  · p224
+- 6.3 Binary Trees  · p227
+- 6.4 Types of Binary Trees  · p228
+- 6.5 Properties of Binary Trees  · p229
+- 6.6 Binary Tree Traversals  · p232
+- 6.7 Generic Trees (n-ary Trees)  · p273
+- 6.8 Threaded Binary Tree Traversals (Stack or Queue-less Traversals)  · p284
+- 6.9 Expression Trees  · p295
+- 6.10 XOR Trees  · p299
+- 6.11 Binary Search Trees (BSTs)  · p301
+- 6.12 Balanced Binary Search Trees  · p329
+- 6.13 AVL (Adelson-Velskii and Landis) Trees  · p330
+- 6.14 Other Variations on Trees  · p362
+- 7. Priority Queues and Heaps  · p369
+- 7.1 What is a Priority Queue?  · p369
+- 7.2 Priority Queue ADT  · p370
+- 7.3 Priority Queue Applications  · p370
+- 7.4 Priority Queue Implementations  · p371
+- 7.5 Heaps and Binary Heaps  · p372
+- 7.6 Binary Heaps  · p374
+- 7.7 Heapsort  · p386
+- 7.8 Priority Queues [Heaps]: Problems & Solutions  · p387
+- 8. Disjoint Sets ADT  · p409
+- 8.1 Introduction  · p409
+- 8.2 Equivalence Relations and Equivalence Classes  · p409
+- 8.3 Disjoint Sets ADT  · p410
+- 8.4 Applications  · p411
+- 8.5 Tradeoffs in Implementing Disjoint Sets ADT  · p411
+- 8.8 Fast UNION Implementation (Slow FIND)  · p412
+- 8.9 Fast UNION Implementations (Quick FIND)  · p417
+- 8.10 Summary  · p423
+- 8.11 Disjoint Sets: Problems & Solutions  · p423
+- 9. Graph Algorithms  · p426
+- 9.1 Introduction  · p426
+- 9.2 Glossary  · p426
+- 9.3 Applications of Graphs  · p431
+- 9.4 Graph Representation  · p432
+- 9.5 Graph Traversals  · p437
+- 9.6 Topological Sort  · p449
+- 9.7 Shortest Path Algorithms  · p451
+- 9.8 Minimal Spanning Tree  · p461
+- 9.9 Graph Algorithms: Problems & Solutions  · p471
+- 10. Sorting  · p504
+- 10.1 What is Sorting?  · p504
+- 10.2 Why is Sorting Necessary?  · p504
+- 10.3 Classification of Sorting Algorithms  · p504
+- 10.4 Other Classifications  · p506
+- 10.5 Bubble Sort  · p506
+- 10.6 Selection Sort  · p508
+- 10.7 Insertion Sort  · p509
+- 10.8 Shell Sort  · p512
+- 10.9 Merge Sort  · p514
+- 10.10 Heap Sort  · p517
+- 10.11 Quicksort  · p518
+- 10.12 Tree Sort  · p522
+- 10.13 Comparison of Sorting Algorithms  · p522
+- 10.14 Linear Sorting Algorithms  · p523
+- 10.15 Counting Sort  · p523
+- 10.16 Bucket Sort (or Bin Sort)  · p524
+- 10.17 Radix Sort  · p525
+- 10.18 Topological Sort  · p526
+- 10.19 External Sorting  · p526
+- 10.20 Sorting: Problems & Solutions  · p528
+- 11. Searching  · p547
+- 11.1 What is Searching?  · p547
+- 11.2 Why do we need Searching?  · p547
+- 11.3 Types of Searching  · p548
+- 11.4 Unordered Linear Search  · p548
+- 11.5 Sorted/Ordered Linear Search  · p548
+- 11.6 Binary Search  · p549
+- 11.7 Interpolation Search  · p550
+- 11.8 Comparing Basic Searching Algorithms  · p553
+- 11.9 Symbol Tables and Hashing  · p553
+- 11.10 String Searching Algorithms  · p553
+- 11.11 Searching: Problems & Solutions  · p553
+- 12. Selection Algorithms [Medians]  · p590
+- 12.1 What are Selection Algorithms?  · p590
+- 12.2 Selection by Sorting  · p590
+- 12.3 Partition-based Selection Algorithm  · p591
+- 12.4 Linear Selection Algorithm - Median of Medians Algorithm  · p591
+- 12.5 Finding the K Smallest Elements in Sorted Order  · p591
+- 12.6 Selection Algorithms: Problems & Solutions  · p591
+- 13. Symbol Tables  · p606
+- 13.1 Introduction  · p606
+- 13.2 What are Symbol Tables?  · p606
+- 13.3 Symbol Table Implementations  · p607
+- 13.4 Comparison Table of Symbols for Implementations  · p608
+- 14. Hashing  · p610
+- 14.1 What is Hashing?  · p610
+- 14.2 Why Hashing?  · p610
+- 14.3 HashTable ADT  · p610
+- 14.4 Understanding Hashing  · p611
+- 14.5 Components of Hashing  · p613
+- 14.6 Hash Table  · p613
+- 14.7 Hash Function  · p613
+- 14.8 Load Factor  · p614
+- 14.9 Collisions  · p615
+- 14.10 Collision Resolution Techniques  · p615
+- 14.11 Separate Chaining  · p615
+- 14.12 Open Addressing  · p616
+- 14.13 Comparison of Collision Resolution Techniques  · p619
+- 14.14 How Hashing Gets O(1) Complexity?  · p620
+- 14.15 Hashing Techniques  · p621
+- 14.16 Problems for which Hash Tables are not suitable  · p621
+- 14.17 Bloom Filters  · p621
+- 14.18 Hashing: Problems & Solutions  · p624
+- 15. String Algorithms  · p640
+- 15.1 Introduction  · p640
+- 15.2 String Matching Algorithms  · p641
+- 15.3 Brute Force Method  · p641
+- 15.4 Rabin-Karp String Matching Algorithm  · p642
+- 15.5 String Matching with Finite Automata  · p643
+- 15.6 KMP Algorithm  · p645
+- 15.7 Boyer-Moore Algorithm  · p651
+- 15.8 Data Structures for Storing Strings  · p651
+- 15.9 Hash Tables for Strings  · p651
+- 15.10 Binary Search Trees for Strings  · p652
+- 15.11 Tries  · p652
+- 15.12 Ternary Search Trees  · p655
+- 15.13 Comparing BSTs, Tries and TSTs  · p663
+- 15.14 Suffix Trees  · p664
+- 15.15 String Algorithms: Problems & Solutions  · p668
+- 16. Algorithms Design Techniques  · p685
+- 16.1 Introduction  · p685
+- 16.2 Classification  · p685
+- 16.3 Classification by Implementation Method  · p686
+- 16.4 Classification by Design Method  · p687
+- 16.5 Other Classifications  · p688
+- 17. Greedy Algorithms  · p690
+- 17.1 Introduction  · p690
+- 17.2 Greedy Strategy  · p690
+- 17.3 Elements of Greedy Algorithms  · p691
+- 17.4 Does Greedy Always Work?  · p691
+- 17.5 Advantages and Disadvantages of Greedy Method  · p691
+- 17.6 Greedy Applications  · p691
+- 17.7 Understanding Greedy Technique  · p692
+- 17.8 Greedy Algorithms: Problems & Solutions  · p696
+- 18. Divide and Conquer Algorithms  · p706
+- 18.1 Introduction  · p706
+- 18.2 What is the Divide and Conquer Strategy?  · p706
+- 18.3 Does Divide and Conquer Always Work?  · p707
+- 18.4 Divide and Conquer Visualization  · p707
+- 18.5 Understanding Divide and Conquer  · p708
+- 18.6 Advantages of Divide and Conquer  · p708
+- 18.7 Disadvantages of Divide and Conquer  · p709
+- 18.8 Master Theorem  · p709
+- 18.9 Divide and Conquer Applications  · p709
+- 18.10 Divide and Conquer: Problems & Solutions  · p710
+- 19. Dynamic Programming  · p734
+- 19.1 Introduction  · p734
+- 19.2 What is Dynamic Programming Strategy?  · p734
+- 19.3 Properties of Dynamic Programming Strategy  · p735
+- 19.4 Can Dynamic Programming Solve All Problems?  · p735
+- 19.5 Dynamic Programming Approaches  · p735
+- 19.6 Examples of Dynamic Programming Algorithms  · p736
+- 19.7 Understanding Dynamic Programming  · p736
+- 19.8 Longest Common Subsequence  · p741
+- 19.9 Dynamic Programming: Problems & Solutions  · p744
+- 20. Complexity Classes  · p795
+- 20.1 Introduction  · p795
+- 20.2 Polynomial/Exponential Time  · p796
+- 20.3 What is a Decision Problem?  · p796
+- 20.4 Decision Procedure  · p797
+- 20.5 What is a Complexity Class?  · p797
+- 20.6 Types of Complexity Classes  · p797
+- 20.7 Reductions  · p800
+- 20.8 Complexity Classes: Problems & Solutions  · p804
+- 21. Miscellaneous Concepts  · p808
+- 21.1 Introduction  · p808
+- 21.2 Hacks on Bit-wise Programming  · p808
+- 21.3 Other Programming Questions  · p816
+- References  · p827

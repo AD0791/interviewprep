@@ -1,0 +1,139 @@
+# TOC — Designing Event-Driven Systems.pdf
+
+*Extracted by `_tools/extract_toc.py` (outline). 135 entries. Machine-generated — do not hand-edit.*
+
+- Cover  · p1
+- Copyright  · p3
+- Table of Contents  · p4
+- Foreword  · p8
+- Preface  · p12
+  - How to Read This Book  · p14
+  - Acknowledgments  · p14
+- Part I. Setting the Stage  · p16
+  - Chapter 1. Introduction  · p18
+  - Chapter 2. The Origins of Streaming  · p24
+  - Chapter 3. Is Kafka What You Think It Is?  · p28
+    - Kafka Is Like REST but Asynchronous?  · p28
+    - Kafka Is Like a Service Bus?  · p29
+    - Kafka Is Like a Database?  · p30
+    - What Is Kafka Really? A Streaming Platform  · p30
+  - Chapter 4. Beyond Messaging: An Overview of the Kafka Broker  · p32
+    - The Log: An Efficient Structure for Retaining and Distributing Messages  · p33
+    - Linear Scalability  · p34
+    - Segregating Load in Multiservice Ecosystems  · p36
+    - Maintaining Strong Ordering Guarantees  · p36
+    - Ensuring Messages Are Durable  · p37
+    - Load-Balance Services and Make Them Highly Available  · p38
+    - Compacted Topics  · p39
+    - Long-Term Data Storage  · p40
+    - Security  · p40
+    - Summary  · p40
+- Part II. Designing Event-Driven Systems  · p42
+  - Chapter 5. Events: A Basis for Collaboration  · p44
+    - Commands, Events, and Queries  · p45
+    - Coupling and Message Brokers  · p47
+      - Is Loose Coupling Always Good?  · p47
+      - Essential Data Coupling Is Unavoidable  · p49
+    - Using Events for Notification  · p49
+    - Using Events to Provide State Transfer  · p52
+    - Which Approach to Use  · p53
+    - The Event Collaboration Pattern  · p54
+    - Relationship with Stream Processing  · p56
+    - Mixing Request- and Event-Driven Protocols  · p57
+    - Summary  · p59
+  - Chapter 6. Processing Events with Stateful Functions  · p60
+    - Making Services Stateful  · p62
+      - The Event-Driven Approach  · p62
+      - The Pure (Stateless) Streaming Approach  · p63
+      - The Stateful Streaming Approach  · p64
+      - The Practicalities of Being Stateful  · p67
+    - Summary  · p67
+  - Chapter 7. Event Sourcing, CQRS, and Other Stateful Patterns  · p70
+    - Event Sourcing, Command Sourcing, and CQRS in a Nutshell  · p70
+    - Version Control for Your Data  · p72
+    - Making Events the Source of Truth  · p74
+    - Command Query Responsibility Segregation  · p76
+    - Materialized Views  · p77
+    - Polyglot Views  · p78
+    - Whole Fact or Delta?  · p79
+    - Implementing Event Sourcing and CQRS with Kafka  · p80
+      - Build In-Process Views with Tables and State Stores in Kafka Streams  · p80
+      - Writing Through a Database into a Kafka Topic with Kafka Connect  · p81
+      - Writing Through a State Store to a Kafka Topic in Kafka Streams  · p83
+      - Unlocking Legacy Systems with CDC  · p83
+      - Query a Read-Optimized View Created in a Database  · p84
+      - Memory Images/Prepopulated Caches  · p85
+      - The Event-Sourced View  · p86
+    - Summary  · p86
+- Part III. Rethinking Architecture at Company Scales  · p88
+  - Chapter 8. Sharing Data and Services Across an Organization  · p90
+    - Encapsulation Isn’t Always Your Friend  · p92
+    - The Data Dichotomy  · p94
+    - What Happens to Systems as They Evolve?  · p95
+      - The God Service Problem  · p95
+      - The REST-to-ETL Problem  · p96
+    - Make Data on the Outside a First-Class Citizen  · p98
+    - Don’t Be Afraid to Evolve  · p99
+    - Summary  · p100
+  - Chapter 9. Event Streams as a Shared Source of Truth  · p102
+    - A Database Inside Out  · p102
+    - Summary  · p105
+  - Chapter 10. Lean Data  · p106
+    - If Messaging Remembers, Databases Don’t Have To  · p106
+    - Take Only the Data You Need, Nothing More  · p107
+    - Rebuilding Event-Sourced Views  · p108
+      - Kafka Streams  · p108
+      - Databases and Caches  · p109
+      - Handling the Impracticalities of Data Movement  · p109
+    - Automation and Schema Migration  · p109
+      - The Data Divergence Problem  · p110
+    - Summary  · p111
+- Part IV. Consistency, Concurrency, and Evolution  · p114
+  - Chapter 11. Consistency and Concurrency in Event-Driven Systems  · p116
+    - Eventual Consistency  · p117
+      - Timeliness  · p119
+      - Collisions and Merging  · p120
+    - The Single Writer Principle  · p120
+      - Command Topic  · p122
+      - Single Writer Per Transition  · p123
+    - Atomicity with Transactions  · p123
+    - Identity and Concurrency Control  · p123
+    - Limitations  · p125
+    - Summary  · p125
+  - Chapter 12. Transactions, but Not as We Know Them  · p126
+    - The Duplicates Problem  · p126
+    - Using the Transactions API to Remove Duplicates  · p129
+    - Exactly Once Is Both Idempotence and Atomic Commit  · p130
+    - How Kafka’s Transactions Work Under the Covers  · p131
+    - Store State and Send Events Atomically  · p133
+    - Do We Need Transactions? Can We Do All This with Idempotence?  · p134
+    - What Can’t Transactions Do?  · p134
+    - Making Use of Transactions in Your Services  · p135
+    - Summary  · p135
+  - Chapter 13. Evolving Schemas and Data over Time  · p138
+    - Using Schemas to Manage the Evolution of Data in Time  · p138
+    - Handling Schema Change and Breaking Backward Compatibility  · p139
+    - Collaborating over Schema Change  · p141
+    - Handling Unreadable Messages  · p142
+    - Deleting Data  · p142
+      - Triggering Downstream Deletes  · p143
+    - Segregating Public and Private Topics  · p144
+    - Summary  · p144
+- Part V. Implementing Streaming Services with Kafka  · p146
+  - Chapter 14. Kafka Streams and KSQL  · p148
+    - A Simple Email Service Built with Kafka Streams and KSQL  · p148
+    - Windows, Joins, Tables, and State Stores  · p150
+    - Summary  · p153
+  - Chapter 15. Building Streaming Services  · p154
+    - An Order Validation Ecosystem  · p154
+    - Join-Filter-Process  · p155
+    - Event-Sourced Views in Kafka Streams  · p156
+    - Collapsing CQRS with a Blocking Read  · p157
+    - Scaling Concurrent Operations in Streaming Systems  · p157
+    - Rekey to Join  · p160
+    - Repartitioning and Staged Execution  · p161
+    - Waiting for N Events  · p162
+    - Reflecting on the Design  · p163
+    - A More Holistic Streaming Ecosystem  · p163
+    - Summary  · p165
+- About the Author  · p166

@@ -1,0 +1,50 @@
+# TOC — dokumen.pub_you-dont-know-js-yet-get-started-2nbsped-9781647862008.pdf
+
+*Extracted by `_tools/extract_toc.py` (outline). 46 entries. Machine-generated — do not hand-edit.*
+
+- Table of Contents  · p7
+- Foreword  · p10
+- Preface  · p13
+  - The Parts  · p13
+  - The Title?  · p15
+  - The Mission  · p16
+  - The Path  · p17
+- Chapter 1: What Is JavaScript?  · p20
+  - About This Book  · p20
+  - What's With That Name?  · p21
+  - Language Specification  · p23
+  - Many Faces  · p30
+  - Backwards & Forwards  · p32
+  - What's in an Interpretation?  · p39
+  - Strictly Speaking  · p46
+  - Defined  · p49
+- Chapter 2: Surveying JS  · p50
+  - Each File is a Program  · p51
+  - Values  · p52
+  - Declaring and Using Variables  · p58
+  - Functions  · p62
+  - Comparisons  · p65
+  - How We Organize in JS  · p72
+  - The Rabbit Hole Deepens  · p85
+- Chapter 3: Digging to the Roots of JS  · p86
+  - Iteration  · p87
+  - Closure  · p93
+  - this Keyword  · p97
+  - Prototypes  · p100
+  - Asking ``Why?''  · p107
+- Chapter 4: The Bigger Picture  · p108
+  - Pillar 1: Scope and Closure  · p109
+  - Pillar 2: Prototypes  · p110
+  - Pillar 3: Types and Coercion  · p111
+  - With the Grain  · p113
+  - In Order  · p115
+- Appendix A: Exploring Further  · p118
+  - Values vs. References  · p118
+  - So Many Function Forms  · p120
+  - Coercive Conditional Comparison  · p125
+  - Prototypal ``Classes''  · p128
+- Appendix B: Practice, Practice, Practice!  · p131
+  - Practicing Comparisons  · p131
+  - Practicing Closure  · p132
+  - Practicing Prototypes  · p133
+  - Suggested Solutions  · p136

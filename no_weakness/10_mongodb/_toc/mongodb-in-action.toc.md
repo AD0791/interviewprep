@@ -1,0 +1,346 @@
+# TOC — MongoDB in Action.pdf
+
+*Extracted by `_tools/extract_toc.py` (outline). 342 entries. Machine-generated — do not hand-edit.*
+
+- Front cover  · p1
+- brief contents  · p8
+- contents  · p10
+- preface  · p18
+- acknowledgments  · p20
+- about this book  · p22
+  - How to use this book  · p22
+  - Roadmap  · p23
+  - Code conventions and downloads  · p23
+  - Software requirements  · p24
+  - Author Online  · p24
+- about the cover illustration  · p25
+- Part 1—Getting started  · p26
+  - 1 A database for the modern web  · p28
+    - 1.1 Built for the internet  · p30
+    - 1.2 MongoDB’s key features  · p31
+      - 1.2.1 Document data model  · p31
+      - 1.2.2 Ad hoc queries  · p35
+      - 1.2.3 Indexes  · p35
+      - 1.2.4 Replication  · p36
+      - 1.2.5 Speed and durability  · p37
+      - 1.2.6 Scaling  · p39
+    - 1.3 MongoDB’s core server and tools  · p40
+      - 1.3.1 Core server  · p41
+      - 1.3.2 JavaScript shell  · p41
+      - 1.3.3 Database drivers  · p42
+      - 1.3.4 Command-line tools  · p43
+    - 1.4 Why MongoDB?  · p43
+      - 1.4.1 MongoDB versus other databases  · p44
+      - 1.4.2 Use cases and production deployments  · p47
+    - 1.5 Tips and limitations  · p49
+    - 1.6 History of MongoDB  · p50
+    - 1.7 Additional resources  · p52
+    - 1.8 Summary  · p53
+  - 2 MongoDB through the JavaScript shell  · p54
+    - 2.1 Diving into the MongoDB shell  · p55
+      - 2.1.1 Starting the shell  · p55
+      - 2.1.2 Databases, collections, and documents  · p56
+      - 2.1.3 Inserts and queries  · p57
+      - 2.1.4 Updating documents  · p59
+      - 2.1.5 Deleting data  · p63
+      - 2.1.6 Other shell features  · p63
+    - 2.2 Creating and querying with indexes  · p64
+      - 2.2.1 Creating a large collection  · p64
+      - 2.2.2 Indexing and explain( )  · p66
+    - 2.3 Basic administration  · p71
+      - 2.3.1 Getting database information  · p71
+      - 2.3.2 How commands work  · p73
+    - 2.4 Getting help  · p74
+    - 2.5 Summary  · p76
+  - 3 Writing programs using MongoDB  · p77
+    - 3.1 MongoDB through the Ruby lens  · p78
+      - 3.1.1 Installing and connecting  · p78
+      - 3.1.2 Inserting documents in Ruby  · p80
+      - 3.1.3 Queries and cursors  · p81
+      - 3.1.4 Updates and deletes  · p82
+      - 3.1.5 Database commands  · p83
+    - 3.2 How the drivers work  · p84
+      - 3.2.1 Object ID generation  · p84
+    - 3.3 Building a simple application  · p86
+      - 3.3.1 Setting up  · p86
+      - 3.3.2 Gathering data  · p87
+      - 3.3.3 Viewing the archive  · p90
+    - 3.4 Summary  · p94
+- Part 2—Application development in MongoDB  · p96
+  - 4 Document-oriented data  · p98
+    - 4.1 Principles of schema design  · p99
+    - 4.2 Designing an e-commerce data model  · p100
+      - 4.2.1 Schema basics  · p101
+      - 4.2.2 Users and orders  · p105
+      - 4.2.3 Reviews  · p108
+    - 4.3 Nuts and bolts: On databases, collections, and documents  · p109
+      - 4.3.1 Databases  · p109
+      - 4.3.2 Collections  · p112
+      - 4.3.3 Documents and insertion  · p117
+    - 4.4 Summary  · p121
+  - 5 Constructing queries  · p123
+    - 5.1 E-commerce queries  · p124
+      - 5.1.1 Products, categories, and reviews  · p124
+      - 5.1.2 Users and orders  · p126
+    - 5.2 MongoDB’s query language  · p128
+      - 5.2.1 Query criteria and selectors  · p128
+      - 5.2.2 Query options  · p142
+    - 5.3 Summary  · p144
+  - 6 Aggregation  · p145
+    - 6.1 Aggregation framework overview  · p146
+    - 6.2 E-commerce aggregation example  · p148
+      - 6.2.1 Products, categories, and reviews  · p150
+      - 6.2.2 User and order  · p157
+    - 6.3 Aggregation pipeline operators  · p160
+      - 6.3.1 $project  · p161
+      - 6.3.2 $group  · p161
+      - 6.3.3 $match, $sort, $skip, $limit  · p163
+      - 6.3.4 $unwind  · p164
+      - 6.3.5 $out  · p164
+    - 6.4 Reshaping documents  · p165
+      - 6.4.1 String functions  · p166
+      - 6.4.2 Arithmetic functions  · p167
+      - 6.4.3 Date functions  · p167
+      - 6.4.4 Logical functions  · p168
+      - 6.4.5 Set Operators  · p169
+      - 6.4.6 Miscellaneous functions  · p170
+    - 6.5 Understanding aggregation pipeline performance  · p171
+      - 6.5.1 Aggregation pipeline options  · p172
+      - 6.5.2 The aggregation framework’s explain( ) function  · p172
+      - 6.5.3 allowDiskUse option  · p176
+      - 6.5.4 Aggregation cursor option  · p176
+    - 6.6 Other aggregation capabilities  · p177
+      - 6.6.1 .count( ) and .distinct( )  · p178
+      - 6.6.2 map-reduce  · p178
+    - 6.7 Summary  · p181
+  - 7 Updates, atomic operations, and deletes  · p182
+    - 7.1 A brief tour of document updates  · p183
+      - 7.1.1 Modify by replacement  · p184
+      - 7.1.2 Modify by operator  · p184
+      - 7.1.3 Both methods compared  · p185
+      - 7.1.4 Deciding: replacement vs. operators  · p185
+    - 7.2 E-commerce updates  · p187
+      - 7.2.1 Products and categories  · p187
+      - 7.2.2 Reviews  · p192
+      - 7.2.3 Orders  · p193
+    - 7.3 Atomic document processing  · p196
+      - 7.3.1 Order state transitions  · p197
+      - 7.3.2 Inventory management  · p199
+    - 7.4 Nuts and bolts: MongoDB updates and deletes  · p204
+      - 7.4.1 Update types and options  · p204
+      - 7.4.2 Update operators  · p206
+      - 7.4.3 The findAndModify command  · p213
+      - 7.4.4 Deletes  · p214
+      - 7.4.5 Concurrency, atomicity, and isolation  · p215
+      - 7.4.6 Update performance notes  · p216
+    - 7.5 Reviewing update operators  · p217
+    - 7.6 Summary  · p218
+- Part 3—MongoDB mastery  · p220
+  - 8 Indexing and query optimization  · p222
+    - 8.1 Indexing theory  · p223
+      - 8.1.1 A thought experiment  · p223
+      - 8.1.2 Core indexing concepts  · p226
+      - 8.1.3 B-trees  · p230
+    - 8.2 Indexing in practice  · p232
+      - 8.2.1 Index types  · p232
+      - 8.2.2 Index administration  · p236
+    - 8.3 Query optimization  · p241
+      - 8.3.1 Identifying slow queries  · p242
+      - 8.3.2 Examining slow queries  · p246
+      - 8.3.3 Query patterns  · p266
+    - 8.4 Summary  · p268
+  - 9 Text search  · p269
+    - 9.1 Text searches—not just pattern matching  · p270
+      - 9.1.1 Text searches vs. pattern matching  · p271
+      - 9.1.2 Text searches vs. web page searches  · p272
+      - 9.1.3 MongoDB text search vs. dedicated text search engines  · p275
+    - 9.2 Manning book catalog data download  · p278
+    - 9.3 Defining text search indexes  · p280
+      - 9.3.1 Text index size  · p280
+      - 9.3.2 Assigning an index name and indexing all text fields in a collection  · p281
+    - 9.4 Basic text search  · p282
+      - 9.4.1 More complex searches  · p284
+      - 9.4.2 Text search scores  · p286
+      - 9.4.3 Sorting results by text search score  · p287
+    - 9.5 Aggregation framework text search  · p288
+      - 9.5.1 Where’s MongoDB in Action, Second Edition?  · p290
+    - 9.6 Text search languages  · p292
+      - 9.6.1 Specifying language in the index  · p292
+      - 9.6.2 Specifying the language in the document  · p294
+      - 9.6.3 Specifying the language in a search  · p294
+      - 9.6.4 Available languages  · p296
+    - 9.7 Summary  · p297
+  - 10 WiredTiger and pluggable storage  · p298
+    - 10.1 Pluggable Storage Engine API  · p298
+      - 10.1.1 Why use different storages engines?  · p299
+    - 10.2 WiredTiger  · p300
+      - 10.2.1 Switching to WiredTiger  · p301
+      - 10.2.2 Migrating your database to WiredTiger  · p302
+    - 10.3 Comparison with MMAPv1  · p303
+      - 10.3.1 Configuration files  · p304
+      - 10.3.2 Insertion script and benchmark script  · p306
+      - 10.3.3 Insertion benchmark results  · p308
+      - 10.3.4 Read performance scripts  · p310
+      - 10.3.5 Read performance results  · p311
+      - 10.3.6 Benchmark conclusion  · p313
+    - 10.4 Other examples of pluggable storage engines  · p314
+    - 10.5 Advanced topics  · p315
+      - 10.5.1 How does a pluggable storage engine work?  · p315
+      - 10.5.2 Data structure  · p317
+      - 10.5.3 Locking  · p319
+    - 10.6 Summary  · p320
+  - 11 Replication  · p321
+    - 11.1 Replication overview  · p322
+      - 11.1.1 Why replication matters  · p322
+      - 11.1.2 Replication use cases and limitations  · p323
+    - 11.2 Replica sets  · p325
+      - 11.2.1 Setup  · p325
+      - 11.2.2 How replication works  · p332
+      - 11.2.3 Administration  · p339
+    - 11.3 Drivers and replication  · p349
+      - 11.3.1 Connections and failover  · p349
+      - 11.3.2 Write concern  · p352
+      - 11.3.3 Read scaling  · p353
+      - 11.3.4 Tagging  · p355
+    - 11.4 Summary  · p357
+  - 12 Scaling your system with sharding  · p358
+    - 12.1 Sharding overview  · p359
+      - 12.1.1 What is sharding?  · p359
+      - 12.1.2 When should you shard?  · p360
+    - 12.2 Understanding components of a sharded cluster  · p361
+      - 12.2.1 Shards: storage of application data  · p362
+      - 12.2.2 Mongos router: router of operations  · p363
+      - 12.2.3 Config servers: storage of metadata  · p363
+    - 12.3 Distributing data in a sharded cluster  · p364
+      - 12.3.1 Ways data can be distributed in a sharded cluster  · p365
+      - 12.3.2 Distributing databases to shards  · p366
+      - 12.3.3 Sharding within collections  · p366
+    - 12.4 Building a sample shard cluster  · p368
+      - 12.4.1 Starting the mongod and mongos servers  · p368
+      - 12.4.2 Configuring the cluster  · p371
+      - 12.4.3 Sharding collections  · p372
+      - 12.4.4 Writing to a sharded cluster  · p374
+    - 12.5 Querying and indexing a shard cluster  · p380
+      - 12.5.1 Query routing  · p380
+      - 12.5.2 Indexing in a sharded cluster  · p381
+      - 12.5.3 The explain() tool in a sharded cluster  · p382
+      - 12.5.4 Aggregation in a sharded cluster  · p384
+    - 12.6 Choosing a shard key  · p384
+      - 12.6.1 Imbalanced writes (hotspots)  · p385
+      - 12.6.2 Unsplittable chunks (coarse granularity)  · p387
+      - 12.6.3 Poor targeting (shard key not present in queries)  · p387
+      - 12.6.4 Ideal shard keys  · p388
+      - 12.6.5 Inherent design trade-offs (email application)  · p389
+    - 12.7 Sharding in production  · p390
+      - 12.7.1 Provisioning  · p391
+      - 12.7.2 Deployment  · p394
+      - 12.7.3 Maintenance  · p395
+    - 12.8 Summary  · p400
+  - 13 Deployment and administration  · p401
+    - 13.1 Hardware and provisioning  · p402
+      - 13.1.1 Cluster topology  · p402
+      - 13.1.2 Deployment environment  · p403
+      - 13.1.3 Provisioning  · p410
+    - 13.2 Monitoring and diagnostics  · p411
+      - 13.2.1 Logging  · p412
+      - 13.2.2 MongoDB diagnostic commands  · p412
+      - 13.2.3 MongoDB diagnostic tools  · p413
+      - 13.2.4 MongoDB Monitoring Service  · p415
+      - 13.2.5 External monitoring applications  · p415
+    - 13.3 Backups  · p416
+      - 13.3.1 mongodump and mongorestore  · p416
+      - 13.3.2 Data file–based backups  · p417
+      - 13.3.3 MMS backups  · p418
+    - 13.4 Security  · p419
+      - 13.4.1 Secure environments  · p419
+      - 13.4.2 Network encryption  · p420
+      - 13.4.3 Authentication  · p422
+      - 13.4.4 Replica set authentication  · p426
+      - 13.4.5 Sharding authentication  · p427
+      - 13.4.6 Enterprise security features  · p427
+    - 13.5 Administrative tasks  · p427
+      - 13.5.1 Data imports and exports  · p427
+      - 13.5.2 Compaction and repair  · p428
+      - 13.5.3 Upgrading  · p430
+    - 13.6 Performance troubleshooting  · p430
+      - 13.6.1 Working set  · p431
+      - 13.6.2 Performance cliff  · p432
+      - 13.6.3 Query interactions  · p432
+      - 13.6.4 Seek professional assistance  · p433
+    - 13.7 Deployment checklist  · p433
+    - 13.8 Summary  · p435
+- Appendix A—Installation  · p436
+  - A.1 Installation  · p436
+    - A.1.1 Production deployments  · p436
+    - A.1.2 32-bit vs. 64-bit  · p437
+  - A.2 MongoDB on Linux  · p437
+    - A.2.1 Installing with precompiled binaries  · p437
+    - A.2.2 Using a package manager  · p438
+  - A.3 MongoDB on Mac OS X  · p439
+    - A.3.1 Precompiled binaries  · p439
+    - A.3.2 Using a package manager  · p440
+  - A.4 MongoDB on Windows  · p440
+    - A.4.1 Precompiled binaries  · p440
+  - A.5 Compiling MongoDB from source  · p441
+  - A.6 Troubleshooting  · p441
+    - A.6.1 Wrong architecture  · p442
+    - A.6.2 Nonexistent data directory  · p442
+    - A.6.3 Lack of permissions  · p442
+    - A.6.4 Unable to bind to port  · p443
+  - A.7 Basic configuration options  · p443
+  - A.8 Installing Ruby  · p444
+    - A.8.1 Linux and Mac OS X  · p444
+    - A.8.2 Windows  · p445
+- Appendix B—Design patterns  · p446
+  - B.1 Embed vs. reference  · p446
+  - B.2 One-to-many  · p446
+  - B.3 Many-to-many  · p448
+  - B.4 Trees  · p448
+  - B.5 Worker queues  · p452
+  - B.6 Dynamic attributes  · p452
+  - B.7 Transactions  · p454
+  - B.8 Locality and precomputation  · p455
+  - B.9 Antipatterns  · p456
+    - B.9.1 Careless indexing  · p456
+    - B.9.2 Motley types  · p456
+    - B.9.3 Bucket collections  · p456
+    - B.9.4 Large, deeply nested documents  · p456
+    - B.9.5 One collection per user  · p457
+    - B.9.6 Unshardable collections  · p457
+- Appendix C—Binary data and GridFS  · p458
+  - C.1 Simple binary storage  · p458
+    - C.1.1 Storing a thumbnail  · p459
+    - C.1.2 Storing an MD5  · p459
+  - C.2 GridFS  · p460
+    - C.2.1 GridFS in Ruby  · p461
+    - C.2.2 GridFS with mongofiles  · p463
+- index  · p466
+  - Symbols  · p466
+  - Numerics  · p466
+  - A  · p466
+  - B  · p467
+  - C  · p467
+  - D  · p468
+  - E  · p470
+  - F  · p470
+  - G  · p471
+  - H  · p471
+  - I  · p471
+  - J  · p472
+  - K  · p472
+  - L  · p472
+  - M  · p473
+  - N  · p474
+  - O  · p475
+  - P  · p475
+  - Q  · p476
+  - R  · p477
+  - S  · p477
+  - T  · p479
+  - U  · p480
+  - V  · p481
+  - W  · p481
+  - X  · p481
+  - Y  · p481
+  - Z  · p481
+- Back cover  · p482

@@ -1,0 +1,241 @@
+# TOC — High-Performance Browser Netwo - Grigorik, Ilya_5527.pdf
+
+*Extracted by `_tools/extract_toc.py` (outline). 237 entries. Machine-generated — do not hand-edit.*
+
+- Copyright  · p4
+- Table of Contents  · p5
+- Foreword  · p13
+- Preface  · p15
+  - About This Book  · p16
+  - Conventions Used in This Book  · p17
+  - Safari® Books Online  · p17
+  - How to Contact Us  · p18
+- Part I. Networking 101  · p19
+  - Chapter 1. Primer on Latency and Bandwidth  · p21
+    - Speed Is a Feature  · p21
+    - The Many Components of Latency  · p22
+    - Speed of Light and Propagation Latency  · p24
+    - Last-Mile Latency  · p26
+    - Bandwidth in Core Networks  · p27
+    - Bandwidth at the Network Edge  · p28
+    - Delivering Higher Bandwidth and Lower Latencies  · p29
+  - Chapter 2. Building Blocks of TCP  · p31
+    - Three-Way Handshake  · p32
+    - Congestion Avoidance and Control  · p34
+      - Flow Control  · p35
+      - Slow-Start  · p37
+      - Congestion Avoidance  · p44
+    - Bandwidth-Delay Product  · p46
+    - Head-of-Line Blocking  · p48
+    - Optimizing for TCP  · p50
+      - Tuning Server Configuration  · p50
+      - Tuning Application Behavior  · p52
+      - Performance Checklist  · p52
+  - Chapter 3. Building Blocks of UDP  · p53
+    - Null Protocol Services  · p54
+    - UDP and Network Address Translators  · p56
+      - Connection-State Timeouts  · p57
+      - NAT Traversal  · p58
+      - STUN, TURN, and ICE  · p59
+    - Optimizing for UDP  · p62
+  - Chapter 4. Transport Layer Security (TLS)  · p65
+    - Encryption, Authentication, and Integrity  · p66
+    - TLS Handshake  · p68
+      - Application Layer Protocol Negotiation (ALPN)  · p71
+      - Server Name Indication (SNI)  · p72
+    - TLS Session Resumption  · p73
+      - Session Identifiers  · p73
+      - Session Tickets  · p75
+    - Chain of Trust and Certificate Authorities  · p75
+    - Certificate Revocation  · p79
+      - Certificate Revocation List (CRL)  · p79
+      - Online Certificate Status Protocol (OCSP)  · p80
+    - TLS Record Protocol  · p80
+    - Optimizing for TLS  · p81
+      - Computational Costs  · p82
+      - Early Termination  · p83
+      - Session Caching and Stateless Resumption  · p85
+      - TLS Record Size  · p86
+      - TLS Compression  · p87
+      - Certificate-Chain Length  · p88
+      - OCSP Stapling  · p89
+      - HTTP Strict Transport Security (HSTS)  · p90
+    - Performance Checklist  · p91
+    - Testing and Verification  · p91
+- Part II. Performance of Wireless Networks  · p95
+  - Chapter 5. Introduction to Wireless Networks  · p97
+    - Ubiquitous Connectivity  · p97
+    - Types of Wireless Networks  · p98
+    - Performance Fundamentals of Wireless Networks  · p99
+      - Bandwidth  · p100
+      - Signal Power  · p103
+      - Modulation  · p104
+    - Measuring Real-World Wireless Performance  · p105
+  - Chapter 6. WiFi  · p107
+    - From Ethernet to a Wireless LAN  · p107
+    - WiFi Standards and Features  · p109
+    - Measuring and Optimizing WiFi Performance  · p110
+      - Packet Loss in WiFi Networks  · p112
+    - Optimizing for WiFi Networks  · p113
+      - Leverage Unmetered Bandwidth  · p113
+      - Adapt to Variable Bandwidth  · p114
+      - Adapt to Variable Latency  · p115
+  - Chapter 7. Mobile Networks  · p117
+    - Brief History of the G’s  · p117
+      - First Data Services with 2G  · p118
+      - 3GPP and 3GPP2 Partnerships  · p119
+      - Evolution of 3G Technologies  · p121
+      - IMT-Advanced 4G Requirements  · p123
+      - Long Term Evolution (LTE)  · p124
+      - HSPA+ is Leading Worldwide 4G Adoption  · p125
+      - Building for the Multigeneration Future  · p127
+    - Device Features and Capabilities  · p129
+      - User Equipment Category  · p129
+    - Radio Resource Controller (RRC)  · p131
+      - 3G, 4G, and WiFi Power Requirements  · p133
+      - LTE RRC State Machine  · p134
+      - HSPA and HSPA+ (UMTS) RRC State Machine  · p137
+      - EV-DO (CDMA) RRC State Machine  · p138
+      - Inefficiency of Periodic Transfers  · p139
+    - End-to-End Carrier Architecture  · p141
+      - Radio Access Network (RAN)  · p141
+      - Core Network (CN)  · p143
+      - Backhaul Capacity and Latency  · p146
+    - Packet Flow in a Mobile Network  · p147
+      - Initiating a Request  · p147
+      - Inbound Data Flow  · p150
+    - Heterogeneous Networks (HetNets)  · p151
+    - Real-World 3G, 4G, and WiFi Performance  · p153
+  - Chapter 8. Optimizing for Mobile Networks  · p157
+    - Preserve Battery Power  · p158
+    - Eliminate Periodic and Inefficient Data Transfers  · p160
+      - Eliminate Unnecessary Application Keepalives  · p162
+    - Anticipate Network Latency Overhead  · p163
+      - Account for RRC State Transitions  · p164
+      - Decouple User Interactions from Network Communication  · p164
+    - Design for Variable Network Interface Availability  · p165
+    - Burst Your Data and Return to Idle  · p167
+    - Offload to WiFi Networks  · p168
+    - Apply Protocol and Application Best Practices  · p168
+- Part III. HTTP  · p171
+  - Chapter 9. Brief History of HTTP  · p173
+    - HTTP 0.9: The One-Line Protocol  · p173
+    - HTTP 1.0: Rapid Growth and Informational RFC  · p175
+    - HTTP 1.1: Internet Standard  · p177
+    - HTTP 2.0: Improving Transport Performance  · p179
+  - Chapter 10. Primer on Web Performance  · p183
+    - Hypertext, Web Pages, and Web Applications  · p184
+    - Anatomy of a Modern Web Application  · p186
+      - Speed, Performance, and Human Perception  · p188
+      - Analyzing the Resource Waterfall  · p189
+    - Performance Pillars: Computing, Rendering, Networking  · p194
+      - More Bandwidth Doesn’t Matter (Much)  · p194
+      - Latency as a Performance Bottleneck  · p195
+    - Synthetic and Real-User Performance Measurement  · p197
+    - Browser Optimization  · p201
+  - Chapter 11. HTTP 1.X  · p205
+    - Benefits of Keepalive Connections  · p207
+    - HTTP Pipelining  · p210
+    - Using Multiple TCP Connections  · p214
+    - Domain Sharding  · p216
+    - Measuring and Controlling Protocol Overhead  · p218
+    - Concatenation and Spriting  · p219
+    - Resource Inlining  · p222
+  - Chapter 12. HTTP 2.0  · p225
+    - History and Relationship to SPDY  · p226
+    - The Road to HTTP 2.0  · p227
+    - Design and Technical Goals  · p229
+      - Binary Framing Layer  · p229
+      - Streams, Messages, and Frames  · p230
+      - Request and Response Multiplexing  · p232
+      - Request Prioritization  · p233
+      - One Connection Per Origin  · p235
+      - Flow Control  · p236
+      - Server Push  · p237
+      - Header Compression  · p240
+      - Efficient HTTP 2.0 Upgrade and Discovery  · p242
+    - Brief Introduction to Binary Framing  · p244
+      - Initiating a New Stream  · p247
+      - Sending Application Data  · p248
+      - Analyzing HTTP 2.0 Frame Data Flow  · p248
+  - Chapter 13. Optimizing Application Delivery  · p251
+    - Evergreen Performance Best Practices  · p253
+      - Cache Resources on the Client  · p254
+      - Compress Transferred Data  · p255
+      - Eliminate Unnecessary Request Bytes  · p256
+      - Parallelize Request and Response Processing  · p257
+    - Optimizing for HTTP 1.x  · p259
+    - Optimizing for HTTP 2.0  · p259
+      - Removing 1.x Optimizations  · p260
+      - Dual-Protocol Application Strategies  · p262
+      - Translating 1.x to 2.0 and Back  · p263
+      - Evaluating Server Quality and Performance  · p265
+      - Speaking 2.0 with and without TLS  · p265
+      - Load Balancers, Proxies, and Application Servers  · p266
+- Part IV. Browser APIs and Protocols  · p269
+  - Chapter 14. Primer on Browser Networking  · p271
+    - Connection Management and Optimization  · p272
+    - Network Security and Sandboxing  · p274
+    - Resource and Client State Caching  · p275
+    - Application APIs and Protocols  · p276
+  - Chapter 15. XMLHttpRequest  · p279
+    - Brief History of XHR  · p280
+    - Cross-Origin Resource Sharing (CORS)  · p281
+    - Downloading Data with XHR  · p284
+    - Uploading Data with XHR  · p286
+    - Monitoring Download and Upload Progress  · p287
+    - Streaming Data with XHR  · p289
+    - Real-Time Notifications and Delivery  · p291
+      - Polling with XHR  · p292
+      - Long-Polling with XHR  · p294
+    - XHR Use Cases and Performance  · p296
+  - Chapter 16. Server-Sent Events (SSE)  · p297
+    - EventSource API  · p297
+    - Event Stream Protocol  · p300
+    - SSE Use Cases and Performance  · p303
+  - Chapter 17. WebSocket  · p305
+    - WebSocket API  · p306
+      - WS and WSS URL Schemes  · p307
+      - Receiving Text and Binary Data  · p308
+      - Sending Text and Binary Data  · p309
+      - Subprotocol Negotiation  · p311
+    - WebSocket Protocol  · p312
+      - Binary Framing Layer  · p313
+      - Protocol Extensions  · p315
+      - HTTP Upgrade Negotiation  · p316
+    - WebSocket Use Cases and Performance  · p319
+      - Request and Response Streaming  · p320
+      - Message Overhead  · p321
+      - Data Efficiency and Compression  · p322
+      - Custom Application Protocols  · p322
+      - Deploying WebSocket Infrastructure  · p323
+    - Performance Checklist  · p325
+  - Chapter 18. WebRTC  · p327
+    - Standards and Development of WebRTC  · p328
+    - Audio and Video Engines  · p329
+      - Acquiring Audio and Video with getUserMedia  · p330
+    - Real-Time Network Transports  · p333
+      - Brief Introduction to RTCPeerConnection API  · p335
+    - Establishing a Peer-to-Peer Connection  · p337
+      - Signaling and Session Negotiation  · p338
+      - Session Description Protocol (SDP)  · p340
+      - Interactive Connectivity Establishment (ICE)  · p343
+      - Incremental Provisioning (Trickle ICE)  · p346
+      - Tracking ICE Gathering and Connectivity Status  · p347
+      - Putting It All Together  · p350
+    - Delivering Media and Application Data  · p355
+      - Secure Communication with DTLS  · p355
+      - Delivering Media with SRTP and SRTCP  · p358
+      - Delivering application data with SCTP  · p362
+    - DataChannel  · p366
+      - Setup and Negotiation  · p368
+      - Configuring Message Order and Reliability  · p371
+      - Partially Reliable Delivery and Message Size  · p373
+    - WebRTC Use Cases and Performance  · p374
+      - Audio, Video, and Data Streaming  · p374
+      - Multiparty Architectures  · p376
+      - Infrastructure and Capacity Planning  · p377
+      - Data Efficiency and Compression  · p379
+    - Performance Checklist  · p379
+- Index  · p381
+- About the Author  · p401

@@ -50,7 +50,7 @@ SQLite (version not recorded)
 
 ## SQL — indexes and the query planner
 
-Source: [`03_sql/01_indexes_and_the_query_planner.md`](03_sql/01_indexes_and_the_query_planner.md), measured 2026-08-04 on `ENV-A` (SQLite 3.51.0) against a purpose-built **200,000 account / 1,000,000 transaction** schema (50 MB, `ANALYZE`d). Scripts: `s1_index.py`, `s2_joins.py`; dataset builder inline.
+Source: [`09_sql/01_indexes_and_the_query_planner.md`](09_sql/01_indexes_and_the_query_planner.md), measured 2026-08-04 on `ENV-A` (SQLite 3.51.0) against a purpose-built **200,000 account / 1,000,000 transaction** schema (50 MB, `ANALYZE`d). Scripts: `s1_index.py`, `s2_joins.py`; dataset builder inline.
 
 | ID | Claim | Command | Tag |
 |---|---|---|---|
@@ -70,7 +70,7 @@ Source: [`03_sql/01_indexes_and_the_query_planner.md`](03_sql/01_indexes_and_the
 
 ## SQL — window functions
 
-Source: [`03_sql/04_window_functions_and_analytical_sql.md`](03_sql/04_window_functions_and_analytical_sql.md), measured 2026-08-04, SQLite 3.51.0. Script: `w1_windows.py`.
+Source: [`09_sql/04_window_functions_and_analytical_sql.md`](09_sql/04_window_functions_and_analytical_sql.md), measured 2026-08-04, SQLite 3.51.0. Script: `w1_windows.py`.
 
 | ID | Claim | Command | Tag |
 |---|---|---|---|
@@ -82,7 +82,7 @@ Source: [`03_sql/04_window_functions_and_analytical_sql.md`](03_sql/04_window_fu
 
 ## JavaScript — the event loop
 
-Source: [`04_javascript/03_the_event_loop_microtasks_and_async.md`](04_javascript/03_the_event_loop_microtasks_and_async.md), measured 2026-08-04, **Node v20.20.2**. Script: `j1_loop.js`.
+Source: [`07_javascript/03_the_event_loop_microtasks_and_async.md`](07_javascript/03_the_event_loop_microtasks_and_async.md), measured 2026-08-04, **Node v20.20.2**. Script: `j1_loop.js`.
 
 | ID | Claim | Command | Tag |
 |---|---|---|---|
@@ -96,7 +96,7 @@ Source: [`04_javascript/03_the_event_loop_microtasks_and_async.md`](04_javascrip
 
 ## TypeScript — variance and inference
 
-Source: [`05_typescript/02_generics_inference_and_variance.md`](05_typescript/02_generics_inference_and_variance.md), measured 2026-08-04 via `npx -p typescript tsc` on `ENV-A`. Files: `ts/variance.ts`, `ts/cov.ts`, `ts/claim.ts`, `ts/erasure.ts`.
+Source: [`08_typescript/02_generics_inference_and_variance.md`](08_typescript/02_generics_inference_and_variance.md), measured 2026-08-04 via `npx -p typescript tsc` on `ENV-A`. Files: `ts/variance.ts`, `ts/cov.ts`, `ts/claim.ts`, `ts/erasure.ts`.
 
 | ID | Claim | Command | Tag |
 |---|---|---|---|
@@ -111,7 +111,7 @@ Source: [`05_typescript/02_generics_inference_and_variance.md`](05_typescript/02
 
 ## Python — object model and attribute lookup
 
-Source: [`01_python/01_object_model_and_attribute_lookup.md`](01_python/01_object_model_and_attribute_lookup.md), measured 2026-08-04 on `ENV-A`. Scripts in the session scratchpad: `m1_lookup_order.py`, `m2_slots.py`, `m3_mro.py`, `m4_breaks.py`, `lazy_descriptor.py`.
+Source: [`05_python/01_object_model_and_attribute_lookup.md`](05_python/01_object_model_and_attribute_lookup.md), measured 2026-08-04 on `ENV-A`. Scripts in the session scratchpad: `m1_lookup_order.py`, `m2_slots.py`, `m3_mro.py`, `m4_breaks.py`, `lazy_descriptor.py`.
 
 | ID | Claim | Command | Tag |
 |---|---|---|---|
@@ -140,7 +140,7 @@ Source: [`01_python/01_object_model_and_attribute_lookup.md`](01_python/01_objec
 
 ## Python — closures, decorators, metaprogramming
 
-Source: [`01_python/03_closures_decorators_and_metaprogramming.md`](01_python/03_closures_decorators_and_metaprogramming.md), measured 2026-08-04 on `ENV-A`. Scripts: `c1_closures.py`, `c2_wraps.py`, `c3_meta.py`, `c4_verify.py`.
+Source: [`05_python/03_closures_decorators_and_metaprogramming.md`](05_python/03_closures_decorators_and_metaprogramming.md), measured 2026-08-04 on `ENV-A`. Scripts: `c1_closures.py`, `c2_wraps.py`, `c3_meta.py`, `c4_verify.py`.
 
 | ID | Claim | Command | Tag |
 |---|---|---|---|
@@ -159,7 +159,7 @@ Source: [`01_python/03_closures_decorators_and_metaprogramming.md`](01_python/03
 
 ## Python — bytecode and the runtime
 
-Source: [`01_python/05_bytecode_and_the_runtime.md`](01_python/05_bytecode_and_the_runtime.md), measured 2026-08-04 on `ENV-A` (**CPython 3.14.6**). Scripts: `b1_bytecode.py`–`b6_identity.py`.
+Source: [`05_python/05_bytecode_and_the_runtime.md`](05_python/05_bytecode_and_the_runtime.md), measured 2026-08-04 on `ENV-A` (**CPython 3.14.6**). Scripts: `b1_bytecode.py`–`b6_identity.py`.
 
 | ID | Claim | Command | Tag |
 |---|---|---|---|
@@ -178,7 +178,7 @@ Source: [`01_python/05_bytecode_and_the_runtime.md`](01_python/05_bytecode_and_t
 
 ## Concurrency — the GIL
 
-Source: [`02_concurrency/01_the_gil_what_it_protects_and_when_it_lets_go.md`](02_concurrency/01_the_gil_what_it_protects_and_when_it_lets_go.md), measured 2026-08-04 on `ENV-A` (CPython 3.14.6, 8 cores, GIL enabled). Scripts: `g1_gil.py`–`g6_real.py`.
+Source: [`06_concurrency/01_the_gil_what_it_protects_and_when_it_lets_go.md`](06_concurrency/01_the_gil_what_it_protects_and_when_it_lets_go.md), measured 2026-08-04 on `ENV-A` (CPython 3.14.6, 8 cores, GIL enabled). Scripts: `g1_gil.py`–`g6_real.py`.
 
 | ID | Claim | Command | Tag |
 |---|---|---|---|
@@ -195,7 +195,7 @@ Source: [`02_concurrency/01_the_gil_what_it_protects_and_when_it_lets_go.md`](02
 
 ## Concurrency — threads, races, synchronisation
 
-Source: [`02_concurrency/02_threads_races_and_synchronisation.md`](02_concurrency/02_threads_races_and_synchronisation.md), measured 2026-08-04 on `ENV-A`. Scripts: `t1_deadlock.py`, `t2_lockcost.py`, `t3_release.py`.
+Source: [`06_concurrency/02_threads_races_and_synchronisation.md`](06_concurrency/02_threads_races_and_synchronisation.md), measured 2026-08-04 on `ENV-A`. Scripts: `t1_deadlock.py`, `t2_lockcost.py`, `t3_release.py`.
 
 | ID | Claim | Command | Tag |
 |---|---|---|---|
@@ -209,7 +209,7 @@ Source: [`02_concurrency/02_threads_races_and_synchronisation.md`](02_concurrenc
 
 ## Concurrency — multiprocessing and the process boundary
 
-Source: [`02_concurrency/03_multiprocessing_and_the_process_boundary.md`](02_concurrency/03_multiprocessing_and_the_process_boundary.md), measured 2026-08-04 on `ENV-A`. Script: `p1_procs.py`.
+Source: [`06_concurrency/03_multiprocessing_and_the_process_boundary.md`](06_concurrency/03_multiprocessing_and_the_process_boundary.md), measured 2026-08-04 on `ENV-A`. Script: `p1_procs.py`.
 
 | ID | Claim | Command | Tag |
 |---|---|---|---|
@@ -223,7 +223,7 @@ Source: [`02_concurrency/03_multiprocessing_and_the_process_boundary.md`](02_con
 
 ## Concurrency — asyncio internals
 
-Source: [`02_concurrency/04_asyncio_internals.md`](02_concurrency/04_asyncio_internals.md), measured 2026-08-04 on `ENV-A`. Scripts: `a1_async.py`, `a2_tasks.py`.
+Source: [`06_concurrency/04_asyncio_internals.md`](06_concurrency/04_asyncio_internals.md), measured 2026-08-04 on `ENV-A`. Scripts: `a1_async.py`, `a2_tasks.py`.
 
 | ID | Claim | Command | Tag |
 |---|---|---|---|
@@ -242,7 +242,7 @@ Source: [`02_concurrency/04_asyncio_internals.md`](02_concurrency/04_asyncio_int
 
 ## Python — async execution model
 
-Source: `_archive/2026-08_v1/01_python/01_async_execution_model.md`, measured 2026-08-03.
+Source: `_archive/2026-08_v1/05_python/01_async_execution_model.md`, measured 2026-08-03.
 
 | ID | Claim | Environment | Tag |
 |---|---|---|---|
@@ -256,7 +256,7 @@ Source: `_archive/2026-08_v1/01_python/01_async_execution_model.md`, measured 20
 
 ## Python — threads and processes
 
-Source: `_archive/2026-08_v1/01_python/02_concurrency_threads_processes.md`, measured 2026-08-03.
+Source: `_archive/2026-08_v1/05_python/02_concurrency_threads_processes.md`, measured 2026-08-03.
 
 | ID | Claim | Environment | Tag |
 |---|---|---|---|

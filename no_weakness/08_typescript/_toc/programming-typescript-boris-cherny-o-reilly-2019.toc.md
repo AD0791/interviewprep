@@ -1,0 +1,199 @@
+# TOC — Programming TypeScript - Boris Cherny - O’Reilly (2019).pdf
+
+*Extracted by `_tools/extract_toc.py` (outline). 195 entries. Machine-generated — do not hand-edit.*
+
+- Preface  · p6
+  - How This Book Is Organized  · p6
+  - Style  · p7
+    - Conventions Used in This Book  · p9
+  - Using Code Examples  · p10
+  - O’Reilly Online Learning  · p10
+  - How to Contact Us  · p11
+  - Acknowledgments  · p12
+- 1. Introduction  · p13
+- 2. TypeScript: A 10_000 Foot View  · p17
+  - The Compiler  · p17
+  - The Type System  · p20
+    - TypeScript Versus JavaScript  · p21
+  - Code Editor Setup  · p24
+    - tsconfig.json  · p25
+    - tslint.json  · p27
+  - index.ts  · p28
+  - Exercises  · p29
+- 3. All About Types  · p31
+  - Talking About Types  · p32
+  - The ABCs of Types  · p34
+    - any  · p34
+    - unknown  · p35
+    - boolean  · p36
+    - number  · p37
+    - bigint  · p39
+    - string  · p40
+    - symbol  · p40
+    - Objects  · p41
+    - Intermission: Type Aliases, Unions, and Intersections  · p49
+    - Arrays  · p54
+    - Tuples  · p56
+    - null, undefined, void, and never  · p58
+    - Enums  · p62
+  - Summary  · p66
+  - Exercises  · p67
+- 4. Functions  · p70
+  - Declaring and Invoking Functions  · p70
+    - Optional and Default Parameters  · p72
+    - Rest Parameters  · p74
+    - call, apply, and bind  · p76
+    - Typing this  · p77
+    - Generator Functions  · p79
+    - Iterators  · p81
+    - Call Signatures  · p83
+    - Contextual Typing  · p86
+    - Overloaded Function Types  · p88
+  - Polymorphism  · p95
+    - When Are Generics Bound?  · p101
+    - Where Can You Declare Generics?  · p102
+    - Generic Type Inference  · p104
+    - Generic Type Aliases  · p106
+    - Bounded Polymorphism  · p108
+    - Generic Type Defaults  · p113
+  - Type-Driven Development  · p115
+  - Summary  · p116
+  - Exercises  · p117
+- 5. Classes and Interfaces  · p119
+  - Classes and Inheritance  · p119
+  - super  · p126
+  - Using this as a Return Type  · p127
+  - Interfaces  · p129
+    - Declaration Merging  · p132
+    - Implementations  · p134
+    - Implementing Interfaces Versus Extending Abstract Classes  · p136
+  - Classes Are Structurally Typed  · p137
+  - Classes Declare Both Values and Types  · p138
+  - Polymorphism  · p141
+  - Mixins  · p143
+  - Decorators  · p146
+  - Simulating final Classes  · p150
+  - Design Patterns  · p151
+    - Factory Pattern  · p151
+    - Builder Pattern  · p153
+  - Summary  · p154
+  - Exercises  · p155
+- 6. Advanced Types  · p157
+  - Relationships Between Types  · p157
+    - Subtypes and Supertypes  · p157
+    - Variance  · p159
+    - Assignability  · p167
+    - Type Widening  · p168
+    - Refinement  · p174
+  - Totality  · p179
+  - Advanced Object Types  · p181
+    - Type Operators for Object Types  · p181
+    - The Record Type  · p186
+    - Mapped Types  · p187
+    - Companion Object Pattern  · p190
+  - Advanced Function Types  · p192
+    - Improving Type Inference for Tuples  · p192
+    - User-Defined Type Guards  · p193
+  - Conditional Types  · p195
+    - Distributive Conditionals  · p196
+    - The infer Keyword  · p198
+    - Built-in Conditional Types  · p200
+  - Escape Hatches  · p201
+    - Type Assertions  · p201
+    - Nonnull Assertions  · p203
+    - Definite Assignment Assertions  · p206
+  - Simulating Nominal Types  · p207
+  - Safely Extending the Prototype  · p210
+  - Summary  · p213
+  - Exercises  · p213
+- 7. Handling Errors  · p216
+  - Returning null  · p217
+  - Throwing Exceptions  · p218
+  - Returning Exceptions  · p221
+  - The Option Type  · p224
+  - Summary  · p232
+  - Exercises  · p232
+- 8. Asynchronous Programming, Concurrency, and Parallelism  · p234
+  - JavaScript’s Event Loop  · p235
+  - Working with Callbacks  · p238
+  - Regaining Sanity with Promises  · p241
+  - async and await  · p247
+  - Async Streams  · p248
+    - Event Emitters  · p249
+  - Typesafe Multithreading  · p252
+    - In the Browser: With Web Workers  · p253
+    - In NodeJS: With Child Processes  · p263
+  - Summary  · p265
+  - Exercises  · p266
+- 9. Frontend and Backend Frameworks  · p268
+  - Frontend Frameworks  · p268
+    - React  · p270
+    - Angular 6/7  · p278
+  - Typesafe APIs  · p282
+  - Backend Frameworks  · p284
+  - Summary  · p285
+- 10. Namespaces.Modules  · p287
+  - A Brief History of JavaScript Modules  · p288
+  - import, export  · p291
+    - Dynamic Imports  · p293
+    - Using CommonJS and AMD Code  · p295
+    - Module Mode Versus Script Mode  · p296
+  - Namespaces  · p297
+    - Collisions  · p299
+    - Compiled Output  · p300
+  - Declaration Merging  · p301
+  - Summary  · p305
+  - Exercise  · p305
+- 11. Interoperating with JavaScript  · p306
+  - Type Declarations  · p307
+    - Ambient Variable Declarations  · p311
+    - Ambient Type Declarations  · p312
+    - Ambient Module Declarations  · p313
+  - Gradually Migrating from JavaScript to TypeScript  · p315
+    - Step 1: Add TSC  · p316
+    - Step 2a: Enable Typechecking for JavaScript (Optional)  · p317
+    - Step 2b: Add JSDoc Annotations (Optional)  · p319
+    - Step 3: Rename Your Files to .ts  · p320
+    - Step 4: Make It strict  · p321
+  - Type Lookup for JavaScript  · p322
+  - Using Third-Party JavaScript  · p325
+    - JavaScript That Comes with Type Declarations  · p326
+    - JavaScript That Has Type Declarations on DefinitelyTyped  · p326
+    - JavaScript That Doesn’t Have Type Declarations on DefinitelyTyped  · p327
+  - Summary  · p329
+- 12. Building and Running TypeScript  · p331
+  - Building Your TypeScript Project  · p331
+    - Project Layout  · p331
+    - Artifacts  · p332
+    - Dialing In Your Compile Target  · p333
+    - Enabling Source Maps  · p339
+    - Project References  · p339
+    - Error Monitoring  · p343
+  - Running TypeScript on the Server  · p344
+  - Running TypeScript in the Browser  · p344
+  - Publishing Your TypeScript Code to NPM  · p347
+  - Triple-Slash Directives  · p349
+    - The types Directive  · p349
+    - The amd-module Directive  · p351
+  - Summary  · p352
+- 13. Conclusion  · p354
+- A. Type Operators  · p356
+- B. Type Utilities  · p358
+- C. Scoped Declarations  · p359
+  - Does It Generate a Type?  · p359
+  - Does It Merge?  · p359
+- D. Recipes for Writing Declaration Files for Third-Party JavaScript Modules  · p361
+  - Types of Exports  · p362
+    - Globals  · p362
+    - ES2015 Exports  · p363
+    - CommonJS Exports  · p363
+    - UMD Exports  · p364
+  - Extending a Module  · p365
+    - Globals  · p365
+    - Modules  · p366
+- E. Triple-Slash Directives  · p370
+  - Internal Directives  · p371
+  - Deprecated Directives  · p371
+- F. TSC Compiler Flags for Safety  · p373
+- G. TSX  · p375
+- Index  · p379

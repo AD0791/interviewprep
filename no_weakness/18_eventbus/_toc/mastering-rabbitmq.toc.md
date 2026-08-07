@@ -1,0 +1,248 @@
+# TOC — Mastering RabbitMQ.pdf
+
+*Extracted by `_tools/extract_toc.py` (outline). 244 entries. Machine-generated — do not hand-edit.*
+
+- Cover  · p1
+- Copyright  · p3
+- Credits  · p4
+- About the Authors  · p5
+- About the Reviewers  · p6
+- www.PacktPub.com  · p9
+- Table of Contents  · p10
+- Preface  · p16
+- Chapter 1: Getting Started  · p22
+  - Message brokers and message queue  · p23
+    - Message brokers  · p23
+    - Message Queues  · p24
+  - An introduction to the advanced message queue protocol  · p25
+  - An overview of RabbitMQ  · p26
+  - Installation of RabbitMQ  · p27
+    - Windows  · p29
+    - Mac OS X  · p31
+    - Ubuntu  · p33
+    - Fedora  · p34
+    - Amazon elastic compute cloud (EC2)  · p35
+  - Starting RabbitMQ  · p36
+    - Starting RabbitMQ on Windows  · p37
+    - Other OSes (Linux, Mac OS X)  · p38
+  - Summary  · p39
+- Chapter 2: Configuring RabbitMQ  · p40
+  - Overall configuration of RabbitMQ  · p40
+  - The RabbitMQ environment variables  · p41
+    - Common environment variables  · p43
+    - Unix-specific default location  · p45
+    - Windows-specific default location  · p46
+  - The configuration file  · p47
+  - Runtime parameters  · p52
+    - Parameter management  · p53
+    - Policy management  · p53
+    - Memory management  · p54
+  - Summary  · p54
+- Chapter 3: Architecture and Messaging  · p56
+  - Messaging and its use cases  · p56
+    - Coupling of the software systems  · p57
+      - Heterogeneous integration  · p58
+      - Addressing scalability  · p59
+  - Enterprise messaging  · p60
+  - Messaging-related software architectures  · p61
+    - Message oriented middleware – Architecture  · p62
+    - Event-driven architecture  · p63
+  - Messaging concepts  · p65
+    - Message producers  · p66
+    - Message brokers  · p66
+    - Message consumers  · p67
+    - Messages  · p67
+  - Advanced Message Queuing Protocol (AMQP)  · p68
+    - AMQ elements  · p69
+      - Message flow  · p70
+      - Exchanges in AMQ  · p71
+      - Message queues  · p71
+      - Bindings  · p71
+    - Functional specifications of AMQP  · p72
+      - AMQP messages  · p72
+      - Virtual hosts  · p73
+      - Exchange types  · p73
+  - Summary  · p76
+- Chapter 4: Clustering and High Availability  · p78
+  - High reliability in RabbitMQ  · p79
+    - Federation in RabbitMQ  · p80
+    - Clustering in RabbitMQ  · p81
+    - Creating clusters  · p82
+    - Checking the cluster status  · p84
+    - Changing the cluster node types  · p87
+    - Updating cluster nodes  · p88
+    - Clustering the settings of RabbitMQ  · p90
+    - Load balancing for high availability of queues  · p91
+    - Summary  · p93
+- Chapter 5: Plugins and Plugin Development  · p94
+  - Plugin management and default plugins  · p94
+    - Enabling and disabling plugins  · p95
+    - Installing plugin from third-party sources  · p97
+    - Default plugin list  · p98
+  - Plugin configuration  · p100
+  - Custom plugin development  · p101
+    - Basics of Erlang  · p102
+      - Variables and expressions  · p103
+      - Tuples and lists  · p104
+      - Functions and modules  · p105
+      - Conditionals  · p106
+      - Looping in Erlang  · p107
+      - Concurrent programming  · p108
+    - Simple RabbitMQ metronome plugin  · p111
+  - Summary  · p118
+- Chapter 6: Managing Your RabbitMQ Server  · p120
+  - Management via a command line  · p121
+    - Cluster commands  · p121
+    - User commands  · p122
+    - Virtual host and permission commands  · p122
+    - Miscellaneous commands  · p123
+  - Management via a web plugin  · p125
+  - Management via a REST API  · p130
+  - Summary  · p139
+- Chapter 7: Monitoring  · p140
+  - RabbitMQ command-line tools  · p140
+  - Web plugins  · p147
+  - Nagios  · p148
+  - Munin  · p151
+  - Zabbix  · p152
+  - Summary  · p155
+- Chapter 8: Security in RabbitMQ  · p156
+  - An brief introduction to security in RabbitMQ  · p156
+    - Vulnerabilities  · p157
+      - Information leakage  · p157
+      - Session management  · p157
+      - Authentication and authorization  · p157
+    - Solutions to the vulnerabilities  · p158
+      - Fixing information leakage  · p158
+      - Session management  · p158
+      - Authentication and authorization  · p158
+  - Applying access control  · p159
+  - Providing SASL authentication  · p161
+  - SSL support in RabbitMQ  · p162
+    - Keys, certificates, and CA certificates  · p162
+      - Enabling SSL support  · p163
+  - Summary  · p163
+- Chapter 9: Java RabbitMQ Client Programming  · p164
+  - Case study  · p165
+    - Use cases  · p165
+    - Interaction diagram – sequence diagram  · p166
+  - Application language – Java  · p167
+    - Java Message Service (JMS)  · p168
+  - RabbitMQ Java client API  · p169
+    - Client package in detail  · p170
+      - Connection  · p170
+      - Channel  · p171
+      - Exchanges  · p172
+      - Queues  · p172
+      - Publishing messages  · p172
+      - Consuming messages  · p174
+  - Case study – client implementations  · p176
+    - Model classes  · p176
+      - JSONMessage interface  · p176
+      - Message model  · p177
+      - File message  · p178
+      - Task  · p179
+    - Single message  · p180
+      - Sender  · p181
+      - Receiver  · p182
+    - Group message – routing  · p183
+      - Sender  · p184
+      - Receiver  · p185
+    - Bulk message – PubSub  · p186
+      - Sender  · p187
+      - Receiver  · p188
+    - File message  · p190
+      - Sender  · p190
+      - Receiver  · p192
+    - RPC message  · p194
+      - RPC client  · p194
+      - RPC server  · p196
+    - Creating tasks – manual acknowledgment  · p198
+      - Task creator  · p198
+      - Task handler  · p200
+    - Creating distributing tasks  · p201
+      - Task creator  · p202
+      - Task handler clients  · p203
+  - Spring framework and RabbitMQ  · p204
+  - Spring AMQP  · p205
+    - Single message  · p205
+      - Spring config  · p206
+      - Sender  · p207
+      - Receiver  · p208
+    - PubSub messages  · p208
+      - Spring config  · p209
+    - Private messages – routing  · p211
+      - Spring config  · p211
+  - Summary  · p213
+- Chapter 10: Ruby Client Programming  · p214
+  - Case study  · p214
+    - Small data  · p215
+    - Big data  · p215
+    - Medium data  · p216
+    - Solving all data problems  · p216
+  - Bunny and Ruby  · p217
+  - Installing Ruby  · p217
+    - Linux  · p217
+    - Windows  · p217
+    - OSX/Mac  · p218
+    - Rbenv  · p218
+    - Installing Bunny  · p218
+  - Using Bunny  · p219
+    - Bunny producer  · p219
+    - Bunny consumer  · p221
+  - Exploring the AMQP model with Bunny  · p222
+    - Workers  · p222
+    - Publish – subscribe  · p225
+    - Routing  · p227
+  - The real-time processing  · p230
+  - Sneakers  · p230
+    - Installing  · p231
+    - Lambda architecture  · p235
+    - The real-time processors  · p236
+      - Key performance indicators (KPIs)  · p237
+    - Building averaging workers  · p238
+      - Windows  · p240
+      - Linux  · p240
+      - Mac OS X  · p240
+    - Building the IP2Location worker  · p242
+    - Exploring sneakers  · p243
+    - Timeouts  · p244
+    - Job handling  · p244
+    - Metrics  · p244
+  - Summary  · p245
+- Chapter 11: Python Client Programming  · p246
+  - Case study  · p246
+    - Getting Python dependencies  · p247
+  - Pika  · p247
+    - Installing Pika  · p247
+    - Our first Pika client  · p248
+    - A consumer  · p250
+  - Introducing the web scraper  · p252
+    - Scheduler  · p252
+    - Scraper  · p253
+  - Implementing the scheduler  · p253
+  - Implementing the scraper  · p255
+    - Running the scraper  · p257
+  - Handling failure  · p258
+  - Using acknowledgement  · p259
+  - The Pika API  · p260
+    - Connecting  · p260
+    - Using connection adapters  · p262
+      - BlockingConnection  · p262
+      - BlockingChannel  · p263
+    - Declaring queues and exchanges  · p264
+    - Authentication  · p265
+      - Plain credentials  · p266
+      - SSL and external credentials  · p266
+      - Certificate authentication  · p266
+    - Background processing  · p267
+  - Celery  · p267
+    - Installation  · p268
+    - Celery scraper  · p270
+    - Celery scheduler  · p270
+    - Exploring Celery  · p273
+      - Scheduling  · p273
+      - HTTP hook tasks  · p274
+      - Other Celery features  · p275
+  - Summary  · p276
+- Index  · p278

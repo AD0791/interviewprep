@@ -1,0 +1,264 @@
+# TOC — datapot.vn-Practical-Statistics-for-Data-Scientists.pdf
+
+*Extracted by `_tools/extract_toc.py` (outline). 260 entries. Machine-generated — do not hand-edit.*
+
+- Cover  · p1
+- Copyright  · p4
+- Table of Contents  · p7
+- Preface  · p15
+  - Conventions Used in This Book  · p15
+  - Using Code Examples  · p16
+  - O’Reilly Online Learning  · p17
+  - How to Contact Us  · p17
+  - Acknowledgments  · p18
+- Chapter 1. Exploratory Data Analysis  · p19
+  - Elements of Structured Data  · p20
+    - Further Reading  · p22
+  - Rectangular Data  · p22
+    - Data Frames and Indexes  · p24
+    - Nonrectangular Data Structures  · p24
+    - Further Reading  · p25
+  - Estimates of Location  · p25
+    - Mean  · p27
+    - Median and Robust Estimates  · p28
+    - Example: Location Estimates of Population and Murder Rates  · p30
+    - Further Reading  · p31
+  - Estimates of Variability  · p31
+    - Standard Deviation and Related Estimates  · p32
+    - Estimates Based on Percentiles  · p34
+    - Example: Variability Estimates of State Population  · p36
+    - Further Reading  · p37
+  - Exploring the Data Distribution  · p37
+    - Percentiles and Boxplots  · p38
+    - Frequency Tables and Histograms  · p40
+    - Density Plots and Estimates  · p42
+    - Further Reading  · p44
+  - Exploring Binary and Categorical Data  · p45
+    - Mode  · p47
+    - Expected Value  · p47
+    - Probability  · p48
+    - Further Reading  · p48
+  - Correlation  · p48
+    - Scatterplots  · p52
+    - Further Reading  · p54
+  - Exploring Two or More Variables  · p54
+    - Hexagonal Binning and Contours (Plotting Numeric Versus Numeric Data)  · p54
+    - Two Categorical Variables  · p57
+    - Categorical and Numeric Data  · p59
+    - Visualizing Multiple Variables  · p61
+    - Further Reading  · p64
+  - Summary  · p64
+- Chapter 2. Data and Sampling Distributions  · p65
+  - Random Sampling and Sample Bias  · p66
+    - Bias  · p68
+    - Random Selection  · p69
+    - Size Versus Quality: When Does Size Matter?  · p70
+    - Sample Mean Versus Population Mean  · p71
+    - Further Reading  · p71
+  - Selection Bias  · p72
+    - Regression to the Mean  · p73
+    - Further Reading  · p75
+  - Sampling Distribution of a Statistic  · p75
+    - Central Limit Theorem  · p78
+    - Standard Error  · p78
+    - Further Reading  · p79
+  - The Bootstrap  · p79
+    - Resampling Versus Bootstrapping  · p83
+    - Further Reading  · p83
+  - Confidence Intervals  · p83
+    - Further Reading  · p86
+  - Normal Distribution  · p87
+    - Standard Normal and QQ-Plots  · p89
+  - Long-Tailed Distributions  · p91
+    - Further Reading  · p93
+  - Student’s t-Distribution  · p93
+    - Further Reading  · p96
+  - Binomial Distribution  · p96
+    - Further Reading  · p98
+  - Chi-Square Distribution  · p98
+    - Further Reading  · p99
+  - F-Distribution  · p100
+    - Further Reading  · p100
+  - Poisson and Related Distributions  · p100
+    - Poisson Distributions  · p101
+    - Exponential Distribution  · p102
+    - Estimating the Failure Rate  · p102
+    - Weibull Distribution  · p103
+    - Further Reading  · p104
+  - Summary  · p104
+- Chapter 3. Statistical Experiments and Significance Testing  · p105
+  - A/B Testing  · p106
+    - Why Have a Control Group?  · p108
+    - Why Just A/B? Why Not C, D,…?  · p109
+    - Further Reading  · p110
+  - Hypothesis Tests  · p111
+    - The Null Hypothesis  · p112
+    - Alternative Hypothesis  · p113
+    - One-Way Versus Two-Way Hypothesis Tests  · p113
+    - Further Reading  · p114
+  - Resampling  · p114
+    - Permutation Test  · p115
+    - Example: Web Stickiness  · p116
+    - Exhaustive and Bootstrap Permutation Tests  · p120
+    - Permutation Tests: The Bottom Line for Data Science  · p120
+    - Further Reading  · p121
+  - Statistical Significance and p-Values  · p121
+    - p-Value  · p124
+    - Alpha  · p125
+    - Type 1 and Type 2 Errors  · p127
+    - Data Science and p-Values  · p127
+    - Further Reading  · p128
+  - t-Tests  · p128
+    - Further Reading  · p130
+  - Multiple Testing  · p130
+    - Further Reading  · p134
+  - Degrees of Freedom  · p134
+    - Further Reading  · p136
+  - ANOVA  · p136
+    - F-Statistic  · p139
+    - Two-Way ANOVA  · p141
+    - Further Reading  · p142
+  - Chi-Square Test  · p142
+    - Chi-Square Test: A Resampling Approach  · p142
+    - Chi-Square Test: Statistical Theory  · p145
+    - Fisher’s Exact Test  · p146
+    - Relevance for Data Science  · p148
+    - Further Reading  · p149
+  - Multi-Arm Bandit Algorithm  · p149
+    - Further Reading  · p152
+  - Power and Sample Size  · p153
+    - Sample Size  · p154
+    - Further Reading  · p156
+  - Summary  · p157
+- Chapter 4. Regression and Prediction  · p159
+  - Simple Linear Regression  · p159
+    - The Regression Equation  · p161
+    - Fitted Values and Residuals  · p164
+    - Least Squares  · p166
+    - Prediction Versus Explanation (Profiling)  · p167
+    - Further Reading  · p168
+  - Multiple Linear Regression  · p168
+    - Example: King County Housing Data  · p169
+    - Assessing the Model  · p171
+    - Cross-Validation  · p173
+    - Model Selection and Stepwise Regression  · p174
+    - Weighted Regression  · p177
+    - Further Reading  · p179
+  - Prediction Using Regression  · p179
+    - The Dangers of Extrapolation  · p179
+    - Confidence and Prediction Intervals  · p179
+  - Factor Variables in Regression  · p181
+    - Dummy Variables Representation  · p182
+    - Factor Variables with Many Levels  · p185
+    - Ordered Factor Variables  · p187
+  - Interpreting the Regression Equation  · p187
+    - Correlated Predictors  · p188
+    - Multicollinearity  · p190
+    - Confounding Variables  · p190
+    - Interactions and Main Effects  · p192
+  - Regression Diagnostics  · p194
+    - Outliers  · p195
+    - Influential Values  · p197
+    - Heteroskedasticity, Non-Normality, and Correlated Errors  · p200
+    - Partial Residual Plots and Nonlinearity  · p203
+  - Polynomial and Spline Regression  · p205
+    - Polynomial  · p206
+    - Splines  · p207
+    - Generalized Additive Models  · p210
+    - Further Reading  · p211
+  - Summary  · p212
+- Chapter 5. Classification  · p213
+  - Naive Bayes  · p214
+    - Why Exact Bayesian Classification Is Impractical  · p215
+    - The Naive Solution  · p216
+    - Numeric Predictor Variables  · p218
+    - Further Reading  · p219
+  - Discriminant Analysis  · p219
+    - Covariance Matrix  · p220
+    - Fisher’s Linear Discriminant  · p221
+    - A Simple Example  · p222
+    - Further Reading  · p225
+  - Logistic Regression  · p226
+    - Logistic Response Function and Logit  · p226
+    - Logistic Regression and the GLM  · p228
+    - Generalized Linear Models  · p230
+    - Predicted Values from Logistic Regression  · p230
+    - Interpreting the Coefficients and Odds Ratios  · p231
+    - Linear and Logistic Regression: Similarities and Differences  · p232
+    - Assessing the Model  · p234
+    - Further Reading  · p237
+  - Evaluating Classification Models  · p237
+    - Confusion Matrix  · p239
+    - The Rare Class Problem  · p241
+    - Precision, Recall, and Specificity  · p241
+    - ROC Curve  · p242
+    - AUC  · p244
+    - Lift  · p246
+    - Further Reading  · p247
+  - Strategies for Imbalanced Data  · p248
+    - Undersampling  · p249
+    - Oversampling and Up/Down Weighting  · p250
+    - Data Generation  · p251
+    - Cost-Based Classification  · p252
+    - Exploring the Predictions  · p252
+    - Further Reading  · p254
+  - Summary  · p254
+- Chapter 6. Statistical Machine Learning  · p255
+  - K-Nearest Neighbors  · p256
+    - A Small Example: Predicting Loan Default  · p257
+    - Distance Metrics  · p259
+    - One Hot Encoder  · p260
+    - Standardization (Normalization, z-Scores)  · p261
+    - Choosing K  · p264
+    - KNN as a Feature Engine  · p265
+  - Tree Models  · p267
+    - A Simple Example  · p268
+    - The Recursive Partitioning Algorithm  · p270
+    - Measuring Homogeneity or Impurity  · p272
+    - Stopping the Tree from Growing  · p274
+    - Predicting a Continuous Value  · p275
+    - How Trees Are Used  · p276
+    - Further Reading  · p277
+  - Bagging and the Random Forest  · p277
+    - Bagging  · p278
+    - Random Forest  · p279
+    - Variable Importance  · p283
+    - Hyperparameters  · p287
+  - Boosting  · p288
+    - The Boosting Algorithm  · p289
+    - XGBoost  · p290
+    - Regularization: Avoiding Overfitting  · p292
+    - Hyperparameters and Cross-Validation  · p297
+  - Summary  · p300
+- Chapter 7. Unsupervised Learning  · p301
+  - Principal Components Analysis  · p302
+    - A Simple Example  · p303
+    - Computing the Principal Components  · p306
+    - Interpreting Principal Components  · p307
+    - Correspondence Analysis  · p310
+    - Further Reading  · p312
+  - K-Means Clustering  · p312
+    - A Simple Example  · p313
+    - K-Means Algorithm  · p316
+    - Interpreting the Clusters  · p317
+    - Selecting the Number of Clusters  · p320
+  - Hierarchical Clustering  · p322
+    - A Simple Example  · p323
+    - The Dendrogram  · p324
+    - The Agglomerative Algorithm  · p326
+    - Measures of Dissimilarity  · p327
+  - Model-Based Clustering  · p329
+    - Multivariate Normal Distribution  · p329
+    - Mixtures of Normals  · p330
+    - Selecting the Number of Clusters  · p333
+    - Further Reading  · p336
+  - Scaling and Categorical Variables  · p336
+    - Scaling the Variables  · p337
+    - Dominant Variables  · p339
+    - Categorical Data and Gower’s Distance  · p340
+    - Problems with Clustering Mixed Data  · p343
+  - Summary  · p344
+- Bibliography  · p345
+- Index  · p347
+- About the Authors  · p361
+- Colophon  · p362

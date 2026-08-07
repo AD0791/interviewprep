@@ -1,0 +1,243 @@
+# TOC — dokumen.pub_data-science-from-scratch-first-principles-with-python-9781491901427-149190142x.pdf
+
+*Extracted by `_tools/extract_toc.py` (outline). 239 entries. Machine-generated — do not hand-edit.*
+
+- Preface  · p7
+  - Data Science  · p8
+  - From Scratch  · p10
+  - Conventions Used in This Book  · p11
+  - Using Code Examples  · p12
+  - Safari® Books Online  · p13
+  - How to Contact Us  · p14
+  - Acknowledgments  · p15
+- 1. Introduction  · p17
+  - The Ascendance of Data  · p18
+  - What Is Data Science?  · p19
+  - Motivating Hypothetical: DataSciencester  · p20
+    - Finding Key Connectors  · p21
+    - Data Scientists You May Know  · p24
+    - Salaries and Experience  · p27
+    - Paid Accounts  · p30
+    - Topics of Interest  · p31
+    - Onward  · p33
+- 2. A Crash Course in Python  · p35
+  - The Basics  · p36
+    - Getting Python  · p37
+    - The Zen of Python  · p38
+    - Whitespace Formatting  · p39
+    - Modules  · p41
+    - Arithmetic  · p41
+    - Functions  · p42
+    - Strings  · p44
+    - Exceptions  · p44
+    - Lists  · p45
+    - Tuples  · p47
+    - Dictionaries  · p48
+      - defaultdict  · p50
+      - Counter  · p51
+    - Sets  · p51
+    - Control Flow  · p52
+    - Truthiness  · p53
+  - The Not-So-Basics  · p55
+    - Sorting  · p56
+    - List Comprehensions  · p57
+    - Generators and Iterators  · p58
+    - Randomness  · p60
+    - Regular Expressions  · p61
+    - Object-Oriented Programming  · p61
+    - Functional Tools  · p63
+    - enumerate  · p64
+    - zip and Argument Unpacking  · p65
+    - args and kwargs  · p66
+    - Welcome to DataSciencester!  · p68
+  - For Further Exploration  · p69
+- 3. Visualizing Data  · p71
+  - matplotlib  · p72
+  - Bar Charts  · p74
+  - Line Charts  · p78
+  - Scatterplots  · p79
+  - For Further Exploration  · p82
+- 4. Linear Algebra  · p84
+  - Vectors  · p85
+  - Matrices  · p90
+  - For Further Exploration  · p93
+- 5. Statistics  · p95
+  - Describing a Single Set of Data  · p96
+    - Central Tendencies  · p99
+    - Dispersion  · p100
+  - Correlation  · p102
+  - Simpson’s Paradox  · p105
+  - Some Other Correlational Caveats  · p107
+  - Correlation and Causation  · p108
+  - For Further Exploration  · p109
+- 6. Probability  · p111
+  - Dependence and Independence  · p112
+  - Conditional Probability  · p113
+  - Bayes’s Theorem  · p115
+  - Random Variables  · p117
+  - Continuous Distributions  · p118
+  - The Normal Distribution  · p120
+  - The Central Limit Theorem  · p124
+  - For Further Exploration  · p127
+- 7. Hypothesis and Inference  · p128
+  - Statistical Hypothesis Testing  · p129
+  - Example: Flipping a Coin  · p130
+  - Confidence Intervals  · p134
+  - P-hacking  · p136
+  - Example: Running an A/B Test  · p136
+  - Bayesian Inference  · p138
+  - For Further Exploration  · p142
+- 8. Gradient Descent  · p143
+  - The Idea Behind Gradient Descent  · p144
+  - Estimating the Gradient  · p146
+  - Using the Gradient  · p148
+  - Choosing the Right Step Size  · p149
+  - Putting It All Together  · p150
+  - Stochastic Gradient Descent  · p152
+  - For Further Exploration  · p153
+- 9. Getting Data  · p155
+  - stdin and stdout  · p156
+  - Reading Files  · p158
+    - The Basics of Text Files  · p159
+    - Delimited Files  · p161
+  - Scraping the Web  · p162
+    - HTML and the Parsing Thereof  · p163
+    - Example: O’Reilly Books About Data  · p165
+  - Using APIs  · p169
+    - JSON (and XML)  · p170
+    - Using an Unauthenticated API  · p171
+    - Finding APIs  · p173
+  - Example: Using the Twitter APIs  · p174
+    - Getting Credentials  · p175
+      - Using Twython  · p177
+  - For Further Exploration  · p178
+- 10. Working with Data  · p180
+  - Exploring Your Data  · p181
+    - Exploring One-Dimensional Data  · p182
+    - Two Dimensions  · p184
+    - Many Dimensions  · p186
+  - Cleaning and Munging  · p188
+  - Manipulating Data  · p190
+  - Rescaling  · p193
+  - Dimensionality Reduction  · p195
+  - For Further Exploration  · p201
+- 11. Machine Learning  · p203
+  - Modeling  · p204
+  - What Is Machine Learning?  · p205
+  - Overfitting and Underfitting  · p206
+  - Correctness  · p209
+  - The Bias-Variance Trade-off  · p212
+  - Feature Extraction and Selection  · p214
+  - For Further Exploration  · p216
+- 12. k-Nearest Neighbors  · p218
+  - The Model  · p219
+  - Example: Favorite Languages  · p221
+  - The Curse of Dimensionality  · p225
+  - For Further Exploration  · p232
+- 13. Naive Bayes  · p234
+  - A Really Dumb Spam Filter  · p235
+  - A More Sophisticated Spam Filter  · p236
+  - Implementation  · p238
+  - Testing Our Model  · p240
+  - For Further Exploration  · p243
+- 14. Simple Linear Regression  · p245
+  - The Model  · p246
+  - Using Gradient Descent  · p250
+  - Maximum Likelihood Estimation  · p251
+  - For Further Exploration  · p252
+- 15. Multiple Regression  · p254
+  - The Model  · p255
+  - Further Assumptions of the Least Squares Model  · p256
+  - Fitting the Model  · p258
+  - Interpreting the Model  · p259
+  - Goodness of Fit  · p260
+  - Digression: The Bootstrap  · p261
+  - Standard Errors of Regression Coefficients  · p263
+  - Regularization  · p265
+  - For Further Exploration  · p267
+- 16. Logistic Regression  · p269
+  - The Problem  · p270
+  - The Logistic Function  · p273
+  - Applying the Model  · p276
+  - Goodness of Fit  · p278
+  - Support Vector Machines  · p279
+  - For Further Investigation  · p283
+- 17. Decision Trees  · p285
+  - What Is a Decision Tree?  · p286
+  - Entropy  · p289
+  - The Entropy of a Partition  · p291
+  - Creating a Decision Tree  · p292
+  - Putting It All Together  · p295
+  - Random Forests  · p298
+  - For Further Exploration  · p299
+- 18. Neural Networks  · p300
+  - Perceptrons  · p301
+  - Feed-Forward Neural Networks  · p303
+  - Backpropagation  · p306
+  - Example: Defeating a CAPTCHA  · p308
+  - For Further Exploration  · p312
+- 19. Clustering  · p314
+  - The Idea  · p315
+  - The Model  · p316
+  - Example: Meetups  · p318
+  - Choosing k  · p321
+  - Example: Clustering Colors  · p323
+  - Bottom-up Hierarchical Clustering  · p325
+  - For Further Exploration  · p330
+- 20. Natural Language Processing  · p332
+  - Word Clouds  · p333
+  - n-gram Models  · p336
+  - Grammars  · p339
+  - An Aside: Gibbs Sampling  · p342
+  - Topic Modeling  · p343
+  - For Further Exploration  · p348
+- 21. Network Analysis  · p350
+  - Betweenness Centrality  · p351
+  - Eigenvector Centrality  · p356
+    - Matrix Multiplication  · p357
+    - Centrality  · p360
+  - Directed Graphs and PageRank  · p361
+  - For Further Exploration  · p364
+- 22. Recommender Systems  · p365
+  - Manual Curation  · p366
+  - Recommending What’s Popular  · p367
+  - User-Based Collaborative Filtering  · p368
+  - Item-Based Collaborative Filtering  · p371
+  - For Further Exploration  · p373
+- 23. Databases and SQL  · p375
+  - CREATE TABLE and INSERT  · p376
+  - UPDATE  · p378
+  - DELETE  · p379
+  - SELECT  · p380
+  - GROUP BY  · p382
+  - ORDER BY  · p385
+  - JOIN  · p386
+  - Subqueries  · p389
+  - Indexes  · p390
+  - Query Optimization  · p391
+  - NoSQL  · p392
+  - For Further Exploration  · p393
+- 24. MapReduce  · p395
+  - Example: Word Count  · p396
+  - Why MapReduce?  · p398
+  - MapReduce More Generally  · p399
+  - Example: Analyzing Status Updates  · p400
+  - Example: Matrix Multiplication  · p402
+  - An Aside: Combiners  · p404
+  - For Further Exploration  · p405
+- 25. Go Forth and Do Data Science  · p407
+  - IPython  · p408
+  - Mathematics  · p409
+  - Not from Scratch  · p410
+    - NumPy  · p411
+    - pandas  · p412
+    - scikit-learn  · p413
+    - Visualization  · p414
+    - R  · p415
+  - Find Data  · p416
+  - Do Data Science  · p417
+    - Hacker News  · p418
+    - Fire Trucks  · p419
+    - T-shirts  · p420
+    - And You?  · p421
+- Index  · p423

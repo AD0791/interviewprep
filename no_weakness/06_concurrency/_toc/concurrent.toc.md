@@ -1,0 +1,88 @@
+# TOC — Concurrent.pdf
+
+*Extracted by `_tools/extract_toc.py` (slides[1-84]). 84 entries. Machine-generated — do not hand-edit.*
+
+- An Introduction to Python  · p1
+- Support Files  · p2
+- Disclaimers  · p3
+- Part I  · p4
+- Multitasking  · p5
+- Task Execution  · p6
+- I/O Bound Tasks  · p7
+- Processes  · p8
+- Part 2  · p9
+- Why Use Python at All?  · p10
+- Programmer Performance  · p11
+- You Can Go Faster  · p12
+- Part 3  · p13
+- Thread Basics  · p14
+- Thread Basics  · p15
+- Thread Basics  · p16
+- threading module  · p17
+- Functions as threads  · p18
+- Daemonic Threads  · p19
+- Access to Shared Data  · p20
+- Accessing Shared Data  · p21
+- Accessing Shared Data  · p22
+- Thread Synchronization  · p23
+- Synchronization Options  · p24
+- Mutex Locks  · p25
+- Use of Mutex Locks  · p26
+- Locking Perils  · p27
+- Lock Management  · p28
+- RLock  · p29
+- Semaphores  · p30
+- Resource Control  · p31
+- Events  · p32
+- Event Example  · p33
+- Condition Variables  · p34
+- Condition Variables  · p35
+- Part 5  · p36
+- Queue Library Module  · p37
+- Queue Signaling  · p38
+- Part 6  · p39
+- A Performance Test  · p40
+- Interlude  · p41
+- What is a Thread?  · p42
+- GIL Behavior  · p43
+- The Check Interval  · p44
+- What is a "Tick?"  · p45
+- Thread Scheduling  · p46
+- Thread Scheduling  · p47
+- Signaling Overhead  · p48
+- Multiple CPU Cores  · p49
+- The GIL and C Code  · p50
+- How to Release the GIL  · p51
+- The GIL and C Extensions  · p52
+- Why is the GIL there?  · p53
+- Using Threads  · p54
+- Why Threads?  · p55
+- Part 9  · p56
+- Message Passing  · p57
+- pickle Module  · p58
+- cPickle vs pickle  · p59
+- Message Transport  · p60
+- Pipes and Pickle  · p61
+- Some Sample Code  · p62
+- Big Picture  · p63
+- Part 10  · p64
+- Using multiprocessing  · p65
+- Launching Processes  · p66
+- Does it Work?  · p67
+- Distributed Memory  · p68
+- Using Pipes  · p69
+- Pipe Example  · p70
+- Queue Implementation  · p71
+- Queue Example  · p72
+- Other Features  · p73
+- Pool Example  · p74
+- Pool Example  · p75
+- Part 11  · p76
+- Two Approaches  · p77
+- Events and Asyncore  · p78
+- Coroutines  · p79
+- An Insight  · p80
+- Scheduling Example  · p81
+- Coroutines and I/O  · p82
+- Coroutine Info  · p83
+- Quick Summary  · p84

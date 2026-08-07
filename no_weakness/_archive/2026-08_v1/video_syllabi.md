@@ -2,7 +2,7 @@
 
 These are transcriptions of four phone screenshots that lived in `no_weakness/assets/` until August 2026. Each was a crop of a YouTube video's chapter-timestamp list. The images have been deleted; this file is what they contained.
 
-They were referred to as "the syllabus" but they are not one. There is no hierarchy, no learning objective, no prerequisite, no indication of depth — only an ordinal number and a timestamp. Their sole remaining use is the coverage appendix in [`SYLLABUS.md`](../../SYLLABUS.md), which argues explicitly about which of these topics this repo covers and which it deliberately skips.
+They were referred to as "the syllabus" but they are not one. There is no hierarchy, no learning objective, no prerequisite, no indication of depth — only an ordinal number and a timestamp. Their sole remaining use is the coverage appendix in [`SYLLABUS.md`](../2026-08_syllabi/SYLLABUS.md), which argues explicitly about which of these topics this repo covers and which it deliberately skips.
 
 Two videos are represented. Neither covers SQL, MongoDB, TypeScript, or BigQuery.
 

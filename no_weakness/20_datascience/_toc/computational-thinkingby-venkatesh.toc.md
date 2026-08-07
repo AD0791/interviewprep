@@ -1,0 +1,77 @@
+# TOC — Computational-thinkingby Venkatesh.pdf
+
+*Extracted by `_tools/extract_toc.py` (scrape[1-12]). 73 entries. Machine-generated — do not hand-edit.*
+
+- 1 Introduction  · p13
+  - 1.1 What is Computational Thinking? . . . . . . . . . . . . . . . .  · p13
+  - 1.2 Sample datasets . . . . . . . . . . . . . . . . . . . . . . . . . .  · p16
+  - 1.3 Organisation of the book . . . . . . . . . . . . . . . . . . . . .  · p28
+  - 1.4 A guide to the digital companion . . . . . . . . . . . . . . . . .  · p31
+- 2 Iterator  · p35
+  - 2.1 Going through a dataset . . . . . . . . . . . . . . . . . . . . . .  · p35
+  - 2.2 Flowcharts . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p38
+  - 2.3 Iterator flowchart for cards . . . . . . . . . . . . . . . . . . . .  · p40
+- 3 Variables  · p43
+  - 3.1 Generic flowchart for iterator with variables . . . . . . . . . . .  · p43
+  - 3.2 Counting . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p44
+  - 3.3 Sum . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p45
+  - 3.4 Average . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p47
+  - 3.5 Accumulator . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p50
+- 4 Filtering  · p53
+  - 4.1 Selecting cards: Iterator with filtering . . . . . . . . . . . . . .  · p54
+  - 4.2 Examples . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p54
+  - 4.3 Compound conditions . . . . . . . . . . . . . . . . . . . . . . .  · p61
+  - 4.4 Looking for a data element . . . . . . . . . . . . . . . . . . . .  · p69
+- 5 Datatypes  · p73
+  - 5.1 Sanity of data . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p74
+  - 5.2 Basic datatypes . . . . . . . . . . . . . . . . . . . . . . . . . .  · p77
+  - 5.3 Compound datatypes . . . . . . . . . . . . . . . . . . . . . . .  · p79
+  - 5.4 Subtypes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p81
+  - 5.5 Transforming the data element . . . . . . . . . . . . . . . . . .  · p83
+  - 5.6 Datatypes for the elements in the dataset . . . . . . . . . . . . .  · p86
+- 6 Filtering: dynamic conditions  · p91
+  - 6.1 Maximum . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p91
+  - 6.2 Minimum . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p95
+  - 6.3 Examples using maximum or minimum . . . . . . . . . . . . .  · p96
+  - 6.4 Combining static, dynamic and state conditions . . . . . . . . .  · p97
+- 7 Pseudocode  · p103
+  - 7.1 Basic iteration . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p105
+  - 7.2 Filtering . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p107
+  - 7.3 Compound conditions . . . . . . . . . . . . . . . . . . . . . . .  · p108
+  - 7.4 Filtering with dynamic conditions . . . . . . . . . . . . . . . .  · p109
+- 8 Procedures and Parameters  · p111
+  - 8.1 Pseudocode for procedures . . . . . . . . . . . . . . . . . . . .  · p111
+  - 8.2 Parameters . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p112
+  - 8.3 Checking for a single outstanding student . . . . . . . . . . . .  · p113
+  - 8.4 Side-effects . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p114
+- 9 Element ←→ Dataset  · p119
+  - 9.1 Sequenced iterations . . . . . . . . . . . . . . . . . . . . . . .  · p120
+  - 9.2 Compare with average . . . . . . . . . . . . . . . . . . . . . .  · p122
+  - 9.3 Classifying/Ranking the elements . . . . . . . . . . . . . . . .  · p125
+- 10 Element ←→ Element  · p133
+  - 10.1 Nested iterations . . . . . . . . . . . . . . . . . . . . . . . . .  · p134
+  - 10.2 Reducing the number of comparisons . . . . . . . . . . . . . .  · p140
+  - 10.3 Examples of nested iterations . . . . . . . . . . . . . . . . . . .  · p145
+- 11 Lists  · p151
+  - 11.1 List as a set or collection . . . . . . . . . . . . . . . . . . . . .  · p152
+  - 11.2 Using the list collections . . . . . . . . . . . . . . . . . . . . .  · p152
+- 12 Procedures with Side Effects  · p153
+- 13 Sorted Lists  · p155
+  - 13.1 Keeping lists in sorted form may speedup subsequent processing  · p156
+  - 13.2 How do we sort? . . . . . . . . . . . . . . . . . . . . . . . . .  · p156
+  - 13.3 Using the insertion sort procedure . . . . . . . . . . . . . . . .  · p156
+- 14 Dictionaries  · p157
+- 15 Dictionaries with Lists  · p159
+- 16 Graphs  · p161
+- 17 Graphs, Lists and Dictionaries  · p163
+- 18 Recursion  · p167
+- 19 Recursion Trees  · p169
+- 20 Spanning Trees  · p171
+- 21 Object Oriented Computing  · p173
+- 22 Functional Computing  · p175
+- 23 Concurrency  · p177
+- 24 Input and Output  · p179
+- 25 Real Time Systems  · p181
+- 26 Bottom-up Computing  · p183
+- 27 Summary & Further Reading  · p185
+- Part I

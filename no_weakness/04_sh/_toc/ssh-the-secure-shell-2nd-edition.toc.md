@@ -1,0 +1,787 @@
+# TOC — SSH, The Secure Shell, 2nd Edition.pdf
+
+*Extracted by `_tools/extract_toc.py` (outline). 783 entries. Machine-generated — do not hand-edit.*
+
+- Table of Contents  · p7
+- Preface  · p13
+  - Protect Your Network with SSH  · p14
+  - Intended Audience  · p15
+    - End-User Audience  · p15
+      - Prerequisites  · p15
+    - System-Administrator Audience  · p16
+      - Prerequisites  · p16
+  - Reading This Book  · p16
+  - Our Approach  · p16
+  - Which Chapters Are for You?  · p17
+  - Supported Platforms  · p18
+  - Disclaimers  · p18
+  - Conventions Used in This Book  · p18
+  - Comments and Questions  · p19
+  - Safari Enabled  · p19
+  - Acknowledgments  · p20
+- Introduction to SSH  · p21
+  - 1.1 What Is SSH?  · p21
+  - 1.2 What SSH Is Not  · p23
+  - 1.3 The SSH Protocol  · p23
+    - 1.3.1 Protocols, Products, Clients, and Confusion  · p24
+  - 1.4 Overview of SSH Features  · p25
+    - 1.4.1 Secure Remote Logins  · p25
+    - 1.4.2 Secure File Transfer  · p27
+    - 1.4.3 Secure Remote Command Execution  · p27
+    - 1.4.4 Keys and Agents  · p27
+    - 1.4.5 Access Control  · p28
+    - 1.4.6 Port Forwarding  · p28
+  - 1.5 History of SSH  · p29
+  - 1.6 Related Technologies  · p30
+    - 1.6.1 rsh Suite (r-Commands)  · p30
+    - 1.6.2 Pretty Good Privacy (PGP) and GNU Privacy Guard (GnuPG)  · p31
+    - 1.6.3 Kerberos  · p32
+    - 1.6.4 IPSEC and Virtual Private Networks  · p32
+    - 1.6.5 Secure Remote Password (SRP)  · p33
+    - 1.6.6 Secure Socket Layer (SSL) Protocol  · p34
+    - 1.6.7 SSL-Enhanced Telnet and FTP  · p34
+    - 1.6.8 stunnel  · p35
+    - 1.6.9 Firewalls  · p35
+  - 1.7 Summary  · p35
+- Basic Client Use  · p36
+  - 2.1 A Running Example  · p36
+  - 2.2 Remote Terminal Sessions with ssh  · p36
+    - 2.2.1 File Transfer with scp  · p37
+  - 2.3 Adding Complexity to the Example  · p38
+    - 2.3.1 Known Hosts  · p39
+    - 2.3.2 The Escape Character  · p41
+  - 2.4 Authentication by Cryptographic Key  · p41
+    - 2.4.1 A Brief Introduction to Keys  · p42
+    - 2.4.2 Generating Key Pairs with ssh-keygen  · p43
+    - 2.4.3 Installing a Public Key on an SSH Server Machine  · p44
+      - 2.4.3.1 Instructions for OpenSSH  · p44
+      - 2.4.3.2 Instructions for Tectia  · p45
+    - 2.4.4 If You Change Your Key  · p47
+  - 2.5 The SSH Agent  · p48
+    - 2.5.1 Agents and Automation  · p49
+    - 2.5.2 A More Complex Passphrase Problem  · p50
+    - 2.5.3 Agent Forwarding  · p50
+  - 2.6 Connecting Without a Password or Passphrase  · p52
+  - 2.7 Miscellaneous Clients  · p53
+    - 2.7.1 sftp  · p53
+    - 2.7.2 slogin  · p54
+  - 2.8 Summary  · p54
+- Inside SSH  · p56
+  - 3.1 Overview of Features  · p56
+    - 3.1.1 Privacy (Encryption)  · p57
+    - 3.1.2 Integrity  · p57
+    - 3.1.3 Authentication  · p58
+    - 3.1.4 Authorization  · p59
+    - 3.1.5 Forwarding ( Tunneling)  · p59
+  - 3.2 A Cryptography Primer  · p59
+    - 3.2.1 How Secure Is Secure?  · p60
+    - 3.2.2 Public- and Secret-Key Cryptography  · p61
+    - 3.2.3 Hash Functions  · p62
+  - 3.3 The Architecture of an SSH System  · p63
+  - 3.4 Inside SSH-2  · p65
+    - 3.4.1 Protocol Summary  · p67
+    - 3.4.2 SSH Transport Layer Protocol (SSH-TRANS)  · p69
+      - 3.4.2.1 Connection  · p69
+      - 3.4.2.2 Protocol version selection  · p70
+      - 3.4.2.3 Parameter negotiation  · p71
+      - 3.4.2.4 Key exchange and server authentication  · p74
+      - 3.4.2.5 Server authentication and antispoofing: some gory details  · p76
+      - 3.4.2.6 Wonder security powers, activate!  · p76
+    - 3.4.3 SSH Authentication Protocol (SSH-AUTH)  · p77
+      - 3.4.3.1 The authentication request  · p77
+      - 3.4.3.2 The authentication response  · p78
+      - 3.4.3.3 Getting started: the “none” request  · p79
+      - 3.4.3.4 Public-key authentication  · p80
+      - 3.4.3.5 Password authentication  · p81
+      - 3.4.3.6 Hostbased authentication  · p82
+    - 3.4.4 SSH Connection Protocol (SSH-CONN)  · p84
+      - 3.4.4.1 Channels  · p84
+      - 3.4.4.2 Requests  · p85
+      - 3.4.4.3 The finish line  · p87
+  - 3.5 Inside SSH-1  · p88
+  - 3.6 Implementation Issues  · p89
+    - 3.6.1 Host Keys  · p89
+    - 3.6.2 Authorization in Hostbased Authentication  · p91
+      - 3.6.2.1 Hostbased access files  · p92
+      - 3.6.2.2 Control file details  · p92
+      - 3.6.2.3 Netgroups as wildcards  · p96
+      - 3.6.2.4 Summary  · p97
+    - 3.6.3 SSH-1 Backward Compatibility  · p98
+    - 3.6.4 Randomness  · p98
+    - 3.6.5 Privilege Separation in OpenSSH  · p100
+  - 3.7 SSH and File Transfers (scp and sftp)  · p101
+    - 3.7.1 What’s in a Name?  · p102
+    - 3.7.2 scp Details  · p102
+    - 3.7.3 scp2/sftp Details  · p104
+  - 3.8 Algorithms Used by SSH  · p104
+    - 3.8.1 Public-Key Algorithms  · p104
+      - 3.8.1.1 Rivest-Shamir-Adleman (RSA)  · p104
+      - 3.8.1.2 Digital Signature Algorithm (DSA)  · p105
+      - 3.8.1.3 Diffie-Hellman key agreement  · p106
+    - 3.8.2 Secret-Key Algorithms  · p106
+      - 3.8.2.1 International Data Encryption Algorithm (IDEA)  · p106
+      - 3.8.2.2 Advanced Encryption Standard (AES)  · p107
+      - 3.8.2.3 Data Encryption Standard (DES)  · p107
+      - 3.8.2.4 Triple-DES  · p108
+      - 3.8.2.5 ARCFOUR (RC4)  · p108
+      - 3.8.2.6 Blowfish  · p108
+      - 3.8.2.7 Twofish  · p109
+      - 3.8.2.8 CAST  · p109
+    - 3.8.3 Hash Functions  · p109
+      - 3.8.3.1 CRC-32  · p109
+      - 3.8.3.2 MD5  · p110
+      - 3.8.3.3 SHA-1  · p110
+      - 3.8.3.4 RIPEMD-160  · p110
+    - 3.8.4 Compression Algorithms: zlib  · p111
+  - 3.9 Threats SSH Can Counter  · p111
+    - 3.9.1 Eavesdropping  · p111
+    - 3.9.2 Name Service and IP Spoofing  · p111
+    - 3.9.3 Connection Hijacking  · p111
+    - 3.9.4 Man-in-the-Middle Attacks  · p112
+  - 3.10 Threats SSH Doesn’t Prevent  · p113
+    - 3.10.1 Password Cracking  · p113
+    - 3.10.2 IP and TCP Attacks  · p114
+    - 3.10.3 Traffic Analysis  · p115
+    - 3.10.4 Covert Channels  · p116
+    - 3.10.5 Carelessness  · p117
+  - 3.11 Threats Caused by SSH  · p117
+  - 3.12 Summary  · p118
+- Installation and Compile-Time Configuration  · p119
+  - 4.1. Overview  · p119
+    - 4.1.1 Install the Prerequisites  · p120
+    - 4.1.2 Obtain the Sources  · p120
+    - 4.1.3 Verify the Signature  · p120
+    - 4.1.4 Extract the Source Files  · p121
+    - 4.1.5 Perform Compile-Time Configuration  · p121
+    - 4.1.6 Compile Everything  · p125
+    - 4.1.7 Install the Programs and Configuration Files  · p125
+  - 4.2 Installing OpenSSH  · p126
+    - 4.2.1 Prerequisites  · p126
+    - 4.2.2 Downloading and Extracting the Files  · p126
+      - 4.2.2.1 Verifying with GnuPG  · p127
+    - 4.2.3 Building and Installing  · p127
+    - 4.2.4 Configuration Options  · p127
+      - 4.2.4.1 File locations  · p127
+      - 4.2.4.2 Random number generation  · p128
+      - 4.2.4.3 Networking  · p129
+      - 4.2.4.4 Authentication  · p129
+      - 4.2.4.5 Access control  · p131
+  - 4.3 Installing Tectia  · p131
+    - 4.3.1 Prerequisites  · p132
+    - 4.3.2 Obtaining and Extracting the Files  · p132
+    - 4.3.3 Verifying with md5sum  · p132
+    - 4.3.4 Building and Installing  · p133
+    - 4.3.5 Configuration Options  · p133
+      - 4.3.5.1 File locations and permission  · p133
+      - 4.3.5.2 Random number generation  · p134
+      - 4.3.5.3 Networking  · p135
+      - 4.3.5.4 X Window System  · p136
+      - 4.3.5.5 TCP port forwarding  · p137
+      - 4.3.5.6 Encryption  · p137
+      - 4.3.5.7 Authentication  · p137
+      - 4.3.5.8 SOCKS proxies  · p140
+      - 4.3.5.9 Debugging  · p140
+      - 4.3.5.10 SSH-1 protocol compatibility  · p141
+    - 4.3.6 SSH-1 Compatibility Support for Tectia  · p142
+  - 4.4 Software Inventory  · p144
+  - 4.5 Replacing r Commands with SSH  · p145
+    - 4.5.1 Concurrent Versions System (CVS)  · p145
+    - 4.5.2 GNU Emacs  · p146
+    - 4.5.3 Pine  · p146
+    - 4.5.4 rsync, rdist  · p147
+  - 4.6 Summary  · p147
+- Serverwide Configuration  · p148
+  - 5.1 Running the Server  · p149
+    - 5.1.1 Running sshd as the Superuser  · p149
+    - 5.1.2 Running sshd as an Ordinary User  · p149
+  - 5.2 Server Configuration: An Overview  · p152
+    - 5.2.1 Server Configuration Files  · p153
+    - 5.2.2 Checking Configuration Files  · p155
+      - 5.2.2.1 Checking OpenSSH configuration files  · p155
+      - 5.2.2.2 Checking Tectia configuration files  · p156
+    - 5.2.3 Command-Line Options  · p158
+    - 5.2.4 Changing the Configuration  · p159
+    - 5.2.5 A Tricky Reconfiguration Example  · p161
+  - 5.3 Getting Ready: Initial Setup  · p161
+    - 5.3.1 File Locations  · p162
+      - 5.3.1.1 Host key files  · p162
+      - 5.3.1.2 Random seed file  · p163
+      - 5.3.1.3 Process ID file  · p163
+      - 5.3.1.4 Server configuration file  · p164
+      - 5.3.1.5 User SSH directory  · p164
+      - 5.3.1.6 Per-account authorization files  · p165
+      - 5.3.1.7 utmp file structure  · p165
+    - 5.3.2 File Permissions  · p166
+      - 5.3.2.1 Acceptable permissions for user files  · p166
+    - 5.3.3 TCP/IP Settings  · p167
+      - 5.3.3.1 Port number and network interface  · p168
+      - 5.3.3.2 Invocation by inetd or xinetd  · p170
+      - 5.3.3.3 Restarting the SSH server for each connection  · p171
+      - 5.3.3.4 Keepalive messages  · p172
+      - 5.3.3.5 Idle connections  · p175
+      - 5.3.3.6 Failed logins  · p176
+      - 5.3.3.7 Limiting simultaneous connections  · p177
+      - 5.3.3.8 Reverse IP mappings  · p178
+      - 5.3.3.9 Controlling the Nagle Algorithm  · p179
+      - 5.3.3.10 Discovering other servers  · p179
+    - 5.3.4 Key Regeneration  · p181
+    - 5.3.5 Encryption Algorithms  · p182
+    - 5.3.6 Integrity-Checking (MAC) Algorithms  · p187
+    - 5.3.7 SSH Protocol Settings  · p189
+      - 5.3.7.1 Protocol version string  · p190
+    - 5.3.8 Compression  · p190
+  - 5.4 Authentication: Verifying Identities  · p191
+    - 5.4.1 Authentication Syntax  · p191
+    - 5.4.2 Password Authentication  · p193
+      - 5.4.2.1 Failed password attempts  · p193
+      - 5.4.2.2 Empty passwords  · p193
+      - 5.4.2.3 Expired passwords  · p193
+    - 5.4.3 Public-Key Authentication  · p194
+    - 5.4.4 Hostbased Authentication  · p195
+    - 5.4.5 Keyboard-Interactive Authentication  · p197
+      - 5.4.5.1 OpenSSH keyboard-interactive authentication  · p198
+      - 5.4.5.2 Tectia’s keyboard-interactive authentication  · p198
+    - 5.4.6 PGP Authentication  · p201
+    - 5.4.7 Kerberos Authentication  · p201
+      - 5.4.7.1 Kerberos and OpenSSH  · p201
+      - 5.4.7.2 Kerberos and Tectia  · p202
+    - 5.4.8 PAM Authentication  · p203
+    - 5.4.9 Privilege Separation  · p204
+    - 5.4.10 Selecting a Login Program  · p204
+  - 5.5 Access Control: Letting People In  · p204
+    - 5.5.1 Account Access Control  · p205
+      - 5.5.1.1 Restricting all logins  · p211
+    - 5.5.2 Group Access Control  · p211
+    - 5.5.3 Hostname Access Control  · p212
+    - 5.5.4 shosts Access Control  · p213
+    - 5.5.5 Root Access Control  · p214
+    - 5.5.6 External Access Control  · p214
+    - 5.5.7 Restricting Directory Access with chroot  · p215
+    - 5.5.8 Summary of Authentication and Access Control  · p217
+  - 5.6 User Logins and Accounts  · p218
+    - 5.6.1 Welcome Messages for the User  · p218
+    - 5.6.2 Setting Environment Variables  · p219
+    - 5.6.3 Initialization Scripts  · p220
+  - 5.7 Forwarding  · p221
+    - 5.7.1 Port Forwarding  · p221
+    - 5.7.2 X Forwarding  · p225
+    - 5.7.3 Agent Forwarding  · p226
+  - 5.8 Subsystems  · p226
+  - 5.9 Logging and Debugging  · p229
+    - 5.9.1 OpenSSH Logging and Debugging  · p231
+    - 5.9.2 Tectia Logging and Debugging  · p235
+    - 5.9.3 Debugging Under inetd or xinetd  · p243
+  - 5.10 Compatibility Between SSH-1 and SSH-2 Servers  · p243
+    - 5.10.1 Security Issues with Tectia’s SSH-1 Compatibility Mode  · p245
+  - 5.11 Summary  · p246
+- Key Management and Agents  · p247
+  - 6.1 What Is an Identity?  · p247
+    - 6.1.1 OpenSSH Identities  · p249
+    - 6.1.2 Tectia Identities  · p250
+  - 6.2 Creating an Identity  · p253
+    - 6.2.1 Generating Keys for OpenSSH  · p253
+      - 6.2.1.1 Creating OpenSSH keys  · p253
+      - 6.2.1.2 Working with OpenSSH keys  · p254
+    - 6.2.2 Generating Keys for Tectia  · p255
+      - 6.2.2.1 Creating Tectia keys  · p257
+      - 6.2.2.2 Working with Tectia keys  · p257
+    - 6.2.3 Selecting a Passphrase  · p260
+    - 6.2.4 Generating New Groups for Diffie-Hellman Key Exchange  · p261
+  - 6.3 SSH Agents  · p262
+    - 6.3.1 Agents Do Not Expose Keys  · p262
+    - 6.3.2 Starting an Agent  · p263
+      - 6.3.2.1 Single-shell method  · p263
+      - 6.3.2.2 Subshell method  · p266
+      - 6.3.2.3 Format of environment variable commands  · p267
+    - 6.3.3 Loading Keys with ssh-add  · p267
+      - 6.3.3.1 Automatic agent loading (single-shell method)  · p271
+      - 6.3.3.2 Automatic agent loading (subshell method)  · p272
+      - 6.3.3.3 Automatic agent loading (X Window System)  · p273
+    - 6.3.4 Agents and Security  · p273
+      - 6.3.4.1 Access control  · p273
+      - 6.3.4.2 Cracking an agent  · p275
+    - 6.3.5 Agent Forwarding  · p276
+      - 6.3.5.1 A firewall example  · p276
+      - 6.3.5.2 How agent forwarding works  · p277
+      - 6.3.5.3 Enabling agent forwarding  · p279
+    - 6.3.6 Agent CPU Usage  · p279
+    - 6.3.7 Debugging the Agent  · p279
+  - 6.4 Multiple Identities  · p280
+    - 6.4.1 Switching Identities Manually  · p281
+    - 6.4.2 Switching Identities with an Agent  · p281
+    - 6.4.3 Tailoring Sessions Based on Identity  · p282
+  - 6.5 PGP Authentication in Tectia  · p282
+  - 6.6 Tectia External Keys  · p284
+  - 6.7 Summary  · p285
+- Advanced Client Use  · p286
+  - 7.1 How to Configure Clients  · p286
+    - 7.1.1 Command-Line Options  · p287
+    - 7.1.2 Client Configuration Files  · p288
+      - 7.1.2.1 Keywords versus command-line options  · p288
+      - 7.1.2.2 Global and local files  · p289
+      - 7.1.2.3 Configuration-file sections  · p290
+      - 7.1.2.4 Multiple matches  · p291
+      - 7.1.2.5 Making nicknames for hosts  · p293
+      - 7.1.2.6 Comments, indenting, and style  · p295
+    - 7.1.3 Environment Variables  · p295
+  - 7.2 Precedence  · p296
+  - 7.3 Introduction to Verbose Mode  · p297
+  - 7.4 Client Configuration in Depth  · p298
+    - 7.4.1 Remote Account Name  · p299
+      - 7.4.1.1 Tricks with remote account names  · p299
+    - 7.4.2 User Identity  · p301
+      - 7.4.2.1 Using identities  · p303
+    - 7.4.3 Host Keys and Known-Hosts Databases  · p304
+      - 7.4.3.1 Strict host-key checking  · p304
+      - 7.4.3.2 Verifying host keys by DNS  · p305
+      - 7.4.3.3 Host key aliasing  · p306
+      - 7.4.3.4 Ignoring host keys for localhost  · p307
+      - 7.4.3.5 Moving the known hosts files  · p307
+    - 7.4.4 SSH Protocol Settings  · p307
+      - 7.4.4.1 Choosing a protocol version  · p307
+      - 7.4.4.2 Connection sharing  · p308
+      - 7.4.4.3 Setting environment variables in the server  · p309
+    - 7.4.5 TCP/IP Settings  · p310
+      - 7.4.5.1 Selecting a remote port  · p310
+      - 7.4.5.2 Connecting via a given network interface  · p311
+      - 7.4.5.3 Forcing a nonprivileged local port  · p311
+      - 7.4.5.4 Keepalive messages  · p312
+      - 7.4.5.5 Controlling TCP_NODELAY  · p313
+      - 7.4.5.6 Requiring IPv4 and IPv6  · p313
+    - 7.4.6 Making Connections  · p314
+      - 7.4.6.1 Number of connection attempts  · p314
+      - 7.4.6.2 Password prompting in OpenSSH  · p315
+      - 7.4.6.3 Password prompting in Tectia  · p315
+      - 7.4.6.4 Batch mode: suppressing prompts  · p315
+      - 7.4.6.5 Pseudo-terminal allocation (TTY/PTY/PTTY)  · p316
+      - 7.4.6.6 Backgrounding a remote command  · p317
+      - 7.4.6.7 Backgrounding a remote command, take two  · p318
+      - 7.4.6.8 Escaping  · p319
+    - 7.4.7 Proxies and SOCKS  · p322
+      - 7.4.7.1 SOCKS in OpenSSH: using DynamicForward  · p324
+      - 7.4.7.2 SOCKS in Tectia  · p324
+    - 7.4.8 Forwarding  · p325
+    - 7.4.9 Encryption Algorithms  · p326
+    - 7.4.10 Integrity-Checking (MAC) Algorithms  · p326
+    - 7.4.11 Host Key Types  · p327
+    - 7.4.12 Session Rekeying  · p327
+    - 7.4.13 Authentication  · p327
+      - 7.4.13.1 Requesting an authentication technique  · p327
+      - 7.4.13.2 The server is the boss  · p328
+      - 7.4.13.3 Detecting successful authentication  · p328
+      - 7.4.13.4 Using ssh-keysign for hostbased authentication  · p330
+    - 7.4.14 Data Compression  · p330
+    - 7.4.15 Program Locations  · p331
+    - 7.4.16 Subsystems  · p331
+    - 7.4.17 Logging and Debugging  · p332
+    - 7.4.18 Random Seeds  · p333
+  - 7.5 Secure Copy with scp  · p333
+    - 7.5.1 Full Syntax of scp  · p333
+    - 7.5.2 Handling of Wildcards  · p336
+    - 7.5.3 Recursive Copy of Directories  · p336
+    - 7.5.4 Preserving Permissions  · p337
+    - 7.5.5 Automatic Removal of Original File  · p337
+    - 7.5.6 Safety Features  · p338
+      - 7.5.6.1 Directory confirmation  · p338
+      - 7.5.6.2 No-execute mode  · p338
+      - 7.5.6.3 Overwriting existing files  · p338
+    - 7.5.7 Batch Mode  · p339
+    - 7.5.8 User Identity  · p339
+    - 7.5.9 SSH Protocol Settings  · p339
+    - 7.5.10 TCP/IP Settings  · p339
+    - 7.5.11 Encryption Algorithms  · p339
+    - 7.5.12 Controlling Bandwidth  · p340
+    - 7.5.13 Data Compression  · p340
+    - 7.5.14 File Conversion  · p340
+    - 7.5.15 Optimizations  · p341
+    - 7.5.16 Statistics Display  · p341
+    - 7.5.17 Locating the ssh Executable  · p342
+    - 7.5.18 Getting Help  · p342
+    - 7.5.19 For Internal Use Only  · p342
+    - 7.5.20 Further Configuration  · p343
+  - 7.6 Secure, Interactive Copy with sftp  · p343
+    - 7.6.1 Interactive Commands  · p343
+    - 7.6.2 Command-Line Options  · p345
+  - 7.7 Summary  · p345
+- Per-Account Server Configuration  · p346
+  - 8.1 Limits of This Technique  · p346
+    - 8.1.1 Overriding Serverwide Settings  · p347
+    - 8.1.2 Authentication Issues  · p348
+  - 8.2 Public-Key-Based Configuration  · p348
+    - 8.2.1 OpenSSH Authorization Files  · p349
+    - 8.2.2 Tectia Authorization Files  · p350
+      - 8.2.2.1 Tectia PGP key authentication  · p351
+    - 8.2.3 Forced Commands  · p351
+      - 8.2.3.1 Security issues  · p353
+      - 8.2.3.2 Rejecting connections with a custom message  · p354
+      - 8.2.3.3 Displaying a command menu  · p355
+      - 8.2.3.4 Examining the client’s original command  · p356
+      - 8.2.3.5 Restricting a client’s original command  · p357
+      - 8.2.3.6 Logging a client’s original command  · p358
+      - 8.2.3.7 Forced commands and secure copy (scp)  · p358
+    - 8.2.4 Restricting Access by Host or Domain  · p358
+      - 8.2.4.1 OpenSSH host access control  · p358
+      - 8.2.4.2 Tectia host access control  · p360
+    - 8.2.5 Setting Environment Variables  · p360
+      - 8.2.5.1 Example: CVS and $LOGNAME  · p362
+    - 8.2.6 Setting Idle Timeout  · p363
+    - 8.2.7 Disabling or Limiting Forwarding  · p364
+    - 8.2.8 Disabling TTY Allocation  · p365
+  - 8.3 Hostbased Access Control  · p366
+  - 8.4 The User rc File  · p368
+  - 8.5 Summary  · p368
+- Port Forwarding and X Forwarding  · p369
+  - 9.1 What Is Forwarding?  · p370
+  - 9.2 Port Forwarding  · p371
+    - 9.2.1 Local Forwarding  · p372
+      - 9.2.1.1 Local forwarding and GatewayPorts  · p375
+      - 9.2.1.2 Remote forwarding  · p376
+    - 9.2.2 Trouble with Multiple Connections  · p377
+    - 9.2.3 Comparing Local and Remote Port Forwarding  · p378
+      - 9.2.3.1 Common elements  · p378
+      - 9.2.3.2 Local versus remote forwarding: the distinction  · p380
+    - 9.2.4 Forwarding Off-Host  · p381
+      - 9.2.4.1 Privacy  · p383
+      - 9.2.4.2 Access control and the loopback address  · p383
+      - 9.2.4.3 Listening on (“binding”) an interface  · p384
+    - 9.2.5 Bypassing a Firewall  · p384
+    - 9.2.6 Port Forwarding Without a Remote Login  · p386
+      - 9.2.6.1 One-shot forwarding  · p387
+    - 9.2.7 The Listening Port Number  · p387
+    - 9.2.8 Choosing the Target Forwarding Address  · p388
+    - 9.2.9 Termination  · p389
+      - 9.2.9.1 The TIME_WAIT problem  · p390
+    - 9.2.10 Configuring Port Forwarding in the Server  · p390
+      - 9.2.10.1 Compile-time configuration  · p390
+      - 9.2.10.2 Serverwide configuration  · p390
+      - 9.2.10.3 Per-account configuration  · p391
+    - 9.2.11 Protocol-Specific Forwarding: FTP  · p391
+  - 9.3 Dynamic Port Forwarding  · p393
+    - 9.3.1 SOCKS v4, SOCKS v5, and Names  · p395
+    - 9.3.2 Other Uses of Dynamic Forwarding  · p396
+  - 9.4 X Forwarding  · p397
+    - 9.4.1 The X Window System  · p397
+    - 9.4.2 How X Forwarding Works  · p399
+    - 9.4.3 Enabling X Forwarding  · p400
+    - 9.4.4 Configuring X Forwarding  · p401
+      - 9.4.4.1 Compile-time configuration  · p401
+      - 9.4.4.2 Serverwide configuration  · p401
+      - 9.4.4.3 Per-account configuration  · p401
+    - 9.4.5 X Authentication  · p402
+      - 9.4.5.1 How X authentication works  · p402
+      - 9.4.5.2 xauth and the SSH rc files  · p402
+      - 9.4.5.3 Trusted X forwarding  · p403
+      - 9.4.5.4 Problems with X authentication  · p404
+      - 9.4.5.5 SSH and authentication spoofing  · p404
+      - 9.4.5.6 Improving authentication spoofing  · p406
+      - 9.4.5.7 Nonstandard X clients  · p407
+    - 9.4.6 Further Issues  · p407
+      - 9.4.6.1 X server configuration  · p407
+      - 9.4.6.2 Setting your DISPLAY environment variable  · p408
+      - 9.4.6.3 Shared accounts  · p408
+      - 9.4.6.4 Location of the xauth program  · p409
+      - 9.4.6.5 X forwarding and the GatewayPorts feature  · p409
+  - 9.5 Forwarding Security: TCP-Wrappers and libwrap  · p409
+    - 9.5.1 TCP-Wrappers Configuration  · p410
+    - 9.5.2 Notes About TCP-Wrappers  · p414
+  - 9.6 Summary  · p415
+- A Recommended Setup  · p416
+  - 10.1 The Basics  · p416
+  - 10.2 Compile-Time Configuration  · p417
+  - 10.3 Serverwide Configuration  · p417
+    - 10.3.1 Disable Other Means of Access  · p418
+    - 10.3.2 sshd_config for OpenSSH  · p418
+      - 10.3.2.1 Choice of protocol  · p418
+      - 10.3.2.2 Important files  · p418
+      - 10.3.2.3 File and directory permissions  · p418
+      - 10.3.2.4 TCP/IP settings  · p419
+      - 10.3.2.5 Login time  · p419
+      - 10.3.2.6 Authentication  · p419
+      - 10.3.2.7 Access control  · p420
+      - 10.3.2.8 Forwarding  · p420
+      - 10.3.2.9 SFTP  · p421
+    - 10.3.3 sshd2_config for Tectia  · p421
+      - 10.3.3.1 Choice of protocol  · p421
+      - 10.3.3.2 Important files  · p421
+      - 10.3.3.3 File and directory permissions  · p421
+      - 10.3.3.4 TCP/IP settings  · p421
+      - 10.3.3.5 Login time  · p422
+      - 10.3.3.6 Authentication  · p422
+      - 10.3.3.7 Access control  · p422
+      - 10.3.3.8 Forwarding  · p423
+      - 10.3.3.9 Encryption  · p423
+      - 10.3.3.10 SFTP  · p423
+  - 10.4 Per-Account Configuration  · p423
+  - 10.5 Key Management  · p424
+  - 10.6 Client Configuration  · p424
+  - 10.7 Remote Home Directories (NFS, AFS)  · p424
+    - 10.7.1 NFS Security Risks  · p425
+    - 10.7.2 NFS Access Problems  · p426
+    - 10.7.3 AFS Access Problems  · p426
+  - 10.8 Summary  · p427
+- Case Studies  · p428
+  - 11.1 Unattended SSH: Batch or cron Jobs  · p428
+    - 11.1.1 Password Authentication  · p428
+    - 11.1.2 Public-Key Authentication  · p429
+      - 11.1.2.1 Storing the passphrase in the filesystem  · p429
+      - 11.1.2.2 Using a plaintext key  · p430
+      - 11.1.2.3 Using an agent  · p430
+    - 11.1.3 Hostbased Authentication  · p432
+    - 11.1.4 Kerberos  · p433
+    - 11.1.5 General Precautions for Batch Jobs  · p433
+      - 11.1.5.1 Least-privilege accounts  · p434
+      - 11.1.5.2 Separate, locked-down automation accounts  · p434
+      - 11.1.5.3 Restricted-use keys  · p434
+      - 11.1.5.4 Useful ssh options  · p434
+    - 11.1.6 Recommendations  · p435
+  - 11.2 FTP and SSH  · p435
+    - 11.2.1 FTP-Specific Tools for SSH  · p436
+      - 11.2.1.1 VanDyke’s SecureFX  · p436
+      - 11.2.1.2 Tectia client  · p436
+    - 11.2.2 Static Port Forwarding and FTP: A Study in Pain  · p437
+    - 11.2.3 The FTP Protocol  · p437
+    - 11.2.4 Forwarding the Control Connection  · p440
+      - 11.2.4.1 Choosing the forwarding target  · p441
+      - 11.2.4.2 Using passive mode  · p442
+      - 11.2.4.3 The “PASV port theft” problem  · p443
+    - 11.2.5 FTP, Firewalls, and Passive Mode  · p444
+    - 11.2.6 FTP and Network Address Translation (NAT)  · p446
+      - 11.2.6.1 Server-side NAT issues  · p447
+    - 11.2.7 All About Data Connections  · p449
+      - 11.2.7.1 The usual method of file transfer  · p449
+      - 11.2.7.2 Passive mode in depth  · p451
+      - 11.2.7.3 FTP with the default data ports  · p452
+    - 11.2.8 Forwarding the Data Connection  · p454
+  - 11.3 Pine, IMAP, and SSH  · p456
+    - 11.3.1 Securing IMAP Authentication  · p457
+      - 11.3.1.1 Pine and preauthenticated IMAP  · p459
+      - 11.3.1.2 Making Pine use SSH  · p460
+    - 11.3.2 Mail Relaying and News Access  · p462
+    - 11.3.3 Using a Connection Script  · p464
+  - 11.4 Connecting Through a Gateway Host  · p464
+    - 11.4.1 Making Transparent SSH Connections  · p465
+    - 11.4.2 Using SCP Through a Gateway  · p468
+    - 11.4.3 Another Approach: SSH-in-SSH (Port Forwarding)  · p469
+    - 11.4.4 SSH-in-SSH with a Proxy Command (OpenSSH)  · p470
+    - 11.4.5 Comparing the Techniques  · p471
+      - 11.4.5.1 Smoothness  · p471
+      - 11.4.5.2 Security  · p472
+  - 11.5 Scalable Authentication for SSH  · p472
+    - 11.5.1 Tectia with X.509 Certificates  · p474
+      - 11.5.1.1 What’s a PKI?  · p474
+      - 11.5.1.2 Using certificates with Tectia host keys  · p475
+      - 11.5.1.3 A simple configuration  · p476
+      - 11.5.1.4 Getting a certificate  · p476
+      - 11.5.1.5 Hostkey verification: configuring the server  · p477
+      - 11.5.1.6 Hostkey verification: configuring the Client  · p478
+      - 11.5.1.7 User authentication: configuring the client  · p479
+      - 11.5.1.8 User authentication: configuring the server  · p480
+    - 11.5.2 OpenSSH and Tectia with Kerberos  · p481
+      - 11.5.2.1 How Kerberos works  · p482
+      - 11.5.2.2 Kerberos support in SSH  · p483
+      - 11.5.2.3 Kerberos interoperability with OpenSSH and Tectia  · p484
+  - 11.6 Tectia Extensions to Server Configuration Files  · p488
+    - 11.6.1 Metaconfiguration  · p489
+    - 11.6.2 Subconfiguration Files  · p491
+    - 11.6.3 Quoted Values  · p498
+  - 11.7 Tectia Plugins  · p499
+    - 11.7.1 A Plugin for Changing Expired Passwords  · p499
+      - 11.7.1.1 The ssh-passwd-plugin program  · p501
+      - 11.7.1.2 A Perl package implementing the Tectia plugin protocol  · p504
+      - 11.7.1.3 Creating a customized password-change plugin  · p507
+    - 11.7.2 A Plugin for Keyboard-Interactive Authentication  · p508
+    - 11.7.3 A Plugin for External Authorization  · p512
+- Troubleshooting and FAQ  · p515
+  - 12.1 Debug Messages: Your First Line of Defense  · p515
+    - 12.1.1 Client Debugging  · p515
+    - 12.1.2 Server Debugging  · p516
+  - 12.2 Problems and Solutions  · p517
+    - 12.2.1 General Problems  · p518
+    - 12.2.2 Authentication Problems  · p518
+      - 12.2.2.1 General authentication problems  · p518
+      - 12.2.2.2 Password authentication  · p519
+      - 12.2.2.3 Hostbased authentication  · p520
+      - 12.2.2.4 Public-key authentication  · p521
+      - 12.2.2.5 PGP key authentication  · p523
+    - 12.2.3 Key and Agent Problems  · p524
+      - 12.2.3.1 ssh-keygen  · p524
+      - 12.2.3.2 ssh-agent and ssh-add  · p525
+      - 12.2.3.3 Per-account authorization files  · p526
+    - 12.2.4 Server Problems  · p526
+      - 12.2.4.1 sshd_config, sshd2_config  · p526
+    - 12.2.5 Client Problems  · p527
+      - 12.2.5.1 General client problems  · p527
+      - 12.2.5.2 Client configuration file  · p527
+      - 12.2.5.3 ssh  · p528
+      - 12.2.5.4 scp  · p529
+      - 12.2.5.5 sftp  · p531
+      - 12.2.5.6 Port forwarding  · p532
+  - 12.3 Other SSH Resources  · p533
+    - 12.3.1 Web Sites  · p534
+    - 12.3.2 Usenet Newsgroups  · p534
+- Overview of Other Implementations  · p535
+  - 13.1 Common Features  · p535
+  - 13.2 Covered Products  · p536
+  - 13.3 Other SSH Products  · p536
+    - 13.3.1 BeOS  · p536
+    - 13.3.2 Commodore Amiga  · p536
+    - 13.3.3 GNU Emacs  · p537
+    - 13.3.4 Java  · p537
+    - 13.3.5 Macintosh OS 9  · p537
+    - 13.3.6 Macintosh OS X  · p537
+    - 13.3.7 Microsoft Windows  · p537
+    - 13.3.8 Microsoft Windows CE (PocketPC)  · p539
+    - 13.3.9 OS/2  · p539
+    - 13.3.10 Palm OS  · p539
+    - 13.3.11 Perl  · p539
+    - 13.3.12 Unix Variants (Linux, OpenBSD, etc.)  · p539
+    - 13.3.13 VMS  · p540
+- OpenSSH for Windows  · p541
+  - 14.1 Installation  · p541
+  - 14.2 Using the SSH Clients  · p542
+  - 14.3 Setting Up the SSH Server  · p542
+    - 14.3.1 Opening Remote Windows on the Desktop  · p543
+  - 14.4 Public-Key Authentication  · p544
+    - 14.4.1 Running an Agent  · p544
+  - 14.5 Troubleshooting  · p545
+  - 14.6 Summary  · p545
+- OpenSSH for Macintosh  · p546
+  - 15.1 Using the SSH Clients  · p546
+  - 15.2 Using the OpenSSH Server  · p546
+    - 15.2.1 Enabling the Server  · p547
+    - 15.2.2 Opening the Firewall  · p547
+    - 15.2.3 Control by xinetd  · p548
+    - 15.2.4 Server Configuration Details  · p549
+    - 15.2.5 Kerberos Support  · p549
+- Tectia for Windows  · p551
+  - 16.1 Obtaining and Installing  · p552
+  - 16.2 Basic Client Use  · p553
+  - 16.3 Key Management  · p554
+  - 16.4 Accession Lite  · p556
+  - 16.5 Advanced Client Use  · p559
+  - 16.6 Port Forwarding  · p562
+  - 16.7 Connector  · p563
+    - 16.7.1 General Settings  · p565
+    - 16.7.2 Servers for Outgoing SSH Connections  · p566
+    - 16.7.3 Filter Rules for Dynamic Port Forwarding  · p568
+    - 16.7.4 Configuration File  · p570
+  - 16.8 File Transfers  · p571
+  - 16.9 Command-Line Programs  · p572
+  - 16.10 Troubleshooting  · p574
+  - 16.11 Server  · p575
+    - 16.11.1 Server Operation  · p576
+    - 16.11.2 Server Configuration  · p577
+    - 16.11.3 Commands and Interactive Sessions  · p577
+    - 16.11.4 Authentication  · p579
+    - 16.11.5 Access Control  · p579
+    - 16.11.6 Forwarding  · p580
+    - 16.11.7 SFTP Server  · p580
+    - 16.11.8 Logging and Debugging  · p581
+- SecureCRT and SecureFX for Windows  · p583
+  - 17.1 Obtaining and Installing  · p583
+  - 17.2 Basic Client Use  · p584
+  - 17.3 Key Management  · p584
+    - 17.3.1 Key Generation Wizard  · p585
+      - 17.3.1.1 Automatic installation of keys  · p585
+      - 17.3.1.2 Manual installation of keys  · p586
+    - 17.3.2 Using Multiple Identities  · p587
+    - 17.3.3 The SSH Agent  · p587
+  - 17.4 Advanced Client Use  · p588
+    - 17.4.1 Mandatory Fields  · p589
+    - 17.4.2 Data Compression  · p589
+    - 17.4.3 Firewall Use  · p589
+  - 17.5 Forwarding  · p590
+    - 17.5.1 Port Forwarding  · p590
+    - 17.5.2 X Forwarding  · p591
+  - 17.6 Command-Line Client Programs  · p592
+  - 17.7 File Transfer  · p592
+    - 17.7.1 The vcp and vsftp Commands  · p592
+    - 17.7.2 Zmodem File Transfer  · p593
+    - 17.7.3 SecureFX  · p593
+  - 17.8 Troubleshooting  · p594
+    - 17.8.1 Authentication  · p594
+    - 17.8.2 Forwarding  · p594
+  - 17.9 VShell  · p594
+  - 17.10 Summary  · p595
+- PuTTY for Windows  · p596
+  - 18.1 Obtaining and Installing  · p596
+  - 18.2 Basic Client Use  · p596
+    - 18.2.1 Plink, a Console Client  · p597
+    - 18.2.2 Running Remote Commands  · p598
+  - 18.3 File Transfer  · p598
+    - 18.3.1 File Transfer with PSCP  · p599
+    - 18.3.2 File Transfer with PSFTP  · p599
+  - 18.4 Key Management  · p600
+    - 18.4.1 Choosing a Key  · p602
+    - 18.4.2 Pageant, an SSH Agent  · p602
+  - 18.5 Advanced Client Use  · p603
+    - 18.5.1 Saved Sessions  · p603
+    - 18.5.2 Host Keys  · p604
+    - 18.5.3 Choosing a Protocol Version  · p604
+    - 18.5.4 TCP/IP Settings  · p604
+      - 18.5.4.1 Selecting a remote port  · p605
+      - 18.5.4.2 Keepalive messages  · p605
+      - 18.5.4.3 The Nagle Algorithm  · p605
+    - 18.5.5 Pseudo-Terminal Allocation  · p605
+    - 18.5.6 Proxies and SOCKS  · p605
+    - 18.5.7 Encryption Algorithms  · p605
+    - 18.5.8 Authentication  · p606
+    - 18.5.9 Compression  · p606
+    - 18.5.10 Logging and Debugging  · p606
+    - 18.5.11 Batch Jobs  · p607
+  - 18.6 Forwarding  · p607
+    - 18.6.1 Forwarding with PuTTY  · p608
+    - 18.6.2 Forwarding with Plink  · p608
+  - 18.7 Summary  · p609
+- OpenSSH 4.0 New Features  · p611
+  - Server Features: sshd  · p611
+    - Logging of Access Control Violations  · p611
+    - AddressFamily Keyword  · p611
+    - Password and Account Expiration Warnings  · p611
+  - Client Features: ssh, scp, and sftp  · p612
+    - KbdInteractiveDevices Keyword  · p612
+    - More Control for Connection Sharing  · p612
+    - Hashing of Hostnames  · p612
+    - Port Forwarding  · p612
+    - sftp Command-Line Features  · p613
+  - ssh-keygen  · p613
+    - Hashing Your Known Hosts File  · p613
+    - Managing Hosts  · p614
+- Tectia Manpage for sshregex  · p615
+  - Regex Syntax: Egrep Patterns  · p615
+    - Escaped Tokens for Regex Syntax Egrep  · p616
+  - Regex Syntax: ZSH_FILEGLOB (or Traditional) Patterns  · p617
+  - Character Sets for Egrep and ZSH_FILEGLOB  · p618
+    - Example  · p619
+  - Regex Syntax: SSH Patterns  · p619
+    - Escaped Tokens for Regex Syntax SSH  · p621
+    - Character Sets for Regex Syntax SSH  · p622
+      - Example  · p623
+  - Authors  · p623
+  - See Also  · p623
+- Tectia Module Names for Debugging  · p624
+- SSH-1 Features of OpenSSH and Tectia  · p629
+  - OpenSSH Features  · p629
+    - Serverwide Configuration  · p629
+    - Client Configuration  · p629
+    - Files  · p630
+  - Tectia Features  · p630
+    - Serverwide Configuration  · p630
+    - Client Configuration  · p630
+    - File Transfers  · p631
+    - Key Management  · p631
+    - Authentication Agent  · p631
+- SSH Quick Reference  · p632
+  - Legend  · p632
+  - sshd Options  · p632
+  - sshd Keywords  · p633
+  - ssh Options  · p638
+  - scp Options  · p639
+  - ssh and scp Keywords  · p640
+  - ssh-keygen Options  · p643
+  - ssh-agent Options  · p645
+  - ssh-add Options  · p645
+  - Identity and Authorization Files, OpenSSH  · p646
+  - Identity and Authorization Files, Tectia  · p646
+  - Environment Variables  · p647
+- Index  · p649

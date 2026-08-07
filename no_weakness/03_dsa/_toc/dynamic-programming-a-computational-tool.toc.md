@@ -1,0 +1,277 @@
+# TOC — Dynamic Programming - A Computational Tool.pdf
+
+*Extracted by `_tools/extract_toc.py` (scrape[5-16]). 273 entries. Machine-generated — do not hand-edit.*
+
+- 1680 East-West Road Eckerd College
+- Part I Dynamic Programming
+- 1 Introduction to Dynamic Programming . . . . . . . . . . . . . . . . . . . .  · p3
+  - 1.1 Principles of Dynamic Programming . . . . . . . . . . . . . . . . . . . . . .  · p5
+    - 1.1.1 Sequential Decision Processes . . . . . . . . . . . . . . . . . . . . .  · p6
+    - 1.1.2 Dynamic Programming Functional Equations . . . . . . . .  · p9
+    - 1.1.3 The Elements of Dynamic Programming . . . . . . . . . . . .  · p11
+    - 1.1.4 Application: Linear Search . . . . . . . . . . . . . . . . . . . . . . . .  · p12
+    - 1.1.5 Problem Formulation and Solution . . . . . . . . . . . . . . . . .  · p14
+    - 1.1.6 State Transition Graph Model . . . . . . . . . . . . . . . . . . . . .  · p17
+    - 1.1.7 Staged Decisions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p19
+    - 1.1.8 Path-States . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p21
+    - 1.1.9 Relaxation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p22
+    - 1.1.10 Shortest Path Problems . . . . . . . . . . . . . . . . . . . . . . . . . .  · p23
+    - 1.1.11 All-Pairs Shortest Paths . . . . . . . . . . . . . . . . . . . . . . . . . .  · p29
+    - 1.1.12 State Space Generation . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p30
+    - 1.1.13 Complexity . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p31
+    - 1.1.14 Greedy Algorithms . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p32
+    - 1.1.15 Probabilistic DP . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p32
+    - 1.1.16 Nonoptimization Problems . . . . . . . . . . . . . . . . . . . . . . . .  · p33
+    - 1.1.17 Concluding Remarks . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p34
+  - 1.2 Computational Solution of DPFEs . . . . . . . . . . . . . . . . . . . . . . . .  · p34
+    - 1.2.1 Solution by Conventional Programming . . . . . . . . . . . . .  · p35
+    - 1.2.2 The State-Decision-Reward-Transformation Table . . . .  · p36
+    - 1.2.3 Code Generation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p38
+    - 1.2.4 Spreadsheet Solutions . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p38
+    - 1.2.5 Example: SPA . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p40
+    - 1.2.6 Concluding Remarks . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p42
+  - 1.3 Overview of Book . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p42
+- 2 Applications of Dynamic Programming . . . . . . . . . . . . . . . . . . . .  · p45
+  - 2.1 Optimal Allotment Problem (ALLOT) . . . . . . . . . . . . . . . . . . . .  · p49
+  - 2.2 All-Pairs Shortest Paths Problem (APSP) . . . . . . . . . . . . . . . . . .  · p50
+  - 2.3 Optimal Alphabetic Radix-Code Tree Problem (ARC) . . . . . . .  · p51
+  - 2.4 Assembly Line Balancing (ASMBAL) . . . . . . . . . . . . . . . . . . . . .  · p52
+  - 2.5 Optimal Assignment Problem (ASSIGN) . . . . . . . . . . . . . . . . . . .  · p54
+  - 2.6 Optimal Binary Search Tree Problem (BST) . . . . . . . . . . . . . . .  · p55
+  - 2.7 Optimal Covering Problem (COV) . . . . . . . . . . . . . . . . . . . . . . .  · p57
+  - 2.8 Deadline Scheduling Problem (DEADLINE) . . . . . . . . . . . . . . . .  · p57
+  - 2.9 Discounted Proﬁts Problem (DPP) . . . . . . . . . . . . . . . . . . . . . . . .  · p58
+  - 2.10 Edit Distance Problem (EDP) . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p59
+  - 2.11 Fibonacci Recurrence Relation (FIB) . . . . . . . . . . . . . . . . . . . . . .  · p60
+  - 2.12 Flowshop Problem (FLOWSHOP) . . . . . . . . . . . . . . . . . . . . . . . .  · p61
+  - 2.13 Tower of Hanoi Problem (HANOI) . . . . . . . . . . . . . . . . . . . . . . . .  · p62
+  - 2.14 Integer Linear Programming (ILP) . . . . . . . . . . . . . . . . . . . . . . . .  · p63
+  - 2.15 Integer Knapsack as ILP Problem (ILPKNAP) . . . . . . . . . . . . .  · p64
+  - 2.16 Interval Scheduling Problem (INTVL) . . . . . . . . . . . . . . . . . . . . .  · p64
+  - 2.17 Inventory Problem (INVENT) . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p66
+  - 2.18 Optimal Investment Problem (INVEST) . . . . . . . . . . . . . . . . . . .  · p67
+  - 2.19 Investment: Winning in Las Vegas Problem (INVESTWLV) . .  · p68
+  - 2.20 0/1 Knapsack Problem (KS01) . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p69
+  - 2.21 COV as KSINT Problem (KSCOV) . . . . . . . . . . . . . . . . . . . . . . .  · p70
+  - 2.22 Integer Knapsack Problem (KSINT) . . . . . . . . . . . . . . . . . . . . . . .  · p70
+  - 2.23 Longest Common Subsequence (LCS) . . . . . . . . . . . . . . . . . . . . .  · p71
+  - 2.24 Optimal Linear Search Problem (LINSRC) . . . . . . . . . . . . . . . . .  · p73
+  - 2.25 Lot Size Problem (LOT) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p73
+  - 2.26 Longest Simple Path Problem (LSP) . . . . . . . . . . . . . . . . . . . . . .  · p74
+  - 2.27 Matrix Chain Multiplication Problem (MCM) . . . . . . . . . . . . . .  · p75
+  - 2.28 Minimum Maximum Problem (MINMAX) . . . . . . . . . . . . . . . . .  · p75
+  - 2.29 Minimum Weight Spanning Tree Problem (MWST) . . . . . . . . .  · p77
+  - 2.30 The Game of NIM (NIM) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p78
+  - 2.31 Optimal Distribution Problem (ODP) . . . . . . . . . . . . . . . . . . . . .  · p80
+  - 2.32 Optimal Permutation Problem (PERM) . . . . . . . . . . . . . . . . . . .  · p81
+  - 2.33 Jug-Pouring Problem (POUR) . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p82
+  - 2.34 Optimal Production Problem (PROD) . . . . . . . . . . . . . . . . . . . . .  · p83
+  - 2.35 Production: Reject Allowances Problem (PRODRAP) . . . . . . .  · p84
+  - 2.36 Reliability Design Problem (RDP) . . . . . . . . . . . . . . . . . . . . . . . .  · p84
+  - 2.37 Replacement Problem (REPLACE) . . . . . . . . . . . . . . . . . . . . . . .  · p85
+  - 2.38 Stagecoach Problem (SCP) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p86
+  - 2.39 Seek Disk Scheduling Problem (SEEK) . . . . . . . . . . . . . . . . . . . .  · p87
+  - 2.40 Segmented Curve Fitting Problem (SEGLINE) . . . . . . . . . . . . .  · p88
+  - 2.41 Program Segmentation Problem (SEGPAGE) . . . . . . . . . . . . . .  · p91
+  - 2.42 Optimal Selection Problem (SELECT) . . . . . . . . . . . . . . . . . . . .  · p94
+  - 2.43 Shortest Path in an Acyclic Graph (SPA) . . . . . . . . . . . . . . . . . .  · p95
+  - 2.44 Shortest Path in an Cyclic Graph (SPC) . . . . . . . . . . . . . . . . . . .  · p95
+  - 2.45 Process Scheduling Problem (SPT) . . . . . . . . . . . . . . . . . . . . . . . .  · p97
+  - 2.46 Transportation Problem (TRANSPO) . . . . . . . . . . . . . . . . . . . . .  · p98
+  - 2.47 Traveling Salesman Problem (TSP) . . . . . . . . . . . . . . . . . . . . . . .  · p99
+- Part II Modeling of DP Problems
+- 3 The DP Speciﬁcation Language gDPS . . . . . . . . . . . . . . . . . . . . . .  · p103
+  - 3.1 Introduction to gDPS . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p103
+  - 3.2 Design Principles of gDPS . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p105
+  - 3.3 Detailed Description of the gDPS Sections . . . . . . . . . . . . . . . . .  · p106
+    - 3.3.1 Name Section . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p106
+    - 3.3.2 General Variables Section . . . . . . . . . . . . . . . . . . . . . . . . .  · p106
+    - 3.3.3 Set Variables Section . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p108
+    - 3.3.4 General Functions Section . . . . . . . . . . . . . . . . . . . . . . . .  · p109
+    - 3.3.5 State Type Section . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p110
+    - 3.3.6 Decision Variable Section . . . . . . . . . . . . . . . . . . . . . . . . .  · p110
+    - 3.3.7 Decision Space Section . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p111
+    - 3.3.8 Goal Section . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p111
+    - 3.3.9 DPFE Base Section . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p112
+    - 3.3.10 DPFE Section . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p113
+    - 3.3.11 Cost/Reward Function Section . . . . . . . . . . . . . . . . . . . .  · p115
+    - 3.3.12 Transformation Function Section . . . . . . . . . . . . . . . . . .  · p115
+    - 3.3.13 Transition Weight Section . . . . . . . . . . . . . . . . . . . . . . . .  · p116
+  - 3.4 BNF Grammar of the gDPS language . . . . . . . . . . . . . . . . . . . . .  · p117
+- 4 DP Problem Speciﬁcations in gDPS . . . . . . . . . . . . . . . . . . . . . . . .  · p125
+  - 4.1 gDPS source for ALLOT . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p125
+  - 4.2 gDPS source for APSP . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p128
+  - 4.3 gDPS source for ARC . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p131
+  - 4.4 gDPS source for ASMBAL . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p132
+  - 4.5 gDPS source for ASSIGN . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p135
+  - 4.6 gDPS source for BST . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p136
+  - 4.7 gDPS source for COV . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p138
+  - 4.8 gDPS source for DEADLINE . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p139
+  - 4.9 gDPS source for DPP . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p140
+  - 4.10 gDPS source for EDP . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p141
+  - 4.11 gDPS source for FIB . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p144
+  - 4.12 gDPS source for FLOWSHOP . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p144
+  - 4.13 gDPS source for HANOI . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p145
+  - 4.14 gDPS source for ILP . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p146
+  - 4.15 gDPS source for ILPKNAP . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p148
+  - 4.16 gDPS source for INTVL . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p150
+  - 4.17 gDPS source for INVENT . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p154
+  - 4.18 gDPS source for INVEST . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p156
+  - 4.19 gDPS source for INVESTWLV . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p157
+  - 4.20 gDPS source for KS01 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p158
+  - 4.21 gDPS source for KSCOV . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p159
+  - 4.22 gDPS source for KSINT . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p160
+  - 4.23 gDPS source for LCS . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p161
+  - 4.24 gDPS source for LINSRC . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p165
+  - 4.25 gDPS source for LOT . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p167
+  - 4.26 gDPS source for LSP . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p168
+  - 4.27 gDPS source for MCM . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p170
+  - 4.28 gDPS source for MINMAX . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p171
+  - 4.29 gDPS source for MWST . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p173
+  - 4.30 gDPS source for NIM . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p176
+  - 4.31 gDPS source for ODP . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p176
+  - 4.32 gDPS source for PERM . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p178
+  - 4.33 gDPS source for POUR . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p179
+  - 4.34 gDPS source for PROD . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p181
+  - 4.35 gDPS source for PRODRAP . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p182
+  - 4.36 gDPS source for RDP . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p184
+  - 4.37 gDPS source for REPLACE . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p186
+  - 4.38 gDPS source for SCP . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p187
+  - 4.39 gDPS source for SEEK . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p189
+  - 4.40 gDPS source for SEGLINE . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p190
+  - 4.41 gDPS source for SEGPAGE . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p192
+  - 4.42 gDPS source for SELECT . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p193
+  - 4.43 gDPS source for SPA . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p194
+  - 4.44 gDPS source for SPC . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p196
+  - 4.45 gDPS source for SPT . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p199
+  - 4.46 gDPS source for TRANSPO . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p200
+  - 4.47 gDPS source for TSP . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p201
+- 5 Bellman Nets: A Class of Petri Nets . . . . . . . . . . . . . . . . . . . . . . .  · p205
+  - 5.1 Petri Net Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p205
+    - 5.1.1 Place/Transition Nets . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p205
+    - 5.1.2 High-level Petri Nets . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p207
+    - 5.1.3 Colored Petri Nets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p208
+    - 5.1.4 Petri Net Properties . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p209
+    - 5.1.5 Petri Net Software . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p210
+  - 5.2 Petri Net Models of Dynamic Programming . . . . . . . . . . . . . . . .  · p210
+  - 5.3 The Low-Level Bellman Net Model . . . . . . . . . . . . . . . . . . . . . . . .  · p212
+    - 5.3.1 Construction of the Low-Level Bellman Net Model . . .  · p212
+    - 5.3.2 The Role of Transitions in the Low-Level Bellman
+    - 5.3.3 The Role of Places in the Low-Level Bellman Net
+    - 5.3.4 The Role of Markings in the Low-Level Bellman Net
+    - 5.3.5 Advantages of the Low-Level Bellman Net Model . . . .  · p214
+  - 5.4 Low-Level Bellman Net Properties . . . . . . . . . . . . . . . . . . . . . . . .  · p214
+  - 5.5 The High-Level Bellman Net Model . . . . . . . . . . . . . . . . . . . . . . .  · p215
+  - 5.6 High-Level Bellman Net Properties . . . . . . . . . . . . . . . . . . . . . . . .  · p219
+- 6 Bellman Net Representations of DP Problems . . . . . . . . . . . . .  · p221
+  - 6.1 Graphical Representation of Low-Level Bellman Net Examples222
+    - 6.1.1 Low-Level Bellman Net for BST . . . . . . . . . . . . . . . . . . .  · p222
+    - 6.1.2 Low-Level Bellman Net for LINSRC . . . . . . . . . . . . . . . .  · p222
+    - 6.1.3 Low-Level Bellman Net for MCM . . . . . . . . . . . . . . . . . .  · p224
+    - 6.1.4 Low-Level Bellman Net for ODP . . . . . . . . . . . . . . . . . . .  · p224
+    - 6.1.5 Low-Level Bellman Net for PERM . . . . . . . . . . . . . . . . .  · p227
+    - 6.1.6 Low-Level Bellman Net for SPA . . . . . . . . . . . . . . . . . . .  · p228
+  - 6.2 Graphical Representation of High-Level Bellman Net Examples228
+    - 6.2.1 High-Level Bellman Net for EDP . . . . . . . . . . . . . . . . . .  · p230
+    - 6.2.2 High-Level Bellman Net for ILP . . . . . . . . . . . . . . . . . . .  · p230
+    - 6.2.3 High-Level Bellman Net for KS01 . . . . . . . . . . . . . . . . . .  · p231
+    - 6.2.4 High-Level Bellman Net for LCS . . . . . . . . . . . . . . . . . . .  · p231
+    - 6.2.5 High-Level Bellman Net for LINSRC . . . . . . . . . . . . . . .  · p234
+    - 6.2.6 High-Level Bellman Net for LSP . . . . . . . . . . . . . . . . . . .  · p235
+    - 6.2.7 High-Level Bellman Net for MCM . . . . . . . . . . . . . . . . .  · p236
+    - 6.2.8 High-Level Bellman Net for RDP . . . . . . . . . . . . . . . . . .  · p238
+    - 6.2.9 High-Level Bellman Net for SCP . . . . . . . . . . . . . . . . . . .  · p238
+    - 6.2.10 High-Level Bellman Net for SPA . . . . . . . . . . . . . . . . . . .  · p240
+    - 6.2.11 High-Level Bellman Net for SPC . . . . . . . . . . . . . . . . . . .  · p242
+- Part III Design and Implementation of DP Tool
+- 7 DP2PN2Solver Tool . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p247
+  - 7.1 Overview . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p247
+  - 7.2 Internal Representation of Bellman Nets . . . . . . . . . . . . . . . . . . .  · p251
+  - 7.3 Compiling and Executing DP Programs . . . . . . . . . . . . . . . . . . .  · p252
+  - 7.4 The ILP2gDPS Preprocessor Module . . . . . . . . . . . . . . . . . . . . . .  · p255
+- 8 DP2PN Parser and Builder . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p259
+  - 8.1 Design of the DP2PN modules . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p259
+  - 8.2 Implementation of the DP2PN modules . . . . . . . . . . . . . . . . . . . .  · p260
+  - 8.3 The Module LINSRCSMain . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p263
+  - 8.4 Error Detection in DP2PN . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p268
+- 9 The PN2Solver Modules . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p271
+  - 9.1 The Solver Code Generation Process . . . . . . . . . . . . . . . . . . . . . .  · p271
+  - 9.2 The PN2Java Module . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p273
+    - 9.2.1 Java Solver Code Calculation Objects . . . . . . . . . . . . . .  · p274
+    - 9.2.2 Java Solver Code for LINSRCS . . . . . . . . . . . . . . . . . . . .  · p276
+    - 9.2.3 Java Solver Code for LSP . . . . . . . . . . . . . . . . . . . . . . . . .  · p278
+    - 9.2.4 Java Solver Code for MCM . . . . . . . . . . . . . . . . . . . . . . .  · p278
+    - 9.2.5 Java Solver Code for SPA . . . . . . . . . . . . . . . . . . . . . . . . .  · p280
+  - 9.3 The PN2Spreadsheet Module . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p281
+    - 9.3.1 PN2Spreadsheet Solver Code for LINSRCS . . . . . . . . .  · p282
+    - 9.3.2 PN2Spreadsheet Solver Code for Other Examples . . . .  · p284
+  - 9.4 The PN2XML Module . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p284
+    - 9.4.1 Petri Net Solver Code for LINSRCS . . . . . . . . . . . . . . . .  · p285
+    - 9.4.2 Petri Net Solver Code for SPA . . . . . . . . . . . . . . . . . . . .  · p288
+  - 9.5 Conclusion . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p289
+- Part IV Computational Results
+- 10 Java Solver Results of DP Problems . . . . . . . . . . . . . . . . . . . . . . .  · p293
+  - 10.1 ALLOT Java Solver Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p293
+  - 10.2 APSP Java Solver Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p294
+  - 10.3 ARC Java Solver Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p296
+  - 10.4 ASMBAL Java Solver Output . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p296
+  - 10.5 ASSIGN Java Solver Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p297
+  - 10.6 BST Java Solver Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p297
+  - 10.7 COV Java Solver Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p298
+  - 10.8 DEADLINE Java Solver Output . . . . . . . . . . . . . . . . . . . . . . . . . .  · p298
+  - 10.9 DPP Java Solver Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p299
+  - 10.10 EDP Java Solver Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p299
+  - 10.11 FIB Java Solver Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p299
+  - 10.12 FLOWSHOP Java Solver Output . . . . . . . . . . . . . . . . . . . . . . . . .  · p300
+  - 10.13 HANOI Java Solver Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p300
+  - 10.14 ILP Java Solver Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p301
+  - 10.15 ILPKNAP Java Solver Output . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p301
+  - 10.16 INTVL Java Solver Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p302
+  - 10.17 INVENT Java Solver Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p303
+  - 10.18 INVEST Java Solver Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p304
+  - 10.19 INVESTWLV Java Solver Output . . . . . . . . . . . . . . . . . . . . . . . .  · p304
+  - 10.20 KS01 Java Solver Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p305
+  - 10.21 KSCOV Java Solver Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p306
+  - 10.22 KSINT Java Solver Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p306
+  - 10.23 LCS Java Solver Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p306
+  - 10.24 LINSRC Java Solver Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p307
+  - 10.25 LOT Java Solver Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p308
+  - 10.26 LSP Java Solver Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p308
+  - 10.27 MCM Java Solver Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p308
+  - 10.28 MINMAX Java Solver Output . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p309
+  - 10.29 MWST Java Solver Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p309
+  - 10.30 NIM Java Solver Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p309
+  - 10.31 ODP Java Solver Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p312
+  - 10.32 PERM Java Solver Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p312
+  - 10.33 POUR Java Solver Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p312
+  - 10.34 PROD Java Solver Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p313
+  - 10.35 PRODRAP Java Solver Output . . . . . . . . . . . . . . . . . . . . . . . . . .  · p314
+  - 10.36 RDP Java Solver Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p314
+  - 10.37 REPLACE Java Solver Output . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p315
+  - 10.38 SCP Java Solver Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p315
+  - 10.39 SEEK Java Solver Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p315
+  - 10.40 SEGLINE Java Solver Output . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p316
+  - 10.41 SEGPAGE Java Solver Output . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p316
+  - 10.42 SELECT Java Solver Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p317
+  - 10.43 SPA Java Solver Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p317
+  - 10.44 SPC Java Solver Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p318
+  - 10.45 SPT Java Solver Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p318
+  - 10.46 TRANSPO Java Solver Output . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p319
+  - 10.47 TSP Java Solver Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p319
+- 11 Other Solver Results . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p321
+  - 11.1 PN2Spreadsheet Solver Code Output . . . . . . . . . . . . . . . . . . . . . .  · p321
+    - 11.1.1 PN2Spreadsheet Solver Code for LINSRCS . . . . . . . . .  · p321
+    - 11.1.2 PN2Spreadsheet Solver Code for LSP . . . . . . . . . . . . . .  · p322
+    - 11.1.3 PN2Spreadsheet Solver Code for MCM . . . . . . . . . . . . .  · p322
+    - 11.1.4 PN2Spreadsheet Solver Code for SPA . . . . . . . . . . . . . .  · p323
+    - 11.1.5 Spreadsheet Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p323
+  - 11.2 PN2XML Solver Code Output . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p324
+    - 11.2.1 PN2XML Simulation Output for LINSRCS . . . . . . . . .  · p325
+- 12 Conclusions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p329
+  - 12.1 Applicability of DP and DP2PN2Solver . . . . . . . . . . . . . . . . . . . .  · p329
+  - 12.2 The DP2PN2Solver Tool . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p330
+  - 12.3 Research Directions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p332
+    - 12.3.1 User Functionality . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p333
+    - 12.3.2 Reduction of Dimensionality . . . . . . . . . . . . . . . . . . . . . .  · p334
+    - 12.3.3 Petri Net Modeling . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p335
+  - 12.4 Summary . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p336

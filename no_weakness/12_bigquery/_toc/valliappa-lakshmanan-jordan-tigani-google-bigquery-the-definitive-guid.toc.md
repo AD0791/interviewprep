@@ -1,0 +1,238 @@
+# TOC — Valliappa+Lakshmanan_+Jordan+Tigani+-+Google+BigQuery_+The+Definitive+Guide_+Data+Warehousing,+Analytics,+and+Machine+Learning+at+Scale-O’Reilly+Media+(2020).pdf
+
+*Extracted by `_tools/extract_toc.py` (outline). 234 entries. Machine-generated — do not hand-edit.*
+
+- Preface  · p8
+  - Who Is This Book For?  · p9
+  - Conventions Used in This Book  · p9
+  - Using Code Examples  · p10
+  - O’Reilly Online Learning  · p11
+  - How to Contact Us  · p11
+  - Acknowledgments  · p12
+- 1. What Is Google BigQuery?  · p14
+  - Data Processing Architectures  · p14
+    - Relational Database Management System  · p15
+    - MapReduce Framework  · p17
+    - BigQuery: A Serverless, Distributed SQL Engine  · p18
+  - Working with BigQuery  · p21
+    - Deriving Insights Across Datasets  · p21
+    - ETL, EL, and ELT  · p22
+    - Powerful Analytics  · p25
+    - Simplicity of Management  · p27
+  - How BigQuery Came About  · p28
+  - What Makes BigQuery Possible?  · p32
+    - Separation of Compute and Storage  · p32
+    - Storage and Networking Infrastructure  · p33
+    - Managed Storage  · p35
+    - Integration with Google Cloud Platform  · p37
+    - Security and Compliance  · p38
+  - Summary  · p39
+- 2. Query Essentials  · p42
+  - Simple Queries  · p43
+    - Retrieving Rows by Using SELECT  · p45
+    - Aliasing Column Names with AS  · p47
+    - Filtering with WHERE  · p49
+    - SELECT *, EXCEPT, REPLACE  · p51
+    - Subqueries with WITH  · p52
+    - Sorting with ORDER BY  · p53
+  - Aggregates  · p54
+    - Computing Aggregates by Using GROUP BY  · p54
+    - Counting Records by Using COUNT  · p55
+    - Filtering Grouped Items by Using HAVING  · p56
+    - Finding Unique Values by Using DISTINCT  · p56
+  - A Brief Primer on Arrays and Structs  · p58
+    - Creating Arrays by Using ARRAY_AGG  · p60
+    - Array of STRUCT  · p63
+    - TUPLE  · p64
+    - Working with Arrays  · p65
+    - UNNEST an Array  · p65
+  - Joining Tables  · p67
+    - The JOIN Explained  · p67
+    - INNER JOIN  · p71
+    - CROSS JOIN  · p73
+    - OUTER JOIN  · p75
+  - Saving and Sharing  · p76
+    - Query History and Caching  · p76
+    - Saved Queries  · p78
+    - Views Versus Shared Queries  · p79
+  - Summary  · p80
+- 3. Data Types, Functions, and Operators  · p81
+  - Numeric Types and Functions  · p81
+    - Mathematical Functions  · p82
+    - Standard-Compliant Floating-Point Division  · p82
+    - SAFE Functions  · p83
+    - Comparisons  · p83
+    - Precise Decimal Calculations with NUMERIC  · p84
+  - Working with BOOL  · p85
+    - Logical Operations  · p85
+    - Conditional Expressions  · p86
+    - Cleaner NULL-Handling with COALESCE  · p87
+    - Casting and Coercion  · p88
+    - Using COUNTIF to Avoid Casting Booleans  · p89
+  - String Functions  · p90
+    - Internationalization  · p91
+    - Printing and Parsing  · p92
+    - String Manipulation Functions  · p93
+    - Transformation Functions  · p93
+    - Regular Expressions  · p93
+    - Summary of String Functions  · p94
+  - Working with TIMESTAMP  · p95
+    - Parsing and Formatting Timestamps  · p95
+    - Extracting Calendar Parts  · p96
+    - Arithmetic with Timestamps  · p97
+    - Date, Time, and DateTime  · p97
+  - Working with GIS Functions  · p98
+  - Summary  · p99
+- 4. Loading Data into BigQuery  · p101
+  - The Basics  · p101
+    - Loading from a Local Source  · p102
+    - Specifying a Schema  · p109
+    - Copying into a New Table  · p113
+    - Data Management (DDL and DML)  · p114
+    - Loading Data Efficiently  · p116
+  - Federated Queries and External Data Sources  · p119
+    - How to Use Federated Queries  · p119
+    - When to Use Federated Queries and External Data Sources  · p124
+    - Interactive Exploration and Querying of Data in Google Sheets  · p131
+    - SQL Queries on Data in Cloud Bigtable  · p141
+  - Transfers and Exports  · p147
+    - Data Transfer Service  · p147
+    - Exporting Stackdriver Logs  · p154
+    - Using Cloud Dataflow to Read/Write from BigQuery  · p156
+  - Moving On-Premises Data  · p162
+    - Data Migration Methods  · p162
+  - Summary  · p164
+- 5. Developing with BigQuery  · p167
+  - Developing Programmatically  · p167
+    - Accessing BigQuery via the REST API  · p167
+    - Google Cloud Client Library  · p177
+  - Accessing BigQuery from Data Science Tools  · p201
+    - Notebooks on Google Cloud Platform  · p202
+    - Working with BigQuery, pandas, and Jupyter  · p207
+    - Working with BigQuery from R  · p214
+    - Cloud Dataflow  · p216
+    - JDBC/ODBC drivers  · p219
+    - Incorporating BigQuery Data into Google Slides (in G Suite)  · p220
+  - Bash Scripting with BigQuery  · p223
+    - Creating Datasets and Tables  · p224
+    - Executing Queries  · p227
+    - BigQuery Objects  · p230
+  - Summary  · p233
+- 6. Architecture of BigQuery  · p235
+  - High-Level Architecture  · p235
+    - Life of a Query Request  · p235
+    - BigQuery Upgrades  · p241
+  - Query Engine (Dremel)  · p241
+    - Dremel Architecture  · p244
+    - Query Execution  · p250
+  - Storage  · p268
+    - Storage Data  · p268
+    - Metadata  · p278
+  - Summary  · p292
+- 7. Optimizing Performance and Cost  · p294
+  - Principles of Performance  · p294
+    - Key Drivers of Performance  · p294
+    - Controlling Cost  · p295
+  - Measuring and Troubleshooting  · p297
+    - Measuring Query Speed Using REST API  · p297
+    - Measuring Query Speed Using BigQuery Workload Tester  · p299
+    - Troubleshooting Workloads Using Stackdriver  · p301
+    - Reading Query Plan Information  · p303
+  - Increasing Query Speed  · p309
+    - Minimizing I/O  · p310
+    - Caching the Results of Previous Queries  · p315
+    - Performing Efficient Joins  · p319
+    - Avoiding Overwhelming a Worker  · p328
+    - Using Approximate Aggregation Functions  · p331
+  - Optimizing How Data Is Stored and Accessed  · p335
+    - Minimizing Network Overhead  · p335
+    - Choosing an Efficient Storage Format  · p339
+    - Partitioning Tables to Reduce Scan Size  · p350
+    - Clustering Tables Based on High-Cardinality Keys  · p353
+  - Time-Insensitive Use Cases  · p358
+    - Batch Queries  · p358
+    - File Loads  · p359
+  - Summary  · p360
+    - Checklist  · p361
+- 8. Advanced Queries  · p363
+  - Reusable Queries  · p363
+    - Parameterized Queries  · p363
+    - SQL User-Defined Functions  · p370
+    - Reusing Parts of Queries  · p375
+  - Advanced SQL  · p379
+    - Working with Arrays  · p380
+    - Window Functions  · p392
+    - Table Metadata  · p399
+    - Data Definition Language and Data Manipulation Language  · p403
+  - Beyond SQL  · p410
+    - JavaScript UDFs  · p410
+    - Scripting  · p412
+  - Advanced Functions  · p420
+    - BigQuery Geographic Information Systems  · p420
+    - Useful Statistical Functions  · p429
+    - Hash Algorithms  · p432
+  - Summary  · p437
+- 9. Machine Learning in BigQuery  · p440
+  - What Is Machine Learning?  · p440
+    - Formulating a Machine Learning Problem  · p440
+    - Types of Machine Learning Problems  · p443
+  - Building a Regression Model  · p445
+    - Choose the Label  · p445
+    - Exploring the Dataset to Find Features  · p446
+    - Creating a Training Dataset  · p450
+    - Training and Evaluating the Model  · p450
+    - Predicting with the Model  · p452
+    - Examining Model Weights  · p455
+    - More-Complex Regression Models  · p457
+  - Building a Classification Model  · p462
+    - Training  · p463
+    - Evaluation  · p464
+    - Prediction  · p465
+    - Choosing the Threshold  · p466
+  - Customizing BigQuery ML  · p467
+    - Controlling Data Split  · p468
+    - Balancing Classes  · p469
+    - Regularization  · p470
+  - k-Means Clustering  · p471
+    - What’s Being Clustered?  · p471
+    - Clustering Bicycle Stations  · p472
+    - Carrying Out Clustering  · p473
+    - Understanding the Clusters  · p474
+    - Data-Driven Decisions  · p476
+  - Recommender Systems  · p476
+    - The MovieLens Dataset  · p477
+    - Matrix Factorization  · p478
+    - Making Recommendations  · p480
+    - Incorporating User and Movie Information  · p483
+  - Custom Machine Learning Models on GCP  · p490
+    - Hyperparameter Tuning  · p490
+    - AutoML  · p494
+    - Support for TensorFlow  · p496
+  - Summary  · p500
+- 10. Administering and Securing BigQuery  · p503
+  - Infrastructure Security  · p503
+  - Identity and Access Management  · p505
+    - Identity  · p505
+    - Role  · p505
+    - Resource  · p509
+  - Administering BigQuery  · p509
+    - Job Management  · p509
+    - Authorizing Users  · p510
+    - Restoring Deleted Records and Tables  · p511
+    - Continuous Integration/Continuous Deployment  · p512
+    - Cost/Billing Exports  · p514
+    - Dashboards, Monitoring, and Audit Logging  · p517
+  - Availability, Disaster Recovery, and Encryption  · p519
+    - Zones, Regions, and Multiregions  · p519
+    - BigQuery and Failure Handling  · p520
+    - Durability, Backups, and Disaster Recovery  · p523
+    - Privacy and Encryption  · p524
+  - Regulatory Compliance  · p525
+    - Data Locality  · p525
+    - Restricting Access to Subsets of Data  · p526
+    - Removing All Transactions Related to a Single Individual  · p531
+    - Data Loss Prevention  · p535
+    - CMEK  · p536
+    - Data Exfiltration Protection  · p538
+  - Summary  · p539
+- Index  · p541

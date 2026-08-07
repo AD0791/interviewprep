@@ -1,0 +1,829 @@
+# TOC — HTTP.The.Definitive.Guide.Brian.Totty.David.Gourley.OReilly.9781565925090.EBooksWorld.ir.pdf
+
+*Extracted by `_tools/extract_toc.py` (outline). 825 entries. Machine-generated — do not hand-edit.*
+
+- Table of Contents  · p7
+- Preface  · p15
+  - Running Example: Joe’s Hardware Store  · p16
+  - Chapter-by-Chapter Guide  · p16
+  - Typographic Conventions  · p18
+  - Comments and Questions  · p18
+  - Acknowledgments  · p19
+- Part I  · p21
+- Overview of HTTP  · p23
+  - HTTP: The Internet’s Multimedia Courier  · p23
+  - Web Clients and Servers  · p24
+  - Resources  · p24
+    - Media Types  · p25
+    - URIs  · p26
+    - URLs  · p26
+    - URNs  · p27
+  - Transactions  · p28
+    - Methods  · p28
+    - Status Codes  · p29
+    - Web Pages Can Consist of Multiple Objects  · p29
+  - Messages  · p30
+    - Simple Message Example  · p31
+  - Connections  · p31
+    - TCP/IP  · p31
+    - Connections, IP Addresses, and Port Numbers  · p33
+    - A Real Example Using Telnet  · p35
+  - Protocol Versions  · p36
+  - Architectural Components of the Web  · p37
+    - Proxies  · p38
+    - Caches  · p38
+    - Gateways  · p39
+    - Tunnels  · p39
+    - Agents  · p39
+  - The End of the Beginning  · p41
+  - For More Information  · p41
+    - HTTP Protocol Information  · p41
+    - Historical Perspective  · p42
+    - Other World Wide Web Information  · p42
+- URLs and Resources  · p43
+  - Navigating the Internet’s Resources  · p44
+    - The Dark Days Before URLs  · p45
+  - URL Syntax  · p46
+    - Schemes: What Protocol to Use  · p47
+    - Hosts and Ports  · p47
+    - Usernames and Passwords  · p47
+    - Paths  · p48
+    - Parameters  · p48
+    - Query Strings  · p49
+    - Fragments  · p50
+  - URL Shortcuts  · p50
+    - Relative URLs  · p50
+      - Base URLs  · p52
+      - Resolving relative references  · p53
+    - Expandomatic URLs  · p54
+  - Shady Characters  · p55
+    - The URL Character Set  · p55
+    - Encoding Mechanisms  · p56
+    - Character Restrictions  · p56
+    - A Bit More  · p57
+  - A Sea of Schemes  · p58
+  - The Future  · p60
+    - If Not Now, When?  · p60
+  - For More Information  · p61
+- HTTP Messages  · p63
+  - The Flow of Messages  · p63
+    - Messages Commute Inbound to the Origin Server  · p63
+    - Messages Flow Downstream  · p64
+  - The Parts of a Message  · p64
+    - Message Syntax  · p65
+    - Start Lines  · p67
+      - Request line  · p68
+      - Response line  · p68
+      - Methods  · p68
+      - Status codes  · p69
+      - Reason phrases  · p70
+      - Version numbers  · p70
+    - Headers  · p71
+      - Header classifications  · p71
+      - Header continuation lines  · p71
+    - Entity Bodies  · p72
+    - Version 0.9 Messages  · p72
+  - Methods  · p73
+    - Safe Methods  · p73
+    - GET  · p73
+    - HEAD  · p74
+    - PUT  · p74
+    - POST  · p75
+    - TRACE  · p75
+    - OPTIONS  · p77
+    - DELETE  · p78
+    - Extension Methods  · p78
+  - Status Codes  · p79
+    - 100–199: Informational Status Codes  · p79
+      - Clients and 100 Continue  · p79
+      - Servers and 100 Continue  · p80
+      - Proxies and 100 Continue  · p80
+    - 200–299: Success Status Codes  · p81
+    - 300–399: Redirection Status Codes  · p81
+    - 400–499: Client Error Status Codes  · p85
+    - 500–599: Server Error Status Codes  · p86
+  - Headers  · p87
+    - General Headers  · p88
+      - General caching headers  · p88
+    - Request Headers  · p89
+      - Accept headers  · p89
+      - Conditional request headers  · p90
+      - Request security headers  · p90
+      - Proxy request headers  · p90
+    - Response Headers  · p91
+      - Negotiation headers  · p91
+      - Response security headers  · p92
+    - Entity Headers  · p92
+      - Content headers  · p92
+      - Entity caching headers  · p93
+  - For More Information  · p93
+- Connection Management  · p94
+  - TCP Connections  · p94
+    - TCP Reliable Data Pipes  · p95
+    - TCP Streams Are Segmented and Shipped by IP Packets  · p96
+    - Keeping TCP Connections Straight  · p97
+    - Programming with TCP Sockets  · p98
+  - TCP Performance Considerations  · p100
+    - HTTP Transaction Delays  · p100
+    - Performance Focus Areas  · p101
+    - TCP Connection Handshake Delays  · p102
+    - Delayed Acknowledgments  · p103
+    - TCP Slow Start  · p103
+    - Nagle’s Algorithm and TCP_NODELAY  · p104
+    - TIME_WAIT Accumulation and Port Exhaustion  · p105
+  - HTTP Connection Handling  · p106
+    - The Oft-Misunderstood Connection Header  · p106
+    - Serial Transaction Delays  · p107
+  - Parallel Connections  · p108
+    - Parallel Connections May Make Pages Load Faster  · p108
+    - Parallel Connections Are Not Always Faster  · p109
+    - Parallel Connections May “Feel” Faster  · p110
+  - Persistent Connections  · p110
+    - Persistent Versus Parallel Connections  · p111
+    - HTTP/1.0+ Keep-Alive Connections  · p111
+    - Keep-Alive Operation  · p112
+    - Keep-Alive Options  · p112
+    - Keep-Alive Connection Restrictions and Rules  · p113
+    - Keep-Alive and Dumb Proxies  · p114
+      - The Connection header and blind relays  · p114
+      - Proxies and hop-by-hop headers  · p116
+    - The Proxy-Connection Hack  · p116
+    - HTTP/1.1 Persistent Connections  · p117
+    - Persistent Connection Restrictions and Rules  · p118
+  - Pipelined Connections  · p119
+  - The Mysteries of Connection Close  · p121
+    - “At Will” Disconnection  · p121
+    - Content-Length and Truncation  · p121
+    - Connection Close Tolerance, Retries, and Idempotency  · p121
+    - Graceful Connection Close  · p122
+      - Full and half closes  · p122
+      - TCP close and reset errors  · p123
+      - Graceful close  · p124
+  - For More Information  · p124
+    - HTTP Connections  · p124
+    - HTTP Performance Issues  · p125
+    - TCP/IP  · p125
+- Part II  · p127
+- Web Servers  · p129
+  - Web Servers Come in All Shapes and Sizes  · p129
+    - Web Server Implementations  · p129
+    - General-Purpose Software Web Servers  · p130
+    - Web Server Appliances  · p131
+    - Embedded Web Servers  · p131
+  - A Minimal Perl Web Server  · p131
+  - What Real Web Servers Do  · p133
+  - Step 1: Accepting Client Connections  · p135
+    - Handling New Connections  · p135
+    - Client Hostname Identification  · p135
+    - Determining the Client User Through ident  · p135
+  - Step 2: Receiving Request Messages  · p136
+    - Internal Representations of Messages  · p137
+    - Connection Input/Output Processing Architectures  · p137
+  - Step 3: Processing Requests  · p140
+  - Step 4: Mapping and Accessing Resources  · p140
+    - Docroots  · p140
+      - Virtually hosted docroots  · p141
+      - User home directory docroots  · p142
+    - Directory Listings  · p142
+    - Dynamic Content Resource Mapping  · p143
+    - Server-Side Includes (SSI)  · p144
+    - Access Controls  · p144
+  - Step 5: Building Responses  · p145
+    - Response Entities  · p145
+    - MIME Typing  · p145
+    - Redirection  · p146
+  - Step 6: Sending Responses  · p147
+  - Step 7: Logging  · p147
+  - For More Information  · p147
+- Proxies  · p149
+  - Web Intermediaries  · p149
+    - Private and Shared Proxies  · p150
+    - Proxies Versus Gateways  · p150
+  - Why Use Proxies?  · p151
+  - Where Do Proxies Go?  · p157
+    - Proxy Server Deployment  · p157
+    - Proxy Hierarchies  · p158
+      - Proxy hierarchy content routing  · p159
+    - How Proxies Get Traffic  · p160
+  - Client Proxy Settings  · p161
+    - Client Proxy Configuration: Manual  · p162
+    - Client Proxy Configuration: PAC Files  · p162
+    - Client Proxy Configuration: WPAD  · p163
+  - Tricky Things About Proxy Requests  · p164
+    - Proxy URIs Differ from Server URIs  · p164
+    - The Same Problem with Virtual Hosting  · p166
+    - Intercepting Proxies Get Partial URIs  · p166
+    - Proxies Can Handle Both Proxy and Server Requests  · p166
+    - In-Flight URI Modification  · p167
+    - URI Client Auto-Expansion and Hostname Resolution  · p167
+    - URI Resolution Without a Proxy  · p168
+    - URI Resolution with an Explicit Proxy  · p169
+    - URI Resolution with an Intercepting Proxy  · p169
+  - Tracing Messages  · p170
+    - The Via Header  · p171
+      - Via syntax  · p172
+      - Via request and response paths  · p173
+      - Via and gateways  · p173
+      - The Server and Via headers  · p174
+      - Privacy and security implications of Via  · p174
+    - The TRACE Method  · p175
+      - Max-Forwards  · p175
+  - Proxy Authentication  · p176
+  - Proxy Interoperation  · p177
+    - Handling Unsupported Headers and Methods  · p178
+    - OPTIONS: Discovering Optional Feature Support  · p179
+    - The Allow Header  · p179
+  - For More Information  · p180
+- Caching  · p181
+  - Redundant Data Transfers  · p181
+  - Bandwidth Bottlenecks  · p181
+  - Flash Crowds  · p183
+  - Distance Delays  · p183
+  - Hits and Misses  · p184
+    - Revalidations  · p185
+    - Hit Rate  · p187
+    - Byte Hit Rate  · p187
+    - Distinguishing Hits and Misses  · p188
+  - Cache Topologies  · p188
+    - Private Caches  · p188
+    - Public Proxy Caches  · p189
+    - Proxy Cache Hierarchies  · p189
+    - Cache Meshes, Content Routing, and Peering  · p190
+  - Cache Processing Steps  · p191
+    - Step 1: Receiving  · p192
+    - Step 2: Parsing  · p192
+    - Step 3: Lookup  · p193
+    - Step 4: Freshness Check  · p193
+    - Step 5: Response Creation  · p194
+    - Step 6: Sending  · p194
+    - Step 7: Logging  · p194
+    - Cache Processing Flowchart  · p195
+  - Keeping Copies Fresh  · p195
+    - Document Expiration  · p195
+    - Expiration Dates and Ages  · p196
+    - Server Revalidation  · p197
+    - Revalidation with Conditional Methods  · p197
+    - If-Modified-Since: Date Revalidation  · p198
+    - If-None-Match: Entity Tag Revalidation  · p200
+    - Weak and Strong Validators  · p201
+    - When to Use Entity Tags and Last-Modified Dates  · p201
+  - Controlling Cachability  · p202
+    - No-Cache and No-Store Response Headers  · p202
+    - Max-Age Response Headers  · p203
+    - Expires Response Headers  · p203
+    - Must-Revalidate Response Headers  · p203
+    - Heuristic Expiration  · p204
+    - Client Freshness Constraints  · p205
+    - Cautions  · p205
+  - Setting Cache Controls  · p206
+    - Controlling HTTP Headers with Apache  · p206
+    - Controlling HTML Caching Through HTTP-EQUIV  · p207
+  - Detailed Algorithms  · p207
+    - Age and Freshness Lifetime  · p208
+    - Age Computation  · p209
+      - Apparent age is based on the Date header  · p210
+      - Hop-by-hop age calculations  · p210
+      - Compensating for network delays  · p211
+    - Complete Age-Calculation Algorithm  · p212
+    - Freshness Lifetime Computation  · p212
+    - Complete Server-Freshness Algorithm  · p213
+  - Caches and Advertising  · p214
+    - The Advertiser’s Dilemma  · p214
+    - The Publisher’s Response  · p215
+    - Log Migration  · p215
+    - Hit Metering and Usage Limiting  · p216
+  - For More Information  · p216
+- Integration Points: Gateways, Tunnels, and Relays  · p217
+  - Gateways  · p217
+    - Client-Side and Server-Side Gateways  · p219
+  - Protocol Gateways  · p220
+    - HTTP/*: Server-Side Web Gateways  · p220
+    - HTTP/HTTPS: Server-Side Security Gateways  · p222
+    - HTTPS/HTTP: Client-Side Security Accelerator Gateways  · p222
+  - Resource Gateways  · p223
+    - Common Gateway Interface (CGI)  · p224
+    - Server Extension APIs  · p225
+  - Application Interfaces and Web Services  · p225
+  - Tunnels  · p226
+    - Establishing HTTP Tunnels with CONNECT  · p226
+      - CONNECT requests  · p228
+      - CONNECT responses  · p228
+    - Data Tunneling, Timing, and Connection Management  · p228
+    - SSL Tunneling  · p229
+    - SSL Tunneling Versus HTTP/HTTPS Gateways  · p230
+    - Tunnel Authentication  · p231
+    - Tunnel Security Considerations  · p231
+  - Relays  · p232
+  - For More Information  · p233
+- Web Robots  · p235
+  - Crawlers and Crawling  · p235
+    - Where to Start: The “Root Set”  · p236
+    - Extracting Links and Normalizing Relative Links  · p237
+    - Cycle Avoidance  · p237
+    - Loops and Dups  · p237
+    - Trails of Breadcrumbs  · p238
+    - Aliases and Robot Cycles  · p239
+    - Canonicalizing URLs  · p240
+    - Filesystem Link Cycles  · p240
+    - Dynamic Virtual Web Spaces  · p241
+    - Avoiding Loops and Dups  · p242
+  - Robotic HTTP  · p245
+    - Identifying Request Headers  · p245
+    - Virtual Hosting  · p245
+    - Conditional Requests  · p246
+    - Response Handling  · p247
+      - Status codes  · p247
+      - Entities  · p247
+    - User-Agent Targeting  · p248
+  - Misbehaving Robots  · p248
+  - Excluding Robots  · p249
+    - The Robots Exclusion Standard  · p250
+    - Web Sites and robots.txt Files  · p251
+      - Fetching robots.txt  · p251
+      - Response codes  · p251
+    - robots.txt File Format  · p252
+      - The User-Agent line  · p252
+      - The Disallow and Allow lines  · p253
+      - Disallow/Allow prefix matching  · p253
+    - Other robots.txt Wisdom  · p254
+    - Caching and Expiration of robots.txt  · p254
+    - Robot Exclusion Perl Code  · p255
+    - HTML Robot-Control META Tags  · p257
+      - Robot META directives  · p257
+      - Search engine META tags  · p258
+  - Robot Etiquette  · p259
+  - Search Engines  · p262
+    - Think Big  · p262
+    - Modern Search Engine Architecture  · p262
+    - Full-Text Index  · p263
+    - Posting the Query  · p264
+    - Sorting and Presenting the Results  · p264
+    - Spoofing  · p265
+  - For More Information  · p266
+- HTTP-NG  · p267
+  - HTTP’s Growing Pains  · p267
+  - HTTP-NG Activity  · p268
+  - Modularize and Enhance  · p268
+  - Distributed Objects  · p269
+  - Layer 1: Messaging  · p270
+  - Layer 2: Remote Invocation  · p270
+  - Layer 3: Web Application  · p271
+  - WebMUX  · p271
+  - Binary Wire Protocol  · p272
+  - Current Status  · p272
+  - For More Information  · p273
+- Part III  · p275
+- Client Identification and Cookies  · p277
+  - The Personal Touch  · p277
+  - HTTP Headers  · p278
+  - Client IP Address  · p279
+  - User Login  · p280
+  - Fat URLs  · p282
+  - Cookies  · p283
+    - Types of Cookies  · p284
+    - How Cookies Work  · p284
+    - Cookie Jar: Client-Side State  · p284
+      - Netscape Navigator cookies  · p285
+      - Microsoft Internet Explorer cookies  · p286
+    - Different Cookies for Different Sites  · p286
+      - Cookie Domain attribute  · p287
+      - Cookie Path attribute  · p288
+    - Cookie Ingredients  · p288
+    - Version 0 (Netscape) Cookies  · p289
+      - Version 0 Set-Cookie header  · p289
+      - Version 0 Cookie header  · p290
+    - Version 1 (RFC 2965) Cookies  · p290
+      - Version 1 Set-Cookie2 header  · p291
+      - Version 1 Cookie header  · p292
+      - Version 1 Cookie2 header and version negotiation  · p292
+    - Cookies and Session Tracking  · p292
+    - Cookies and Caching  · p293
+    - Cookies, Security, and Privacy  · p295
+  - For More Information  · p296
+- Basic Authentication  · p297
+  - Authentication  · p297
+    - HTTP’s Challenge/Response Authentication Framework  · p298
+    - Authentication Protocols and Headers  · p298
+    - Security Realms  · p300
+  - Basic Authentication  · p301
+    - Basic Authentication Example  · p301
+    - Base-64 Username/Password Encoding  · p302
+    - Proxy Authentication  · p303
+  - The Security Flaws of Basic Authentication  · p303
+  - For More Information  · p305
+- Digest Authentication  · p306
+  - The Improvements of Digest Authentication  · p306
+    - Using Digests to Keep Passwords Secret  · p307
+    - One-Way Digests  · p308
+    - Using Nonces to Prevent Replays  · p309
+    - The Digest Authentication Handshake  · p310
+  - Digest Calculations  · p311
+    - Digest Algorithm Input Data  · p311
+    - The Algorithms H(d) and KD(s,d)  · p311
+    - The Security-Related Data (A1)  · p313
+    - The Message-Related Data (A2)  · p313
+    - Overall Digest Algorithm  · p314
+    - Digest Authentication Session  · p315
+    - Preemptive Authorization  · p315
+      - Next nonce pregeneration  · p317
+      - Limited nonce reuse  · p317
+      - Synchronized nonce generation  · p317
+    - Nonce Selection  · p318
+    - Symmetric Authentication  · p318
+  - Quality of Protection Enhancements  · p319
+    - Message Integrity Protection  · p319
+    - Digest Authentication Headers  · p320
+  - Practical Considerations  · p320
+    - Multiple Challenges  · p321
+    - Error Handling  · p321
+    - Protection Spaces  · p321
+    - Rewriting URIs  · p322
+    - Caches  · p322
+  - Security Considerations  · p323
+    - Header Tampering  · p323
+    - Replay Attacks  · p323
+    - Multiple Authentication Mechanisms  · p323
+    - Dictionary Attacks  · p324
+    - Hostile Proxies and Man-in-the-Middle Attacks  · p324
+    - Chosen Plaintext Attacks  · p325
+    - Storing Passwords  · p325
+  - For More Information  · p326
+- Secure HTTP  · p327
+  - Making HTTP Safe  · p327
+    - HTTPS  · p328
+  - Digital Cryptography  · p329
+    - The Art and Science of Secret Coding  · p330
+    - Ciphers  · p330
+    - Cipher Machines  · p331
+    - Keyed Ciphers  · p331
+    - Digital Ciphers  · p331
+  - Symmetric-Key Cryptography  · p333
+    - Key Length and Enumeration Attacks  · p333
+    - Establishing Shared Keys  · p335
+  - Public-Key Cryptography  · p335
+    - RSA  · p337
+    - Hybrid Cryptosystems and Session Keys  · p337
+  - Digital Signatures  · p337
+    - Signatures Are Cryptographic Checksums  · p338
+  - Digital Certificates  · p339
+    - The Guts of a Certificate  · p339
+    - X.509 v3 Certificates  · p340
+    - Using Certificates to Authenticate Servers  · p341
+  - HTTPS: The Details  · p342
+    - HTTPS Overview  · p342
+    - HTTPS Schemes  · p343
+    - Secure Transport Setup  · p344
+    - SSL Handshake  · p344
+    - Server Certificates  · p346
+    - Site Certificate Validation  · p347
+    - Virtual Hosting and Certificates  · p348
+  - A Real HTTPS Client  · p348
+    - OpenSSL  · p348
+    - A Simple HTTPS Client  · p349
+    - Executing Our Simple OpenSSL Client  · p353
+  - Tunneling Secure Traffic Through Proxies  · p355
+  - For More Information  · p356
+    - HTTP Security  · p356
+    - SSL and TLS  · p357
+    - Public-Key Infrastructure  · p357
+    - Digital Cryptography  · p358
+- Part IV  · p359
+- Entities and Encodings  · p361
+  - Messages Are Crates, Entities Are Cargo  · p362
+    - Entity Bodies  · p363
+  - Content-Length: The Entity’s Size  · p364
+    - Detecting Truncation  · p364
+    - Incorrect Content-Length  · p365
+    - Content-Length and Persistent Connections  · p365
+    - Content Encoding  · p365
+    - Rules for Determining Entity Body Length  · p366
+  - Entity Digests  · p367
+  - Media Type and Charset  · p368
+    - Character Encodings for Text Media  · p369
+    - Multipart Media Types  · p369
+    - Multipart Form Submissions  · p369
+    - Multipart Range Responses  · p370
+  - Content Encoding  · p371
+    - The Content-Encoding Process  · p371
+    - Content-Encoding Types  · p372
+    - Accept-Encoding Headers  · p373
+  - Transfer Encoding and Chunked Encoding  · p374
+    - Safe Transport  · p374
+    - Transfer-Encoding Headers  · p375
+    - Chunked Encoding  · p376
+      - Chunking and persistent connections  · p376
+      - Trailers in chunked messages  · p378
+    - Combining Content and Transfer Encodings  · p378
+    - Transfer-Encoding Rules  · p378
+  - Time-Varying Instances  · p379
+  - Validators and Freshness  · p380
+    - Freshness  · p380
+    - Conditionals and Validators  · p381
+  - Range Requests  · p383
+  - Delta Encoding  · p385
+    - Instance Manipulations, Delta Generators, and Delta Appliers  · p387
+  - For More Information  · p389
+- Internationalization  · p390
+  - HTTP Support for International Content  · p390
+  - Character Sets and HTTP  · p391
+    - Charset Is a Character-to-Bits Encoding  · p391
+    - How Character Sets and Encodings Work  · p392
+    - The Wrong Charset Gives the Wrong Characters  · p393
+    - Standardized MIME Charset Values  · p394
+    - Content-Type Charset Header and META Tags  · p395
+    - The Accept-Charset Header  · p395
+  - Multilingual Character Encoding Primer  · p396
+    - Character Set Terminology  · p396
+    - Charset Is Poorly Named  · p397
+    - Characters  · p398
+    - Glyphs, Ligatures, and Presentation Forms  · p398
+    - Coded Character Sets  · p399
+      - US-ASCII: The mother of all character sets  · p399
+      - iso-8859  · p400
+      - JIS X 0201  · p400
+      - JIS X 0208 and JIS X 0212  · p400
+      - UCS  · p401
+    - Character Encoding Schemes  · p401
+      - 8-bit  · p402
+      - UTF-8  · p402
+      - iso-2022-jp  · p402
+      - euc-jp  · p403
+  - Language Tags and HTTP  · p404
+    - The Content-Language Header  · p404
+    - The Accept-Language Header  · p405
+    - Types of Language Tags  · p405
+    - Subtags  · p406
+    - Capitalization  · p406
+    - IANA Language Tag Registrations  · p406
+    - First Subtag: Namespace  · p407
+    - Second Subtag: Namespace  · p408
+    - Remaining Subtags: Namespace  · p409
+    - Configuring Language Preferences  · p409
+    - Language Tag Reference Tables  · p409
+  - Internationalized URIs  · p409
+    - Global Transcribability Versus Meaningful Characters  · p409
+    - URI Character Repertoire  · p410
+    - Escaping and Unescaping  · p410
+    - Escaping International Characters  · p410
+    - Modal Switches in URIs  · p411
+  - Other Considerations  · p412
+    - Headers and Out-of-Spec Data  · p412
+    - Dates  · p412
+    - Domain Names  · p412
+  - For More Information  · p412
+    - Appendixes  · p413
+    - Internet Internationalization  · p413
+    - International Standards  · p413
+- Content Negotiation and Transcoding  · p415
+  - Content-Negotiation Techniques  · p415
+  - Client-Driven Negotiation  · p416
+  - Server-Driven Negotiation  · p417
+    - Content-Negotiation Headers  · p417
+    - Content-Negotiation Header Quality Values  · p418
+    - Varying on Other Headers  · p419
+    - Content Negotiation on Apache  · p419
+      - Using type-map files  · p419
+      - Using MultiViews  · p420
+    - Server-Side Extensions  · p420
+  - Transparent Negotiation  · p420
+    - Caching and Alternates  · p421
+    - The Vary Header  · p422
+  - Transcoding  · p423
+    - Format Conversion  · p424
+    - Information Synthesis  · p424
+    - Content Injection  · p425
+    - Transcoding Versus Static Pregeneration  · p425
+  - Next Steps  · p425
+  - For More Information  · p426
+- Part V  · p429
+- Web Hosting  · p431
+  - Hosting Services  · p431
+    - A Simple Example: Dedicated Hosting  · p432
+  - Virtual Hosting  · p433
+    - Virtual Server Request Lacks Host Information  · p433
+    - Making Virtual Hosting Work  · p434
+      - Virtual hosting by URL path  · p435
+      - Virtual hosting by port number  · p435
+      - Virtual hosting by IP address  · p436
+      - Virtual hosting by Host header  · p437
+    - HTTP/1.1 Host Headers  · p438
+      - Syntax and usage  · p438
+      - Missing Host headers  · p439
+      - Interpreting Host headers  · p439
+      - Host headers and proxies  · p439
+  - Making Web Sites Reliable  · p439
+    - Mirrored Server Farms  · p440
+    - Content Distribution Networks  · p441
+    - Surrogate Caches in CDNs  · p441
+    - Proxy Caches in CDNs  · p442
+  - Making Web Sites Fast  · p442
+  - For More Information  · p443
+- Publishing Systems  · p444
+  - FrontPage Server Extensions for Publishing Support  · p444
+    - FrontPage Server Extensions  · p444
+    - FrontPage Vocabulary  · p445
+    - The FrontPage RPC Protocol  · p446
+      - Request  · p447
+      - Response  · p447
+    - FrontPage Security Model  · p448
+  - WebDAV and Collaborative Authoring  · p449
+    - WebDAV Methods  · p449
+    - WebDAV and XML  · p450
+    - WebDAV Headers  · p451
+    - WebDAV Locking and Overwrite Prevention  · p452
+    - The LOCK Method  · p453
+      - The opaquelocktoken scheme  · p454
+      - The <lockdiscovery> XML element  · p455
+      - Lock refreshes and the Timeout header  · p455
+    - The UNLOCK Method  · p455
+    - Properties and META Data  · p456
+    - The PROPFIND Method  · p457
+    - The PROPPATCH Method  · p458
+    - Collections and Namespace Management  · p459
+    - The MKCOL Method  · p460
+    - The DELETE Method  · p461
+    - The COPY and MOVE Methods  · p462
+      - Overwrite header effect  · p462
+      - COPY/MOVE of properties  · p463
+      - Locked resources and COPY/MOVE  · p463
+    - Enhanced HTTP/1.1 Methods  · p464
+      - The PUT method  · p464
+      - The OPTIONS method  · p465
+    - Version Management in WebDAV  · p466
+    - Future of WebDAV  · p466
+  - For More Information  · p466
+- Redirection and Load Balancing  · p468
+  - Why Redirect?  · p469
+  - Where to Redirect  · p469
+  - Overview of Redirection Protocols  · p470
+  - General Redirection Methods  · p472
+    - HTTP Redirection  · p472
+    - DNS Redirection  · p473
+      - DNS round robin  · p474
+      - Multiple addresses and round-robin address rotation  · p475
+      - DNS round robin for load balancing  · p476
+      - The impact of DNS caching  · p476
+      - Other DNS-based redirection algorithms  · p477
+    - Anycast Addressing  · p477
+    - IP MAC Forwarding  · p479
+    - IP Address Forwarding  · p480
+    - Network Element Control Protocol  · p481
+      - Messages  · p481
+  - Proxy Redirection Methods  · p482
+    - Explicit Browser Configuration  · p483
+    - Proxy Auto-configuration  · p483
+    - Web Proxy Autodiscovery Protocol  · p484
+      - PAC file autodiscovery  · p485
+      - WPAD algorithm  · p485
+      - CURL discovery using DHCP  · p487
+      - DNS A record lookup  · p487
+      - Retrieving the PAC file  · p487
+      - When to execute WPAD  · p488
+      - WPAD spoofing  · p488
+      - Timeouts  · p488
+      - Administrator considerations  · p489
+  - Cache Redirection Methods  · p489
+    - WCCP Redirection  · p490
+      - How WCCP redirection works  · p490
+      - WCCP2 messages  · p490
+      - Message components  · p491
+      - Service groups  · p492
+      - GRE packet encapsulation  · p492
+      - WCCP load balancing  · p493
+  - Internet Cache Protocol  · p493
+  - Cache Array Routing Protocol  · p495
+  - Hyper Text Caching Protocol  · p498
+    - HTCP Authentication  · p500
+    - Setting Caching Policies  · p500
+  - For More Information  · p501
+- Logging and Usage Tracking  · p503
+  - What to Log?  · p503
+  - Log Formats  · p504
+    - Common Log Format  · p504
+    - Combined Log Format  · p505
+    - Netscape Extended Log Format  · p506
+    - Netscape Extended 2 Log Format  · p507
+    - Squid Proxy Log Format  · p509
+  - Hit Metering  · p512
+    - Overview  · p513
+    - The Meter Header  · p513
+  - A Word on Privacy  · p515
+  - For More Information  · p515
+- Part VI  · p517
+- URI Schemes  · p519
+- HTTP Status Codes  · p525
+  - Status Code Classifications  · p525
+  - Status Codes  · p525
+- HTTP Header Reference  · p528
+  - Accept  · p528
+  - Accept-Charset  · p529
+  - Accept-Encoding  · p529
+  - Accept-Language  · p530
+  - Accept-Ranges  · p530
+  - Age  · p530
+  - Allow  · p531
+  - Authorization  · p531
+  - Cache-Control  · p531
+  - Client-ip  · p532
+  - Connection  · p532
+  - Content-Base  · p533
+  - Content-Encoding  · p533
+  - Content-Language  · p533
+  - Content-Length  · p534
+  - Content-Location  · p534
+  - Content-MD5  · p534
+  - Content-Range  · p535
+  - Content-Type  · p535
+  - Cookie  · p536
+  - Cookie2  · p536
+  - Date  · p536
+  - ETag  · p537
+  - Expect  · p537
+  - Expires  · p537
+  - From  · p537
+  - Host  · p538
+  - If-Modified-Since  · p538
+  - If-Match  · p539
+  - If-None-Match  · p539
+  - If-Range  · p539
+  - If-Unmodified-Since  · p540
+  - Last-Modified  · p540
+  - Location  · p540
+  - Max-Forwards  · p541
+  - MIME-Version  · p541
+  - Pragma  · p541
+  - Proxy-Authenticate  · p542
+  - Proxy-Authorization  · p542
+  - Proxy-Connection  · p543
+  - Public  · p543
+  - Range  · p544
+  - Referer  · p544
+  - Retry-After  · p545
+  - Server  · p545
+  - Set-Cookie  · p545
+  - Set-Cookie2  · p546
+  - TE  · p546
+  - Trailer  · p546
+  - Title  · p547
+  - Transfer-Encoding  · p547
+  - UA-(CPU, Disp, OS, Color, Pixels)  · p547
+  - Upgrade  · p548
+  - User-Agent  · p548
+  - Vary  · p549
+  - Via  · p549
+  - Warning  · p550
+  - WWW-Authenticate  · p551
+  - X-Cache  · p551
+  - X-Forwarded-For  · p551
+  - X-Pad  · p551
+  - X-Serial-Number  · p552
+- MIME Types  · p553
+  - Background  · p554
+  - MIME Type Structure  · p554
+    - Discrete Types  · p554
+    - Composite Types  · p554
+    - Multipart Types  · p555
+    - Syntax  · p556
+  - MIME Type IANA Registration  · p557
+    - Registration Trees  · p557
+    - Registration Process  · p557
+    - Registration Rules  · p558
+    - Registration Template  · p558
+    - MIME Media Type Registry  · p559
+  - MIME Type Tables  · p559
+    - application/*  · p560
+    - audio/*  · p577
+    - chemical/*  · p579
+    - image/*  · p581
+    - message/*  · p583
+    - model/*  · p583
+    - multipart/*  · p584
+    - text/*  · p585
+    - video/*  · p588
+    - Experimental Types  · p589
+- Base-64 Encoding  · p590
+  - Base-64 Encoding Makes Binary Data Safe  · p590
+  - Eight Bits to Six Bits  · p590
+  - Base-64 Padding  · p592
+  - Perl Implementation  · p592
+  - For More Information  · p593
+- Digest Authentication  · p594
+  - Digest WWW-Authenticate Directives  · p594
+  - Digest Authorization Directives  · p595
+  - Digest Authentication-Info Directives  · p596
+  - Reference Code  · p597
+    - File “digcalc.h”  · p597
+    - File “digcalc.c”  · p598
+    - File “digtest.c”  · p600
+- Language Tags  · p601
+  - First Subtag Rules  · p601
+  - Second Subtag Rules  · p602
+  - IANA-Registered Language Tags  · p602
+  - ISO 639 Language Codes  · p603
+  - ISO 3166 Country Codes  · p614
+  - Language Administrative Organizations  · p621
+- MIME Charset Registry  · p622
+  - MIME Charset Registry  · p622
+  - Preferred MIME Names  · p623
+  - Registered Charsets  · p623
+- Index  · p637

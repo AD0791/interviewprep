@@ -1,0 +1,71 @@
+# TOC — Mastering_FastAPI_with_Python.pdf
+
+*Extracted by `_tools/extract_toc.py` (outline). 67 entries. Machine-generated — do not hand-edit.*
+
+- Contents  · p3
+- Author's Introduction  · p7
+- Introduction  · p10
+  - Why FastAPI?  · p10
+- Getting Started with FastAPI  · p18
+  - Installing FastAPI and Running Your First Application  · p18
+    - Installing FastAPI and Uvicorn  · p18
+    - Running Your First API and Accessing it in the Browser  · p19
+    - Using Swagger UI and ReDoc for API Documentation  · p21
+    - Customizing the Documentation  · p22
+  - Fundamentals of Building APIs  · p23
+    - Defining Routes (GET, POST, PUT, DELETE)  · p23
+    - Dynamic Path Parameters  · p25
+    - Query Parameters and Path Parameters  · p26
+- Data Validation with Pydantic  · p29
+  - Data Models in FastAPI  · p29
+    - Using Pydantic to Create Models  · p29
+    - Validating Data and Handling Errors  · p30
+    - Default Fields and Required Attributes  · p33
+  - Handling Requests & Responses  · p37
+    - Parsing Incoming JSON Data  · p37
+    - Customizing HTTP Responses  · p39
+    - Using HTTPException for Error Handling  · p41
+- Improving Performance with Async  · p45
+  - Understanding Async/Await in FastAPI  · p45
+    - Synchronous vs. Asynchronous Operations  · p45
+    - Using async def for Better Performance  · p47
+    - Practical Example of an Async API  · p49
+- Working with Databases  · p52
+  - Connecting to a Database with SQLAlchemy  · p52
+    - Setting up SQLite/PostgreSQL with SQLAlchemy  · p52
+    - Defining Database Models and Tables  · p54
+    - Creating a CRUD API for Database Operations  · p56
+  - Managing Sessions and Transactions  · p61
+    - Creating and Handling Database Sessions  · p61
+    - Handling Transactions in SQLAlchemy  · p63
+    - Handling Errors During Database Operations  · p65
+- Best Practices for API Design  · p68
+  - Structuring a Scalable FastAPI Project  · p68
+    - Organizing a Project into Modules  · p68
+    - Key Modules and Their Roles  · p69
+    - Writing Clean and Maintainable Code  · p71
+  - Security in FastAPI  · p76
+- Building Microservices with FastAPI  · p85
+  - Designing Microservices with FastAPI  · p85
+    - Principles of Microservices Architecture  · p85
+    - Scaling FastAPI Applications  · p89
+  - Inter-Service Communication  · p93
+    - Using Redis and RabbitMQ for Service-to-Service Communication  · p93
+    - Working with an API Gateway  · p97
+- Deploying FastAPI in Production  · p101
+  - Running FastAPI with Gunicorn and Uvicorn  · p101
+    - Comparing Uvicorn vs. Gunicorn  · p101
+    - Setting Up a Secure Production Environment  · p103
+  - Deploying FastAPI to Cloud Servers  · p109
+    - Using Docker to Containerize the Application  · p109
+    - Deploying on AWS (Amazon Web Services)  · p112
+    - Deploying on GCP (Google Cloud Platform)  · p114
+- Conclusion  · p117
+  - Final Review and Further Learning Resources  · p117
+- Appendices  · p124
+  - Appendix A: FastAPI Command Line Tools  · p124
+  - Appendix B: Environment Configuration  · p125
+  - Appendix C: Common FastAPI Errors and Debugging Tips  · p128
+  - Appendix D: Useful FastAPI Extensions  · p131
+  - Appendix E: FastAPI Example Project  · p133
+- References  · p135

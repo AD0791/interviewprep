@@ -1,0 +1,297 @@
+# TOC — How.Computers.Really.Work.2020.12.pdf
+
+*Extracted by `_tools/extract_toc.py` (outline). 293 entries. Machine-generated — do not hand-edit.*
+
+- Contents in Detail  · p13
+- Acknowledgments  · p19
+- Introduction  · p21
+  - Who Is This Book For?  · p22
+  - About This Book  · p22
+  - About Exercises and Projects  · p23
+  - My Computing Journey  · p24
+- Chapter 1: Computing Concepts  · p25
+  - Defining a Computer  · p26
+  - Analog and Digital  · p26
+    - The Analog Approach  · p26
+    - Going Digital  · p28
+  - Number Systems  · p29
+    - Decimal Numbers  · p29
+    - Binary Numbers  · p30
+  - Bits and Bytes  · p32
+  - Prefixes  · p33
+  - Hexadecimal  · p35
+  - SI Prefixes for Binary Data  · p35
+  - Summary  · p39
+- Chapter 2: Binary in Action  · p41
+  - Representing Data Digitally  · p42
+    - Digital Text  · p42
+    - ASCII  · p43
+  - Digital Colors and Images  · p45
+  - Interpreting Binary Data  · p48
+  - Approaches for Representing Colors and Images  · p46
+  - Binary Logic  · p49
+  - Summary  · p54
+- Chapter 3: Electrical Circuits  · p55
+  - Electrical Terms Defined  · p56
+    - Electric Charge  · p56
+    - Electric Current  · p56
+    - Voltage  · p57
+    - Resistance  · p57
+    - Water Analogy  · p58
+  - Ohm’s Law  · p59
+  - Circuit Diagrams  · p59
+  - AC and DC  · p59
+  - Kirchhoff’s Voltage Law  · p62
+  - Circuits in the Real World  · p64
+  - Light-­Emitting Diodes  · p66
+  - Summary  · p68
+  - Project #1: Build and Measure a Circuit  · p69
+  - Project #2: Build a Simple LED Circuit  · p74
+- Chapter 4: Digital Circuits  · p77
+  - What Is a Digital Circuit?  · p78
+  - Logic with Mechanical Switches  · p78
+  - The Amazing Transistor  · p81
+  - Logic Gates  · p83
+  - Exercise 4-1: Design a Logical OR with Transistors  · p84
+  - Designing with Logic Gates  · p85
+  - Exercise 4-2: Design a Circuit with Logic Gates  · p86
+  - Integrated Circuits  · p86
+  - Summary  · p89
+  - Project #3: Build Logical Operators (AND, OR) with Transistors  · p90
+  - Project #4: Construct a Circuit with Logic Gates  · p92
+- Chapter 5: Math with Digital Circuits  · p97
+  - Binary Addition  · p98
+  - Exercise 5-1: Practice Binary Addition  · p99
+  - Half Adders  · p100
+  - Full Adders  · p102
+  - A 4-bit Adder  · p104
+  - Signed Numbers  · p105
+  - Exercise 5-2: Find the Two’s Complement  · p106
+  - Two’s Complement Terminology  · p107
+  - Unsigned Numbers  · p109
+  - Summary  · p111
+  - Exercise 5-3: Add Two Binary Numbers and Interpret as Signed and Unsigned  · p111
+  - Project #5: Build a Half Adder  · p113
+- Chapter 6: Memory and Clock Signals  · p115
+  - Sequential Logic Circuits and Memory  · p115
+  - The SR Latch  · p116
+  - Using the SR Latch in a Circuit  · p119
+  - Universal Logic Gates  · p119
+  - Clock Signals  · p122
+  - JK Flip-­Flops  · p123
+  - T Flip-­Flops  · p124
+  - Using a Clock in a 3-Bit Counter  · p125
+  - Summary  · p127
+  - Project #6: Construct an SR Latch Using NOR Gates  · p128
+  - Project #7: Construct a Basic Vending Machine Circuit  · p129
+  - Project #8: Add a Delayed Reset to the Vending Machine Circuit  · p131
+  - Project #9: Using a Latch as a Manual Clock  · p133
+  - Project #10: Test a JK Flip-­Flop  · p135
+  - Project #11: Construct a 3-bit Counter  · p137
+- Chapter 7: Computer Hardware  · p141
+  - Computer Hardware Overview  · p141
+  - Main Memory  · p143
+  - Exercise 7-1: Calculate the Required Number of Bits  · p146
+  - Central Processing Unit (CPU)  · p146
+    - Instruction Set Architectures  · p147
+    - CPU Internals  · p149
+    - Clock, Cores, and Cache  · p151
+  - Beyond Memory and Processor  · p154
+    - Secondary Storage  · p154
+    - Input/Output  · p155
+  - Exercise 7-2: Get to Know the Hardware Devices in Your Life  · p157
+  - Bus Communication  · p158
+  - Summary  · p159
+  - 8  · p161
+  - Machine Code and Assembly Language  · p161
+  - Software Terms Defined  · p162
+  - An Example Machine Instruction  · p163
+  - Calculating a Factorial in Machine Code  · p165
+  - Branching and the Status Register  · p167
+  - Exercise 8-1: Use Your Brain as a CPU  · p167
+  - Summary  · p168
+  - Project #12: Factorial in Assembly  · p169
+  - Project #13: Examining Machine Code  · p179
+- Chapter 9: High-­Level Programming  · p183
+  - High-­Level Programming Overview  · p184
+  - Introduction to C and Python  · p184
+  - Comments  · p185
+  - Variables  · p186
+    - Variables in C  · p186
+    - Variables in Python  · p187
+  - Stack and Heap Memory  · p188
+    - The Stack  · p188
+    - The Heap  · p189
+  - Math  · p190
+  - Logic  · p193
+    - Bitwise Operators  · p193
+  - Exercise 9-1: Bitwise Operators  · p194
+    - Boolean Operators  · p194
+  - Program Flow  · p196
+    - If Statements  · p196
+    - Looping  · p197
+  - Functions  · p198
+    - Defining Functions  · p199
+    - Calling Functions  · p200
+    - Using Libraries  · p201
+  - Object-­Oriented Programming  · p201
+  - Compiled or Interpreted  · p203
+  - Calculating a Factorial in C  · p204
+  - Exercise 9-2: Run a C Program in Your Mind  · p205
+  - Summary  · p207
+  - Project #14: Examine Variables  · p208
+  - Project #15: Change the Type of Value Referenced by a Variable in Python  · p210
+  - Project #16: Stack or Heap  · p211
+  - Project #17: Write a Guessing Game  · p213
+  - Project #18: Use a Bank Account Class in Python  · p214
+  - Project #19: Factorial in C  · p215
+- Chapter 10: Operating Systems  · p217
+  - Programming Without an Operating System  · p217
+  - Operating Systems Overview  · p219
+  - Operating System Families  · p221
+  - Kernel Mode and User Mode  · p223
+  - Exercise 10-1: Get to Know the Operating Systems in Your Life  · p223
+  - Kernel Mode Components in Windows  · p224
+  - Processes  · p224
+  - Threads  · p226
+  - Physical and Logical Cores  · p227
+  - Virtual Memory  · p228
+  - Application Programming Interface (API)  · p231
+  - The User Mode Bubble and System Calls  · p233
+  - APIs and System Calls  · p235
+  - Operating System Software Libraries  · p236
+  - Windows Subsystem for Linux  · p238
+  - Application Binary Interface  · p238
+  - Device Drivers  · p238
+  - Filesystems  · p239
+  - Services and Daemons  · p240
+  - Security  · p241
+  - Summary  · p241
+  - Project #20: Examine Running Processes  · p242
+  - Project #21: Create a Thread and Observe It  · p244
+  - Project #22: Examine Virtual Memory  · p246
+  - Project #23: Try the Operating System API  · p248
+  - Project #24: Observe System Calls  · p250
+  - Project #25: Use glibc  · p251
+  - Project #26: View Loaded Kernel Modules  · p254
+  - Project #27: Examine Storage Devices and FileSystems  · p254
+  - Project #28: View Services  · p255
+- Chapter 11: The Internet  · p257
+  - Networking Terms Defined  · p257
+  - The Internet Protocol Suite  · p259
+  - OSI—Another Network Model  · p260
+    - Link Layer  · p262
+    - Internet Layer  · p263
+  - Exercise 11-1: Which IPs Are on the Same Subnet?  · p266
+    - Transport Layer  · p267
+  - Exercise 11-2: Research Common Ports  · p268
+    - Application Layer  · p269
+  - A Trip Through the Internet  · p270
+  - Foundational Internet Capabilities  · p271
+    - Dynamic Host Configuration Protocol  · p271
+    - Private IP Addresses and Network Address Translation  · p272
+    - The Domain Name System  · p274
+  - Networking Is Computing  · p276
+  - Summary  · p277
+  - Project #29: Examine the Link Layer  · p278
+  - Project #30: Examine the Internet Layer  · p279
+  - Project #31: Examine Port Usage  · p280
+  - Project #32: Trace the Route to a Host on the Internet  · p282
+  - Project #33: See Your Leased IP Address  · p282
+  - Project #34: Is Your Device’s IP Public or Private?  · p283
+  - Project #35: Find Information in DNS  · p284
+- Chapter 12: The World Wide Web  · p285
+  - Overview of the World Wide Web  · p285
+    - The Distributed Web  · p286
+    - The Addressable Web  · p286
+  - Exercise 12-1: Identify the Parts of a URL  · p287
+    - The Linked Web  · p288
+    - The Protocols of the Web  · p288
+    - The Searchable Web  · p291
+  - The Languages of the Web  · p292
+    - Structuring the Web with HTML  · p292
+    - Styling the Web with CSS  · p295
+    - Scripting the Web with JavaScript  · p297
+    - Structuring the Web’s Data with JSON and XML  · p299
+  - Web Browsers  · p301
+    - Rendering a Page  · p301
+    - The User Agent String  · p303
+  - Web Servers  · p304
+  - Summary  · p306
+  - Project #36: Examine HTTP Traffic  · p307
+  - Project #37: Run Your Own Web Server  · p309
+  - Project #38: Return HTML from Your Web Server  · p311
+  - Project #39: Add CSS to Your Website  · p312
+  - Project #40: Add JavaScript to Your Website  · p313
+- Chapter 13: Modern Computing  · p315
+  - Apps  · p316
+    - Native Apps  · p316
+    - Web Apps  · p318
+  - Virtualization and Emulation  · p319
+    - Virtualization  · p319
+    - Emulation  · p321
+  - Process Virtual Machines  · p322
+  - Cloud Computing  · p322
+    - The History of Remote Computing  · p322
+    - The Categories of Cloud Computing  · p323
+  - The Deep Web and Dark Web  · p325
+  - Bitcoin  · p326
+    - Bitcoin Basics  · p326
+    - Bitcoin Wallets  · p327
+    - Bitcoin Transactions  · p328
+    - Bitcoin Mining  · p329
+  - Bitcoin Beginnings  · p330
+  - Virtual Reality and Augmented Reality  · p330
+  - The Internet of Things  · p332
+  - Summary  · p333
+  - Project #41: Final Project  · p335
+- Appendix A: Answers to Exercises  · p343
+  - Chapter 3: Electrical Circuits  · p348
+    - 3-1: Using Ohm’s Law  · p348
+    - 3-2: Find the Voltage Drops  · p348
+  - Chapter 4: Digital Circuits  · p349
+    - 4-1: Design a Logical OR with Transistors  · p349
+    - 4-2: Design a Circuit with Logic Gates  · p349
+  - Chapter 5: Math with Digital Circuits  · p350
+    - 5-1: Practice Binary Addition  · p350
+    - 5-2: Find the Two’s Complement  · p350
+    - 5-3: Add Two Binary Numbers and Interpret as Signed and Unsigned  · p350
+  - Chapter 7: Computer Hardware  · p351
+    - 7-1: Calculate the Required Number of Bits  · p351
+  - Chapter 8: Machine Code and Assembly Language  · p351
+    - 8-1: Use Your Brain as a CPU  · p351
+  - Chapter 9: High-­Level Programming  · p353
+    - 9-1: Bitwise Operators  · p353
+    - 9-2: Run a C Program in Your Mind  · p354
+  - Chapter 11: The Internet  · p355
+    - 11-1: Which IPs Are on the Same Subnet?  · p355
+    - 11-2: Research Common Ports  · p355
+  - Chapter 12: The World Wide Web  · p356
+    - 12-1: Identify the Parts of a URL  · p356
+  - 1-2: Binary to Decimal  · p343
+  - 1-3: Decimal to Binary  · p344
+  - 1-4: Binary to Hexadecimal  · p344
+  - 1-5: Hexadecimal to Binary  · p344
+  - 2-1: Create Your Own System for Representing Text  · p344
+  - 2-2: Encode and Decode ASCII  · p345
+  - 2-3: Create Your Own System for Representing Grayscale  · p345
+  - 2-4: Create Your Own Approach for Representing Simple Images  · p346
+  - 2-5: Write a Truth Table for a Logical Expression  · p347
+- Appendix B: Resources  · p357
+  - Buying Electronic Components for the Projects  · p357
+    - 7400 Part Numbers  · p358
+    - Shopping  · p359
+  - Powering Digital Circuits  · p360
+    - USB Charger  · p360
+    - Breadboard Power Supply  · p361
+    - Power from a Raspberry Pi  · p362
+    - AA Batteries  · p363
+  - Troubleshooting Circuits  · p364
+  - Raspberry Pi  · p365
+    - Why Raspberry Pi  · p365
+    - Parts Needed  · p366
+    - Setting Up a Raspberry Pi  · p367
+    - Using Raspberry Pi OS  · p368
+    - Working with Files and Folders  · p370
+- Index  · p375
+- Blank Page  · p2

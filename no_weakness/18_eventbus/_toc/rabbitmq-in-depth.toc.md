@@ -1,0 +1,204 @@
+# TOC — RabbitMQ in Depth.pdf
+
+*Extracted by `_tools/extract_toc.py` (outline). 200 entries. Machine-generated — do not hand-edit.*
+
+- Front cover  · p1
+- brief contents  · p6
+- contents  · p8
+- preface  · p14
+- acknowledgments  · p15
+- about this book  · p16
+  - Road Map  · p16
+  - Code  · p17
+  - Book forum  · p17
+  - About the author  · p18
+  - About the cover  · p18
+- Part 1—RabbitMQ and application architecture  · p20
+  - 1 Foundational RabbitMQ  · p22
+    - 1.1 RabbitMQ’s features and benefits  · p23
+      - 1.1.1 RabbitMQ and Erlang  · p24
+      - 1.1.2 RabbitMQ and AMQP  · p25
+    - 1.2 Who’s using RabbitMQ, and how?  · p26
+    - 1.3 The advantages of loosely coupled architectures  · p27
+      - 1.3.1 Decoupling your application  · p29
+      - 1.3.2 Decoupling database writes  · p30
+      - 1.3.3 Seamlessly adding new functionality  · p31
+      - 1.3.4 Replication of data and events  · p31
+      - 1.3.5 Multi-master federation of data and events  · p32
+      - 1.3.6 The Advanced Message Queuing model  · p33
+    - 1.4 Summary  · p35
+  - 2 How to speak Rabbit: the AMQ Protocol  · p37
+    - 2.1 AMQP as an RPC transport  · p38
+      - 2.1.1 Kicking off the conversation  · p39
+      - 2.1.2 Tuning in to the right channel  · p39
+    - 2.2 AMQP’s RPC frame structure  · p40
+      - 2.2.1 AMQP frame components  · p40
+      - 2.2.2 Types of frames  · p41
+      - 2.2.3 Marshaling messages into frames  · p42
+      - 2.2.4 The anatomy of a method frame  · p43
+      - 2.2.5 The content header frame  · p45
+      - 2.2.6 The body frame  · p45
+    - 2.3 Putting the protocol to use  · p46
+      - 2.3.1 Declaring an exchange  · p46
+      - 2.3.2 Declaring a queue  · p47
+      - 2.3.3 Binding a queue to an exchange  · p48
+      - 2.3.4 Publishing a message to RabbitMQ  · p48
+      - 2.3.5 Consuming messages from RabbitMQ  · p49
+    - 2.4 Writing a message publisher in Python  · p51
+    - 2.5 Getting messages from RabbitMQ  · p55
+    - 2.6 Summary  · p56
+  - 3 An in-depth tour of message properties  · p57
+    - 3.1 Using properties properly  · p58
+    - 3.2 Creating an explicit message contract with content-type  · p60
+    - 3.3 Reducing message size with gzip and content-encoding  · p62
+    - 3.4 Referencing messages with message-id and correlation-id  · p64
+      - 3.4.1 Message-id  · p64
+      - 3.4.2 Correlation-id  · p64
+    - 3.5 Born-on dating: the timestamp property  · p65
+    - 3.6 Automatically expiring messages  · p66
+    - 3.7 Balancing speed with safety using delivery-mode  · p67
+    - 3.8 Validating message origin with app-id and user-id  · p68
+      - 3.8.1 app-id  · p69
+      - 3.8.2 user-id  · p70
+    - 3.9 Getting specific with the message type property  · p70
+    - 3.10 Using reply-to for dynamic workflows  · p71
+    - 3.11 Custom properties using the headers property  · p72
+    - 3.12 The priority property  · p73
+    - 3.13 A property you can’t use: cluster-id/reserved  · p73
+    - 3.14 Summary  · p74
+  - 4 Performance trade-offs in publishing  · p77
+    - 4.1 Balancing delivery speed with guaranteed delivery  · p78
+      - 4.1.1 What to expect with no guarantees  · p79
+      - 4.1.2 RabbitMQ won’t accept non-routable messages with mandatory set  · p81
+      - 4.1.3 Publisher Confirms as a lightweight alternative to transactions  · p83
+      - 4.1.4 Using alternate exchanges for unroutable messages  · p85
+      - 4.1.5 Batch processing with transactions  · p87
+      - 4.1.6 Surviving node failures with HA queues  · p89
+      - 4.1.7 HA queues with transactions  · p91
+      - 4.1.8 Persisting messages to disk via delivery-mode 2  · p91
+    - 4.2 When RabbitMQ pushes back  · p94
+      - 4.2.1 Checking the connection status with rabbitpy  · p96
+      - 4.2.2 Using the management API for connection status  · p96
+    - 4.3 Summary  · p97
+  - 5 Don’t get messages; consume them  · p98
+    - 5.1 Basic.Get vs. Basic.Consume  · p99
+      - 5.1.1 Basic.Get  · p99
+      - 5.1.2 Basic.Consume  · p101
+    - 5.2 Performance-tuning consumers  · p103
+      - 5.2.1 Using no-ack mode for faster throughput  · p104
+      - 5.2.2 Controlling consumer prefetching via quality of service settings  · p105
+      - 5.2.3 Using transactions with consumers  · p108
+    - 5.3 Rejecting messages  · p109
+      - 5.3.1 Basic.Reject  · p109
+      - 5.3.2 Basic.Nack  · p110
+      - 5.3.3 Dead letter exchanges  · p111
+    - 5.4 Controlling queues  · p113
+      - 5.4.1 Temporary queues  · p113
+      - 5.4.2 Permanent queues  · p116
+      - 5.4.3 Arbitrary queue settings  · p118
+    - 5.5 Summary  · p118
+  - 6 Message patterns via exchange routing  · p120
+    - 6.1 Simple message routing using the direct exchange  · p121
+      - 6.1.1 Creating the application architecture  · p122
+      - 6.1.2 Creating the RPC worker  · p126
+      - 6.1.3 Writing a simple RPC publisher  · p129
+    - 6.2 Broadcasting messages via the fanout exchange  · p134
+      - 6.2.1 Modifying the facial detection consumer  · p135
+      - 6.2.2 Creating a simple image-hashing consumer  · p136
+    - 6.3 Selectively routing messages with the topic exchange  · p138
+    - 6.4 Selective routing with the headers exchange  · p141
+    - 6.5 Exchange performance benchmarking  · p143
+    - 6.6 Going meta: exchange-to-exchange routing  · p144
+    - 6.7 Routing messages with the consistent-hashing exchange  · p146
+    - 6.8 Summary  · p150
+- Part 2—Managing RabbitMQ in the data center or the cloud  · p152
+  - 7 Scaling RabbitMQ with clusters  · p154
+    - 7.1 About clusters  · p155
+      - 7.1.1 Clusters and the management UI  · p156
+      - 7.1.2 Cluster node types  · p157
+      - 7.1.3 Clusters and queue behavior  · p158
+    - 7.2 Cluster setup  · p161
+      - 7.2.1 Virtual machine setup  · p162
+      - 7.2.2 Adding nodes to the cluster  · p163
+    - 7.3 Summary  · p166
+  - 8 Cross-cluster message distribution  · p167
+    - 8.1 Federating exchanges and queues  · p168
+      - 8.1.1 Federated exchanges  · p168
+      - 8.1.2 Federated queues  · p171
+    - 8.2 Creating the RabbitMQ virtual machines  · p172
+      - 8.2.1 Creating the first instance  · p172
+      - 8.2.2 Duplicating the EC2 instance  · p178
+    - 8.3 Connecting upstream  · p181
+      - 8.3.1 Defining federation upstreams  · p181
+      - 8.3.2 Defining a policy  · p183
+      - 8.3.3 Leveraging upstream sets  · p186
+      - 8.3.4 Bidirectional federated exchanges  · p189
+      - 8.3.5 Federation for cluster upgrades  · p190
+    - 8.4 Summary  · p192
+- Part 3—Integrations and customization  · p194
+  - 9 Using alternative protocols  · p196
+    - 9.1 MQTT and RabbitMQ  · p197
+      - 9.1.1 The MQTT protocol  · p197
+      - 9.1.2 Publishing via MQTT  · p201
+      - 9.1.3 MQTT subscribers  · p203
+      - 9.1.4 MQTT plugin configuration  · p206
+    - 9.2 STOMP and RabbitMQ  · p208
+      - 9.2.1 The STOMP protocol  · p209
+      - 9.2.2 Publishing messages  · p210
+      - 9.2.3 Consuming messages  · p214
+      - 9.2.4 Configuring the STOMP plugin  · p217
+      - 9.2.5 Using STOMP in the web browser  · p218
+    - 9.3 Stateless publishing via HTTP  · p219
+      - 9.3.1 How statelessd came to be  · p219
+      - 9.3.2 Using statelessd  · p220
+      - 9.3.3 Operational architecture  · p221
+      - 9.3.4 Publishing messages via statelessd  · p222
+    - 9.4 Summary  · p222
+  - 10 Database integrations  · p224
+    - 10.1 The pg_amqp PostgreSQL extension  · p225
+      - 10.1.1 Installing the pg_amqp extension  · p226
+      - 10.1.2 Configuring the pg_amqp extension  · p228
+      - 10.1.3 Publishing a message via pg_amqp  · p229
+    - 10.2 Listening to PostgreSQL notifications  · p231
+      - 10.2.1 Installing the PostgreSQL LISTEN exchange  · p232
+      - 10.2.2 Policy-based configuration  · p234
+      - 10.2.3 Creating the exchange  · p236
+      - 10.2.4 Creating and binding a test queue  · p236
+      - 10.2.5 Publishing via NOTIFY  · p237
+    - 10.3 Storing messages in InfluxDB  · p238
+      - 10.3.1 InfluxDB installation and setup  · p239
+      - 10.3.2 Installing the InfluxDB storage exchange  · p241
+      - 10.3.3 Creating a test exchange  · p242
+      - 10.3.4 Testing the exchange  · p243
+    - 10.4 Summary  · p246
+- Appendix—Getting set up  · p247
+  - A.1 Installing VirtualBox  · p247
+  - A.2 Installing Vagrant  · p249
+  - A.3 Setting up the Vagrant virtual machine  · p252
+  - A.4 Confirming your installation  · p253
+  - A.5 Summary  · p255
+- index  · p256
+  - Symbols  · p256
+  - A  · p256
+  - B  · p257
+  - C  · p257
+  - D  · p258
+  - E  · p258
+  - F  · p259
+  - G  · p259
+  - H  · p259
+  - I  · p259
+  - L  · p260
+  - M  · p260
+  - N  · p261
+  - O  · p262
+  - P  · p262
+  - Q  · p263
+  - R  · p263
+  - S  · p264
+  - T  · p264
+  - U  · p264
+  - V  · p264
+  - W  · p265
+  - X  · p265
+- Back cover  · p266

@@ -1,0 +1,258 @@
+# TOC — book.pdf
+
+*Extracted by `_tools/extract_toc.py` (scrape[1-14]). 254 entries. Machine-generated — do not hand-edit.*
+
+- 1 Introduction  · p9
+- 2 High-Dimensional Space  · p12
+  - 2.1 Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p12
+  - 2.2 The Law of Large Numbers . . . . . . . . . . . . . . . . . . . . . . . . . .  · p12
+  - 2.3 The Geometry of High Dimensions . . . . . . . . . . . . . . . . . . . . . .  · p15
+  - 2.4 Properties of the Unit Ball . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p17
+    - 2.4.1 Volume of the Unit Ball . . . . . . . . . . . . . . . . . . . . . . . .  · p17
+    - 2.4.2 Volume Near the Equator . . . . . . . . . . . . . . . . . . . . . . .  · p19
+  - 2.5 Generating Points Uniformly at Random from a Ball . . . . . . . . . . . .  · p22
+  - 2.6 Gaussians in High Dimension . . . . . . . . . . . . . . . . . . . . . . . . .  · p23
+  - 2.7 Random Projection and Johnson-Lindenstrauss Lemma . . . . . . . . . . .  · p25
+  - 2.8 Separating Gaussians . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p27
+  - 2.9 Fitting a Spherical Gaussian to Data . . . . . . . . . . . . . . . . . . . . .  · p29
+  - 2.10 Bibliographic Notes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p31
+  - 2.11 Exercises . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p32
+- 3 Best-Fit Subspaces and Singular Value Decomposition (SVD)  · p40
+  - 3.1 Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p40
+  - 3.2 Preliminaries . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p41
+  - 3.3 Singular Vectors . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p42
+  - 3.4 Singular Value Decomposition (SVD) . . . . . . . . . . . . . . . . . . . . .  · p45
+  - 3.5 Best Rank-k Approximations . . . . . . . . . . . . . . . . . . . . . . . . .  · p47
+  - 3.6 Left Singular Vectors . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p48
+  - 3.7 Power Method for Singular Value Decomposition . . . . . . . . . . . . . . .  · p51
+    - 3.7.1 A Faster Method . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p51
+  - 3.8 Singular Vectors and Eigenvectors . . . . . . . . . . . . . . . . . . . . . . .  · p54
+  - 3.9 Applications of Singular Value Decomposition . . . . . . . . . . . . . . . .  · p54
+    - 3.9.1 Centering Data . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p54
+    - 3.9.2 Principal Component Analysis . . . . . . . . . . . . . . . . . . . . .  · p56
+    - 3.9.3 Clustering a Mixture of Spherical Gaussians . . . . . . . . . . . . .  · p56
+    - 3.9.4 Ranking Documents and Web Pages . . . . . . . . . . . . . . . . .  · p62
+    - 3.9.5 An Application of SVD to a Discrete Optimization Problem . . . .  · p63
+  - 3.10 Bibliographic Notes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p65
+  - 3.11 Exercises . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p67
+- 4 Random Walks and Markov Chains  · p76
+  - 4.1 Stationary Distribution . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p80
+  - 4.2 Markov Chain Monte Carlo . . . . . . . . . . . . . . . . . . . . . . . . . .  · p81
+    - 4.2.1 Metropolis-Hasting Algorithm . . . . . . . . . . . . . . . . . . . . .  · p83
+    - 4.2.2 Gibbs Sampling . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p84
+  - 4.3 Areas and Volumes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p86
+  - 4.4 Convergence of Random Walks on Undirected Graphs . . . . . . . . . . . .  · p88
+    - 4.4.1 Using Normalized Conductance to Prove Convergence . . . . . . . .  · p94
+  - 4.5 Electrical Networks and Random Walks . . . . . . . . . . . . . . . . . . . .  · p97
+  - 4.6 Random Walks on Undirected Graphs with Unit Edge Weights . . . . . . .  · p102
+  - 4.7 Random Walks in Euclidean Space . . . . . . . . . . . . . . . . . . . . . .  · p109
+  - 4.8 The Web as a Markov Chain . . . . . . . . . . . . . . . . . . . . . . . . . .  · p112
+  - 4.9 Bibliographic Notes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p116
+  - 4.10 Exercises . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p118
+- 5 Machine Learning  · p129
+  - 5.1 Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p129
+  - 5.2 The Perceptron algorithm . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p130
+  - 5.3 Kernel Functions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p132
+  - 5.4 Generalizing to New Data . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p134
+  - 5.5 Overfitting and Uniform Convergence . . . . . . . . . . . . . . . . . . . . .  · p135
+  - 5.6 Illustrative Examples and Occam’s Razor . . . . . . . . . . . . . . . . . . .  · p138
+    - 5.6.1 Learning Disjunctions . . . . . . . . . . . . . . . . . . . . . . . . .  · p138
+    - 5.6.2 Occam’s Razor . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p139
+    - 5.6.3 Application: Learning Decision Trees . . . . . . . . . . . . . . . . .  · p140
+  - 5.7 Regularization: Penalizing Complexity . . . . . . . . . . . . . . . . . . . .  · p141
+  - 5.8 Online Learning . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p141
+    - 5.8.1 An Example: Learning Disjunctions . . . . . . . . . . . . . . . . . .  · p142
+    - 5.8.2 The Halving Algorithm . . . . . . . . . . . . . . . . . . . . . . . . .  · p143
+    - 5.8.3 The Perceptron Algorithm . . . . . . . . . . . . . . . . . . . . . . .  · p143
+    - 5.8.4 Extensions: Inseparable Data and Hinge Loss . . . . . . . . . . . .  · p145
+  - 5.9 Online to Batch Conversion . . . . . . . . . . . . . . . . . . . . . . . . . .  · p146
+  - 5.10 Support-Vector Machines . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p147
+  - 5.11 VC-Dimension . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p148
+    - 5.11.1 Definitions and Key Theorems . . . . . . . . . . . . . . . . . . . . .  · p149
+    - 5.11.2 Examples: VC-Dimension and Growth Function . . . . . . . . . . .  · p151
+    - 5.11.3 Proof of Main Theorems . . . . . . . . . . . . . . . . . . . . . . . .  · p153
+    - 5.11.4 VC-Dimension of Combinations of Concepts . . . . . . . . . . . . .  · p156
+    - 5.11.5 Other Measures of Complexity . . . . . . . . . . . . . . . . . . . . .  · p156
+  - 5.12 Strong and Weak Learning - Boosting . . . . . . . . . . . . . . . . . . . . .  · p157
+  - 5.13 Stochastic Gradient Descent . . . . . . . . . . . . . . . . . . . . . . . . . .  · p160
+  - 5.14 Combining (Sleeping) Expert Advice . . . . . . . . . . . . . . . . . . . . .  · p162
+  - 5.15 Deep Learning . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p164
+    - 5.15.1 Generative Adversarial Networks (GANs) . . . . . . . . . . . . . . .  · p170
+  - 5.16 Further Current Directions . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p171
+    - 5.16.1 Semi-Supervised Learning . . . . . . . . . . . . . . . . . . . . . . .  · p171
+    - 5.16.2 Active Learning . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p174
+    - 5.16.3 Multi-Task Learning . . . . . . . . . . . . . . . . . . . . . . . . . .  · p174
+  - 5.17 Bibliographic Notes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p175
+  - 5.18 Exercises . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p176
+- 6 Algorithms for Massive Data Problems: Streaming, Sketching, and
+  - 6.1 Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p181
+  - 6.2 Frequency Moments of Data Streams . . . . . . . . . . . . . . . . . . . . .  · p182
+    - 6.2.1 Number of Distinct Elements in a Data Stream . . . . . . . . . . .  · p183
+    - 6.2.2 Number of Occurrences of a Given Element. . . . . . . . . . . . . .  · p186
+    - 6.2.3 Frequent Elements . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p187
+    - 6.2.4 The Second Moment . . . . . . . . . . . . . . . . . . . . . . . . . .  · p189
+  - 6.3 Matrix Algorithms using Sampling . . . . . . . . . . . . . . . . . . . . . .  · p192
+    - 6.3.1 Matrix Multiplication using Sampling . . . . . . . . . . . . . . . . .  · p193
+    - 6.3.2 Implementing Length Squared Sampling in Two Passes . . . . . . .  · p197
+    - 6.3.3 Sketch of a Large Matrix . . . . . . . . . . . . . . . . . . . . . . . .  · p197
+  - 6.4 Sketches of Documents . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p201
+  - 6.5 Bibliographic Notes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p203
+  - 6.6 Exercises . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p204
+- 7 Clustering  · p208
+  - 7.1 Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p208
+    - 7.1.1 Preliminaries . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p208
+    - 7.1.2 Two General Assumptions on the Form of Clusters . . . . . . . . .  · p209
+    - 7.1.3 Spectral Clustering . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p211
+  - 7.2 k-Means Clustering . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p211
+    - 7.2.1 A Maximum-Likelihood Motivation . . . . . . . . . . . . . . . . . .  · p211
+    - 7.2.2 Structural Properties of the k-Means Objective . . . . . . . . . . .  · p212
+    - 7.2.3 Lloyd’s Algorithm . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p213
+    - 7.2.4 Ward’s Algorithm . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p215
+    - 7.2.5 k-Means Clustering on the Line . . . . . . . . . . . . . . . . . . . .  · p215
+  - 7.3 k-Center Clustering . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p215
+  - 7.4 Finding Low-Error Clusterings . . . . . . . . . . . . . . . . . . . . . . . . .  · p216
+  - 7.5 Spectral Clustering . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p216
+    - 7.5.1 Why Project? . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p216
+    - 7.5.2 The Algorithm . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p218
+    - 7.5.3 Means Separated by Ω(1) Standard Deviations . . . . . . . . . . . .  · p219
+    - 7.5.4 Laplacians . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p221
+    - 7.5.5 Local spectral clustering . . . . . . . . . . . . . . . . . . . . . . . .  · p221
+  - 7.6 Approximation Stability . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p224
+    - 7.6.1 The Conceptual Idea . . . . . . . . . . . . . . . . . . . . . . . . . .  · p224
+    - 7.6.2 Making this Formal . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p224
+    - 7.6.3 Algorithm and Analysis . . . . . . . . . . . . . . . . . . . . . . . .  · p225
+  - 7.7 High-Density Clusters . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p227
+    - 7.7.1 Single Linkage . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p227
+    - 7.7.2 Robust Linkage . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p228
+  - 7.8 Kernel Methods . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p228
+  - 7.9 Recursive Clustering based on Sparse Cuts . . . . . . . . . . . . . . . . . .  · p229
+  - 7.10 Dense Submatrices and Communities . . . . . . . . . . . . . . . . . . . . .  · p230
+  - 7.11 Community Finding and Graph Partitioning . . . . . . . . . . . . . . . . .  · p233
+  - 7.12 Spectral clustering applied to social networks . . . . . . . . . . . . . . . . .  · p236
+  - 7.13 Bibliographic Notes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p239
+  - 7.14 Exercises . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p240
+- 8 Random Graphs  · p245
+  - 8.1 The G(n, p) Model . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p245
+    - 8.1.1 Degree Distribution . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p246
+    - 8.1.2 Existence of Triangles in G(n, d/n) . . . . . . . . . . . . . . . . . .  · p250
+  - 8.2 Phase Transitions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p252
+  - 8.3 Giant Component . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p261
+    - 8.3.1 Existence of a giant component . . . . . . . . . . . . . . . . . . . .  · p261
+    - 8.3.2 No other large components . . . . . . . . . . . . . . . . . . . . . . .  · p263
+    - 8.3.3 The case of p < 1/n . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p264
+  - 8.4 Cycles and Full Connectivity . . . . . . . . . . . . . . . . . . . . . . . . . .  · p265
+    - 8.4.1 Emergence of Cycles . . . . . . . . . . . . . . . . . . . . . . . . . .  · p265
+    - 8.4.2 Full Connectivity . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p266
+    - 8.4.3 Threshold for O(ln n) Diameter . . . . . . . . . . . . . . . . . . . .  · p268
+  - 8.5 Phase Transitions for Increasing Properties . . . . . . . . . . . . . . . . . .  · p270
+  - 8.6 Branching Processes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p272
+  - 8.7 CNF-SAT . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p277
+    - 8.7.1 SAT-solvers in practice . . . . . . . . . . . . . . . . . . . . . . . . .  · p278
+    - 8.7.2 Phase Transitions for CNF-SAT . . . . . . . . . . . . . . . . . . . .  · p279
+  - 8.8 Nonuniform Models of Random Graphs . . . . . . . . . . . . . . . . . . . .  · p284
+    - 8.8.1 Giant Component in Graphs with Given Degree Distribution . . . .  · p285
+  - 8.9 Growth Models . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p286
+    - 8.9.1 Growth Model Without Preferential Attachment . . . . . . . . . . .  · p287
+    - 8.9.2 Growth Model With Preferential Attachment . . . . . . . . . . . .  · p293
+  - 8.10 Small World Graphs . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p294
+  - 8.11 Bibliographic Notes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p299
+  - 8.12 Exercises . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p301
+- 9 Topic Models, Nonnegative Matrix Factorization, Hidden Markov Mod-
+  - 9.1 Topic Models . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p310
+  - 9.2 An Idealized Model . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p313
+  - 9.3 Nonnegative Matrix Factorization - NMF . . . . . . . . . . . . . . . . . . .  · p315
+  - 9.4 NMF with Anchor Terms . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p317
+  - 9.5 Hard and Soft Clustering . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p318
+  - 9.6 The Latent Dirichlet Allocation Model for Topic Modeling . . . . . . . . .  · p320
+  - 9.7 The Dominant Admixture Model . . . . . . . . . . . . . . . . . . . . . . .  · p322
+  - 9.8 Formal Assumptions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p324
+  - 9.9 Finding the Term-Topic Matrix . . . . . . . . . . . . . . . . . . . . . . . .  · p327
+  - 9.10 Hidden Markov Models . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p332
+  - 9.11 Graphical Models and Belief Propagation . . . . . . . . . . . . . . . . . . .  · p337
+  - 9.12 Bayesian or Belief Networks . . . . . . . . . . . . . . . . . . . . . . . . . .  · p338
+  - 9.13 Markov Random Fields . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p339
+  - 9.14 Factor Graphs . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p340
+  - 9.15 Tree Algorithms . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p341
+  - 9.16 Message Passing in General Graphs . . . . . . . . . . . . . . . . . . . . . .  · p342
+  - 9.17 Graphs with a Single Cycle . . . . . . . . . . . . . . . . . . . . . . . . . .  · p344
+  - 9.18 Belief Update in Networks with a Single Loop . . . . . . . . . . . . . . . .  · p346
+  - 9.19 Maximum Weight Matching . . . . . . . . . . . . . . . . . . . . . . . . . .  · p347
+  - 9.20 Warning Propagation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p351
+  - 9.21 Correlation Between Variables . . . . . . . . . . . . . . . . . . . . . . . . .  · p351
+  - 9.22 Bibliographic Notes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p355
+  - 9.23 Exercises . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p357
+- 10 Other Topics  · p360
+  - 10.1 Ranking and Social Choice . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p360
+    - 10.1.1 Randomization . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p362
+    - 10.1.2 Examples . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p363
+  - 10.2 Compressed Sensing and Sparse Vectors . . . . . . . . . . . . . . . . . . .  · p364
+    - 10.2.1 Unique Reconstruction of a Sparse Vector . . . . . . . . . . . . . .  · p365
+    - 10.2.2 Efficiently Finding the Unique Sparse Solution . . . . . . . . . . . .  · p366
+  - 10.3 Applications . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p368
+    - 10.3.1 Biological . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p368
+    - 10.3.2 Low Rank Matrices . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p369
+  - 10.4 An Uncertainty Principle . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p370
+    - 10.4.1 Sparse Vector in Some Coordinate Basis . . . . . . . . . . . . . . .  · p370
+    - 10.4.2 A Representation Cannot be Sparse in Both Time and Frequency
+  - 10.5 Gradient . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p373
+  - 10.6 Linear Programming . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p375
+    - 10.6.1 The Ellipsoid Algorithm . . . . . . . . . . . . . . . . . . . . . . . .  · p375
+  - 10.7 Integer Optimization . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p377
+  - 10.8 Semi-Definite Programming . . . . . . . . . . . . . . . . . . . . . . . . . .  · p378
+  - 10.9 Bibliographic Notes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p380
+- 11 Wavelets  · p385
+  - 11.1 Dilation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p385
+  - 11.2 The Haar Wavelet . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p386
+  - 11.3 Wavelet Systems . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p390
+  - 11.4 Solving the Dilation Equation . . . . . . . . . . . . . . . . . . . . . . . . .  · p390
+  - 11.5 Conditions on the Dilation Equation . . . . . . . . . . . . . . . . . . . . .  · p392
+  - 11.6 Derivation of the Wavelets from the Scaling Function . . . . . . . . . . . .  · p394
+  - 11.7 Sufficient Conditions for the Wavelets to be Orthogonal . . . . . . . . . . .  · p398
+  - 11.8 Expressing a Function in Terms of Wavelets . . . . . . . . . . . . . . . . .  · p401
+  - 11.9 Designing a Wavelet System . . . . . . . . . . . . . . . . . . . . . . . . . .  · p402
+  - 11.11 Bibliographic Notes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p402
+  - 11.12 Exercises . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p403
+- 12 Appendix  · p406
+  - 12.1 Definitions and Notation . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p406
+  - 12.2 Asymptotic Notation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p406
+  - 12.3 Useful Relations . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p408
+  - 12.4 Useful Inequalities . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p413
+  - 12.5 Probability . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p420
+    - 12.5.1 Sample Space, Events, and Independence . . . . . . . . . . . . . . .  · p420
+    - 12.5.2 Linearity of Expectation . . . . . . . . . . . . . . . . . . . . . . . .  · p421
+    - 12.5.3 Union Bound . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p422
+    - 12.5.4 Indicator Variables . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p422
+    - 12.5.5 Variance . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p422
+    - 12.5.6 Variance of the Sum of Independent Random Variables . . . . . . .  · p423
+    - 12.5.7 Median . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p423
+    - 12.5.8 The Central Limit Theorem . . . . . . . . . . . . . . . . . . . . . .  · p423
+    - 12.5.9 Probability Distributions . . . . . . . . . . . . . . . . . . . . . . . .  · p424
+    - 12.5.10 Bayes Rule and Estimators . . . . . . . . . . . . . . . . . . . . . . .  · p428
+  - 12.6 Bounds on Tail Probability . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p430
+    - 12.6.1 Chernoff Bounds . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p430
+    - 12.6.2 More General Tail Bounds . . . . . . . . . . . . . . . . . . . . . . .  · p433
+  - 12.7 Applications of the Tail Bound . . . . . . . . . . . . . . . . . . . . . . . .  · p436
+  - 12.8 Eigenvalues and Eigenvectors . . . . . . . . . . . . . . . . . . . . . . . . .  · p437
+    - 12.8.1 Symmetric Matrices . . . . . . . . . . . . . . . . . . . . . . . . . .  · p439
+    - 12.8.2 Relationship between SVD and Eigen Decomposition . . . . . . . .  · p441
+    - 12.8.3 Extremal Properties of Eigenvalues . . . . . . . . . . . . . . . . . .  · p441
+    - 12.8.4 Eigenvalues of the Sum of Two Symmetric Matrices . . . . . . . . .  · p443
+    - 12.8.5 Norms . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p445
+    - 12.8.6 Important Norms and Their Properties . . . . . . . . . . . . . . . .  · p446
+    - 12.8.7 Additional Linear Algebra . . . . . . . . . . . . . . . . . . . . . . .  · p448
+    - 12.8.8 Distance between subspaces . . . . . . . . . . . . . . . . . . . . . .  · p450
+    - 12.8.9 Positive semidefinite matrix . . . . . . . . . . . . . . . . . . . . . .  · p451
+  - 12.9 Generating Functions . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p451
+    - 12.9.1 Generating Functions for Sequences Defined by Recurrence Rela-
+    - 12.9.2 The Exponential Generating Function and the Moment Generating
+    - 12.10.1 Lagrange multipliers . . . . . . . . . . . . . . . . . . . . . . . . . .  · p456
+    - 12.10.2 Finite Fields . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p457
+    - 12.10.3 Application of Mean Value Theorem . . . . . . . . . . . . . . . . .  · p457
+    - 12.10.4 Sperner’s Lemma . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p459
+    - 12.10.5 Prüfer . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  · p459
+- 1 Introduction
+- 2 High-Dimensional Space
+  - 2.1 Introduction
+  - 2.2 The Law of Large Numbers
+- 0 0 a
+- 1 d/2

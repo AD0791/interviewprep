@@ -1,0 +1,433 @@
+# TOC — ullman_the_complete_book.pdf
+
+*Extracted by `_tools/extract_toc.py` (scrape[5-22]). 429 entries. Machine-generated — do not hand-edit.*
+
+- Chapter 5 contains the coverage of relational algebra from the previous
+- Chapter 10 collects a number of advanced SQL topics. The discussion of
+- Chapter 11, this material is all new. Chapter 11 covers modeling; it includes
+- Chapter 13 begins the study of database implementation. It covers disk
+- Chapter 14 covers index structures, including B-trees, hashing, and struc­
+- 13 and 14, from the first edition.
+- Chapter 20 is on parallel and distributed databases. In addition to material
+- Chapter 21 covers information integration. In addition to material on this
+- Chapter 22 is on data mining. Although there was some material on the
+- Chapter 23, all new, addresses two important ways in which the Internet
+- 16 books, including Elements of ML Programming (Prentice Hall 1998). His
+- 1 T h e W orld s o f D a ta b a se S y ste m s  · p1
+  - 1.1 The Evolution of Database Systems  · p1
+    - 1.1.1 Early Database Management S y s te m s  · p2
+    - 1.1.2 Relational Database S y s te m s  · p3
+    - 1.1.3 Smaller and Smaller S y s te m s  · p3
+    - 1.1.4 Bigger and Bigger S y s te m s  · p4
+    - 1.1.5 Information In te g r a tio n  · p4
+  - 1.2 Overview of a Database Management S y s te m  · p5
+    - 1.2.1 Data-Definition Language Commands  · p5
+    - 1.2.2 Overview of Query Processing  · p5
+    - 1.2.3 Storage and Buffer M a n a g e m e n t  · p7
+    - 1.2.4 Transaction Processing  · p8
+    - 1.2.5 The Query P rocessor  · p9
+  - 1.3 Outline of Database-System S t u d i e s  · p10
+  - 1.4 References for Chapter 1  · p12
+- 1 Relational Database M odeling  · p15
+- 2 T h e R e la tio n a l M o d e l o f D a ta  · p17
+  - 2.1 An Overview of Data M o d e ls  · p17
+    - 2.1.1 W hat is a D ata M o d e l?  · p17
+    - 2.1.2 Important D ata M o d e ls  · p18
+    - 2.1.3 The Relational Model in B rief  · p18
+    - 2.1.4 The Semistructured Model in B rie f  · p19
+    - 2.1.5 Other D ata M odels  · p20
+    - 2.1.6 Comparison of Modeling A pproaches  · p21
+  - 2.2 Basics of the Relational Model  · p21
+    - 2.2.1 A ttrib u te s  · p22
+    - 2.2.2 S chem as  · p22
+    - 2.2.3 T u p le s  · p22
+    - 2.2.4 D om ains  · p23
+    - 2.2.5 Equivalent Representations of a Relation  · p23
+    - 2.2.6 Relation In s ta n c e s  · p24
+    - 2.2.7 Keys of Relations  · p25
+    - 2.2.8 An Example Database S c h e m a  · p26
+    - 2.2.9 Exercises for Section 2 . 2  · p28
+  - 2.3 Defining a Relation Schema in S Q L  · p29
+    - 2.3.1 Relations in S Q L  · p29
+    - 2.3.2 Data T y p e s  · p30
+    - 2.3.3 Simple Table D eclarations  · p31
+    - 2.3.4 Modifying Relation Schemas  · p33
+    - 2.3.5 Default V a lu e s  · p34
+    - 2.3.6 Declaring K e y s  · p34
+    - 2.3.7 Exercises for Section 2 . 3  · p36
+  - 2.4 An Algebraic Query Language  · p38
+    - 2.4.1 Why Do We Need a Special Query Language?  · p38
+    - 2.4.2 W hat is an A lgebra?  · p38
+    - 2.4.3 Overview of Relational A lgeb ra  · p39
+    - 2.4.4 Set Operations on R elations  · p39
+    - 2.4.5 P rojection  · p41
+    - 2.4.6 Selection  · p42
+    - 2.4.7 Cartesian P r o d u c t  · p43
+    - 2.4.8 Natural J o i n s  · p43
+    - 2.4.9 T heta-Jo ins  · p45
+    - 2.4.10 Combining Operations to Form Q u e rie s  · p47
+    - 2.4.11 Naming and Renaming  · p49
+    - 2.4.12 Relationships Among O p erations  · p50
+    - 2.4.13 A Linear Notation for Algebraic E x p re ssio n s  · p51
+    - 2.4.14 Exercises for Section 2 . 4  · p52
+  - 2.5 Constraints on R elations  · p58
+    - 2.5.1 Relational Algebra as a Constraint L a n g u a g e  · p59
+    - 2.5.2 Referential Integrity C o n s tra in ts  · p59
+    - 2.5.3 Key Constraints  · p60
+    - 2.5.4 Additional Constraint E x a m p le s  · p61
+    - 2.5.5 Exercises for Section 2 . 5  · p62
+  - 2.6 Summary of Chapter 2  · p63
+  - 2.7 References for Chapter 2  · p65
+- 3 D esign T h eo ry for R elatio n al D atab ases  · p67
+  - 3.1 Functional Dependencies  · p67
+    - 3.1.1 Definition of Functional D ependency  · p68
+    - 3.1.2 Keys of R elations  · p70
+    - 3.1.3 Superkeys  · p71
+    - 3.1.4 Exercises for Section 3 . 1  · p71
+  - 3.2 Rules About Functional D ependencies  · p72
+    - 3.2.1 Reasoning About Functional D ep en d en cies  · p72
+    - 3.2.2 The Splitting/Combining R u l e  · p73
+    - 3.2.3 Trivial Functional Dependencies  · p74
+    - 3.2.4 Computing the Closure of A ttrib u tes  · p75
+    - 3.2.5 Why the Closure Algorithm W o rk s  · p77
+    - 3.2.6 The Transitive R u l e  · p79
+    - 3.2.7 Closing Sets of Functional Dependencies  · p80
+    - 3.2.8 Projecting Functional D ep en d en cies  · p81
+    - 3.2.9 Exercises for Section 3 . 2  · p83
+  - 3.3 Design of Relational Database Schemas  · p85
+    - 3.3.1 Anom alies  · p86
+    - 3.3.2 Decomposing Relations  · p86
+    - 3.3.3 Boyce-Codd Normal F o rm  · p88
+    - 3.3.4 Decomposition into B C N F  · p89
+    - 3.3.5 Exercises for Section 3 . 3  · p92
+  - 3.4 Decomposition: The Good, Bad, and U g ly  · p93
+    - 3.4.1 Recovering Information from a Decomposition  · p94
+    - 3.4.2 The Chase Test for Lossless J o i n  · p96
+    - 3.4.3 Why the Chase W o rk s  · p99
+    - 3.4.4 Dependency P re se rv a tio n  · p100
+    - 3.4.5 Exercises for Section 3 . 4  · p102
+  - 3.5 Third Normal Form  · p102
+    - 3.5.1 Definition of Third Normal F o r m  · p102
+    - 3.5.2 The Synthesis Algorithm for 3NF Schemas  · p103
+    - 3.5.3 Why the 3NF Synthesis Algorithm W o rk s  · p104
+    - 3.5.4 Exercises for Section 3 . 5  · p105
+  - 3.6 Multivalued D ependencies  · p105
+    - 3.6.1 Attribute Independence and Its Consequent Redundancy  · p106
+    - 3.6.2 Definition of Multivalued D e p en d en c ie s  · p107
+    - 3.6.3 Reasoning About Multivalued Dependencies  · p108
+    - 3.6.4 Fourth Normal F o rm  · p110
+    - 3.6.5 Decomposition into Fourth Normal Form I l l
+    - 3.6.6 Relationships Among Normal F o r m s  · p113
+    - 3.6.7 Exercises for Section 3 . 6  · p113
+  - 3.7 An Algorithm for Discovering MVD’s  · p115
+    - 3.7.1 The Closure and the C h a s e  · p115
+    - 3.7.2 Extending the Chase to MVD’s  · p116
+    - 3.7.3 Why the Chase Works for MVD’s  · p118
+    - 3.7.4 Projecting MVD’s  · p119
+    - 3.7.5 Exercises for Section 3 . 7  · p120
+  - 3.8 Summary of Chapter 3  · p121
+  - 3.9 References for Chapter 3  · p122
+- 4 H igh-L evel D a ta b a se M odels  · p125
+  - 4.1 The Entity/Relationship M o d e l  · p126
+    - 4.1.1 Entity S e t s  · p126
+    - 4.1.2 A ttrib u tes  · p126
+    - 4.1.3 R elationships  · p127
+    - 4.1.4 Entity-Relationship D iagram s  · p127
+    - 4.1.5 Instances of an E /R D iag ram  · p128
+    - 4.1.6 Multiplicity of Binary E /R R e la tio n sh ip s  · p129
+    - 4.1.7 Multiway R e la tio n sh ip s  · p130
+    - 4.1.8 Roles in R elationships  · p131
+    - 4.1.9 Attributes on R elationships  · p134
+    - 4.1.10 Converting Multiway Relationships to B in a ry  · p134
+    - 4.1.11 Subclasses in the E /R M o d e l  · p135
+    - 4.1.12 Exercises for Section 4 . 1  · p138
+  - 4.2 Design P rin cip les  · p140
+    - 4.2.1 Faithfulness  · p140
+    - 4.2.2 Avoiding R ed u n d an cy  · p141
+    - 4.2.3 Simplicity Counts  · p142
+    - 4.2.4 Choosing the Right Relationships  · p142
+    - 4.2.5 Picking the Right Kind of E lem en t  · p144
+    - 4.2.6 Exercises for Section 4 . 2  · p145
+  - 4.3 Constraints in the E /R M odel  · p148
+    - 4.3.1 Keys in the E /R M o d e l  · p148
+    - 4.3.2 Representing Keys in the E /R Model  · p149
+    - 4.3.3 Referential In te g r ity ■ ■ • •  · p150
+    - 4.3.4 Degree C o nstraints  · p151
+    - 4.3.5 Exercises for Section 4 . 3  · p151
+  - 4.4 Weak Entity S e t s  · p152
+    - 4.4.1 Causes of Weak Entity S e t s  · p152
+    - 4.4.2 Requirements for Weak Entity S e ts  · p153
+    - 4.4.3 Weak Entity Set N o ta tio n  · p155
+    - 4.4.4 Exercises for Section 4 . 4  · p156
+  - 4.5 From E /R Diagrams to Relational Designs  · p157
+    - 4.5.1 From Entity Sets to R elations  · p157
+    - 4.5.2 From E /R Relationships to Relations  · p158
+    - 4.5.3 Combining R elations  · p160
+    - 4.5.4 Handling Weak Entity S e t s  · p161
+    - 4.5.5 Exercises for Section 4 . 5  · p163
+  - 4.6 Converting Subclass Structures to R elatio n s  · p165
+    - 4.6.1 E/R-Style C o n v ersio n  · p166
+    - 4.6.2 An Object-Oriented A p p r o a c h  · p167
+    - 4.6.3 Using Null Values to Combine R elatio n s  · p168
+    - 4.6.4 Comparison of A p p ro a c h e s  · p169
+    - 4.6.5 Exercises for Section 4 . 6  · p171
+  - 4.7 Unified Modeling L a n g u a g e  · p171
+    - 4.7.1 UML C la s s e s  · p172
+    - 4.7.2 Keys for UML c la s s e s  · p173
+    - 4.7.3 Associations  · p173
+    - 4.7.4 Self-A ssociations  · p175
+    - 4.7.5 Association C lasses  · p175
+    - 4.7.6 Subclasses in U M L  · p176
+    - 4.7.7 Aggregations and Compositions  · p177
+    - 4.7.8 Exercises for Section 4 . 7  · p179
+  - 4.8 From UML Diagrams to R e la tio n s  · p179
+    - 4.8.1 UML-to-Relations Basics  · p179
+    - 4.8.2 From UML Subclasses to R elations  · p180
+    - 4.8.3 From Aggregations and Compositions to Relations . . . .  · p181
+    - 4.8.4 The UML Analog of Weak Entity S e t s  · p181
+    - 4.8.5 Exercises for Section 4 . 8  · p183
+  - 4.9 Object Definition L an g u a g e  · p183
+    - 4.9.1 Class D e c la ra tio n s  · p184
+    - 4.9.2 Attributes in O D L  · p184
+    - 4.9.3 Relationships in O D L  · p185
+    - 4.9.4 Inverse Relationships  · p186
+    - 4.9.5 Multiplicity of Relationships  · p186
+    - 4.9.6 Types in ODL  · p188
+    - 4.9.7 Subclasses in O D L  · p190
+    - 4.9.8 Declaring Keys in O D L  · p191
+    - 4.9.9 Exercises for Section 4 . 9  · p192
+  - 4.10 From ODL Designs to Relational D e s ig n s  · p193
+    - 4.10.1 From ODL Classes to R elations  · p193
+    - 4.10.2 Complex Attributes in C la s s e s  · p194
+    - 4.10.3 Representing Set-Valued Attributes  · p195
+    - 4.10.4 Representing Other Type Constructors  · p196
+    - 4.10.5 Representing ODL R elatio n sh ip s  · p198
+    - 4.10.6 Exercises for Section 4 . 1 0  · p198
+  - 4.11 Summary of Chapter 4  · p200
+  - 4.12 References for Chapter 4  · p202
+- 5 A lg eb raic a n d Logical Q u e ry L anguages  · p205
+  - 5.1 Relational Operations on B a g s  · p205
+    - 5.1.1 Why B a g s ?  · p206
+    - 5.1.2 Union, Intersection, and Difference of B a g s  · p207
+    - 5.1.3 Projection of B a g s  · p208
+    - 5.1.4 Selection on B a g s  · p209
+    - 5.1.5 Product of Bags  · p210
+    - 5.1.6 Joins of B a g s  · p210
+    - 5.1.7 Exercises for Section 5 . 1  · p212
+  - 5.2 Extended Operators of Relational A lg eb ra  · p213
+    - 5.2.1 Duplicate E lim in a tio n  · p214
+    - 5.2.2 Aggregation O perators  · p214
+    - 5.2.3 G ro u p in g  · p215
+    - 5.2.4 The Grouping O p e ra to r  · p216
+    - 5.2.5 Extending the Projection O p e ra to r  · p217
+    - 5.2.6 The Sorting O p e r a t o r  · p219
+    - 5.2.7 O uterjoins  · p219
+    - 5.2.8 Exercises for Section 5 . 2  · p222
+  - 5.3 A Logic for Relations  · p222
+    - 5.3.1 Predicates and A to m s  · p223
+    - 5.3.2 Arithmetic A t o m s  · p223
+    - 5.3.3 Datalog Rules and Q u e r ie s  · p224
+    - 5.3.4 Meaning of Datalog R u le s  · p225
+    - 5.3.5 Extensional and Intensional Predicates  · p228
+    - 5.3.6 Datalog Rules Applied to B a g s  · p228
+    - 5.3.7 Exercises for Section 5 . 3  · p230
+  - 5.4 Relational Algebra and D a ta lo g  · p230
+    - 5.4.1 Boolean Operations  · p231
+    - 5.4.2 P rojection  · p232
+    - 5.4.3 Selection  · p232
+    - 5.4.4 P r o d u c t  · p235
+    - 5.4.5 J o in s  · p235
+    - 5.4.6 Simulating Multiple Operations with D a ta lo g  · p236
+    - 5.4.7 Comparison Between Datalog and Relational Algebra . .  · p238
+    - 5.4.8 Exercises for Section 5 . 4  · p238
+  - 5.5 Summary of Chapter 5  · p240
+  - 5.6 References for Chapter 5  · p241
+  - 6.1 Simple Queries in S Q L  · p244
+    - 6.1.1 Projection in S Q L  · p246
+    - 6.1.2 Selection in S Q L  · p248
+    - 6.1.3 Comparison of S tr in g s  · p250
+    - 6.1.4 Pattern Matching in S Q L  · p250
+    - 6.1.5 Dates and T im e s  · p251
+    - 6.1.6 Null Values and Comparisons Involving NULL  · p252
+    - 6.1.7 The Truth-Value UNKNOWN  · p253
+    - 6.1.8 Ordering the O u tp u t  · p255
+    - 6.1.9 Exercises for Section 6 . 1  · p256
+  - 6.2 Queries Involving More Than One R e la tio n  · p258
+    - 6.2.1 Products and Joins in S Q L  · p259
+    - 6.2.2 Disambiguating Attributes  · p260
+    - 6.2.3 Tuple V ariables  · p261
+    - 6.2.4 Interpreting Multirelation Q u e r ie s  · p262
+    - 6.2.5 Union, Intersection, and Difference of Q ueries  · p265
+    - 6.2.6 Exercises for Section 6 . 2  · p267
+  - 6.3 Subqueries  · p268
+    - 6.3.1 Subqueries that Produce Scalar V alues  · p269
+    - 6.3.2 Conditions Involving R e la tio n s  · p270
+    - 6.3.3 Conditions Involving T u p les  · p271
+    - 6.3.4 Correlated S u b q u eries  · p273
+    - 6.3.5 Subqueries in FROM C la u s e s  · p274
+    - 6.3.6 SQL Join E x p ressio n s  · p275
+    - 6.3.7 Natural J o in s  · p276
+    - 6.3.8 O uterjoins  · p277
+    - 6.3.9 Exercises for Section 6 . 3  · p279
+  - 6.4 Full-Relation O perations  · p281
+    - 6.4.1 Eliminating D uplicates  · p281
+    - 6.4.2 Duplicates in Unions, Intersections, and Differences . . .  · p282
+    - 6.4.3 Grouping and Aggregation in S Q L  · p283
+    - 6.4.4 Aggregation O perators  · p284
+    - 6.4.5 G ro u p in g  · p285
+    - 6.4.6 Grouping, Aggregation, and Nulls  · p287
+    - 6.4.7 HAVING C lau ses  · p288
+    - 6.4.8 Exercises for Section 6 . 4  · p289
+  - 6.5 Database Modifications  · p291
+    - 6.5.1 Insertion  · p291
+    - 6.5.2 D eletio n  · p292
+    - 6.5.3 U p d a te s  · p294
+    - 6.5.4 Exercises for Section 6 . 5  · p295
+  - 6.6 Transactions in S Q L  · p296
+    - 6.6.1 Serializability  · p296
+    - 6.6.2 A to m icity  · p298
+    - 6.6.3 Transactions  · p299
+    - 6.6.4 Read-Only T ransactions  · p300
+    - 6.6.5 Dirty R e a d s  · p302
+    - 6.6.6 Other Isolation L e v e ls  · p304
+    - 6.6.7 Exercises for Section 6 . 6  · p306
+  - 6.7 Summary of Chapter 6  · p307
+  - 6.8 References for Chapter 6  · p308
+- 7 C o n stra in ts a n d T riggers  · p311
+  - 7.1 Keys and Foreign K eys  · p311
+    - 7.1.1 Declaring Foreign-Key C o n strain ts  · p312
+    - 7.1.2 Maintaining Referential In te g rity  · p313
+    - 7.1.3 Deferred Checking of C o nstraints  · p315
+    - 7.1.4 Exercises for Section 7 . 1  · p318
+  - 7.2 Constraints on Attributes and Tuples  · p319
+    - 7.2.1 Not-Null C onstraints  · p319
+    - 7.2.2 Attribute-Based CHECK C onstraints  · p320
+    - 7.2.3 Tuple-Based CHECK C onstraints  · p321
+    - 7.2.4 Comparison of Tuple- and Attribute-Based Constraints .  · p323
+    - 7.2.5 Exercises for Section 7 . 2  · p323
+  - 7.3 Modification of C o n stra in ts  · p325
+    - 7.3.1 Giving Names to C o n stra in ts  · p325
+    - 7.3.2 Altering Constraints on T a b le s  · p326
+    - 7.3.3 Exercises for Section 7 . 3  · p327
+  - 7.4 A ssertions  · p328
+    - 7.4.1 Creating Assertions  · p328
+    - 7.4.2 Using A ssertio n s  · p329
+    - 7.4.3 Exercises for Section 7 . 4  · p330
+  - 7.5 T rig g e rs  · p332
+    - 7.5.1 Triggers in S Q L  · p332
+    - 7.5.2 The Options for Trigger D esign  · p334
+    - 7.5.3 Exercises for Section 7 . 5  · p337
+  - 7.6 Summary of Chapter 7  · p339
+  - 7.7 References for Chapter 7  · p339
+  - 8.1 Virtual V iew s  · p341
+    - 8.1.1 Declaring Views  · p341
+    - 8.1.2 Querying Views  · p343
+    - 8.1.3 Renaming A ttributes  · p343
+    - 8.1.4 Exercises for Section 8 . 1  · p344
+  - 8.2 Modifying V ie w s  · p344
+    - 8.2.1 View Removal  · p345
+    - 8.2.2 Updatable V iew s  · p345
+    - 8.2.3 Instead-Of Triggers on V ie w s  · p347
+    - 8.2.4 Exercises for Section 8 . 2  · p349
+  - 8.3 Indexes in S Q L  · p350
+    - 8.3.1 Motivation for Indexes  · p350
+    - 8.3.2 Declaring Indexes  · p351
+    - 8.3.3 Exercises for Section 8 . 3  · p352
+  - 8.4 Selection of Indexes  · p352
+    - 8.4.1 A Simple Cost Model  · p352
+    - 8.4.2 Some Useful In d e x es  · p353
+    - 8.4.3 Calculating the Best Indexes to C reate  · p355
+    - 8.4.4 Automatic Selection of Indexes to C r e a t e  · p357
+    - 8.4.5 Exercises for Section 8 . 4  · p359
+  - 8.5 Materialized V iew s  · p359
+    - 8.5.1 Maintaining a Materialized V ie w  · p360
+    - 8.5.2 Periodic Maintenance of Materialized V iew s  · p362
+    - 8.5.3 Rewriting Queries to Use Materialized V ie w s  · p362
+    - 8.5.4 Automatic Creation of Materialized V iew s  · p364
+    - 8.5.5 Exercises for Section 8 . 5  · p365
+  - 8.6 Summary of Chapter 8  · p366
+  - 8.7 References for Chapter 8  · p367
+- 9 SQL in a S erv er E n v iro n m en t  · p369
+  - 9.1 The Three-Tier Architecture  · p369
+    - 9.1.1 The Web-Server T ie r  · p370
+    - 9.1.2 The Application T ie r  · p371
+    - 9.1.3 The Database T i e r  · p372
+  - 9.2 The SQL E nvironm ent  · p372
+    - 9.2.1 Environm ents  · p373
+    - 9.2.2 S chem as  · p374
+    - 9.2.3 C atalogs  · p375
+    - 9.2.4 Clients and Servers in the SQL E n v iro n m e n t  · p375
+    - 9.2.5 C onnections  · p376
+    - 9.2.6 S essio n s  · p377
+    - 9.2.7 M odules  · p378
+  - 9.3 The SQL/Host-Language In te rfa c e  · p378
+    - 9.3.1 The Impedance Mismatch P ro b lem  · p380
+    - 9.3.2 Connecting SQL to the Host Language  · p380
+    - 9.3.3 The DECLARE Section  · p381
+    - 9.3.4 Using Shared Variables  · p382
+    - 9.3.5 Single-Row Select S ta tem en ts  · p383
+    - 9.3.6 C u r s o r s  · p383
+    - 9.3.7 Modifications by C u rs o r  · p386
+    - 9.3.8 Protecting Against Concurrent U p d a te s  · p387
+    - 9.3.9 Dynamic S Q L  · p388
+    - 9.3.10 Exercises for Section 9 . 3  · p390
+  - 9.4 Stored P ro c e d u re s  · p391
+    - 9.4.1 Creating PSM Functions and Procedures  · p391
+    - 9.4.2 Some Simple Statement Forms in P S M  · p392
+    - 9.4.3 Branching S ta te m e n ts  · p394
+    - 9.4.4 Queries in P S M  · p395
+    - 9.4.5 Loops in PSM  · p396
+    - 9.4.6 F or-L oops  · p398
+    - 9.4.7 Exceptions in P S M  · p400
+    - 9.4.8 Using PSM Functions and P ro c e d u re s  · p402
+    - 9.4.9 Exercises for Section 9 . 4  · p402
+  - 9.5 Using a Call-Level In te rfa c e  · p404
+    - 9.5.1 Introduction to S Q L /C L I  · p405
+    - 9.5.2 Processing S ta te m e n ts  · p407
+    - 9.5.3 Fetching D ata From a Query R e s u l t  · p408
+    - 9.5.4 Passing Parameters to Q u e r ie s  · p410
+    - 9.5.5 Exercises for Section 9 . 5  · p412
+  - 9.6 J D B C  · p412
+    - 9.6.1 Introduction to J D B C  · p412
+    - 9.6.2 Creating Statements in JD B C  · p413
+    - 9.6.3 Cursor Operations in J D B C  · p415
+    - 9.6.4 Parameter P a s s in g  · p416
+    - 9.6.5 Exercises for Section 9 . 6  · p416
+  - 9.7 P H P  · p416
+    - 9.7.1 PHP B a s ic s  · p417
+    - 9.7.2 A rray s  · p418
+    - 9.7.3 The PEAR DB L i b r a r y  · p419
+    - 9.7.4 Creating a Database Connection Using D B  · p419
+    - 9.7.5 Executing SQL S ta te m e n ts  · p419
+    - 9.7.6 Cursor Operations in PHP  · p420
+    - 9.7.7 Dynamic SQL in P H P  · p421
+    - 9.7.8 Exercises for Section 9 . 7  · p422
+  - 9.8 Summary of Chapter 9  · p422
+  - 9.9 References for Chapter 9  · p423
+- 10 A dvanced Topics in R elatio n al D a ta b ases  · p425
+  - 10.1 Security and User Authorization in S Q L  · p425
+    - 10.1.1 P riv ile g es  · p426
+    - 10.1.2 Creating Privileges  · p427
+    - 10.1.3 The Privilege-Checking P ro cess  · p428
+    - 10.1.4 Granting Privileges  · p430
+    - 10.1.5 Grant Diagrams  · p431
+    - 10.1.6 Revoking Privileges  · p433
+    - 10.1.7 Exercises for Section 1 0 . 1  · p436
+  - 10.2 Recursion in S Q L  · p437
+    - 10.2.1 Defining Recursive Relations in S Q L  · p437
+    - 10.2.2 Problematic Expressions in Recursive SQL  · p440
+    - 10.2.3 Exercises for Section 1 0 . 2  · p443
+  - 10.3 The Object-Relational M o d e l  · p445
+    - 10.3.1 From Relations to Object-Relations  · p445
+    - 10.3.2 Nested R e la tio n s  · p446
+    - 10.3.3 References  · p447
+    - 10.3.4 Object-Oriented Versus O bject-R elational  · p449
+    - 10.3.5 Exercises for Section 1 0 . 3  · p450
+  - 10.4 User-Defined Types in S Q L  · p451
+    - 10.4.1 Defining Types in S Q L  · p451
+    - 10.4.2 Method Declarations in UDT’s  · p452
+    - 10.4.3 Method Definitions  · p453
+    - 10.4.4 Declaring Relations with a U D T  · p454
+    - 10.4.5 References  · p454
+    - 10.4.6 Creating Object ID’s for T ables  · p455
+    - 10.4.7 Exercises for Section 1 0 . 4  · p457

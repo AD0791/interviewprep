@@ -1,0 +1,914 @@
+# TOC — Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf
+
+*Extracted by `_tools/extract_toc.py` (outline). 910 entries. Machine-generated — do not hand-edit.*
+
+- Cover  · p1
+- Title Page  · p5
+- Copyright  · p6
+- Preface  · p9
+- Contents  · p23
+- PART ONE OVERVIEW  · p29
+  - Chapter 1 Introduction  · p31
+    - 1.1 What Operating Systems Do  · p32
+      - 1.1.1 User View  · p32
+      - 1.1.2 System View  · p33
+      - 1.1.3 Defining Operating Systems  · p33
+    - 1.2 Computer-System Organization  · p35
+      - 1.2.1 Interrupts  · p36
+      - 1.2.2 Storage Structure  · p39
+      - 1.2.3 I/O Structure  · p42
+    - 1.3 Computer-System Architecture  · p43
+      - 1.3.1 Single-Processor Systems  · p43
+      - 1.3.2 Multiprocessor Systems  · p44
+      - 1.3.3 Clustered Systems  · p47
+    - 1.4 Operating-System Operations  · p49
+      - 1.4.1 Multiprogramming and Multitasking  · p51
+      - 1.4.2 Dual-Mode and Multimode Operation  · p52
+      - 1.4.3 Timer  · p54
+    - 1.5 Resource Management  · p55
+      - 1.5.1 Process Management  · p55
+      - 1.5.2 Memory Management  · p56
+      - 1.5.3 File-System Management  · p57
+      - 1.5.4 Mass-Storage Management  · p58
+      - 1.5.5 Cache Management  · p58
+      - 1.5.6 I/O System Management  · p60
+    - 1.6 Security and Protection  · p61
+    - 1.7 Virtualization  · p62
+    - 1.8 Distributed Systems  · p63
+    - 1.9 Kernel Data Structures  · p64
+      - 1.9.1 Lists, Stacks, and Queues  · p65
+      - 1.9.2 Trees  · p66
+      - 1.9.3 Hash Functions and Maps  · p66
+      - 1.9.4 Bitmaps  · p67
+    - 1.10 Computing Environments  · p68
+      - 1.10.1 Traditional Computing  · p68
+      - 1.10.2 Mobile Computing  · p69
+      - 1.10.3 Client–Server Computing  · p70
+      - 1.10.4 Peer-to-Peer Computing  · p71
+      - 1.10.5 Cloud Computing  · p72
+      - 1.10.6 Real-Time Embedded Systems  · p73
+    - 1.11 Free and Open-Source Operating Systems  · p74
+      - 1.11.1 History  · p75
+      - 1.11.2 Free Operating Systems  · p75
+      - 1.11.3 GNU/Linux  · p76
+      - 1.11.4 BSD UNIX  · p77
+      - 1.11.5 Solaris  · p79
+      - 1.11.6 Open-Source Systems as Learning Tools  · p79
+    - 1.12 Summary  · p79
+    - Practice Exercises  · p81
+    - Further Reading  · p82
+    - Bibliography  · p82
+    - Chapter 1 Exercises  · p83
+  - Chapter 2 Operating-System Structures  · p85
+    - 2.1 Operating-System Services  · p85
+    - 2.2 User and Operating-System Interface  · p88
+      - 2.2.1 Command Interpreters  · p88
+      - 2.2.2 Graphical User Interface  · p89
+      - 2.2.3 Touch-Screen Interface  · p90
+      - 2.2.4 Choice of Interface  · p90
+    - 2.3 System Calls  · p92
+      - 2.3.1 Example  · p92
+      - 2.3.2 Application Programming Interface  · p93
+      - 2.3.3 Types of System Calls  · p96
+    - 2.4 System Services  · p104
+    - 2.5 Linkers and Loaders  · p105
+    - 2.6 Why Applications Are Operating-System Specific  · p107
+    - 2.7 Operating-System Design and Implementation  · p109
+      - 2.7.1 Design Goals  · p109
+      - 2.7.2 Mechanisms and Policies  · p110
+      - 2.7.3 Implementation  · p110
+    - 2.8 Operating-System Structure  · p111
+      - 2.8.1 Monolithic Structure  · p112
+      - 2.8.2 Layered Approach  · p113
+      - 2.8.3 Microkernels  · p114
+      - 2.8.4 Modules  · p116
+      - 2.8.5 Hybrid Systems  · p116
+    - 2.9 Building and Booting an Operating System  · p122
+      - 2.9.1 Operating-System Generation  · p122
+      - 2.9.2 System Boot  · p124
+    - 2.10 Operating-System Debugging  · p125
+      - 2.10.1 Failure Analysis  · p125
+      - 2.10.2 Performance Monitoring and Tuning  · p126
+      - 2.10.3 Tracing  · p127
+      - 2.10.4 BCC  · p128
+    - 2.11 Summary  · p130
+    - Practice Exercises  · p131
+    - Further Reading  · p131
+    - Bibliography  · p132
+    - Chapter 2 Exercises  · p133
+    - Programming Problems  · p134
+    - Programming Projects  · p134
+- PART TWO PROCESS MANAGEMENT  · p141
+  - Chapter 3 Processes  · p143
+    - 3.1 Process Concept  · p144
+      - 3.1.1 The Process  · p144
+      - 3.1.2 Process State  · p145
+      - 3.1.3 Process Control Block  · p147
+      - 3.1.4 Threads  · p148
+    - 3.2 Process Scheduling  · p148
+      - 3.2.1 Scheduling Queues  · p150
+      - 3.2.2 CPU Scheduling  · p151
+      - 3.2.3 Context Switch  · p152
+    - 3.3 Operations on Processes  · p154
+      - 3.3.1 Process Creation  · p154
+      - 3.3.2 Process Termination  · p159
+    - 3.4 Interprocess Communication  · p161
+    - 3.5 IPC in Shared-Memory Systems  · p163
+    - 3.6 IPC in Message-Passing Systems  · p165
+      - 3.6.1 Naming  · p166
+      - 3.6.2 Synchronization  · p168
+      - 3.6.3 Buffering  · p169
+    - 3.7 Examples of IPC Systems  · p170
+      - 3.7.1 POSIX Shared Memory  · p170
+      - 3.7.2 Mach Message Passing  · p173
+      - 3.7.3 Windows  · p176
+      - 3.7.4 Pipes  · p177
+    - 3.8 Communication in Client–Server Systems  · p183
+      - 3.8.1 Sockets  · p184
+      - 3.8.2 Remote Procedure Calls  · p187
+    - 3.9 Summary  · p191
+    - Practice Exercises  · p192
+    - Further Reading  · p194
+    - Bibliography  · p194
+    - Chapter 3 Exercises  · p196
+    - Programming Problems  · p200
+    - Programming Projects  · p204
+  - Chapter 4 Threads & Concurrency  · p216
+    - 4.1 Overview  · p217
+      - 4.1.1 Motivation  · p217
+      - 4.1.2 Benefits  · p219
+    - 4.2 Multicore Programming  · p219
+      - 4.2.1 Programming Challenges  · p220
+      - 4.2.2 Types of Parallelism  · p222
+    - 4.3 Multithreading Models  · p223
+      - 4.3.1 Many-to-One Model  · p223
+      - 4.3.2 One-to-One Model  · p224
+      - 4.3.3 Many-to-Many Model  · p224
+    - 4.4 Thread Libraries  · p225
+      - 4.4.1 Pthreads  · p226
+      - 4.4.2 Windows Threads  · p228
+      - 4.4.3 Java Threads  · p230
+    - 4.5 Implicit Threading  · p233
+      - 4.5.1 Thread Pools  · p234
+      - 4.5.2 Fork Join  · p237
+      - 4.5.3 OpenMP  · p240
+      - 4.5.4 Grand Central Dispatch  · p242
+      - 4.5.5 Intel Thread Building Blocks  · p243
+    - 4.6 Threading Issues  · p245
+      - 4.6.1 The fork() and exec() System Calls  · p245
+      - 4.6.2 Signal Handling  · p245
+      - 4.6.3 Thread Cancellation  · p247
+      - 4.6.4 Thread-Local Storage  · p249
+      - 4.6.5 Scheduler Activations  · p249
+    - 4.7 Operating-System Examples  · p251
+      - 4.7.1 Windows Threads  · p251
+      - 4.7.2 Linux Threads  · p252
+    - 4.8 Summary  · p253
+    - Practice Exercises  · p254
+    - Further Reading  · p255
+    - Bibliography  · p255
+    - Chapter 4 Exercises  · p256
+    - Programming Problems  · p260
+    - Programming Projects  · p262
+  - Chapter 5 CPU Scheduling  · p266
+    - 5.1 Basic Concepts  · p267
+      - 5.1.1 CPU–I/O Burst Cycle  · p268
+      - 5.1.2 CPU Scheduler  · p268
+      - 5.1.3 Preemptive and Nonpreemptive Scheduling  · p269
+      - 5.1.4 Dispatcher  · p270
+    - 5.2 Scheduling Criteria  · p271
+    - 5.3 Scheduling Algorithms  · p272
+      - 5.3.1 First-Come, First-Served Scheduling  · p273
+      - 5.3.2 Shortest-Job-First Scheduling  · p274
+      - 5.3.3 Round-Robin Scheduling  · p276
+      - 5.3.4 Priority Scheduling  · p278
+      - 5.3.5 Multilevel Queue Scheduling  · p281
+      - 5.3.6 Multilevel Feedback Queue Scheduling  · p283
+    - 5.4 Thread Scheduling  · p284
+      - 5.4.1 Contention Scope  · p284
+      - 5.4.2 Pthread Scheduling  · p285
+    - 5.5 Multi-Processor Scheduling  · p287
+      - 5.5.1 Approaches to Multiple-Processor Scheduling  · p287
+      - 5.5.2 Multicore Processors  · p288
+      - 5.5.3 Load Balancing  · p291
+      - 5.5.4 Processor Affinity  · p292
+      - 5.5.5 Heterogeneous Multiprocessing  · p293
+    - 5.6 Real-Time CPU Scheduling  · p294
+      - 5.6.1 Minimizing Latency  · p294
+      - 5.6.2 Priority-Based Scheduling  · p296
+      - 5.6.3 Rate-Monotonic Scheduling  · p297
+      - 5.6.4 Earliest-Deadline-First Scheduling  · p299
+      - 5.6.5 Proportional Share Scheduling  · p300
+      - 5.6.6 POSIX Real-Time Scheduling  · p300
+    - 5.7 Operating-System Examples  · p301
+      - 5.7.1 Example: Linux Scheduling  · p301
+      - 5.7.2 Example: Windows Scheduling  · p306
+      - 5.7.3 Example: Solaris Scheduling  · p309
+    - 5.8 Algorithm Evaluation  · p311
+      - 5.8.1 Deterministic Modeling  · p312
+      - 5.8.2 Queueing Models  · p314
+      - 5.8.3 Simulations  · p315
+      - 5.8.4 Implementation  · p316
+    - 5.9 Summary  · p317
+    - Practice Exercises  · p318
+    - Further Reading  · p321
+    - Bibliography  · p321
+    - Chapter 5 Exercises  · p322
+    - Programming Projects  · p327
+- PART THREE PROCESS SYNCHRONIZATION  · p330
+  - Chapter 6 Synchronization Tools  · p332
+    - 6.1 Background  · p332
+    - 6.2 The Critical-Section Problem  · p335
+    - 6.3 Peterson’s Solution  · p337
+    - 6.4 Hardware Support for Synchronization  · p340
+      - 6.4.1 Memory Barriers  · p340
+      - 6.4.2 Hardware Instructions  · p341
+      - 6.4.3 Atomic Variables  · p344
+    - 6.5 Mutex Locks  · p345
+    - 6.6 Semaphores  · p347
+      - 6.6.1 Semaphore Usage  · p348
+      - 6.6.2 Semaphore Implementation  · p349
+    - 6.7 Monitors  · p351
+      - 6.7.1 Monitor Usage  · p352
+      - 6.7.2 Implementing a Monitor Using Semaphores  · p355
+      - 6.7.3 Resuming Processes within a Monitor  · p356
+    - 6.8 Liveness  · p358
+      - 6.8.1 Deadlock  · p358
+      - 6.8.2 Priority Inversion  · p359
+    - 6.9 Evaluation  · p359
+    - 6.10 Summary  · p361
+    - Practice Exercises  · p362
+    - Further Reading  · p363
+    - Bibliography  · p363
+    - Chapter 6 Exercises  · p364
+    - Programming Problems  · p373
+  - Chapter 7 Synchronization Examples  · p375
+    - 7.1 Classic Problems of Synchronization  · p375
+      - 7.1.1 The Bounded-Buffer Problem  · p376
+      - 7.1.2 The Readers–Writers Problem  · p376
+      - 7.1.3 The Dining-Philosophers Problem  · p379
+    - 7.2 Synchronization within the Kernel  · p381
+      - 7.2.1 Synchronization in Windows  · p382
+      - 7.2.2 Synchronization in Linux  · p384
+    - 7.3 POSIX Synchronization  · p385
+      - 7.3.1 POSIX Mutex Locks  · p385
+      - 7.3.2 POSIX Semaphores  · p386
+      - 7.3.3 POSIX Condition Variables  · p388
+    - 7.4 Synchronization in Java  · p389
+      - 7.4.1 Java Monitors  · p389
+      - 7.4.2 Reentrant Locks  · p393
+      - 7.4.3 Semaphores  · p394
+      - 7.4.4 Condition Variables  · p395
+    - 7.5 Alternative Approaches  · p397
+      - 7.5.1 Transactional Memory  · p397
+      - 7.5.2 OpenMP  · p398
+      - 7.5.3 Functional Programming Languages  · p399
+    - 7.6 Summary  · p400
+    - Practice Exercises  · p400
+    - Further Reading  · p401
+    - Bibliography  · p401
+    - Chapter 7 Exercises  · p403
+    - Programming Problems  · p404
+    - Programming Projects  · p405
+  - Chapter 8 Deadlocks  · p415
+    - 8.1 System Model  · p416
+    - 8.2 Deadlock in Multithreaded Applications  · p417
+      - 8.2.1 Livelock  · p418
+    - 8.3 Deadlock Characterization  · p419
+      - 8.3.1 Necessary Conditions  · p419
+      - 8.3.2 Resource-Allocation Graph  · p421
+    - 8.4 Methods for Handling Deadlocks  · p424
+    - 8.5 Deadlock Prevention  · p425
+      - 8.5.1 Mutual Exclusion  · p425
+      - 8.5.2 Hold and Wait  · p425
+      - 8.5.3 No Preemption  · p426
+      - 8.5.4 Circular Wait  · p426
+    - 8.6 Deadlock Avoidance  · p428
+      - 8.6.1 Safe State  · p429
+      - 8.6.2 Resource-Allocation-Graph Algorithm  · p431
+      - 8.6.3 Banker’s Algorithm  · p431
+    - 8.7 Deadlock Detection  · p435
+      - 8.7.1 Single Instance of Each Resource Type  · p435
+      - 8.7.2 Several Instances of a Resource Type  · p436
+      - 8.7.3 Detection-Algorithm Usage  · p438
+    - 8.8 Recovery from Deadlock  · p439
+      - 8.8.1 Process and Thread Termination  · p440
+      - 8.8.2 Resource Preemption  · p440
+    - 8.9 Summary  · p441
+    - Practice Exercises  · p442
+    - Further Reading  · p444
+    - Bibliography  · p444
+    - Chapter 8 Exercises  · p445
+    - Programming Problems  · p450
+    - Programming Projects  · p450
+- PART FOUR MEMORY MANAGEMENT  · p453
+  - Chapter 9 Main Memory  · p455
+    - 9.1 Background  · p455
+      - 9.1.1 Basic Hardware  · p456
+      - 9.1.2 Address Binding  · p458
+      - 9.1.3 Logical Versus Physical Address Space  · p459
+      - 9.1.4 Dynamic Loading  · p461
+      - 9.1.5 Dynamic Linking and Shared Libraries  · p461
+    - 9.2 Contiguous Memory Allocation  · p462
+      - 9.2.1 Memory Protection  · p463
+      - 9.2.2 Memory Allocation  · p464
+      - 9.2.3 Fragmentation  · p465
+    - 9.3 Paging  · p466
+      - 9.3.1 Basic Method  · p466
+      - 9.3.2 Hardware Support  · p471
+      - 9.3.3 Protection  · p474
+      - 9.3.4 Shared Pages  · p475
+    - 9.4 Structure of the Page Table  · p477
+      - 9.4.1 Hierarchical Paging  · p477
+      - 9.4.2 Hashed Page Tables  · p479
+      - 9.4.3 Inverted Page Tables  · p480
+      - 9.4.4 Oracle SPARC Solaris  · p481
+    - 9.5 Swapping  · p482
+      - 9.5.1 Standard Swapping  · p483
+      - 9.5.2 Swapping with Paging  · p483
+      - 9.5.3 Swapping on Mobile Systems  · p483
+    - 9.6 Example: Intel 32- and 64-bit Architectures  · p485
+      - 9.6.1 IA-32 Architecture  · p485
+      - 9.6.2 x86-64  · p488
+    - 9.7 Example: ARMv8 Architecture  · p489
+    - 9.8 Summary  · p490
+    - Practice Exercises  · p491
+    - Further Reading  · p493
+    - Bibliography  · p493
+    - Chapter 9 Exercises  · p494
+    - Programming Problems  · p497
+    - Programming Projects  · p497
+  - Chapter 10 Virtual Memory  · p501
+    - 10.1 Background  · p501
+    - 10.2 Demand Paging  · p504
+      - 10.2.1 Basic Concepts  · p505
+      - 10.2.2 Free-Frame List  · p508
+      - 10.2.3 Performance of Demand Paging  · p509
+    - 10.3 Copy-on-Write  · p511
+    - 10.4 Page Replacement  · p513
+      - 10.4.1 Basic Page Replacement  · p513
+      - 10.4.2 FIFO Page Replacement  · p516
+      - 10.4.3 Optimal Page Replacement  · p518
+      - 10.4.4 LRU Page Replacement  · p519
+      - 10.4.5 LRU-Approximation Page Replacement  · p521
+      - 10.4.6 Counting-Based Page Replacement  · p523
+      - 10.4.7 Page-Buffering Algorithms  · p524
+      - 10.4.8 Applications and Page Replacement  · p524
+    - 10.5 Allocation of Frames  · p525
+      - 10.5.1 Minimum Number of Frames  · p525
+      - 10.5.2 Allocation Algorithms  · p526
+      - 10.5.3 Global versus Local Allocation  · p527
+      - 10.5.4 Non-Uniform Memory Access  · p530
+    - 10.6 Thrashing  · p531
+      - 10.6.1 Cause of Thrashing  · p531
+      - 10.6.2 Working-Set Model  · p534
+      - 10.6.3 Page-Fault Frequency  · p536
+      - 10.6.4 Current Practice  · p537
+    - 10.7 Memory Compression  · p537
+    - 10.8 Allocating Kernel Memory  · p538
+      - 10.8.1 Buddy System  · p539
+      - 10.8.2 Slab Allocation  · p539
+    - 10.9 Other Considerations  · p542
+      - 10.9.1 Prepaging  · p542
+      - 10.9.2 Page Size  · p543
+      - 10.9.3 TLB Reach  · p544
+      - 10.9.4 Inverted Page Tables  · p545
+      - 10.9.5 Program Structure  · p545
+      - 10.9.6 I/O Interlock and Page Locking  · p546
+    - 10.10 Operating-System Examples  · p548
+      - 10.10.1 Linux  · p548
+      - 10.10.2 Windows  · p549
+      - 10.10.3 Solaris  · p550
+    - 10.11 Summary  · p552
+    - Practice Exercises  · p553
+    - Further Reading  · p556
+    - Bibliography  · p556
+    - Chapter 10 Exercises  · p558
+    - Programming Problems  · p566
+    - Programming Projects  · p566
+- PART FIVE STORAGE MANAGEMENT  · p571
+  - Chapter 11 Mass-Storage Structure  · p573
+    - 11.1 Overview of Mass-Storage Structure  · p573
+      - 11.1.1 Hard Disk Drives  · p574
+      - 11.1.2 Nonvolatile Memory Devices  · p576
+      - 11.1.3 Volatile Memory  · p578
+      - 11.1.4 Secondary Storage Connection Methods  · p580
+      - 11.1.5 Address Mapping  · p580
+    - 11.2 HDD Scheduling  · p581
+      - 11.2.1 FCFS Scheduling  · p582
+      - 11.2.2 SCAN Scheduling  · p582
+      - 11.2.3 C-SCAN Scheduling  · p584
+      - 11.2.4 Selection of a Disk-Scheduling Algorithm  · p584
+    - 11.3 NVM Scheduling  · p585
+    - 11.4 Error Detection and Correction  · p586
+    - 11.5 Storage Device Management  · p587
+      - 11.5.1 Drive Formatting, Partitions, and Volumes  · p587
+      - 11.5.2 Boot Block  · p589
+      - 11.5.3 Bad Blocks  · p590
+    - 11.6 Swap-Space Management  · p591
+      - 11.6.1 Swap-Space Use  · p592
+      - 11.6.2 Swap-Space Location  · p592
+      - 11.6.3 Swap-Space Management: An Example  · p593
+    - 11.7 Storage Attachment  · p593
+      - 11.7.1 Host-Attached Storage  · p594
+      - 11.7.2 Network-Attached Storage  · p594
+      - 11.7.3 Cloud Storage  · p595
+    - 11.7.4 Storage-Area Networks and Storage Arrays  · p596
+    - 11.8 RAID Structure  · p597
+      - 11.8.1 Improvement of Reliability via Redundancy  · p597
+      - 11.8.2 Improvement in Performance via Parallelism  · p599
+      - 11.8.3 RAID Levels  · p599
+      - 11.8.4 Selecting a RAID Level  · p604
+      - 11.8.5 Extensions  · p605
+      - 11.8.6 Problems with RAID  · p606
+      - 11.8.7 Object Storage  · p607
+    - 11.9 Summary  · p609
+    - Practice Exercises  · p610
+    - Further Reading  · p611
+    - Bibliography  · p612
+    - Chapter 11 Exercises  · p613
+    - Programming Problems  · p616
+  - Chapter 12 I/O Systems  · p617
+    - 12.1 Overview  · p617
+    - 12.2 I/O Hardware  · p618
+      - 12.2.1 Memory-Mapped I/O  · p619
+      - 12.2.2 Polling  · p621
+      - 12.2.3 Interrupts  · p622
+      - 12.2.4 Direct Memory Access  · p626
+      - 12.2.5 I/O Hardware Summary  · p628
+    - 12.3 Application I/O Interface  · p628
+      - 12.3.1 Block and Character Devices  · p631
+      - 12.3.2 Network Devices  · p632
+      - 12.3.3 Clocks and Timers  · p633
+      - 12.3.4 Nonblocking and Asynchronous I/O  · p634
+      - 12.3.5 Vectored I/O  · p635
+    - 12.4 Kernel I/O Subsystem  · p636
+      - 12.4.1 I/O Scheduling  · p636
+      - 12.4.2 Buffering  · p637
+      - 12.4.3 Caching  · p638
+      - 12.4.4 Spooling and Device Reservation  · p639
+      - 12.4.5 Error Handling  · p639
+      - 12.4.6 I/O Protection  · p640
+      - 12.4.7 Kernel Data Structures  · p640
+      - 12.4.8 Power Management  · p642
+      - 12.4.9 Kernel I/O Subsystem Summary  · p644
+    - 12.5 Transforming I/O Requests to Hardware Operations  · p644
+    - 12.6 STREAMS  · p647
+    - 12.7 Performance  · p649
+    - 12.8 Summary  · p652
+    - Practice Exercises  · p653
+    - Further Reading  · p654
+    - Bibliography  · p654
+    - Chapter 12 Exercises  · p655
+- PART SIX FILE SYSTEM  · p657
+  - Chapter 13 File-System Interface  · p659
+    - 13.1 File Concept  · p659
+      - 13.1.1 File Attributes  · p660
+      - 13.1.2 File Operations  · p662
+      - 13.1.3 File Types  · p666
+      - 13.1.4 File Structure  · p667
+      - 13.1.5 Internal File Structure  · p668
+    - 13.2 Access Methods  · p669
+      - 13.2.1 Sequential Access  · p669
+      - 13.2.2 Direct Access  · p669
+      - 13.2.3 Other Access Methods  · p670
+    - 13.3 Directory Structure  · p671
+      - 13.3.1 Single-Level Directory  · p672
+      - 13.3.2 Two-Level Directory  · p673
+      - 13.3.3 Tree-Structured Directories  · p675
+      - 13.3.4 Acyclic-Graph Directories  · p677
+      - 13.3.5 General Graph Directory  · p679
+    - 13.4 Protection  · p680
+      - 13.4.1 Types of Access  · p681
+      - 13.4.2 Access Control  · p682
+      - 13.4.3 Other Protection Approaches  · p684
+    - 13.5 Memory-Mapped Files  · p685
+      - 13.5.1 Basic Mechanism  · p685
+      - 13.5.2 Shared Memory in the Windows API  · p686
+    - 13.6 Summary  · p690
+    - Practice Exercises  · p690
+    - Further Reading  · p691
+    - Bibliography  · p692
+    - Chapter 13 Exercises  · p693
+  - Chapter 14 File-System Implementation  · p694
+    - 14.1 File-System Structure  · p695
+    - 14.2 File-System Operations  · p697
+      - 14.2.1 Overview  · p697
+      - 14.2.2 Usage  · p699
+    - 14.3 Directory Implementation  · p699
+      - 14.3.1 Linear List  · p700
+      - 14.3.2 Hash Table  · p701
+    - 14.4 Allocation Methods  · p701
+      - 14.4.1 Contiguous Allocation  · p701
+      - 14.4.2 Linked Allocation  · p704
+      - 14.4.3 Indexed Allocation  · p706
+      - 14.4.4 Performance  · p708
+    - 14.5 Free-Space Management  · p709
+      - 14.5.1 Bit Vector  · p710
+      - 14.5.2 Linked List  · p710
+      - 14.5.3 Grouping  · p711
+      - 14.5.4 Counting  · p711
+      - 14.5.5 Space Maps  · p712
+      - 14.5.6 TRIMing Unused Blocks  · p712
+    - 14.6 Efficiency and Performance  · p713
+      - 14.6.1 Efficiency  · p713
+      - 14.6.2 Performance  · p714
+    - 14.7 Recovery  · p717
+      - 14.7.1 Consistency Checking  · p717
+      - 14.7.2 Log-Structured File Systems  · p718
+      - 14.7.3 Other Solutions  · p719
+      - 14.7.4 Backup and Restore  · p719
+    - 14.8 Example: The WAFL File System  · p720
+    - 14.9 Summary  · p724
+    - Practice Exercises  · p725
+    - Further Reading  · p725
+    - Bibliography  · p726
+    - Chapter 14 Exercises  · p728
+  - Chapter 15 File-System Internals  · p730
+    - 15.1 File Systems  · p730
+    - 15.2 File-System Mounting  · p731
+    - 15.3 Partitions and Mounting  · p734
+    - 15.4 File Sharing  · p735
+      - 15.4.1 Multiple Users  · p735
+    - 15.5 Virtual File Systems  · p736
+    - 15.6 Remote File Systems  · p738
+      - 15.6.1 The Client–Server Model  · p739
+      - 15.6.2 Distributed Information Systems  · p740
+      - 15.6.3 Failure Modes  · p740
+    - 15.7 Consistency Semantics  · p741
+      - 15.7.1 UNIX Semantics  · p742
+      - 15.7.2 Session Semantics  · p742
+      - 15.7.3 Immutable-Shared-Files Semantics  · p742
+    - 15.8 NFS  · p743
+      - 15.8.1 Overview  · p743
+      - 15.8.2 The Mount Protocol  · p745
+      - 15.8.3 The NFS Protocol  · p745
+      - 15.8.4 Path-Name Translation  · p747
+      - 15.8.5 Remote Operations  · p748
+    - 15.9 Summary  · p748
+    - Practice Exercises  · p749
+    - Further Reading  · p750
+    - Bibliography  · p750
+    - Chapter 15 Exercises  · p751
+- PART SEVEN SECURITY AND PROTECTION  · p753
+  - Chapter 16 Security  · p755
+    - 16.1 The Security Problem  · p755
+    - 16.2 Program Threats  · p759
+      - 16.2.1 Malware  · p759
+      - 16.2.2 Code Injection  · p762
+      - 16.2.3 Viruses and Worms  · p765
+    - 16.3 System and Network Threats  · p768
+      - 16.3.1 Attacking Network Traffic  · p769
+      - 16.3.2 Denial of Service  · p770
+      - 16.3.3 Port Scanning  · p771
+    - 16.4 Cryptography as a Security Tool  · p771
+      - 16.4.1 Encryption  · p772
+      - 16.4.2 Implementation of Cryptography  · p779
+      - 16.4.3 An Example: TLS  · p780
+    - 16.5 User Authentication  · p782
+      - 16.5.1 Passwords  · p783
+      - 16.5.2 Password Vulnerabilities  · p783
+      - 16.5.3 Securing Passwords  · p784
+      - 16.5.4 One-Time Passwords  · p786
+      - 16.5.5 Biometrics  · p786
+    - 16.6 Implementing Security Defenses  · p787
+      - 16.6.1 Security Policy  · p787
+      - 16.6.2 Vulnerability Assessment  · p787
+      - 16.6.3 Intrusion Prevention  · p789
+      - 16.6.4 Virus Protection  · p791
+      - 16.6.5 Auditing, Accounting, and Logging  · p793
+      - 16.6.6 Firewalling to Protect Systems and Networks  · p793
+      - 16.6.7 Other Solutions  · p795
+      - 16.6.8 Security Defenses Summarized  · p795
+    - 16.7 An Example: Windows 10  · p796
+    - 16.8 Summary  · p798
+    - Further Reading  · p799
+    - Bibliography  · p800
+    - Chapter 16 Exercises  · p801
+  - Chapter 17 Protection  · p803
+    - 17.1 Goals of Protection  · p803
+    - 17.2 Principles of Protection  · p804
+    - 17.3 Protection Rings  · p805
+    - 17.4 Domain of Protection  · p807
+      - 17.4.1 Domain Structure  · p809
+      - 17.4.2 Example: UNIX  · p810
+      - 17.4.3 Example: Android Application IDs  · p811
+    - 17.5 Access Matrix  · p811
+    - 17.6 Implementation of the Access Matrix  · p815
+      - 17.6.1 Global Table  · p815
+      - 17.6.2 Access Lists for Objects  · p815
+      - 17.6.3 Capability Lists for Domains  · p816
+      - 17.6.4 A Lock–Key Mechanism  · p817
+      - 17.6.5 Comparison  · p817
+    - 17.7 Revocation of Access Rights  · p818
+    - 17.8 Role-Based Access Control  · p819
+    - 17.9 Mandatory Access Control (MAC)  · p820
+    - 17.10 Capability-Based Systems  · p821
+      - 17.10.1 Linux Capabilities  · p821
+      - 17.10.2 Darwin Entitlements  · p822
+    - 17.11 Other Protection Improvement Methods  · p823
+      - 17.11.1 System Integrity Protection  · p823
+      - 17.11.2 System-Call Filtering  · p824
+      - 17.11.3 Sandboxing  · p825
+      - 17.11.4 Code Signing  · p826
+    - 17.12 Language-Based Protection  · p826
+      - 17.12.1 Compiler-Based Enforcement  · p827
+      - 17.12.2 Run-Time-Based Enforcement—Protection in Java  · p830
+    - 17.13 Summary  · p832
+    - Further Reading  · p833
+    - Bibliography  · p833
+    - Chapter 17 Exercises  · p835
+- PART EIGHT ADVANCED TOPICS  · p836
+  - Chapter 18 Virtual Machines  · p838
+    - 18.1 Overview  · p838
+    - 18.2 History  · p840
+    - 18.3 Benefits and Features  · p841
+    - 18.4 Building Blocks  · p844
+      - 18.4.1 Trap-and-Emulate  · p844
+      - 18.4.2 Binary Translation  · p845
+      - 18.4.3 Hardware Assistance  · p847
+    - 18.5 Types of VMs and Their Implementations  · p850
+      - 18.5.1 The Virtual Machine Life Cycle  · p850
+      - 18.5.2 Type 0 Hypervisor  · p850
+      - 18.5.3 Type 1 Hypervisor  · p851
+      - 18.5.4 Type 2 Hypervisor  · p852
+      - 18.5.5 Paravirtualization  · p853
+      - 18.5.6 Programming-Environment Virtualization  · p854
+      - 18.5.7 Emulation  · p854
+      - 18.5.8 Application Containment  · p855
+    - 18.6 Virtualization and Operating-System Components  · p856
+      - 18.6.1 CPU Scheduling  · p857
+      - 18.6.2 Memory Management  · p858
+      - 18.6.3 I/O  · p859
+      - 18.6.4 Storage Management  · p860
+      - 18.6.5 Live Migration  · p861
+    - 18.7 Examples  · p863
+      - 18.7.1 VMware  · p863
+      - 18.7.2 The Java Virtual Machine  · p864
+    - 18.8 Virtualization Research  · p865
+    - 18.9 Summary  · p866
+    - Further Reading  · p867
+    - Bibliography  · p868
+    - Chapter 18 Exercises  · p870
+  - Chapter 19 Networks and Distributed Systems  · p871
+    - 19.1 Advantages of Distributed Systems  · p871
+      - 19.1.1 Resource Sharing  · p872
+      - 19.1.2 Computation Speedup  · p873
+      - 19.1.3 Reliability  · p873
+    - 19.2 Network Structure  · p873
+      - 19.2.1 Local-Area Networks  · p874
+      - 19.2.2 Wide-Area Networks  · p875
+    - 19.3 Communication Structure  · p876
+      - 19.3.1 Naming and Name Resolution  · p876
+      - 19.3.2 Communication Protocols  · p879
+      - 19.3.3 TCP/IP Example  · p883
+      - 19.3.4 Transport Protocols UDP and TCP  · p884
+    - 19.4 Network and Distributed Operating Systems  · p887
+      - 19.4.1 Network Operating Systems  · p888
+      - 19.4.2 Distributed Operating Systems  · p889
+    - 19.5 Design Issues in Distributed Systems  · p891
+      - 19.5.1 Robustness  · p892
+      - 19.5.2 Transparency  · p894
+      - 19.5.3 Scalability  · p894
+    - 19.6 Distributed File Systems  · p895
+      - 19.6.1 The Client–Server DFS Model  · p896
+      - 19.6.2 The Cluster-Based DFS Model  · p897
+    - 19.7 DFS Naming and Transparency  · p899
+      - 19.7.1 Naming Structures  · p899
+      - 19.7.2 Naming Schemes  · p901
+      - 19.7.3 Implementation Techniques  · p901
+    - 19.8 Remote File Access  · p902
+      - 19.8.1 Basic Caching Scheme  · p902
+      - 19.8.2 Cache Location  · p903
+      - 19.8.3 Cache-Update Policy  · p904
+      - 19.8.4 Consistency  · p905
+    - 19.9 Final Thoughts on Distributed File Systems  · p905
+    - 19.10 Summary  · p906
+    - Practice Exercises  · p908
+    - Further Reading  · p908
+    - Bibliography  · p909
+    - Chapter 19 Exercises  · p910
+- PART NINE CASE STUDIES  · p913
+  - Chapter 20 The Linux System  · p915
+    - 20.1 Linux History  · p915
+      - 20.1.1 The Linux Kernel  · p916
+      - 20.1.2 The Linux System  · p918
+      - 20.1.3 Linux Distributions  · p919
+      - 20.1.4 Linux Licensing  · p919
+    - 20.2 Design Principles  · p920
+      - 20.2.1 Components of a Linux System  · p921
+    - 20.3 Kernel Modules  · p923
+      - 20.3.1 Module Management  · p924
+      - 20.3.2 Driver Registration  · p925
+      - 20.3.3 Conflict Resolution  · p925
+    - 20.4 Process Management  · p926
+      - 20.4.1 The fork() and exec() Process Model  · p926
+      - 20.4.2 Processes and Threads  · p929
+    - 20.5 Scheduling  · p930
+      - 20.5.1 Thread Scheduling  · p930
+      - 20.5.2 Real-Time Scheduling  · p932
+      - 20.5.3 Kernel Synchronization  · p932
+      - 20.5.4 Symmetric Multiprocessing  · p934
+    - 20.6 Memory Management  · p935
+      - 20.6.1 Management of Physical Memory  · p935
+      - 20.6.2 Virtual Memory  · p938
+      - 20.6.3 Execution and Loading of User Programs  · p941
+    - 20.7 File Systems  · p943
+      - 20.7.1 The Virtual File System  · p944
+      - 20.7.2 The Linux ext3 File System  · p945
+      - 20.7.3 Journaling  · p948
+      - 20.7.4 The Linux Proc File System  · p948
+    - 20.8 Input and Output  · p950
+      - 20.8.1 Block Devices  · p950
+      - 20.8.2 Character Devices  · p951
+    - 20.9 Interprocess Communication  · p952
+      - 20.9.1 Synchronization and Signals  · p952
+      - 20.9.2 Passing of Data among Processes  · p953
+    - 20.10 Network Structure  · p953
+    - 20.11 Security  · p956
+      - 20.11.1 Authentication  · p956
+      - 20.11.2 Access Control  · p957
+    - 20.12 Summary  · p958
+    - Practice Exercises  · p959
+    - Further Reading  · p959
+    - Bibliography  · p960
+    - Chapter 20 Exercises  · p961
+  - Chapter 21 Windows  · p963
+    - 21.1 History  · p963
+      - 21.1.1 Windows XP, Vista, and 7  · p964
+      - 21.1.2 Windows 8  · p965
+      - 21.1.3 Windows 10  · p965
+    - 21.2 Design Principles  · p968
+      - 21.2.1 Security  · p968
+      - 21.2.2 Reliability  · p970
+      - 21.2.3 Windows and Application Compatibility  · p972
+      - 21.2.4 Performance  · p973
+      - 21.2.5 Extensibility  · p975
+      - 21.2.6 Portability  · p976
+      - 21.2.7 International Support  · p977
+      - 21.2.8 Energy Efficiency  · p978
+      - 21.2.9 Dynamic Device Support  · p979
+    - 21.3 System Components  · p980
+      - 21.3.1 Hyper-V Hypervisor  · p981
+      - 21.3.2 Secure Kernel  · p981
+      - 21.3.3 Hardware-Abstraction Layer  · p982
+      - 21.3.4 Kernel  · p982
+      - 21.3.5 Executive  · p990
+    - 21.4 Terminal Services and Fast User Switching  · p1016
+    - 21.5 File System  · p1017
+      - 21.5.1 NTFS Internal Layout  · p1017
+      - 21.5.2 Recovery  · p1019
+      - 21.5.3 Security  · p1020
+      - 21.5.4 Compression  · p1020
+      - 21.5.5 Mount Points, Symbolic Links, and Hard Links  · p1021
+      - 21.5.6 Change Journal  · p1021
+      - 21.5.7 Volume Shadow Copies  · p1021
+    - 21.6 Networking  · p1022
+      - 21.6.1 Network Interfaces  · p1022
+      - 21.6.2 Protocols  · p1022
+      - 21.6.3 Redirectors and Servers  · p1024
+      - 21.6.4 Domains  · p1026
+      - 21.6.5 Active Directory  · p1026
+    - 21.7 Programmer Interface  · p1026
+      - 21.7.1 Access to Kernel Objects  · p1026
+      - 21.7.2 Sharing Objects Between Processes  · p1027
+      - 21.7.3 Process Management  · p1028
+      - 21.7.4 IPC Using Windows Messaging  · p1033
+      - 21.7.5 Memory Management  · p1034
+    - 21.8 Summary  · p1037
+    - Practice Exercises  · p1038
+    - Further Reading  · p1039
+    - Bibliography  · p1039
+    - Chapter 21 Exercises  · p1040
+- PART TEN APPENDICES  · p1043
+  - Appendix A Influential Operating Systems  · p1043
+    - A.1 Feature Migration  · p1043
+    - A.2 Early Systems  · p1044
+      - A.2.1 Dedicated Computer Systems  · p1045
+      - A.2.2 Shared Computer Systems  · p1046
+      - A.2.3 Overlapped I/O  · p1049
+    - A.3 Atlas  · p1051
+    - A.4 XDS-940  · p1052
+    - A.5 THE  · p1053
+    - A.6 RC 4000  · p1053
+    - A.7 CTSS  · p1054
+    - A.8 MULTICS  · p1055
+    - A.9 IBM OS/360  · p1055
+    - A.10 TOPS-20  · p1057
+    - A.11 CP/M and MS/DOS  · p1057
+    - A.12 Macintosh Operating System and Windows  · p1058
+    - A.13 Mach  · p1058
+    - A.14 Capability-based Systems—Hydra and CAP  · p1060
+      - A.14.1 Hydra  · p1060
+      - A.14.2 Cambridge CAP System  · p1062
+    - A.15 Other Systems  · p1062
+    - Further Reading  · p1063
+    - Bibliography  · p1064
+  - Appendix B Windows  · p1067
+    - B.1 History  · p1067
+    - B.2 Design Principles  · p1069
+      - B.2.1 Security  · p1069
+      - B.2.2 Reliability  · p1070
+      - B.2.3 Windows and POSIX Application Compatibility  · p1071
+      - B.2.4 High Performance  · p1072
+      - B.2.5 Extensibility  · p1074
+      - B.2.6 Portability  · p1074
+      - B.2.7 International Support  · p1075
+      - B.2.8 Energy Efficiency  · p1075
+      - B.2.9 Dynamic Device Support  · p1075
+    - B.3 System Components  · p1076
+      - B.3.1 Hardware-Abstraction Layer  · p1076
+      - B.3.2 Kernel  · p1077
+      - B.3.3 Executive  · p1082
+    - B.4 Terminal Services and Fast User Switching  · p1100
+    - B.5 File System  · p1101
+      - B.5.1 NTFS Internal Layout  · p1101
+      - B.5.2 Recovery  · p1103
+      - B.5.3 Security  · p1104
+      - B.5.4 Volume Management and Fault Tolerance  · p1104
+      - B.5.5 Compression  · p1106
+      - B.5.6 Mount Points, Symbolic Links, and Hard Links  · p1106
+      - B.5.7 Change Journal  · p1106
+      - B.5.8 Volume Shadow Copies  · p1107
+    - B.6 Networking  · p1107
+      - B.6.1 Network Interfaces  · p1107
+      - B.6.2 Protocols  · p1107
+      - B.6.3 Redirectors and Servers  · p1110
+      - B.6.4 Domains  · p1111
+      - B.6.5 Active Directory  · p1111
+    - B.7 Programmer Interface  · p1112
+      - B.7.1 Access to Kernel Objects  · p1112
+      - B.7.2 Sharing Objects between Processes  · p1112
+      - B.7.3 Process Management  · p1113
+      - B.7.4 IPC Using Windows Messaging  · p1118
+      - B.7.5 Memory Management  · p1119
+    - B.8 Summary  · p1121
+    - Practice Exercises  · p1122
+    - Further Reading  · p1122
+    - Bibliography  · p1122
+  - Appendix C BSD UNIX  · p1125
+    - C.1 UNIX History  · p1125
+      - C.1.1 UNIX Support Group  · p1126
+      - C.1.2 Berkeley Begins Development  · p1126
+      - C.1.3 The Spread of UNIX  · p1128
+      - C.1.4 History of FreeBSD  · p1130
+    - C.2 Design Principles  · p1130
+    - C.3 Programmer Interface  · p1132
+      - C.3.1 File Manipulation  · p1133
+      - C.3.2 Process Control  · p1135
+      - C.3.3 Signals  · p1137
+      - C.3.4 Process Groups  · p1138
+      - C.3.5 Information Manipulation  · p1138
+      - C.3.6 Library Routines  · p1139
+    - C.4 User Interface  · p1139
+      - C.4.1 Shells and Commands  · p1140
+      - C.4.2 Standard I/O  · p1141
+      - C.4.3 Pipelines, Filters, and Shell Scripts  · p1142
+    - C.5 Process Management  · p1142
+      - C.5.1 Process Control Blocks  · p1143
+      - C.5.2 CPU Scheduling  · p1145
+    - C.6 Memory Management  · p1146
+    - C.7 File System  · p1149
+      - C.7.1 Blocks and Fragments  · p1149
+      - C.7.2 Inodes  · p1149
+      - C.7.3 Directories  · p1151
+      - C.7.4 Mapping a File Descriptor to an Inode  · p1152
+      - C.7.5 Disk Structures  · p1152
+      - C.7.6 Implementations  · p1154
+      - C.7.7 Layout and Allocation Policies  · p1154
+    - C.8 I/O System  · p1157
+      - C.8.1 Block Buffer Cache  · p1158
+      - C.8.2 Raw Device Interfaces  · p1159
+      - C.8.3 C-Lists  · p1160
+    - C.9 Interprocess Communication  · p1160
+      - C.9.1 Sockets  · p1160
+      - C.9.2 Network Support  · p1163
+    - C.10 Summary  · p1165
+    - Further Reading  · p1166
+    - Bibliography  · p1166
+  - Appendix D The Mach System  · p1167
+    - D.1 History of the Mach System  · p1167
+    - D.2 Design Principles  · p1169
+    - D.3 System Components  · p1170
+    - D.4 Process Management  · p1173
+      - D.4.1 Basic Structure  · p1173
+      - D.4.2 The C Threads Package  · p1174
+      - D.4.3 The CPU Scheduler  · p1176
+      - D.4.4 Exception Handling  · p1177
+    - D.5 Interprocess Communication  · p1179
+      - D.5.1 Ports  · p1179
+      - D.5.2 Messages  · p1180
+      - D.5.3 The NetMsgServer  · p1181
+      - D.5.4 Synchronization Through IPC  · p1184
+    - D.6 Memory Management  · p1184
+      - D.6.1 Basic Structure  · p1184
+      - D.6.2 User-Level Memory Managers  · p1186
+      - D.6.3 Shared Memory  · p1188
+    - D.7 Programmer Interface  · p1189
+    - D.8 Summary  · p1190
+    - Further Reading  · p1191
+    - Bibliography  · p1191
+- Credits  · p1193
+- Index  · p1195
+- Glossary  · p1237
+- EULA  · p1278

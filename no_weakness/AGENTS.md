@@ -6,13 +6,44 @@ This file governs everything inside `no_weakness/`. It supersedes `interviewprep
 
 ---
 
+## 0. Two layers: the graph and the text
+
+This folder has two kinds of file, built by two different contracts.
+
+**The knowledge graph** — [`KNOWLEDGE_GRAPH.md`](KNOWLEDGE_GRAPH.md) at the root, and one
+`00_knowledge_graph.md` per subject — is the structural index. It says what concepts exist in a
+subject, how they depend on and contrast with each other, which books cover them, and — the
+part that matters most — how far each concept has drifted from what is true now. It is built
+and edited per [`_tools/KG_SPEC.md`](_tools/KG_SPEC.md), a separate, binding specification.
+**Read `KG_SPEC.md`, not this file, before touching a `00_knowledge_graph.md`.**
+[`_tools/validate_kg.py`](_tools/validate_kg.py) checks every graph file mechanically; a graph
+that fails it is not finished.
+
+**The written module** — everything else, e.g. `06_concurrency/01_the_gil_...md` — is the
+textbook chapter a node in the graph eventually earns. The rest of *this* file, §1 onward,
+governs that: what a module is, how it is structured, and the honesty rules around measured
+claims. A module's front matter names the graph node(s) it covers; the graph node's own
+`**Article:**` line points back once the module exists.
+
+**As of this writing, the graph layer is complete for all 23 subjects (413 nodes) and the text
+layer is not** — 11 modules are written. Building a graph node is not a promise that a module
+follows immediately; see §9.
+
+---
+
 ## 1. What this folder is
 
-**A programming textbook** covering seven subjects at senior-and-above depth. Not a course, not a training regimen, not interview prep with exercises.
+**A programming textbook** covering, as of this writing, twenty-three subjects at
+senior-and-above depth. Not a course, not a training regimen, not interview prep with
+exercises.
 
-The reader is an experienced engineer who wants to *understand these subjects properly* — the object model, the GIL, the query planner, the event loop, the type system, the storage engine, the execution model. The measure of a module is whether someone who reads it understands the mechanism afterwards, not whether they can be tested on it.
+The reader is an experienced engineer who wants to *understand these subjects properly* — the
+object model, the GIL, the query planner, the event loop, the type system, the storage engine,
+the execution model. The measure of a module is whether someone who reads it understands the
+mechanism afterwards, not whether they can be tested on it.
 
-Write it the way a good technical book is written: exposition that builds, complete code that runs, diagrams where prose genuinely strains, and honest treatment of trade-offs.
+Write it the way a good technical book is written: exposition that builds, complete code that
+runs, diagrams where prose genuinely strains, and honest treatment of trade-offs.
 
 ---
 
@@ -41,7 +72,7 @@ Every module follows this, in order. Total 6,000–8,000 words.
 
 *Reference counts, bytecode boundaries, and the five milliseconds nobody mentions.*
 
-**Level:** L4 · **Prerequisites:** [01_python/05 bytecode](../01_python/05_bytecode_and_the_runtime.md)
+**Level:** L4 · **Prerequisites:** [05_python/05 bytecode](../05_python/05_bytecode_and_the_runtime.md)
 **Covers:** CONC-01 … CONC-07
 **Measurement:** Measured — CPython 3.14.6, 8 cores, macOS 26.5. Every number below
 came out of a terminal.
@@ -108,7 +139,7 @@ A condensed, scannable statement of everything the module established. Measured 
 
 ### Footer
 
-`← [<Topic> syllabus](00_syllabus.md) · [repo index](../README.md)`
+`← [<Topic> knowledge graph](00_knowledge_graph.md) · [repo index](../README.md)`
 
 ---
 
@@ -160,31 +191,66 @@ Figures inherited from an earlier environment carry `measured-stale-env` in the 
 
 ## 8. Directory numbering
 
-Directory numbers encode **prerequisite order**, not writing order. `02_concurrency/` is second because `04_javascript/03` and `03_sql/03` both need "race" to already mean something precise.
+Directory numbers encode **prerequisite order**, not writing order, and are derived from the
+subject-level `requires` edges in [`KNOWLEDGE_GRAPH.md`](KNOWLEDGE_GRAPH.md) §2 rather than
+assigned by hand:
+
+| # | Subject | # | Subject | # | Subject |
+|---|---|---|---|---|---|
+| 01 | `01_computation` | 09 | `09_sql` | 17 | `17_grpc` |
+| 02 | `02_os` | 10 | `10_mongodb` | 18 | `18_eventbus` |
+| 03 | `03_dsa` | 11 | `11_redis_caching` | 19 | `19_data_analysis` |
+| 04 | `04_sh` | 12 | `12_bigquery` | 20 | `20_datascience` |
+| 05 | `05_python` | 13 | `13_http` | 21 | `21_dataengineering` |
+| 06 | `06_concurrency` | 14 | `14_browser_networking` | 22 | `22_android` |
+| 07 | `07_javascript` | 15 | `15_websocket` | 23 | `23_app_dev` |
+| 08 | `08_typescript` | 16 | `16_webrtc` | | |
+
+`06_concurrency` sits at position 06 rather than immediately after `05_python` because
+`07_javascript`'s event-loop node and `09_sql`'s transaction-isolation node both need "a race
+condition" to already mean something precise, and both sit downstream of it. `13_http` is the
+widest fan-out point in the whole numbering: four later subjects (`14`–`17`) require it
+directly.
+
+If the graph's `requires` edges ever imply a different order than the table above — a new
+subject added, an edge corrected — the numbering is wrong and should be brought back into
+agreement with the graph, not the other way around.
 
 ---
 
 ## 9. Status — this work is unfinished
 
-**11 of 43 modules are written.** The repo is incomplete and is expected to stay under active construction.
+**The knowledge graph is built for all 23 subjects (413 nodes, 0 validator errors).** The
+written-module layer is not: **11 modules are written**, all of them in the two subjects built
+before the graph existed. The repo is incomplete and is expected to stay under active
+construction for a long time — 413 nodes does not mean 413 modules are coming; some nodes will
+stay graph-only indefinitely, and which ones is a judgment made per subject, not a quota.
 
-| Topic | Written | Remaining |
-|---|---|---|
-| `01_python/` | 01, 03, 05 | 02, 04, 06, 07, 08 |
-| `02_concurrency/` | 01, 02, 03, 04 | 05, 06, 07 |
-| `03_sql/` | 01, 04 | 02, 03, 05, 06, 07 |
-| `04_javascript/` | 03 | 01, 02, 04, 05, 06 |
-| `05_typescript/` | 02 | 01, 03, 04, 05 |
-| `06_mongodb/` | — | 01, 02, 03, 04, 05 |
-| `07_bigquery/` | — | 01, 02, 03, 04, 05 |
+| Topic | Written | Graph nodes | Article gap |
+|---|---|---|---|
+| `05_python/` | 01, 03, 05 | 20 (`PY-01`…`PY-20`) | 17 nodes with no module |
+| `06_concurrency/` | 01, 02, 03, 04 | 17 (`CONC-01`…`CONC-17`) | 13 nodes with no module |
+| `07_javascript/` | 03 | 20 (`JS-01`…`JS-20`) | 19 nodes with no module |
+| `08_typescript/` | 02 | 20 (`TS-01`…`TS-20`) | 19 nodes with no module |
+| `09_sql/` | 01, 04 | 20 (`SQL-01`…`SQL-20`) | 18 nodes with no module |
+| every other subject | — | 316 across 18 subjects | all of them |
 
-**Blocked on environment:**
+Each subject's `00_knowledge_graph.md` node record carries an `**Article:**` line once a module
+exists for it — that is the authoritative record of what is written, not this table, which will
+drift as modules get added.
 
-- `06_mongodb/` — needs the Docker daemon running plus `mongo:8` for real `explain("executionStats")`. Without it every plan claim is `documented`.
-- `07_bigquery/` — needs `gcloud`/`bq` installed. `bq query --dry_run` returns real bytes-processed at zero cost, which would make the cost-control module `measured` rather than `documented`.
-- `03_sql/` 02, 03, 06, 07 — better on Postgres than SQLite; needs Docker plus `postgres:17`. Module 03 in particular wants a deadlock reproduced across two live `psql` sessions.
-- `02_concurrency/05` — wants `uv python install 3.14t` for a measured GIL versus free-threaded comparison.
+**Blocked on environment**, carried over from before the graph existed and still accurate:
 
-**The three modules written before this contract** — `01_python/01`, `03`, `05` — predate the no-practice rule and contain quiz-style §2 openings ("the questions you cannot answer about it") and rehearsal-oriented interview sections. They need revising to match §3. The eight later modules share the same structure and need the same pass.
+- `10_mongodb/` — needs the Docker daemon running plus `mongo:8` for real `explain("executionStats")`. Without it every plan claim is `documented`, which the graph's own currency pass already confirms independently: `10_mongodb` carries four `absent` nodes (transactions, change streams, time-series collections, the warehouse-ingestion boundary) that the source book never covers at all.
+- `12_bigquery/` — needs `gcloud`/`bq` installed. `bq query --dry_run` returns real bytes-processed at zero cost, which would make the cost-control module `measured` rather than `documented`.
+- `09_sql/` 02, 03, 06, 07 — better on Postgres than SQLite; needs Docker plus `postgres:17`. Module 03 in particular wants a deadlock reproduced across two live `psql` sessions.
+- `06_concurrency/05` — wants `uv python install 3.14t` for a measured GIL versus free-threaded comparison. The graph's own `CONC-05` node is tagged `absent` for exactly this reason: no book on the shelf covers free-threading, because none postdates it.
+
+**The three modules written before this contract** — `05_python/01`, `03`, `05` — predate the no-practice rule and contain quiz-style §2 openings ("the questions you cannot answer about it") and rehearsal-oriented interview sections. They need revising to match §3. The eight later modules share the same structure and need the same pass.
 
 Every module written so far also carries an `## Interview angles` section of spoken answers. Under this contract those are **legacy**: leave existing ones in place, do not add them to new modules, and fold anything genuinely explanatory from them into §2 or §5 when revising.
+
+**Before writing a new module**, check the target node's `Currency` tag and `Δ current` line in
+its subject's `00_knowledge_graph.md`. A `stale-major` or `absent` node means the source books
+cannot carry the module alone — the `Δ current` line already names what to lead with instead,
+and was written for exactly this purpose.

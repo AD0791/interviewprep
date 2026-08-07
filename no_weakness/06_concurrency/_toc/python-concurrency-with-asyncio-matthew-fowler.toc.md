@@ -1,0 +1,238 @@
+# TOC — Python_Concurrency_with_asyncio_Matthew_Fowler.pdf
+
+*Extracted by `_tools/extract_toc.py` (outline). 234 entries. Machine-generated — do not hand-edit.*
+
+- Python Concurrency with asyncio  · p1
+- contents  · p7
+- preface  · p13
+- acknowledgments  · p15
+- about this book  · p16
+  - Who should read this book?  · p16
+  - How this book is organized: A road map  · p17
+  - About the code  · p18
+  - liveBook discussion forum  · p18
+- about the author  · p19
+- about the cover illustration  · p20
+- 1 Getting to know asyncio  · p21
+  - 1.1 What is asyncio?  · p22
+  - 1.2 What is I/O-bound and what is CPU-bound?  · p23
+  - 1.3 Understanding concurrency, parallelism, and multitasking  · p24
+    - 1.3.1 Concurrency  · p24
+    - 1.3.2 Parallelism  · p25
+    - 1.3.3 The difference between concurrency and parallelism  · p26
+    - 1.3.4 What is multitasking?  · p27
+    - 1.3.5 The benefits of cooperative multitasking  · p27
+  - 1.4 Understanding processes, threads, multithreading, and multiprocessing  · p28
+    - 1.4.1 Process  · p28
+    - 1.4.2 Thread  · p28
+  - 1.5 Understanding the global interpreter lock  · p32
+    - 1.5.1 Is the GIL ever released?  · p35
+    - 1.5.2 asyncio and the GIL  · p37
+  - 1.6 How single-threaded concurrency works  · p37
+    - 1.6.1 What is a socket?  · p37
+  - 1.7 How an event loop works  · p40
+  - Summary  · p42
+- 2 asyncio basics  · p43
+  - 2.1 Introducing coroutines  · p44
+    - 2.1.1 Creating coroutines with the async keyword  · p44
+    - 2.1.2 Pausing execution with the await keyword  · p46
+  - 2.2 Introducing long-running coroutines with sleep  · p47
+  - 2.3 Running concurrently with tasks  · p50
+    - 2.3.1 The basics of creating tasks  · p50
+    - 2.3.2 Running multiple tasks concurrently  · p51
+  - 2.4 Canceling tasks and setting timeouts  · p53
+    - 2.4.1 Canceling tasks  · p54
+    - 2.4.2 Setting a timeout and canceling with wait_for  · p55
+  - 2.5 Tasks, coroutines, futures, and awaitables  · p57
+    - 2.5.1 Introducing futures  · p57
+    - 2.5.2 The relationship between futures, tasks, and coroutines  · p59
+  - 2.6 Measuring coroutine execution time with decorators  · p60
+  - 2.7 The pitfalls of coroutines and tasks  · p62
+    - 2.7.1 Running CPU-bound code  · p62
+    - 2.7.2 Running blocking APIs  · p64
+  - 2.8 Accessing and manually managing the event loop  · p65
+    - 2.8.1 Creating an event loop manually  · p66
+    - 2.8.2 Accessing the event loop  · p66
+  - 2.9 Using debug mode  · p67
+    - 2.9.1 Using asyncio.run  · p67
+    - 2.9.2 Using command-line arguments  · p67
+    - 2.9.3 Using environment variables  · p68
+  - Summary  · p69
+- 3 A first asyncio application  · p70
+  - 3.1 Working with blocking sockets  · p71
+  - 3.2 Connecting to a server with Telnet  · p73
+    - 3.2.1 Reading and writing data to and from a socket  · p74
+    - 3.2.2 Allowing multiple connections and the dangers of blocking  · p76
+  - 3.3 Working with non-blocking sockets  · p77
+  - 3.4 Using the selectors module to build a socket event loop  · p81
+  - 3.5 An echo server on the asyncio event loop  · p84
+    - 3.5.1 Event loop coroutines for sockets  · p84
+    - 3.5.2 Designing an asyncio echo server  · p85
+    - 3.5.3 Handling errors in tasks  · p87
+  - 3.6 Shutting down gracefully  · p89
+    - 3.6.1 Listening for signals  · p89
+    - 3.6.2 Waiting for pending tasks to finish  · p90
+  - Summary  · p94
+- 4 Concurrent web requests  · p95
+  - 4.1 Introducing aiohttp  · p96
+  - 4.2 Asynchronous context managers  · p97
+    - 4.2.1 Making a web request with aiohttp  · p99
+    - 4.2.2 Setting timeouts with aiohttp  · p101
+  - 4.3 Running tasks concurrently, revisited  · p102
+  - 4.4 Running requests concurrently with gather  · p104
+    - 4.4.1 Handling exceptions with gather  · p106
+  - 4.5 Processing requests as they complete  · p108
+    - 4.5.1 Timeouts with as_completed  · p110
+  - 4.6 Finer-grained control with wait  · p112
+    - 4.6.1 Waiting for all tasks to complete  · p112
+    - 4.6.2 Watching for exceptions  · p114
+    - 4.6.3 Processing results as they complete  · p116
+    - 4.6.4 Handling timeouts  · p119
+    - 4.6.5 Why wrap everything in a task?  · p120
+  - Summary  · p121
+- 5 Non-blocking database drivers  · p122
+  - 5.1 Introducing asyncpg  · p123
+  - 5.2 Connecting to a Postgres database  · p123
+  - 5.3 Defining a database schema  · p124
+  - 5.4 Executing queries with asyncpg  · p127
+  - 5.5 Executing queries concurrently with connection pools  · p129
+    - 5.5.1 Inserting random SKUs into the product database  · p130
+    - 5.5.2 Creating a connection pool to run queries concurrently  · p133
+  - 5.6 Managing transactions with asyncpg  · p138
+    - 5.6.1 Nested transactions  · p139
+    - 5.6.2 Manually managing transactions  · p140
+  - 5.7 Asynchronous generators and streaming result sets  · p142
+    - 5.7.1 Introducing asynchronous generators  · p143
+    - 5.7.2 Using asynchronous generators with a streaming cursor  · p144
+  - Summary  · p147
+- 6 Handling CPU-bound work  · p148
+  - 6.1 Introducing the multiprocessing library  · p149
+  - 6.2 Using process pools  · p151
+    - 6.2.1 Using asynchronous results  · p152
+  - 6.3 Using process pool executors with asyncio  · p153
+    - 6.3.1 Introducing process pool executors  · p153
+    - 6.3.2 Process pool executors with the asyncio event loop  · p154
+  - 6.4 Solving a problem with MapReduce using asyncio  · p156
+    - 6.4.1 A simple MapReduce example  · p157
+    - 6.4.2 The Google Books Ngram dataset  · p159
+    - 6.4.3 Mapping and reducing with asyncio  · p160
+  - 6.5 Shared data and locks  · p165
+    - 6.5.1 Sharing data and race conditions  · p166
+    - 6.5.2 Synchronizing with locks  · p169
+    - 6.5.3 Sharing data with process pools  · p171
+  - 6.6 Multiple processes, multiple event loops  · p174
+  - Summary  · p178
+- 7 Handling blocking work with threads  · p179
+  - 7.1 Introducing the threading module  · p180
+  - 7.2 Using threads with asyncio  · p184
+    - 7.2.1 Introducing the requests library  · p184
+    - 7.2.2 Introducing thread pool executors  · p185
+    - 7.2.3 Thread pool executors with asyncio  · p187
+    - 7.2.4 Default executors  · p188
+  - 7.3 Locks, shared data, and deadlocks  · p189
+    - 7.3.1 Reentrant locks  · p191
+    - 7.3.2 Deadlocks  · p193
+  - 7.4 Event loops in separate threads  · p195
+    - 7.4.1 Introducing Tkinter  · p196
+    - 7.4.2 Building a responsive UI with asyncio and threads  · p198
+  - 7.5 Using threads for CPU-bound work  · p205
+    - 7.5.1 Multithreading with hashlib  · p205
+    - 7.5.2 Multithreading with NumPy  · p208
+  - Summary  · p210
+- 8 Streams  · p211
+  - 8.1 Introducing streams  · p212
+  - 8.2 Transports and protocols  · p212
+  - 8.3 Stream readers and stream writers  · p216
+  - 8.4 Non-blocking command-line input  · p218
+    - 8.4.1 Terminal raw mode and the read coroutine  · p222
+  - 8.5 Creating servers  · p229
+  - 8.6 Creating a chat server and client  · p231
+  - Summary  · p236
+- 9 Web applications  · p237
+  - 9.1 Creating a REST API with aiohttp  · p238
+    - 9.1.1 What is REST?  · p238
+    - 9.1.2 aiohttp server basics  · p239
+    - 9.1.3 Connecting to a database and returning results  · p240
+    - 9.1.4 Comparing aiohttp with Flask  · p246
+  - 9.2 The asynchronous server gateway interface  · p248
+    - 9.2.1 How does ASGI compare to WSGI?  · p248
+  - 9.3 ASGI with Starlette  · p250
+    - 9.3.1 A REST endpoint with Starlette  · p250
+    - 9.3.2 WebSockets with Starlette  · p251
+  - 9.4 Django asynchronous views  · p255
+    - 9.4.1 Running blocking work in an asynchronous view  · p260
+    - 9.4.2 Using async code in synchronous views  · p262
+  - Summary  · p263
+- 10 Microservices  · p264
+  - 10.1 Why microservices?  · p265
+    - 10.1.1 Complexity of code  · p265
+    - 10.1.2 Scalability  · p266
+    - 10.1.3 Team and stack independence  · p266
+    - 10.1.4 How can asyncio help?  · p266
+  - 10.2 Introducing the backend-for-frontend pattern  · p266
+  - 10.3 Implementing the product listing API  · p268
+    - 10.3.1 User favorite service  · p268
+    - 10.3.2 Implementing the base services  · p269
+    - 10.3.3 Implementing the backend-for-frontend service  · p273
+    - 10.3.4 Retrying failed requests  · p278
+    - 10.3.5 The circuit breaker pattern  · p281
+  - Summary  · p285
+- 11 Synchronization  · p287
+  - 11.1 Understanding single-threaded concurrency bugs  · p288
+  - 11.2 Locks  · p292
+  - 11.3 Limiting concurrency with semaphores  · p296
+    - 11.3.1 Bounded semaphores  · p298
+  - 11.4 Notifying tasks with events  · p300
+  - 11.5 Conditions  · p305
+  - Summary  · p309
+- 12 Asynchronous queues  · p310
+  - 12.1 Asynchronous queue basics  · p311
+    - 12.1.1 Queues in web applications  · p317
+    - 12.1.2 A web crawler queue  · p320
+  - 12.2 Priority queues  · p323
+  - 12.3 LIFO queues  · p329
+  - Summary  · p331
+- 13 Managing subprocesses  · p332
+  - 13.1 Creating a subprocess  · p333
+    - 13.1.1 Controlling standard output  · p335
+    - 13.1.2 Running subprocesses concurrently  · p338
+  - 13.2 Communicating with subprocesses  · p342
+  - Summary  · p345
+- 14 Advanced asyncio  · p347
+  - 14.1 APIs with coroutines and functions  · p348
+  - 14.2 Context variables  · p350
+  - 14.3 Forcing an event loop iteration  · p351
+  - 14.4 Using different event loop implementations  · p353
+  - 14.5 Creating a custom event loop  · p354
+    - 14.5.1 Coroutines and generators  · p355
+    - 14.5.2 Generator-based coroutines are deprecated  · p355
+    - 14.5.3 Custom awaitables  · p357
+    - 14.5.4 Using sockets with futures  · p360
+    - 14.5.5 A task implementation  · p362
+    - 14.5.6 Implementing an event loop  · p363
+    - 14.5.7 Implementing a server with a custom event loop  · p366
+  - Summary  · p368
+- index  · p369
+  - A  · p369
+  - B  · p370
+  - C  · p370
+  - D  · p371
+  - E  · p372
+  - F  · p372
+  - G  · p372
+  - H  · p372
+  - I  · p372
+  - J  · p373
+  - K  · p373
+  - L  · p373
+  - M  · p373
+  - N  · p373
+  - O  · p373
+  - P  · p373
+  - Q  · p374
+  - R  · p374
+  - S  · p374
+  - T  · p375
+  - U  · p375
+  - V  · p376
+  - W  · p376

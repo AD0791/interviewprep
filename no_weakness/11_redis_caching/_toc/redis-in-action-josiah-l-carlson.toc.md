@@ -1,0 +1,227 @@
+# TOC — Redis in Action - Josiah L. Carlson.pdf
+
+*Extracted by `_tools/extract_toc.py` (outline). 223 entries. Machine-generated — do not hand-edit.*
+
+- Redis in Action  · p1
+- brief contents  · p8
+- contents  · p10
+- foreword  · p16
+- preface  · p18
+- acknowledgments  · p20
+- about this book  · p22
+  - Roadmap  · p23
+  - Code conventions and downloads  · p24
+  - Author Online  · p24
+  - About the author  · p25
+- about the cover illustration  · p26
+- Part 1: Getting started  · p28
+  - Chapter 1: Getting to know Redis  · p30
+    - 1.1 What is Redis?  · p31
+      - 1.1.1 Redis compared to other databases and software  · p31
+      - 1.1.2 Other features  · p33
+      - 1.1.3 Why Redis?  · p33
+    - 1.2 What Redis data structures look like  · p34
+      - 1.2.1 Strings in Redis  · p36
+      - 1.2.2 Lists in Redis  · p37
+      - 1.2.3 Sets in Redis  · p38
+      - 1.2.4 Hashes in Redis  · p39
+      - 1.2.5 Sorted sets in Redis  · p40
+    - 1.3 Hello Redis  · p42
+      - 1.3.1 Voting on articles  · p42
+      - 1.3.2 Posting and fetching articles  · p46
+      - 1.3.3 Grouping articles  · p47
+    - 1.4 Getting help  · p49
+    - 1.5 Summary  · p49
+  - Chapter 2: Anatomy of a Redis web application  · p51
+    - 2.1 Login and cookie caching  · p52
+    - 2.2 Shopping carts in Redis  · p56
+    - 2.3 Web page caching  · p57
+    - 2.4 Database row caching  · p58
+    - 2.5 Web page analytics  · p61
+    - 2.6 Summary  · p63
+- Part 2: Core concepts  · p64
+  - Chapter 3: Commands in Redis  · p66
+    - 3.1 Strings  · p67
+    - 3.2 Lists  · p70
+    - 3.3 Sets  · p73
+    - 3.4 Hashes  · p75
+    - 3.5 Sorted sets  · p77
+    - 3.6 Publish/subscribe  · p81
+    - 3.7 Other commands  · p84
+      - 3.7.1 Sorting  · p84
+      - 3.7.2 Basic Redis transactions  · p85
+      - 3.7.3 Expiring keys  · p88
+    - 3.8 Summary  · p89
+  - Chapter 4: Keeping data safe and ensuring performance  · p90
+    - 4.1 Persistence options  · p91
+      - 4.1.1 Persisting to disk with snapshots  · p92
+      - 4.1.2 Append-only file persistence  · p95
+      - 4.1.3 Rewriting/compacting append-only files  · p97
+    - 4.2 Replication  · p97
+      - 4.2.1 Configuring Redis for replication  · p98
+      - 4.2.2 Redis replication startup process  · p99
+      - 4.2.3 Master/slave chains  · p100
+      - 4.2.4 Verifying disk writes  · p101
+    - 4.3 Handling system failures  · p102
+      - 4.3.1 Verifying snapshots and append-only files  · p103
+      - 4.3.2 Replacing a failed master  · p104
+    - 4.4 Redis transactions  · p105
+      - 4.4.1 Defining users and their inventory  · p106
+      - 4.4.2 Listing items in the marketplace  · p107
+      - 4.4.3 Purchasing items  · p109
+    - 4.5 Non-transactional pipelines  · p111
+    - 4.6 Performance considerations  · p114
+    - 4.7 Summary  · p116
+  - Chapter 5: Using Redis for application support  · p117
+    - 5.1 Logging to Redis  · p118
+      - 5.1.1 Recent logs  · p118
+      - 5.1.2 Common logs  · p119
+    - 5.2 Counters and statistics  · p120
+      - 5.2.1 Storing counters in Redis  · p121
+      - 5.2.2 Storing statistics in Redis  · p125
+      - 5.2.3 Simplifying our statistics recording and discovery  · p127
+    - 5.3 IP-to-city and -country lookup  · p129
+      - 5.3.1 Loading the location tables  · p129
+      - 5.3.2 Looking up cities  · p131
+    - 5.4 Service discovery and configuration  · p131
+      - 5.4.1 Using Redis to store configuration information  · p132
+      - 5.4.2 One Redis server per application component  · p133
+      - 5.4.3 Automatic Redis connection management  · p134
+    - 5.5 Summary  · p136
+  - Chapter 6: Application components in Redis  · p137
+    - 6.1 Autocomplete  · p138
+      - 6.1.1 Autocomplete for recent contacts  · p138
+      - 6.1.2 Address book autocomplete  · p140
+    - 6.2 Distributed locking  · p143
+      - 6.2.1 Why locks are important  · p144
+      - 6.2.2 Simple locks  · p146
+      - 6.2.3 Building a lock in Redis  · p147
+      - 6.2.4 Fine-grained locking  · p150
+      - 6.2.5 Locks with timeouts  · p153
+    - 6.3 Counting semaphores  · p154
+      - 6.3.1 Building a basic counting semaphore  · p154
+      - 6.3.2 Fair semaphores  · p156
+      - 6.3.3 Refreshing semaphores  · p159
+      - 6.3.4 Preventing race conditions  · p159
+    - 6.4 Task queues  · p161
+      - 6.4.1 First-in, first-out queues  · p161
+      - 6.4.2 Delayed tasks  · p164
+    - 6.5 Pull messaging  · p167
+      - 6.5.1 Single-recipient publish/subscribe replacement  · p167
+      - 6.5.2 Multiple-recipient publish/subscribe replacement  · p168
+    - 6.6 Distributing files with Redis  · p173
+      - 6.6.1 Aggregating users by location  · p173
+      - 6.6.2 Sending files  · p175
+      - 6.6.3 Receiving files  · p176
+      - 6.6.4 Processing files  · p177
+    - 6.7 Summary  · p179
+  - Chapter 7: Search-based applications  · p181
+    - 7.1 Searching in Redis  · p182
+      - 7.1.1 Basic search theory  · p182
+      - 7.1.2 Sorting search results  · p188
+    - 7.2 Sorted indexes  · p190
+      - 7.2.1 Sorting search results with ZSETs  · p190
+      - 7.2.2 Non-numeric sorting with ZSETs  · p192
+    - 7.3 Ad targeting  · p194
+      - 7.3.1 What’s an ad server?  · p195
+      - 7.3.2 Indexing ads  · p195
+      - 7.3.3 Targeting ads  · p198
+      - 7.3.4 Learning from user behavior  · p202
+    - 7.4 Job search  · p208
+      - 7.4.1 Approaching the problem one job at a time  · p208
+      - 7.4.2 Approaching the problem like search  · p209
+    - 7.5 Summary  · p210
+  - Chapter 8: Building a simple social network  · p212
+    - 8.1 Users and statuses  · p213
+      - 8.1.1 User information  · p213
+      - 8.1.2 Status messages  · p214
+    - 8.2 Home timeline  · p215
+    - 8.3 Followers/following lists  · p217
+    - 8.4 Posting or deleting a status update  · p219
+    - 8.5 Streaming API  · p223
+      - 8.5.1 Data to be streamed  · p223
+      - 8.5.2 Serving the data  · p224
+      - 8.5.3 Filtering streamed messages  · p227
+    - 8.6 Summary  · p233
+- Part 3: Next steps  · p234
+  - Chapter 9: Reducing memory use  · p236
+    - 9.1 Short structures  · p237
+      - 9.1.1 The ziplist representation  · p237
+      - 9.1.2 The intset encoding for SETs  · p239
+      - 9.1.3 Performance issues for long ziplists and intsets  · p240
+    - 9.2 Sharded structures  · p242
+      - 9.2.1 HASHes  · p243
+      - 9.2.2 SETs  · p246
+    - 9.3 Packing bits and bytes  · p249
+      - 9.3.1 What location information should we store?  · p249
+      - 9.3.2 Storing packed data  · p251
+      - 9.3.3 Calculating aggregates over sharded STRINGs  · p252
+    - 9.4 Summary  · p254
+  - Chapter 10: Scaling Redis  · p255
+    - 10.1 Scaling reads  · p255
+    - 10.2 Scaling writes and memory capacity  · p259
+      - 10.2.1 Handling shard configuration  · p260
+      - 10.2.2 Creating a server-sharded connection decorator  · p261
+    - 10.3 Scaling complex queries  · p263
+      - 10.3.1 Scaling search query volume  · p263
+      - 10.3.2 Scaling search index size  · p263
+      - 10.3.3 Scaling a social network  · p268
+    - 10.4 Summary  · p275
+  - Chapter 11: Scripting Redis with Lua  · p276
+    - 11.1 Adding functionality without writing C  · p277
+      - 11.1.1 Loading Lua scripts into Redis  · p277
+      - 11.1.2 Creating a new status message  · p279
+    - 11.2 Rewriting locks and semaphores with Lua  · p282
+      - 11.2.1 Why locks in Lua?  · p282
+      - 11.2.2 Rewriting our lock  · p283
+      - 11.2.3 Counting semaphores in Lua  · p285
+    - 11.3 Doing away with WATCH/MULTI/EXEC  · p287
+      - 11.3.1 Revisiting group autocomplete  · p287
+      - 11.3.2 Improving the marketplace, again  · p289
+    - 11.4 Sharding LISTs with Lua  · p292
+      - 11.4.1 Structuring a sharded LIST  · p292
+      - 11.4.2 Pushing items onto the sharded LIST  · p293
+      - 11.4.3 Popping items from the sharded LIST  · p295
+      - 11.4.4 Performing blocking pops from the sharded LIST  · p296
+    - 11.5 Summary  · p298
+- appendix A: Quick and dirty setup  · p300
+  - A.1 Installation on Debian or Ubuntu Linux  · p300
+  - A.2 Installing on OS X  · p302
+  - A.3 Installing on Windows  · p303
+    - A.3.1 Drawbacks of Redis on Windows  · p304
+    - A.3.2 Installing Redis on Windows  · p304
+    - A.3.3 Installing Python on Windows  · p305
+  - A.4 Hello Redis  · p306
+- appendix B: Other resources and references  · p308
+  - B.1 Forums for help  · p308
+  - B.2 Introductory topics  · p308
+  - B.3 Queues and other libraries  · p309
+  - B.4 Data visualization and recording  · p309
+  - B.5 Data sources  · p310
+  - B.6 Redis experiences and articles  · p310
+- index  · p311
+  - A  · p311
+  - B  · p311
+  - C  · p311
+  - D  · p312
+  - E  · p312
+  - F  · p314
+  - G  · p316
+  - H  · p316
+  - I  · p316
+  - J  · p317
+  - K  · p317
+  - L  · p317
+  - M  · p317
+  - N  · p317
+  - O  · p317
+  - P  · p317
+  - Q  · p318
+  - R  · p318
+  - S  · p318
+  - T  · p320
+  - U  · p321
+  - V  · p321
+  - W  · p321
+  - X  · p321
+  - Z  · p321

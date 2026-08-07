@@ -1,0 +1,62 @@
+# TOC — redis.pdf
+
+*Extracted by `_tools/extract_toc.py` (outline). 58 entries. Machine-generated — do not hand-edit.*
+
+- About This Book  · p2
+  - License  · p2
+  - About The Author  · p2
+  - With Thanks To  · p2
+  - Latest Version  · p2
+- Introduction  · p3
+- Getting Started  · p4
+  - On Windows  · p4
+  - On *nix and MacOSX  · p4
+  - Running and Connecting to Redis  · p4
+- Redis Drivers  · p6
+- Chapter 1 - The Basics  · p7
+- The Building Blocks  · p8
+  - Databases  · p8
+  - Commands, Keys and Values  · p8
+  - Querying  · p9
+  - Memory and Persistence  · p9
+  - Putting It Together  · p10
+  - In This Chapter  · p10
+- Chapter 2 - The Data Structures  · p11
+  - Strings  · p11
+  - Hashes  · p12
+  - Lists  · p13
+  - Sets  · p13
+  - Sorted Sets  · p14
+  - In This Chapter  · p14
+- Chapter 3 - Leveraging Data Structures  · p15
+  - Big O Notation  · p15
+  - Pseudo Multi Key Queries  · p16
+  - References and Indexes  · p16
+  - Round Trips and Pipelining  · p17
+  - Transactions  · p18
+  - Keys Anti-Pattern  · p19
+  - In This Chapter  · p19
+- Chapter 4 - Beyond The Data Structures  · p20
+  - Expiration  · p20
+  - Publication and Subscriptions  · p20
+  - Monitor and Slow Log  · p21
+  - Sort  · p21
+  - Scan  · p23
+  - In This Chapter  · p24
+- Chapter 5 - Lua Scripting  · p25
+  - Why?  · p25
+  - Eval  · p25
+  - Script Management  · p26
+  - Libraries  · p26
+  - Atomic  · p27
+  - Administration  · p27
+  - In This Chapter  · p27
+- Chapter 6 - Administration  · p28
+  - Configuration  · p28
+  - Authentication  · p28
+  - Size Limitations  · p28
+  - Replication  · p29
+  - Backups  · p29
+  - Scaling and Redis Cluster  · p29
+  - In This Chapter  · p29
+- Conclusion  · p31

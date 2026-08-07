@@ -1,0 +1,165 @@
+# TOC — Data Engineering with Python Work with massive datasets to design data models and automate data pipelines using Python (Crickard, Paul) (Z-Library).pdf
+
+*Extracted by `_tools/extract_toc.py` (outline). 161 entries. Machine-generated — do not hand-edit.*
+
+- Cover  · p1
+- Title Page
+- Copyright and Credits  · p2
+- About Packt  · p3
+- Contributors  · p4
+- Table of Contents  · p7
+- Preface  · p13
+- Section 1: Building Data Pipelines – Extract Transform, and Load  · p19
+- Chapter 01: What is Data Engineering?  · p21
+  - What data engineers do  · p22
+    - Required skills and knowledge to be a data engineer  · p24
+  - Data engineering versus data science  · p25
+  - Data engineering tools  · p25
+    - Programming languages  · p26
+    - Databases  · p26
+    - Data processing engines  · p28
+    - Data pipelines  · p29
+  - Summary  · p33
+- Chapter 02: Building Our Data Engineering Infrastructure  · p35
+  - Installing and configuring Apache NiFi  · p36
+    - A quick tour of NiFi  · p38
+    - PostgreSQL driver  · p45
+  - Installing and configuring Apache Airflow  · p45
+  - Installing and configuring Elasticsearch  · p52
+  - Installing and configuring Kibana  · p54
+  - Installing and configuring PostgreSQL  · p59
+  - Installing pgAdmin 4  · p59
+    - A tour of pgAdmin 4  · p60
+  - Summary  · p62
+- Chapter 03: Reading and Writing Files  · p63
+  - Writing and reading files in Python  · p64
+    - Writing and reading CSVs  · p64
+    - Reading and writing CSVs using pandas DataFrames  · p67
+    - Writing JSON with Python  · p69
+  - Building data pipelines in Apache Airflow  · p73
+  - Handling files using NiFi processors  · p79
+    - Working with CSV in NiFi  · p80
+    - Working with JSON in NiFi  · p86
+  - Summary  · p90
+- Chapter 04: Working with Databases  · p91
+  - Inserting and extracting relational data in Python  · p92
+    - Inserting data into PostgreSQL  · p93
+  - Inserting and extracting NoSQL database data in Python  · p101
+    - Installing Elasticsearch  · p102
+    - Inserting data into Elasticsearch  · p102
+  - Building data pipelines in Apache Airflow  · p109
+    - Setting up the Airflow boilerplate  · p110
+    - Running the DAG  · p112
+  - Handling databases with NiFi processors  · p114
+    - Extracting data from PostgreSQL  · p115
+    - Running the data pipeline  · p118
+  - Summary  · p119
+- Chapter 05: Cleaning, Transforming, and Enriching Data  · p121
+  - Performing exploratory data analysis in Python  · p122
+    - Downloading the data  · p122
+    - Basic data exploration  · p122
+  - Handling common data issues using pandas  · p132
+    - Drop rows and columns  · p133
+    - Creating and modifying columns  · p136
+    - Enriching data  · p141
+  - Cleaning data using Airflow  · p143
+  - Summary  · p146
+- Chapter 06: Building a 311 Data Pipeline  · p147
+  - Building the data pipeline  · p148
+    - Mapping a data type  · p148
+    - Triggering a pipeline  · p149
+    - Querying SeeClickFix  · p150
+    - Transforming the data for Elasticsearch  · p153
+    - Getting every page  · p154
+    - Backfilling data  · p156
+  - Building a Kibana dashboard  · p157
+    - Creating visualizations  · p158
+    - Creating a dashboard  · p164
+  - Summary  · p168
+- Section 2: Deploying Data Pipelines in Production  · p171
+- Chapter 07: Features of a Production Pipeline  · p173
+  - Staging and validating data  · p174
+    - Staging data  · p174
+    - Validating data with Great Expectations  · p179
+  - Building idempotent data pipelines  · p196
+  - Building atomic data pipelines  · p197
+  - Summary  · p199
+- Chapter 08: Version Control with the NiFi Registry  · p201
+  - Installing and configuring the NiFi Registry  · p202
+    - Installing the NiFi Registry  · p202
+    - Configuring the NiFi Registry  · p204
+  - Using the Registry in NiFi  · p205
+    - Adding the Registry to NiFi  · p206
+  - Versioning your data pipelines  · p207
+  - Using git-persistence with the NiFi Registry  · p212
+  - Summary  · p217
+- Chapter 09: Monitoring Data Pipelines  · p219
+  - Monitoring NiFi using the GUI  · p219
+    - Monitoring NiFi with the status bar  · p220
+  - Monitoring NiFi with processors  · p228
+  - Using Python with the NiFi REST API  · p232
+  - Summary  · p238
+- Chapter 10: Deploying Data Pipelines  · p239
+  - Finalizing your data pipelines for production  · p240
+    - Backpressure  · p240
+    - Improving processor groups  · p243
+  - Using the NiFi variable registry  · p248
+  - Deploying your data pipelines  · p250
+    - Using the simplest strategy  · p250
+    - Using the middle strategy  · p252
+    - Using multiple registries  · p255
+  - Summary  · p256
+- Chapter 11: Building a Production Data Pipeline  · p257
+  - Creating a test and production environment  · p258
+    - Creating the databases  · p258
+    - Populating a data lake  · p261
+  - Building a production data pipeline  · p262
+    - Reading the data lake  · p263
+    - Scanning the data lake  · p265
+    - Inserting the data into staging  · p266
+    - Querying the staging database  · p267
+    - Validating the staging data  · p268
+    - Insert Warehouse  · p272
+  - Deploying a data pipeline in production  · p273
+  - Summary  · p274
+- Section 3: Beyond Batch – Building Real-Time Data Pipelines  · p275
+- Chapter 12: Building a Kafka Cluster  · p277
+  - Creating ZooKeeper and Kafka clusters  · p278
+    - Downloading Kafka and setting up the environment  · p279
+    - Configuring ZooKeeper and Kafka  · p280
+    - Starting the ZooKeeper and Kafka clusters  · p283
+  - Testing the Kafka cluster  · p283
+    - Testing the cluster with messages  · p284
+  - Summary  · p285
+- Chapter 13: Streaming Data with Apache Kafka  · p287
+  - Understanding logs  · p288
+  - Understanding how Kafka uses logs  · p290
+    - Topics  · p290
+    - Kafka producers and consumers  · p291
+  - Building data pipelines with Kafka and NiFi  · p293
+    - The Kafka producer  · p294
+    - The Kafka consumer  · p296
+  - Differentiating stream processing from batch processing  · p300
+  - Producing and consuming with Python  · p302
+    - Writing a Kafka producer in Python  · p302
+    - Writing a Kafka consumer in Python  · p304
+  - Summary  · p306
+- Chapter 14: Data Processing with Apache Spark  · p307
+  - Installing and running Spark  · p308
+  - Installing and configuring PySpark  · p312
+  - Processing data with PySpark  · p314
+    - Spark for data engineering  · p316
+  - Summary  · p321
+- Chapter 15: Real-Time Edge Data with MiNiFi, Kafka, and Spark  · p323
+  - Setting up MiNiFi  · p324
+  - Building a MiNiFi task in NiFi  · p326
+  - Summary  · p331
+- Appendix  · p333
+  - Building a NiFi cluster  · p333
+  - The basics of NiFi clustering  · p333
+  - Building a NiFi cluster  · p334
+  - Building a distributed data pipeline  · p340
+  - Managing the distributed data pipeline  · p341
+  - Summary  · p344
+- Other Books You May Enjoy  · p345
+- Index  · p349

@@ -1,0 +1,130 @@
+# TOC — WebSocket - Andrew Lombardi.pdf
+
+*Extracted by `_tools/extract_toc.py` (outline). 126 entries. Machine-generated — do not hand-edit.*
+
+- Copyright  · p4
+- Table of Contents  · p5
+- Preface  · p11
+  - Who Should Read This Book  · p11
+  - Goals of This Book  · p12
+  - Navigating This Book  · p12
+  - Conventions Used in This Book  · p12
+  - Using Code Examples  · p13
+  - Safari® Books Online  · p13
+  - How to Contact Us  · p14
+  - Acknowledgments  · p14
+- Chapter 1. Quick Start  · p15
+  - Getting Node and npm  · p16
+    - Installing on Windows  · p16
+    - Installing on OS X  · p16
+    - Installing on Linux  · p16
+  - Hello, World! Example  · p17
+  - Why WebSocket?  · p21
+  - Summary  · p22
+- Chapter 2. WebSocket API  · p23
+  - Initializing  · p23
+  - Stock Example UI  · p25
+  - WebSocket Events  · p26
+    - Event: Open  · p27
+    - Event: Message  · p28
+    - Event: Error  · p29
+    - Event: PING/PONG  · p29
+    - Event: Close  · p29
+  - WebSocket Methods  · p30
+    - Method: Send  · p30
+    - Method: Close  · p31
+  - WebSocket Attributes  · p32
+    - Attribute: readyState  · p32
+    - Attribute: bufferedAmount  · p33
+    - Attribute: protocol  · p33
+  - Stock Example Server  · p33
+  - Testing for WebSocket Support  · p35
+  - Summary  · p35
+- Chapter 3. Bidirectional Chat  · p37
+  - Long Polling  · p37
+  - Writing a Basic Chat Application  · p38
+  - WebSocket Client  · p41
+  - Client Identity  · p41
+  - Events and Notifications  · p43
+  - The Server  · p44
+  - The Client  · p45
+  - Summary  · p48
+- Chapter 4. STOMP over WebSocket  · p49
+  - Implementing STOMP  · p50
+    - Getting Connected  · p50
+    - Connecting via the Server  · p53
+  - Setting Up RabbitMQ  · p56
+  - Connecting the Server to RabbitMQ  · p58
+    - The Stock Price Daemon  · p61
+  - Processing STOMP Requests  · p63
+  - Client  · p64
+  - Using RabbitMQ with Web-Stomp  · p70
+    - STOMP Client for Web and Node.js  · p71
+    - Installing the Web-Stomp Plug-in  · p71
+    - Echo Client for Web-Stomp  · p71
+  - Summary  · p73
+- Chapter 5. WebSocket Compatibility  · p75
+  - SockJS  · p76
+    - SockJS Chat Server  · p77
+    - SockJS Chat Client  · p80
+  - Socket.IO  · p80
+    - Adobe Flash Socket  · p81
+    - Connecting  · p81
+    - Socket.IO Chat Server  · p82
+    - Socket.IO Chat Client  · p83
+  - Pusher.com  · p84
+    - Channels  · p85
+    - Events  · p86
+    - Pusher Chat Server  · p87
+    - Pusher Chat Client  · p90
+    - Don’t Forget: Pusher Is a Commercial Solution  · p92
+  - Reverse Proxy  · p92
+  - Summary  · p92
+- Chapter 6. WebSocket Security  · p93
+  - TLS and WebSocket  · p93
+    - Generating a Self-Signed Certificate  · p93
+    - Installing on Windows  · p94
+    - Installing on OS X  · p94
+    - Installing on Linux  · p94
+    - Setting up WebSocket over TLS  · p94
+    - WebSocket Server over TLS Example  · p96
+  - Origin-Based Security Model  · p97
+    - Clickjacking  · p99
+    - X-Frame-Options for Framebusting  · p100
+  - Denial of Service  · p101
+  - Frame Masking  · p101
+  - Validating Clients  · p102
+    - Setting Up Dependencies and Inits  · p102
+    - Listening for Web Requests  · p103
+    - WebSocket Server  · p105
+  - Summary  · p106
+- Chapter 7. Debugging and Tools  · p109
+  - The Handshake  · p109
+    - The Server  · p110
+    - The Client  · p111
+    - Download and Configure ZAP  · p113
+  - WebSocket Secure to the Rescue  · p116
+  - Validating the Handshake  · p116
+  - Inspecting Frames  · p117
+    - Masked Payloads  · p117
+  - Closing Connection  · p122
+  - Summary  · p123
+- Chapter 8. WebSocket Protocol  · p125
+  - HTTP 0.9—The Web Is Born  · p125
+  - HTTP 1.0 and 1.1  · p125
+  - WebSocket Open Handshake  · p126
+    - Sec-WebSocket-Key and Sec-WebSocket-Accept  · p127
+    - WebSocket HTTP Headers  · p128
+  - WebSocket Frame  · p130
+    - Fin Bit  · p131
+    - Frame Opcodes  · p131
+    - Masking  · p132
+    - Length  · p132
+    - Fragmentation  · p133
+  - WebSocket Close Handshake  · p133
+  - WebSocket Subprotocols  · p135
+  - WebSocket Extensions  · p136
+  - Alternate Server Implementations  · p137
+  - Summary  · p138
+- Index  · p139
+- About the Author  · p143

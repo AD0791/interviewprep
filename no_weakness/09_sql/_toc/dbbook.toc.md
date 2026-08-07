@@ -1,0 +1,144 @@
+# TOC — dbbook.pdf
+
+*Extracted by `_tools/extract_toc.py` (outline). 140 entries. Machine-generated — do not hand-edit.*
+
+- Contents  · p9
+- Preface  · p19
+- Introduction  · p27
+  - 1.1 Information and data  · p27
+  - 1.2 Databases and database management systems  · p29
+  - 1.3 Data models  · p31
+  - 1.4 Languages and users  · p34
+  - 1.5 Advantages and disadvantages of DBMSs  · p36
+  - 1.6 Bibliography  · p36
+- Part 1: Relational databases  · p39
+- The relational model  · p41
+  - 2.1 The structure of the relational model  · p41
+  - 2.2 Integrity constraints  · p54
+  - 2.3 Conclusions  · p64
+  - 2.4 Bibliography  · p64
+  - 2.5 Exercises  · p65
+- Relational algebra and calculus  · p67
+  - 3.1 Relational algebra  · p68
+  - 3.2 Relational calculus  · p93
+  - 3.3 Datalog  · p103
+  - 3.4 Bibliography  · p106
+  - 3.5 Exercises  · p107
+- SQL  · p111
+  - 4.1 Data definition in SQL  · p113
+  - 4.2 SQL queries  · p126
+  - 4.3 Data modification in SQL  · p154
+  - 4.4 Other definitions of data in SQL  · p157
+  - 4.5 Access control  · p162
+  - 4.6 Use of SQL in programming languages  · p164
+  - 4.7 Summarizing examples  · p173
+  - 4.8 Bibliography  · p176
+  - 4.9 Exercises  · p176
+- Part 2: Database design  · p181
+- Design techniques and models  · p183
+  - 5.1 The database design process  · p184
+  - 5.2 The Entity-Relationship model  · p189
+  - 5.3 Documentation of E-R schemas  · p205
+  - 5.4 Bibliography  · p209
+  - 5.5 Exercises  · p210
+- Conceptual design  · p215
+  - 6.1 Requirements collection and analysis  · p215
+  - 6.2 General criteria for data representation  · p220
+  - 6.3 Design strategies  · p222
+  - 6.4 Quality of a conceptual schema  · p229
+  - 6.5 A comprehensive method for conceptual design  · p230
+  - 6.6 An example of conceptual design  · p231
+  - 6.7 CASE tools for database design  · p235
+  - 6.8 Bibliography  · p237
+  - 6.9 Exercises  · p237
+- Logical design  · p243
+  - 7.1 Performance analysis on E-R schemas  · p244
+  - 7.2 Restructuring of E-R schemas  · p248
+  - 7.3 Translation into the relational model  · p260
+  - 7.4 An example of logical design  · p271
+  - 7.5 Logical design using CASE tools  · p276
+  - 7.6 Bibliography  · p277
+  - 7.7 Exercises  · p277
+- Normalization  · p281
+  - 8.1 Redundancies and anomalies  · p282
+  - 8.2 Functional dependencies  · p283
+  - 8.3 Boyce–Codd normal form  · p285
+  - 8.4 Decomposition properties  · p288
+  - 8.5 Third normal form  · p293
+  - 8.6 Database design and normalization  · p296
+  - 8.7 Bibliography  · p302
+  - 8.8 Exercises  · p302
+- Part 3: Database technology  · p307
+- Technology of a database server  · p309
+  - 9.1 Definition of transactions  · p310
+  - 9.2 Concurrency control  · p313
+  - 9.3 Buffer management  · p333
+  - 9.4 Reliability control system  · p337
+  - 9.5 Physical access structures  · p346
+  - 9.6 Query optimization  · p358
+  - 9.7 Physical database design  · p367
+  - 9.8 Bibliography  · p369
+  - 9.9 Exercises  · p370
+- Distributed architectures  · p375
+  - 10.1 Client-server architecture  · p377
+  - 10.2 Distributed databases  · p379
+  - 10.3 Technology of distributed databases  · p387
+  - 10.4 Two-phase commit protocol  · p395
+  - 10.5 Interoperability  · p403
+  - 10.6 Co-operation among pre-existing systems  · p407
+  - 10.7 Parallelism  · p409
+  - 10.8 Replicated databases  · p414
+  - 10.9 Bibliography  · p417
+  - 10.10 Exercises  · p417
+- Part 4: Database evolution  · p421
+- Object databases  · p423
+  - 11.1 Object-Oriented databases (OODBMSs)  · p424
+  - 11.2 The ODMG standard for object-oriented databases  · p443
+  - 11.3 Object-Relational databases (ORDBMSs)  · p449
+  - 11.4 Multimedia databases  · p455
+  - 11.5 Technological extensions for object-oriented databases  · p460
+  - 11.6 Bibliography  · p467
+  - 11.7 Exercises  · p468
+- Active databases  · p473
+  - 12.1 Trigger behaviour in a relational system  · p474
+  - 12.2 Definition and use of triggers in Oracle  · p475
+  - 12.3 Definition and use of triggers in DB2  · p478
+  - 12.4 Advanced features of active rules  · p480
+  - 12.5 Properties of active rules  · p481
+  - 12.6 Applications of active databases  · p483
+  - 12.7 Bibliography  · p487
+  - 12.8 Exercises  · p487
+- Data analysis  · p491
+  - 13.1 Data warehouse architecture  · p493
+  - 13.2 Schemas for data warehouses  · p495
+  - 13.3 Operations for data analysis  · p500
+  - 13.4 Development of the data warehouse  · p505
+  - 13.5 Data mining  · p507
+  - 13.6 Bibliography  · p512
+  - 13.7 Exercises  · p512
+- Databases and the World Wide Web  · p515
+  - 14.1 The Internet and the World Wide Web  · p516
+  - 14.2 Information systems on the Web  · p521
+  - 14.3 Design of data-intensive Web sites  · p524
+  - 14.4 Techniques and tools for database access through the Web  · p534
+  - 14.5 Bibliography  · p542
+  - 14.6 Exercises  · p543
+- Part 5: Appendices & Bibliography  · p545
+- Microsoft Access  · p547
+  - A.1 System characteristics  · p548
+  - A.2 Definition of tables  · p549
+  - A.3 Query definition  · p556
+  - A.4 Forms and reports  · p564
+  - A.5 The definition of macros  · p565
+- DB2 Universal Database  · p569
+  - B.1 DB2 overview  · p570
+  - B.2 Database management with DB2  · p572
+  - B.3 Advanced features of DB2  · p580
+- Oracle PL/SQL  · p591
+  - C.1 Tools architecture of Oracle  · p591
+  - C.2 Base domains  · p593
+  - C.3 The object-relational extension of Oracle  · p595
+  - C.4 PL/SQL language  · p598
+- Bibliography  · p613
+- Index  · p619
+- Using the book  · p639

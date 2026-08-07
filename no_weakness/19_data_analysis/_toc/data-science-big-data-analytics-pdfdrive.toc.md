@@ -1,0 +1,230 @@
+# TOC — Data Science _ Big Data Analytics ( PDFDrive ).pdf
+
+*Extracted by `_tools/extract_toc.py` (scrape[5-20]). 226 entries. Machine-generated — do not hand-edit.*
+
+- Chapter 1 • Introduction to Big Data Analytics . . .  · p1
+  - 1.1 Big Data Overview • • . . . • .. . .  · p2
+    - 1.1.1 Data Structures .. . .. . . . .. . .. . . .. .. . . .. . . . ..  · p5
+    - 1.1.2 Analyst Perspective on Data Repositories . . •. .. ..  · p9
+  - 1.2 State of the Practice in Analytics .  · p11
+    - 1.2.1 Bl Versus Data Science . .. . . . . . ..  · p12
+    - 1.2.2 Current Analytical Architecture . .• . . •.. .  · p13
+    - 1.2.3 Drivers of Big Data . . . .. .. . .  · p15
+    - 1.2.4 Emerging Big Data Ecosystem and a New Approach to Analytics .. . ..  · p16
+  - 1.3 Key Roles for the New Big Data Ecosystem . . ..  · p19
+  - 1.4 Examples of Big Data Analytics . . .  · p22
+- Summary • • .. • ..• .  · p23
+- Exercises .. . • .. .. . . ..•  · p23
+- Bibliography .. • .. •  · p24
+- Chapter 2 • Data Analytics Lifecycle .  · p25
+  - 2.1 Data Analytics Lifecycle Overview . • •.. • • . . .  · p26
+    - 2.1.1 Key Roles for a Successful Anolytics Project . .. . . . .. .. . ..• •. • . .. . .26
+    - 2.1.2 Background and Overview of Data Analytics Lifecyc/e . • .  · p28
+  - 2.2 Phase 1: Discovery .. .. .. . . ..• • .  · p30
+    - 2.2.1 Learning the Business Domain .. . ..•.•. • . .. . . .. . • .30
+    - 2.2.2 Resources . . . . . • •  · p31
+    - 2.2.3 Framing the Problem • . • •.• . .  · p32
+    - 2.2.6 Developing Initial Hypotheses .. . . . .. . . . .. . . . . .. . . • . .  · p35
+  - 2.3 Phase 2: Data Preparation • •..•  · p36
+    - 2.3.1 Preparing the Analytic Sandbox . •. • • ..  · p37
+    - 2.3.2 Performing ETLT •.• • .. .  · p38
+    - 2.3.3 Learning About the Data.. . .. •.• •.• .  · p39
+    - 2.3.4 Data Conditioning .. • . .. . .. . . . •. • .. .40
+    - 2.3.5 Survey and Visualize . . . .. .. .. . . .. . . . •. . .•.. .. .. .. . . .  · p41
+    - 2.3.6 Common Tools for the Data Preparation Phase . . . .. . • •.• .•.. .. .. .. . . .42
+  - 2.4 Phase 3: Model Planning • . . .. • •  · p42
+    - 2.4.1 Data Exploration and Variable Selection . . . . .. . • . . . . .. .. . . . .44
+    - 2.4.2 Model Selection . . .. . . . • • • . .45
+    - 2.4.3 Common Tools for the Model Planning Phase . • . . •. . . . .45
+  - 2.5 Phase 4: Model Building •. • •. . •. .. • • •  · p46
+          - 2.5.1Common Tools for the Mode/Building Phase .. .. . .. . . .. . . .. . . .. . . . .. .  · p48
+  - 2.6 Phase 5: Communicate Results . • . • •. •  · p49
+  - 2.7 Phase 6: Operationalize . .. •. . •. . SO
+  - 2.8 Case Study: Global Innovation Network and Analysis (GINA) •  · p53
+    - 2.8.1 Phase 1: Discovery  · p54
+    - 2.8.2 Phase 2: Data Preparation • . .  · p55
+    - 2.8.3 Phase 3: Model Planning . . . •.•. . . .. . . .. . . .. . .. .. . . . . . . .. . .56
+    - 2.8.4 Phase 4: Mode/Building . •.. .. .. . . . .. . . . .. . . .. . . .56
+    - 2.8.5 Phase 5: Communicate Results .. . . . .. .. . .. . .  · p58
+    - 2.8.6 Phase 6: Operationalize . . • ..• .. . . . .. . . •  · p59
+- Summary • •..•.. • • •• . •  · p60
+- Exercises • .. •. . • . . . . . •  · p61
+- Bibliography • . .•• • . . • ..  · p61
+- Chapter 3 • Review of Basic Data Analytic Methods Using R . . . . . . .. . . .. .. . . . . . . .. .  · p63
+  - 3.1 Introd uction toR  · p64
+    - 3.1.1 RGraphical User Interfaces . . . .. . . .  · p67
+    - 3.1.2 Data Import and Export. . . ..  · p69
+    - 3.1.3 Attribute and Data Types . .. .  · p71
+    - 3.1.4 Descriptive Statistics . . .  · p79
+  - 3.2 Exploratory Data Analysis • . .• • • .  · p80
+    - 3.2.1 Visualization Before Analysis . •  · p82
+    - 3.2.2 Dirty Data .. . • .85
+    - 3.2.3 Visualizing a Single Variable •.. . .. .. . . . •.. . . . .. . .88
+    - 3.2.4 Examining Multiple Varia bles . • . .. . . .. ..  · p91
+    - 3.2.5 Data Exploration Versus Presentation . •. . . . .. . . ..  · p99
+  - 3.3 Statistical Methods for Evaluation . .. .• . .. . ..  · p101
+    - 3.3.1 Hypothesis Testing . .. . .. .  · p102
+    - 3.3.2 Difference ofMeans . .. . .  · p704
+    - 3.3.3 Wilcoxon Rank-Sum Test • .. . . •  · p108
+    - 3.3.4 Type I and Type II Errors . . .. . . . .. ..  · p109
+    - 3.3.5 Power and Sample Size •.. . . .. . . ..  · p110
+    - 3.3.6 ANOVA . .. . . .. . . . . .. . .. .. . •. • • .  · p110
+- Summary • • .. • • • •  · p114
+- Exercises . . •  · p114
+- Chapter 4 • Advanced Analytical Theory and Methods: Clu stering .. . . .. . .. . . .. . . . . ..  · p117
+  - 4.1 Overview of Clustering ..  · p118
+  - 4.2 K-means .. . . . .  · p118
+    - 4.2.1 Use Cases .. . • • .. . . .. .. .  · p119
+    - 4.2.2 Overview of the Method . . .. .. . .•. . .. .  · p120
+    - 4.2.3 Determining the Number of Clusters. . . .. .. •. • . .. .  · p123
+    - 4.2.4 Diagnostics .. • .. .. .  · p128
+    - 4.2.5 Reasons to Choose and Cautions .. . .. . . . . . . .. . . . . . .. . .. .. . . •. •. •. . •. • .•. .  · p730
+  - 4.3 Add itional Algorithms . . . . .. . . . .• .. .. ..  · p134
+- Summary .. . .. . ..•.. .  · p135
+- Bibliography .  · p136
+- Chapter 5 • Advanced Analytica l Theory and Methods: Association Ru les  · p137
+  - 5.1 Overview . . .. . .. . . .. ..  · p138
+  - 5.2 Apriori Algorithm . .. . . . . ..  · p140
+  - 5.3 Evaluation of Candidate Rules . .. . .. • .  · p141
+  - 5.4 Applications of Association Rules . . . . .. .. ..  · p143
+  - 5.5 An Example: Transactions in a Grocery Store . . .  · p143
+    - 5.5.1 The Groceries Dataset . . .. • • . •  · p144
+    - 5.5.2 Frequent ltemset Generation . . .. . . •. • •  · p146
+    - 5.5.3 Rule Generation and Visualization . . . .•. • .•. • . .. .  · p752
+  - 5.6 Validation and Testing . . . .  · p157
+  - 5.7 Diagnostics .. . .. . . . . .. . . .. . . .  · p158
+- Exercises . . . . . .  · p159
+- Chapter 6 • Advanced Analytical Theory and Methods: Regression .  · p161
+  - 6.1 Linear Regression . . .. . .. .. . .. .  · p162
+    - 6.1.1 UseCases . . . . . . .. . .. . .. . . .. . /62
+    - 6.1.2 Model Description .. .. . .. . . . .. . .. . . •. . •.•.• . . .• . .. .  · p163
+    - 6.1.3 Diagnostics . .. . . . . . . •.•.• •. •.• .• . •.•.. . .. . . . . . . . .  · p773
+  - 6.2 Logistic Regression . . .. .. ..  · p178
+    - 6.2.1 Use Cases .  · p179
+    - 6.2.2 Model Description .. • . .. .. •. . .•. • • .•  · p179
+    - 6.2.3 Diagnostics . . .. •. •. •. .• .•  · p181
+  - 6.3 Reasons to Choose and Cautions . . .. .  · p188
+  - 6.4 Additional Regression Models .. . . .  · p189
+- Chapter 7 • Advanced Ana lytical Theory and Methods: Classification . .  · p191
+  - 7.1 Decision Trees ..  · p192
+    - 7.1.1 Overview ofa Decision Tree . .. . .. .  · p193
+    - 7.1.2 The General Algorithm . ..•. .• .. .. . .. . .  · p197
+    - 7.1.3 Decision Tree Algorithms .. . .. •. . .•.. •. • . . ..  · p203
+    - 7.1.4 Evaluating a Decision Tree . . • . . • . . . . . . .  · p204
+    - 7.1.5 Decision Trees in R . . . .. .. .. . ..  · p206
+  - 7.2 Na'lve Bayes . . . . . .. . . .. .  · p211
+    - 7.2.1 Bayes' Theorem . . .. . .  · p212
+    - 7.2.2 Nai've Bayes Classifier • . • .. .  · p214
+    - 7.2.3 Smoothing . . .. . . .. . .. •. .. .. .  · p277
+    - 7.2.4 Diagnostics.. . . .. . .• •.• • • . . .  · p217
+    - 7.2.5 Nai've Bayes in R . . .. . • .. . •.• •.•.. .. . .. •. •.• . .. .278
+  - 7.3 Diagnostics of Classifiers • • • • .. • •.  · p224
+  - 7.4 Additional Classification Methods • • • • •  · p228
+- Summary • • .. •  · p229
+- Exercises • . . . •  · p230
+- Bibliography . • . . •  · p231
+- Chapter 8 • Advanced Analytical Theory and Methods: Time Series Analysis . . .. . . .. .  · p233
+  - 8.1 Overview of Time Series Analysis  · p234
+    - 8.1.1 Box-Jenkins Methodology . .. . . ..  · p235
+  - 8.2 ARIMA Model. . .. . •..• .. . • • . ..•  · p236
+    - 8.2.1 Autocorrelation Function (ACF).. . . ..  · p236
+    - 8.2.2 Autoregressive Models. . . . .. •. . .. . . .. . .  · p238
+    - 8.2.3 Moving Average Models . .. .. . • . .239
+    - 8.2.4 ARMA and ARIMA Models . • • •  · p241
+    - 8.2.5 Building and Evaluating an ARIMA Model . .• •. •. . •  · p244
+    - 8.2.6 Reasons to Choose and Cautions .. . .. . .. . . .. . . .•.•. •.. . •. . .252
+  - 8.3 Additional Methods . .. .. .. . . . .  · p253
+- Summary .. • ..• .. •  · p254
+- Exercises . . •. .. • .. . . .. • . .•  · p254
+- Chapter 9 • Advanced Analytical Theory and Methods: Text Analysis . . .. .. .. . .  · p255
+  - 9.1 Text Analysis Steps . . . . . .•  · p257
+  - 9.2 A Text Analysis Example • .. •  · p259
+  - 9.3 Collecting Raw Text .. 00 00 00  · p260
+- 00 ••••• 00 ••• ••• ••• ••••• 00 ••••• 00 ••••• •• ••• 00 •••
+  - 9.4 Representing Text . •.. ..  · p264
+  - 9.5 Term Frequency-Inverse Document Freq uency (TFIDF) • • .•. .  · p269
+  - 9.6 Categorizing Documents by Topics .. .• . . • •.. . . .. . .  · p274
+  - 9.7 Determining Sentiments . . • •..• .. .. .. •.. • •.. . . ..  · p277
+  - 9.8 Gaining Insights .. •..• .. • . .  · p283
+- Summary . . • • . . . • .  · p290
+- Exercises • . . . .. •..• . • . .  · p290
+- Bibliography •. ..• . . . . .. . . .  · p291
+- Chapter 10 • Advanced Analytics-Technology and Tools: MapReduce and Hadoop . . .  · p295
+  - 10.1 Analytics for Unstructured Data . 00 .. .. 00 ••••• 00. 296 00 ••• 00 00 00 00 •• 00 .. .
+    - 10.1.1 UseCasesoo .. 00.00 00 ••••• 00.00 00 •••••• 00 ••••••• 00 •••296 00 • • 00.00 .. . 00 . .. 00.
+    - 10.1.2 MapReduce . .. .. . • •.• •.•. • .  · p298
+    - 70.7.3 Apache Hadoop . . . .. .. . . .. . . .• • .. . •  · p300
+  - 10.2 The Hadoop Ecosystem • . . • .. • . •. .. .. . ••  · p306
+    - 70.2.1 Pig . . . .. . . • . •.•  · p306
+    - 70.2.2 Hive . • . •.• • •. . .. . .. . . .. . ..  · p308
+    - 70.2.3 HBase .. 00 .. . . 00 ••••••••••••••• 00 •••••• 00  · p317
+    - 10.2.4 Mahout .. 00 • •• • ••••••••••• 00 . . . .. .  · p319
+  - 10.3 NoSOL • • • •  · p322
+- Summary • • • • •  · p323
+- Exercises • • •  · p324
+- Bibliography • • • • • • ..•  · p324
+- Chapter 11 • Advanced Analytics-Technology and Tools: In-Database Analytics . . .  · p327
+  - 11.1 SOL Essentials .. . . • ..•  · p328
+    - 77.1.1 Joins .. . .. . . .. .. . .. .. . . .. .. . .. .. . . .. . .. .330
+    - 77.1.2 Set Operations . .. . . .  · p332
+    - 11.1.3 Grouping Extensions .. .. .. . . . . .. .. .334
+  - 11.2 In-Database Text Analysis • . • • . . .. .• . . . •..•  · p338
+- 11 .3 Advanced SOL .. •.. • • . •  · p343
+    - 71.3.1 Window Functions . . . . .. .. . . . .  · p343
+    - 11.3.2 User-Defined Functions and Aggregates •. •. • .. .347
+    - 11.3.3 Ordered Aggregates ..  · p351
+    - 11.3.4 MADiib •. . . . •. • .352
+- Summary •.. • • .. . .  · p356
+- Exercises . .. . .  · p356
+- Bibliography • •. .• • • .. . •. ..• . .. .  · p357
+- Chapter 12 • The Endgame, or Putting It All Together  · p359
+  - 12.1 Communicating and Operationalizing an Analytics Project. . •  · p360
+  - 12.2 Creating the Final Deliverables . .. .. .. .•  · p362
+    - 12.2.1 Developing Core Material for Multiple Audiences • .. •.•  · p364
+    - 12.2.2 Project Goals . . . . . .. . . . .. . . . . .  · p365
+    - 12.2.3 Main Findings . . . . . .. . .. . • . . . . •. • . .. .367
+    - 12.2.4 Approach . .. . . .. . .  · p369
+    - 12.2.5 Model Description . .. . .. . . • .  · p371
+    - 12.2.6 Key Points Supported with Data . . . . . . .. .. .. .372
+    - 12.2.7 Model Details .. . . .. •.• . .372
+    - 12.2.8 Recommendations . . . •.•.• .. . .374
+    - 12.2.9 Additional Tips on Final Presentation . .. . .. . . . . .. . .. . . •. • .375
+    - 12.2.10 Providing Technica15pecificarions and Code . .376
+  - 12.3 Data Visua lization Basics • . .  · p377
+    - 12.3.1 Key Points Supported with Data . . . . .378
+    - 12.3.2 Evolution of a Graph . •.• •. •.• •  · p380
+    - 12.3.3 Common Representation Methods .. .. . . . •. •.. . •. .  · p386
+    - 12.3.4 How to Clean Up a Graphic •. . . . . . . . . .387
+    - 12.3.5 Additional Considerations . .. . . . . •.•. .. . •.• . .392
+- Summary .. • • • . • •  · p393
+- Exercises . . . .. .. . . . • . . .. . .. • .  · p394
+- References and Further Reading .. . . .  · p394
+- Bibliography . . . • .. . .. .. . . .  · p394
+- Chapter 3 examines fundamental statistical techniques in the context of the open source Ranalytic software
+- Chapter 12 provides guidance on operationalizing Big Data analytics projects. This chapter focuses on creat·
+  - 1.1 Big Data Overview
+- 23 pairs of 20.5% · s, b·S 1h Jn Afr c.an
+  - 1.1 Big Dat a Overview
+    - 1.1.1 Data Structures
+- 1969 1.2 99 2.2 0.3
+- 1970 1.9 227 8.2 1.8
+- 1971 3.2 569 29.0 8.2
+- 1972 6.5 1,080 73.5 21.9
+- 1973 11.2 1,437 65.4 26.6
+- 1974 10.6 1,403 63.6 33.6
+- 1975 12.0 1,785 84.3 50.3
+- 1976 16.0 2,453 104.8 73.4
+- 1977 23.7 2,791 170.4 114.4
+- 1978 22.4 2,333 120.3 100.3
+- 1979 23.0 2,126 121.8 108.6
+- 1980 21.6 1,922 108.2 110.1
+- 1981 20.6 1,726 90.3 105.9
+- 1982 14.4 1,397 68.2 87.1
+- 1983 14.9 1,401 71.3 93.4
+- 1984 15.1 1,422 73.8 96.2
+- 1985 16.0 1,462 77.2 111.5
+- 1986 16.1 1,509 77.1 114.7
+- 1987 16.9 1,560 79.9 129.3
+- 1988 17.2 1,577 80.3 133.3
+- 1989 18.5 1.652 86.0 143.8
+- 1990 19? 1 ~Q? 91? 1~11

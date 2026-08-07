@@ -1,0 +1,122 @@
+# TOC — dokumen.pub_grpc-up-amp-running-building-cloud-native-applications-with-go-and-java-for-docker-and-kubernetes-9781492058335-b-6485645.pdf
+
+*Extracted by `_tools/extract_toc.py` (outline). 118 entries. Machine-generated — do not hand-edit.*
+
+- Copyright  · p4
+- Table of Contents  · p5
+- Preface  · p9
+  - Why Did We Write This Book?  · p9
+  - Who Is This Book For?  · p9
+  - How This Book Is Organized  · p10
+  - Using Code Examples  · p11
+  - Conventions Used in This Book  · p11
+  - O’Reilly Online Learning  · p12
+  - How to Contact Us  · p13
+  - Acknowledgments  · p13
+- Chapter 1. Introduction to gRPC  · p15
+  - What Is gRPC?  · p16
+    - Service Definition  · p18
+    - gRPC Server  · p19
+    - gRPC Client  · p21
+    - Client–Server Message Flow  · p22
+  - Evolution of Inter-Process Communication  · p22
+    - Conventional RPC  · p22
+    - SOAP  · p23
+    - REST  · p23
+    - Inception of gRPC  · p25
+    - Why gRPC?  · p25
+    - gRPC Versus Other Protocols: GraphQL and Thrift  · p28
+  - gRPC in the Real World  · p29
+    - Netflix  · p30
+    - etcd  · p30
+    - Dropbox  · p31
+  - Summary  · p31
+- Chapter 2. Getting Started with gRPC  · p33
+  - Creating the Service Definition  · p34
+    - Defining Messages  · p35
+    - Defining Services  · p36
+  - Implementation  · p38
+    - Developing a Service  · p39
+    - Developing a gRPC Client  · p50
+  - Building and Running  · p53
+    - Building a Go Server  · p54
+    - Building a Go Client  · p54
+    - Running a Go Server and Client  · p54
+    - Building a Java Server  · p55
+    - Building a Java Client  · p55
+    - Running a Java Server and Client  · p55
+  - Summary  · p56
+- Chapter 3. gRPC Communication Patterns  · p57
+  - Simple RPC (Unary RPC)  · p57
+  - Server-Streaming RPC  · p60
+  - Client-Streaming RPC  · p63
+  - Bidirectional-Streaming RPC  · p67
+  - Using gRPC for Microservices Communication  · p72
+  - Summary  · p74
+- Chapter 4. gRPC: Under the Hood  · p75
+  - RPC Flow  · p76
+  - Message Encoding Using Protocol Buffers  · p77
+    - Encoding Techniques  · p81
+  - Length-Prefixed Message Framing  · p83
+  - gRPC over HTTP/2  · p85
+    - Request Message  · p86
+    - Response Message  · p88
+    - Understanding the Message Flow in gRPC Communication Patterns  · p90
+  - gRPC Implementation Architecture  · p93
+  - Summary  · p94
+- Chapter 5. gRPC: Beyond the Basics  · p95
+  - Interceptors  · p95
+    - Server-Side Interceptors  · p96
+    - Client-Side Interceptors  · p101
+  - Deadlines  · p104
+  - Cancellation  · p107
+  - Error Handling  · p109
+  - Multiplexing  · p113
+  - Metadata  · p115
+    - Creating and Retrieving Metadata  · p116
+    - Sending and Receiving Metadata: Client Side  · p117
+    - Sending and Receiving Metadata: Server Side  · p118
+    - Name Resolver  · p120
+  - Load Balancing  · p121
+    - Load-Balancer Proxy  · p122
+    - Client-Side Load Balancing  · p123
+    - Compression  · p125
+  - Summary  · p125
+- Chapter 6. Secured gRPC  · p127
+  - Authenticating a gRPC Channel with TLS  · p127
+    - Enabling a One-Way Secured Connection  · p128
+    - Enabling an mTLS Secured Connection  · p131
+  - Authenticating gRPC Calls  · p136
+    - Using Basic Authentication  · p136
+    - Using OAuth 2.0  · p141
+    - Using JWT  · p144
+    - Using Google Token-Based Authentication  · p145
+  - Summary  · p146
+- Chapter 7. Running gRPC in Production  · p149
+  - Testing gRPC Applications  · p149
+    - Testing a gRPC Server  · p149
+    - Testing a gRPC Client  · p151
+    - Load Testing  · p152
+    - Continuous Integration  · p153
+  - Deployment  · p153
+    - Deploying on Docker  · p154
+    - Deploying on Kubernetes  · p156
+  - Observability  · p162
+    - Metrics  · p162
+    - Logs  · p170
+    - Tracing  · p171
+  - Debugging and Troubleshooting  · p175
+    - Enabling Extra Logging  · p175
+  - Summary  · p176
+- Chapter 8. The gRPC Ecosystem  · p177
+  - gRPC Gateway  · p177
+  - HTTP/JSON Transcoding for gRPC  · p184
+  - The gRPC Server Reflection Protocol  · p185
+  - gRPC Middleware  · p188
+  - Health Checking Protocol  · p190
+  - gRPC Health Probe  · p192
+  - Other Ecosystem Projects  · p194
+  - Summary  · p194
+- Index  · p197
+- About the Authors  · p203
+- Colophon  · p203

@@ -1,0 +1,548 @@
+# TOC — luciano-ramalho-fluent-python_-clear-concise-and-effective-programming-oreilly-media-2022.pdf
+
+*Extracted by `_tools/extract_toc.py` (outline). 544 entries. Machine-generated — do not hand-edit.*
+
+- Cover  · p1
+- Copyright  · p4
+- Table of Contents  · p7
+- Preface  · p21
+  - Who This Book Is For  · p22
+  - Who This Book Is Not For  · p22
+  - Five Books in One  · p22
+    - How the Book Is Organized  · p23
+  - Hands-On Approach  · p24
+  - Soapbox: My Personal Perspective  · p25
+  - Companion Website: fluentpython.com  · p25
+  - Conventions Used in This Book  · p25
+  - Using Code Examples  · p26
+  - O’Reilly Online Learning  · p27
+  - How to Contact Us  · p27
+  - Acknowledgments  · p27
+    - Acknowledgments for the First Edition  · p29
+- Part I. Data Structures  · p31
+  - Chapter 1. The Python Data Model  · p33
+    - What’s New in This Chapter  · p34
+    - A Pythonic Card Deck  · p35
+    - How Special Methods Are Used  · p38
+      - Emulating Numeric Types  · p39
+      - String Representation  · p42
+      - Boolean Value of a Custom Type  · p43
+      - Collection API  · p44
+    - Overview of Special Methods  · p45
+    - Why len Is Not a Method  · p47
+    - Chapter Summary  · p48
+    - Further Reading  · p48
+  - Chapter 2. An Array of Sequences  · p51
+    - What’s New in This Chapter  · p52
+    - Overview of Built-In Sequences  · p52
+    - List Comprehensions and Generator Expressions  · p55
+      - List Comprehensions and Readability  · p55
+      - Listcomps Versus map and filter  · p57
+      - Cartesian Products  · p57
+      - Generator Expressions  · p59
+    - Tuples Are Not Just Immutable Lists  · p60
+      - Tuples as Records  · p60
+      - Tuples as Immutable Lists  · p62
+      - Comparing Tuple and List Methods  · p64
+    - Unpacking Sequences and Iterables  · p65
+      - Using * to Grab Excess Items  · p66
+      - Unpacking with * in Function Calls and Sequence Literals  · p67
+      - Nested Unpacking  · p67
+    - Pattern Matching with Sequences  · p68
+      - Pattern Matching Sequences in an Interpreter  · p73
+    - Slicing  · p77
+      - Why Slices and Ranges Exclude the Last Item  · p77
+      - Slice Objects  · p78
+      - Multidimensional Slicing and Ellipsis  · p79
+      - Assigning to Slices  · p80
+    - Using + and * with Sequences  · p80
+      - Building Lists of Lists  · p81
+      - Augmented Assignment with Sequences  · p83
+      - A += Assignment Puzzler  · p84
+    - list.sort Versus the sorted Built-In  · p86
+    - When a List Is Not the Answer  · p89
+      - Arrays  · p89
+      - Memory Views  · p92
+      - NumPy  · p94
+      - Deques and Other Queues  · p97
+    - Chapter Summary  · p100
+    - Further Reading  · p101
+  - Chapter 3. Dictionaries and Sets  · p107
+    - What’s New in This Chapter  · p108
+    - Modern dict Syntax  · p108
+      - dict Comprehensions  · p109
+      - Unpacking Mappings  · p110
+      - Merging Mappings with |  · p110
+    - Pattern Matching with Mappings  · p111
+    - Standard API of Mapping Types  · p113
+      - What Is Hashable  · p114
+      - Overview of Common Mapping Methods  · p115
+      - Inserting or Updating Mutable Values  · p117
+    - Automatic Handling of Missing Keys  · p120
+      - defaultdict: Another Take on Missing Keys  · p120
+      - The __missing__ Method  · p121
+      - Inconsistent Usage of __missing__ in the Standard Library  · p124
+    - Variations of dict  · p125
+      - collections.OrderedDict  · p125
+      - collections.ChainMap  · p125
+      - collections.Counter  · p126
+      - shelve.Shelf  · p127
+      - Subclassing UserDict Instead of dict  · p127
+    - Immutable Mappings  · p129
+    - Dictionary Views  · p131
+    - Practical Consequences of How dict Works  · p132
+    - Set Theory  · p133
+      - Set Literals  · p135
+      - Set Comprehensions  · p136
+    - Practical Consequences of How Sets Work  · p137
+      - Set Operations  · p137
+    - Set Operations on dict Views  · p140
+    - Chapter Summary  · p142
+    - Further Reading  · p143
+  - Chapter 4. Unicode Text Versus Bytes  · p147
+    - What’s New in This Chapter  · p148
+    - Character Issues  · p148
+    - Byte Essentials  · p150
+    - Basic Encoders/Decoders  · p153
+    - Understanding Encode/Decode Problems  · p155
+      - Coping with UnicodeEncodeError  · p155
+      - Coping with UnicodeDecodeError  · p156
+      - SyntaxError When Loading Modules with Unexpected Encoding  · p158
+      - How to Discover the Encoding of a Byte Sequence  · p158
+      - BOM: A Useful Gremlin  · p159
+    - Handling Text Files  · p161
+      - Beware of Encoding Defaults  · p164
+    - Normalizing Unicode for Reliable Comparisons  · p170
+      - Case Folding  · p172
+      - Utility Functions for Normalized Text Matching  · p173
+      - Extreme “Normalization”: Taking Out Diacritics  · p174
+    - Sorting Unicode Text  · p178
+      - Sorting with the Unicode Collation Algorithm  · p180
+    - The Unicode Database  · p180
+      - Finding Characters by Name  · p181
+      - Numeric Meaning of Characters  · p183
+    - Dual-Mode str and bytes APIs  · p185
+      - str Versus bytes in Regular Expressions  · p185
+      - str Versus bytes in os Functions  · p186
+    - Chapter Summary  · p187
+    - Further Reading  · p188
+  - Chapter 5. Data Class Builders  · p193
+    - What’s New in This Chapter  · p194
+    - Overview of Data Class Builders  · p194
+      - Main Features  · p197
+    - Classic Named Tuples  · p199
+    - Typed Named Tuples  · p202
+    - Type Hints 101  · p203
+      - No Runtime Effect  · p203
+      - Variable Annotation Syntax  · p204
+      - The Meaning of Variable Annotations  · p205
+    - More About @dataclass  · p209
+      - Field Options  · p210
+      - Post-init Processing  · p213
+      - Typed Class Attributes  · p215
+      - Initialization Variables That Are Not Fields  · p216
+      - @dataclass Example: Dublin Core Resource Record  · p217
+    - Data Class as a Code Smell  · p220
+      - Data Class as Scaffolding  · p221
+      - Data Class as Intermediate Representation  · p221
+    - Pattern Matching Class Instances  · p222
+      - Simple Class Patterns  · p222
+      - Keyword Class Patterns  · p223
+      - Positional Class Patterns  · p224
+    - Chapter Summary  · p225
+    - Further Reading  · p226
+  - Chapter 6. Object References, Mutability, and Recycling  · p231
+    - What’s New in This Chapter  · p232
+    - Variables Are Not Boxes  · p232
+    - Identity, Equality, and Aliases  · p234
+      - Choosing Between == and is  · p236
+      - The Relative Immutability of Tuples  · p237
+    - Copies Are Shallow by Default  · p238
+      - Deep and Shallow Copies of Arbitrary Objects  · p241
+    - Function Parameters as References  · p243
+      - Mutable Types as Parameter Defaults: Bad Idea  · p244
+      - Defensive Programming with Mutable Parameters  · p246
+    - del and Garbage Collection  · p249
+    - Tricks Python Plays with Immutables  · p251
+    - Chapter Summary  · p253
+    - Further Reading  · p254
+- Part II. Functions as Objects  · p259
+  - Chapter 7. Functions as First-Class Objects  · p261
+    - What’s New in This Chapter  · p262
+    - Treating a Function Like an Object  · p262
+    - Higher-Order Functions  · p264
+      - Modern Replacements for map, filter, and reduce  · p265
+    - Anonymous Functions  · p266
+    - The Nine Flavors of Callable Objects  · p267
+    - User-Defined Callable Types  · p269
+    - From Positional to Keyword-Only Parameters  · p270
+      - Positional-Only Parameters  · p272
+    - Packages for Functional Programming  · p273
+      - The operator Module  · p273
+      - Freezing Arguments with functools.partial  · p277
+    - Chapter Summary  · p279
+    - Further Reading  · p280
+  - Chapter 8. Type Hints in Functions  · p283
+    - What’s New in This Chapter  · p284
+    - About Gradual Typing  · p284
+    - Gradual Typing in Practice  · p285
+      - Starting with Mypy  · p286
+      - Making Mypy More Strict  · p287
+      - A Default Parameter Value  · p288
+      - Using None as a Default  · p290
+    - Types Are Defined by Supported Operations  · p290
+    - Types Usable in Annotations  · p296
+      - The Any Type  · p296
+      - Simple Types and Classes  · p299
+      - Optional and Union Types  · p300
+      - Generic Collections  · p301
+      - Tuple Types  · p304
+      - Generic Mappings  · p306
+      - Abstract Base Classes  · p308
+      - Iterable  · p310
+      - Parameterized Generics and TypeVar  · p312
+      - Static Protocols  · p316
+      - Callable  · p321
+      - NoReturn  · p324
+    - Annotating Positional Only and Variadic Parameters  · p325
+    - Imperfect Typing and Strong Testing  · p326
+    - Chapter Summary  · p327
+    - Further Reading  · p328
+  - Chapter 9. Decorators and Closures  · p333
+    - What’s New in This Chapter  · p334
+    - Decorators 101  · p334
+    - When Python Executes Decorators  · p336
+    - Registration Decorators  · p338
+    - Variable Scope Rules  · p338
+    - Closures  · p341
+    - The nonlocal Declaration  · p345
+      - Variable Lookup Logic  · p346
+    - Implementing a Simple Decorator  · p347
+      - How It Works  · p348
+    - Decorators in the Standard Library  · p350
+      - Memoization with functools.cache  · p350
+      - Using lru_cache  · p353
+      - Single Dispatch Generic Functions  · p354
+    - Parameterized Decorators  · p359
+      - A Parameterized Registration Decorator  · p359
+      - The Parameterized Clock Decorator  · p362
+      - A Class-Based Clock Decorator  · p365
+    - Chapter Summary  · p366
+    - Further Reading  · p366
+  - Chapter 10. Design Patterns with First-Class Functions  · p371
+    - What’s New in This Chapter  · p372
+    - Case Study: Refactoring Strategy  · p372
+      - Classic Strategy  · p372
+      - Function-Oriented Strategy  · p377
+      - Choosing the Best Strategy: Simple Approach  · p380
+      - Finding Strategies in a Module  · p381
+    - Decorator-Enhanced Strategy Pattern  · p383
+    - The Command Pattern  · p385
+    - Chapter Summary  · p387
+    - Further Reading  · p388
+- Part III. Classes and Protocols  · p391
+  - Chapter 11. A Pythonic Object  · p393
+    - What’s New in This Chapter  · p394
+    - Object Representations  · p394
+    - Vector Class Redux  · p395
+    - An Alternative Constructor  · p398
+    - classmethod Versus staticmethod  · p399
+    - Formatted Displays  · p400
+    - A Hashable Vector2d  · p404
+    - Supporting Positional Pattern Matching  · p407
+    - Complete Listing of Vector2d, Version 3  · p408
+    - Private and “Protected” Attributes in Python  · p412
+    - Saving Memory with __slots__  · p414
+      - Simple Measure of __slot__ Savings  · p417
+      - Summarizing the Issues with __slots__  · p418
+    - Overriding Class Attributes  · p419
+    - Chapter Summary  · p421
+    - Further Reading  · p422
+  - Chapter 12. Special Methods for Sequences  · p427
+    - What’s New in This Chapter  · p428
+    - Vector: A User-Defined Sequence Type  · p428
+    - Vector Take #1: Vector2d Compatible  · p429
+    - Protocols and Duck Typing  · p432
+    - Vector Take #2: A Sliceable Sequence  · p433
+      - How Slicing Works  · p434
+      - A Slice-Aware __getitem__  · p436
+    - Vector Take #3: Dynamic Attribute Access  · p437
+    - Vector Take #4: Hashing and a Faster ==  · p441
+    - Vector Take #5: Formatting  · p448
+    - Chapter Summary  · p455
+    - Further Reading  · p456
+  - Chapter 13. Interfaces, Protocols, and ABCs  · p461
+    - The Typing Map  · p462
+    - What’s New in This Chapter  · p463
+    - Two Kinds of Protocols  · p464
+    - Programming Ducks  · p465
+      - Python Digs Sequences  · p466
+      - Monkey Patching: Implementing a Protocol at Runtime  · p468
+      - Defensive Programming and “Fail Fast”  · p470
+    - Goose Typing  · p472
+      - Subclassing an ABC  · p477
+      - ABCs in the Standard Library  · p479
+      - Defining and Using an ABC  · p481
+      - ABC Syntax Details  · p487
+      - Subclassing an ABC  · p488
+      - A Virtual Subclass of an ABC  · p490
+      - Usage of register in Practice  · p493
+      - Structural Typing with ABCs  · p494
+    - Static Protocols  · p496
+      - The Typed double Function  · p496
+      - Runtime Checkable Static Protocols  · p498
+      - Limitations of Runtime Protocol Checks  · p501
+      - Supporting a Static Protocol  · p502
+      - Designing a Static Protocol  · p504
+      - Best Practices for Protocol Design  · p506
+      - Extending a Protocol  · p507
+      - The numbers ABCs and Numeric Protocols  · p508
+    - Chapter Summary  · p511
+    - Further Reading  · p512
+  - Chapter 14. Inheritance: For Better or for Worse  · p517
+    - What’s New in This Chapter  · p518
+    - The super() Function  · p518
+    - Subclassing Built-In Types Is Tricky  · p520
+    - Multiple Inheritance and Method Resolution Order  · p524
+    - Mixin Classes  · p530
+      - Case-Insensitive Mappings  · p530
+    - Multiple Inheritance in the Real World  · p532
+      - ABCs Are Mixins Too  · p532
+      - ThreadingMixIn and ForkingMixIn  · p533
+      - Django Generic Views Mixins  · p534
+      - Multiple Inheritance in Tkinter  · p537
+    - Coping with Inheritance  · p540
+      - Favor Object Composition over Class Inheritance  · p540
+      - Understand Why Inheritance Is Used in Each Case  · p540
+      - Make Interfaces Explicit with ABCs  · p541
+      - Use Explicit Mixins for Code Reuse  · p541
+      - Provide Aggregate Classes to Users  · p541
+      - Subclass Only Classes Designed for Subclassing  · p542
+      - Avoid Subclassing from Concrete Classes  · p543
+      - Tkinter: The Good, the Bad, and the Ugly  · p543
+    - Chapter Summary  · p544
+    - Further Reading  · p545
+  - Chapter 15. More About Type Hints  · p549
+    - What’s New in This Chapter  · p549
+    - Overloaded Signatures  · p550
+      - Max Overload  · p551
+      - Takeaways from Overloading max  · p555
+    - TypedDict  · p556
+    - Type Casting  · p564
+    - Reading Type Hints at Runtime  · p567
+      - Problems with Annotations at Runtime  · p568
+      - Dealing with the Problem  · p570
+    - Implementing a Generic Class  · p571
+      - Basic Jargon for Generic Types  · p574
+    - Variance  · p574
+      - An Invariant Dispenser  · p575
+      - A Covariant Dispenser  · p576
+      - A Contravariant Trash Can  · p577
+      - Variance Review  · p579
+    - Implementing a Generic Static Protocol  · p582
+    - Chapter Summary  · p584
+    - Further Reading  · p585
+  - Chapter 16. Operator Overloading  · p591
+    - What’s New in This Chapter  · p592
+    - Operator Overloading 101  · p592
+    - Unary Operators  · p593
+    - Overloading + for Vector Addition  · p596
+    - Overloading * for Scalar Multiplication  · p602
+    - Using @ as an Infix Operator  · p604
+    - Wrapping-Up Arithmetic Operators  · p606
+    - Rich Comparison Operators  · p607
+    - Augmented Assignment Operators  · p610
+    - Chapter Summary  · p615
+    - Further Reading  · p617
+- Part IV. Control Flow  · p621
+  - Chapter 17. Iterators, Generators, and Classic Coroutines  · p623
+    - What’s New in This Chapter  · p624
+    - A Sequence of Words  · p624
+    - Why Sequences Are Iterable: The iter Function  · p626
+      - Using iter with a Callable  · p628
+    - Iterables Versus Iterators  · p629
+    - Sentence Classes with __iter__  · p633
+      - Sentence Take #2: A Classic Iterator  · p633
+      - Don’t Make the Iterable an Iterator for Itself  · p635
+      - Sentence Take #3: A Generator Function  · p636
+      - How a Generator Works  · p637
+    - Lazy Sentences  · p640
+      - Sentence Take #4: Lazy Generator  · p640
+      - Sentence Take #5: Lazy Generator Expression  · p641
+    - When to Use Generator Expressions  · p643
+    - An Arithmetic Progression Generator  · p645
+      - Arithmetic Progression with itertools  · p648
+    - Generator Functions in the Standard Library  · p649
+    - Iterable Reducing Functions  · p660
+    - Subgenerators with yield from  · p662
+      - Reinventing chain  · p663
+      - Traversing a Tree  · p664
+    - Generic Iterable Types  · p669
+    - Classic Coroutines  · p671
+      - Example: Coroutine to Compute a Running Average  · p673
+      - Returning a Value from a Coroutine  · p676
+      - Generic Type Hints for Classic Coroutines  · p680
+    - Chapter Summary  · p682
+    - Further Reading  · p682
+  - Chapter 18. with, match, and else Blocks  · p687
+    - What’s New in This Chapter  · p688
+    - Context Managers and with Blocks  · p688
+      - The contextlib Utilities  · p693
+      - Using @contextmanager  · p694
+    - Pattern Matching in lis.py: A Case Study  · p699
+      - Scheme Syntax  · p699
+      - Imports and Types  · p701
+      - The Parser  · p701
+      - The Environment  · p703
+      - The REPL  · p705
+      - The Evaluator  · p706
+      - Procedure: A Class Implementing a Closure  · p715
+      - Using OR-patterns  · p716
+    - Do This, Then That: else Blocks Beyond if  · p717
+    - Chapter Summary  · p719
+    - Further Reading  · p720
+  - Chapter 19. Concurrency Models in Python  · p725
+    - What’s New in This Chapter  · p726
+    - The Big Picture  · p726
+    - A Bit of Jargon  · p727
+      - Processes, Threads, and Python’s Infamous GIL  · p729
+    - A Concurrent Hello World  · p731
+      - Spinner with Threads  · p731
+      - Spinner with Processes  · p734
+      - Spinner with Coroutines  · p736
+      - Supervisors Side-by-Side  · p741
+    - The Real Impact of the GIL  · p743
+      - Quick Quiz  · p743
+    - A Homegrown Process Pool  · p746
+      - Process-Based Solution  · p748
+      - Understanding the Elapsed Times  · p748
+      - Code for the Multicore Prime Checker  · p749
+      - Experimenting with More or Fewer Processes  · p753
+      - Thread-Based Nonsolution  · p754
+    - Python in the Multicore World  · p755
+      - System Administration  · p756
+      - Data Science  · p757
+      - Server-Side Web/Mobile Development  · p758
+      - WSGI Application Servers  · p760
+      - Distributed Task Queues  · p762
+    - Chapter Summary  · p763
+    - Further Reading  · p764
+      - Concurrency with Threads and Processes  · p764
+      - The GIL  · p766
+      - Concurrency Beyond the Standard Library  · p766
+      - Concurrency and Scalability Beyond Python  · p768
+  - Chapter 20. Concurrent Executors  · p773
+    - What’s New in This Chapter  · p773
+    - Concurrent Web Downloads  · p774
+      - A Sequential Download Script  · p776
+      - Downloading with concurrent.futures  · p779
+      - Where Are the Futures?  · p781
+    - Launching Processes with concurrent.futures  · p784
+      - Multicore Prime Checker Redux  · p785
+    - Experimenting with Executor.map  · p788
+    - Downloads with Progress Display and Error Handling  · p792
+      - Error Handling in the flags2 Examples  · p796
+      - Using futures.as_completed  · p799
+    - Chapter Summary  · p802
+    - Further Reading  · p802
+  - Chapter 21. Asynchronous Programming  · p805
+    - What’s New in This Chapter  · p806
+    - A Few Definitions  · p807
+    - An asyncio Example: Probing Domains  · p808
+      - Guido’s Trick to Read Asynchronous Code  · p810
+    - New Concept: Awaitable  · p811
+    - Downloading with asyncio and HTTPX  · p812
+      - The Secret of Native Coroutines: Humble Generators  · p814
+      - The All-or-Nothing Problem  · p815
+    - Asynchronous Context Managers  · p816
+    - Enhancing the asyncio Downloader  · p817
+      - Using asyncio.as_completed and a Thread  · p818
+      - Throttling Requests with a Semaphore  · p820
+      - Making Multiple Requests for Each Download  · p824
+    - Delegating Tasks to Executors  · p827
+    - Writing asyncio Servers  · p829
+      - A FastAPI Web Service  · p830
+      - An asyncio TCP Server  · p834
+    - Asynchronous Iteration and Asynchronous Iterables  · p841
+      - Asynchronous Generator Functions  · p842
+      - Async Comprehensions and Async Generator Expressions  · p848
+    - async Beyond asyncio: Curio  · p851
+    - Type Hinting Asynchronous Objects  · p854
+    - How Async Works and How It Doesn’t  · p855
+      - Running Circles Around Blocking Calls  · p855
+      - The Myth of I/O-Bound Systems  · p856
+      - Avoiding CPU-Bound Traps  · p856
+    - Chapter Summary  · p857
+    - Further Reading  · p858
+- Part V. Metaprogramming  · p863
+  - Chapter 22. Dynamic Attributes and Properties  · p865
+    - What’s New in This Chapter  · p866
+    - Data Wrangling with Dynamic Attributes  · p866
+      - Exploring JSON-Like Data with Dynamic Attributes  · p868
+      - The Invalid Attribute Name Problem  · p872
+      - Flexible Object Creation with __new__  · p873
+    - Computed Properties  · p875
+      - Step 1: Data-Driven Attribute Creation  · p876
+      - Step 2: Property to Retrieve a Linked Record  · p878
+      - Step 3: Property Overriding an Existing Attribute  · p882
+      - Step 4: Bespoke Property Cache  · p883
+      - Step 5: Caching Properties with functools  · p885
+    - Using a Property for Attribute Validation  · p887
+      - LineItem Take #1: Class for an Item in an Order  · p887
+      - LineItem Take #2: A Validating Property  · p888
+    - A Proper Look at Properties  · p890
+      - Properties Override Instance Attributes  · p891
+      - Property Documentation  · p894
+    - Coding a Property Factory  · p895
+    - Handling Attribute Deletion  · p898
+    - Essential Attributes and Functions for Attribute Handling  · p899
+      - Special Attributes that Affect Attribute Handling  · p900
+      - Built-In Functions for Attribute Handling  · p900
+      - Special Methods for Attribute Handling  · p901
+    - Chapter Summary  · p903
+    - Further Reading  · p903
+  - Chapter 23. Attribute Descriptors  · p909
+    - What’s New in This Chapter  · p910
+    - Descriptor Example: Attribute Validation  · p910
+      - LineItem Take #3: A Simple Descriptor  · p910
+      - LineItem Take #4: Automatic Naming of Storage Attributes  · p917
+      - LineItem Take #5: A New Descriptor Type  · p919
+    - Overriding Versus Nonoverriding Descriptors  · p922
+      - Overriding Descriptors  · p924
+      - Overriding Descriptor Without __get__  · p925
+      - Nonoverriding Descriptor  · p926
+      - Overwriting a Descriptor in the Class  · p927
+    - Methods Are Descriptors  · p928
+    - Descriptor Usage Tips  · p930
+    - Descriptor Docstring and Overriding Deletion  · p932
+    - Chapter Summary  · p933
+    - Further Reading  · p934
+  - Chapter 24. Class Metaprogramming  · p937
+    - What’s New in This Chapter  · p938
+    - Classes as Objects  · p938
+    - type: The Built-In Class Factory  · p939
+    - A Class Factory Function  · p941
+    - Introducing __init_subclass__  · p944
+      - Why __init_subclass__ Cannot Configure __slots__  · p951
+    - Enhancing Classes with a Class Decorator  · p952
+    - What Happens When: Import Time Versus Runtime  · p955
+      - Evaluation Time Experiments  · p956
+    - Metaclasses 101  · p961
+      - How a Metaclass Customizes a Class  · p963
+      - A Nice Metaclass Example  · p964
+      - Metaclass Evaluation Time Experiment  · p967
+    - A Metaclass Solution for Checked  · p972
+    - Metaclasses in the Real World  · p977
+      - Modern Features Simplify or Replace Metaclasses  · p977
+      - Metaclasses Are Stable Language Features  · p978
+      - A Class Can Only Have One Metaclass  · p978
+      - Metaclasses Should Be Implementation Details  · p979
+    - A Metaclass Hack with __prepare__  · p980
+    - Wrapping Up  · p982
+    - Chapter Summary  · p983
+    - Further Reading  · p984
+- Afterword  · p989
+  - Further Reading  · p990
+- Index  · p993
+- About the Author  · p1010
+- Colophon  · p1010

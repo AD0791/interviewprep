@@ -1,0 +1,106 @@
+# TOC — ADAfaEPoV.pdf
+
+*Extracted by `_tools/extract_toc.py` (outline). 102 entries. Machine-generated — do not hand-edit.*
+
+- Contents  · p4
+- Introduction  · p12
+- Introduction  · p12
+- Part I Regression and Its Generalizations  · p17
+  - 1 Regression Basics  · p19
+  - Exercises  · p44
+  - 2 The Truth about Linear Regression  · p45
+  - Exercises  · p67
+  - 3 Model Evaluation  · p68
+  - Exercises  · p93
+  - 4 Smoothing in Regression  · p95
+  - Exercises  · p124
+  - 5 Simulation  · p125
+  - Exercises  · p138
+  - 6 The Bootstrap  · p139
+  - Exercises  · p168
+  - 7 Splines  · p169
+  - Exercises  · p183
+  - 8 Additive Models  · p185
+  - Exercises  · p207
+  - 9 Testing Regression Specifications  · p209
+  - 10 Weighting and Variance  · p225
+  - Exercises  · p255
+  - 11 Logistic Regression  · p256
+  - Exercises  · p287
+  - 12 GLMs and GAMs  · p289
+  - Exercises  · p295
+  - 13 Trees  · p296
+  - Exercises  · p318
+- Part II Distributions and Latent Structure  · p321
+  - 14 Density Estimation  · p323
+  - Exercises  · p346
+  - 15 Principal Components Analysis  · p348
+  - Exercises  · p374
+  - 16 Factor Models  · p375
+  - Exercises  · p404
+  - 17 Mixture Models  · p406
+  - Exercises  · p435
+  - 18 Graphical Models  · p437
+  - Exercises  · p456
+- Part III Causal Inference  · p457
+  - 19 Graphical Causal Models  · p459
+  - Exercises  · p466
+  - 20 Identifying Causal Effects  · p467
+  - Exercises  · p487
+  - 21 Estimating Causal Effects  · p489
+  - Exercises  · p500
+  - 22 Discovering Causal Structure  · p501
+  - Exercises  · p518
+- Part IV Dependent Data  · p519
+  - 23 Time Series  · p521
+  - Exercises  · p581
+  - 24 Simulation-Based Inference  · p583
+  - Exercises  · p591
+- Bibliography  · p591
+  - References  · p592
+  - Acknowledgments  · p614
+- Index  · p615
+  - Index  · p616
+- Online Appendices  · p631
+  - to 1.25Appendix ABig O and Little o Notation  · p633
+  - to 1.25Appendix BTaylor Expansions  · p635
+  - Exercises  · p636
+  - to 1.25Appendix CPropagation of Error  · p638
+  - to 1.25Appendix DOptimization  · p640
+  - Exercises  · p668
+  - to 1.25Appendix EInformation Theory  · p670
+  - to 1.25Appendix FRelative Distributions and Smooth Tests  · p689
+  - Exercises  · p712
+  - to 1.25Appendix GNonlinear Dimensionality Reduction  · p715
+  - Exercises  · p738
+  - to 1.25Appendix HRudimentary Graph Theory  · p739
+  - to 1.25Appendix IMissing Data  · p742
+  - to 1.25Appendix JProgramming  · p770
+- Data-Analysis Assignments  · p806
+  - 1 Your Daddy's Rich  · p633
+  - 2 …But We Make It Up in Volume  · p635
+  - 3 Past Performance, Future Results  · p638
+  - 4 Free Soil  · p640
+  - 5 There Were Giants in the Earth in Those Day  · p670
+  - 6 The Sound of Gunfire, Off in the Distance  · p689
+  - 7 The Bullet or the Ballot?  · p715
+  - 8 A Diversified Portfolio  · p739
+  - 9 The Monkey's Paw  · p742
+  - 10 What's That Got to Do with the Price of Condos in California?  · p770
+  - 11 The Advantages of Backwardness  · p846
+  - 12 It's Not the Heat that Gets You  · p850
+  - 13 Nice Demo City, but Will It Scale?  · p853
+  - 14 Fair's Affairs  · p860
+  - 15 How the North American Paleofauna Got a Crook in Its Regression Line  · p862
+  - 16 How the Hyracotherium Got Its Mass  · p866
+  - 17 How the Recent Mammals Got Their Size Distribution  · p869
+  - 18 Red Brain, Blue Brain  · p872
+  - 19 Brought to You by the Letters D, A and G  · p875
+  - 20 Teacher, Leave Those Kids Alone! (They're the Control Group)  · p880
+  - 21 Estimating with DAGs  · p883
+  - 22 Use and Abuse of Conditioning  · p887
+  - 23 What Makes the Union Strong?  · p889
+  - 24 An Insufficiently Random Walk Down Wall Street  · p893
+  - 25 Predicting Nine of the Last Five Recessions  · p897
+  - 26 Debt Needs Time for What It Kills to Grow In  · p899
+  - 27 How Tetracycline Came to Peoria  · p901
