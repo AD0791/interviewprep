@@ -84,6 +84,7 @@ graph LR
 **Type:** Model · **Depth:** L3
 **Covers:** conventional RPC history, SOAP's XML-envelope model, REST's resource orientation, why gRPC emerged, comparison with GraphQL and Thrift
 **Sources:** book ch.1 (2020)
+**Edges:** `contrasts` [`GO-21`] · `contrasts` [`SPRG-08`]
 **Currency:** `current`
 
 ### `GRPC-02` · Service definition with Protocol Buffers
@@ -205,10 +206,12 @@ graph LR
 
 | From | Edge | To | Why |
 |---|---|---|---|
+| `GRPC-01` | `contrasts` | `GO-21` | This node's whole subject is gRPC's position relative to REST; `GO-21` is that comparison seen from the implementation side, where the same service is a set of `http.Handler` functions rather than a generated service stub; reciprocal of `GO-21`'s edge into this node |
 | `GRPC-04` | `requires` | `HTTP-17` | gRPC's wire protocol is defined as a mapping onto HTTP/2 frames |
 | `GRPC-09` | `requires` | `BNET-04` | Securing a gRPC channel requires the TLS handshake mechanics established in `14_browser_networking` |
 | `GRPC-11` | `contrasts` | `CONC-14` | Testing gRPC services compared against testing/scheduling concurrent Python applications |
 | `GRPC-15` | `contrasts` | `WS-01` | gRPC-Web and WebSocket are contrasting approaches to browser-server streaming |
+| `GRPC-01` | `contrasts` | `SPRG-08` | The same remote call exposed as REST through Spring's `RestClient`/`WebClient` against a schema-first RPC contract, seen from the Spring client side |
 | `WS-01` | `contrasts` | `GRPC-15` | Reciprocal, declared in `15_websocket` |
 
 ---

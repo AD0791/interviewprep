@@ -29,11 +29,12 @@ For each subject directory `NN_subject/` you are given:
 
 - `NN_subject/_toc/*.toc.md` — machine-extracted tables of contents, one per book. **Read all
   of them.** These are your source material.
-- `_archive/2026-08_syllabi/NN_subject_00_syllabus.md` — if it exists, the superseded
-  syllabus. Its competency table is a useful sanity check on coverage. **Its competency IDs
-  are dead** and must not be reused. Its `Probe` / `Tell` interview columns are forbidden
-  framing — ignore them entirely.
 - The web, via `WebSearch` and `WebFetch`, for the currency pass in §6.
+
+The superseded competency-table syllabi that earlier graphs were sanity-checked against have
+been deleted along with the rest of the v1 archive. Their competency IDs were dead already and
+their interview-framed columns were forbidden source material; nothing in this spec depends on
+them.
 
 **Do not open the PDFs.** The TOC files exist so you do not have to. Opening a 900-page book
 will exhaust your context and produce a worse graph than the TOC gives you.
@@ -58,7 +59,9 @@ in the file, with no gaps.
 | `09_sql` | `SQL` | `21_dataengineering` | `DE` |
 | `10_mongodb` | `MDB` | `22_android` | `AND` |
 | `11_redis_caching` | `RDS` | `23_app_dev` | `APPD` |
-| `12_bigquery` | `BQ` | | |
+| `12_bigquery` | `BQ` | `24_golang` | `GO` |
+| | | `25_Java` | `JAVA` |
+| | | `26_spring` | `SPRG` |
 
 The pattern is `^[A-Z]{2,5}-\d{2}$`. IDs are globally unique across the whole repo, which the
 prefix table guarantees.

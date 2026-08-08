@@ -1,0 +1,294 @@
+# TOC — manning-spring-action.pdf
+
+*Extracted by `_tools/extract_toc.py` (outline). 290 entries. Machine-generated — do not hand-edit.*
+
+- Spring in Action 3E  · p1
+- brief contents  · p6
+- contents  · p8
+- preface  · p16
+- acknowledgments  · p18
+- about this book  · p20
+  - Who should read this book  · p20
+  - Roadmap  · p21
+  - Code conventions  · p22
+  - About the author  · p22
+  - Author Online  · p22
+  - About the title  · p23
+- about the cover illustration  · p24
+- Part 1 Core Spring  · p26
+  - Chapter 1 Springing into action  · p28
+    - 1.1 Simplifying Java development  · p29
+      - 1.1.1 Unleashing the power of POJOs  · p30
+      - 1.1.2 Injecting dependencies  · p31
+      - 1.1.3 Applying aspects  · p35
+      - 1.1.4 Eliminating boilerplate code with templates  · p40
+    - 1.2 Containing your beans  · p42
+      - 1.2.1 Working with an application context  · p43
+      - 1.2.2 A bean’s life  · p44
+    - 1.3 Surveying the Spring landscape  · p45
+      - 1.3.1 Spring modules  · p45
+      - 1.3.2 The Spring portfolio  · p48
+    - 1.4 What’s new in Spring  · p52
+      - 1.4.1 What’s new in Spring 2.5?  · p52
+      - 1.4.2 What’s new in Spring 3.0?  · p53
+      - 1.4.3 What’s new in the Spring portfolio?  · p53
+    - 1.5 Summary  · p54
+  - Chapter 2 Wiring beans  · p55
+    - 2.1 Declaring beans  · p56
+      - 2.1.1 Setting up Spring configuration  · p57
+      - 2.1.2 Declaring a simple bean  · p58
+      - 2.1.3 Injecting through constructors  · p59
+      - 2.1.4 Bean scoping  · p63
+      - 2.1.5 Initializing and destroying beans  · p64
+    - 2.2 Injecting into bean properties  · p66
+      - 2.2.1 Injecting simple values  · p67
+      - 2.2.2 Referencing other beans  · p68
+      - 2.2.3 Wiring properties with Spring’s p namespace  · p71
+      - 2.2.4 Wiring collections  · p72
+      - 2.2.5 Wiring nothing (null)  · p77
+    - 2.3 Wiring with expressions  · p77
+      - 2.3.1 Expressing SpEL fundamentals  · p78
+      - 2.3.2 Performing operations on SpEL values  · p81
+      - 2.3.3 Sifting through collections in SpEL  · p84
+    - 2.4 Summary  · p88
+  - Chapter 3 Minimizing XML configuration in Spring  · p89
+    - 3.1 Automatically wiring bean properties  · p90
+      - 3.1.1 The four kinds of autowiring  · p90
+      - 3.1.2 Default autowiring  · p93
+      - 3.1.3 Mixing auto with explicit wiring  · p94
+    - 3.2 Wiring with annotations  · p95
+      - 3.2.1 Using @Autowired  · p96
+      - 3.2.2 Applying standards-based autowiring with @Inject  · p99
+      - 3.2.3 Using expressions with annotation injection  · p101
+    - 3.3 Automatically discovering beans  · p102
+      - 3.3.1 Annotating beans for autodiscovery  · p103
+      - 3.3.2 Filtering component-scans  · p104
+    - 3.4 Using Spring’s Java-based configuration  · p105
+      - 3.4.1 Setting up for Java-based configuration  · p105
+      - 3.4.2 Defining a configuration class  · p106
+      - 3.4.3 Declaring a simple bean  · p106
+      - 3.4.4 Injecting with Spring’s Java-based configuration  · p107
+    - 3.5 Summary  · p108
+  - Chapter 4 Aspect-oriented Spring  · p109
+    - 4.1 What’s aspect-oriented programming?  · p110
+      - 4.1.1 Defining AOP terminology  · p111
+      - 4.1.2 Spring’s AOP support  · p113
+    - 4.2 Selecting join points with pointcuts  · p116
+      - 4.2.1 Writing pointcuts  · p117
+      - 4.2.2 Using Spring’s bean() designator  · p118
+    - 4.3 Declaring aspects in XML  · p118
+      - 4.3.1 Declaring before and after advice  · p120
+      - 4.3.2 Declaring around advice  · p122
+      - 4.3.3 Passing parameters to advice  · p123
+      - 4.3.4 Introducing new functionality with aspects  · p125
+    - 4.4 Annotating aspects  · p127
+      - 4.4.1 Annotating around advice  · p129
+      - 4.4.2 Passing arguments to annotated advice  · p130
+      - 4.4.3 Annotating introductions  · p131
+    - 4.5 Injecting AspectJ aspects  · p132
+    - 4.6 Summary  · p135
+- Part 2 Spring application essentials  · p136
+  - Chapter 5 Hitting the database  · p138
+    - 5.1 Learning Spring’s data access philosophy  · p139
+      - 5.1.1 Getting to know Spring’s data access exception hierarchy  · p140
+      - 5.1.2 Templating data access  · p142
+      - 5.1.3 Using DAO support classes  · p144
+    - 5.2 Configuring a data source  · p146
+      - 5.2.1 Using JNDI data sources  · p146
+      - 5.2.2 Using a pooled data source  · p147
+      - 5.2.3 JDBC driver-based data source  · p148
+    - 5.3 Using JDBC with Spring  · p149
+      - 5.3.1 Tackling runaway JDBC code  · p149
+      - 5.3.2 Working with JDBC templates  · p152
+    - 5.4 Integrating Hibernate with Spring  · p157
+      - 5.4.1 A Hibernate overview  · p159
+      - 5.4.2 Declaring a Hibernate session factory  · p159
+      - 5.4.3 Building Spring-free Hibernate  · p162
+    - 5.5 Spring and the Java Persistence API  · p163
+      - 5.5.1 Configuring an entity manager factory  · p164
+      - 5.5.2 Writing a JPA-based DAO  · p168
+    - 5.6 Summary  · p169
+  - Chapter 6 Managing transactions  · p171
+    - 6.1 Understanding transactions  · p172
+      - 6.1.1 Explaining transactions in only four words  · p173
+      - 6.1.2 Understanding Spring’s transaction management support  · p174
+    - 6.2 Choosing a transaction manager  · p175
+      - 6.2.1 JDBC transactions  · p176
+      - 6.2.2 Hibernate transactions  · p176
+      - 6.2.3 Java Persistence API transactions  · p177
+      - 6.2.4 Java transaction API transactions  · p178
+    - 6.3 Programming transactions in Spring  · p178
+    - 6.4 Declaring transactions  · p180
+      - 6.4.1 Defining transaction attributes  · p181
+      - 6.4.2 Declaring transactions in XML  · p185
+      - 6.4.3 Defining annotation-driven transactions  · p187
+    - 6.5 Summary  · p188
+  - Chapter 7 Building web applications with Spring MVC  · p189
+    - 7.1 Getting started with Spring MVC  · p190
+      - 7.1.1 Following a request through Spring MVC  · p190
+      - 7.1.2 Setting up Spring MVC  · p192
+    - 7.2 Writing a basic controller  · p194
+      - 7.2.1 Configuring an annotation-driven Spring MVC  · p195
+      - 7.2.2 Defining the home page controller  · p195
+      - 7.2.3 Resolving views  · p198
+      - 7.2.4 Defining the home page view  · p202
+      - 7.2.5 Rounding out the Spring application context  · p204
+    - 7.3 Handling controller input  · p206
+      - 7.3.1 Writing a controller that processes input  · p206
+      - 7.3.2 Rendering the view  · p208
+    - 7.4 Processing forms  · p210
+      - 7.4.1 Displaying the registration form  · p210
+      - 7.4.2 Processing form input  · p212
+      - 7.4.3 Validating input  · p214
+    - 7.5 Handling file uploads  · p218
+      - 7.5.1 Adding a file upload field to the form  · p218
+      - 7.5.2 Receiving uploaded files  · p219
+      - 7.5.3 Configuring Spring for file uploads  · p222
+    - 7.6 Summary  · p222
+  - Chapter 8 Working with Spring Web Flow  · p224
+    - 8.1 Installing Spring Web Flow  · p225
+      - 8.1.1 Configuring Web Flow in Spring  · p225
+    - 8.2 The components of a flow  · p228
+      - 8.2.1 States  · p228
+      - 8.2.2 Transitions  · p231
+      - 8.2.3 Flow data  · p232
+    - 8.3 Putting it all together: the pizza flow  · p234
+      - 8.3.1 Defining the base flow  · p234
+      - 8.3.2 Collecting customer information  · p238
+      - 8.3.3 Building an order  · p243
+      - 8.3.4 Taking payment  · p246
+    - 8.4 Securing web flows  · p247
+    - 8.5 Summary  · p248
+  - Chapter 9 Securing Spring  · p249
+    - 9.1 Introducing Spring Security  · p250
+      - 9.1.1 Getting started with Spring Security  · p251
+      - 9.1.2 Using the Spring Security configuration namespace  · p251
+    - 9.2 Securing web requests  · p252
+      - 9.2.1 Proxying servlet filters  · p253
+      - 9.2.2 Configuring minimal web security  · p253
+      - 9.2.3 Intercepting requests  · p257
+    - 9.3 Securing view-level elements  · p260
+      - 9.3.1 Accessing authentication details  · p260
+      - 9.3.2 Rendering with authorities  · p261
+    - 9.4 Authenticating users  · p263
+      - 9.4.1 Configuring an in-memory user repository  · p264
+      - 9.4.2 Authenticating against a database  · p265
+      - 9.4.3 Authenticating against LDAP  · p266
+      - 9.4.4 Enabling remember-me functionality  · p270
+    - 9.5 Securing methods  · p271
+      - 9.5.1 Securing methods with @Secured  · p271
+      - 9.5.2 Using JSR-250’s @RolesAllowed  · p272
+      - 9.5.3 Pre-/Post-invocation security with SpEL  · p272
+      - 9.5.4 Declaring method-level security pointcuts  · p277
+    - 9.6 Summary  · p277
+- Part 3 Integrating Spring  · p278
+  - Chapter 10 Working with remote services  · p280
+    - 10.1 An overview of Spring remoting  · p281
+    - 10.2 Working with RMI  · p283
+      - 10.2.1 Exporting an RMI service  · p284
+      - 10.2.2 Wiring an RMI service  · p286
+    - 10.3 Exposing remote services with Hessian and Burlap  · p288
+      - 10.3.1 Exposing bean functionality with Hessian/Burlap  · p289
+      - 10.3.2 Accessing Hessian/Burlap services  · p291
+    - 10.4 Using Spring’s HttpInvoker  · p293
+      - 10.4.1 Exposing beans as HTTP services  · p293
+      - 10.4.2 Accessing services via HTTP  · p294
+    - 10.5 Publishing and consuming web services  · p295
+      - 10.5.1 Creating Spring-enabled JAX-WS endpoints  · p296
+      - 10.5.2 Proxying JAX-WS services on the client side  · p299
+    - 10.6 Summary  · p301
+  - Chapter 11 Giving Spring some REST  · p302
+    - 11.1 Getting REST  · p303
+      - 11.1.1 The fundamentals of REST  · p303
+      - 11.1.2 How Spring supports REST  · p304
+    - 11.2 Writing resource-oriented controllers  · p304
+      - 11.2.1 Dissecting a RESTless controller  · p305
+      - 11.2.2 Handling RESTful URLs  · p306
+      - 11.2.3 Performing the REST verbs  · p309
+    - 11.3 Representing resources  · p312
+      - 11.3.1 Negotiating resource representation  · p313
+      - 11.3.2 Working with HTTP message converters  · p316
+    - 11.4 Writing REST clients  · p319
+      - 11.4.1 Exploring RestTemplate’s operations  · p320
+      - 11.4.2 GETting resources  · p321
+      - 11.4.3 PUTting resources  · p324
+      - 11.4.4 DELETE-ing resources  · p326
+      - 11.4.5 POSTing resource data  · p326
+      - 11.4.6 Exchanging resources  · p329
+    - 11.5 Submitting RESTful forms  · p331
+      - 11.5.1 Rendering hidden method fields in JSP  · p331
+      - 11.5.2 Unmasking the real request  · p332
+    - 11.6 Summary  · p334
+  - Chapter 12 Messaging in Spring  · p335
+    - 12.1 A brief introduction to JMS  · p336
+      - 12.1.1 Architecting JMS  · p337
+      - 12.1.2 Assessing the benefits of JMS  · p339
+    - 12.2 Setting up a message broker in Spring  · p341
+      - 12.2.1 Creating a connection factory  · p341
+      - 12.2.2 Declaring an ActiveMQ message destination  · p342
+    - 12.3 Using Spring’s JMS template  · p343
+      - 12.3.1 Tackling runaway JMS code  · p343
+      - 12.3.2 Working with JMS templates  · p344
+    - 12.4 Creating message-driven POJOs  · p350
+      - 12.4.1 Creating a message listener  · p351
+      - 12.4.2 Configuring message listeners  · p352
+    - 12.5 Using message-based RPC  · p352
+      - 12.5.1 Working with Spring message-based RPC  · p353
+      - 12.5.2 Asynchronous RPC with Lingo  · p355
+    - 12.6 Summary  · p357
+  - Chapter 13 Managing Spring beans with JMX  · p358
+    - 13.1 Exporting Spring beans as MBeans  · p359
+      - 13.1.1 Exposing methods by name  · p362
+      - 13.1.2 Using interfaces to define MBean operations and attributes  · p364
+      - 13.1.3 Working with annotation-driven MBeans  · p365
+      - 13.1.4 Handing MBean collisions  · p367
+    - 13.2 Remoting MBeans  · p368
+      - 13.2.1 Exposing remote MBeans  · p368
+      - 13.2.2 Accessing remote MBeans  · p369
+      - 13.2.3 Proxying MBeans  · p370
+    - 13.3 Handling notifications  · p371
+      - 13.3.1 Listening for notifications  · p373
+    - 13.4 Summary  · p374
+  - Chapter 14 Odds and ends  · p375
+    - 14.1 Externalizing configuration  · p376
+      - 14.1.1 Replacing property placeholders  · p377
+      - 14.1.2 Overriding properties  · p379
+      - 14.1.3 Encrypting external properties  · p380
+    - 14.2 Wiring JNDI objects  · p382
+      - 14.2.1 Working with conventional JNDI  · p382
+      - 14.2.2 Injecting JNDI objects  · p384
+      - 14.2.3 Wiring EJBs in Spring  · p387
+    - 14.3 Sending email  · p388
+      - 14.3.1 Configuring a mail sender  · p388
+      - 14.3.2 Constructing the email  · p390
+    - 14.4 Scheduling and background tasks  · p395
+      - 14.4.1 Declaring scheduled methods  · p396
+      - 14.4.2 Declaring asynchronous methods  · p398
+    - 14.5 Summary  · p399
+    - 14.6 The end ?  · p399
+- index  · p402
+  - Symbols  · p402
+  - A  · p402
+  - B  · p405
+  - C  · p406
+  - D  · p408
+  - E  · p409
+  - F  · p410
+  - G  · p411
+  - H  · p411
+  - I  · p412
+  - J  · p413
+  - K  · p414
+  - L  · p414
+  - M  · p415
+  - N  · p417
+  - O  · p417
+  - P  · p417
+  - Q  · p419
+  - R  · p419
+  - S  · p421
+  - T  · p423
+  - U  · p424
+  - V  · p424
+  - W  · p425
+  - X  · p425

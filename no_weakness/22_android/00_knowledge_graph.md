@@ -17,6 +17,7 @@ plainly what still holds and what the platform has since replaced outright.*
 | Book | Year | Documents | Verdict |
 |---|---|---|---|
 | Steele & To, *The Android Developer's Cookbook* | 2011 (Addison-Wesley, 1st edition) | The Android stack and Market, activities/intents and the lifecycle, threads/services/receivers/widgets, View-based UI layout, input events and gestures, multimedia, hardware access (camera/sensors/telephony/Bluetooth), networking (SMS/HTTP/Twitter), on-device storage (preferences/SQLite/content providers), location and Maps, custom views/NDK/security/AIDL/backup/animation, Eclipse-based debugging | Solid on component-model mechanics (the activity lifecycle, intents, services) that changed comparatively little at the API-contract level. Everything toolchain-specific — the Eclipse+ADT project structure, the Debug tooling, the "Android Market" branding — targets a development environment Google replaced in December 2014 and formally deprecated the year after. The book predates Kotlin's existence entirely and predates Jetpack Compose by a decade |
+| Friesen, *Learn Java for Android Development*, 4th ed. | ~2021 | Seventeen chapters of Java SE language and API material framed for a reader coming to Java from Android — fundamentals, OOD, generics, collections, functional programming, concurrency utilities, classic and new I/O, networking, JDBC, XML/JSON, date and time | Despite its title, this is a Java SE reference, not an Android APIs book — it lives in `25_Java/`, where its seven core-language chapters are cited instead. Only its concurrency-utilities (ch.11) and networking (ch.13) chapters add anything to this subject's single-book source base, and neither treats an Android-specific API — `Handler`, `Looper`, `WorkManager`, OkHttp — at all; both stay at the level of `java.util.concurrent` and `java.net`, which this subject's own book already assumes as background |
 
 ---
 
@@ -121,7 +122,7 @@ graph LR
 ### `AND-05` · Background execution: threads, handlers, and services
 **Type:** Mechanism · **Depth:** L4
 **Covers:** secondary threads and the main-thread UI constraint, Handler-based message passing, thread priority and cancellation, started and bound Services, BroadcastReceivers, App Widgets, user-facing alerts (Toast, dialogs, notifications)
-**Sources:** Steele & To ch.3 (2011)
+**Sources:** Steele & To ch.3 (2011) · Friesen ch.11 (~2021, `java.util.concurrent` utilities as background, not the Android-specific `Handler`/`Looper` API)
 **Edges:** `requires` [`AND-03`] · `contrasts` [`CONC-02`]
 **Currency:** `current`
 
@@ -157,7 +158,7 @@ graph LR
 ### `AND-10` · Network access: HTTP clients and third-party APIs
 **Type:** Mechanism · **Depth:** L3
 **Covers:** SMS send/receive, embedding a WebView, issuing HTTP GET/POST from an app, OAuth-based third-party API integration
-**Sources:** Steele & To ch.8 (2011)
+**Sources:** Steele & To ch.8 (2011) · Friesen ch.13 (~2021, plain `java.net` HTTP requests, not an Android-specific or OkHttp-based client)
 **Edges:** `contrasts` [`HTTP-02`]
 **Currency:** `stale-minor`
 **Δ current:** The book issues raw HTTP requests directly against `HttpURLConnection`-era APIs and integrates Twitter's API using the credentials flow current in 2011; both the recommended HTTP client (community libraries such as OkHttp/Retrofit have been the practical default for years) and Twitter's own API terms have changed substantially since. The underlying request/response mechanics this node's HTTP recipes rely on are `13_http`'s concern, not this subject's, hence the `contrasts` rather than `requires` relation.

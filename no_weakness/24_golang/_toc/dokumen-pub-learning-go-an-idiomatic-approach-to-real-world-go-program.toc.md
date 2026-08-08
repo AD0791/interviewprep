@@ -1,0 +1,269 @@
+# TOC — dokumen.pub_learning-go-an-idiomatic-approach-to-real-world-go-programming-1492077216-9781492077213-w-4707635.pdf
+
+*Extracted by `_tools/extract_toc.py` (outline). 265 entries. Machine-generated — do not hand-edit.*
+
+- Cover  · p1
+- Copyright  · p6
+- Table of Contents  · p7
+- Preface  · p15
+  - Who Should Read This Book  · p16
+  - Conventions Used in This Book  · p16
+  - Using Code Examples  · p17
+  - O’Reilly Online Learning  · p18
+  - How to Contact Us  · p18
+  - Acknowledgments  · p18
+- Chapter 1. Setting Up Your Go Environment  · p21
+  - Installing the Go Tools  · p21
+  - The Go Workspace  · p22
+  - The go Command  · p23
+    - go run and go build  · p23
+    - Getting Third-Party Go Tools  · p25
+    - Formatting Your Code  · p26
+  - Linting and Vetting  · p28
+  - Choose Your Tools  · p29
+    - Visual Studio Code  · p29
+    - GoLand  · p30
+    - The Go Playground  · p31
+  - Makefiles  · p33
+  - Staying Up to Date  · p34
+  - Wrapping Up  · p36
+- Chapter 2. Primitive Types and Declarations  · p37
+  - Built-in Types  · p37
+    - The Zero Value  · p37
+    - Literals  · p38
+    - Booleans  · p39
+    - Numeric Types  · p40
+    - A Taste of Strings and Runes  · p46
+    - Explicit Type Conversion  · p46
+  - var Versus :=  · p47
+  - Using const  · p49
+  - Typed and Untyped Constants  · p51
+  - Unused Variables  · p52
+  - Naming Variables and Constants  · p53
+  - Wrapping Up  · p54
+- Chapter 3. Composite Types  · p55
+  - Arrays—Too Rigid to Use Directly  · p55
+  - Slices  · p57
+    - len  · p58
+    - append  · p59
+    - Capacity  · p59
+    - make  · p61
+    - Declaring Your Slice  · p62
+    - Slicing Slices  · p63
+    - Converting Arrays to Slices  · p66
+    - copy  · p66
+  - Strings and Runes and Bytes  · p68
+  - Maps  · p71
+    - Reading and Writing a Map  · p73
+    - The comma ok Idiom  · p74
+    - Deleting from Maps  · p74
+    - Using Maps as Sets  · p75
+  - Structs  · p76
+    - Anonymous Structs  · p78
+    - Comparing and Converting Structs  · p79
+  - Wrapping Up  · p80
+- Chapter 4. Blocks, Shadows, and Control Structures  · p81
+  - Blocks  · p81
+    - Shadowing Variables  · p82
+    - Detecting Shadowed Variables  · p84
+  - if  · p85
+  - for, Four Ways  · p87
+    - The Complete for Statement  · p87
+    - The Condition-Only for Statement  · p88
+    - The Infinite for Statement  · p88
+    - break and continue  · p89
+    - The for-range Statement  · p91
+    - Labeling Your for Statements  · p96
+    - Choosing the Right for Statement  · p97
+  - switch  · p98
+  - Blank Switches  · p101
+  - Choosing Between if and switch  · p103
+  - goto—Yes, goto  · p103
+  - Wrapping Up  · p106
+- Chapter 5. Functions  · p107
+  - Declaring and Calling Functions  · p107
+    - Simulating Named and Optional Parameters  · p108
+    - Variadic Input Parameters and Slices  · p109
+    - Multiple Return Values  · p110
+    - Multiple Return Values Are Multiple Values  · p111
+    - Ignoring Returned Values  · p111
+    - Named Return Values  · p112
+    - Blank Returns—Never Use These!  · p113
+  - Functions Are Values  · p114
+    - Function Type Declarations  · p116
+    - Anonymous Functions  · p116
+  - Closures  · p117
+    - Passing Functions as Parameters  · p118
+    - Returning Functions from Functions  · p119
+  - defer  · p120
+  - Go Is Call By Value  · p124
+  - Wrapping Up  · p126
+- Chapter 6. Pointers  · p127
+  - A Quick Pointer Primer  · p127
+  - Don’t Fear the Pointers  · p131
+  - Pointers Indicate Mutable Parameters  · p133
+  - Pointers Are a Last Resort  · p137
+  - Pointer Passing Performance  · p138
+  - The Zero Value Versus No Value  · p138
+  - The Difference Between Maps and Slices  · p139
+  - Slices as Buffers  · p142
+  - Reducing the Garbage Collector’s Workload  · p143
+  - Wrapping Up  · p147
+- Chapter 7. Types, Methods, and Interfaces  · p149
+  - Types in Go  · p149
+  - Methods  · p150
+    - Pointer Receivers and Value Receivers  · p151
+    - Code Your Methods for nil Instances  · p153
+    - Methods Are Functions Too  · p154
+    - Functions Versus Methods  · p155
+    - Type Declarations Aren’t Inheritance  · p155
+    - Types Are Executable Documentation  · p156
+    - iota Is for Enumerations—Sometimes  · p157
+  - Use Embedding for Composition  · p159
+  - Embedding Is Not Inheritance  · p160
+  - A Quick Lesson on Interfaces  · p161
+  - Interfaces Are Type-Safe Duck Typing  · p162
+  - Embedding and Interfaces  · p166
+  - Accept Interfaces, Return Structs  · p166
+  - Interfaces and nil  · p167
+  - The Empty Interface Says Nothing  · p168
+  - Type Assertions and Type Switches  · p170
+  - Use Type Assertions and Type Switches Sparingly  · p172
+  - Function Types Are a Bridge to Interfaces  · p174
+  - Implicit Interfaces Make Dependency Injection Easier  · p175
+  - Wire  · p179
+  - Go Isn’t Particularly Object-Oriented (and That’s Great)  · p179
+  - Wrapping Up  · p180
+- Chapter 8. Errors  · p181
+  - How to Handle Errors: The Basics  · p181
+  - Use Strings for Simple Errors  · p183
+  - Sentinel Errors  · p183
+  - Errors Are Values  · p185
+  - Wrapping Errors  · p188
+  - Is and As  · p190
+  - Wrapping Errors with defer  · p193
+  - panic and recover  · p194
+  - Getting a Stack Trace from an Error  · p196
+  - Wrapping Up  · p196
+- Chapter 9. Modules, Packages, and Imports  · p197
+  - Repositories, Modules, and Packages  · p197
+  - go.mod  · p198
+  - Building Packages  · p198
+    - Imports and Exports  · p198
+    - Creating and Accessing a Package  · p199
+    - Naming Packages  · p201
+    - How to Organize Your Module  · p202
+    - Overriding a Package’s Name  · p203
+    - Package Comments and godoc  · p204
+    - The internal Package  · p205
+    - The init Function: Avoid if Possible  · p206
+    - Circular Dependencies  · p207
+    - Gracefully Renaming and Reorganizing Your API  · p208
+  - Working with Modules  · p210
+    - Importing Third-Party Code  · p210
+    - Working with Versions  · p212
+    - Minimum Version Selection  · p214
+    - Updating to Compatible Versions  · p215
+    - Updating to Incompatible Versions  · p216
+    - Vendoring  · p217
+    - pkg.go.dev  · p218
+    - Additional Information  · p218
+  - Publishing Your Module  · p219
+  - Versioning Your Module  · p219
+  - Module Proxy Servers  · p220
+    - Specifying a Proxy Server  · p221
+    - Private Repositories  · p221
+  - Wrapping Up  · p222
+- Chapter 10. Concurrency in Go  · p223
+  - When to Use Concurrency  · p223
+  - Goroutines  · p225
+  - Channels  · p226
+    - Reading, Writing, and Buffering  · p226
+    - for-range and Channels  · p228
+    - Closing a Channel  · p228
+    - How Channels Behave  · p229
+  - select  · p229
+  - Concurrency Practices and Patterns  · p232
+    - Keep Your APIs Concurrency-Free  · p232
+    - Goroutines, for Loops, and Varying Variables  · p233
+    - Always Clean Up Your Goroutines  · p234
+    - The Done Channel Pattern  · p235
+    - Using a Cancel Function to Terminate a Goroutine  · p236
+    - When to Use Buffered and Unbuffered Channels  · p236
+    - Backpressure  · p237
+    - Turning Off a case in a select  · p239
+    - How to Time Out Code  · p239
+    - Using WaitGroups  · p240
+    - Running Code Exactly Once  · p242
+    - Putting Our Concurrent Tools Together  · p243
+  - When to Use Mutexes Instead of Channels  · p247
+  - Atomics—You Probably Don’t Need These  · p250
+  - Where to Learn More About Concurrency  · p250
+  - Wrapping Up  · p251
+- Chapter 11. The Standard Library  · p253
+  - io and Friends  · p253
+  - time  · p258
+    - Monotonic Time  · p260
+    - Timers and Timeouts  · p261
+  - encoding/json  · p261
+    - Use Struct Tags to Add Metadata  · p261
+    - Unmarshaling and Marshaling  · p263
+    - JSON, Readers, and Writers  · p263
+    - Encoding and Decoding JSON Streams  · p265
+    - Custom JSON Parsing  · p266
+  - net/http  · p267
+    - The Client  · p267
+    - The Server  · p269
+  - Wrapping Up  · p273
+- Chapter 12. The Context  · p275
+  - What Is the Context?  · p275
+  - Cancellation  · p278
+  - Timers  · p281
+  - Handling Context Cancellation in Your Own Code  · p283
+  - Values  · p285
+  - Wrapping Up  · p290
+- Chapter 13. Writing Tests  · p291
+  - The Basics of Testing  · p291
+    - Reporting Test Failures  · p293
+    - Setting Up and Tearing Down  · p293
+    - Storing Sample Test Data  · p295
+    - Caching Test Results  · p295
+    - Testing Your Public API  · p296
+    - Use go-cmp to Compare Test Results  · p297
+  - Table Tests  · p298
+  - Checking Your Code Coverage  · p300
+  - Benchmarks  · p303
+  - Stubs in Go  · p306
+  - httptest  · p311
+  - Integration Tests and Build Tags  · p314
+  - Finding Concurrency Problems with the Race Checker  · p315
+  - Wrapping Up  · p317
+- Chapter 14. Here There Be Dragons: Reflect, Unsafe, and Cgo  · p319
+  - Reflection Lets Us Work with Types at Runtime  · p320
+    - Types, Kinds, and Values  · p321
+    - Making New Values  · p325
+    - Use Reflection to Check If an Interface’s Value Is nil  · p326
+    - Use Reflection to Write a Data Marshaler  · p327
+    - Build Functions with Reflection to Automate Repetitive Tasks  · p332
+    - You Can Build Structs with Reflection, but Don’t  · p333
+    - Reflection Can’t Make Methods  · p334
+    - Only Use Reflection If It’s Worthwhile  · p334
+  - unsafe Is Unsafe  · p335
+    - Use unsafe to Convert External Binary Data  · p336
+    - unsafe Strings and Slices  · p339
+    - unsafe Tools  · p340
+  - Cgo Is for Integration, Not Performance  · p341
+  - Wrapping Up  · p344
+- Chapter 15. A Look at the Future: Generics in Go  · p345
+  - Generics Reduce Repetitive Code and Increase Type Safety  · p345
+  - Introducing Generics in Go  · p348
+  - Use Type Lists to Specify Operators  · p352
+  - Generic Functions Abstract Algorithms  · p353
+  - Type Lists Limit Constants and Implementations  · p354
+  - Things That Are Left Out  · p357
+  - Idiomatic Go and Generics  · p359
+  - Further Futures Unlocked  · p359
+  - Wrapping Up  · p360
+- Index  · p361
+- About the Author  · p373
+- Colophon  · p373

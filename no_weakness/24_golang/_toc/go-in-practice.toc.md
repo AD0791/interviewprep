@@ -1,0 +1,225 @@
+# TOC — go-in-practice.pdf
+
+*Extracted by `_tools/extract_toc.py` (outline). 221 entries. Machine-generated — do not hand-edit.*
+
+- Go in Practice  · p1
+- brief contents  · p6
+- contents  · p8
+- foreword  · p14
+- preface  · p16
+- acknowledgments  · p17
+  - Matt Butcher  · p18
+  - Matt Farina  · p18
+- about this book  · p19
+  - How the book is organized  · p19
+  - Code conventions and downloads  · p20
+  - Author Online Forum  · p20
+- about the authors  · p21
+- about the cover illustration  · p22
+- Part 1 Background and fundamentals  · p24
+  - 1 Getting into Go  · p26
+    - 1.1 What is Go?  · p27
+    - 1.2 Noteworthy aspects of Go  · p29
+      - 1.2.1 Multiple return values  · p29
+      - 1.2.2 A modern standard library  · p30
+      - 1.2.3 Concurrency with goroutines and channels  · p32
+      - 1.2.4 Go the toolchain—more than a language  · p36
+    - 1.3 Go in the vast language landscape  · p40
+      - 1.3.1 C and Go  · p40
+      - 1.3.2 Java and Go  · p41
+      - 1.3.3 Python, PHP, and Go  · p42
+      - 1.3.4 JavaScript, Node.js, and Go  · p44
+    - 1.4 Getting up and running in Go  · p45
+      - 1.4.1 Installing Go  · p45
+      - 1.4.2 Working with Git, Mercurial, and version control  · p45
+      - 1.4.3 Exploring the workspace  · p46
+      - 1.4.4 Working with environment variables  · p46
+    - 1.5 Hello, Go  · p47
+    - 1.6 Summary  · p48
+  - 2 A solid foundation  · p50
+    - 2.1 Working with CLI applications, the Go way  · p51
+      - 2.1.1 Command-line flags  · p51
+      - Technique 1 GNU/UNIX-style command-line arguments  · p54
+      - 2.1.2 Command-line frameworks  · p56
+      - Technique 2 Avoiding CLI boilerplate code  · p56
+    - 2.2 Handling configuration  · p61
+      - Technique 3 Using configuration files  · p62
+      - Technique 4 Configuration via environment variables  · p66
+    - 2.3 Working with real-world web servers  · p67
+      - 2.3.1 Starting up and shutting down a server  · p68
+      - Technique 5 Graceful shutdowns using manners  · p69
+      - 2.3.2 Routing web requests  · p72
+      - Technique 6 Matching paths to content  · p72
+      - Technique 7 Handling complex paths with wildcards  · p75
+      - Technique 8 URL pattern matching  · p77
+      - Technique 9 Faster routing (without the work)  · p80
+    - 2.4 Summary  · p81
+  - 3 Concurrency in Go  · p82
+    - 3.1 Understanding Go’s concurrency model  · p82
+    - 3.2 Working with goroutines  · p83
+      - Technique 10 Using goroutine closures  · p84
+      - Technique 11 Waiting for goroutines  · p86
+      - Technique 12 Locking with a mutex  · p90
+    - 3.3 Working with channels  · p95
+      - Technique 13 Using multiple channels  · p96
+      - Technique 14 Closing channels  · p99
+      - Technique 15 Locking with buffered channels  · p103
+    - 3.4 Summary  · p105
+- Part 2 Well-rounded applications  · p108
+  - 4 Handling errors and panics  · p110
+    - 4.1 Error handling  · p111
+      - Technique 16 Minimize the nils  · p113
+      - Technique 17 Custom error types  · p115
+      - Technique 18 Error variables  · p116
+    - 4.2 The panic system  · p118
+      - 4.2.1 Differentiating panics from errors  · p119
+      - 4.2.2 Working with panics  · p120
+      - Technique 19 Issuing panics  · p120
+      - 4.2.3 Recovering from panics  · p122
+      - Technique 20 Recovering from panics  · p123
+      - 4.2.4 Panics and goroutines  · p127
+      - Technique 21 Trapping panics on goroutines  · p128
+    - 4.3 Summary  · p134
+  - 5 Debugging and testing  · p136
+    - 5.1 Locating bugs  · p137
+      - 5.1.1 Wait, where is my debugger?  · p137
+    - 5.2 Logging  · p137
+      - 5.2.1 Using Go’s logger  · p138
+      - Technique 22 Logging to an arbitrary writer  · p139
+      - Technique 23 Logging to a network resource  · p141
+      - Technique 24 Handling back pressure in network logging  · p143
+      - 5.2.2 Working with system loggers  · p146
+      - Technique 25 Logging to the syslog  · p146
+    - 5.3 Accessing stack traces  · p149
+      - Technique 26 Capturing stack traces  · p149
+    - 5.4 Testing  · p152
+      - 5.4.1 Unit testing  · p152
+      - Technique 27 Using interfaces for mocking or stubbing  · p153
+      - Technique 28 Verifying interfaces with canary tests  · p155
+      - 5.4.2 Generative testing  · p157
+    - 5.5 Using performance tests and benchmarks  · p159
+      - Technique 29 Benchmarking Go code  · p160
+      - Technique 30 Parallel benchmarks  · p162
+      - Technique 31 Detecting race conditions  · p164
+    - 5.6 Summary  · p165
+- Part 3 An interface for your applications  · p168
+  - 6 HTML and email template patterns  · p170
+    - 6.1 Working with HTML templates  · p171
+      - 6.1.1 Standard library HTML package overview  · p171
+      - 6.1.2 Adding functionality inside templates  · p173
+      - Technique 32 Extending templates with functions  · p173
+      - 6.1.3 Limiting template parsing  · p175
+      - Technique 33 Caching parsed templates  · p176
+      - 6.1.4 When template execution breaks  · p177
+      - Technique 34 Handling template execution failures  · p177
+      - 6.1.5 Mixing templates  · p178
+      - Technique 35 Nested templates  · p179
+      - Technique 36 Template inheritance  · p181
+      - Technique 37 Mapping data types to templates  · p184
+    - 6.2 Using templates for email  · p187
+      - Technique 38 Generating email from templates  · p187
+    - 6.3 Summary  · p189
+  - 7 Serving and receiving assets and forms  · p191
+    - 7.1 Serving static content  · p192
+      - Technique 39 Serving subdirectories  · p194
+      - Technique 40 File server with custom error pages  · p195
+      - Technique 41 Caching file server  · p197
+      - Technique 42 Embedding files in a binary  · p199
+      - Technique 43 Serving from an alternative location  · p201
+    - 7.2 Handling form posts  · p203
+      - 7.2.1 Introduction to form requests  · p203
+      - Technique 44 Accessing multiple values for a form field  · p205
+      - 7.2.2 Working with files and multipart submissions  · p206
+      - Technique 45 Uploading a single file  · p206
+      - Technique 46 Uploading multiple files  · p208
+      - Technique 47 Verify uploaded file is allowed type  · p210
+      - 7.2.3 Working with raw multipart data  · p212
+      - Technique 48 Incrementally saving a file  · p212
+    - 7.3 Summary  · p216
+  - 8 Working with web services  · p217
+    - 8.1 Using REST APIs  · p218
+      - 8.1.1 Using the HTTP client  · p218
+      - 8.1.2 When faults happen  · p219
+      - Technique 49 Detecting timeouts  · p220
+      - Technique 50 Timing out and resuming with HTTP  · p221
+    - 8.2 Passing and handling errors over HTTP  · p223
+      - 8.2.1 Generating custom errors  · p224
+      - Technique 51 Custom HTTP error passing  · p224
+      - 8.2.2 Reading and using custom errors  · p226
+      - Technique 52 Reading custom errors  · p227
+    - 8.3 Parsing and mapping JSON  · p229
+      - Technique 53 Parsing JSON without knowing the schema  · p229
+    - 8.4 Versioning REST APIs  · p232
+      - Technique 54 API version in the URL  · p232
+      - Technique 55 API version in content type  · p234
+    - 8.5 Summary  · p236
+- Part 4 Taking your applications to the cloud  · p238
+  - 9 Using the cloud  · p240
+    - 9.1 What is cloud computing?  · p241
+      - 9.1.1 The types of cloud computing  · p241
+      - 9.1.2 Containers and cloud-native applications  · p243
+    - 9.2 Managing cloud services  · p245
+      - 9.2.1 Avoiding cloud provider lock-in  · p245
+      - Technique 56 Working with multiple cloud providers  · p245
+      - 9.2.2 Dealing with divergent errors  · p248
+      - Technique 57 Cleanly handling cloud provider errors  · p248
+    - 9.3 Running on cloud servers  · p250
+      - 9.3.1 Performing runtime detection  · p250
+      - Technique 58 Gathering information on the host  · p250
+      - Technique 59 Detecting dependencies  · p252
+      - 9.3.2 Building for the cloud  · p253
+      - Technique 60 Cross-compiling  · p253
+      - 9.3.3 Performing runtime monitoring  · p255
+      - Technique 61 Monitoring the Go runtime  · p256
+    - 9.4 Summary  · p257
+  - 10 Communication between cloud services  · p258
+    - 10.1 Microservices and high availability  · p259
+    - 10.2 Communicating between services  · p260
+      - 10.2.1 Making REST faster  · p260
+      - Technique 62 Reusing connections  · p261
+      - Technique 63 Faster JSON marshal and unmarshal  · p264
+      - 10.2.2 Moving beyond REST  · p267
+      - Technique 64 Using protocol buffers  · p267
+      - Technique 65 Communicating over RPC with protocol buffers  · p270
+    - 10.3 Summary  · p275
+  - 11 Reflection and code generation  · p276
+    - 11.1 Three features of reflection  · p277
+      - Technique 66 Switching based on type and kind  · p277
+      - Technique 67 Discovering whether a value implements an interface  · p281
+      - Technique 68 Accessing fields on a struct  · p285
+    - 11.2 Structs, tags, and annotations  · p289
+      - 11.2.1 Annotating structs  · p289
+      - 11.2.2 Using tag annotations  · p290
+      - Technique 69 Processing tags on a struct  · p291
+    - 11.3 Generating Go code with Go code  · p297
+      - Technique 70 Generating code with go generate  · p298
+    - 11.4 Summary  · p303
+- index  · p304
+  - Symbols  · p304
+  - Numerics  · p304
+  - A  · p304
+  - B  · p304
+  - C  · p304
+  - D  · p305
+  - E  · p305
+  - F  · p306
+  - G  · p306
+  - H  · p306
+  - I  · p307
+  - J  · p307
+  - K  · p307
+  - L  · p307
+  - M  · p307
+  - N  · p307
+  - O  · p308
+  - P  · p308
+  - Q  · p308
+  - R  · p308
+  - S  · p309
+  - T  · p309
+  - U  · p310
+  - V  · p310
+  - W  · p310
+  - X  · p310
+  - Y  · p310
+- Back Cover  · p314

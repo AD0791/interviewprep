@@ -192,7 +192,7 @@ graph LR
 **Type:** Algorithm · **Depth:** L4
 **Covers:** FIFO, optimal, and LRU page replacement, LRU-approximation (clock/second-chance) algorithms, frame-allocation policy, thrashing, the working-set model
 **Sources:** Silberschatz et al. ch.10 §10.4–10.6 (2018)
-**Edges:** `requires` [`OS-10`]
+**Edges:** `requires` [`OS-10`] · `contrasts` [`JAVA-18`]
 **Currency:** `stale-minor`
 **Δ current:** The book's page-replacement chapter presents LRU-approximation algorithms (clock/second-chance) as the practical compromise between true LRU and cheap hardware support. The Multi-Generational LRU (MGLRU), merged into the mainline kernel at version 6.1 (December 2022) and engineered primarily by Google for ChromeOS and Android, replaces the single active/inactive list with page generations tracked by recency and is documented to outperform the classic approximation on memory-constrained systems. As of the most recent public discussion available (LWN, 2026), MGLRU adoption has stalled and it is not enabled by default on many distributions, so an article on this node should present classic LRU approximation as the still-dominant default and MGLRU as an available, Google-driven alternative rather than a universal replacement.
 
@@ -283,6 +283,7 @@ because the target subject still has no graph.
 |---|---|---|---|
 | `OS-19` | `contrasts` | `WS-08` | OS-level protection fundamentals compared against browser-enforced Origin/CSP access control in `WS-08` |
 | `OS-05` | `contrasts` | `AND-15` | General-purpose interprocess communication mechanisms versus AIDL-based Android IPC in `AND-15` |
+| `OS-11` | `contrasts` | `JAVA-18` | Generational garbage collection and OS page replacement are both "reclaim memory nobody is using anymore" algorithms operating at different layers, one tracking object reachability and the other tracking page access recency |
 
 ---
 

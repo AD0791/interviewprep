@@ -1,0 +1,153 @@
+# TOC — go-in-action.pdf
+
+*Extracted by `_tools/extract_toc.py` (outline). 149 entries. Machine-generated — do not hand-edit.*
+
+- Go in Action  · p1
+- brief contents  · p6
+- contents  · p8
+- foreword  · p12
+- preface  · p14
+- acknowledgments  · p15
+- about this book  · p17
+  - Who should read this book?  · p17
+  - Roadmap  · p17
+  - About the code  · p18
+  - Author Online  · p18
+  - About the authors  · p19
+- about the cover illustration  · p20
+- 1 Introducing Go  · p22
+  - 1.1 Solving modern programming challenges with Go  · p23
+    - 1.1.1 Development speed  · p24
+    - 1.1.2 Concurrency  · p24
+    - 1.1.3 Go’s type system  · p26
+    - 1.1.4 Memory management  · p28
+  - 1.2 Hello, Go  · p28
+    - 1.2.1 Introducing the Go Playground  · p29
+  - 1.3 Summary  · p29
+- 2 Go quick-start  · p30
+  - 2.1 Program architecture  · p31
+  - 2.2 Main package  · p32
+  - 2.3 Search package  · p34
+    - 2.3.1 search.go  · p35
+    - 2.3.2 feed.go  · p43
+    - 2.3.3 match.go/default.go  · p47
+  - 2.4 RSS matcher  · p53
+  - 2.5 Summary  · p59
+- 3 Packaging and tooling  · p60
+  - 3.1 Packages  · p61
+    - 3.1.1 Package-naming conventions  · p61
+    - 3.1.2 Package main  · p61
+  - 3.2 Imports  · p63
+    - 3.2.1 Remote imports  · p63
+    - 3.2.2 Named imports  · p64
+  - 3.3 init  · p65
+  - 3.4 Using Go tools  · p66
+  - 3.5 Going farther with Go developer tools  · p68
+    - 3.5.1 go vet  · p68
+    - 3.5.2 Go format  · p69
+    - 3.5.3 Go documentation  · p69
+  - 3.6 Collaborating with other Go developers  · p72
+    - 3.6.1 Creating repositories for sharing  · p72
+  - 3.7 Dependency management  · p73
+    - 3.7.1 Vendoring dependencies  · p73
+    - 3.7.2 Introducing gb  · p75
+  - 3.8 Summary  · p77
+- 4 Arrays, slices, and maps  · p78
+  - 4.1 Array internals and fundamentals  · p78
+    - 4.1.1 Internals  · p79
+    - 4.1.2 Declaring and initializing  · p79
+    - 4.1.3 Working with arrays  · p81
+    - 4.1.4 Multidimensional arrays  · p83
+    - 4.1.5 Passing arrays between functions  · p85
+  - 4.2 Slice internals and fundamentals  · p86
+    - 4.2.1 Internals  · p86
+    - 4.2.2 Creating and initializing  · p86
+    - 4.2.3 Working with slices  · p89
+    - 4.2.4 Multidimensional slices  · p100
+    - 4.2.5 Passing slices between functions  · p101
+  - 4.3 Map internals and fundamentals  · p102
+    - 4.3.1 Internals  · p102
+    - 4.3.2 Creating and initializing  · p104
+    - 4.3.3 Working with maps  · p105
+    - 4.3.4 Passing maps between functions  · p107
+  - 4.4 Summary  · p108
+- 5 Go’s type system  · p109
+  - 5.1 User-defined types  · p110
+  - 5.2 Methods  · p113
+  - 5.3 The nature of types  · p117
+    - 5.3.1 Built-in types  · p117
+    - 5.3.2 Reference types  · p118
+    - 5.3.3 Struct types  · p119
+  - 5.4 Interfaces  · p122
+    - 5.4.1 Standard library  · p123
+    - 5.4.2 Implementation  · p125
+    - 5.4.3 Method sets  · p126
+    - 5.4.4 Polymorphism  · p130
+  - 5.5 Type embedding  · p132
+  - 5.6 Exporting and unexporting identifiers  · p140
+  - 5.7 Summary  · p148
+- 6 Concurrency  · p149
+  - 6.1 Concurrency versus parallelism  · p150
+  - 6.2 Goroutines  · p153
+  - 6.3 Race conditions  · p160
+  - 6.4 Locking shared resources  · p163
+    - 6.4.1 Atomic functions  · p163
+    - 6.4.2 Mutexes  · p166
+  - 6.5 Channels  · p168
+    - 6.5.1 Unbuffered channels  · p169
+    - 6.5.2 Buffered channels  · p174
+  - 6.6 Summary  · p178
+- 7 Concurrency patterns  · p179
+  - 7.1 Runner  · p179
+  - 7.2 Pooling  · p188
+  - 7.3 Work  · p198
+  - 7.4 Summary  · p204
+- 8 Standard library  · p205
+  - 8.1 Documentation and source code  · p206
+  - 8.2 Logging  · p208
+    - 8.2.1 Log package  · p208
+    - 8.2.2 Customized loggers  · p212
+    - 8.2.3 Conclusion  · p216
+  - 8.3 Encoding/Decoding  · p217
+    - 8.3.1 Decoding JSON  · p217
+    - 8.3.2 Encoding JSON  · p222
+    - 8.3.3 Conclusion  · p223
+  - 8.4 Input and output  · p224
+    - 8.4.1 Writer and Reader interfaces  · p224
+    - 8.4.2 Working together  · p226
+    - 8.4.3 Simple curl  · p229
+    - 8.4.4 Conclusion  · p231
+  - 8.5 Summary  · p231
+- 9 Testing and benchmarking  · p232
+  - 9.1 Unit testing  · p233
+    - 9.1.1 Basic unit test  · p233
+    - 9.1.2 Table tests  · p237
+    - 9.1.3 Mocking calls  · p240
+    - 9.1.4 Testing endpoints  · p244
+  - 9.2 Examples  · p249
+  - 9.3 Benchmarking  · p253
+  - 9.4 Summary  · p257
+- index  · p258
+  - Symbols  · p258
+  - A  · p258
+  - B  · p258
+  - C  · p258
+  - D  · p259
+  - E  · p259
+  - F  · p259
+  - G  · p259
+  - H  · p260
+  - I  · p260
+  - J  · p260
+  - L  · p260
+  - M  · p260
+  - N  · p260
+  - O  · p260
+  - P  · p260
+  - R  · p261
+  - S  · p261
+  - T  · p261
+  - U  · p262
+  - V  · p262
+  - W  · p262
+  - X  · p262

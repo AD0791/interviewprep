@@ -139,7 +139,7 @@ repeated as anchors so this cluster renders independently — see §4 for the au
 **Type:** Mechanism · **Depth:** L5
 **Covers:** ACID properties, the anomaly ladder (dirty read, non-repeatable read, phantom, write skew), two-phase locking and deadlock detection, optimistic versus pessimistic locking, MVCC snapshots, bloat from long-running transactions
 **Sources:** Atzeni §9.1–9.2 (1999) · Ullman §6.6 (2009) · DB2 Best Practices, "Query design: isolation levels, application deadlocks" (2012)
-**Edges:** `requires` [`SQL-01`] · `contrasts` [`CONC-17`, `RDS-07`] · `contrasts` [`BUS-05`]
+**Edges:** `requires` [`SQL-01`] · `contrasts` [`CONC-17`, `RDS-07`] · `contrasts` [`BUS-05`] · `contrasts` [`JAVA-22`]
 **Currency:** `stale-minor`
 **Δ current:** All three sources describe classic two-phase-locking serializability and the SQL-92 four-level isolation ladder without a snapshot-based alternative. PostgreSQL's Serializable Snapshot Isolation (SSI), which detects dangerous read-write dependencies without lock-based blocking, shipped in PostgreSQL 9.1 (2011); the current PostgreSQL 17 documentation (postgresql.org/docs/17/transaction-iso.html) still lists Read Committed as the default and Serializable, implemented via SSI, as the strictest level. An article on this node should teach MVCC and SSI as the mechanism a PostgreSQL engineer actually meets, with textbook 2PL taught as the older alternative MySQL's gap-locking approach still resembles.
 
@@ -240,7 +240,7 @@ repeated as anchors so this cluster renders independently — see §4 for the au
 **Type:** Practice · **Depth:** L4
 **Covers:** identifying slow queries by total time, estimated-versus-actual as the diagnostic signal, autovacuum and table bloat, N+1 patterns from lazily loaded ORM relationships, `COPY` versus row-at-a-time `INSERT`, the row-store/column-store boundary
 **Sources:** DB2 Best Practices, "Performance and monitoring" (2012)
-**Edges:** `requires` [`SQL-04`, `SQL-05`] · `contrasts` [`PY-16`]
+**Edges:** `requires` [`SQL-04`, `SQL-05`] · `contrasts` [`PY-16`] · `contrasts` [`SPRG-05`]
 **Currency:** `current`
 
 ---
@@ -261,6 +261,8 @@ repeated as anchors so this cluster renders independently — see §4 for the au
 | `SQL-01` | `contrasts` | `AND-11` | The general relational model versus Android's embedded, single-app SQLite usage in `AND-11`, a lightweight application of it |
 | `SQL-17` | `contrasts` | `DE-07` | Dimensional-modeling theory for the warehouse schema versus the book's hand-rolled staging-to-warehouse pipeline that loads into it in `DE-07` |
 | `SQL-08` | `contrasts` | `STAT-21` | This node's own window-functions treatment versus DSBDA's advanced-SQL-for-analytics chapter in `STAT-21` |
+| `SQL-07` | `contrasts` | `JAVA-22` | Isolation levels and concurrency control from the database's side versus JDBC connection pooling and transaction handling from the client's side in `JAVA-22` |
+| `SQL-20` | `contrasts` | `SPRG-05` | The database-side view of query performance and the ORM boundary versus Spring Data repositories, a concrete framework instance of that same boundary |
 
 ---
 

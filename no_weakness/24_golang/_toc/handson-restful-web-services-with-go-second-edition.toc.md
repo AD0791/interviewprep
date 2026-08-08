@@ -1,0 +1,215 @@
+# TOC — HANDSON_RESTFUL_WEB_SERVICES_WITH_GO_SECOND_EDITION.epub
+
+*Extracted by `_tools/extract_toc.py` (epub-ncx). 211 entries. Machine-generated — do not hand-edit.*
+
+- Title Page
+- Copyright and Credits
+  - Hands-On RESTful Web Services with Go Second Edition
+- Dedication
+- About Packt
+  - Why subscribe?
+- Contributors
+  - About the author
+  - About the reviewer
+  - Packt is searching for authors like you
+- Preface
+  - Who this book is for
+  - What this book covers
+  - To get the most out of this book
+    - Download the example code files
+    - Download the color images
+    - Conventions used
+  - Get in touch
+    - Reviews
+- Getting Started with REST API Development
+  - Technical requirements
+  - Types of web services
+    - The REST API
+      - Characteristics of REST services
+  - REST verbs and status codes
+    - GET
+      - Examples of path parameters
+    - POST, PUT, and PATCH
+    - DELETE and OPTIONS
+      - Cross-Origin Resource Sharing (CORS)
+  - The rise of the REST API with SPAs
+    - Old and new methods of data flow in SPA
+    - Why use Go for REST API development?
+  - Setting up the project and running the development server
+    - Demystifying GOPATH
+  - Building our first service – finding the fastest mirror site from a list
+  - Open API and Swagger
+    - Installing Swagger UI
+  - Summary
+- Handling Routing for our REST Services
+  - Technical requirements
+  - Understanding Go's net/http package
+  - ServeMux – a basic router in Go
+    - Developing a UUID generation API using ServeMux
+      - Adding multiple handlers using ServeMux
+  - Understanding httprouter – a lightweight HTTP router
+    - Installing httprouter
+    - Building a simple static file server in minutes
+  - Introducing gorilla/mux – a powerful HTTP router
+    - Installing gorilla/mux
+    - Fundamentals of gorilla/mux
+      - Path-based matching
+      - Query-based matching
+      - Other notable features of gorilla/mux
+  - SQL injection in URLs and ways to avoid them
+  - Reader's challenge – an API for URL shortening
+  - Summary
+- Working with Middleware and RPC
+  - Technical requirements
+  - What is middleware?
+    - Creating a basic middleware
+  - Multiple middleware and chaining
+  - Painless middleware chaining with Alice
+  - Using Gorilla handlers middleware for logging
+  - What is RPC?
+    - Creating an RPC server
+    - Creating an RPC client
+  - JSON-RPC using Gorilla RPC
+  - Summary
+- Simplifying RESTful Services with Popular Go Frameworks
+  - Technical requirements
+  - Introducing go-restful – a REST API framework
+  - SQLite3 basics and CRUD operations
+  - Building a Metro Rail API with go-restful
+    - Design specification
+    - Creating database models
+  - Building RESTful API with the Gin framework
+  - Building a RESTful API with revel.go
+  - Summary
+- Working with MongoDB and Go to Create a REST API
+  - Technical requirements
+  - Introduction to MongoDB
+  - Installing MongoDB and using the shell
+    - Working with the MongoDB shell
+  - Introducing mongo-driver, an official MongoDB driver for Go
+  - RESTful API with gorilla/mux and MongoDB
+  - Boosting the querying performance with indexing
+  - Designing MongoDB documents for a delivery logistics API
+  - Summary
+- Working with Protocol Buffers and gRPC
+  - Technical requirements
+  - Introduction to protocol buffers
+  - Protocol buffer language
+    - Scalar values
+    - Enumerations and repeated fields
+    - Nested fields
+  - Compiling a protocol buffer with protoc
+  - Introduction to gRPC
+  - Bidirectional streaming with gRPC
+  - Summary
+- Working with PostgreSQL, JSON, and Go
+  - Technical requirements
+  - Discussing PostgreSQL installation options
+    - Installing via Docker
+    - Adding users and databases in PostgreSQL
+  - Introducing pq, a pure PostgreSQL database driver for Go
+  - Implementing a URL-shortening service using PostgreSQL and pq
+    - Defining the Base62 algorithm
+  - Exploring the JSONStore feature in PostgreSQL
+    - Introducing GORM, a powerful ORM for Go
+    - Implementing the logistics REST API
+  - Summary
+- Building a REST API Client in Go
+  - Technical requirements
+  - Plan for building a REST API client
+  - Basics for writing a command-line tool in Go
+    - CLI – a package for building beautiful clients
+    - Collecting command-line arguments in the CLI
+  - Cobra, an advanced CLI library
+  - grequests a REST API package for Go
+    - API overview of grequests
+  - Getting comfortable with the GitHub REST API
+  - Creating a CLI tool as an API client for the GitHub REST API
+  - Using Redis to cache the API data
+  - Summary
+- Asynchronous API Design
+  - Technical requirements
+  - Understanding sync/async API requests
+  - Fan-in/fan-out of services
+  - Delaying API jobs with queuing
+    - RabbitMQ, a powerful message queue
+      - Communicating with RabbitMQ in Go
+  - Long-running task design
+  - Caching strategies for APIs
+    - go-redis, a Go client for communicating with Redis
+    - Job status cache with Redis
+  - Event-driven API
+  - Summary
+- GraphQL and Go
+  - Technical requirements
+  - What is GraphQL?
+  - Over-fetching and under-fetching problems in the REST API
+  - GraphQL basics
+    - Types and queries
+      - Object-level types
+      - Field-level types
+      - Non-nullable types
+      - Enumerations
+    - Queries and mutations
+      - Mutations and inputs
+  - Creating GraphQL clients in Go
+  - Creating GraphQL servers in Go
+  - Summary
+- Scaling our REST API Using Microservices
+  - Technical requirements
+  - What are microservices?
+  - Monoliths versus microservices
+  - Introducing Go Micro, a package for building microservices
+    - Understanding encryption
+    - Building a microservice with Go Micro
+    - Building an RPC client with Go Micro
+    - Building event-driven microservices
+  - Adding logging to microservices
+  - Summary
+- Containerizing REST Services for Deployment
+  - Technical requirements
+  - Installing the Nginx server
+    - Installation on a bare machine
+    - Installation via a Docker container
+  - What is a reverse proxy server?
+    - Important Nginx paths
+    - Using server blocks
+  - Deploying a Go service using Nginx
+    - Load balancing with Nginx
+    - Rate limiting our REST API
+    - Securing our Nginx proxy server
+  - Monitoring our Go API server with Supervisord
+    - Installing Supervisord
+  - Makefile and Docker Compose-based deployment
+  - Summary
+- Deploying REST Services on Amazon Web Services
+  - Technical requirements
+  - Basics for working with AWS
+    - Managed services for applications from AWS
+    - Setting up an AWS account
+  - IaC with Terraform
+    - Deploying a service on EC2
+  - Why is an API Gateway required?
+  - Introducing Amazon API Gateway
+    - Deploying our service behind Amazon API Gateway
+  - Other API Gateways
+  - Summary
+- Handling Authentication for our REST Services
+  - Technical requirements
+  - How simple authentication works
+    - A simple authentication example
+  - Introducing Postman, a visual client for testing a REST API
+  - Persisting client sessions with Redis
+  - Introducing JWT and OAuth2
+    - JWT format
+      - Reserved claims
+      - Private claims
+    - Creating a JWT in Go
+    - Reading a JWT in Go
+  - JWT in an OAuth2.0 workflow
+    - Authentication versus authorization
+  - Exercise
+  - Security aspects of an API
+  - Summary
+- Other Books You May Enjoy
+  - Leave a review - let other readers know what you think

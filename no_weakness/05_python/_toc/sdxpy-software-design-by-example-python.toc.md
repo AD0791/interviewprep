@@ -1,0 +1,192 @@
+# TOC — Wilson, *Software Design by Example* (Python edition)
+
+*Not produced by `_tools/extract_toc.py`: this book has no PDF on the shelf. Walked out of the source repository `gvwilson/sdxpy` at commit `ffa707a` (2026-06-23), one directory per chapter, in the order the published site's Lessons menu lists them. Chapter titles are each chapter's `index.md` front-matter `title`; the nested entries are its `##` section headings. 31 chapters, 188 entries. Machine-generated — do not hand-edit.*
+
+- Introduction  · `intro/`
+  - Audience
+  - The Big Ideas
+  - Formatting
+  - Usage
+  - What People Are Saying
+  - Acknowledgments
+  - Exercises
+- Objects and Classes  · `oop/`
+  - Objects
+  - Classes
+  - Arguments
+  - Inheritance
+  - Summary
+  - Exercises
+- Finding Duplicate Files  · `dup/`
+  - Getting Started
+  - Hashing Files
+  - Better Hashing
+  - Summary
+  - Exercises
+- Matching Patterns  · `glob/`
+  - Simple Patterns
+  - Rethinking
+  - Summary
+  - Exercises
+- Parsing Text  · `parse/`
+  - Tokenizing
+  - Parsing
+  - Summary
+  - Exercises
+- Running Tests  · `test/`
+  - Storing and Running Tests
+  - Finding Functions
+  - Summary
+  - Exercises
+- An Interpreter  · `interp/`
+  - Expressions
+  - Variables
+  - Introspection
+  - Summary
+  - Exercises
+- Functions and Closures  · `func/`
+  - Definition and Storage
+  - Calling Functions
+  - Closures
+  - Summary
+  - Exercises
+- Protocols  · `protocols/`
+  - Mock Objects
+  - Protocols
+  - Decorators
+  - Iterators
+  - Summary
+  - Exercises
+- A File Archiver  · `archive/`
+  - Saving Files
+  - Testing
+  - Tracking Backups
+  - Refactoring
+  - Summary
+  - Exercises
+- An HTML Validator  · `check/`
+  - HTML and the DOM
+  - The Visitor Pattern
+  - Checking Style
+  - Summary
+  - Exercises
+- A Template Expander  · `template/`
+  - Syntax
+  - Managing Variables
+  - Visiting Nodes
+  - Implementing Handlers
+  - Control Flow
+  - Summary
+  - Exercises
+- A Code Linter  · `lint/`
+  - Machinery
+  - Finding Duplicate Keys
+  - Finding Unused Variables
+  - Summary
+  - Exercises
+- Page Layout  · `layout/`
+  - Sizing
+  - Positioning
+  - Rendering
+  - Wrapping
+  - Summary
+  - Exercises
+- Performance Profiling  · `perf/`
+  - Options
+  - Row-Wise Storage
+  - Column-Wise Storage
+  - Performance
+  - Summary
+  - Exercises
+- Object Persistence  · `persist/`
+  - Built-in Types
+  - Converting to Classes
+  - Aliasing
+  - Summary
+  - Exercises
+- Binary Data  · `binary/`
+  - Integers
+  - Bitwise Operations
+  - Text
+  - And Now, Persistence
+  - Summary
+  - Exercises
+- A Database  · `db/`
+  - Starting Point
+  - Saving Records
+  - A File-Backed Database
+  - Playing with Blocks
+  - Persisting Blocks
+  - Cleaning Up
+  - Summary
+  - Exercises
+- A Build Manager  · `build/`
+  - Concepts
+  - Initial Design
+  - Topological Sorting
+  - A Better Design
+  - Summary
+  - Exercises
+- A Package Manager  · `pack/`
+  - Semantic Versioning
+  - Exhaustive Search
+  - Generating Possibilities Manually
+  - Incremental Search
+  - Using a Theorem Prover
+  - Summary
+  - Exercises
+- Transferring Files  · `ftp/`
+  - Using TCP/IP
+  - Chunking
+  - Testing
+  - Summary
+  - Exercises
+- Serving Web Pages  · `http/`
+  - Protocol
+  - Hello, Web
+  - Serving Files
+  - Testing
+  - Summary
+  - Exercises
+- A File Viewer  · `viewer/`
+  - Curses
+  - Windowing
+  - Moving
+  - Refactoring
+  - Clipping
+  - Viewport
+  - Summary
+  - Exercises
+- Undo and Redo  · `undo/`
+  - Getting Started
+  - Insertion and Deletion
+  - Going Backward
+  - Summary
+  - Exercises
+- A Virtual Machine  · `vm/`
+  - Architecture
+  - Execution
+  - Assembly Code
+  - Arrays
+  - Summary
+  - Exercises
+- A Debugger  · `debugger/`
+  - One Step at a Time
+  - Testing
+  - Extensibility
+  - Breakpoints
+  - Summary
+  - Exercises
+- Observers  · `observe/`
+- Generating Documentation  · `docgen/`
+  - Modifying Code
+  - Exercises
+- A File Cache  · `cache/`
+  - A File Index
+  - A Local Cache
+  - A Limited Cache
+  - Placeholders
+  - Summary
+  - Exercises
+- Concurrency  · `concur/`
+- Conclusion  · `finale/`

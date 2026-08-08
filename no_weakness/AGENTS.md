@@ -20,12 +20,22 @@ and edited per [`_tools/KG_SPEC.md`](_tools/KG_SPEC.md), a separate, binding spe
 that fails it is not finished.
 
 **The written module** — everything else, e.g. `06_concurrency/01_the_gil_...md` — is the
-textbook chapter a node in the graph eventually earns. The rest of *this* file, §1 onward,
-governs that: what a module is, how it is structured, and the honesty rules around measured
-claims. A module's front matter names the graph node(s) it covers; the graph node's own
-`**Article:**` line points back once the module exists.
+textbook chapter a node in the graph eventually earns. Its format is binding and lives in
+[`_tools/MODULE_SPEC.md`](_tools/MODULE_SPEC.md): section order, word budgets, the
+simple-to-complex code progression, the diagram rules, and the ban on practice material.
+**Read `MODULE_SPEC.md`, not this file, before writing or revising a module.** A module's front
+matter names the graph node(s) it covers; the graph node's own `**Article:**` line points back
+once the module exists.
 
-**As of this writing, the graph layer is complete for all 23 subjects (413 nodes) and the text
+**Every number** either of those layers quotes is governed by a third spec,
+[`_tools/MEASUREMENT_SPEC.md`](_tools/MEASUREMENT_SPEC.md) — the four honesty tags, the
+identifier rule, and the environment blocks that make a stale figure visible instead of silent.
+[`MEASUREMENTS.md`](MEASUREMENTS.md) is the ledger it governs.
+
+This file states the principles the three specs implement, and is the tiebreaker when they are
+silent or appear to conflict.
+
+**As of this writing, the graph layer is complete for all 26 subjects (482 nodes) and the text
 layer is not** — 11 modules are written. Building a graph node is not a promise that a module
 follows immediately; see §9.
 
@@ -33,7 +43,7 @@ follows immediately; see §9.
 
 ## 1. What this folder is
 
-**A programming textbook** covering, as of this writing, twenty-three subjects at
+**A programming textbook** covering, as of this writing, twenty-six subjects at
 senior-and-above depth. Not a course, not a training regimen, not interview prep with
 exercises.
 
@@ -55,93 +65,32 @@ This is a hard rule and it reverses an earlier version of this folder.
 
 **Do not write** rhetorical quiz openings — "can you answer this?", "questions you cannot answer", "if you can explain all four, skip ahead". A textbook does not interrogate its reader.
 
-`00_self_assessment.md` at the repo root is **deprecated** and outside the workflow. Do not extend it, link to it, or build anything that depends on it. `RECALL.md` as a rehearsal drill script is likewise abandoned.
-
 What replaces them: a **reference summary** at the end of each module — a condensed statement of the module's facts, written as something to look up, not something to be quizzed on.
+
+The v1 self-assessment diagnostic, the `RECALL.md` rehearsal script, the competency-table syllabi and the drills that went with them have all been **deleted**, not merely deprecated. Nothing in this repository should link to them or reproduce their shape. [`MODULE_SPEC.md`](_tools/MODULE_SPEC.md) §2 carries the operative list, including the two section titles that are permanently retired because they encode the banned framing.
 
 ---
 
 ## 3. The module structure
 
-Every module follows this, in order. Total 6,000–8,000 words.
+Every module is 6,000–8,000 words across six sections, in a fixed order: the problem this
+solves, the mechanism built up from the smallest runnable example, failure modes with verbatim
+terminal output, trade-offs with a mandatory cost column, and a reference summary. Diagrams are
+integrated into the mechanism section rather than collected into one of their own.
 
-### Front matter (~120 words)
+**The binding format, with the section budgets and the full rules for each, is
+[`_tools/MODULE_SPEC.md`](_tools/MODULE_SPEC.md) §3.** Two of its requirements are the ones
+drafts most often miss, so they are worth stating here as principles rather than as format:
 
-```markdown
-# The GIL — what it protects, and when it lets go
+**Build up, never decompose.** The mechanism section starts with the smallest complete example
+that runs — five to ten lines, one idea, output shown — and extends it one dimension at a time
+until it reaches the shape the thing takes in production. Presenting the complex form first and
+taking it apart is the failure mode this rule exists to prevent.
 
-*Reference counts, bytecode boundaries, and the five milliseconds nobody mentions.*
-
-**Level:** L4 · **Prerequisites:** [05_python/05 bytecode](../05_python/05_bytecode_and_the_runtime.md)
-**Covers:** CONC-01 … CONC-07
-**Measurement:** Measured — CPython 3.14.6, 8 cores, macOS 26.5. Every number below
-came out of a terminal.
-```
-
-The measurement line is mandatory (see §5).
-
-### §1 — The problem this solves (400–700 words)
-
-Open with the engineering situation the subject exists to address. Concrete, in code. What goes wrong without this mechanism, or what question it answers.
-
-Do not open with a definition. Do not open by asking the reader what they know.
-
-### §2 — The mechanism, built up (2,500–3,500 words)
-
-The core of the module, and where the **simple-to-complex code progression** lives. This is a hard requirement:
-
-**Start with the smallest complete example that runs.** Five to ten lines. One idea. Output shown.
-
-**Then extend it, one dimension at a time.** Each step adds exactly one new concept and shows the resulting output. The reader must be able to follow the whole chain without a leap.
-
-**End with a realistic version** — the shape the thing actually takes in production code, with the complications that implies.
-
-Never present the complex form first and decompose it. Build up.
-
-Narrate in prose between the code blocks. The explanation lives in paragraphs; comments annotate, they do not teach.
-
-Trace one concrete execution through the machine in plain words at least once per module.
-
-### §3 — Diagrams (integrated into §2, not a separate section)
-
-**Where a paragraph would be harder to visualise than a picture, draw the picture.** This is a requirement, not a permission — an earlier version of this folder under-used diagrams badly.
-
-Use Mermaid. Two to four per module is normal; more is fine when the subject is structural.
-
-Draw when the subject has: a **shape** (a chain, a tree, a DAG), an **ordering or interleave** (event loops, races, protocol exchanges), a **lifecycle** (state machines), a **topology** (replica sets, shard maps, query stages), or a **layout** (memory, address spaces, index pages).
-
-Permitted: `graph`, `sequenceDiagram`, `stateDiagram-v2`, `erDiagram`, and fenced ASCII where byte-level layout matters.
-
-Banned: a diagram that restates a bulleted list; generic "architecture" boxes; anything past ~15 nodes.
-
-**Test:** delete the diagram and reread the paragraph. If the paragraph is fine alone, the diagram was decoration. If the paragraph got noticeably harder, the diagram earns its place.
-
-### §4 — Failure modes (1,500–2,200 words)
-
-Three to five ways the mechanism breaks, each with:
-
-1. Minimal runnable reproduction, named `# Gist: name.py`
-2. **Verbatim terminal output** in its own fenced block — copy-pasted, never composed by hand
-3. Prose explanation referring back to the §2 subsection that predicted it
-4. The fix, with its cost stated
-
-Failures that could not be reproduced are **reported as negative results**, not invented. A nondeterministic failure honestly described is more useful than a fabricated one, and this folder has two good examples already.
-
-### §5 — Trade-offs (900–1,300 words)
-
-An options table with fixed columns: **Use when · Because · Real cost.** The cost column is not optional.
-
-Then prose subsections, one of which is always the case *against* — when you would not use this, and what you would use instead.
-
-### §6 — Reference summary (300–500 words)
-
-A condensed, scannable statement of everything the module established. Measured figures in bold. Written as a **lookup table for someone who read the chapter and wants the facts back**, not as a self-test.
-
-### Footer
-
-`← [<Topic> knowledge graph](00_knowledge_graph.md) · [repo index](../README.md)`
-
----
+**Draw the picture where a paragraph would be harder to visualise than one.** This is a
+requirement rather than a permission, because an earlier version of this folder under-used
+diagrams badly. The test is to delete the diagram and reread the paragraph: if the paragraph is
+fine alone, the diagram was decoration.
 
 ## 4. Prose rules
 
@@ -153,29 +102,40 @@ Write about the subject, not about the reader. No second-person challenges, no "
 
 ## 5. Measurement honesty
 
-The measured claims are what make these modules worth more than the documentation they compete with. Borrowing that authority for an unmeasured claim would undermine every claim that is real.
+The measured claims are what make these modules worth more than the documentation they compete
+with. A number with a command and an environment behind it can be checked and re-derived by the
+reader; a number without them cannot, and letting the second borrow the authority of the first
+would undermine every claim that is real.
 
-Every module carries exactly one tag in its front matter; individual claims may carry a stricter one.
+This is not an abstract worry. The rule exists because an early module was written about a
+database with no server available locally, so its query plans came from vendor documentation
+while its size calculations were genuinely computed — and on the page the two were
+indistinguishable.
 
-**`Measured`** — the number came out of a terminal on a named machine on a named date, and the command is recorded in [`MEASUREMENTS.md`](MEASUREMENTS.md) with an ID.
-
-**`Reproduced small`** — measured on a toy that demonstrates the mechanism correctly but whose magnitude does not transfer. Never quote the magnitude.
-
-**`Documented`** — from vendor documentation, no measurement. The tag appears in the front matter *and* is repeated in prose at the point of use.
-
-Figures inherited from an earlier environment carry `measured-stale-env` in the ledger and must name that environment wherever they appear.
+**The four tags, the identifier rule and the environment blocks are in
+[`_tools/MEASUREMENT_SPEC.md`](_tools/MEASUREMENT_SPEC.md).** Every module carries exactly one
+tag in its front matter, and it must be the weakest tag among the claims the module makes.
+[`MEASUREMENTS.md`](MEASUREMENTS.md) is the ledger.
 
 ---
 
 ## 6. Quality checks before a module is marked written
 
-1. **Verbatim output.** Every §4 failure shows real terminal output. Zero hand-composed, zero "would print approximately".
-2. **Code progression.** §2 starts with a minimal runnable example and builds. No module opens with its most complex listing.
-3. **Diagrams present where earned.** At least one, and every one survives the delete test.
-4. **Measurement density.** At least three claims cite `MEASUREMENTS.md` IDs.
-5. **Rejected alternatives.** §5 names at least two, with costs.
-6. **The noun-swap test.** No paragraph may survive having its subject swapped for a different technology. Generic filler survives noun-swapping — *"indexes improve read performance at the cost of write performance"* works for Postgres, MongoDB and MySQL, which is why it is worthless. Specific writing does not, because it names a version, a default, a constant, or a measured figure.
-7. **No practice material.** Per §2.
+The operative checklist is [`_tools/MODULE_SPEC.md`](_tools/MODULE_SPEC.md) §5, which is what a
+module is actually checked against. The two checks that carry the most weight, and the reasoning
+behind them, are these.
+
+**The noun-swap test.** No paragraph may survive having its subject swapped for a different
+technology. Generic filler does survive it — *"indexes improve read performance at the cost of
+write performance"* works for Postgres, MongoDB and MySQL, which is exactly why it is worthless.
+Specific writing does not survive it, because it names a version, a default, a constant, or a
+measured figure.
+
+**Verbatim output.** Every failure mode shows real terminal output, copy-pasted. Zero
+hand-composed, zero "would print approximately". A failure that could not be reproduced is
+reported as a negative result rather than replaced with one that behaved better; this folder has
+two good examples of that already, and they are more useful than the invented alternative would
+have been.
 
 ---
 
@@ -204,35 +164,58 @@ assigned by hand:
 | 05 | `05_python` | 13 | `13_http` | 21 | `21_dataengineering` |
 | 06 | `06_concurrency` | 14 | `14_browser_networking` | 22 | `22_android` |
 | 07 | `07_javascript` | 15 | `15_websocket` | 23 | `23_app_dev` |
-| 08 | `08_typescript` | 16 | `16_webrtc` | | |
+| 08 | `08_typescript` | 16 | `16_webrtc` | 24 | `24_golang` |
+| | | | | 25 | `25_Java` |
+| | | | | 26 | `26_spring` |
 
 `06_concurrency` sits at position 06 rather than immediately after `05_python` because
 `07_javascript`'s event-loop node and `09_sql`'s transaction-isolation node both need "a race
 condition" to already mean something precise, and both sit downstream of it. `13_http` is the
-widest fan-out point in the whole numbering: four later subjects (`14`–`17`) require it
-directly.
+widest fan-out point in the whole numbering: six later subjects (`14`–`17`, `24`, and `26`)
+require it directly.
 
-If the graph's `requires` edges ever imply a different order than the table above — a new
-subject added, an edge corrected — the numbering is wrong and should be brought back into
+**A subject added after the first pass appends rather than renumbers.** The original twenty-three
+directories were numbered together, in one derivation from the graph's `requires` edges. A
+subject added after that takes the next free number, and renumbering nineteen directories to insert
+it in DAG order is not worth the churn — every cross-subject reference, every relative link and
+every node ID would move. `24_golang` is the first such case: nothing in Go's language core requires
+another subject, so a from-scratch derivation would place it near the front alongside Python and
+JavaScript, and it sits at 24 instead. `25_Java` and `26_spring` are the second and third, added
+together as a two-subject pass: Java, like Go, is near-root (only one node names an OS
+prerequisite), but Spring is not — every node in it requires Java, and several reach further into
+HTTP and SQL — so the append rule produces the first case in this repository where a subject's
+directory number actively understates its depth in the DAG.
+
+The consequence is that the directory numbers are a *weak* ordering, consistent with the DAG for
+the original twenty-three and merely non-contradictory for anything appended after — `24_golang`
+happens to satisfy its own `requires` edges into `02_os` and `13_http` because both are lower, and
+`25_Java`/`26_spring` happen to as well, but that is a coincidence rather than a guarantee, and a
+future subject might not be so lucky.
+[`KNOWLEDGE_GRAPH.md`](KNOWLEDGE_GRAPH.md) §2 is authoritative for real prerequisite order; this
+table is a directory listing. Within the original twenty-three, if the graph's `requires` edges ever
+imply a different order than the table above, the numbering is wrong and should be brought back into
 agreement with the graph, not the other way around.
 
 ---
 
 ## 9. Status — this work is unfinished
 
-**The knowledge graph is built for all 23 subjects (413 nodes, 0 validator errors).** The
+**The knowledge graph is built for all 26 subjects (482 nodes, 0 validator errors).** The
 written-module layer is not: **11 modules are written**, all of them in the two subjects built
 before the graph existed. The repo is incomplete and is expected to stay under active
-construction for a long time — 413 nodes does not mean 413 modules are coming; some nodes will
+construction for a long time — 482 nodes does not mean 482 modules are coming; some nodes will
 stay graph-only indefinitely, and which ones is a judgment made per subject, not a quota.
 
 | Topic | Written | Graph nodes | Article gap |
 |---|---|---|---|
-| `05_python/` | 01, 03, 05 | 20 (`PY-01`…`PY-20`) | 17 nodes with no module |
+| `05_python/` | 01, 03, 05 | 24 (`PY-01`…`PY-24`) | 21 nodes with no module |
 | `06_concurrency/` | 01, 02, 03, 04 | 17 (`CONC-01`…`CONC-17`) | 13 nodes with no module |
-| `07_javascript/` | 03 | 20 (`JS-01`…`JS-20`) | 19 nodes with no module |
+| `07_javascript/` | 03 | 22 (`JS-01`…`JS-22`) | 21 nodes with no module |
 | `08_typescript/` | 02 | 20 (`TS-01`…`TS-20`) | 19 nodes with no module |
 | `09_sql/` | 01, 04 | 20 (`SQL-01`…`SQL-20`) | 18 nodes with no module |
+| `24_golang/` | — | 23 (`GO-01`…`GO-23`) | all of them |
+| `25_Java/` | — | 23 (`JAVA-01`…`JAVA-23`) | all of them |
+| `26_spring/` | — | 17 (`SPRG-01`…`SPRG-17`) | all of them |
 | every other subject | — | 316 across 18 subjects | all of them |
 
 Each subject's `00_knowledge_graph.md` node record carries an `**Article:**` line once a module
@@ -245,10 +228,28 @@ drift as modules get added.
 - `12_bigquery/` — needs `gcloud`/`bq` installed. `bq query --dry_run` returns real bytes-processed at zero cost, which would make the cost-control module `measured` rather than `documented`.
 - `09_sql/` 02, 03, 06, 07 — better on Postgres than SQLite; needs Docker plus `postgres:17`. Module 03 in particular wants a deadlock reproduced across two live `psql` sessions.
 - `06_concurrency/05` — wants `uv python install 3.14t` for a measured GIL versus free-threaded comparison. The graph's own `CONC-05` node is tagged `absent` for exactly this reason: no book on the shelf covers free-threading, because none postdates it.
+- `24_golang/` — needs a Go toolchain installed, and specifically a recent one: nine of its twenty-three nodes are tagged `stale-major` because the shelf stops at 2021, and the corrections they name are only checkable against Go 1.22 or later. `GO-18` in particular wants Go 1.26 for a Green Tea collector measurement, and `GO-12` wants Go 1.25 or later for `testing/synctest`. Nothing here can be measured without the toolchain, so every figure would otherwise be `documented`.
+- `25_Java/` and `26_spring/` — both need a JDK, and specifically a current LTS: `JAVA-14`'s virtual-threads and structured-concurrency claims need Java 21 or later to run at all, and every `stale-major` GC and JFR correction (`JAVA-18`, `JAVA-21`) needs a modern JDK to measure against rather than quote from the release notes. `26_spring` additionally needs a Spring Boot 4/Framework 7 project to verify `SPRG-02` and `SPRG-15`'s migration claims by actually running the upgrade rather than reading about it.
 
-**The three modules written before this contract** — `05_python/01`, `03`, `05` — predate the no-practice rule and contain quiz-style §2 openings ("the questions you cannot answer about it") and rehearsal-oriented interview sections. They need revising to match §3. The eight later modules share the same structure and need the same pass.
+**All eleven written modules predate `MODULE_SPEC.md` and none of them conforms to it.** An audit
+of the written layer found this is not partial drift in the earliest three, as an earlier version
+of this section claimed, but a different structure end to end. Every module uses the same
+superseded seven-section skeleton: a quiz-framed second section ("the questions you cannot answer
+about it"), an `## Interview angles` section of spoken answers, and a closing section feeding
+`RECALL.md` — a file that no longer exists. None of the eleven has the reference summary that
+`MODULE_SPEC.md` §3.6 requires, which is the contract's deliberate replacement for practice
+material.
 
-Every module written so far also carries an `## Interview angles` section of spoken answers. Under this contract those are **legacy**: leave existing ones in place, do not add them to new modules, and fold anything genuinely explanatory from them into §2 or §5 when revising.
+The word counts follow from that. Removing the three non-conforming sections leaves 2,675–4,678
+words standing per module, median around 2,940, against a 6,000-word floor. Each therefore needs
+roughly 3,000 new words — about 33,000 across all eleven. That gap is not padding: it is the
+simple-to-complex code progression and the reference summary, neither of which the old skeleton
+asked for.
+
+Treat these as **rewrites against `MODULE_SPEC.md`, not revisions.** Fold anything genuinely
+explanatory out of an interview-angles section into the mechanism or trade-offs sections rather
+than deleting it outright, and re-verify every failure mode still reproduces before its output is
+carried across.
 
 **Before writing a new module**, check the target node's `Currency` tag and `Δ current` line in
 its subject's `00_knowledge_graph.md`. A `stale-major` or `absent` node means the source books

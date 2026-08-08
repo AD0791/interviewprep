@@ -1,0 +1,135 @@
+# TOC — Wilson, *Software Design by Example* (JavaScript edition)
+
+*Not produced by `_tools/extract_toc.py`: this book has no PDF on the shelf. Walked out of the source repository `gvwilson/sdxjs` at commit `7a9b988` (2026-05-31), one directory per chapter, in the order the published site's Lessons menu lists them. Chapter titles are each chapter's `index.md` front-matter `title`; the nested entries are its `##` section headings. 21 chapters, 131 entries. Machine-generated — do not hand-edit.*
+
+- Introduction  · `introduction/`
+  - Who is our audience?
+  - What tools and ideas do we cover?
+  - How are these lessons laid out?
+  - How did we get here?
+  - How can people use and contribute to this material?
+  - Who helped us?
+- Systems Programming  · `sysprog/`
+  - How can we list a directory?
+  - What is a callback function?
+  - What are anonymous functions?
+  - How can we select a set of files?
+  - How can we copy a set of files?
+  - Exercises
+- Asynchronous Programming  · `async/`
+  - How can we manage asynchronous execution?
+  - How do promises work?
+  - How can we chain operations together?
+  - How are real promises different?
+  - How can we build tools with promises?
+  - How can we make this more readable?
+  - How can we handle errors with asynchronous code?
+  - Exercises
+- Unit Testing  · `test/`
+  - How should we structure unit testing?
+  - How can we separate registration, execution, and reporting?
+  - How should we structure test registration?
+  - How can we build a command-line interface for testing?
+  - Exercises
+- File Backup  · `backup/`
+  - How can we uniquely identify files?
+  - How can we back up files?
+  - How can we track which files have already been backed up?
+  - How can we test code that modifies files?
+  - Exercises
+- Data Tables  · `table/`
+  - How can we implement data tables?
+  - How can we test the performance of our implementations?
+  - What is the most efficient way to save a table?
+  - Does binary storage improve performance?
+  - Exercises
+- Pattern Matching  · `glob/`
+  - How can we match query selectors?
+  - How can we implement a simple regular expression matcher?
+  - How can we implement an extensible matcher?
+  - Exercises
+- Parsing Expressions  · `parser/`
+  - How can we break text into tokens?
+  - How can we turn a list of tokens into a tree?
+  - Exercises
+- Page Templates  · `templater/`
+  - What will our system look like?
+  - How can we keep track of values?
+  - How do we handle nodes?
+  - How do we implement node handlers?
+  - How can we implement control flow?
+  - How did we know how to do all of this?
+  - Exercises
+- Build Manager  · `build/`
+  - What's in a build manager?
+  - Where should we start?
+  - How can we specify that a file is out-of-date?
+  - How can we update out-of-date files?
+  - How can we add generic build rules?
+  - What should we do next?
+  - Exercises
+- Layout Engine  · `layout/`
+  - How can we size rows and columns?
+  - How can we position rows and columns?
+  - How can we render elements?
+  - How can we wrap elements to fit?
+  - What subset of CSS will we support?
+  - Exercises
+- File Interpolator  · `interp/`
+  - How can we evaluate JavaScript dynamically?
+  - How can we manage files?
+  - How can we find files?
+  - How can we interpolate pieces of code?
+  - What did we do instead?
+  - Exercises
+- Module Loader  · `loader/`
+  - How can we implement namespaces?
+  - How can we load a module?
+  - Do we need to handle circular dependencies?
+  - How can a module load another module?
+  - Exercises
+- Style Checker  · `style/`
+  - How can we parse JavaScript to create an AST?
+  - How can we find things in an AST?
+  - How can we apply checks?
+  - How does the AST walker work?
+  - How else could the AST walker work?
+  - What other kinds of analysis can we do?
+  - Exercises
+- Code Generator  · `codegen/`
+  - How can we replace a function with another function?
+  - How can we generate JavaScript?
+  - How can we count how often functions are executed?
+  - How can we time function execution?
+  - Exercises
+- Documentation Generator  · `docgen/`
+  - How can we extract documentation comments?
+  - What input will we try to handle?
+  - How can we avoid duplicating names?
+  - Code is Data
+  - Exercises
+- Module Bundler  · `bundler/`
+  - What will we use as test cases?
+  - How can we find dependencies?
+  - How can we safely combine several files into one?
+  - How can files access each other?
+  - Exercises
+- Package Manager  · `packman/`
+  - What is semantic versioning?
+  - How can we find a consistent set of packages?
+  - How can we satisfy constraints?
+  - How can we do less work?
+  - Exercises
+- Virtual Machine  · `vm/`
+  - What is the architecture of our virtual machine?
+  - How can we execute these instructions?
+  - What do assembly programs look like?
+  - How can we store data?
+  - Exercises
+- Debugger  · `debugger/`
+  - What is our starting point?
+  - How can we make a tracing debugger?
+  - How can we make the debugger interactive?
+  - How can we test an interactive application?
+  - Exercises
+- Conclusion  · `conclusion/`

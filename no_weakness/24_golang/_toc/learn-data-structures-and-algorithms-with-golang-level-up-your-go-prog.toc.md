@@ -1,0 +1,440 @@
+# TOC — Learn Data Structures and Algorithms with Golang- Level up your Go programming skills to develop faster and more efficient code.epub
+
+*Extracted by `_tools/extract_toc.py` (epub-ncx). 436 entries. Machine-generated — do not hand-edit.*
+
+- Title Page
+- Copyright and Credits
+  - Learn Data Structures and Algorithms with Golang
+- About Packt
+  - Why subscribe?
+  - Packt.com
+- Contributors
+  - About the author
+  - About the reviewer
+  - Packt is searching for authors like you
+- Preface
+  - Who this book is for
+  - What this book covers
+  - To get the most out of this book
+    - Download the example code files
+    - Download the color images
+    - Conventions used
+  - Get in touch
+    - Reviews
+- Section 1: Introduction to Data Structures and Algorithms and the Go Language
+- Data Structures and Algorithms
+  - Technical requirements
+  - Classification of data structures and structural design patterns
+    - Classification of data structures
+      - Lists
+      - Tuples
+      - Heaps
+    - Structural design patterns
+      - Adapter
+      - Bridge
+        - drawShape method
+        - drawContour method
+      - Composite
+      - Decorator
+      - Facade
+      - Flyweight
+      - Private class data
+      - Proxy
+  - Representation of algorithms
+    - Flow chart
+    - Pseudo code
+  - Complexity and performance analysis
+    - Complexity analysis of algorithms
+      - Big O notation
+      - Linear complexity
+      - Quadratic complexity
+      - Cubic complexity
+      - Logarithmic complexity
+  - Brute force algorithms
+  - Divide and conquer algorithms
+  - Backtracking algorithms
+  - Summary
+  - Questions and exercises
+  - Further reading
+- Getting Started with Go for Data Structures and Algorithms
+  - Technical requirements
+  - Arrays
+  - Slices
+    - The len function
+    - Slice function
+  - Two-dimensional slices
+  - Maps
+  - Database operations
+    - The GetCustomer method
+    - The InsertCustomer method
+  - Variadic functions
+    - The update operation
+    - The delete operation
+  - CRUD web forms
+    - The defer and panic statements
+      - The InsertCustomer method
+      - The UpdateCustomer method
+      - The DeleteCustomer method
+    - CRM web application
+      - The Create function
+      - The Insert function
+      - The Alter function
+      - The Update function
+      - The Delete function
+      - The main method
+    - The Header template
+    - The Footer template
+    - The Menu template
+    - The Create template
+    - The Update template
+    - The View template
+  - Summary
+  - Questions
+  - Further reading
+- Section 2: Basic Data Structures and Algorithms using Go
+- Linear Data Structures
+  - Technical requirements
+  - Lists
+    - LinkedList
+      - The Node class
+      - The LinkedList class
+        - The AddToHead method
+        - The IterateList method
+        - The LastNode method
+        - The AddToEnd method
+        - The NodeWithValue method
+        - The AddAfter method
+        - The main method
+    - Doubly linked list
+      - The NodeBetweenValues method
+      - The AddToHead method
+      - AddAfter method
+      - The AddToEnd method
+      - The main method
+  - Sets
+    - The AddElement method
+    - The DeleteElement method
+    - The ContainsElement method
+    - The main method – contains element
+    - The InterSect method
+    - The Union method
+    - The main method – intersection and union
+  - Tuples
+  - Queues
+    - The New method
+    - The Add method
+    - The main method – queues
+    - Synchronized queue
+      - The New method
+      - The StartTicketIssue method
+      - The EndTicketIssue method
+      - The ticketIssue method
+      - The StartPass method
+      - The EndPass method
+      - The passenger method
+      - The main method
+  - Stacks
+    - The New method
+    - The Push method
+    - The Pop method
+    - The main method
+  - Summary
+  - Questions
+  - Further reading
+- Non-Linear Data Structures
+  - Technical requirements
+  - Trees
+    - Binary search tree
+      - The BinarySearchTree class
+        - The InsertElement method
+        - The insertTreeNode method
+        - The inOrderTraverse method
+        - The inOrderTraverseTree method
+        - The PreOrderTraverseTree method
+        - The preOrderTraverseTree method
+        - The PostOrderTraverseTree method
+        - The postOrderTraverseTree method
+        - The MinNode method
+        - The MaxNode method
+        - The SearchNode method
+        - The searchNode method
+        - The RemoveNode method
+        - The removeNode method
+        - The String method
+        - The stringify method
+        - The main method
+    - Adelson, Velski, and Landis (AVL) tree
+      - The KeyValue interface
+      - The TreeNode class
+        - The opposite method
+        - The singleRotation method
+        - The doubleRotation method
+        - The adjustBalance method
+        - The BalanceTree method
+        - The insertRNode method
+        - The InsertNode method
+        - The RemoveNode method
+        - The removeBalance method
+        - The removeRNode method
+        - The main method
+    - B+ tree
+    - B-tree
+    - T-tree
+  - Tables
+    - The Table class
+    - The Row class
+    - The Column class
+    - The printTable method
+    - The main method
+  - Symbol tables
+  - Containers
+    - Circular linked list
+  - The hash functions
+  - Summary
+  - Questions
+  - Further reading
+- Homogeneous Data Structures
+  - Technical requirements
+  - Two-dimensional arrays
+    - Row matrix
+    - Column matrix
+    - Lower triangular matrix
+    - Upper triangular matrix
+    - Null matrix
+    - Identity matrix
+    - Symmetric matrix
+    - Basic 2D matrix operations
+      - The add method
+      - The subtract method
+      - The multiply method
+      - The transpose method
+      - The determinant method
+      - The inverse method
+    - Zig-zag matrix
+    - Spiral matrix
+    - Boolean matrix
+      - The printMatrix method
+      - The main method
+  - Multi-dimensional arrays
+    - Tensors
+  - Summary
+  - Questions
+  - Further reading
+- Heterogeneous Data Structures
+  - Technical requirements
+  - Linked lists
+    - Singly linked lists
+      - The CreateLinkedList method
+      - The ReverseLinkedList method
+      - The main method
+    - Doubly linked lists
+    - Circular-linked lists
+      - The CircularQueue class
+        - The NewQueue method
+        - The IsUnUsed method
+        - The IsComplete method
+        - The Add method
+        - The MoveOneStep method
+        - The main method
+  - Ordered lists
+    - The ToString method
+    - The SortByAge type
+    - The Thing class
+      - The ByFactor function type
+        - The Sort method
+    - Thing sorter class
+      - The len, swap, and less methods
+      - The main method
+    - The struct type
+      - The multiSorter class
+        - The Sort method
+        - The OrderBy method
+        - The len method
+        - The Swap method
+        - The less method
+        - The main method
+  - Unordered lists
+    - The UnOrderedList class
+      - The AddtoHead method
+      - The IterateList method
+      - The main method
+  - Summary
+  - Questions
+  - Further reading
+- Dynamic Data Structures
+  - Technical requirements
+  - Dictionaries
+    - DictVal type
+    - Dictionary class
+      - Put method
+      - Remove method
+      - Contains method
+      - Find method
+      - Reset method
+      - NumberOfElements method
+      - GetKeys method
+      - GetValues method
+      - The main method
+  - TreeSets
+    - InsertTreeNode method
+    - Delete method
+    - InOrderTraverseTree method
+    - The inOrderTraverseTree method
+    - PreOrderTraverseTree method
+    - The preOrderTraverseTree method
+    - Search method
+    - The String method
+    - The main method
+    - Synchronized TreeSets
+    - Mutable TreeSets
+      - RemoveNode method
+      - Treeset.bst
+  - Sequences
+    - Farey sequence
+      - String method
+      - The g method
+      - The main method
+    - Fibonacci sequence
+      - FibonacciNumber method
+      - Main method
+    - Look-and-say
+    - Thue–Morse
+  - Summary
+  - Questions
+  - Further reading
+- Classic Algorithms
+  - Technical requirements
+  - Sorting
+    - Bubble
+    - Selection
+      - The swap method
+      - The main method
+    - Insertion
+      - InsertionSorter method
+      - The main method
+    - Shell
+      - The power method
+      - The main method
+    - Merge
+      - MergeSorter method
+      - JoinArrays method
+      - The main method
+    - Quick
+      - The divideParts method
+      - The swap method
+      - The main method
+  - Searching
+    - Linear
+    - Binary
+    - Interpolation
+  - Recursion
+  - Hashing
+    - The CreateHashMutliple method
+    - The XOR method
+    - The main method
+  - Summary
+  - Questions
+  - Further reading
+- Section 3: Advanced Data Structures and Algorithms using Go
+- Network and Sparse Matrix Representation
+  - Technical requirements
+  - Network representation using graphs
+    - The Link class
+      - The NewSocialGraph method
+      - The AddLink method
+      - The PrintLinks method
+      - The main method
+      - Test
+    - Representing a social network
+      - The NewSocialGraph method
+      - The AddEntity method
+      - The AddLink method
+      - The PrintLinks method
+      - The main method
+    - Map layouts
+      - The MapLayout class
+        - The NewMapLayout method
+        - The AddPlace method
+        - The AddLink method
+        - The PrintLinks method
+        - The main method
+        - Test
+    - Knowledge graphs
+      - The KnowledgeGraph class
+        - The NewKnowledgeGraph method
+        - The AddClass method
+        - The AddLink method
+        - The PrintLinks method
+        - The main method
+        - Test
+  - Sparse matrix representation using a list of lists
+    - SparseMatrix class
+      - The Shape method
+      - The NumNonZero method
+      - The LessThan method
+      - The Equal method
+      - The GetValue method
+      - The SetValue method
+      - The NewSparseMatrix method
+      - The main method
+  - Summary
+  - Questions
+  - Further reading
+- Memory Management
+  - Technical requirements
+  - Garbage collection
+    - The ReferenceCounter class
+      - The newReferenceCounter method
+    - The Stack class
+      - The Stack class – a new method
+      - The main method
+    - Reference counting
+      - Simple reference counting
+      - Deferred reference counting
+      - One-bit reference counting
+      - Weighted reference counting
+    - The mark-and-sweep algorithm
+    - The generational collection algorithm
+  - Cache management
+    - The CacheObject class
+      - The IfExpired method
+    - The Cache class
+      - The NewCache method
+      - The GetObject method
+      - The SetValue method
+    - The main method
+  - Space allocation
+    - Pointers
+      - The addOne method
+      - The main method
+  - Concepts – Go memory management
+    - Profiling
+  - Summary
+  - Questions
+  - Further reading
+- Next Steps
+  - Technical requirements
+  - Learning outcomes
+    - Key takeaways
+    - Next steps
+      - Chapter 1 – Data Structures and Algorithms
+      - Chapter 2 – Getting Started with Go for Data Structures and Algorithms
+      - Chapter 3 – Linear Data Structures
+      - Chapter 4 – Non-Linear Data Structures
+      - Chapter 5 – Homogeneous Data Structures
+      - Chapter 6 – Heterogeneous Data Structures
+      - Chapter 7 – Dynamic Data Structures
+      - Chapter 8 – Classic Algorithms
+      - Chapter 9 – Network and Sparse Matrix Representation
+      - Chapter 10 – Memory Management
+    - Tips and techniques
+      - Using channel with a timeout interval
+      - Using context instead of channel
+      - Logging with the line number
+      - Go tool usage
+      - Go environment variables
+      - Test table
+      - Importing packages
+      - Panic, defer, and recover
+- Other Books You May Enjoy
+  - Leave a review - let other readers know what you think

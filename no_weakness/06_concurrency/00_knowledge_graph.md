@@ -85,7 +85,7 @@ graph LR
 **Type:** Mechanism · **Depth:** L5
 **Covers:** non-atomic reference counts as the reason the lock exists, bytecode-boundary switching, `sys.getswitchinterval`, release around blocking syscalls, explicit release by C extensions (NumPy, Polars, DuckDB) around their compute loops
 **Sources:** Ramalho ch.19 (2022, catalogued under `05_python`) · Fowler ch.1 (2022) · Nguyen ch.15 (2018) · Beazley, *An Introduction to Python Concurrency* (2009)
-**Edges:** `requires` [`PY-05`] · `contrasts` [`CONC-07`]
+**Edges:** `requires` [`PY-05`] · `contrasts` [`CONC-07`, `GO-08`]
 **Currency:** `stale-major`
 **Δ current:** Nguyen (2018) and Fowler (2022) both describe the GIL as a fixed, un-removable feature of CPython. PEP 703, accepted by the Steering Council on 24 October 2023, made a free-threaded build real: Python 3.13 (7 October 2024) shipped it experimentally, and PEP 779 promoted it to officially supported status in Python 3.14 (7 October 2025), with single-thread overhead now roughly 5–10%. The written article on this node measures the GIL-enabled default build, which remains accurate for that build; the free-threaded alternative and its implications belong to `CONC-05`.
 **Article:** [01_the_gil_what_it_protects_and_when_it_lets_go.md](01_the_gil_what_it_protects_and_when_it_lets_go.md)
@@ -94,7 +94,7 @@ graph LR
 **Type:** Mechanism · **Depth:** L4
 **Covers:** `Lock`/`RLock`/`Semaphore`/`Event`/`Condition`, `queue.Queue` as the answer that avoids hand-rolled locking, lost updates from non-atomic `+=`, `threading.local` versus `contextvars`, deadlock from inconsistent lock ordering
 **Sources:** Fowler ch.7, 11 (2022) · Nguyen ch.3, 4, 14 (2018) · Palach ch.4 (2014) · Beazley, *An Introduction to Python Concurrency* (2009)
-**Edges:** `requires` [`CONC-01`] · `contrasts` [`CONC-13`] · `contrasts` [`AND-05`]
+**Edges:** `requires` [`CONC-01`] · `contrasts` [`CONC-13`] · `contrasts` [`AND-05`] · `contrasts` [`JAVA-05`]
 **Currency:** `current`
 **Article:** [02_threads_races_and_synchronisation.md](02_threads_races_and_synchronisation.md)
 
@@ -111,7 +111,7 @@ graph LR
 **Type:** Mechanism · **Depth:** L5
 **Covers:** coroutine objects and `.send()`, `Task`/`Future`, the selector-based event loop, `gather` versus `TaskGroup`, cancellation and shielding, `asyncio.timeout`, bounded concurrency with a semaphore, `to_thread`, debug mode, structured concurrency, context variables propagating across `await`
 **Sources:** Ramalho ch.21 (2022, catalogued under `05_python`) · Fowler ch.2–4, 14 (2022)
-**Edges:** `requires` [`CONC-01`] · `requires` [`PY-07`] · `supersedes` [`CONC-08`] · `contrasts` [`JS-12`] · `contrasts` [`TS-15`] · `contrasts` [`BUS-25`]
+**Edges:** `requires` [`CONC-01`] · `requires` [`PY-07`] · `supersedes` [`CONC-08`] · `contrasts` [`JS-12`] · `contrasts` [`TS-15`] · `contrasts` [`BUS-25`] · `contrasts` [`JAVA-14`]
 **Currency:** `stale-minor`
 **Δ current:** Fowler's book, published February 2022, covers `gather`, `wait`, and `as_completed` but not `TaskGroup` or `asyncio.timeout`, both added in Python 3.11 (released 7 October 2022) on top of PEP 654's exception groups and `except*` syntax. The written article on this node already treats `TaskGroup` as the primary structured-concurrency form, consistent with that gap; an article written purely from Fowler's chapters would need this correction stated explicitly.
 **Article:** [04_asyncio_internals.md](04_asyncio_internals.md)
@@ -128,7 +128,7 @@ graph LR
 **Type:** Model · **Depth:** L4
 **Covers:** the four Coffman conditions, the Dining Philosophers problem, lock ordering as the practical fix, the readers-writers problem in its three classic variants, livelock as a failure distinct from deadlock
 **Sources:** Nguyen ch.12, 13 (2018) · Palach ch.1 (2014)
-**Edges:** `requires` [`CONC-02`]
+**Edges:** `requires` [`CONC-02`] · `contrasts` [`JAVA-09`]
 **Currency:** `current`
 
 ### `CONC-07` · Amdahl's Law and the limits of parallel speedup
@@ -193,7 +193,7 @@ graph LR
 **Type:** Algorithm · **Depth:** L3
 **Covers:** the properties a reduction operator must satisfy, a MapReduce implementation over the Google Books Ngram dataset built with asyncio, concurrent image processing as a data-parallel case study, choosing a chunk size
 **Sources:** Fowler ch.6 (2022) · Nguyen ch.7, 8 (2018)
-**Edges:** `requires` [`CONC-09`] · `contrasts` [`BQ-01`]
+**Edges:** `requires` [`CONC-09`] · `contrasts` [`BQ-01`] · `contrasts` [`JAVA-13`]
 **Currency:** `current`
 
 ### `CONC-16` · Distributed task queues and message-driven architectures
@@ -219,6 +219,7 @@ graph LR
 | From | Edge | To | Why |
 |---|---|---|---|
 | `CONC-01` | `requires` | `PY-05` | The GIL's rationale — non-atomic reference counts, bytecode-boundary switching — only makes sense once bytecode and the eval loop are concrete rather than a rumour |
+| `CONC-01` | `contrasts` | `GO-08` | An interpreter lock serialising bytecode execution onto one core against an M:N scheduler multiplexing goroutines across all of them — two opposite answers to running concurrent code in a managed runtime; reciprocal of `GO-08`'s edge into this node |
 | `CONC-03` | `requires` | `PY-08` | `spawn` re-imports the target module in the child process, so the module-level side-effect and `__main__`-guard discussion is a hard prerequisite, not background |
 | `CONC-04` | `requires` | `PY-07` | A `Task` driving a coroutine via repeated `.send()` calls is the exact mechanism generators already established; asyncio is that mechanism wired to an event loop |
 | `CONC-08` | `requires` | `PY-07` | A hand-rolled event loop over generator-based coroutines is literally generator mechanics applied to socket readiness, and cannot be built without them |
@@ -233,6 +234,10 @@ graph LR
 | `CONC-16` | `contrasts` | `BUS-21` | Distributed task queues and message-driven architectures generally versus Celery's specific broker/worker/result-backend model in `BUS-21` |
 | `CONC-04` | `contrasts` | `BUS-25` | asyncio's own event-loop mechanics versus the async-native task-queue landscape (Dramatiq/arq/Taskiq) contrasted against Celery's pre-fork model in `BUS-25` |
 | `CONC-02` | `contrasts` | `AND-05` | General-purpose thread and race-condition mechanics versus Android's Handler/thread/Service model in `AND-05` |
+| `CONC-02` | `contrasts` | `JAVA-05` | Java's threads are preemptively OS-scheduled with no interpreter lock; Python's threads are OS-scheduled too but serialised onto one core by the GIL — the same `Thread` vocabulary hides two different concurrency ceilings |
+| `CONC-06` | `contrasts` | `JAVA-09` | The same three liveness failures — deadlock, livelock, starvation — recur in both languages, but Java's virtual-thread carrier-pinning starvation mode has no Python analogue |
+| `CONC-04` | `contrasts` | `JAVA-14` | Virtual threads let blocking, synchronous-looking code scale by making the runtime cheap to schedule; asyncio gets the same scale by making the code explicitly non-blocking instead — opposite solutions to the same problem |
+| `CONC-15` | `contrasts` | `JAVA-13` | MapReduce-style data-parallel reduction and fork/join's recursive divide-and-conquer decomposition are two different shapes for splitting work and combining results |
 
 ---
 

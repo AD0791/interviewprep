@@ -1,0 +1,470 @@
+# TOC — dokumen.pub_google-bigquery-the-definitive-guide-data-warehousing-analytics-and-machine-learning-at-scale-1492044466-9781492044468.epub
+
+*Extracted by `_tools/extract_toc.py` (epub-ncx). 466 entries. Machine-generated — do not hand-edit.*
+
+- Preface
+  - Who Is This Book For?
+  - Conventions Used in This Book
+  - Using Code Examples
+  - O’Reilly Online Learning
+  - How to Contact Us
+  - Acknowledgments
+- 1. What Is Google BigQuery?
+  - Data Processing Architectures
+    - Relational Database Management System
+    - MapReduce Framework
+    - BigQuery: A Serverless, Distributed SQL Engine
+  - Working with BigQuery
+    - Deriving Insights Across Datasets
+    - ETL, EL, and ELT
+    - Powerful Analytics
+    - Simplicity of Management
+  - How BigQuery Came About
+  - What Makes BigQuery Possible?
+    - Separation of Compute and Storage
+    - Storage and Networking Infrastructure
+    - Managed Storage
+    - Integration with Google Cloud Platform
+    - Security and Compliance
+  - Summary
+- 2. Query Essentials
+  - Simple Queries
+    - Retrieving Rows by Using SELECT
+    - Aliasing Column Names with AS
+    - Filtering with WHERE
+    - SELECT *, EXCEPT, REPLACE
+    - Subqueries with WITH
+    - Sorting with ORDER BY
+  - Aggregates
+    - Computing Aggregates by Using GROUP BY
+    - Counting Records by Using COUNT
+    - Filtering Grouped Items by Using HAVING
+    - Finding Unique Values by Using DISTINCT
+  - A Brief Primer on Arrays and Structs
+    - Creating Arrays by Using ARRAY_AGG
+    - Array of STRUCT
+    - TUPLE
+    - Working with Arrays
+    - UNNEST an Array
+  - Joining Tables
+    - The JOIN Explained
+    - INNER JOIN
+    - CROSS JOIN
+    - OUTER JOIN
+  - Saving and Sharing
+    - Query History and Caching
+    - Saved Queries
+    - Views Versus Shared Queries
+  - Summary
+- 3. Data Types, Functions, and Operators
+  - Numeric Types and Functions
+    - Mathematical Functions
+    - Standard-Compliant Floating-Point Division
+    - SAFE Functions
+    - Comparisons
+    - Precise Decimal Calculations with NUMERIC
+  - Working with BOOL
+    - Logical Operations
+    - Conditional Expressions
+    - Cleaner NULL-Handling with COALESCE
+    - Casting and Coercion
+    - Using COUNTIF to Avoid Casting Booleans
+  - String Functions
+    - Internationalization
+    - Printing and Parsing
+    - String Manipulation Functions
+    - Transformation Functions
+    - Regular Expressions
+    - Summary of String Functions
+  - Working with TIMESTAMP
+    - Parsing and Formatting Timestamps
+    - Extracting Calendar Parts
+    - Arithmetic with Timestamps
+    - Date, Time, and DateTime
+  - Working with GIS Functions
+  - Summary
+- 4. Loading Data into BigQuery
+  - The Basics
+    - Loading from a Local Source
+    - Specifying a Schema
+    - Copying into a New Table
+    - Data Management (DDL and DML)
+    - Loading Data Efficiently
+      - Impact of compression and staging via Google Cloud Storage
+      - Price and quota
+  - Federated Queries and External Data Sources
+    - How to Use Federated Queries
+      - Wildcards
+      - Temporary table
+      - Loading and querying Parquet and ORC
+      - Loading and querying Hive partitions
+    - When to Use Federated Queries and External Data Sources
+      - Exploratory work using federated queries
+      - ELT in SQL for experimentation
+      - External query in Cloud SQL
+    - Interactive Exploration and Querying of Data in Google Sheets
+      - Loading Google Sheets data into BigQuery
+      - Populating a Google Sheets spreadsheet with data from BigQuery
+      - Exploring BigQuery tables using Sheets
+      - Exploring BigQuery tables as a data sheet in Google Sheets
+      - Joining Sheets data with a large dataset in BigQuery
+    - SQL Queries on Data in Cloud Bigtable
+      - NoSQL Queries based on a row-key prefix
+      - Ad hoc SQL queries on Cloud Bigtable data
+      - Improving performance
+  - Transfers and Exports
+    - Data Transfer Service
+      - Data locality
+      - Setting up destination table
+      - Create a transfer job
+      - Scheduled queries
+      - Cross-region dataset copy
+    - Exporting Stackdriver Logs
+    - Using Cloud Dataflow to Read/Write from BigQuery
+      - Using a Dataflow template to load directly from MySQL
+      - Writing a Dataflow job
+      - Using the Streaming API directly
+  - Moving On-Premises Data
+    - Data Migration Methods
+  - Summary
+- 5. Developing with BigQuery
+  - Developing Programmatically
+    - Accessing BigQuery via the REST API
+      - Dataset manipulation
+      - Table manipulation
+      - Querying
+      - Limitations
+    - Google Cloud Client Library
+      - Dataset manipulation
+        - Dataset information
+        - Creating a dataset
+        - Deleting a dataset
+        - Modifying attributes of a dataset
+      - Table management
+        - Obtaining table properties
+        - Deleting a table
+        - Creating an empty table
+        - Updating a table’s schema
+        - Inserting rows into a table
+        - Creating an empty table with schema
+        - Loading a pandas DataFrame
+        - Loading from a URI
+        - Loading from a local file
+        - Copying a table
+        - Extracting data from a table
+        - Browsing the rows of a table
+      - Querying
+        - Dry run
+        - Executing the query
+        - Creating a pandas DataFrame
+        - Parameterized queries
+  - Accessing BigQuery from Data Science Tools
+    - Notebooks on Google Cloud Platform
+      - Jupyter Magics
+      - Running a parameterized query
+      - Saving query results to pandas
+    - Working with BigQuery, pandas, and Jupyter
+    - Working with BigQuery from R
+    - Cloud Dataflow
+    - JDBC/ODBC drivers
+    - Incorporating BigQuery Data into Google Slides (in G Suite)
+  - Bash Scripting with BigQuery
+    - Creating Datasets and Tables
+      - Checking whether a dataset exists
+      - Creating a dataset in a different project
+      - Creating a table
+      - Complex schema
+      - Copying datasets
+      - Loading and inserting data
+      - Extracting data
+    - Executing Queries
+      - Previewing data
+      - Creating views
+    - BigQuery Objects
+      - Showing details
+      - Updating
+  - Summary
+- 6. Architecture of BigQuery
+  - High-Level Architecture
+    - Life of a Query Request
+      - Step 1: HTTP POST
+      - Step 2: Routing
+      - Step 3: Job Server
+      - Step 4: Query engine
+      - Step 5: Returning the query results
+    - BigQuery Upgrades
+  - Query Engine (Dremel)
+    - Dremel Architecture
+      - Query Master
+      - Scheduler
+      - Worker Shard
+      - Shuffle
+    - Query Execution
+      - Scan-filter-count query
+        - Stage 0
+        - Post–stage 0
+        - Stage 1
+      - Scan-filter-aggregate query
+        - Stage 0
+        - Stage 1
+        - Stage 2
+      - Scan-filter-aggregate query with high cardinality
+        - Stage 0
+        - Distributed sort
+      - Broadcast JOIN query
+      - Hash join query
+  - Storage
+    - Storage Data
+      - Physical storage: Colossus
+      - Storage format: Capacitor
+    - Metadata
+      - Storage sets
+      - Time travel
+      - Storage optimization
+      - Partitioning
+      - Clustering
+        - Reclustering
+        - Performance optimizations with clustered tables
+      - DML
+      - Meta-File
+  - Summary
+- 7. Optimizing Performance and Cost
+  - Principles of Performance
+    - Key Drivers of Performance
+    - Controlling Cost
+      - Estimating per-query cost
+      - Finding the most expensive queries
+  - Measuring and Troubleshooting
+    - Measuring Query Speed Using REST API
+    - Measuring Query Speed Using BigQuery Workload Tester
+    - Troubleshooting Workloads Using Stackdriver
+    - Reading Query Plan Information
+      - Obtaining query plan information from the job details
+      - Visualizing the query plan information
+  - Increasing Query Speed
+    - Minimizing I/O
+      - Be purposeful in SELECT
+      - Reducing data being read
+      - Reducing the number of expensive computations
+    - Caching the Results of Previous Queries
+      - Caching intermediate results
+      - Accelerating queries with BI Engine
+    - Performing Efficient Joins
+      - Denormalization
+      - Avoiding self-joins of large tables
+      - Reducing the data being joined
+      - Using a window function instead of self-join
+      - Joining with precomputed values
+      - JOIN versus denormalization
+    - Avoiding Overwhelming a Worker
+      - Limiting large sorts
+      - Data skew
+      - Optimizing user-defined functions
+    - Using Approximate Aggregation Functions
+      - Approximate count
+      - Approximate top
+      - HLL functions
+  - Optimizing How Data Is Stored and Accessed
+    - Minimizing Network Overhead
+      - Compressed, partial responses
+      - Batching multiple requests
+      - Bulk reads using BigQuery Storage API
+    - Choosing an Efficient Storage Format
+      - Internal versus external data sources
+      - Setting up life cycle management on staging buckets
+      - Storing data as arrays of structs
+      - Storing data as geography types
+    - Partitioning Tables to Reduce Scan Size
+      - Antipattern: Table suffixes and wildcards
+      - Partitioned tables
+    - Clustering Tables Based on High-Cardinality Keys
+      - Clustering by the partitioning column
+      - Reclustering
+      - Side benefits of clustering
+  - Time-Insensitive Use Cases
+    - Batch Queries
+    - File Loads
+  - Summary
+    - Checklist
+- 8. Advanced Queries
+  - Reusable Queries
+    - Parameterized Queries
+      - Named parameters
+      - Named timestamp parameters
+      - Positional parameters
+      - Array and struct parameters
+    - SQL User-Defined Functions
+      - Persistent UDFs
+      - Public UDFs
+    - Reusing Parts of Queries
+      - Correlated subquery
+      - WITH clause
+      - Defining constants
+  - Advanced SQL
+    - Working with Arrays
+      - Using arrays to preserve ordering
+      - Using arrays to store repeated fields
+      - Using arrays for generating data
+      - Array functions
+    - Window Functions
+      - Aggregate analytic functions
+      - Navigation functions
+      - Numbering functions
+    - Table Metadata
+      - Building queries dynamically
+      - Labels and tags
+      - Time travel
+    - Data Definition Language and Data Manipulation Language
+      - DDL
+        - Options list
+        - Empty table
+        - Changing options
+      - DML
+        - Insert SELECT
+        - Insert VALUES
+        - Insert VALUES with subquery SELECT
+        - Deleting rows
+        - Updating row values
+        - MERGE statement
+  - Beyond SQL
+    - JavaScript UDFs
+    - Scripting
+      - A sequence of statements
+      - Temporary tables
+      - Anatomy of a simple script
+      - Looping
+      - Stored procedures
+      - Parameters to stored procedures
+  - Advanced Functions
+    - BigQuery Geographic Information Systems
+      - Geographic types
+      - Creating Polygons
+      - GIS predicate functions
+      - GIS Measures
+      - Geometry transformations and aggregations
+    - Useful Statistical Functions
+      - Statistics
+      - Quantiles
+      - Correlation
+    - Hash Algorithms
+      - Fingerprint function
+      - MD5 and SHA
+      - UUID
+      - Random number generator
+  - Summary
+- 9. Machine Learning in BigQuery
+  - What Is Machine Learning?
+    - Formulating a Machine Learning Problem
+    - Types of Machine Learning Problems
+      - Regression
+      - Classification
+      - Recommender
+      - Clustering
+      - Unstructured data
+      - Summary of model types
+  - Building a Regression Model
+    - Choose the Label
+    - Exploring the Dataset to Find Features
+      - Impact of station
+      - Day of week
+      - Number of bicycles
+    - Creating a Training Dataset
+    - Training and Evaluating the Model
+      - Evaluating the model
+      - Combining days of the week
+      - Bucketizing the hour of day
+    - Predicting with the Model
+      - The need for TRANSFORM
+      - Generating batch predictions
+    - Examining Model Weights
+    - More-Complex Regression Models
+      - Deep Neural Networks
+      - Gradient-boosted trees
+      - Human insights and auxiliary data
+  - Building a Classification Model
+    - Training
+    - Evaluation
+    - Prediction
+    - Choosing the Threshold
+  - Customizing BigQuery ML
+    - Controlling Data Split
+    - Balancing Classes
+    - Regularization
+  - k-Means Clustering
+    - What’s Being Clustered?
+    - Clustering Bicycle Stations
+    - Carrying Out Clustering
+    - Understanding the Clusters
+    - Data-Driven Decisions
+  - Recommender Systems
+    - The MovieLens Dataset
+    - Matrix Factorization
+    - Making Recommendations
+      - Filtering out previously rated movies
+      - Customer targeting
+      - Batch predictions for all users and movies
+    - Incorporating User and Movie Information
+      - Obtaining user and product factors
+      - Creating input features
+      - Training hybrid recommendation model
+  - Custom Machine Learning Models on GCP
+    - Hyperparameter Tuning
+      - Hyperparameter tuning using scripting
+      - Hyperparameter tuning in Python
+      - Hyperparameter tuning using AI Platform
+    - AutoML
+    - Support for TensorFlow
+      - TensorFlow’s BigQueryReader
+      - Using pandas
+      - Apache Beam/Cloud Dataflow
+      - Exporting to TensorFlow
+      - Predicting with TensorFlow models
+  - Summary
+- 10. Administering and Securing BigQuery
+  - Infrastructure Security
+  - Identity and Access Management
+    - Identity
+    - Role
+      - Predefined roles
+      - Primitive roles
+      - Custom roles
+    - Resource
+  - Administering BigQuery
+    - Job Management
+    - Authorizing Users
+    - Restoring Deleted Records and Tables
+    - Continuous Integration/Continuous Deployment
+      - Invoking BigQuery from a Cloud Function
+      - Putting table, view, and function creation under version control
+    - Cost/Billing Exports
+      - Costs by month by product
+      - Visualizing the billing report
+      - Labels
+    - Dashboards, Monitoring, and Audit Logging
+      - Cloud Security Command Center
+      - Stackdriver monitoring and audit logging
+  - Availability, Disaster Recovery, and Encryption
+    - Zones, Regions, and Multiregions
+    - BigQuery and Failure Handling
+      - Disk failures
+      - Machine failures
+      - Zonal failures
+      - Regional failures
+    - Durability, Backups, and Disaster Recovery
+    - Privacy and Encryption
+      - Access transparency
+      - Virtual Private Cloud Service Controls
+      - Customer-Managed Encryption Keys
+  - Regulatory Compliance
+    - Data Locality
+    - Restricting Access to Subsets of Data
+      - Authorized views
+      - Dynamic filtering based on user
+    - Removing All Transactions Related to a Single Individual
+      - DML
+      - Crypto-shredding
+    - Data Loss Prevention
+    - CMEK
+    - Data Exfiltration Protection
+  - Summary
+- Index

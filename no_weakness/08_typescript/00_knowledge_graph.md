@@ -159,7 +159,7 @@ graph LR
 **Type:** Mechanism · **Depth:** L5
 **Covers:** generic function and type-alias declarations, where generics can be declared and when they are bound, inference-site priority, bounded polymorphism with `extends`, generic defaults, `const` type parameters, subtype/supertype relationships, parameter contravariance and return covariance under `strictFunctionTypes`, method bivariance as a deliberate legacy exception, array covariance as a deliberate unsoundness, `satisfies` as the modern way to check without widening
 **Sources:** Cherny ch.4 §"Polymorphism", ch.6 §"Relationships Between Types" (2019)
-**Edges:** `requires` [`TS-07`]
+**Edges:** `requires` [`TS-07`] · `contrasts` [`JAVA-02`]
 **Currency:** `current`
 
 ### `TS-09` · Classes, interfaces, and structural inheritance
@@ -266,6 +266,7 @@ graph LR
 | `TS-07` | `requires` | `JS-09` | Typing a function signature presupposes the function-value forms (declarations, expressions, arrow functions, rest/default parameters) that `JS-09` establishes |
 | `TS-09` | `requires` | `JS-10` | TypeScript's class and interface typing is a type layer over the prototype-based object model `JS-10` describes; `super`, structural class compatibility, and mixins only make sense once the underlying prototype chain does |
 | `TS-15` | `requires` | `JS-12` | Typing a promise or an `async` function is meaningless without the event-loop and microtask-scheduling model `JS-12` establishes first |
+| `TS-08` | `contrasts` | `JAVA-02` | Two different answers to generic types at compile time: erasure to `Object` plus bridge methods, against a structural type system that erases everything and checks shapes instead of names |
 | `TS-15` | `contrasts` | `CONC-04` | TypeScript's promise/`async`-`await` typing and Python's asyncio typing (`Coroutine`, `Awaitable`) type-check the same underlying single-threaded-scheduler concurrency model through two different gradual type systems |
 | `TS-16` | `requires` | `JS-13` | TypeScript's module resolution settings (`nodenext`, `bundler`) configure how `tsc` interprets exactly the CommonJS/ESM/bundler resolution behaviour `JS-13` describes at the JavaScript level; the type layer adds nothing new to resolve, it only has to match it |
 | `TS-19` | `requires` | `JS-16` | Typing `useState`/`useReducer` requires knowing what those hooks do at runtime first, which is `JS-16`'s subject |

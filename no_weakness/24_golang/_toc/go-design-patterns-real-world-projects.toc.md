@@ -1,0 +1,938 @@
+# TOC — go-design-patterns-real-world-projects.epub
+
+*Extracted by `_tools/extract_toc.py` (epub-ncx). 934 entries. Machine-generated — do not hand-edit.*
+
+- Go: Design Patterns for Real-World Projects
+- Credits
+- Preface
+- What this learning path covers
+- What you need for this learning path
+- Who this learning path is for
+- Reader feedback
+- Customer support
+- Downloading the example code
+- Errata
+- Piracy
+- Questions
+- 1. Module 1
+- 1. A First Step in Go
+- The Go programming language
+- Playing with Go
+- No IDE required
+- Installing Go
+- Source code examples
+- Your first Go program
+- Go in a nutshell
+- Functions
+- Packages
+- The workspace
+- Strongly typed
+- Composite types
+- The named type
+- Methods and objects
+- Interfaces
+- Concurrency and channels
+- Memory management and safety
+- Fast compilation
+- Testing and code coverage
+- Documentation
+- An extensive library
+- The Go Toolchain
+- Summary
+- 2. Go Language Essentials
+- The Go source file
+- Optional semicolon
+- Multiple lines
+- Go identifiers
+- The blank identifier
+- Muting package imports
+- Muting unwanted function results
+- Built-in identifiers
+- Types
+- Values
+- Functions
+- Go variables
+- Variable declaration
+- The zero-value
+- Initialized declaration
+- Omitting variable types
+- Short variable declaration
+- Restrictions for short variable declaration
+- Variable scope and visibility
+- Variable declaration block
+- Go constants
+- Constant literals
+- Typed constants
+- Untyped constants
+- Assigning untyped constants
+- Constant declaration block
+- Constant enumeration
+- Overriding the default enumeration type
+- Using iota in expressions
+- Skipping enumerated values
+- Go operators
+- Arithmetic operators
+- The increment and decrement operators
+- Go assignment operators
+- Bitwise operators
+- Logical Operators
+- Comparison operators
+- Operator precedence
+- Summary
+- 3. Go Control Flow
+- The if statement
+- The if statement initialization
+- Switch statements
+- Using expression switches
+- The fallthrough cases
+- Expressionless switches
+- Switch initializer
+- Type switches
+- The for statements
+- For condition
+- Infinite loop
+- The traditional for statement
+- The for range
+- The break, continue, and goto statements
+- The label identifier
+- The break statement
+- The continue statement
+- The goto statement
+- Summary
+- 4. Data Types
+- Go types
+- Numeric types
+- Unsigned integer types
+- Signed integer types
+- Floating point types
+- Complex number types
+- Numeric literals
+- Boolean type
+- Rune and string types
+- The rune
+- The string
+- Interpreted and raw string literals
+- Pointers
+- The pointer type
+- The address operator
+- The new() function
+- Pointer indirection - accessing referenced values
+- Type declaration
+- Type conversion
+- Summary
+- 5. Functions in Go
+- Go functions
+- Function declaration
+- The function type
+- Variadic parameters
+- Function result parameters
+- Named result parameters
+- Passing parameter values
+- Achieving pass-by-reference
+- Anonymous Functions and Closures
+- Invoking anonymous function literals
+- Closures
+- Higher-order functions
+- Error signaling and handling
+- Signaling errors
+- Error handling
+- The error type
+- Deferring function calls
+- Using defer
+- Function panic and recovery
+- Function panic
+- Function panic recovery
+- Summary
+- 6. Go Packages and Programs
+- The Go package
+- Understanding the Go package
+- The workspace
+- Creating a workspace
+- The import path
+- Creating packages
+- Declaring the package
+- Multi-File packages
+- Naming packages
+- Use globally unique namespaces
+- Add context to path
+- Use short names
+- Building packages
+- Installing a package
+- Package visibility
+- Package member visibility
+- Importing package
+- Specifying package identifiers
+- The dot identifier
+- The blank identifier
+- Package initialization
+- Creating programs
+- Accessing program arguments
+- Building and installing programs
+- Remote packages
+- Summary
+- 7. Composite Types
+- The array type
+- Array initialization
+- Declaring named array types
+- Using arrays
+- Array length and capacity
+- Array traversal
+- Array as parameters
+- The slice type
+- Slice initialization
+- Slice representation
+- Slicing
+- Slicing a slice
+- Slicing an array
+- Slice expressions with capacity
+- Making a slice
+- Using slices
+- Slices as parameters
+- Length and capacity
+- Appending to slices
+- Copying slices
+- Strings as slices
+- The map type
+- Map initialization
+- Making Maps
+- Using maps
+- Map traversal
+- Map functions
+- Maps as parameters
+- The struct type
+- Accessing struct fields
+- Struct initialization
+- Declaring named struct types
+- The anonymous field
+- Promoted fields
+- Structs as parameters
+- Field tags
+- Summary
+- 8. Methods, Interfaces, and Objects
+- Go methods
+- Value and pointer receivers
+- Objects in Go
+- The struct as object
+- Object composition
+- Field and method promotion
+- The constructor function
+- The interface type
+- Implementing an interface
+- Subtyping with Go interfaces
+- Implementing multiple interfaces
+- Interface embedding
+- The empty interface type
+- Type assertion
+- Summary
+- 9. Concurrency
+- Goroutines
+- The go statement
+- Goroutine scheduling
+- Channels
+- The Channel type
+- The send and receive operations
+- Unbuffered channel
+- Buffered channel
+- Unidirectional channels
+- Channel length and capacity
+- Closing a channel
+- Writing concurrent programs
+- Synchronization
+- Streaming data
+- Using for…range to receive data
+- Generator functions
+- Selecting from multiple channels
+- Channel timeout
+- The sync package
+- Synchronizing with mutex locks
+- Synchronizing access to composite values
+- Concurrency barriers with sync.WaitGroup
+- Detecting race conditions
+- Parallelism in Go
+- Summary
+- 10. Data IO in Go
+- IO with readers and writers
+- The io.Reader interface
+- Chaining readers
+- The io.Writer interface
+- Working with the io package
+- Working with files
+- Creating and opening files
+- Function os.OpenFile
+- Files writing and reading
+- Standard input, output, and error
+- Formatted IO with fmt
+- Printing to io.Writer interfaces
+- Printing to standard output
+- Reading from io.Reader
+- Reading from standard input
+- Buffered IO
+- Buffered writers and readers
+- Scanning the buffer
+- In-memory IO
+- Encoding and decoding data
+- Binary encoding with gob
+- Encoding data as JSON
+- Controlling JSON mapping with struct tags
+- Custom encoding and decoding
+- Summary
+- 11. Writing Networked Services
+- The net package
+- Addressing
+- The net.Conn Type
+- Dialing a connection
+- Listening for incoming connections
+- Accepting client connections
+- A TCP API server
+- Connecting to the TCP server with telnet
+- Connecting to the TCP server with Go
+- The HTTP package
+- The http.Client type
+- Configuring the client
+- Handling client requests and responses
+- A simple HTTP server
+- The default server
+- Routing requests with http.ServeMux
+- The default ServeMux
+- A JSON API server
+- Testing the API server with cURL
+- An API server client in Go
+- A JavaScript API server client
+- Summary
+- 12. Code Testing
+- The Go test tool
+- Test file names
+- Test organization
+- Writing Go tests
+- The test functions
+- Running the tests
+- Filtering executed tests
+- Test logging
+- Reporting failure
+- Skipping tests
+- Table-driven tests
+- HTTP testing
+- Testing HTTP server code
+- Testing HTTP client code
+- Test coverage
+- The cover tool
+- Code benchmark
+- Running the benchmark
+- Skipping test functions
+- The benchmark report
+- Adjusting N
+- Comparative benchmarks
+- Summary
+- 2. Module 2
+- 1. Ready Steady Go!
+- A little bit of history
+- Installing Go
+- Linux
+- Go Linux advanced installation
+- Windows
+- Mac OS X
+- Setting the workspace - Linux and Apple OS X
+- Starting with Hello World
+- Integrated Development Environment - IDE
+- Types
+- Variables and constants
+- Operators
+- Flow control
+- The if else statement
+- The switch statement
+- The for…range statement
+- Functions
+- What does a function look like?
+- What is an anonymous function?
+- Closures
+- Creating errors, handling errors and returning errors.
+- Function with undetermined number of parameters
+- Naming returned types
+- Arrays, slices, and maps
+- Arrays
+- Zero-initialization
+- Slices
+- Maps
+- Visibility
+- Zero-initialization
+- Pointers and structures
+- What is a pointer? Why are they good?
+- Structs
+- Interfaces
+- Interfaces - signing a contract
+- Testing and TDD
+- The testing package
+- What is TDD?
+- Libraries
+- The Go get tool
+- Managing JSON data
+- The encoding package
+- Go tools
+- The golint tool
+- The gofmt tool
+- The godoc tool
+- The goimport tool
+- Contributing to Go open source projects in GitHub
+- Summary
+- 2. Creational Patterns - Singleton, Builder, Factory, Prototype, and Abstract Factory Design Patterns
+- Singleton design pattern - having a unique instance of a type in the entire program
+- Description
+- Objectives
+- Example - a unique counter
+- Requirements and acceptance criteria
+- Writing unit tests first
+- Implementation
+- A few words about the Singleton design pattern
+- Builder design pattern - reusing an algorithm to create many implementations of an interface
+- Description
+- Objectives
+- Example - vehicle manufacturing
+- Requirements and acceptance criteria
+- Unit test for the vehicle builder
+- Implementation
+- Wrapping up the Builder design pattern
+- Factory method - delegating the creation of different types of payments
+- Description
+- Objectives
+- The example - a factory of payment methods for a shop
+- Acceptance criteria
+- First unit test
+- Implementation
+- Upgrading the Debitcard method to a new platform
+- What we learned about the Factory method
+- Abstract Factory - a factory of factories
+- Description
+- The objectives
+- The vehicle factory example, again?
+- Acceptance criteria
+- Unit test
+- Implementation
+- A few lines about the Abstract Factory method
+- Prototype design pattern
+- Description
+- Objective
+- Example
+- Acceptance criteria
+- Unit test
+- Implementation
+- What we learned about the Prototype design pattern
+- Summary
+- 3. Structural Patterns - Composite, Adapter, and Bridge Design Patterns
+- Composite design pattern
+- Description
+- Objectives
+- The swimmer and the fish
+- Requirements and acceptance criteria
+- Creating compositions
+- Binary Tree compositions
+- Composite pattern versus inheritance
+- Final words on the Composite pattern
+- Adapter design pattern
+- Description
+- Objectives
+- Using an incompatible interface with an Adapter object
+- Requirements and acceptance criteria
+- Unit testing our Printer adapter
+- Implementation
+- Examples of the Adapter pattern in Go's source code
+- What the Go source code tells us about the Adapter pattern
+- Bridge design pattern
+- Description
+- Objectives
+- Two printers and two ways of printing for each
+- Requirements and acceptance criteria
+- Unit testing the Bridge pattern
+- Implementation
+- Reuse everything with the Bridge pattern
+- Summary
+- 4. Structural Patterns - Proxy, Facade, Decorator, and Flyweight Design Patterns
+- Proxy design pattern
+- Description
+- Objectives
+- Example
+- Acceptance criteria
+- Unit test
+- Implementation
+- Proxying around actions
+- Decorator design pattern
+- Description
+- Objectives
+- Example
+- Acceptance criteria
+- Unit test
+- Implementation
+- A real-life example - server middleware
+- Starting with the common interface, http.Handler
+- A few words about Go's structural typing
+- Summarizing the Decorator design pattern - Proxy versus Decorator
+- Facade design pattern
+- Description
+- Objectives
+- Example
+- Acceptance criteria
+- Unit test
+- Implementation
+- Library created with the Facade pattern
+- Flyweight design pattern
+- Description
+- Objectives
+- Example
+- Acceptance criteria
+- Basic structs and tests
+- Implementation
+- What's the difference between Singleton and Flyweight then?
+- Summary
+- 5. Behavioral Patterns - Strategy, Chain of Responsibility, and Command Design Patterns
+- Strategy design pattern
+- Description
+- Objectives
+- Rendering images or text
+- Acceptance criteria
+- Implementation
+- Solving small issues in our library
+- Final words on the Strategy pattern
+- Chain of responsibility design pattern
+- Description
+- Objectives
+- A multi-logger chain
+- Unit test
+- Implementation
+- What about a closure?
+- Putting it together
+- Command design pattern
+- Description
+- Objectives
+- A simple queue
+- Acceptance criteria
+- Implementation
+- More examples
+- Chain of responsibility of commands
+- Rounding-up the Command pattern up
+- Summary
+- 6. Behavioral Patterns - Template, Memento, and Interpreter Design Patterns
+- Template design pattern
+- Description
+- Objectives
+- Example - a simple algorithm with a deferred step
+- Requirements and acceptance criteria
+- Unit tests for the simple algorithm
+- Implementing the Template pattern
+- Anonymous functions
+- How to avoid modifications on the interface
+- Looking for the Template pattern in Go's source code
+- Summarizing the Template design pattern
+- Memento design pattern
+- Description
+- Objectives
+- A simple example with strings
+- Requirements and acceptance criteria
+- Unit test
+- Implementing the Memento pattern
+- Another example using the Command and Facade patterns
+- Last words on the Memento pattern
+- Interpreter design pattern
+- Description
+- Objectives
+- Example - a polish notation calculator
+- Acceptance criteria for the calculator
+- Unit test of some operations
+- Implementation
+- Complexity with the Interpreter design pattern
+- Interpreter pattern again - now using interfaces
+- The power of the Interpreter pattern
+- Summary
+- 7. Behavioral Patterns - Visitor, State, Mediator, and Observer Design Patterns
+- Visitor design pattern
+- Description
+- Objectives
+- A log appender
+- Acceptance criteria
+- Unit tests
+- Implementation of Visitor pattern
+- Another example
+- Visitors to the rescue!
+- State design pattern
+- Description
+- Objectives
+- A small guess the number game
+- Acceptance criteria
+- Implementation of State pattern
+- A state to win and a state to lose
+- The game built using the State pattern
+- Mediator design pattern
+- Description
+- Objectives
+- A calculator
+- Acceptance criteria
+- Implementation
+- Uncoupling two types with the Mediator
+- Observer design pattern
+- Description
+- Objectives
+- The notifier
+- Acceptance criteria
+- Unit tests
+- Implementation
+- Summary
+- 8. Introduction to Gos Concurrency
+- A little bit of history and theory
+- Concurrency versus parallelism
+- CSP versus actor-based concurrency
+- Goroutines
+- Our first Goroutine
+- Anonymous functions launched as new Goroutines
+- WaitGroups
+- Callbacks
+- Callback hell
+- Mutexes
+- An example with mutexes - concurrent counter
+- Presenting the race detector
+- Channels
+- Our first channel
+- Buffered channels
+- Directional channels
+- The select statement
+- Ranging over channels too!
+- Using it all - concurrent singleton
+- Unit test
+- Implementation
+- Summary
+- 9. Concurrency Patterns - Barrier, Future, and Pipeline Design Patterns
+- Barrier concurrency pattern
+- Description
+- Objectives
+- An HTTP GET aggregator
+- Acceptance criteria
+- Unit test - integration
+- Implementation
+- Waiting for responses with the Barrier design pattern
+- Future design pattern
+- Description
+- Objectives
+- A simple asynchronous requester
+- Acceptance criteria
+- Unit tests
+- Implementation
+- Putting the Future together
+- Pipeline design pattern
+- Description
+- Objectives
+- A concurrent multi-operation
+- Acceptance criteria
+- Beginning with tests
+- Implementation
+- The list generator
+- Raising numbers to the power of 2
+- Final reduce operation
+- Launching the Pipeline pattern
+- Final words on the Pipeline pattern
+- Summary
+- 10. Concurrency Patterns - Workers Pool and Publish/Subscriber Design Patterns
+- Workers pool
+- Description
+- Objectives
+- A pool of pipelines
+- Acceptance criteria
+- Implementation
+- The dispatcher
+- The pipeline
+- An app using the workers pool
+- No tests?
+- Wrapping up the Worker pool
+- Concurrent Publish/Subscriber design pattern
+- Description
+- Objectives
+- Example - a concurrent notifier
+- Acceptance criteria
+- Unit test
+- Testing subscriber
+- Testing publisher
+- Implementation
+- Implementing the publisher
+- Handling channels without race conditions
+- A few words on the concurrent Observer pattern
+- Summary
+- 3. Module 3
+- 1. Chat Application with Web Sockets
+- A simple web server
+- Separating views from logic using templates
+- Doing things once
+- Using your own handlers
+- Properly building and executing Go programs
+- Modeling a chat room and clients on the server
+- Modeling the client
+- Modeling a room
+- Concurrency programming using idiomatic Go
+- Turning a room into an HTTP handler
+- Using helper functions to remove complexity
+- Creating and using rooms
+- Building an HTML and JavaScript chat client
+- Getting more out of templates
+- Tracing code to get a look under the hood
+- Writing a package using TDD
+- Interfaces
+- Unit tests
+- Red-green testing
+- Implementing the interface
+- Unexported types being returned to users
+- Using our new trace package
+- Making tracing optional
+- Clean package APIs
+- Summary
+- 2. Adding User Accounts
+- Handlers all the way down
+- Making a pretty social sign-in page
+- Endpoints with dynamic paths
+- Getting started with OAuth2
+- Open source OAuth2 packages
+- Tell the authorization providers about your app
+- Implementing external logging in
+- Logging in
+- Handling the response from the provider
+- Presenting the user data
+- Augmenting messages with additional data
+- Summary
+- 3. Three Ways to Implement Profile Pictures
+- Avatars from the OAuth2 server
+- Getting the avatar URL
+- Transmitting the avatar URL
+- Adding the avatar to the user interface
+- Logging out
+- Making things prettier
+- Implementing Gravatar
+- Abstracting the avatar URL process
+- The auth service and the avatar's implementation
+- Using an implementation
+- The Gravatar implementation
+- Uploading an avatar picture
+- User identification
+- An upload form
+- Handling the upload
+- Serving the images
+- The Avatar implementation for local files
+- Supporting different file types
+- Refactoring and optimizing our code
+- Replacing concrete types with interfaces
+- Changing interfaces in a test-driven way
+- Fixing the existing implementations
+- Global variables versus fields
+- Implementing our new design
+- Tidying up and testing
+- Combining all three implementations
+- Summary
+- 4. Command-Line Tools to Find Domain Names
+- Pipe design for command-line tools
+- Five simple programs
+- Sprinkle
+- Domainify
+- Coolify
+- Synonyms
+- Using environment variables for configuration
+- Consuming a web API
+- Getting domain suggestions
+- Available
+- Composing all five programs
+- One program to rule them all
+- Summary
+- 5. Building Distributed Systems and Working with Flexible Data
+- The system design
+- The database design
+- Installing the environment
+- Introducing NSQ
+- NSQ driver for Go
+- Introducing MongoDB
+- MongoDB driver for Go
+- Starting the environment
+- Reading votes from Twitter
+- Authorization with Twitter
+- Extracting the connection
+- Reading environment variables
+- Reading from MongoDB
+- Reading from Twitter
+- Signal channels
+- Publishing to NSQ
+- Gracefully starting and stopping programs
+- Testing
+- Counting votes
+- Connecting to the database
+- Consuming messages in NSQ
+- Keeping the database updated
+- Responding to Ctrl + C
+- Running our solution
+- Summary
+- 6. Exposing Data and Functionality through a RESTful Data Web Service API
+- RESTful API design
+- Sharing data between handlers
+- Context keys
+- Wrapping handler functions
+- API keys
+- Cross-origin resource sharing
+- Injecting dependencies
+- Responding
+- Understanding the request
+- Serving our API with one function
+- Using handler function wrappers
+- Handling endpoints
+- Using tags to add metadata to structs
+- Many operations with a single handler
+- Reading polls
+- Creating a poll
+- Deleting a poll
+- CORS support
+- Testing our API using curl
+- A web client that consumes the API
+- Index page showing a list of polls
+- Creating a new poll
+- Showing the details of a poll
+- Running the solution
+- Summary
+- 7. Random Recommendations Web Service
+- The project overview
+- Project design specifics
+- Representing data in code
+- Public views of Go structs
+- Generating random recommendations
+- The Google Places API key
+- Enumerators in Go
+- Test-driven enumerator
+- Querying the Google Places API
+- Building recommendations
+- Handlers that use query parameters
+- CORS
+- Testing our API
+- Web application
+- Summary
+- 8. Filesystem Backup
+- Solution design
+- The project structure
+- The backup package
+- Considering obvious interfaces first
+- Testing interfaces by implementing them
+- Has the filesystem changed?
+- Checking for changes and initiating a backup
+- Hardcoding is OK for a short while
+- The user command-line tool
+- Persisting small data
+- Parsing arguments
+- Listing the paths
+- String representations for your own types
+- Adding paths
+- Removing paths
+- Using our new tool
+- The daemon backup tool
+- Duplicated structures
+- Caching data
+- Infinite loops
+- Updating filedb records
+- Testing our solution
+- Summary
+- 9. Building a Q&A Application for Google App Engine
+- The Google App Engine SDK for Go
+- Creating your application
+- App Engine applications are Go packages
+- The app.yaml file
+- Running simple applications locally
+- Deploying simple applications to Google App Engine
+- Modules in Google App Engine
+- Specifying modules
+- Routing to modules with dispatch.yaml
+- Google Cloud Datastore
+- Denormalizing data
+- Entities and data access
+- Keys in Google Cloud Datastore
+- Putting data into Google Cloud Datastore
+- Reading data from Google Cloud Datastore
+- Google App Engine users
+- Embedding denormalized data
+- Transactions in Google Cloud Datastore
+- Using transactions to maintain counters
+- Avoiding early abstraction
+- Querying in Google Cloud Datastore
+- Votes
+- Indexing
+- Embedding a different view of entities
+- Casting a vote
+- Accessing parents via datastore.Key
+- Line of sight in code
+- Exposing data operations over HTTP
+- Optional features with type assertions
+- Response helpers
+- Parsing path parameters
+- Exposing functionality via an HTTP API
+- HTTP routing in Go
+- Context in Google App Engine
+- Decoding key strings
+- Using query parameters
+- Anonymous structs for request data
+- Writing self-similar code
+- Validation methods that return an error
+- Mapping the router handlers
+- Running apps with multiple modules
+- Testing locally
+- Using the admin console
+- Automatically generated indexes
+- Deploying apps with multiple modules
+- Summary
+- 10. Micro-services in Go with the Go kit Framework
+- Introducing gRPC
+- Protocol buffers
+- Installing protocol buffers
+- Protocol buffers language
+- Generating Go code
+- Building the service
+- Starting with tests
+- Constructors in Go
+- Hashing and validating passwords with bcrypt
+- Modeling method calls with requests and responses
+- Endpoints in Go kit
+- Making endpoints for service methods
+- Different levels of error
+- Wrapping endpoints into a Service implementation
+- An HTTP server in Go kit
+- A gRPC server in Go kit
+- Translating from protocol buffer types to our types
+- Creating a server command
+- Using Go kit endpoints
+- Running the HTTP server
+- Running the gRPC server
+- Preventing a main function from terminating immediately
+- Consuming the service over HTTP
+- Building a gRPC client
+- A command-line tool to consume the service
+- Parsing arguments in CLIs
+- Maintaining good line of sight by extracting case bodies
+- Installing tools from the Go source code
+- Rate limiting with service middleware
+- Middleware in Go kit
+- Manually testing the rate limiter
+- Graceful rate limiting
+- Summary
+- 11. Deploying Go Applications Using Docker
+- Using Docker locally
+- Installing Docker tools
+- Dockerfile
+- Building Go binaries for different architectures
+- Building a Docker image
+- Running a Docker image locally
+- Inspecting Docker processes
+- Stopping a Docker instance
+- Deploying Docker images
+- Deploying to Docker Hub
+- Deploying to Digital Ocean
+- Creating a droplet
+- Accessing the droplet's console
+- Pulling Docker images
+- Running Docker images in the cloud
+- Accessing Docker images in the cloud
+- Summary
+- Appendix. Good Practices for a Stable Go Environment
+- Installing Go
+- Configuring Go
+- Getting GOPATH right
+- Go tools
+- Cleaning up, building, and running tests on save
+- Integrated developer environments
+- Sublime Text 3
+- Visual Studio Code
+- Summary
+- Bibliography

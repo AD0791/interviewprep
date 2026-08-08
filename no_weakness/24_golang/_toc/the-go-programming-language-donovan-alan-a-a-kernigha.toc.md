@@ -1,0 +1,153 @@
+# TOC — The Go Programming Language - Donovan, Alan A. A. & Kernigha.pdf
+
+*Extracted by `_tools/extract_toc.py` (outline). 149 entries. Machine-generated — do not hand-edit.*
+
+- Contents  · p8
+- Preface  · p12
+- The Origins of Go  · p13
+- The Go Project  · p14
+- Organization of the Book  · p16
+- Where to Find More Information  · p17
+- Acknowledgments  · p18
+- 1. Tutorial  · p20
+  - 1.1. Hello, World  · p20
+  - 1.2. Command-Line Arguments  · p23
+  - 1.3. Finding Duplicate Lines  · p27
+  - 1.4. Animated GIFs  · p32
+  - 1.5. Fetching a URL  · p34
+  - 1.6. Fetching URLs Concurrently  · p36
+  - 1.7. A Web Server  · p38
+  - 1.8. Loose Ends  · p42
+- 2. Program Structure  · p46
+  - 2.1. Names  · p46
+  - 2.2. Declarations  · p47
+  - 2.3. Variables  · p49
+  - 2.4. Assignments  · p55
+  - 2.5. Type Declarations  · p58
+  - 2.6. Packages and Files  · p60
+  - 2.7. Scope  · p64
+- 3. Basic Data Types  · p70
+  - 3.1. Integers  · p70
+  - 3.2. Floating-Point Numbers  · p75
+  - 3.3. Complex Numbers  · p80
+  - 3.4. Booleans  · p82
+  - 3.5. Strings  · p83
+  - 3.6. Constants  · p94
+- 4. Composite Types  · p100
+  - 4.1. Arrays  · p100
+  - 4.2. Slices  · p103
+  - 4.3. Maps  · p112
+  - 4.4. Structs  · p118
+  - 4.5. JSON  · p126
+  - 4.6. Text and HTML Templates  · p132
+- 5. Functions  · p138
+  - 5.1. Function Declarations  · p138
+  - 5.2. Recursion  · p140
+  - 5.3. Multiple Return Values  · p143
+  - 5.4. Errors  · p146
+  - 5.5. Function Values  · p151
+  - 5.6. Anonymous Functions  · p154
+  - 5.7. Variadic Functions  · p161
+  - 5.8. Deferred Function Calls  · p162
+  - 5.9. Panic  · p167
+  - 5.10. Recover  · p170
+- 6. Methods  · p174
+  - 6.1. Method Declarations  · p174
+  - 6.2. Methods with a Pointer Receiver  · p177
+  - 6.3. Composing Types by Struct Embedding  · p180
+  - 6.4. Method Values and Expressions  · p183
+  - 6.5. Example: Bit Vector Type  · p184
+  - 6.6. Encapsulation  · p187
+- 7. Interfaces  · p190
+  - 7.1. Interfaces as Contracts  · p190
+  - 7.2. Interface Types  · p193
+  - 7.3. Interface Satisfaction  · p194
+  - 7.4. Parsing Flags with flag. Value  · p198
+  - 7.5. Interface Values  · p200
+  - 7.6. Sorting with sort. Interface  · p205
+  - 7.7. The http. Handler Interface  · p210
+  - 7.8. The error Interface  · p215
+  - 7.9. Example: Expression Evaluator  · p216
+  - 7.10. Type Assertions  · p224
+  - 7.11. Discriminating Errors with Type Assertions  · p225
+  - 7.12. Querying Behaviors with Interface Type Assertions  · p227
+  - 7.13. Type Switches  · p229
+  - 7.14. Example: Token-Based XML Decoding  · p232
+  - 7.15. A Few Words of Advice  · p235
+- 8. Goroutines and Channels  · p236
+  - 8.1. Goroutines  · p236
+  - 8.2. Example: Concurrent Clock Server  · p238
+  - 8.3. Example: Concurrent Echo Server  · p241
+  - 8.4. Channels  · p244
+  - 8.5. Looping in Paralle  · p253
+  - 8.6. Example: Concurrent Web Crawler  · p258
+  - 8.7. Multiplexing with select  · p263
+  - 8.8. Example: Concurrent Directory Traversal  · p266
+  - 8 9 Cancellation  · p270
+  - 8.10. Example: Chat Server  · p272
+- 9. Concurrency with Shared Variables  · p276
+  - 9.1. Race Conditions  · p276
+  - 9.2. Mutual Exclusion: sync. Mutex  · p281
+  - 9.3. Read/Write Mutexes: sync. RWMutex  · p285
+  - 9.4. Memory Synchronization  · p286
+  - 9.5. Lazy Initialization: sync.Once  · p287
+  - 9.6. The Race Detector  · p290
+  - 9.7. Example: Concurrent Non-Blocking Cache  · p291
+  - 9.8. Goroutinesand Threads  · p299
+- 10. Packages and the Go Tool  · p302
+  - 10.1. Introduction  · p302
+  - 10.2. Import Paths  · p303
+  - 10.3. The Package Declaration  · p304
+  - 10.4. Import Declarations  · p304
+  - 10.5. Blank Imports  · p305
+  - 10.6. Packages and Naming  · p308
+  - 10.7. The Go Tool  · p309
+- 11. Testing  · p320
+  - 11.1. The go test Tool  · p321
+  - 11.2. Test Functions  · p321
+  - 11.3. Coverage  · p337
+  - 11.4. Benchmark Functions  · p340
+  - 11.5. Profiling  · p342
+  - 11.6. Example Functions  · p345
+- 12. Reflection  · p348
+  - 12.1. Why Reflection?  · p348
+  - 12.2. reflect. Type and reflect. Value  · p349
+  - 12.3. Display, a Recursive Value Printer  · p352
+  - 12.4. Example: Encoding S-Expressions  · p357
+  - 12.5. Setting Variables with reflect.Value  · p360
+  - 12.6. Example: Decoding S-Expressions  · p363
+  - 12.7. Accessing Struct Field Tags  · p367
+  - 12.8. Displaying the Methods of a Type  · p370
+  - 12.9. A Word of Caution  · p371
+- 13. Low-Level Programming  · p372
+  - 13.1. unsafe. Sizeof, Alignof,and Offsetof  · p373
+  - 13.2. unsafe. Pointer  · p375
+  - 13.3. Example: Deep Equivalence  · p377
+  - 13.4. Calling C Code with cgo  · p380
+  - 13.5. Another Word of Caution  · p385
+- Index  · p386
+  - A  · p386
+  - B  · p387
+  - C  · p387
+  - D  · p388
+  - E  · p389
+  - F  · p390
+  - G  · p391
+  - H  · p391
+  - I  · p392
+  - J  · p392
+  - K  · p392
+  - L  · p392
+  - M  · p393
+  - N  · p394
+  - O  · p394
+  - P  · p394
+  - Q  · p395
+  - R  · p395
+  - S  · p396
+  - T  · p397
+  - U  · p398
+  - V  · p399
+  - W  · p399
+  - X  · p399
+  - Z  · p399

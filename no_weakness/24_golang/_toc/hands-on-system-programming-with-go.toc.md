@@ -1,0 +1,525 @@
+# TOC — Hands-On System Programming with Go.epub
+
+*Extracted by `_tools/extract_toc.py` (epub-ncx). 521 entries. Machine-generated — do not hand-edit.*
+
+- Title Page
+- Copyright and Credits
+  - Hands-On System Programming with Go
+- Dedication
+- About Packt
+  - Why subscribe?
+- Contributors
+  - About the author
+  - About the reviewers
+  - Packt is searching for authors like you
+- Preface
+  - Who this book is for
+  - What this book covers
+  - To get the most out of this book
+    - Download the example code files
+    - Download the color images
+    - Code in Action
+      - Playground examples
+    - Conventions used
+  - Get in touch
+    - Reviews
+- Section 1: An Introduction to System Programming and Go
+- An Introduction to System Programming
+  - Technical requirements
+  - Beginning with system programming
+    - Software for software
+    - Languages and system evolution
+    - System programming and software engineering
+  - Application programming interfaces
+    - Types of APIs
+      - Operating systems
+      - Libraries and frameworks
+      - Remote APIs
+      - Web APIs
+  - Understanding the protection ring
+    - Architectural differences
+    - Kernel space and user space
+  - Diving into system calls
+    - Services provided
+      - Process control
+      - File management
+      - Device management
+      - Information maintenance
+      - Communication
+    - The difference between operating systems
+  - Understanding the POSIX standard
+    - POSIX standards and features
+      - POSIX.1 – core services
+      - POSIX.1b and POSIX.1c – real-time and thread extensions
+      - POSIX.2 – shell and utilities
+    - OS adherence
+      - Linux and macOS
+      - Windows
+  - Summary
+  - Questions
+- Unix OS Components
+  - Technical requirements
+  - Memory management
+    - Techniques of management
+    - Virtual memory
+  - Understanding files and filesystems
+    - Operating systems and filesystems
+      - Linux
+      - macOS
+      - Windows
+    - Files and hard and soft links
+  - Unix filesystem
+    - Root and inodes
+    - Directory structure
+    - Navigation and interaction
+    - Mounting and unmounting
+  - Processes
+    - Process properties
+    - Process life cycle
+      - Foreground and background
+      - Killing a job
+  - Users, groups, and permissions
+    - Users and groups
+    - Owner, group, and others
+      - Read, write, and execute
+      - Changing permission
+  - Process communications
+    - Exit codes
+    - Signals
+    - Pipes
+    - Sockets
+  - Summary
+  - Questions
+- An Overview of Go
+  - Technical requirements
+  - Language features
+    - History of Go
+    - Strengths and weaknesses
+  - Namespace
+    - Imports and exporting symbols
+  - Type system
+    - Basic types
+    - Composite types
+    - Custom-defined types
+  - Variables and functions
+    - Handling variables
+      - Declaration
+      - Operations
+      - Casting
+      - Scope
+    - Constants
+    - Functions and methods
+      - Values and pointers
+  - Understanding flow control
+    - Condition
+    - Looping
+  - Exploring built-in functions
+    - Defer, panic, and recover
+  - Concurrency model
+    - Understanding channels and goroutines
+  - Understanding memory management
+    - Stack and heap
+    - The history of GC in Go
+  - Building and compiling programs
+    - Install
+    - Build
+    - Run
+  - Summary
+  - Questions
+- Section 2: Advanced File I/O Operations
+- Working with the Filesystem
+  - Technical requirements
+  - Handling paths
+    - Working directory
+      - Getting and setting the working directory
+    - Path manipulation
+  - Reading from files
+    - Reader interface
+      - The file structure
+    - Using buffers
+      - Peeking content
+    - Closer and seeker
+  - Writing to file
+    - Writer interface
+    - Buffers and format
+    - Efficient writing
+    - File modes
+  - Other operations
+    - Create
+    - Truncate
+    - Delete
+    - Move
+    - Copy
+    - Stats
+    - Changing properties
+  - Third-party packages
+    - Virtual filesystems
+    - Filesystem events
+  - Summary
+  - Questions
+- Handling Streams
+  - Technical requirements
+  - Streams
+    - Input and readers
+      - The bytes reader
+      - The strings reader
+    - Defining a reader
+    - Output and writers
+      - The bytes writer
+      - The string writer
+    - Defining a writer
+  - Built-in utilities
+    - Copying from one stream to another
+    - Connected readers and writers
+    - Extending readers
+    - Writers and decorators
+  - Summary
+  - Questions
+- Building Pseudo-Terminals
+  - Technical requirements
+  - Understanding pseudo-terminals
+    - Beginning with teletypes
+    - Pseudo teletypes
+  - Creating a basic PTY
+    - Input management
+    - Selector
+    - Command execution
+    - Some refactor
+  - Improving the PTY
+    - Multiline input
+    - Providing color support to the pseudo-terminal
+    - Suggesting commands
+    - Extensible commands
+  - Commands with status
+    - Volatile status
+    - Persistent status
+      - Upgrading the Stack command
+  - Summary
+  - Questions
+- Section 3: Understanding Process Communication
+- Handling Processes and Daemons
+  - Technical requirements
+  - Understanding processes
+    - Current process
+      - Standard input
+      - User and group ID
+      - Working directory
+    - Child processes
+      - Accessing child properties
+      - Standard input
+  - Beginning with daemons
+    - Operating system support
+    - Daemons in action
+    - Services
+  - Creating a service
+    - Third-party packages
+  - Summary
+  - Questions
+- Exit Codes, Signals, and Pipes
+  - Technical requirements
+  - Using exit codes
+    - Sending exit codes
+      - Exit codes in bash
+      - The exit value bit size
+      - Exit and deferred functions
+      - Panics and exit codes
+      - Exit codes and goroutines
+    - Reading child process exit codes
+  - Handling signals
+    - Handling incoming signals
+      - The signal package
+      - Graceful shutdowns
+      - Exit cleanup and resource release
+      - Configuration reload
+    - Sending signals to other processes
+  - Connecting streams
+    - Pipes
+      - Anonymous pipes
+      - Standard input and output pipes
+  - Summary
+  - Questions
+- Network Programming
+  - Technical requirements
+  - Communicating via networks
+    - OSI model
+      - Layer 1 – Physical layer
+      - Layer 2 – Data link layer
+      - Layer 3 – Network layer
+      - Layer 4 – Transport layer
+      - Layer 5 – Session layer
+      - Layer 6 – Presentation layer
+      - Layer 7 – Application layer
+    - TCP/IP – Internet protocol suite
+      - Layer 1 – Link layer
+      - Layer 2 – Internet layer
+      - Layer 3 – Transport layer
+      - Layer 4 – Application layer
+  - Understanding socket programming
+    - Network package
+    - TCP connections
+    - UDP connections
+      - Encoding and checksum
+  - Web servers in Go
+    - Web server
+      - HTTP protocol
+      - HTTP/2 and Go
+    - Using the standard package
+      - Making a HTTP request
+      - Creating a simple server
+      - Serving filesystem
+      - Navigating through routes and methods
+      - Multipart request and files
+      - HTTPS
+    - Third-party packages
+      - gorilla/mux
+      - gin-gonic/gin
+    - Other functionalities
+      - HTTP/2 Pusher
+      - WebSockets protocol
+  - Beginning with the template engine
+    - Syntax and basic usage
+    - Creating, parsing, and executing templates
+    - Conditions and loops
+    - Template functions
+  - RPC servers
+    - Defining a service
+    - Creating the server
+    - Creating the client
+  - Summary
+  - Questions
+- Data Encoding Using Go
+  - Technical requirements
+  - Understanding text-based encoding
+    - CSV
+      - Decoding values
+      - Encoding values
+      - Custom options
+    - JSON
+      - Field tags
+      - Decoder
+      - Encoder
+      - Marshaler and unmarshaler
+      - Interfaces
+      - Generating structs
+      - JSON schemas
+    - XML
+      - Structure
+      - Document Type Definition
+      - Decoding and encoding
+      - Field tags
+      - Marshaler and unmarshaler
+      - Generating structs
+    - YAML
+      - Structure
+      - Decoding and encoding
+  - Learning about binary encoding
+    - BSON
+      - Encoding
+      - Decoding
+    - gob
+      - Interfaces
+      - Encoding
+      - Decoding
+      - Interfaces
+    - Proto
+      - Structure
+      - Code generation
+      - Encoding
+      - Decoding
+      - gRPC protocol
+  - Summary
+  - Questions
+- Section 4: Deep Dive into Concurrency
+- Dealing with Channels and Goroutines
+  - Technical requirements
+  - Understanding goroutines
+    - Comparing threads and goroutines
+      - Threads
+      - Goroutines
+    - New goroutine
+    - Multiple goroutines
+    - Argument evaluation
+    - Synchronization
+  - Exploring channels
+    - Properties and operations
+      - Capacity and size
+      - Blocking operations
+      - Closing channels
+      - One-way channels
+    - Waiting receiver
+    - Special values
+      - nil channels
+      - Closed channels
+    - Managing multiple operations
+      - Default clause
+    - Timers and tickers
+      - Timers
+      - AfterFunc
+      - Tickers
+  - Combining channels and goroutines
+    - Rate limiter
+    - Workers
+    - Pool of workers
+    - Semaphores
+  - Summary
+  - Questions
+- Synchronization with sync and atomic
+  - Technical requirements
+  - Synchronization primitives
+    - Concurrent access and lockers
+      - Mutex
+      - RWMutex
+      - Write starvation
+      - Locking gotchas
+    - Synchronizing goroutines
+    - Singleton in Go
+      - Once and Reset
+    - Resource recycling
+      - Slices recycling issues
+    - Conditions
+    - Synchronized maps
+    - Semaphores
+  - Atomic operations
+    - Integer operations
+      - clicker
+      - Thread-safe floats
+      - Thread-safe Boolean
+      - Pointer operations
+    - Value
+      - Under the hood
+  - Summary
+  - Questions
+- Coordination Using Context
+  - Technical requirements
+  - Understanding context
+    - The interface
+    - Default contexts
+      - Background
+      - TODO
+    - Cancellation, timeout, and deadline
+      - Cancellation
+      - Deadline
+      - Timeout
+    - Keys and values
+  - Context in the standard library
+    - HTTP requests
+      - Passing scoped values
+      - Request cancellation
+    - HTTP server
+      - Shutdown
+      - Passing values
+    - TCP dialing
+      - Cancelling a connection
+    - Database operations
+    - Experimental packages
+  - Context in your application
+    - Things to avoid
+      - Wrong types as keys
+      - Passing parameters
+      - Optional arguments
+      - Globals
+    - Building a service with Context
+      - Main interface and usage
+      - Exit and entry points
+      - Exclude list
+      - Handling directories
+      - Checking file names and contents
+  - Summary
+  - Questions
+- Implementing Concurrency Patterns
+  - Technical requirements
+  - Beginning with generators
+    - Avoiding leaks
+  - Sequencing with pipelines
+  - Muxing and demuxing
+    - Fan-out
+    - Fan-in
+  - Producers and consumers
+    - Multiple producers (N * 1)
+    - Multiple consumers (1 * M)
+    - Multiple consumers and producers (N*M)
+  - Other patterns
+    - Error groups
+    - Leaky bucket
+    - Sequencing
+  - Summary
+  - Questions
+- Section 5: A Guide to Using Reflection and CGO
+- Using Reflection
+  - Technical requirements
+  - What's reflection?
+    - Type assertions
+      - Interface assertion
+  - Understanding basic mechanics
+    - Value and Type methods
+      - Kind
+    - Value to interface
+    - Manipulating values
+      - Changing values
+      - Creating new values
+  - Handling complex types
+    - Data structures
+      - Changing fields
+      - Using tags
+    - Maps and slices
+      - Maps
+      - Slices
+    - Functions
+      - Analyzing a function
+      - Invoking a function
+    - Channels
+      - Creating channels
+      - Sending, receiving, and closing
+      - Select statement
+  - Reflecting on reflection
+    - Performance cost
+    - Usage in the standard library
+    - Using reflection in a package
+      - Property files
+        - Using the package
+  - Summary
+  - Questions
+- Using CGO
+  - Technical requirements
+  - Introduction to CGO
+    - Calling C code from Go
+    - Calling Go code from C
+  - The C and Go type systems
+    - Strings and byte slices
+    - Integers
+    - Float types
+    - Unsafe conversions
+      - Editing a byte slice directly
+    - Numbers
+  - Working with slices
+  - Working with structs
+    - Structures in Go
+      - Manual padding
+    - Structures in C
+      - Unpacked structures
+      - Packed structures
+  - CGO recommendations
+    - Compilation and speed
+    - Performance
+    - Dependency from C
+  - Summary
+  - Questions
+- Assessments
+  - Chapter 1
+  - Chapter 2
+  - Chapter 3
+  - Chapter 4
+  - Chapter 5
+  - Chapter 6
+  - Chapter 7
+  - Chapter 8
+  - Chapter 9
+  - Chapter 10
+  - Chapter 11
+  - Chapter 12
+  - Chapter 13
+  - Chapter 14
+  - Chapter 15
+  - Chapter 16
+- Other Books You May Enjoy
+  - Leave a review - let other readers know what you think

@@ -23,7 +23,7 @@ PREFIX = {
     "14_browser_networking": "BNET", "15_websocket": "WS", "16_webrtc": "RTC",
     "17_grpc": "GRPC", "18_eventbus": "BUS", "19_data_analysis": "STAT",
     "20_datascience": "DS", "21_dataengineering": "DE", "22_android": "AND",
-    "23_app_dev": "APPD",
+    "23_app_dev": "APPD", "24_golang": "GO", "25_Java": "JAVA", "26_spring": "SPRG",
 }
 
 TYPES = {"Mechanism", "Protocol", "Structure", "Algorithm", "Model", "Practice", "Tool"}

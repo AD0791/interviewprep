@@ -4,7 +4,7 @@
 async web-service stack (FastAPI, Pydantic, SQLAlchemy) that most of this repo's other subjects
 assume the reader already has.*
 
-**Nodes:** 20 · **Books:** 4 · **Currency researched:** 2026-08-06
+**Nodes:** 24 · **Books:** 5 · **Currency researched:** 2026-08-06, extended 2026-08-08
 **Requires:** none — this is a root topic
 **Feeds:** [`06_concurrency`](../06_concurrency/00_knowledge_graph.md)
 
@@ -18,6 +18,7 @@ assume the reader already has.*
 | Beazley, *Advanced Python Mastery* (slide deck) | 2024 | Object model internals, descriptors, closures, decorators, metaclasses, generators, coroutines, the import system — as terse slides, not prose | Current as of publication and a useful second angle on object internals from a different teacher; the slide format leaves no room to develop the free-threading and subinterpreter material that shipped the same year |
 | Tragura, *Building Python Microservices with FastAPI* | 2022 | FastAPI fundamentals, dependency injection, five different ORM/ODM layers, authentication (Basic/Digest/OAuth2/JWT/OIDC), coroutines and message-driven transactions, session/CORS/middleware, microservice decomposition and service discovery, deployment | Broad and still the best single source here for microservice architecture patterns. Written against Pydantic v1 and SQLAlchemy 1.x, both since replaced by breaking rewrites — every code sample using `.dict()` or the legacy `Query` object is teaching a superseded API |
 | Alheraki, *Mastering FastAPI with Python* | 2025 | FastAPI basics through production deployment, Pydantic validation, async database access with SQLAlchemy, microservice scaling, Docker/AWS/GCP deployment | Recent enough to reflect the current FastAPI/Pydantic v2 surface, but shallow — roughly 135 pages against Tragura's 400+ — and thin on the concurrency internals underneath the framework |
+| Wilson, *Software Design by Example* (Python edition) | 2026 | Thirty-one chapters that each build a small working version of a tool programmers use daily: an object system made of dictionaries, a duplicate-file finder, a pattern matcher, a parser, a test runner, a tree-walking interpreter, closures, protocols, an archiver, an HTML validator, a template expander, a linter, a page-layout engine, a profiler, an object-persistence layer, binary encoding, a database, a build manager, a package manager, file transfer, a web server, a file viewer, undo/redo, a register virtual machine, a debugger, and a documentation generator | A different kind of source from the rest of this shelf, and the reason it is worth citing: it is open-licensed, continuously revised, and its most recent commit at the time of this pass is dated 2026-06-23, which makes it the only source here newer than Python 3.10. It teaches by construction rather than by reference, so it is authoritative on *how a mechanism works* and deliberately silent on CPython's actual implementation of the same idea — an object system built from dictionaries is not `PyTypeObject`. Two caveats from reading the repository directly: the "Observers" and "Concurrency" chapters are outline stubs of roughly 75 and 156 words with `FIXME` abstracts, and "Generating Documentation" is partially drafted, so none of the three is cited as a source anywhere below |
 
 ---
 
@@ -45,6 +46,10 @@ assume the reader already has.*
 | `PY-18` | Microservice decomposition and inter-service communication | Practice | L4 | `current` |
 | `PY-19` | Testing and deploying a Python web service | Practice | L3 | `stale-minor` |
 | `PY-20` | Structural pattern matching and the match statement | Mechanism | L3 | `current` |
+| `PY-21` | Building an interpreter and a virtual machine in Python | Mechanism | L5 | `current` |
+| `PY-22` | Object persistence and binary serialisation | Mechanism | L4 | `stale-minor` |
+| `PY-23` | The abstract syntax tree as a program-analysis surface | Mechanism | L4 | `stale-minor` |
+| `PY-24` | Tracing a running program: profilers, debuggers, and `sys.monitoring` | Mechanism | L4 | `stale-major` |
 
 ---
 
@@ -80,14 +85,24 @@ graph LR
     PY19["19 testing & deploy"] --> PY14
 ```
 
+### Programs as data
+
+```mermaid
+graph LR
+    PY21["21 interpreter & VM"] --> PY05d["05 bytecode"]
+    PY22["22 persistence & binary"] --> PY02d["02 special methods"]
+    PY23["23 the AST"] --> PY05d
+    PY24["24 tracing & profiling"] --> PY05d
+```
+
 ---
 
 ## §4 Node records
 
 ### `PY-01` · Object model and attribute lookup
 **Type:** Mechanism · **Depth:** L5
-**Covers:** `__getattribute__`/`__getattr__` resolution order, the descriptor protocol (data versus non-data descriptors), instance `__dict__` versus class `__dict__`, `__slots__` and its memory and inheritance costs, C3 linearisation, cooperative `super()`
-**Sources:** Ramalho ch.1, 11, 13, 14, 22, 23, 24 (2022) · Beazley, *Advanced Python Mastery* §3–4 (2024)
+**Covers:** `__getattribute__`/`__getattr__` resolution order, the descriptor protocol (data versus non-data descriptors), instance `__dict__` versus class `__dict__`, `__slots__` and its memory and inheritance costs, C3 linearisation, cooperative `super()`, the dictionary-of-methods model that makes all of the above possible
+**Sources:** Ramalho ch.1, 11, 13, 14, 22, 23, 24 (2022) · Beazley, *Advanced Python Mastery* §3–4 (2024) · Wilson, *Software Design by Example* ch."Objects and Classes" (2026) — an object system built from bare dictionaries, which is the mechanism stripped of CPython's implementation
 **Edges:** `contrasts` [`PY-10`] · `contrasts` [`JS-10`]
 **Currency:** `current`
 **Article:** [01_object_model_and_attribute_lookup.md](01_object_model_and_attribute_lookup.md)
@@ -95,14 +110,14 @@ graph LR
 ### `PY-02` · The special-method protocol: dunders as the real interface
 **Type:** Mechanism · **Depth:** L4
 **Covers:** the iteration protocol as a fallback chain (`__iter__` then legacy `__getitem__`), context managers and `contextlib.contextmanager`, the `__eq__`/`__hash__` contract and what violating it breaks in a dict, `__new__` versus `__init__`, operator overloading, duck typing as protocol-slot lookup on the type rather than the instance, `functools.singledispatch`
-**Sources:** Ramalho ch.1, 12, 13, 16, 18, 22 (2022) · Beazley, *Advanced Python Mastery* §3 (2024)
+**Sources:** Ramalho ch.1, 12, 13, 16, 18, 22 (2022) · Beazley, *Advanced Python Mastery* §3 (2024) · Wilson, *Software Design by Example* ch."Protocols" (2026)
 **Edges:** `requires` [`PY-01`]
 **Currency:** `current`
 
 ### `PY-03` · Closures, decorators, and metaprogramming
 **Type:** Mechanism · **Depth:** L5
-**Covers:** cell objects and `__closure__`, late binding, decorators that take arguments, what `functools.wraps` restores and what stays broken without it, class decorators, `__init_subclass__` and `__set_name__`, metaclasses and where SQLAlchemy's declarative base and Pydantic's model machinery actually use them
-**Sources:** Ramalho ch.9, 10, 24 (2022) · Beazley, *Advanced Python Mastery* §7 (2024)
+**Covers:** cell objects and `__closure__`, late binding, decorators that take arguments, what `functools.wraps` restores and what stays broken without it, class decorators, `__init_subclass__` and `__set_name__`, metaclasses and where SQLAlchemy's declarative base and Pydantic's model machinery actually use them, introspection-driven discovery of the kind a test runner does when it finds test functions by scanning a namespace
+**Sources:** Ramalho ch.9, 10, 24 (2022) · Beazley, *Advanced Python Mastery* §7 (2024) · Wilson, *Software Design by Example* ch."Functions and Closures", ch."Protocols" §Decorators, ch."Running Tests" (2026)
 **Edges:** `requires` [`PY-01`] · `contrasts` [`JS-07`]
 **Currency:** `current`
 **Article:** [03_closures_decorators_and_metaprogramming.md](03_closures_decorators_and_metaprogramming.md)
@@ -111,14 +126,14 @@ graph LR
 **Type:** Mechanism · **Depth:** L4
 **Covers:** reference counting and why `sys.getrefcount` reads one high, the generational cyclic collector and `gc` thresholds, `weakref` and `WeakValueDictionary`, `__del__` hazards, pymalloc arenas and why RSS does not return to the OS after a large structure is freed, `tracemalloc`, shallow versus deep copy semantics
 **Sources:** Ramalho ch.6 (2022) · Beazley, *Advanced Python Mastery* §2 (2024)
-**Edges:** `requires` [`PY-01`] · `contrasts` [`JS-14`]
+**Edges:** `requires` [`PY-01`] · `contrasts` [`JS-14`, `GO-18`]
 **Currency:** `stale-minor`
 **Δ current:** Ramalho's chapter 6 (2022) and the Beazley deck describe reference counting as an ordinary, non-atomic integer increment protected only by the GIL. Under the free-threaded build — experimental in Python 3.13, promoted to officially supported status in Python 3.14 by PEP 779 (released 7 October 2025) — CPython instead uses biased reference counting with per-object locking, and PEP 683 immortal objects (module-level code and type objects in 3.13, narrowed to interned strings and code constants as of 3.14) skip refcounting entirely. An article on this node should present ordinary refcounting as the default-build behaviour and flag the free-threaded divergence explicitly, with the mechanism itself detailed in [`CONC-05`](../06_concurrency/00_knowledge_graph.md).
 
 ### `PY-05` · Bytecode and the runtime
 **Type:** Mechanism · **Depth:** L5
 **Covers:** `dis` and frame objects, the eval loop, `LOAD_FAST` versus `LOAD_GLOBAL`, the 3.11+ specialising adaptive interpreter, small-integer and string interning identity traps, honest `timeit` methodology
-**Sources:** Beazley, *Advanced Python Mastery* §2 (2024) — thin overlap only, on builtin-object layout rather than bytecode directly
+**Sources:** Beazley, *Advanced Python Mastery* §2 (2024) — thin overlap only, on builtin-object layout rather than bytecode directly · Wilson, *Software Design by Example* ch."A Virtual Machine" (2026) — a stack-free register machine, useful as the contrast that makes CPython's stack machine legible, not as a description of it
 **Edges:** `requires` [`PY-01`]
 **Currency:** `stale-minor`
 **Δ current:** None of the four books on this shelf disassembles CPython bytecode directly; the closest material is Beazley's 2024 sections on builtin-object internals, which do not touch the instruction set. That instruction set changed materially across 3.11 (the specialising adaptive interpreter, PEP 659), 3.12, and 3.13/3.14 (continued Tier 2 optimizer work plus the experimental JIT under PEP 744 — disabled by default in 3.13, enabled via `PYTHON_JIT=1` in 3.14 with results ranging from 10% slower to 20% faster depending on workload). The written article on this node already measures CPython 3.14.6 directly rather than leaning on a book, which is the only sound approach for a mechanism this shelf does not really cover.
@@ -135,14 +150,14 @@ graph LR
 ### `PY-07` · Iterators, generators, and lazy evaluation
 **Type:** Mechanism · **Depth:** L4
 **Covers:** the iterator protocol and `__next__`/`StopIteration`, generator functions and frame suspension, `yield from` and subgenerator delegation, `send`/`throw`/`close`, `itertools` pipeline composition, classic (pre-`async`) coroutines
-**Sources:** Ramalho ch.17 (2022) · Beazley, *Advanced Python Mastery* §8 (2024)
+**Sources:** Ramalho ch.17 (2022) · Beazley, *Advanced Python Mastery* §8 (2024) · Wilson, *Software Design by Example* ch."Protocols" §Iterators (2026)
 **Edges:** `requires` [`PY-02`] · `contrasts` [`JS-11`]
 **Currency:** `current`
 
 ### `PY-08` · The import system and packaging
 **Type:** Mechanism · **Depth:** L4
-**Covers:** finders and loaders, `sys.modules` as a cache, why a module body runs exactly once, circular imports and the timing of the failure, namespace packages, the `__main__` guard and its interaction with the `spawn` start method
-**Sources:** Beazley, *Advanced Python Mastery* §9 (2024)
+**Covers:** finders and loaders, `sys.modules` as a cache, why a module body runs exactly once, circular imports and the timing of the failure, namespace packages, the `__main__` guard and its interaction with the `spawn` start method, semantic versioning and dependency resolution as a constraint-satisfaction problem rather than a lookup, why a resolver may need a SAT solver
+**Sources:** Beazley, *Advanced Python Mastery* §9 (2024) · Wilson, *Software Design by Example* ch."A Package Manager" (2026)
 **Edges:** `requires` [`PY-01`]
 **Currency:** `stale-minor`
 **Δ current:** Beazley's 2024 deck teaches `venv` plus `pip` for environment and dependency management, which still works but is no longer the fastest or most common path: `uv` (Astral, first released as v0.1.0 in February 2024) reimplements the resolver and installer in Rust and is pitched as a single replacement for `pip`, `pip-tools`, `pipx`, `poetry`, `pyenv` and `virtualenv`; this repository's own tooling assumes it via `uv run`. The import machinery itself — finders, loaders, `sys.modules`, the `spawn`-versus-`fork` interaction — is unchanged; only the packaging layer around it has moved.
@@ -150,14 +165,14 @@ graph LR
 ### `PY-09` · Sequence types and their memory layout
 **Type:** Structure · **Depth:** L4
 **Covers:** list over-allocation and amortised growth, tuples as records versus immutable lists, slicing and slice objects, the `array` module, `memoryview` and zero-copy buffer access, `deque` as a double-ended structure, pattern matching over sequences
-**Sources:** Ramalho ch.2 (2022) · Beazley, *Advanced Python Mastery* §2 (2024)
+**Sources:** Ramalho ch.2 (2022) · Beazley, *Advanced Python Mastery* §2 (2024) · Wilson, *Software Design by Example* ch."Performance Profiling" (2026) — row-wise against column-wise storage of the same table, measured
 **Edges:** `contrasts` [`PY-10`]
 **Currency:** `current`
 
 ### `PY-10` · Hash-based collections: dict and set internals
 **Type:** Structure · **Depth:** L4
-**Covers:** open addressing and collision resolution, why `dict` has preserved insertion order as a language guarantee since 3.7, dictionary views as set-like objects, `defaultdict`/`ChainMap`/`Counter`, the practical consequence that dict keys must be hashable and effectively immutable
-**Sources:** Ramalho ch.3 (2022) · Beazley, *Advanced Python Mastery* §2 (2024)
+**Covers:** open addressing and collision resolution, why `dict` has preserved insertion order as a language guarantee since 3.7, dictionary views as set-like objects, `defaultdict`/`ChainMap`/`Counter`, the practical consequence that dict keys must be hashable and effectively immutable, cryptographic content hashing as a different use of the same word — identity by digest rather than by bucket
+**Sources:** Ramalho ch.3 (2022) · Beazley, *Advanced Python Mastery* §2 (2024) · Wilson, *Software Design by Example* ch."Finding Duplicate Files" (2026)
 **Edges:** `contrasts` [`PY-09`, `PY-01`]
 **Currency:** `current`
 
@@ -236,6 +251,37 @@ graph LR
 **Edges:** `requires` [`PY-01`] · `refines` [`PY-12`]
 **Currency:** `current`
 
+### `PY-21` · Building an interpreter and a virtual machine in Python
+**Type:** Mechanism · **Depth:** L5
+**Covers:** tokenizing and parsing a small language into a tree, tree-walking evaluation against an environment, environments as a chain of dictionaries and what that makes scope mean, first-class functions and closures inside an interpreted language, designing an instruction set, assembling symbolic instructions to numbers, the fetch-decode-execute loop, registers against a stack as the machine's storage model, jumps and labels
+**Sources:** Wilson, *Software Design by Example* ch."Parsing Text", ch."An Interpreter", ch."Functions and Closures", ch."A Virtual Machine" (2026)
+**Edges:** `requires` [`PY-05`] · `contrasts` [`PY-23`]
+**Currency:** `current`
+
+### `PY-22` · Object persistence and binary serialisation
+**Type:** Mechanism · **Depth:** L4
+**Covers:** serialising built-in types by dispatching on type, extending the scheme to user-defined classes, the aliasing problem — a shared object written twice becomes two objects on reload, and a cyclic structure never terminates — identity tables as the fix, `pickle` and its `__reduce__`/`__getstate__`/`__setstate__` hooks, `struct` packing and endianness, why a self-describing text format and a compact binary one are different trade-offs, the security position that unpickling untrusted data is arbitrary code execution
+**Sources:** Wilson, *Software Design by Example* ch."Object Persistence", ch."Binary Data" (2026) · Ramalho ch.4 (2022) — the bytes side only
+**Edges:** `requires` [`PY-02`]
+**Currency:** `stale-minor`
+**Δ current:** The mechanism — dispatch on type, an identity table for aliases, a length-prefixed binary encoding — is exactly as Wilson builds it and does not date. The standard-library surface around it moved after most of this shelf was written: `pickle` protocol 5 (PEP 574, Python 3.8) added out-of-band buffers so a large array can be transferred without copying it into the pickle stream, and protocol 5 is what `multiprocessing` uses to move arrays between processes, which is why this node connects to `PY-04`'s memory discussion rather than being purely a file-format topic. An article should build the mechanism from scratch as the book does and then map each piece onto the corresponding `pickle` hook.
+
+### `PY-23` · The abstract syntax tree as a program-analysis surface
+**Type:** Mechanism · **Depth:** L4
+**Covers:** the `ast` module and what `ast.parse` returns, `NodeVisitor` and `NodeTransformer`, the visitor pattern as a way to separate traversal from action, walking a tree to find duplicate dictionary keys or variables that are assigned and never read, extracting docstrings for generated documentation, source-to-source transformation and `ast.unparse`, why an AST check catches what a regular expression cannot, and the boundary where static analysis stops and running the program starts
+**Sources:** Wilson, *Software Design by Example* ch."A Code Linter", ch."An HTML Validator", ch."Generating Documentation" (2026) — the documentation chapter is partially drafted and is cited for its `NodeVisitor` docstring extraction only
+**Edges:** `requires` [`PY-05`] · `contrasts` [`PY-21`]
+**Currency:** `stale-minor`
+**Δ current:** The `ast` module's shape is stable, but the tree it returns is versioned with the language and each new syntax addition changes it — `ast.Match` and its pattern nodes arrived with PEP 634 in Python 3.10, and the PEP 695 type-parameter syntax added `ast.TypeAlias`, `ast.TypeVar`, `ast.ParamSpec` and `ast.TypeVarTuple` in 3.12 — so a visitor written against one version silently ignores constructs from a later one rather than failing. `ast.unparse` itself is only available from Python 3.9. A separate development sits outside CPython: the linting tools most projects actually run are no longer written in Python at all, since Ruff reimplements the analysis in Rust, so an article should present the `ast` module as the way to understand and extend analysis rather than as what a fast production linter uses.
+
+### `PY-24` · Tracing a running program: profilers, debuggers, and `sys.monitoring`
+**Type:** Mechanism · **Depth:** L4
+**Covers:** what a tracing debugger has to intercept — line, call, return and exception events — single-stepping and the read-eval-print loop around it, breakpoints as a filter on the line event, inspecting frame locals from outside the frame, testing an interactive tool by scripting its input, deterministic profiling against sampling, `cProfile` and what its overhead does to the numbers it reports, `timeit` and why microbenchmarks mislead
+**Sources:** Wilson, *Software Design by Example* ch."A Debugger", ch."Performance Profiling" (2026)
+**Edges:** `requires` [`PY-05`]
+**Currency:** `stale-major`
+**Δ current:** Every treatment of this subject written before Python 3.12, including the mechanism Wilson builds, rests on `sys.settrace`, which fires a Python callback on every line of every frame and costs enough that a traced program is often an order of magnitude slower. PEP 669 added `sys.monitoring` in Python 3.12, a per-tool event API that hooks the specialising interpreter's quickening machinery instead, allows a tool to disable an event at a specific code location, and is reported in the PEP's own rationale and in tool-vendor writeups as roughly an order of magnitude cheaper than `settrace` for debugger workloads. The consequence for an article is structural, not cosmetic: `settrace` is still the right thing to build first because it is simple and shows the event model plainly, but the article must not leave the reader thinking it is what a current debugger or coverage tool should use.
+
 ---
 
 ## §5 Cross-subject edges
@@ -247,6 +293,7 @@ graph LR
 | `PY-01` | `contrasts` | `JS-10` | Attribute lookup via `__getattribute__`/MRO versus prototype-chain delegation are the two dominant answers to "how does a language resolve `obj.x`", reciprocal of `JS-10`'s edge into this node |
 | `PY-03` | `contrasts` | `JS-07` | Cell-based closures over an environment by reference, the same idea under different introspection stories in each language; reciprocal of `JS-07`'s edge into this node |
 | `PY-04` | `contrasts` | `JS-14` | CPython's deterministic reference counting plus a cyclic collector versus V8's generational, non-deterministic GC produce different leak signatures for the same underlying problem; reciprocal of `JS-14`'s edge into this node |
+| `PY-04` | `contrasts` | `GO-18` | Reference counting with a cycle collector against a concurrent tricolour mark-and-sweep collector tuned by `GOGC` and `GOMEMLIMIT` — the two collectors have opposite pause profiles and expose entirely different tuning surfaces; reciprocal of `GO-18`'s edge into this node |
 | `PY-06` | `contrasts` | `TS-01` | Runtime-checked structural duck typing (protocols, `isinstance` with `runtime_checkable`) versus TypeScript's compile-time-only structural typing that erases entirely by runtime — the same "shape, not name" idea enforced at opposite ends of the program's lifecycle |
 | `PY-07` | `contrasts` | `JS-11` | Both languages implement the same iterator-protocol idea (`__iter__`/`__next__` versus `Symbol.iterator`/`next()`) with generators as sugar over a hand-written iterator in both; reciprocal of `JS-11`'s edge into this node |
 | `PY-16` | `contrasts` | `SQL-20` | The ORM-side view SQLAlchemy 2.0's async session model gives N+1 and connection behaviour versus the database-side view `SQL-20` gives the same failure |
@@ -285,6 +332,27 @@ than stretched into a node it does not deserve.
 
 The type-system node (`PY-06`) and the FastAPI/Pydantic nodes (`PY-14`, `PY-15`) would both be
 sharper with a companion module on the HTTP protocol semantics FastAPI sits on top of — status
-codes, content negotiation, and the request/response model generally — which belongs to `13_http`,
-not yet built. Until it exists, `PY-14`'s `Covers` line stays scoped to the ASGI/DI layer and does
-not try to teach HTTP itself.
+codes, content negotiation, and the request/response model generally — which belongs to `13_http`.
+`PY-14`'s `Covers` line therefore stays scoped to the ASGI/DI layer and does not try to teach HTTP
+itself.
+
+*Software Design by Example* contributes four new nodes and citations on eight existing ones, and
+eleven of its thirty-one chapters are deliberately left uncited. Three of them are unfinished in the
+source repository and cannot be cited by anyone: "Observers" and "Concurrency" are outline stubs of
+roughly seventy-five and one hundred and fifty words with `FIXME` abstracts, and "Generating
+Documentation" is partially drafted — it is cited on `PY-23` for its `NodeVisitor` docstring
+extraction and for nothing else. The concurrency stub is the more consequential of the two, because
+a finished version would have been the only treatment on this shelf of greenlet-style cooperative
+scheduling, which no other source here covers and which `06_concurrency` approaches from the asyncio
+side instead.
+
+The other eight are complete chapters that belong to other subjects. "Matching Patterns" and "A File
+Archiver" are algorithm and file-format work rather than language mechanism. "A Build Manager" is a
+topological sort over a dependency graph, which is `DSA-10` material written in Python. "Page Layout"
+builds a box-model layout engine, and "Serving Web Pages", "Transferring Files" and "A File Cache"
+build an HTTP server, a chunked TCP transfer and a cache respectively — all of which belong to
+`13_http`, `COMP-13` and `11_redis_caching`, and none of which teaches anything about Python that
+`PY-19` does not. "A Database" builds a block-structured file-backed store, which is `09_sql`'s
+storage-engine territory. "A Template Expander" and "A File Viewer" are named here for completeness:
+the first duplicates the visitor machinery already folded into `PY-23`, and the second is a `curses`
+application whose interest is in the terminal API rather than in the language.

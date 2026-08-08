@@ -1,0 +1,351 @@
+# TOC — go-design-patterns.pdf
+
+*Extracted by `_tools/extract_toc.py` (outline). 347 entries. Machine-generated — do not hand-edit.*
+
+- Go Design Patterns  · p2
+  - Go Design Patterns  · p13
+  - Credits  · p14
+  - About the Author  · p15
+  - About the Reviewer  · p16
+  - www.PacktPub.com  · p17
+    - Why subscribe?  · p17
+  - Customer Feedback  · p18
+  - Preface  · p19
+    - What this book covers  · p20
+    - What you need for this book  · p22
+    - Who this book is for  · p23
+    - Conventions  · p24
+    - Reader feedback  · p25
+    - Customer support  · p26
+      - Downloading the example code  · p26
+      - Errata  · p26
+      - Piracy  · p27
+      - Questions  · p27
+  - 1. Ready Steady Go!  · p28
+    - A little bit of history  · p28
+    - Installing Go  · p30
+      - Linux  · p30
+        - Go Linux advanced installation  · p30
+      - Windows  · p31
+      - Mac OS X  · p31
+      - Setting the workspace - Linux and Apple OS X  · p31
+    - Starting with Hello World  · p33
+    - Integrated Development Environment - IDE  · p34
+    - Types  · p35
+    - Variables and constants  · p36
+    - Operators  · p37
+    - Flow control  · p38
+      - The if else statement  · p38
+      - The switch statement  · p38
+      - The for…range statement  · p39
+    - Functions  · p40
+      - What does a function look like?  · p40
+      - What is an anonymous function?  · p40
+      - Closures  · p41
+      - Creating errors, handling errors and returning errors.  · p42
+      - Function with undetermined number of parameters  · p42
+        - Naming returned types  · p42
+    - Arrays, slices, and maps  · p44
+      - Arrays  · p44
+        - Zero-initialization  · p44
+      - Slices  · p44
+      - Maps  · p45
+    - Visibility  · p46
+    - Zero-initialization  · p47
+    - Pointers and structures  · p49
+      - What is a pointer? Why are they good?  · p49
+      - Structs  · p50
+    - Interfaces  · p52
+      - Interfaces - signing a contract  · p52
+    - Testing and TDD  · p54
+      - The testing package  · p54
+      - What is TDD?  · p56
+    - Libraries  · p58
+    - The Go get tool  · p61
+    - Managing JSON data  · p62
+      - The encoding package  · p62
+    - Go tools  · p65
+      - The golint tool  · p65
+      - The gofmt tool  · p65
+      - The godoc tool  · p66
+      - The goimport tool  · p67
+    - Contributing to Go open source projects in GitHub  · p68
+    - Summary  · p69
+  - 2. Creational Patterns - Singleton, Builder, Factory, Prototype, and Abstract Factory Design Patterns  · p70
+    - Singleton design pattern - having a unique instance of a type in the entire program  · p70
+      - Description  · p70
+      - Objectives  · p71
+      - Example - a unique counter  · p71
+      - Requirements and acceptance criteria  · p71
+      - Writing unit tests first  · p71
+      - Implementation  · p73
+      - A few words about the Singleton design pattern  · p74
+    - Builder design pattern - reusing an algorithm to create many implementations of an interface  · p76
+      - Description  · p76
+      - Objectives  · p76
+      - Example - vehicle manufacturing  · p76
+      - Requirements and acceptance criteria  · p76
+      - Unit test for the vehicle builder  · p77
+      - Implementation  · p80
+      - Wrapping up the Builder design pattern  · p83
+    - Factory method - delegating the creation of different types of payments  · p84
+      - Description  · p84
+      - Objectives  · p84
+      - The example - a factory of payment methods for a shop  · p84
+      - Acceptance criteria  · p84
+      - First unit test  · p85
+      - Implementation  · p87
+      - Upgrading the Debitcard method to a new platform  · p89
+      - What we learned about the Factory method  · p91
+    - Abstract Factory - a factory of factories  · p92
+      - Description  · p92
+      - The objectives  · p92
+      - The vehicle factory example, again?  · p92
+      - Acceptance criteria  · p92
+      - Unit test  · p92
+      - Implementation  · p98
+      - A few lines about the Abstract Factory method  · p99
+    - Prototype design pattern  · p100
+      - Description  · p100
+      - Objective  · p100
+      - Example  · p100
+      - Acceptance criteria  · p100
+      - Unit test  · p101
+      - Implementation  · p103
+      - What we learned about the Prototype design pattern  · p105
+    - Summary  · p106
+  - 3. Structural Patterns - Composite, Adapter, and Bridge Design Patterns  · p107
+    - Composite design pattern  · p107
+      - Description  · p107
+      - Objectives  · p108
+      - The swimmer and the fish  · p108
+      - Requirements and acceptance criteria  · p108
+      - Creating compositions  · p108
+      - Binary Tree compositions  · p111
+      - Composite pattern versus inheritance  · p112
+      - Final words on the Composite pattern  · p113
+    - Adapter design pattern  · p114
+      - Description  · p114
+      - Objectives  · p114
+      - Using an incompatible interface with an Adapter object  · p114
+      - Requirements and acceptance criteria  · p114
+      - Unit testing our Printer adapter  · p115
+      - Implementation  · p116
+      - Examples of the Adapter pattern in Go's source code  · p117
+      - What the Go source code tells us about the Adapter pattern  · p121
+    - Bridge design pattern  · p122
+      - Description  · p122
+      - Objectives  · p122
+      - Two printers and two ways of printing for each  · p122
+      - Requirements and acceptance criteria  · p122
+      - Unit testing the Bridge pattern  · p123
+      - Implementation  · p128
+      - Reuse everything with the Bridge pattern  · p131
+    - Summary  · p132
+  - 4. Structural Patterns - Proxy, Facade, Decorator, and Flyweight Design Patterns  · p133
+    - Proxy design pattern  · p133
+      - Description  · p133
+      - Objectives  · p133
+      - Example  · p133
+      - Acceptance criteria  · p133
+      - Unit test  · p134
+      - Implementation  · p138
+      - Proxying around actions  · p140
+    - Decorator design pattern  · p142
+      - Description  · p142
+      - Objectives  · p142
+      - Example  · p142
+      - Acceptance criteria  · p142
+      - Unit test  · p143
+      - Implementation  · p146
+      - A real-life example - server middleware  · p148
+        - Starting with the common interface, http.Handler  · p148
+      - A few words about Go's structural typing  · p153
+      - Summarizing the Decorator design pattern - Proxy versus Decorator  · p154
+    - Facade design pattern  · p155
+      - Description  · p155
+      - Objectives  · p155
+      - Example  · p155
+      - Acceptance criteria  · p155
+      - Unit test  · p156
+      - Implementation  · p159
+      - Library created with the Facade pattern  · p162
+    - Flyweight design pattern  · p163
+      - Description  · p163
+      - Objectives  · p163
+      - Example  · p163
+      - Acceptance criteria  · p163
+      - Basic structs and tests  · p164
+      - Implementation  · p166
+      - What's the difference between Singleton and Flyweight then?  · p170
+    - Summary  · p171
+  - 5. Behavioral Patterns - Strategy, Chain of Responsibility, and Command Design Patterns  · p172
+    - Strategy design pattern  · p172
+      - Description  · p172
+      - Objectives  · p172
+      - Rendering images or text  · p173
+      - Acceptance criteria  · p173
+      - Implementation  · p173
+      - Solving small issues in our library  · p178
+      - Final words on the Strategy pattern  · p183
+    - Chain of responsibility design pattern  · p184
+      - Description  · p184
+      - Objectives  · p184
+      - A multi-logger chain  · p184
+      - Unit test  · p185
+      - Implementation  · p189
+      - What about a closure?  · p191
+      - Putting it together  · p193
+    - Command design pattern  · p194
+      - Description  · p194
+      - Objectives  · p194
+      - A simple queue  · p195
+      - Acceptance criteria  · p195
+      - Implementation  · p196
+      - More examples  · p198
+      - Chain of responsibility of commands  · p199
+      - Rounding-up the Command pattern up  · p201
+    - Summary  · p202
+  - 6. Behavioral Patterns - Template, Memento, and Interpreter Design Patterns  · p203
+    - Template design pattern  · p203
+      - Description  · p203
+      - Objectives  · p204
+      - Example - a simple algorithm with a deferred step  · p204
+      - Requirements and acceptance criteria  · p204
+      - Unit tests for the simple algorithm  · p204
+      - Implementing the Template pattern  · p206
+      - Anonymous functions  · p207
+      - How to avoid modifications on the interface  · p209
+      - Looking for the Template pattern in Go's source code  · p212
+      - Summarizing the Template design pattern  · p213
+    - Memento design pattern  · p215
+      - Description  · p215
+      - Objectives  · p215
+      - A simple example with strings  · p215
+      - Requirements and acceptance criteria  · p216
+      - Unit test  · p216
+      - Implementing the Memento pattern  · p219
+      - Another example using the Command and Facade patterns  · p221
+      - Last words on the Memento pattern  · p224
+    - Interpreter design pattern  · p226
+      - Description  · p226
+      - Objectives  · p226
+      - Example - a polish notation calculator  · p226
+      - Acceptance criteria for the calculator  · p226
+      - Unit test of some operations  · p227
+      - Implementation  · p228
+      - Complexity with the Interpreter design pattern  · p232
+      - Interpreter pattern again - now using interfaces  · p232
+      - The power of the Interpreter pattern  · p234
+    - Summary  · p236
+  - 7. Behavioral Patterns - Visitor, State, Mediator, and Observer Design Patterns  · p237
+    - Visitor design pattern  · p237
+      - Description  · p237
+      - Objectives  · p237
+      - A log appender  · p238
+      - Acceptance criteria  · p238
+      - Unit tests  · p238
+      - Implementation of Visitor pattern  · p242
+      - Another example  · p244
+      - Visitors to the rescue!  · p248
+    - State design pattern  · p249
+      - Description  · p249
+      - Objectives  · p249
+      - A small guess the number game  · p249
+      - Acceptance criteria  · p249
+      - Implementation of State pattern  · p250
+      - A state to win and a state to lose  · p254
+      - The game built using the State pattern  · p254
+    - Mediator design pattern  · p256
+      - Description  · p256
+      - Objectives  · p256
+      - A calculator  · p256
+      - Acceptance criteria  · p256
+      - Implementation  · p257
+      - Uncoupling two types with the Mediator  · p260
+    - Observer design pattern  · p261
+      - Description  · p261
+      - Objectives  · p261
+      - The notifier  · p261
+      - Acceptance criteria  · p261
+      - Unit tests  · p262
+      - Implementation  · p266
+      - Summary  · p268
+  - 8. Introduction to Gos Concurrency  · p270
+    - A little bit of history and theory  · p270
+      - Concurrency versus parallelism  · p270
+      - CSP versus actor-based concurrency  · p272
+    - Goroutines  · p274
+      - Our first Goroutine  · p274
+      - Anonymous functions launched as new Goroutines  · p276
+      - WaitGroups  · p277
+    - Callbacks  · p280
+      - Callback hell  · p282
+    - Mutexes  · p283
+      - An example with mutexes - concurrent counter  · p283
+      - Presenting the race detector  · p284
+    - Channels  · p288
+      - Our first channel  · p288
+      - Buffered channels  · p290
+      - Directional channels  · p291
+      - The select statement  · p292
+      - Ranging over channels too!  · p295
+    - Using it all - concurrent singleton  · p297
+      - Unit test  · p297
+      - Implementation  · p298
+    - Summary  · p302
+  - 9. Concurrency Patterns - Barrier, Future, and Pipeline Design Patterns  · p303
+    - Barrier concurrency pattern  · p303
+      - Description  · p303
+      - Objectives  · p303
+      - An HTTP GET aggregator  · p304
+      - Acceptance criteria  · p304
+      - Unit test - integration  · p305
+      - Implementation  · p308
+      - Waiting for responses with the Barrier design pattern  · p311
+    - Future design pattern  · p312
+      - Description  · p312
+      - Objectives  · p315
+      - A simple asynchronous requester  · p315
+      - Acceptance criteria  · p315
+      - Unit tests  · p315
+      - Implementation  · p320
+      - Putting the Future together  · p323
+    - Pipeline design pattern  · p324
+      - Description  · p324
+      - Objectives  · p324
+      - A concurrent multi-operation  · p324
+      - Acceptance criteria  · p324
+      - Beginning with tests  · p325
+      - Implementation  · p326
+        - The list generator  · p329
+        - Raising numbers to the power of 2  · p330
+        - Final reduce operation  · p330
+        - Launching the Pipeline pattern  · p331
+      - Final words on the Pipeline pattern  · p331
+    - Summary  · p333
+  - 10. Concurrency Patterns - Workers Pool and Publish/Subscriber Design Patterns  · p334
+    - Workers pool  · p334
+      - Description  · p334
+      - Objectives  · p334
+      - A pool of pipelines  · p334
+      - Acceptance criteria  · p335
+      - Implementation  · p335
+        - The dispatcher  · p336
+        - The pipeline  · p338
+      - An app using the workers pool  · p341
+      - No tests?  · p343
+      - Wrapping up the Worker pool  · p345
+    - Concurrent Publish/Subscriber design pattern  · p346
+      - Description  · p346
+      - Objectives  · p346
+      - Example - a concurrent notifier  · p347
+      - Acceptance criteria  · p347
+      - Unit test  · p348
+        - Testing subscriber  · p348
+        - Testing publisher  · p351
+      - Implementation  · p355
+        - Implementing the publisher  · p357
+        - Handling channels without race conditions  · p358
+      - A few words on the concurrent Observer pattern  · p360
+    - Summary  · p361

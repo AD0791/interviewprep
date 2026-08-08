@@ -1,0 +1,52 @@
+# TOC — dokumen.pub_java-spring-boot-3-books-in-1-quotfrom-beginner-to-pro-a-comprehensive-guide-to-modern-java-developmentquot.epub
+
+*Extracted by `_tools/extract_toc.py` (epub-ncx). 48 entries. Machine-generated — do not hand-edit.*
+
+- Introduction
+- Chapter One: Getting Started with Spring Boot
+- Chapter Two: Spring Boot Configuration
+- Chapter Three: Building RESTful Web Services
+- Chapter Four: Data Access with Spring Boot
+- Chapter Five: Security in Spring Boot
+- Chapter Six: Testing in Spring Boot
+- Chapter Seven: Working with Microservices
+- Chapter Eight: Spring Boot with Cloud Services
+- Chapter Nine: Advanced Spring Boot Features
+- Chapter Ten: Deployment Strategies
+- Chapter Eleven: Building a Full-Stack Application
+- Chapter Twelve: Best Practices and Common Pitfalls
+- Chapter Thirteen: Case Studies and Real-World Applications
+- Conclusion
+- Introduction
+- Chapter One: Advanced Configuration Techniques
+- Chapter Two: Sophisticated RESTful Services
+- Chapter Three: Enhanced Data Handling
+- Chapter Four: Asynchronous Programming and Event-Driven Architecture
+- Chapter Five: Advanced Security Configurations
+- Chapter Six: Comprehensive Testing Strategies
+- Chapter Seven: Microservices Deep Dive
+- Chapter Eight: Cloud-Native Development with Spring Boot
+- Chapter Nine: Reactive Programming with Spring Boot
+- Chapter Ten: Full-Stack Development Enhanced
+- Chapter Eleven: DevOps and Spring Boot
+- Chapter Twelve: Performance Optimization and Scaling
+- Chapter Thirteen: Architectural Best Practices
+- Chapter Fourteen: Specialized Spring Boot Applications
+- Conclusion
+- Introduction
+- Chapter One: Advanced Architectural Concepts
+- Chapter Two: Complex Configuration Management
+- Chapter Three: Advanced Messaging and Integration Patterns
+- Chapter Four: High-Performance Computing with Spring Boot
+- Chapter Five: Securing Enterprise Applications
+- Chapter Six: Advanced Testing Techniques
+- Chapter Seven: Scalability and Resilience in Distributed Systems
+- Chapter Eight: Advanced Data Management Strategies
+- Chapter Nine: Cloud-Native Applications at Scale
+- Chapter Ten: Building AI-Enabled Applications
+- Chapter Eleven: Advanced Frontend Integration
+- Chapter Twelve: DevOps and Automation for Spring Boot
+- Chapter Thirteen: Quality Assurance and Code Excellence
+- Chapter Fourteen: Emerging Trends and Future of Spring Boot
+- Chapter Fifteen: Case Studies of Enterprise Applications
+- Conclusion

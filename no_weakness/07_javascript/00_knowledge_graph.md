@@ -3,7 +3,7 @@
 *The language runtime — scope, closures, the object model, and the event loop — extended into
 React 19 as the framework this repo's fullstack track builds against.*
 
-**Nodes:** 20 · **Books:** 3 · **Currency researched:** 2026-08-06
+**Nodes:** 22 · **Books:** 4 · **Currency researched:** 2026-08-06, extended 2026-08-08
 **Requires:** none — this is a root topic
 **Feeds:** [`08_typescript`](../08_typescript/00_knowledge_graph.md)
 
@@ -16,6 +16,7 @@ React 19 as the framework this repo's fullstack track builds against.*
 | Simpson, *You Don't Know JS Yet: Get Started*, 2nd ed. | 2020 | The language survey: values, variables, functions, comparisons, iteration, closures, `this`, prototypes, and the three "pillars" (scope/closures, prototypes, types/coercion) | The right entry point and still accurate on mechanism — hoisting, coercion, prototypal delegation have not changed — but its feature inventory stops at ES2019. Six ECMAScript editions have shipped since |
 | Simpson, *You Don't Know JS Yet: Scope & Closures*, 2nd ed. | 2020 | Compile-time versus runtime, lexical scope, the scope chain, shadowing, global scope, hoisting and the TDZ, block scoping, closures and their GC lifecycle, the module pattern (CommonJS and ESM) | The deepest source on this shelf for scope mechanics and closures; the compiler/scope-manager teaching model is engine-agnostic and has not dated. Its ESM chapter predates several years of Node module-resolution changes |
 | Wieruch, *The Road to React: The React.js 19 with Hooks in JavaScript Book*, 2025 ed. | 2025 | Components, JSX, props/state, hooks (state, effect, custom, advanced/reducer), controlled components, conditional rendering, data fetching and re-fetching, forms and Actions, styling approaches, performance, TypeScript in React, testing, project structure, deployment | The freshest book in the whole repo and genuinely React-19-branded — it already teaches Vite over the deprecated Create React App and covers Actions-based forms. Its performance chapter (last updated January 2025) necessarily predates the React Compiler's October 2025 stable release |
+| Wilson, *Software Design by Example* (JavaScript edition) | 2026 | Twenty-one chapters that each build a small working version of a tool: directory listing and callbacks, promises reconstructed from first principles, a unit-test framework, a file-backup system, data tables measured row-wise against column-wise, a pattern matcher, an expression parser, a page templater, a build manager, a layout engine, a file interpolator, a module loader, a style checker over the AST, a code generator, a documentation generator, a module bundler, a package manager, a register virtual machine, and a tracing debugger | Open-licensed, continuously revised, and its most recent commit at the time of this pass is dated 2026-05-31 — the only source here that is not a fixed printed edition. Unlike its Python twin, every chapter is complete prose; none is a stub. Its decisive contribution to this graph is the asynchronous-programming chapter, which builds promises from scratch and is the dedicated treatment `JS-12` previously recorded as missing from the shelf. Read it for how a mechanism works, not for what V8 does: the promises it builds are a teaching model, not the specification's job queue |
 
 ---
 
@@ -43,6 +44,8 @@ React 19 as the framework this repo's fullstack track builds against.*
 | `JS-18` | Forms, Actions, and optimistic UI in React 19 | Mechanism | L4 | `current` |
 | `JS-19` | React performance: manual memoization versus the compiler | Mechanism | L5 | `stale-major` |
 | `JS-20` | Testing and deploying a React application | Practice | L3 | `current` |
+| `JS-21` | The abstract syntax tree as a program-analysis surface | Mechanism | L4 | `stale-minor` |
+| `JS-22` | Building a virtual machine and a tracing debugger | Mechanism | L5 | `current` |
 
 ---
 
@@ -88,6 +91,15 @@ graph LR
     JS18["18 forms & Actions"] --> JS17
     JS19["19 performance & compiler"] --> JS16
     JS20["20 testing & deploying"] --> JS15
+```
+
+### Programs as data
+
+```mermaid
+graph LR
+    JS21["21 the AST"] --> JS03d["03 compilation & lexical scope"]
+    JS22["22 virtual machine & debugger"] --> JS03d
+    JS21 --> JS13d["13 modules & bundling"]
 ```
 
 ---
@@ -147,15 +159,15 @@ graph LR
 
 ### `JS-08` · The module pattern: closures, CommonJS, and ESM
 **Type:** Mechanism · **Depth:** L4
-**Covers:** encapsulation via closure before any module syntax existed, the classic revealing-module pattern, Node's CommonJS `require`/`module.exports` as synchronous value-copying, ES modules as statically analysable with live bindings, why circular imports behave differently under each system
-**Sources:** Simpson, *Scope & Closures* ch.8 (2020)
+**Covers:** encapsulation via closure before any module syntax existed, the classic revealing-module pattern, Node's CommonJS `require`/`module.exports` as synchronous value-copying, ES modules as statically analysable with live bindings, why circular imports behave differently under each system, namespaces built from a function scope, and what a loader must do to let one module load another
+**Sources:** Simpson, *Scope & Closures* ch.8 (2020) · Wilson, *Software Design by Example* ch."Module Loader" (2026) — a working `require` built from `eval` and a cache, including the circular-dependency case
 **Edges:** `requires` [`JS-07`]
 **Currency:** `current`
 
 ### `JS-09` · Functions as values: declarations, expressions, and arrow forms
 **Type:** Mechanism · **Depth:** L3
-**Covers:** function declaration versus function expression and hoisting differences between them, default and rest parameters, IIFEs, named versus anonymous function expressions, arrow-function syntax forms, generator-function syntax as a form (protocol semantics live on `JS-11`)
-**Sources:** Simpson, *Get Started* ch.2 §"Functions" (2020)
+**Covers:** function declaration versus function expression and hoisting differences between them, default and rest parameters, IIFEs, named versus anonymous function expressions, arrow-function syntax forms, generator-function syntax as a form (protocol semantics live on `JS-11`), functions passed as callbacks and why an anonymous function is the usual shape at a call site
+**Sources:** Simpson, *Get Started* ch.2 §"Functions" (2020) · Wilson, *Software Design by Example* ch."Systems Programming" §§"What is a callback function?", "What are anonymous functions?" (2026)
 **Edges:** `requires` [`JS-01`]
 **Currency:** `current`
 
@@ -179,14 +191,14 @@ graph LR
 **Article:** [03_the_event_loop_microtasks_and_async.md](03_the_event_loop_microtasks_and_async.md)
 **Type:** Mechanism · **Depth:** L5
 **Covers:** the call stack, macrotask queue, and microtask queue; `process.nextTick`'s separate higher-priority queue; the promise state machine and what `.then` actually schedules; `async`/`await` desugared to promise scheduling; unhandled-rejection handling per environment; sequential `await` versus `Promise.all`/`allSettled` and bounded concurrency; `AbortController`
-**Sources:** WHATWG HTML §8.1 (event loop processing model) · Node.js event-loop and `libuv` documentation — none of the three surveyed JavaScript books treats this mechanism as a dedicated chapter; see §6
+**Sources:** WHATWG HTML §8.1 (event loop processing model) · Node.js event-loop and `libuv` documentation · Wilson, *Software Design by Example* ch."Asynchronous Programming" (2026) — the one dedicated chapter on this shelf, which reconstructs the promise state machine from callbacks upward before reaching `async`/`await`
 **Edges:** `requires` [`JS-07`, `JS-09`] · `contrasts` [`CONC-04`]
 **Currency:** `current`
 
 ### `JS-13` · Module systems and the bundling/resolution boundary
 **Type:** Mechanism · **Depth:** L4
-**Covers:** tree shaking and the `"sideEffects": false` contract, dynamic `import()`, Node module resolution and the `exports` map as an encapsulation boundary, the dual-package hazard, what a bundler does structurally, source maps
-**Sources:** Simpson, *Scope & Closures* ch.8 (2020)
+**Covers:** tree shaking and the `"sideEffects": false` contract, dynamic `import()`, Node module resolution and the `exports` map as an encapsulation boundary, the dual-package hazard, what a bundler does structurally — finding the dependency graph, combining files without name collisions, rewriting cross-file access — source maps, file interpolation as the crude ancestor of bundling, semantic versioning and dependency resolution as a constraint-satisfaction problem
+**Sources:** Simpson, *Scope & Closures* ch.8 (2020) · Wilson, *Software Design by Example* ch."Module Bundler", ch."Package Manager", ch."File Interpolator" (2026)
 **Edges:** `requires` [`JS-08`]
 **Currency:** `stale-minor`
 **Δ current:** The book's CommonJS/ESM semantics are unchanged, but the import-time metadata syntax around modules has moved: import assertions (the `assert { type: "json" }` clause, TC39 stage 3 circa 2021) were superseded by import attributes (the `with { type: "json" }` clause), which reached TC39 stage 4 and shipped in Node starting at v20.10/v21 with `assert` deprecated in favour of `with`. Neither syntax existed when the book was written. An article should teach `with`, not `assert`.
@@ -202,7 +214,7 @@ graph LR
 ### `JS-15` · The React component model: JSX, rendering, and composition
 **Type:** Model · **Depth:** L4
 **Covers:** JSX as syntax sugar over `React.createElement`, function components, props and children, lists and the `key` prop, controlled components, fragments, reusable components and composition, imperative escape hatches (refs)
-**Sources:** Wieruch, *Road to React* §"Fundamentals of React" (2025)
+**Sources:** Wieruch, *Road to React* §"Fundamentals of React" (2025) · Wilson, *Software Design by Example* ch."Page Templates" (2026) — a template engine that walks a DOM with an environment stack, which is the machinery a JSX runtime hides
 **Edges:** `requires` [`JS-09`, `JS-02`]
 **Currency:** `current`
 
@@ -238,9 +250,24 @@ graph LR
 
 ### `JS-20` · Testing and deploying a React application
 **Type:** Practice · **Depth:** L3
-**Covers:** component testing strategy, project structure for a growing codebase, the production build step, static hosting deployment
-**Sources:** Wieruch, *Road to React* §"Testing in React", §"React Project Structure", §"Deploying a React Application" (2025)
+**Covers:** component testing strategy, project structure for a growing codebase, the production build step, static hosting deployment, what a test framework does underneath — registration, execution and reporting as three separable concerns
+**Sources:** Wieruch, *Road to React* §"Testing in React", §"React Project Structure", §"Deploying a React Application" (2025) · Wilson, *Software Design by Example* ch."Unit Testing" (2026)
 **Edges:** `requires` [`JS-15`]
+**Currency:** `current`
+
+### `JS-21` · The abstract syntax tree as a program-analysis surface
+**Type:** Mechanism · **Depth:** L4
+**Covers:** parsing source to an ESTree-shaped AST with Acorn, walking that tree with a visitor and why traversal and action are separated, writing a check that finds what a regular expression cannot, transforming the tree and regenerating source, instrumenting a function by replacing it with a wrapper that counts or times calls, extracting documentation comments and matching them to the declarations they describe, the boundary where static analysis stops and running the program starts
+**Sources:** Wilson, *Software Design by Example* ch."Style Checker", ch."Code Generator", ch."Documentation Generator" (2026)
+**Edges:** `requires` [`JS-03`, `JS-13`] · `contrasts` [`JS-22`]
+**Currency:** `stale-minor`
+**Δ current:** The ESTree shape and the Acorn parser the chapters build on are unchanged, and the visitor mechanism they teach is exactly what every JavaScript analysis tool still does internally. Two things around it moved. ESLint v9.0.0 (April 2024) made flat `eslint.config.js` the default configuration format and deprecated `.eslintrc.*`, so a plugin written against the older configuration model no longer loads without setting `ESLINT_USE_FLAT_CONFIG=false`. More significantly, the tools most projects now run are not written in JavaScript at all: Biome and Oxc reimplement parsing and linting in Rust, and Biome specifically produces a concrete syntax tree rather than an abstract one because it also formats. An article should teach the AST as the way to understand and extend analysis, and state plainly that a production linter's speed comes from not being a JavaScript program.
+
+### `JS-22` · Building a virtual machine and a tracing debugger
+**Type:** Mechanism · **Depth:** L5
+**Covers:** designing an instruction set, assembling symbolic instructions into numbers, the fetch-decode-execute loop, registers as the machine's storage against a stack, addressing memory and storing arrays, what a debugger has to intercept to single-step, breakpoints as a filter on the instruction stream, an interactive read-eval-print loop over a paused machine, and how to test an interactive tool by scripting its input and capturing its output
+**Sources:** Wilson, *Software Design by Example* ch."Virtual Machine", ch."Debugger", ch."Parsing Expressions" (2026)
+**Edges:** `requires` [`JS-03`] · `contrasts` [`JS-21`]
 **Currency:** `current`
 
 ---
@@ -278,5 +305,29 @@ node should verify against the book text directly before treating the chapter as
 Angular is out of scope for this file entirely — it belongs to whichever subject eventually covers
 component-framework alternatives to React, which does not yet exist in this repo. `JS-19`'s "TypeScript
 in React" TOC entry and any Angular-specific material in the source books are left uncited here.
+
+**One gap recorded in an earlier pass has since closed.** `JS-12` previously carried the note that no
+book on this shelf treated the event loop as a dedicated chapter, and cited only the WHATWG and Node
+documentation. *Software Design by Example*'s "Asynchronous Programming" chapter is that treatment: it
+starts from callbacks, reconstructs the promise state machine, chains operations, and only then
+reaches `async`/`await`, which is the same build-up order a module on that node needs. It is now cited
+there. Two limits are worth stating rather than discovering later. The chapter builds a teaching model
+of a promise, not the specification's job queue, so the microtask-versus-macrotask ordering and
+`process.nextTick`'s separate higher-priority queue still have to come from the WHATWG and Node
+documentation. And it says nothing about `AbortController` or unhandled-rejection handling, both of
+which remain on `JS-12`'s `Covers` line on the strength of the specifications alone.
+
+**Seven of the twenty-one chapters in the JavaScript edition are deliberately uncited**, and each has
+a home elsewhere rather than a gap here. "File Backup" and "Pattern Matching" are algorithm and
+file-format work. "Build Manager" is a topological sort over a dependency graph, which is `DSA-10`
+material written in JavaScript. "Data Tables" measures row-wise against column-wise storage, which is
+a memory-layout question this subject has no node for and `09_sql`'s storage material covers properly.
+"Layout Engine" builds a box model with sizing, positioning, rendering and wrapping — genuinely
+interesting, and genuinely browser-rendering rather than language, so it belongs under `COMP-15`, the
+node `JS-01` already `composes`. Adding a layout node here was considered and rejected on that ground:
+the subject is the language runtime extended into React, and a node whose real prerequisite sits in
+another subject would be misfiled. "Systems Programming" is cited on `JS-09` for its callback sections
+only; its directory-traversal and file-copying material is Node standard-library usage rather than
+language mechanism. "Conclusion" is a hundred-and-thirty-word closing note with no technical content.
 
 ← [repo index](../README.md) · [root graph](../KNOWLEDGE_GRAPH.md) · [writing contract](../AGENTS.md)

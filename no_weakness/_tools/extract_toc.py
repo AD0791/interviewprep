@@ -1,14 +1,17 @@
 #!/usr/bin/env python3
 """Extract a table of contents from every book in no_weakness/ into <subject>/_toc/.
 
-Two paths:
+Three paths:
 
-  1. Embedded PDF outlines via pypdf. Works for 40 of the 53 books and gives
+  1. Embedded PDF outlines via pypdf. Works for 40 of the 53 PDFs and gives
      nesting plus destination pages for free.
   2. A text scrape via `pdftotext` for the rest. Front-matter page ranges differ
      per book, so FALLBACK carries a hand-tuned range and pattern flavour for
      each one. Anything that still yields nothing is reported, never written as
      an empty file.
+  3. The EPUB navigation document, read out of the container with stdlib
+     `zipfile` and `xml.etree`. An EPUB already ships the structure the two PDF
+     paths have to reconstruct, so no new dependency is warranted.
 
 Run:  uv run --with pypdf python _tools/extract_toc.py [--report] [--only SUBSTR]
 """
@@ -19,6 +22,8 @@ import argparse
 import re
 import subprocess
 import sys
+import xml.etree.ElementTree as ET
+import zipfile
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -57,6 +62,7 @@ FALLBACK: dict[str, tuple[int, int, str]] = {
     "03_dsa/Dynamic Programming - A Computational Tool.pdf": (5, 16, "loose"),
     "21_dataengineering/2.pdf": (1, 11, "slides"),
     "18_eventbus/celeryproject-readthedocs-io-zh-cn-latest.pdf": (1, 20, "loose"),
+    "25_Java/O'Reilly Java Threads (2nd Edition).pdf": (3, 4, "columnar"),
 }
 
 MIN_OUTLINE = 15  # below this, an embedded outline is treated as absent
@@ -103,7 +109,7 @@ class Result:
 
 
 def slugify(name: str) -> str:
-    s = name.lower().removesuffix(".pdf")
+    s = name.lower().removesuffix(".pdf").removesuffix(".epub")
     s = re.sub(r"[^a-z0-9]+", "-", s).strip("-")
     return s[:70].rstrip("-")
 
@@ -192,8 +198,15 @@ RE_BODY_HEADING = re.compile(r"^\s{0,12}(\d{1,2}(?:\.\d{1,2}){1,2})\s+([A-Z].{3,
 
 
 def scrape_columnar(pdf: Path, first: int, last: int) -> Result:
-    """Printed contents pages where indentation carries the level."""
-    res = Result(pdf, f"columnar[{first}-{last}]")
+    """Printed contents pages where indentation carries the level.
+
+    Some columnar TOCs print a page number only on the chapter-level line and
+    leave sub-entries unnumbered, which makes the true entry count a handful
+    of chapters rather than MIN_OUTLINE's default floor. `span` mirrors
+    `scrape_slides`'s 80%-of-pages fallback so a thin-but-complete two-page
+    contents spread is not reported as a failed extraction.
+    """
+    res = Result(pdf, f"columnar[{first}-{last}]", span=last - first + 1)
     text = pdftotext(pdf, first, last)
     if not text.strip():
         res.note = "pdftotext produced no text (scanned images?)"
@@ -322,6 +335,130 @@ def scrape(pdf: Path, first: int, last: int, flavour: str) -> Result:
 
 
 # --------------------------------------------------------------------------
+# path 3: EPUB navigation document
+# --------------------------------------------------------------------------
+
+# Every element in an NCX or an XHTML nav document carries a namespace, and
+# which one differs by producer — calibre writes the default DAISY namespace,
+# Packt's toolchain writes it under an `ncx:` prefix. ElementTree reports both
+# as `{uri}tag`, so matching on the local name is the only portable test.
+RE_LOCAL_TAG = re.compile(r"\{[^}]*\}")
+
+# EPUB 3 replaced the NCX with an XHTML `nav` document; both spellings of the
+# filename are in circulation.
+NAV_NAMES = ("toc.xhtml", "toc.html", "nav.xhtml", "nav.html")
+
+# An NCX that carries only the front matter and a handful of part dividers is
+# worse than the nav document sitting beside it. Below this, try the fallback.
+MIN_NCX = 12
+
+
+def local_name(tag: str) -> str:
+    return RE_LOCAL_TAG.sub("", tag)
+
+
+def epub_member(z: zipfile.ZipFile, suffixes: tuple[str, ...]) -> str | None:
+    """Find a navigation member anywhere in the container.
+
+    The OPF may place the navigation document in any directory, so the archive
+    is searched by suffix rather than by an assumed path. Shallower paths win,
+    which puts a real `OEBPS/toc.ncx` ahead of a stray copy in a subfolder.
+    """
+    hits = [n for n in z.namelist() if n.lower().endswith(suffixes)]
+    return min(hits, key=lambda n: (n.count("/"), len(n))) if hits else None
+
+
+def from_ncx(z: zipfile.ZipFile, member: str) -> list[Entry]:
+    """Walk the NCX navMap. `navPoint` nesting is the depth, `navLabel/text`
+    the title. Pages are meaningless in a reflowable EPUB, so none are set."""
+    entries: list[Entry] = []
+
+    def walk(el: ET.Element, depth: int) -> None:
+        for child in el:
+            if local_name(child.tag) != "navPoint":
+                walk(child, depth)  # navMap, or a producer's wrapper element
+                continue
+            title = ""
+            for sub in child.iter():
+                if local_name(sub.tag) == "text" and (sub.text or "").strip():
+                    title = clean_title(sub.text or "")
+                    break
+            if title:
+                entries.append(Entry(depth, title))
+            walk(child, depth + 1)
+
+    walk(ET.fromstring(z.read(member)), 0)
+    return entries
+
+
+def from_nav_xhtml(z: zipfile.ZipFile, member: str) -> list[Entry]:
+    """Walk the EPUB 3 nav document's nested `<ol>`/`<li>` lists.
+
+    Depth is how many `<ol>` elements enclose the item; the title is the text
+    of the `<a>` (or `<span>`, for an unlinked heading) directly inside the
+    `<li>`, excluding the nested list underneath it.
+    """
+    entries: list[Entry] = []
+
+    def text_of(li: ET.Element) -> str:
+        for child in li:
+            if local_name(child.tag) in {"a", "span"}:
+                return clean_title("".join(child.itertext()))
+        return ""
+
+    def walk(el: ET.Element, depth: int) -> None:
+        for child in el:
+            tag = local_name(child.tag)
+            if tag == "ol":
+                walk(child, depth + 1)
+            elif tag == "li":
+                if title := text_of(child):
+                    entries.append(Entry(max(depth - 1, 0), title))
+                walk(child, depth)
+            else:
+                walk(child, depth)
+
+    walk(ET.fromstring(z.read(member)), 0)
+    return entries
+
+
+def from_epub(epub: Path) -> Result:
+    res = Result(epub, "epub")
+    try:
+        z = zipfile.ZipFile(epub)
+    except (zipfile.BadZipFile, OSError) as exc:
+        res.note = f"unreadable: {type(exc).__name__}"
+        return res
+
+    with z:
+        ncx = epub_member(z, (".ncx",))
+        nav = epub_member(z, NAV_NAMES)
+
+        if ncx:
+            try:
+                res.entries = from_ncx(z, ncx)
+                res.method = "epub-ncx"
+            except ET.ParseError as exc:
+                res.note = f"{ncx} unparsable: {exc}"
+
+        # A thin NCX is common in EPUB 3, where the nav document is the real
+        # table of contents and the NCX is a compatibility stub.
+        if len(res.entries) < MIN_NCX and nav:
+            try:
+                fallback = from_nav_xhtml(z, nav)
+            except ET.ParseError as exc:
+                res.note = res.note or f"{nav} unparsable: {exc}"
+            else:
+                if len(fallback) > len(res.entries):
+                    res.entries = fallback
+                    res.method = "epub-nav"
+
+    if not res.entries and not res.note:
+        res.note = "no toc.ncx or nav document in the container"
+    return res
+
+
+# --------------------------------------------------------------------------
 
 
 def render(res: Result) -> str:
@@ -342,14 +479,15 @@ def render(res: Result) -> str:
 
 def discover() -> list[Path]:
     books: list[Path] = []
-    for p in sorted(ROOT.rglob("*.pdf")):
-        rel = p.relative_to(ROOT)
-        if rel.parts[0] in EXCLUDE_DIRS or p.name in EXCLUDE:
-            continue
-        if len(rel.parts) == 1:  # root-level PDF that is not a subject book
-            continue
-        books.append(p)
-    return books
+    for pattern in ("*.pdf", "*.epub"):
+        for p in ROOT.rglob(pattern):
+            rel = p.relative_to(ROOT)
+            if rel.parts[0] in EXCLUDE_DIRS or p.name in EXCLUDE:
+                continue
+            if len(rel.parts) == 1:  # root-level book that is not subject material
+                continue
+            books.append(p)
+    return sorted(books)
 
 
 def main() -> int:
@@ -361,21 +499,25 @@ def main() -> int:
     books = [b for b in discover() if args.only in str(b)]
     results: list[Result] = []
 
-    for pdf in books:
-        rel = str(pdf.relative_to(ROOT))
-        if rel in FALLBACK:
+    for book in books:
+        rel = str(book.relative_to(ROOT))
+        if book.suffix.lower() == ".epub":
+            res = from_epub(book)
+            if not res.ok:
+                res.note = res.note or f"nav document had {len(res.entries)} entries"
+        elif rel in FALLBACK:
             first, last, flavour = FALLBACK[rel]
-            res = scrape(pdf, first, last, flavour)
+            res = scrape(book, first, last, flavour)
         else:
-            res = from_outline(pdf)
+            res = from_outline(book)
             if not res.ok:
                 res.note = res.note or f"outline had {len(res.entries)} entries"
 
         results.append(res)
         if res.ok:
-            out_dir = pdf.parent / "_toc"
+            out_dir = book.parent / "_toc"
             out_dir.mkdir(exist_ok=True)
-            (out_dir / f"{slugify(pdf.name)}.toc.md").write_text(
+            (out_dir / f"{slugify(book.name)}.toc.md").write_text(
                 render(res), encoding="utf-8"
             )
 

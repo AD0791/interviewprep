@@ -108,7 +108,7 @@ connection in your §6 coverage gaps as prose instead of inventing an ID.
 | `SH-18` | Server-side access control and per-account configuration |
 | `SH-19` | SSH threat model: what it prevents and what it does not |
 
-## `05_python` — 20 nodes
+## `05_python` — 24 nodes
 
 | ID | Node |
 |---|---|
@@ -132,6 +132,10 @@ connection in your §6 coverage gaps as prose instead of inventing an ID.
 | `PY-18` | Microservice decomposition and inter-service communication |
 | `PY-19` | Testing and deploying a Python web service |
 | `PY-20` | Structural pattern matching and the match statement |
+| `PY-21` | Building an interpreter and a virtual machine in Python |
+| `PY-22` | Object persistence and binary serialisation |
+| `PY-23` | The abstract syntax tree as a program-analysis surface |
+| `PY-24` | Tracing a running program: profilers, debuggers, and `sys.monitoring` |
 
 ## `06_concurrency` — 17 nodes
 
@@ -155,7 +159,7 @@ connection in your §6 coverage gaps as prose instead of inventing an ID.
 | `CONC-16` | Distributed task queues and message-driven architectures |
 | `CONC-17` | Concurrency at the data layer: MVCC, isolation, and the connection-pool ceiling |
 
-## `07_javascript` — 20 nodes
+## `07_javascript` — 22 nodes
 
 | ID | Node |
 |---|---|
@@ -179,6 +183,8 @@ connection in your §6 coverage gaps as prose instead of inventing an ID.
 | `JS-18` | Forms, Actions, and optimistic UI in React 19 |
 | `JS-19` | React performance: manual memoization versus the compiler |
 | `JS-20` | Testing and deploying a React application |
+| `JS-21` | The abstract syntax tree as a program-analysis surface |
+| `JS-22` | Building a virtual machine and a tracing debugger |
 
 ## `08_typescript` — 20 nodes
 
@@ -534,4 +540,82 @@ connection in your §6 coverage gaps as prose instead of inventing an ID.
 | `APPD-11` | Iteration: routing findings back into Define, Prototype, or Test |
 | `APPD-12` | Pairing interface code with design: the workbook's Swift/SwiftUI exercises |
 
-**413 nodes across 23 subjects.**
+## `24_golang` — 23 nodes
+
+| ID | Node |
+|---|---|
+| `GO-01` | Program structure, declarations, and control flow |
+| `GO-02` | Composite types and their memory layout |
+| `GO-03` | Pointers, value semantics, and the escape-analysis boundary |
+| `GO-04` | Functions, closures, `defer`, panic, and recover |
+| `GO-05` | Methods, interfaces, and implicit satisfaction |
+| `GO-06` | Generics: type parameters, constraints, and inference |
+| `GO-07` | Errors as values: sentinels, wrapping, and inspection |
+| `GO-08` | Goroutines and the runtime scheduler |
+| `GO-09` | Channels and `select`: CSP in practice |
+| `GO-10` | Shared-memory synchronisation and the Go memory model |
+| `GO-11` | Cancellation, deadlines, and context propagation |
+| `GO-12` | Concurrency patterns: pipelines, fan-in/fan-out, and bounded worker pools |
+| `GO-13` | Range-over-func iterators and the iterator protocol |
+| `GO-14` | Packages, modules, and the build toolchain |
+| `GO-15` | Testing, benchmarking, and profiling |
+| `GO-16` | Reflection, struct tags, and code generation |
+| `GO-17` | `unsafe`, cgo, and the C boundary |
+| `GO-18` | The garbage collector and memory-limit tuning |
+| `GO-19` | Streaming I/O and encoding: the `io` interfaces |
+| `GO-20` | Structured logging and runtime observability |
+| `GO-21` | Building HTTP services: `net/http`, routing, and middleware |
+| `GO-22` | System programming: processes, signals, and the Unix interface |
+| `GO-23` | Design patterns without inheritance |
+
+## `25_Java` — 23 nodes
+
+| ID | Node |
+|---|---|
+| `JAVA-01` | The Java object model: classes, interfaces, and the primitive/reference split |
+| `JAVA-02` | Generics and type erasure |
+| `JAVA-03` | The Collections Framework: `List`, `Set`, `Map`, and `Queue` implementations |
+| `JAVA-04` | Concurrent collections and the producer-consumer pattern |
+| `JAVA-05` | Threads and the classic `Thread`/`Runnable` API |
+| `JAVA-06` | Intrinsic locking, `wait`/`notify`, and the monitor pattern |
+| `JAVA-07` | Thread safety, visibility, and safe publication |
+| `JAVA-08` | The Java Memory Model and the happens-before relation |
+| `JAVA-09` | Liveness hazards: deadlock, livelock, and starvation |
+| `JAVA-10` | The Executor framework and thread-pool sizing |
+| `JAVA-11` | Explicit locks and the `AbstractQueuedSynchronizer` |
+| `JAVA-12` | Atomic variables and non-blocking (CAS-based) algorithms |
+| `JAVA-13` | Fork/join and structured parallel decomposition |
+| `JAVA-14` | Virtual threads and structured concurrency |
+| `JAVA-15` | Classloading and the linking model |
+| `JAVA-16` | The class file format and bytecode verification |
+| `JAVA-17` | The bytecode execution engine: frames, the operand stack, and method invocation |
+| `JAVA-18` | Garbage collection algorithms and collector selection |
+| `JAVA-19` | Heap and native memory tuning |
+| `JAVA-20` | JIT compilation, tiered compilation, and warm-up |
+| `JAVA-21` | JVM observability: JDK Flight Recorder and profiling tools |
+| `JAVA-22` | Database access performance: JDBC pooling and JPA tuning |
+| `JAVA-23` | Lambda expressions, method references, and the Streams API |
+
+## `26_spring` — 17 nodes
+
+| ID | Node |
+|---|---|
+| `SPRG-01` | The Spring IoC container: beans, the application context, and dependency injection |
+| `SPRG-02` | Spring Boot: auto-configuration, starters, and the executable JAR |
+| `SPRG-03` | Externalized configuration: properties, YAML, profiles, and `@ConfigurationProperties` |
+| `SPRG-04` | Aspect-oriented Spring: proxies, pointcuts, and advice |
+| `SPRG-05` | Data access: `JdbcTemplate`, Spring Data repositories, and the DAO pattern |
+| `SPRG-06` | Transaction management: declarative `@Transactional` and propagation |
+| `SPRG-07` | Spring MVC: the `DispatcherServlet`, controllers, and view resolution |
+| `SPRG-08` | Building REST clients: `RestTemplate`, `WebClient`, `RestClient`, and HTTP-interface proxies |
+| `SPRG-09` | Spring Security: the filter chain and authentication configuration |
+| `SPRG-10` | Authorization: roles, method security, and expression-based access control |
+| `SPRG-11` | Token-based authentication: JWT/JWS issuing and verification |
+| `SPRG-12` | Enabling TLS and HTTPS in an embedded servlet container |
+| `SPRG-13` | Container-based integration testing: Testcontainers and Docker Compose |
+| `SPRG-14` | Testing a Spring application: JUnit, Mockito, and the Spring test context |
+| `SPRG-15` | Migrating a Spring Boot application across major versions |
+| `SPRG-16` | Enterprise messaging: JMS templates and message-driven POJOs |
+| `SPRG-17` | Legacy RPC remoting: RMI, Hessian/Burlap, and `HttpInvoker` |
+
+**482 nodes across 26 subjects.**

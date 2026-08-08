@@ -1,10 +1,10 @@
 # MEASUREMENTS
 
-*Every number quoted anywhere in this repo, with its provenance. If a figure appears in a module and not here, it does not get spoken in an interview.*
+*Every number quoted anywhere in this repo, with its provenance. A figure that appears in a module and not here has no provenance and may not stand.*
 
-This file exists because the measured claims are what make these modules worth more than the documentation they compete with. A number with a command and an environment behind it is the strongest thing a candidate can bring into a technical interview. A number without them is a liability, because the follow-up question — *"how did you measure that?"* — is the one that exposes it.
+This file exists because the measured claims are what make these modules worth more than the documentation they compete with. A number with a command and an environment behind it can be checked and re-derived by the reader. A number without them cannot, and letting the second borrow the authority of the first would undermine every claim that is real.
 
-Read the tag before quoting anything. The rules are in [`AGENTS.md` §7](AGENTS.md).
+Read the tag before quoting anything. The rules are in [`_tools/MEASUREMENT_SPEC.md`](_tools/MEASUREMENT_SPEC.md); the principle behind them is [`AGENTS.md` §5](AGENTS.md).
 
 ---
 
@@ -32,19 +32,21 @@ SQLite (version not recorded)
 
 `ENV-A` and `ENV-B` differ in three ways that change results rather than merely shifting them. The core count doubled, which changes the shape of every process-pool scaling claim. CPython's specialising adaptive interpreter landed in 3.11, so bytecode-level timings from 3.10 do not transfer. And the Node version went *down*, from 22 to 20, so anything depending on a v22 default needs rechecking.
 
-**Consequence:** every `ENV-B` row is tagged `measured-stale-env`. Those figures may be quoted only with the original environment named — *"on a four-core machine running 3.10 I measured…"*. Rows marked **re-run priority** are the ones worth re-measuring on `ENV-A` before they are spoken.
+**Consequence:** every `ENV-B` row is tagged `measured-stale-env`. Those figures may appear only with the original environment named in the same sentence, never bare. Rows marked **re-run priority** are the ones worth re-measuring on `ENV-A` before a module relies on them.
+
+`ENV-B` no longer exists and the modules that produced its figures have been removed from this repository, so no `ENV-B` row can be re-derived from a source file. Each row below carries its own date and setup for exactly that reason. Re-measuring on `ENV-A` is the only way to upgrade one.
 
 ---
 
 ## Tags
 
-| Tag | Meaning | How it may be spoken |
+| Tag | Meaning | How it may be written |
 |---|---|---|
-| `measured` | Came out of a terminal on `ENV-A`, command recorded below | *"I measured this."* |
-| `measured-stale-env` | Real measurement, but on `ENV-B` | *"On a four-core 3.10 machine I measured…"* — never bare |
-| `reproduced-small` | Mechanism correct, magnitude does not transfer | *"I reproduced the behaviour locally; the numbers wouldn't transfer."* Never quote the magnitude |
-| `documented` | From vendor documentation, no measurement | *"The way it works is…"* — **never** *"I measured"* |
-| `pending` | Claimed in a syllabus, not yet measured | Not quotable at all |
+| `measured` | Came out of a terminal on `ENV-A`, command recorded below | Stated plainly, with the figure |
+| `measured-stale-env` | Real measurement, but on `ENV-B` | Only with that environment named in the same sentence — never bare |
+| `reproduced-small` | Mechanism correct, magnitude does not transfer | Describe the behaviour; never quote the magnitude |
+| `documented` | From vendor documentation, no measurement | Attributed to the documentation at the point of use — **never** written as measured |
+| `pending` | Identified as measurable, not yet measured | Not quotable at all |
 
 ---
 
@@ -205,7 +207,7 @@ Source: [`06_concurrency/02_threads_races_and_synchronisation.md`](06_concurrenc
 | `CONC-THR-04` | `queue.Queue(maxsize=10)` reports `full=True` after 10 puts, so `put` blocks — **back-pressure**, the property hand-rolled pipelines lack | `t2_lockcost.py` | `measured` |
 | `CONC-THR-05` | `Lock` tracks **no owner**: a thread that never acquired it released it **silently** and the lock became free. `RLock` raises `RuntimeError: cannot release un-acquired lock` | `t3_release.py` | `measured` |
 
-`CONC-THR-02` is the module's strongest artefact — a deadlock is usually described rather than demonstrated, and having reproduced *and fixed* one is a materially different interview signal.
+`CONC-THR-02` is the module's strongest artefact. A deadlock is usually described rather than demonstrated, because reproducing one on demand requires forcing a lock-ordering inversion that real code hits only intermittently; having both reproduced and fixed it is what lets the module show the cycle rather than assert it.
 
 ## Concurrency — multiprocessing and the process boundary
 
@@ -242,7 +244,9 @@ Source: [`06_concurrency/04_asyncio_internals.md`](06_concurrency/04_asyncio_int
 
 ## Python — async execution model
 
-Source: `_archive/2026-08_v1/05_python/01_async_execution_model.md`, measured 2026-08-03.
+Measured 2026-08-03 on `ENV-B`, against a FastAPI 0.141.1 service under uvicorn plus a CPU-bound
+and an I/O-bound synthetic job. Originating module removed with the v1 archive; this table is the
+only surviving record.
 
 | ID | Claim | Environment | Tag |
 |---|---|---|---|
@@ -252,11 +256,13 @@ Source: `_archive/2026-08_v1/05_python/01_async_execution_model.md`, measured 20
 | `PY-ASYNC-04` | `asyncio.run(..., debug=True)` warns above `slow_callback_duration`, default **100ms** | — | `documented` |
 | `PY-ASYNC-05` | A `create_task` reference held only by the event loop could not be made to fail on demand: five unreferenced tasks plus a forced `gc.collect()` all completed normally | ENV-B | `measured-stale-env` — a **negative result**, and the honest framing is that the failure is nondeterministic, not absent |
 
-`PY-ASYNC-02` is the single most valuable figure in the archive. It is counterintuitive, it is memorable, and it directly answers "tell me about a time you found something surprising." It should be re-measured on `ENV-A` in Phase 2 before it is used.
+`PY-ASYNC-02` is the counterintuitive result in this table: a plain `def` endpoint ran ten times faster than an `async def` one executing identical code, because Starlette offloads the former to a thread pool while the latter blocks the loop. `CONC-ASY-03` measures the same underlying cause on `ENV-A`, but the endpoint comparison itself has not been re-run and the figure stays four-core until it is.
 
 ## Python — threads and processes
 
-Source: `_archive/2026-08_v1/05_python/02_concurrency_threads_processes.md`, measured 2026-08-03.
+Measured 2026-08-03 on `ENV-B`, against synthetic I/O-bound and CPU-bound workloads plus `dis`
+output for the bytecode claim. Originating module removed with the v1 archive; this table is the
+only surviving record.
 
 | ID | Claim | Environment | Tag |
 |---|---|---|---|
@@ -270,11 +276,14 @@ Source: `_archive/2026-08_v1/05_python/02_concurrency_threads_processes.md`, mea
 | `PY-CONC-08` | A lambda passed across a process boundary raises `PicklingError` | ENV-B | `measured-stale-env` |
 | `PY-CONC-09` | NumPy, Polars and DuckDB release the GIL around their C loops — vectorise before you parallelise | — | `documented` |
 
-`PY-CONC-04` and `PY-CONC-05` together are the best answer available to "is Python thread-safe?" — the pair shows the race is real *and* rare. On a free-threaded build (`3.14t`, not yet installed) the tight loop should lose updates with no switch-interval manipulation at all. **That contrast, measured personally, would be a top-percentile answer and no candidate has it.** It is the single highest-value new measurement available.
+`PY-CONC-04` and `PY-CONC-05` belong together, because the pair is what makes the mechanism legible: the read-modify-write race is real *and* rare, and rarity is what makes it dangerous rather than safe. On a free-threaded build (`3.14t`, not yet installed) the tight loop should lose updates with no switch-interval manipulation at all, which would isolate the GIL as the only thing suppressing the race. That contrast is the highest-value measurement not yet taken.
 
 ## SQL — indexes and the query planner
 
-Source: `_archive/2026-08_v1/02_sql/01_indexes_and_the_query_planner.md`, measured 2026-08-03 against SQLite on a synthetic 200,000-account / 1,000,000-transaction schema.
+Measured 2026-08-03 on `ENV-B` against SQLite (version not recorded), on a synthetic
+200,000-account / 1,000,000-transaction schema. Originating module removed with the v1 archive;
+this table is the only surviving record. Superseded in full by the `ENV-A` run at the top of this
+file, which used a documented dataset and a controlled shape comparison.
 
 | ID | Claim | Environment | Tag |
 |---|---|---|---|
@@ -286,11 +295,13 @@ Source: `_archive/2026-08_v1/02_sql/01_indexes_and_the_query_planner.md`, measur
 | `SQL-IDX-06` | Correlated subquery **10.4 ms** versus single join with `GROUP BY` **17.2 ms** — the subquery won, which contradicts the folk wisdom | ENV-B, SQLite | `measured-stale-env` |
 | `SQL-IDX-07` | `COUNT(*)` **1,000,000** · `COUNT(col)` **900,000** (skips NULLs) · `COUNT(DISTINCT col)` **198,662** | ENV-B, SQLite | `measured-stale-env` |
 
-`SQL-IDX-05` and `SQL-IDX-06` are a matched pair and should always be quoted together: the subquery beat the join, *and* both were irrelevant next to the index. The lesson is that developers argue about query shape while the planner is starved of the one thing that matters. Re-running on Postgres upgrades this from a SQLite curiosity to something an interviewer will recognise.
+`SQL-IDX-05` and `SQL-IDX-06` are a matched pair and belong together wherever either appears: the subquery beat the join, *and* both differences were irrelevant next to the presence of the index. The mechanism that makes this true is that query shape reorders work the planner was going to do anyway, while an index changes the asymptotic amount of work available to reorder. Re-running on Postgres with `EXPLAIN (ANALYZE, BUFFERS)` would generalise it beyond SQLite's planner.
 
 ## JavaScript — the event loop
 
-Source: `_archive/2026-08_v1/03_js_ts/01_event_loop_and_microtasks.md`, measured 2026-08-03 on Node v22.22.3, 4 cores.
+Measured 2026-08-03 on `ENV-B`, Node v22.22.3, 4 cores. Originating module removed with the v1
+archive; this table is the only surviving record. Note that `ENV-A` runs Node v20, so this is the
+one table whose environment is *newer* than the current machine.
 
 | ID | Claim | Environment | Tag |
 |---|---|---|---|
@@ -302,11 +313,14 @@ Source: `_archive/2026-08_v1/03_js_ts/01_event_loop_and_microtasks.md`, measured
 | `JS-LOOP-06` | Closures capture bindings, not values: a `var` loop logs **3 3 3**, a `let` loop logs **0 1 2** | Language-invariant | `measured` |
 | `JS-LOOP-07` | An unhandled promise rejection exits the process with code 1 on Node ≥ 15; in a browser it fires an event and the page survives | — | `documented` |
 
-`JS-LOOP-03` paired with `PY-ASYNC-01` is the cross-language result worth the most in an interview: **JavaScript threads parallelise CPU work and Python threads do not**, because `worker_threads` are isolated V8 heaps with no shared interpreter state and therefore no GIL. Both pay the same isolation tax — structured clone on one side, pickle on the other. Both halves must be re-run on `ENV-A` so the core count matches; quoting a 4-core Node figure against a 4-core Python figure measured on a machine that no longer exists is the kind of detail an interviewer catches.
+`JS-LOOP-03` paired with `PY-ASYNC-01` is the cross-language result: **JavaScript threads parallelise CPU work and Python threads do not**, because `worker_threads` are isolated V8 heaps with no shared interpreter state and therefore no GIL. Both pay the same isolation tax — structured clone on one side, pickle on the other. Both halves need re-running on `ENV-A` before the comparison is sound, since a four-core Node figure set against a four-core Python figure from a machine that no longer exists is a coincidence of environments rather than a controlled comparison.
 
 ## TypeScript — the type system
 
-Source: `_archive/2026-08_v1/03_js_ts/02_the_type_system.md`. These are compiler behaviours rather than timings, verified by running `tsc`.
+Verified 2026-08-03 on `ENV-B` by running `tsc`. These are compiler behaviours rather than
+timings, so they are trivially re-verifiable on any toolchain and the stale-environment tag
+constrains them less than it does a timing. Originating module removed with the v1 archive;
+superseded by the `ENV-A` variance run above.
 
 | ID | Claim | Environment | Tag |
 |---|---|---|---|
@@ -319,19 +333,25 @@ Source: `_archive/2026-08_v1/03_js_ts/02_the_type_system.md`. These are compiler
 
 ## MongoDB — modelling and indexes
 
-Source: `_archive/2026-08_v1/04_mongodb/01_document_modelling_and_indexes.md`. **This was v1's one weak module and it said so in its own header:** no local `mongod` was available, so plans and timings were stated from documentation rather than measured. Only the BSON sizes were real.
+Recorded 2026-08-03 on `ENV-B`. **This is the case the whole tagging scheme was built around, and
+it declared itself in its own header at the time:** no local `mongod` was available, so plans and
+timings were stated from vendor documentation while only the BSON sizes were genuinely computed.
+On the page the two were indistinguishable, which is why the tags in the table below are not
+decoration. Originating module removed with the v1 archive; this table is the only surviving
+record.
 
-Docker is installed on `ENV-A`, so `mongo:8` is reachable and this gap closes in Phase 3.
+Docker is installed on `ENV-A`, so `mongo:8` is reachable and this gap closes as soon as the
+daemon is started.
 
 | ID | Claim | Environment | Tag |
 |---|---|---|---|
-| `MONGO-01` | Roughly **90 bytes** of BSON per embedded transaction, giving roughly **186,000** embedded documents before the 16 MB ceiling | ENV-B, computed from real BSON encoding | `measured-stale-env` |
-| `MONGO-02` | BSON document limit **16 MB** | — | `documented` |
-| `MONGO-03` | In-memory sort limit **32 MB**; aggregation stage limit **100 MB** without `allowDiskUse` | — | `documented` |
-| `MONGO-04` | The ESR rule — Equality, Sort, Range — falls out of index sortedness, because a range predicate scatters everything ordered after it | — | `documented` · **must be re-derived from real `explain("executionStats")` output in Phase 3, not asserted** |
-| `MONGO-05` | `$lookup` executes per input document, making it the N+1 shape unless the foreign field is indexed | — | `documented` |
-| `MONGO-06` | Only leading pipeline stages can use an index; after `$group` or `$unwind` the stream is synthetic | — | `documented` |
-| `MONGO-07` | Mongo indexes are type-sensitive: `"123"` and `123` are different keys | — | `documented` · trivially measurable once `mongod` runs |
+| `MONGO-DOC-01` | Roughly **90 bytes** of BSON per embedded transaction, giving roughly **186,000** embedded documents before the 16 MB ceiling | ENV-B, computed from real BSON encoding | `measured-stale-env` |
+| `MONGO-DOC-02` | BSON document limit **16 MB** | — | `documented` |
+| `MONGO-DOC-03` | In-memory sort limit **32 MB**; aggregation stage limit **100 MB** without `allowDiskUse` | — | `documented` |
+| `MONGO-DOC-04` | The ESR rule — Equality, Sort, Range — falls out of index sortedness, because a range predicate scatters everything ordered after it | — | `documented` · **must be re-derived from real `explain("executionStats")` output in Phase 3, not asserted** |
+| `MONGO-DOC-05` | `$lookup` executes per input document, making it the N+1 shape unless the foreign field is indexed | — | `documented` |
+| `MONGO-DOC-06` | Only leading pipeline stages can use an index; after `$group` or `$unwind` the stream is synthetic | — | `documented` |
+| `MONGO-DOC-07` | Mongo indexes are type-sensitive: `"123"` and `123` are different keys | — | `documented` · trivially measurable once `mongod` runs |
 
 ## BigQuery
 
@@ -339,10 +359,12 @@ Nothing measured. `gcloud` and `bq` are not installed on `ENV-A`.
 
 | ID | Claim | Tag |
 |---|---|---|
-| `BQ-01` | Bytes scanned determines the bill; `SELECT *` is the most expensive habit in the product | `pending` |
-| `BQ-02` | Partition pruning and clustering reduce bytes scanned, measurable as a before/after via `bq query --dry_run` | `pending` |
+| `BQ-COST-01` | Bytes scanned determines the bill; `SELECT *` is the most expensive habit in the product | `pending` |
+| `BQ-COST-02` | Partition pruning and clustering reduce bytes scanned, measurable as a before/after via `bq query --dry_run` | `pending` |
 
-`bq query --dry_run` returns real bytes-processed and **costs nothing**, and the BigQuery sandbox is free without a credit card, with `bigquery-public-data` providing genuinely large tables. That makes the entire cost-control module measurable at zero spend — before/after bytes for `SELECT *` versus named columns, and with versus without a partition filter. This is a case where "we can't measure it" would have been the lazy answer.
+These two carried two-segment IDs (`BQ-01`, `BQ-02`) until they were renamed, which collided with the BigQuery knowledge-graph nodes of the same name. Ledger IDs take three segments precisely so that a citation is never ambiguous between a concept and a figure — see [`_tools/MEASUREMENT_SPEC.md`](_tools/MEASUREMENT_SPEC.md) §3.
+
+`bq query --dry_run` returns real bytes-processed and **costs nothing**, and the BigQuery sandbox is free without a credit card, with `bigquery-public-data` providing genuinely large tables. That makes the entire cost-control module measurable at zero spend — before and after bytes for `SELECT *` versus named columns, and with versus without a partition filter. Recording it as `pending` rather than `documented` is the point: the measurement is available, it simply has not been taken.
 
 What stays genuinely unmeasurable, and must carry the `documented` tag: Dataflow autoscaling and fusion under real load, streaming watermark behaviour at volume, and slot contention under a reservation.
 
@@ -350,14 +372,14 @@ What stays genuinely unmeasurable, and must carry the `documented` tag: Dataflow
 
 ## The re-run queue
 
-Ordered by value. These execute in Phase 2 and Phase 3 as their modules are written.
+Ordered by value. These run as the modules that depend on them are written.
 
 | Priority | IDs | Why |
 |---|---|---|
-| 1 | `PY-CONC-03`, `PY-CONC-04`, `PY-CONC-05` + the new `3.14t` free-threaded comparison | The GIL-versus-no-GIL contrast measured personally is the highest-value new number available, and `3.14t` is one `uv python install` away |
-| 2 | `PY-ASYNC-01`, `PY-ASYNC-02` | The best story in the archive; currently unquotable without a four-core caveat |
-| 3 | `JS-LOOP-03` + `PY-ASYNC-01` together | The cross-language table needs one consistent machine and one consistent core count |
-| 4 | `SQL-IDX-05`, `SQL-IDX-06` | Upgrading from SQLite to Postgres with `EXPLAIN (ANALYZE, BUFFERS)` makes these interview-grade |
-| 5 | `MONGO-04`, `MONGO-07` | Closes v1's only honesty gap once `mongod` is running |
+| 1 | `PY-CONC-03`, `PY-CONC-04`, `PY-CONC-05` + a new `3.14t` free-threaded comparison | Isolating the GIL as the only thing suppressing the read-modify-write race is the highest-value measurement not yet taken, and `3.14t` is one `uv python install` away |
+| 2 | `PY-ASYNC-01`, `PY-ASYNC-02` | The strongest results carrying a stale environment; unusable without a four-core caveat until re-run |
+| 3 | `JS-LOOP-03` + `PY-ASYNC-01` together | The cross-language comparison needs one machine and one core count to be controlled rather than coincidental |
+| 4 | `SQL-IDX-05`, `SQL-IDX-06` | Postgres with `EXPLAIN (ANALYZE, BUFFERS)` generalises these past SQLite's planner |
+| 5 | `MONGO-DOC-04`, `MONGO-DOC-07` | Closes the one gap that motivated the tagging scheme, once `mongod` is running |
 
 Setup still required, each gated on explicit approval: starting the Docker daemon for `postgres:17` and `mongo:8`, running `uv python install 3.14t`, and installing `gcloud`/`bq`.
