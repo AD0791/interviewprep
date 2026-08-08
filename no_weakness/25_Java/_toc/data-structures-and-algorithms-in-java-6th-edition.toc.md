@@ -1,0 +1,129 @@
+# TOC — Data Structures and Algorithms in Java, 6th Edition.pdf
+
+*Extracted by `_tools/extract_toc.py` (outline). 125 entries. Machine-generated — do not hand-edit.*
+
+- Cover  · p1
+- Title Page  · p3
+- Copyright  · p4
+- Preface to the Sixth Edition  · p7
+  - Prerequisites  · p8
+  - Online Resources  · p8
+  - Use as a Textbook  · p9
+  - About the Authors  · p10
+  - Additional Books by These Authors  · p10
+  - Acknowledgments  · p11
+- Contents  · p12
+- Chapter 1: Java Primer  · p19
+  - 1.1 Getting Started  · p20
+  - 1.2 Classes and Objects  · p23
+  - 1.3 Strings, Wrappers, Arrays, and Enum Types  · p35
+  - 1.4 Expressions  · p41
+  - 1.5 Control Flow  · p48
+  - 1.6 Simple Input and Output  · p56
+  - 1.7 An Example Program  · p59
+  - 1.8 Packages and Imports  · p62
+  - 1.9 Software Development  · p64
+  - 1.10 Exercises  · p73
+- Chapter 2: Object-Oriented Design  · p77
+  - 2.1 Goals, Principles, and Patterns  · p78
+  - 2.2 Inheritance  · p82
+  - 2.3 Interfaces and Abstract Classes  · p94
+  - 2.4 Exceptions  · p100
+  - 2.5 Casting and Generics  · p106
+  - 2.6 Nested Classes  · p114
+  - 2.7 Exercises  · p115
+- Chapter 3: Fundamental Data Structures  · p121
+  - 3.1 Using Arrays  · p122
+  - 3.2 Singly Linked Lists  · p140
+  - 3.3 Circularly Linked Lists  · p146
+  - 3.4 Doubly Linked Lists  · p150
+  - 3.5 Equivalence Testing  · p156
+  - 3.6 Cloning Data Structures  · p159
+  - 3.7 Exercises  · p163
+- Chapter 4: Algorithm Analysis  · p167
+  - 4.1 Experimental Studies  · p169
+  - 4.2 The Seven Functions Used in This Book  · p174
+  - 4.3 Asymptotic Analysis  · p182
+  - 4.4 Simple Justification Techniques  · p196
+  - 4.5 Exercises  · p200
+- Chapter 5: Recursion  · p207
+  - 5.1 Illustrative Examples  · p209
+  - 5.2 Analyzing Recursive Algorithms  · p220
+  - 5.3 Further Examples of Recursion  · p224
+  - 5.4 Designing Recursive Algorithms  · p232
+  - 5.5 Recursion Run Amok  · p233
+  - 5.6 Eliminating Tail Recursion  · p237
+  - 5.7 Exercises  · p239
+- Chapter 6: Stacks, Queues, and Deques  · p243
+  - 6.1 Stacks  · p244
+  - 6.2 Queues  · p256
+  - 6.3 Double-Ended Queues  · p266
+  - 6.4 Exercises  · p270
+- Chapter 7: List and Iterator ADTs  · p275
+  - 7.1 The List ADT  · p276
+  - 7.2 Array Lists  · p278
+  - 7.3 Positional Lists  · p288
+  - 7.4 Iterators  · p300
+  - 7.5 The Java Collections Framework  · p306
+  - 7.6 Sorting a Positional List  · p311
+  - 7.7 Case Study: Maintaining Access Frequencies  · p312
+  - 7.8 Exercises  · p318
+- Chapter 8: Trees  · p325
+  - 8.1 General Trees  · p326
+  - 8.2 Binary Trees  · p335
+  - 8.3 Implementing Trees  · p341
+  - 8.4 Tree Traversal Algorithms  · p352
+  - 8.5 Exercises  · p368
+- Chapter 9: Priority Queues  · p377
+  - 9.1 The Priority Queue Abstract Data Type  · p378
+  - 9.2 Implementing a Priority Queue  · p380
+  - 9.3 Heaps  · p388
+  - 9.4 Sorting with a Priority Queue  · p403
+  - 9.5 Adaptable Priority Queues  · p408
+  - 9.6 Exercises  · p413
+- Chapter 10: Maps, Hash Tables, and Skip Lists  · p419
+  - 10.1 Maps  · p420
+  - 10.2 Hash Tables  · p428
+  - 10.3 Sorted Maps  · p446
+  - 10.4 Skip Lists  · p454
+  - 10.5 Sets, Multisets, and Multimaps  · p463
+  - 10.6 Exercises  · p469
+- Chapter 11: Search Trees  · p477
+  - 11.1 Binary Search Trees  · p478
+  - 11.2 Balanced Search Trees  · p490
+  - 11.3 AVL Trees  · p497
+  - 11.4 Splay Trees  · p506
+  - 11.5 ( 2,4) Trees  · p518
+  - 11.6 Red-Black Trees  · p528
+  - 11.7 Exercises  · p543
+- Chapter 12: Sorting and Selection  · p549
+  - 12.1 Merge-Sort  · p550
+  - 12.2 Quick-Sort  · p562
+  - 12.3 Studying Sorting through an Algorithmic Lens  · p574
+  - 12.4 Comparing Sorting Algorithms  · p579
+  - 12.5 Selection  · p581
+  - 12.6 Exercises  · p584
+- Chapter 13: Text Processing  · p591
+  - 13.1 Abundance of Digitized Text  · p592
+  - 13.2 Pattern-Matching Algorithms  · p594
+  - 13.3 Tries  · p604
+  - 13.4 Text Compression and the Greedy Method  · p613
+  - 13.5 Dynamic Programming  · p616
+  - 13.6 Exercises  · p623
+- Chapter 14: Graph Algorithms  · p629
+  - 14.1 Graphs  · p630
+  - 14.2 Data Structures for Graphs  · p637
+  - 14.3 Graph Traversals  · p648
+  - 14.4 Transitive Closure  · p661
+  - 14.5 Directed Acyclic Graphs  · p665
+  - 14.6 Shortest Paths  · p669
+  - 14.7 Minimum Spanning Trees  · p680
+  - 14.8 Exercises  · p695
+- Chapter 15: Memory Management and B-Trees  · p705
+  - 15.1 Memory Management  · p706
+  - 15.2 Memory Hierarchies and Caching  · p713
+  - 15.3 External Searching and B-Trees  · p719
+  - 15.4 External-Memory Sorting  · p723
+  - 15.5 Exercises  · p725
+- Bibliography  · p728
+- Index  · p732

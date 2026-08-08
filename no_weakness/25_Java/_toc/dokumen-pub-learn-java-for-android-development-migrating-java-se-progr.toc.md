@@ -1,0 +1,411 @@
+# TOC — dokumen.pub_learn-java-for-android-development-migrating-java-se-programming-skills-to-mobile-development-4nbsped-9781484259429-9781484259436.pdf
+
+*Extracted by `_tools/extract_toc.py` (outline). 407 entries. Machine-generated — do not hand-edit.*
+
+- Table of Contents  · p4
+- About the Authors  · p16
+- About the Technical Reviewer  · p17
+- Introduction  · p18
+- Fourth Edition Notes  · p19
+- Chapter 1: Getting Started with Java  · p23
+  - What Is Java?  · p24
+    - Java Is a Language  · p24
+    - Java Is a Platform  · p25
+    - Java SE and Java EE  · p28
+  - Installing the JDK and Exploring Example Applications  · p29
+    - Hello, World!  · p30
+    - DumpArgs  · p34
+    - EchoText  · p35
+  - Installing and Exploring the Eclipse IDE  · p38
+  - Java Meets Android  · p43
+    - What Is Android?  · p43
+    - History of Android  · p44
+    - Android Architecture  · p44
+    - Android Says Hello  · p48
+  - Summary  · p50
+- Chapter 2: Learning Language Fundamentals  · p52
+  - Learning Application Structure  · p52
+  - Learning Comments  · p54
+    - Single-Line Comments  · p54
+    - Multiline Comments  · p55
+    - Javadoc Comments  · p55
+  - Learning Identifiers  · p59
+  - Learning Types  · p60
+    - Primitive Types  · p61
+    - Object Types  · p63
+    - Array Types  · p64
+  - Learning Variables  · p64
+  - Learning Expressions  · p65
+    - Simple Expressions  · p66
+    - Compound Expressions  · p72
+      - Additive Operators  · p80
+      - Array Index Operator  · p82
+      - Assignment Operators  · p84
+      - Bitwise Operators  · p84
+      - Cast Operator  · p86
+      - Conditional Operators  · p89
+      - Equality Operators  · p91
+      - Logical Operators  · p91
+      - Member Access Operator  · p94
+      - Method Call Operator  · p94
+      - Multiplicative Operators  · p94
+      - Object Creation Operator  · p95
+      - Relational Operators  · p96
+      - Shift Operators  · p96
+      - Unary Minus/Plus Operators  · p97
+      - Precedence and Associativity  · p97
+  - Learning Statements  · p101
+    - Assignment Statements  · p101
+    - Decision Statements  · p102
+      - If Statement  · p102
+      - If-Else Statement  · p103
+      - Switch Statement  · p107
+    - Loop Statements  · p108
+      - For Statement  · p109
+      - While Statement  · p111
+      - Do-While Statement  · p113
+      - Looping over the Empty Statement  · p114
+    - Break Statements  · p115
+    - Continue Statements  · p117
+  - Summary  · p119
+- Chapter 3: Discovering Classes and Objects  · p122
+  - Declaring Classes  · p123
+    - Classes and Applications  · p123
+  - Constructing Objects  · p124
+    - Default Constructor  · p126
+    - Explicit Constructors  · p126
+    - Objects and Applications  · p130
+  - Encapsulating State and Behaviors  · p132
+    - Representing State via Fields  · p132
+      - Declaring and Accessing Class Fields  · p132
+      - Declaring and Accessing Instance Fields  · p135
+      - Reviewing Field-Access Rules  · p141
+    - Representing Behaviors via Methods  · p142
+      - Declaring and Invoking Class Methods  · p143
+      - Declaring and Invoking Instance Methods  · p145
+      - Returning from a Method via the Return Statement  · p147
+        - Method-Call Stack  · p149
+        - Chaining Together Instance Method Calls  · p150
+      - Passing Arguments to Methods  · p151
+      - Invoking Methods Recursively  · p152
+      - Overloading Methods  · p154
+      - Reviewing Method-Invocation Rules  · p156
+  - Hiding Information  · p157
+  - Initializing Classes and Objects  · p163
+    - Class Initializers  · p164
+    - Instance Initializers  · p165
+    - Initialization Order  · p167
+  - Collecting Garbage  · p167
+  - Revisiting Arrays  · p168
+  - Summary  · p175
+- Chapter 4: Discovering Inheritance, Polymorphism, and Interfaces  · p178
+  - Building Class Hierarchies  · p178
+    - Extending Classes  · p179
+    - The Ultimate Superclass  · p186
+      - Cloning  · p187
+      - Equality  · p189
+      - Finalization  · p192
+      - Hash Codes  · p193
+      - String Representation  · p194
+    - Composition  · p194
+  - Changing Form  · p195
+    - Upcasting and Late Binding  · p197
+    - Abstract Classes and Abstract Methods  · p201
+    - Downcasting and Runtime Type Identification  · p203
+    - Covariant Return Types  · p206
+  - Formalizing Class Interfaces  · p207
+    - Declaring Interfaces  · p207
+    - Implementing Interfaces  · p209
+    - Extending Interfaces  · p213
+    - Why Use Interfaces?  · p214
+  - Summary  · p222
+- Chapter 5: Mastering Advanced Language Features, Part 1  · p224
+  - Mastering Nested Types  · p224
+    - Static Member Classes  · p224
+    - Nonstatic Member Classes  · p229
+    - Anonymous Classes  · p231
+    - Local Classes  · p233
+    - Interfaces Within Classes  · p235
+  - Mastering Packages  · p236
+    - What Are Packages?  · p236
+    - Package Names Must Be Unique  · p237
+    - The Package Statement  · p237
+    - The Import Statement  · p238
+    - Searching for Packages and Types  · p239
+      - Compile-Time Search  · p239
+      - Runtime Search  · p240
+    - Playing with Packages  · p241
+    - Packages and JAR Files  · p246
+  - Mastering Static Imports  · p247
+  - Mastering Exceptions  · p248
+    - What Are Exceptions?  · p249
+    - Representing Exceptions in Source Code  · p249
+      - Error Codes vs. Objects  · p250
+      - The Throwable Class Hierarchy  · p251
+      - Custom Exception Classes  · p253
+    - Throwing Exceptions  · p254
+    - Handling Exceptions  · p257
+      - Handling Multiple Exception Types  · p259
+      - Rethrowing Exceptions  · p261
+    - Performing Cleanup  · p262
+    - Automatic Resource Management  · p265
+  - Summary  · p268
+- Chapter 6: Mastering Advanced Language Features, Part 2  · p270
+  - Mastering Annotations  · p270
+    - Discovering Annotations  · p270
+    - Declaring Annotation Types and Annotating Source Code  · p274
+      - Using Meta-annotations in Annotation Type Declarations  · p277
+    - Processing Annotations  · p280
+  - Mastering Generics  · p282
+    - Collections and the Need for Type Safety  · p282
+    - Generic Types  · p284
+      - Declaring and Using Your Own Generic Types  · p286
+      - Type Parameter Bounds  · p289
+      - Type Parameter Scope  · p293
+      - The Need for Wildcards  · p294
+    - Generic Methods  · p296
+    - Arrays and Generics  · p300
+  - Mastering Enums  · p303
+    - The Trouble with Traditional Enumerated Types  · p303
+    - The Enum Alternative  · p305
+      - Enhancing an Enum  · p306
+    - The Enum Class  · p311
+      - Extending the Enum Class  · p313
+  - Summary  · p317
+- Chapter 7: Exploring the Basic APIs, Part 1  · p319
+  - Exploring Math  · p319
+  - Exploring Number and Its Children  · p322
+    - BigDecimal  · p323
+    - BigInteger  · p327
+    - Primitive Type Wrapper Classes  · p331
+      - Boolean  · p331
+      - Character  · p332
+      - Float and Double  · p334
+      - Integer, Long, Short, and Byte  · p338
+  - Exploring String, StringBuffer, and StringBuilder  · p339
+    - String  · p339
+    - StringBuffer and StringBuilder  · p342
+  - Exploring System  · p344
+  - Exploring Threads  · p347
+    - Runnable and Thread  · p348
+    - Synchronization  · p354
+      - Mutual Exclusion, Monitors, and Locks  · p357
+      - Visibility  · p358
+      - Waiting and Notification  · p360
+      - Deadlock  · p366
+    - Thread-Local Variables  · p370
+  - Summary  · p375
+- Chapter 8: Exploring the Basic APIs, Part 2  · p378
+  - Exploring Random  · p378
+  - Exploring Reflection  · p382
+    - The Class Entry Point  · p382
+      - Obtaining a Class Object  · p382
+      - Instantiating a Dynamically Loaded Class  · p387
+    - Constructor, Field, and Method  · p388
+      - Accessibility of Objects  · p392
+    - Package  · p392
+    - Array  · p397
+  - Exploring StringTokenizer  · p398
+  - Exploring Timer and TimerTask  · p400
+  - Summary  · p403
+- Chapter 9: Exploring the Collections Framework  · p405
+  - Exploring Collections Framework Fundamentals  · p405
+    - Comparable vs. Comparator  · p407
+    - Iterable and Collection  · p409
+      - Iterator and the Enhanced For Loop Statement  · p410
+      - Autoboxing and Unboxing  · p412
+  - Exploring Lists  · p413
+    - ArrayList  · p414
+    - LinkedList  · p415
+  - Exploring Sets  · p416
+    - TreeSet  · p416
+    - HashSet  · p418
+    - EnumSet  · p418
+  - Exploring Sorted Sets  · p419
+  - Exploring Navigable Sets  · p422
+  - Exploring Queues  · p424
+    - PriorityQueue  · p425
+  - Exploring Deques  · p427
+    - ArrayDeque  · p428
+  - Exploring Maps  · p429
+    - TreeMap  · p432
+    - HashMap  · p432
+    - IdentityHashMap  · p436
+    - WeakHashMap  · p437
+    - EnumMap  · p437
+    - Exploring Sorted Maps  · p437
+    - Exploring Navigable Maps  · p438
+  - Exploring the Arrays and Collections Utility APIs  · p438
+  - Exploring the Legacy Collection APIs  · p441
+  - Summary  · p446
+- Chapter 10: Functional Programming  · p448
+  - Functions and Operators  · p449
+  - Lambda Calculus  · p449
+  - Entering a Stream  · p450
+  - Mapping  · p452
+  - Filtering  · p453
+  - Terminating a Stream  · p454
+  - Performing Actions on Each Element  · p454
+  - Limiting, Skipping, Sorting, and Distinct  · p455
+  - Ranges  · p455
+  - Reducing  · p455
+  - Collecting  · p456
+  - Methods As Functions  · p459
+  - Single-Method Interfaces  · p460
+  - Streams and Parallelization  · p461
+  - Protonpack, a Stream Utility Library  · p461
+  - Summary  · p463
+- Chapter 11: Exploring the Concurrency Utilities  · p465
+  - Introducing the Concurrency Utilities  · p465
+  - Exploring Executors  · p467
+  - Exploring Synchronizers  · p470
+    - Countdown Latches  · p470
+    - Cyclic Barriers  · p470
+    - Exchangers  · p471
+    - Semaphores  · p471
+  - Exploring the Concurrent Collections  · p472
+    - Exploring the Locking Framework  · p473
+    - Lock  · p473
+    - ReentrantLock  · p475
+    - Condition  · p475
+    - ReadWriteLock  · p476
+    - ReentrantReadWriteLock  · p476
+  - Exploring Atomic Variables  · p477
+  - Summary  · p480
+- Chapter 12: Performing Classic I/O  · p482
+  - Working with the File API  · p482
+    - Constructing File Instances  · p483
+    - Learning About Stored Abstract Pathnames  · p485
+    - Learning About a Pathname’s File or Directory  · p486
+    - Obtaining Disk Space Information  · p487
+    - Listing Directories  · p488
+    - Creating and Manipulating Files and Directories  · p490
+    - Setting and Getting Permissions  · p491
+  - Working with the RandomAccessFile API  · p493
+  - Working with Streams  · p494
+    - Stream Classes Overview  · p494
+    - ByteArrayOutputStream and ByteArrayInputStream  · p496
+    - FileOutputStream and FileInputStream  · p498
+    - PipedOutputStream and PipedInputStream  · p500
+    - FilterOutputStream and FilterInputStream  · p503
+    - BufferedOutputStream and BufferedInputStream  · p506
+    - DataOutputStream and DataInputStream  · p507
+    - Object Serialization and Deserialization  · p510
+      - Default Serialization and Deserialization  · p510
+      - Externalization  · p516
+    - PrintStream  · p516
+    - Standard I/O Revisited  · p518
+  - Working with Writers and Readers  · p520
+    - Writer and Reader Classes Overview  · p521
+    - Writer and Reader  · p523
+    - OutputStreamWriter and InputStreamReader  · p523
+    - FileWriter and FileReader  · p525
+  - Summary  · p531
+- Chapter 13: Accessing Networks  · p533
+  - Accessing Networks via Sockets  · p533
+    - Socket Addresses  · p535
+    - Socket Options  · p536
+    - Socket and ServerSocket  · p538
+    - DatagramSocket and MulticastSocket  · p544
+  - Accessing Networks via URLs  · p549
+    - URL and URLConnection  · p549
+    - URLEncoder and URLDecoder  · p553
+    - URI  · p555
+  - Accessing Network Interfaces and Interface Addresses  · p556
+  - Managing Cookies  · p560
+  - Summary  · p565
+- Chapter 14: Migrating to New I/O  · p568
+  - Working with Buffers  · p569
+    - Buffer and Its Children  · p570
+  - Working with Channels  · p572
+    - Channel and Its Children  · p573
+  - Working with Selectors  · p579
+    - Selector Fundamentals  · p579
+    - Selector Demonstration  · p585
+  - Working with Regular Expressions  · p590
+    - Pattern, PatternSyntaxException, and Matcher  · p590
+    - Character Classes  · p593
+    - Capturing Groups  · p595
+    - Boundary Matchers and Zero-Length Matches  · p596
+    - Quantifiers  · p597
+    - Practical Regular Expressions  · p600
+  - Working with Charsets  · p601
+    - A Brief Review of the Fundamentals  · p601
+    - Working with Charsets  · p602
+    - Charsets and the String Class  · p606
+  - Working with Formatter and Scanner  · p608
+    - Working with Formatter  · p609
+    - Working with Scanner  · p614
+  - Summary  · p618
+- Chapter 15: Accessing Databases  · p620
+  - Introducing Apache Derby  · p621
+    - Apache Derby Installation and Configuration  · p624
+    - Apache Derby Demos  · p624
+    - Apache Derby Command-Line Tools  · p624
+    - Starting an Apache Derby Server  · p626
+    - Embedded Apache Derby Example  · p627
+  - Introducing SQLite  · p628
+  - Accessing Databases via JDBC  · p630
+    - Data Sources, Drivers, and Connections  · p630
+    - Statements  · p634
+      - Statement and ResultSet  · p634
+      - PreparedStatement  · p639
+      - CallableStatement  · p643
+    - Metadata  · p645
+  - Summary  · p650
+- Chapter 16: Working with XML and JSON Documents  · p653
+  - What Is XML?  · p653
+    - XML Declaration  · p655
+    - Elements and Attributes  · p657
+    - Character References and CDATA Sections  · p659
+    - Namespaces  · p661
+    - Comment and Processing Instructions  · p666
+    - Well-Formed Documents  · p667
+    - Valid Documents  · p668
+      - Document Type Definition  · p669
+      - XML Schema  · p669
+  - Parsing XML Documents with SAX  · p670
+    - Exploring the SAX API  · p670
+    - Demonstrating the SAX API  · p673
+  - Parsing and Creating XML Documents with DOM  · p684
+    - A Tree of Nodes  · p685
+    - Exploring the DOM API  · p688
+      - Parsing XML Documents  · p690
+      - Creating XML Documents  · p697
+  - What Is JSON?  · p700
+  - JSON Processing in Java  · p701
+    - Generating JSON  · p701
+    - Parsing JSON  · p705
+  - Summary  · p709
+- Chapter 17: Date and Time  · p710
+  - The Traditional Date and Time API  · p710
+    - About Dates and Calendars  · p711
+    - Date and Time Formatters  · p719
+    - Parsing  · p721
+  - The New Date and Time API  · p724
+    - Local Dates and Times  · p724
+    - Instants  · p727
+    - Offset Dates and Times  · p728
+    - Zoned Dates and Times  · p731
+    - Duration and Periods  · p733
+    - Clock  · p736
+  - Summary  · p739
+- Appendix A: Solutions to Exercises  · p740
+  - Chapter 1: Getting Started with Java  · p740
+  - Chapter 2: Learning Language Fundamentals  · p742
+  - Chapter 3: Discovering Classes and Objects  · p745
+  - Chapter 4: Discovering Inheritance, Polymorphism, and Interfaces  · p752
+  - Chapter 5: Mastering Advanced Language Features, Part 1  · p761
+  - Chapter 6: Mastering Advanced Language Features, Part 2  · p769
+  - Chapter 7: Exploring the Basic APIs, Part 1  · p776
+  - Chapter 8: Exploring the Basic APIs, Part 2  · p786
+  - Chapter 9: Exploring the Collections Framework  · p791
+  - Chapter 10: Functional Programming  · p799
+  - Chapter 11: Exploring the Concurrency Utilities  · p802
+  - Chapter 12: Performing Classic I/O  · p805
+  - Chapter 13: Accessing Networks  · p816
+  - Chapter 14: Migrating to New I/O  · p822
+  - Chapter 15: Accessing Databases  · p829
+  - Chapter 16: Working with XML and JSON Documents  · p831
+  - Chapter 17: Date and Time  · p837
+- Index  · p841

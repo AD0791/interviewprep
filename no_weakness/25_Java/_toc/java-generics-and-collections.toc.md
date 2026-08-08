@@ -1,0 +1,162 @@
+# TOC — Java Generics and Collections.pdf
+
+*Extracted by `_tools/extract_toc.py` (outline). 158 entries. Machine-generated — do not hand-edit.*
+
+- Table of Contents  · p7
+- Preface  · p13
+  - Obtaining the Example Programs  · p15
+  - How to Contact Us  · p15
+  - Conventions Used in This Book  · p15
+  - Using Code Examples  · p16
+  - Safari® Books Online  · p17
+  - Acknowledgments  · p17
+- Part I. Generics  · p19
+  - Chapter 1. Introduction  · p21
+    - 1.1 Generics  · p22
+    - 1.2 Boxing and Unboxing  · p24
+    - 1.3 Foreach  · p27
+    - 1.4 Generic Methods and Varargs  · p28
+    - 1.5 Assertions  · p30
+  - Chapter 2. Subtyping and Wildcards  · p33
+    - 2.1 Subtyping and the Substitution Principle  · p33
+    - 2.2 Wildcards with extends  · p35
+    - 2.3 Wildcards with super  · p36
+    - 2.4 The Get and Put Principle  · p37
+    - 2.5 Arrays  · p40
+    - 2.6 Wildcards Versus Type Parameters  · p43
+    - 2.7 Wildcard Capture  · p45
+    - 2.8 Restrictions on Wildcards  · p46
+  - Chapter 3. Comparison and Bounds  · p49
+    - 3.1 Comparable  · p49
+    - 3.2 Maximum of a Collection  · p52
+    - 3.3 A Fruity Example  · p54
+    - 3.4 Comparator  · p55
+    - 3.5 Enumerated Types  · p60
+    - 3.6 Multiple Bounds  · p63
+    - 3.7 Bridges  · p65
+    - 3.8 Covariant Overriding  · p67
+  - Chapter 4. Declarations  · p69
+    - 4.1 Constructors  · p69
+    - 4.2 Static Members  · p70
+    - 4.3 Nested Classes  · p71
+    - 4.4 How Erasure Works  · p73
+  - Chapter 5. Evolution, Not Revolution  · p77
+    - 5.1 Legacy Library with Legacy Client  · p78
+    - 5.2 Generic Library with Generic Client  · p78
+    - 5.3 Generic Library with Legacy Client  · p80
+    - 5.4 Legacy Library with Generic Client  · p83
+      - 5.4.1. Evolving a Library using Minimal Changes  · p83
+      - 5.4.2. Evolving a Library using Stubs  · p86
+      - 5.4.3. Evolving a Library using Wrappers  · p86
+    - 5.5 Conclusions  · p89
+  - Chapter 6. Reification  · p91
+    - 6.1 Reifiable Types  · p91
+    - 6.2 Instance Tests and Casts  · p92
+    - 6.3 Exception Handling  · p97
+    - 6.4 Array Creation  · p98
+    - 6.5 The Principle of Truth in Advertising  · p100
+    - 6.6 The Principle of Indecent Exposure  · p104
+    - 6.7 How to Define ArrayList  · p107
+    - 6.8 Array Creation and Varargs  · p108
+    - 6.9 Arrays as a Deprecated Type?  · p110
+    - 6.10 Summing Up  · p113
+  - Chapter 7. Reflection  · p115
+    - 7.1 Generics for Reflection  · p115
+    - 7.2 Reflected Types are Reifiable Types  · p118
+    - 7.3 Reflection for Primitive Types  · p119
+    - 7.4 A Generic Reflection Library  · p119
+    - 7.5 Reflection for Generics  · p122
+    - 7.6 Reflecting Generic Types  · p123
+  - Chapter 8. Effective Generics  · p127
+    - 8.1 Take Care when Calling Legacy Code  · p127
+    - 8.2 Use Checked Collections to Enforce Security  · p129
+    - 8.3 Specialize to Create Reifiable Types  · p130
+    - 8.4 Maintain Binary Compatibility  · p135
+  - Chapter 9. Design Patterns  · p141
+    - 9.1 Visitor  · p141
+    - 9.2 Interpreter  · p145
+    - 9.3 Function  · p146
+    - 9.4 Strategy  · p149
+    - 9.5 Subject-Observer  · p154
+- Part II. Collections  · p161
+  - Chapter 10. The Main Interfaces of the Java Collections Framework  · p163
+  - Chapter 11. Preliminaries  · p165
+    - 11.1 Iterable and Iterators  · p165
+    - 11.2 Implementations  · p167
+    - 11.3 Efficiency and the O-Notation  · p168
+    - 11.4 Contracts  · p170
+    - 11.5 Collections and Thread Safety  · p171
+      - 11.5.1. Synchronization and the Legacy Collections  · p173
+      - 11.5.2. JDK 1.2: Synchronized Collections and Fail-Fast Iterators  · p174
+      - 11.5.3. Concurrent Collections: Java 5 and Beyond  · p176
+  - Chapter 12. The Collection Interface  · p179
+    - 12.1 Using the Methods of Collection  · p182
+    - 12.2 Implementing Collection  · p187
+    - 12.3 Collection Constructors  · p187
+  - Chapter 13. Sets  · p189
+    - 13.1 Implementing Set  · p189
+      - 13.1.1. HashSet  · p190
+      - 13.1.2. LinkedHashSet  · p192
+      - 13.1.3. CopyOnWriteArraySet  · p193
+      - 13.1.4. EnumSet  · p194
+    - 13.2 SortedSet and NavigableSet  · p196
+      - 13.2.1. NavigableSet  · p199
+      - 13.2.2. TreeSet  · p202
+      - 13.2.3. ConcurrentSkipListSet  · p204
+    - 13.3 Comparing Set Implementations  · p206
+  - Chapter 14. Queues  · p209
+    - 14.1 Using the Methods of Queue  · p211
+    - 14.2 Implementing Queue  · p213
+      - 14.2.1. PriorityQueue  · p213
+      - 14.2.2. ConcurrentLinkedQueue  · p215
+    - 14.3 BlockingQueue  · p216
+      - 14.3.1. Using the Methods of BlockingQueue  · p217
+      - 14.3.2. Implementing BlockingQueue  · p220
+        - LinkedBlockingQueue  · p220
+        - ArrayBlockingQueue  · p220
+        - PriorityBlockingQueue  · p222
+        - DelayQueue  · p222
+        - SynchronousQueue  · p223
+    - 14.4 Deque  · p224
+      - 14.4.1. Implementing Deque  · p226
+        - ArrayDeque  · p226
+        - LinkedList  · p226
+      - 14.4.2. BlockingDeque  · p227
+        - Implementing BlockingDeque  · p228
+    - 14.5 Comparing Queue Implementations  · p228
+  - Chapter 15. Lists  · p231
+    - 15.1 Using the Methods of List  · p233
+    - 15.2 Implementing List  · p236
+      - 15.2.1. ArrayList  · p236
+      - 15.2.2. LinkedList  · p239
+      - 15.2.3. CopyOnWriteArrayList  · p239
+    - 15.3 Comparing List Implementations  · p239
+  - Chapter 16. Maps  · p241
+    - 16.1 Using the Methods of Map  · p243
+    - 16.2 Implementing Map  · p244
+      - 16.2.1. HashMap  · p245
+      - 16.2.2. LinkedHashMap  · p245
+      - 16.2.3. WeakHashMap  · p247
+      - 16.2.4. IdentityHashMap  · p249
+      - 16.2.5. EnumMap  · p251
+    - 16.3 SortedMap and NavigableMap  · p252
+      - 16.3.1. NavigableMap  · p253
+      - 16.3.2. TreeMap  · p254
+    - 16.4 ConcurrentMap  · p255
+      - 16.4.1. ConcurrentHashMap  · p256
+    - 16.5 ConcurrentNavigableMap  · p256
+      - 16.5.1. ConcurrentSkipListMap  · p257
+    - 16.6 Comparing Map Implementations  · p257
+  - Chapter 17. The Collections Class  · p259
+    - 17.1 Generic Algorithms  · p259
+      - 17.1.1. Changing the Order of List Elements  · p259
+      - 17.1.2. Changing the Contents of a List  · p260
+      - 17.1.3. Finding Extreme Values in a Collection  · p261
+      - 17.1.4. Finding Specific Values in a List  · p261
+    - 17.2 Collection Factories  · p262
+    - 17.3 Wrappers  · p263
+      - 17.3.1. Synchronized Collections  · p263
+      - 17.3.2. Unmodifiable Collections  · p264
+      - 17.3.3. Checked Collections  · p264
+    - 17.4 Other Methods  · p265
+- Index  · p269

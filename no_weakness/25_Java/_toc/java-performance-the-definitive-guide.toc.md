@@ -1,0 +1,213 @@
+# TOC — Java Performance_ The Definitive Guide.pdf
+
+*Extracted by `_tools/extract_toc.py` (outline). 209 entries. Machine-generated — do not hand-edit.*
+
+- Cover  · p4
+- Table of Contents  · p5
+- Preface  · p11
+  - Who Should (and Shouldn’t) Read This Book  · p12
+  - Conventions Used in This Book  · p13
+  - Using Code Examples  · p14
+  - Safari® Books Online  · p15
+  - How to Contact Us  · p15
+  - Acknowledgments  · p16
+- Chapter 1. Introduction  · p17
+  - A Brief Outline  · p18
+  - Platforms and Conventions  · p18
+    - JVM Tuning Flags  · p20
+  - The Complete Performance Story  · p21
+    - Write Better Algorithms  · p21
+    - Write Less Code  · p22
+    - Oh Go Ahead, Prematurely Optimize  · p23
+    - Look Elsewhere: The Database Is Always the Bottleneck  · p24
+    - Optimize for the Common Case  · p25
+  - Summary  · p26
+- Chapter 2. An Approach to Performance Testing  · p27
+  - Test a Real Application  · p27
+    - Microbenchmarks  · p27
+    - Macrobenchmarks  · p32
+    - Mesobenchmarks  · p34
+    - Common Code Examples  · p36
+  - Understand Throughput, Batching, and Response Time  · p40
+    - Elapsed Time (Batch) Measurements  · p40
+    - Throughput Measurements  · p41
+    - Response Time Tests  · p42
+  - Understand Variability  · p45
+  - Test Early, Test Often  · p49
+  - Summary  · p52
+- Chapter 3. A Java Performance Toolbox  · p53
+  - Operating System Tools and Analysis  · p53
+    - CPU Usage  · p54
+    - The CPU Run Queue  · p57
+    - Disk Usage  · p59
+    - Network Usage  · p60
+  - Java Monitoring Tools  · p62
+    - Basic VM Information  · p63
+    - Thread Information  · p66
+    - Class Information  · p67
+    - Live GC Analysis  · p67
+    - Heap Dump Postprocessing  · p67
+  - Profiling Tools  · p67
+    - Sampling Profilers  · p68
+    - Instrumented Profilers  · p70
+    - Blocking Methods and Thread Timelines  · p71
+    - Native Profilers  · p73
+  - Java Mission Control  · p75
+    - Java Flight Recorder  · p76
+    - Enabling JFR  · p82
+    - Selecting JFR Events  · p86
+  - Summary  · p88
+- Chapter 4. Working with the JIT Compiler  · p89
+  - Just-in-Time Compilers: An Overview  · p89
+    - Hot Spot Compilation  · p91
+  - Basic Tunings: Client or Server (or Both)  · p93
+    - Optimizing Startup  · p94
+    - Optimizing Batch Operations  · p96
+    - Optimizing Long-Running Applications  · p97
+  - Java and JIT Compiler Versions  · p98
+  - Intermediate Tunings for the Compiler  · p101
+    - Tuning the Code Cache  · p101
+    - Compilation Thresholds  · p103
+    - Inspecting the Compilation Process  · p106
+  - Advanced Compiler Tunings  · p110
+    - Compilation Threads  · p110
+    - Inlining  · p112
+    - Escape Analysis  · p113
+  - Deoptimization  · p114
+    - Not Entrant Code  · p114
+    - Deoptimizing Zombie Code  · p117
+  - Tiered Compilation Levels  · p117
+  - Summary  · p119
+- Chapter 5. An Introduction to Garbage Collection  · p121
+  - Garbage Collection Overview  · p121
+    - Generational Garbage Collectors  · p123
+    - GC Algorithms  · p125
+    - Choosing a GC Algorithm  · p129
+  - Basic GC Tuning  · p135
+    - Sizing the Heap  · p135
+    - Sizing the Generations  · p138
+    - Sizing Permgen and Metaspace  · p140
+    - Controlling Parallelism  · p142
+    - Adaptive Sizing  · p143
+  - GC Tools  · p144
+  - Summary  · p147
+- Chapter 6. Garbage Collection Algorithms  · p149
+  - Understanding the Throughput Collector  · p149
+    - Adaptive and Static Heap Size Tuning  · p152
+  - Understanding the CMS Collector  · p156
+    - Tuning to Solve Concurrent Mode Failures  · p161
+    - Tuning CMS for Permgen  · p164
+    - Incremental CMS  · p165
+  - Understanding the G1 Collector  · p166
+    - Tuning G1  · p173
+  - Advanced Tunings  · p175
+    - Tenuring and Survivor Spaces  · p175
+    - Allocating Large Objects  · p179
+    - AggressiveHeap  · p187
+    - Full Control Over Heap Size  · p189
+  - Summary  · p190
+- Chapter 7. Heap Memory Best Practices  · p193
+  - Heap Analysis  · p193
+    - Heap Histograms  · p194
+    - Heap Dumps  · p195
+    - Out of Memory Errors  · p200
+  - Using Less Memory  · p204
+    - Reducing Object Size  · p204
+    - Lazy Initialization  · p207
+    - Immutable and Canonical Objects  · p212
+    - String Interning  · p214
+  - Object Lifecycle Management  · p218
+    - Object Reuse  · p218
+    - Weak, Soft, and Other References  · p224
+  - Summary  · p237
+- Chapter 8. Native Memory Best Practices  · p239
+  - Footprint  · p239
+    - Measuring Footprint  · p240
+    - Minimizing Footprint  · p241
+    - Native NIO Buffers  · p242
+    - Native Memory Tracking  · p243
+  - JVM Tunings for the Operating System  · p246
+    - Large Pages  · p246
+    - Compressed oops  · p250
+  - Summary  · p252
+- Chapter 9. Threading and Synchronization Performance  · p253
+  - Thread Pools and ThreadPoolExecutors  · p253
+    - Setting the Maximum Number of Threads  · p254
+    - Setting the Minimum Number of Threads  · p258
+    - Thread Pool Task Sizes  · p259
+    - Sizing a ThreadPoolExecutor  · p260
+  - The ForkJoinPool  · p262
+    - Automatic Parallelization  · p268
+  - Thread Synchronization  · p270
+    - Costs of Synchronization  · p270
+    - Avoiding Synchronization  · p275
+    - False Sharing  · p278
+  - JVM Thread Tunings  · p283
+    - Tuning Thread Stack Sizes  · p283
+    - Biased Locking  · p284
+    - Lock Spinning  · p284
+    - Thread Priorities  · p285
+  - Monitoring Threads and Locks  · p286
+    - Thread Visibility  · p286
+    - Blocked Thread Visibility  · p287
+  - Summary  · p291
+- Chapter 10. Java Enterprise Edition Performance  · p293
+  - Basic Web Container Performance  · p293
+    - HTTP Session State  · p296
+  - Thread Pools  · p299
+  - Enterprise Java Session Beans  · p299
+    - Tuning EJB Pools  · p299
+    - Tuning EJB Caches  · p302
+    - Local and Remote Instances  · p304
+  - XML and JSON Processing  · p305
+    - Data Size  · p306
+    - An Overview of Parsing and Marshalling  · p307
+    - Choosing a Parser  · p309
+    - XML Validation  · p315
+    - Document Models  · p318
+    - Java Object Models  · p321
+  - Object Serialization  · p323
+    - Transient Fields  · p323
+    - Overriding Default Serialization  · p323
+    - Compressing Serialized Data  · p327
+    - Keeping Track of Duplicate Objects  · p329
+  - Java EE Networking APIs  · p332
+    - Sizing Data Transfers  · p332
+  - Summary  · p334
+- Chapter 11. Database Performance Best Practices  · p337
+  - JDBC  · p338
+    - JDBC Drivers  · p338
+    - Prepared Statements and Statement Pooling  · p340
+    - JDBC Connection Pools  · p342
+    - Transactions  · p343
+    - Result Set Processing  · p351
+  - JPA  · p353
+    - Transaction Handling  · p353
+    - Optimizing JPA Writes  · p356
+    - Optimizing JPA Reads  · p358
+    - JPA Caching  · p362
+    - JPA Read-Only Entities  · p368
+  - Summary  · p369
+- Chapter 12. Java SE API Tips  · p371
+  - Buffered I/O  · p371
+  - Classloading  · p374
+  - Random Numbers  · p378
+  - Java Native Interface  · p380
+  - Exceptions  · p382
+  - String Performance  · p386
+  - Logging  · p387
+  - Java Collections API  · p389
+    - Synchronized Versus Unsynchronized  · p389
+    - Collection Sizing  · p391
+    - Collections and Memory Efficiency  · p392
+  - AggressiveOpts  · p394
+    - Alternate Implementations  · p394
+    - Miscellaneous Flags  · p395
+  - Lambdas and Anonymous Classes  · p395
+    - Lambda and Anonymous Classloading  · p397
+  - Stream and Filter Performance  · p398
+    - Lazy Traversal  · p399
+  - Summary  · p401
+- Appendix A. Summary of Tuning Flags  · p403
+- Index  · p413
+- About the Author  · p425
