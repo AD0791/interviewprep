@@ -1,16 +1,30 @@
-# MEASUREMENTS
+# MEASUREMENTS — a closed archive
 
-*Every number quoted anywhere in this repo, with its provenance. A figure that appears in a module and not here has no provenance and may not stand.*
+> **This ledger is frozen. No rows are added to it.**
+>
+> It records the figures behind the eleven modules written before
+> [`_tools/MODULE_SPEC.md`](_tools/MODULE_SPEC.md) existed, back when a number had to come out of
+> a terminal on a named machine before it could appear in a chapter. That requirement has been
+> replaced by attribution — a claim names its source in the sentence that makes it — for the
+> reason [`AGENTS.md` §5](AGENTS.md) gives: this is a book to read, and nothing in it may depend
+> on the author or the reader having an environment.
+>
+> **What the archive is still for.** Every row below is a real measurement and stays citable as a
+> source like any other documentation, quoted by ID and with its environment named in the same
+> sentence — *"a purpose-built million-row SQLite dataset measured the difference at 2,401×
+> (`SQL-IDX-01`, SQLite 3.51.0)"*. Nothing here may be written bare, as though it came from the
+> reader's own machine.
+>
+> The tag vocabulary the rows use is explained in
+> [`_tools/MEASUREMENT_SPEC.md`](_tools/MEASUREMENT_SPEC.md), also frozen.
 
-This file exists because the measured claims are what make these modules worth more than the documentation they compete with. A number with a command and an environment behind it can be checked and re-derived by the reader. A number without them cannot, and letting the second borrow the authority of the first would undermine every claim that is real.
-
-Read the tag before quoting anything. The rules are in [`_tools/MEASUREMENT_SPEC.md`](_tools/MEASUREMENT_SPEC.md); the principle behind them is [`AGENTS.md` §5](AGENTS.md).
+*Every number the eleven pre-spec modules quote, with its provenance.*
 
 ---
 
 ## Environments
 
-**`ENV-A` — the current machine.** All new measurements go here.
+**`ENV-A` — the machine the later rows were taken on**, as it stood when the ledger closed.
 
 ```
 CPython 3.14.6 (main, Jun 11 2026) [Clang 22.1.3], arm64
@@ -32,9 +46,11 @@ SQLite (version not recorded)
 
 `ENV-A` and `ENV-B` differ in three ways that change results rather than merely shifting them. The core count doubled, which changes the shape of every process-pool scaling claim. CPython's specialising adaptive interpreter landed in 3.11, so bytecode-level timings from 3.10 do not transfer. And the Node version went *down*, from 22 to 20, so anything depending on a v22 default needs rechecking.
 
-**Consequence:** every `ENV-B` row is tagged `measured-stale-env`. Those figures may appear only with the original environment named in the same sentence, never bare. Rows marked **re-run priority** are the ones worth re-measuring on `ENV-A` before a module relies on them.
+**Consequence:** every `ENV-B` row is tagged `measured-stale-env`. Those figures may appear only with the original environment named in the same sentence, never bare.
 
-`ENV-B` no longer exists and the modules that produced its figures have been removed from this repository, so no `ENV-B` row can be re-derived from a source file. Each row below carries its own date and setup for exactly that reason. Re-measuring on `ENV-A` is the only way to upgrade one.
+`ENV-B` no longer exists and the modules that produced its figures have been removed from this repository, so no `ENV-B` row can be re-derived from a source file. Each row below carries its own date and setup for exactly that reason.
+
+With the ledger closed, the distinction between the two environments matters in one way only: both are historical, and **any row from either is quoted with its environment named**. The **re-run priority** marks that appear on some rows below are a leftover from when re-measuring was the plan; read them as a warning that the figure is the least transferable, not as an outstanding task.
 
 ---
 

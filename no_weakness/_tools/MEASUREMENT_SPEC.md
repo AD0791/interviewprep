@@ -1,22 +1,35 @@
-# MEASUREMENT_SPEC — how figures are recorded and quoted
+# MEASUREMENT_SPEC — how the archived figures are read
 
-This is the binding format for [`MEASUREMENTS.md`](../MEASUREMENTS.md) and for every number that
-appears in a written module. It sits alongside [`MODULE_SPEC.md`](MODULE_SPEC.md), which governs
+> **Superseded, and retained only to explain the archive.**
+>
+> This file was the binding format for every number in a written module: measure it on a named
+> machine, record the command, carry a tag. That requirement is gone.
+> [`MODULE_SPEC.md`](MODULE_SPEC.md) §6 replaces it with attribution — a claim names its source
+> in the sentence that makes it — because a reference text may not be conditional on the author
+> or the reader having an environment. [`AGENTS.md`](../AGENTS.md) §5 gives the reasoning.
+>
+> **What survives:** [`MEASUREMENTS.md`](../MEASUREMENTS.md) is a closed archive of real
+> measurements, citable as sources like any other documentation. The tag vocabulary in §2 below
+> is what its rows are written in, so this file stays readable for that purpose alone. **No new
+> module carries a `Measurement:` line, and no new row is added to the ledger.**
+
+This was the binding format for [`MEASUREMENTS.md`](../MEASUREMENTS.md) and for every number that
+appeared in a written module. It sits alongside [`MODULE_SPEC.md`](MODULE_SPEC.md), which governs
 module shape, and [`KG_SPEC.md`](KG_SPEC.md), which governs the knowledge graph.
 
 ---
 
-## 1. Why the ledger exists
+## 1. Why the ledger existed
 
-The measured claims are what make these modules worth more than the documentation they compete
-with. A number with a command and an environment behind it can be checked and reproduced. A
-number without them cannot, and borrowing the authority of the first for the second would
-undermine every claim that is real.
+The discipline came out of a concrete failure rather than a theory. An early module was written
+about a database with no server available locally, so its plans and timings were taken from
+vendor documentation while its size calculations were genuinely computed. On the page the two
+were indistinguishable. The tags in §2 exist so that they never are again.
 
-The discipline exists because of a concrete failure rather than a theory. An early module was
-written about a database with no server available locally, so its plans and timings were taken
-from vendor documentation while its size calculations were genuinely computed. On the page the
-two were indistinguishable. The tags in §2 exist so that they never are again.
+That failure is still worth preventing, and `MODULE_SPEC.md` §6 prevents it — by requiring the
+source rather than the machine. Where this file said *measure it or do not write it*, the rule
+now is *attribute it or do not write it*, which catches the same dishonesty without making a
+book depend on a running daemon.
 
 **The ledger is not an interview aid.** It records provenance so a reader can trust a figure and
 re-derive it, and so a later pass can tell which figures went stale when the machine changed.
@@ -27,8 +40,10 @@ superseded version of this folder and must not return — see `AGENTS.md` §7.
 
 ## 2. The tags
 
-Every module carries exactly one tag in its front matter, and it must be the **weakest** tag
-among the claims it makes. Individual claims may carry a stricter one.
+These are the tags the archive's rows are written in, and the tags the eleven pre-spec modules
+carry in their front matter — one per module, the **weakest** among the claims it makes, with
+individual claims sometimes carrying a stricter one. New modules carry a `Sources:` line instead
+and no tag at all.
 
 | Tag | Meaning |
 |---|---|

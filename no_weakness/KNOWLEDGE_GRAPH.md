@@ -10,7 +10,7 @@ gone stale against what is true now.*
 **Eleven written modules exist, all of them in Python and Concurrency, and all written before this
 graph did.** The graph is the structural layer the directory needed, not a record of what has been
 written: a node's `**Article:**` line is that record, and 471 of the 482 nodes do not carry one.
-See `AGENTS.md` §9 for what remains and what is blocked on environment.
+See `AGENTS.md` §9 for what remains.
 
 ---
 
@@ -431,4 +431,4 @@ specifically to be read immediately after the first.
 
 ---
 
-← [repo index](README.md) · [writing contract](AGENTS.md) · [measurement ledger](MEASUREMENTS.md)
+← [repo index](README.md) · [writing contract](AGENTS.md) · [module spec](_tools/MODULE_SPEC.md) · [writing order](_tools/WRITE_MODULE_PROMPT.md)

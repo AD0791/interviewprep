@@ -24,11 +24,15 @@ covers, its prerequisites, the books that treat it, and — the part that makes 
 more than a merged table of contents — **how far those books have drifted from what is true
 now**, sourced against current specs, release notes, and documentation rather than asserted.
 
-**Every number in a written module came out of a terminal on a real machine**, and is recorded
-in [`MEASUREMENTS.md`](MEASUREMENTS.md) with its command, environment and an honesty tag.
-Claims that could not be measured are tagged `documented` and never written as though they
-were. Two experiments failed to reproduce and are reported as negative results rather than
-replaced with invented ones.
+**Every claim a reader could reasonably doubt names its source in the sentence that makes it** —
+a book and chapter, a PEP or RFC by number, a release note by version, or named vendor
+documentation. A figure with nothing behind it does not appear at all. The rule is
+[`_tools/MODULE_SPEC.md`](_tools/MODULE_SPEC.md) §6; the reasoning is
+[`AGENTS.md`](AGENTS.md) §5.
+
+**Nothing here asks anyone to set anything up.** No installation steps, no toolchain, no
+containers, no "run this and see". Code on the page is exposition, to be read and understood
+there. This is a book, and the only thing needed to use it is reading it.
 
 **No practice material.** No quizzes, diagnostics, drills, self-ratings or rehearsal scripts.
 The full contract is in [`AGENTS.md`](AGENTS.md) and it is binding — read it before writing
@@ -107,10 +111,11 @@ against their source books.** Full breakdown, subject by subject, in
 | [`AGENTS.md`](AGENTS.md) | The contract: what this folder is, what it refuses to be, and which spec governs what. Read first |
 | [`_tools/KG_SPEC.md`](_tools/KG_SPEC.md) | The binding format for a subject's `00_knowledge_graph.md`. Read before editing a graph |
 | [`_tools/MODULE_SPEC.md`](_tools/MODULE_SPEC.md) | The binding format for a written module — structure, word budgets, the code progression, the ban on practice material. Read before writing one |
-| [`_tools/MEASUREMENT_SPEC.md`](_tools/MEASUREMENT_SPEC.md) | The binding format for figures — the four tags, the ID rule, environments. Read before quoting a number |
+| [`_tools/WRITE_MODULE_PROMPT.md`](_tools/WRITE_MODULE_PROMPT.md) | The standing brief for a module-writing session, plus the Python writing order derived from the graph's `requires` edges. Copy the prompt, set the TARGET block, write one chapter |
+| [`_tools/MEASUREMENT_SPEC.md`](_tools/MEASUREMENT_SPEC.md) | **Superseded.** Explains the tag vocabulary the frozen ledger's rows are written in |
 | [`_tools/validate_kg.py`](_tools/validate_kg.py) | Mechanically checks every graph file — node IDs, edge cycles, currency tags, cross-subject reciprocity |
 | [`_tools/extract_toc.py`](_tools/extract_toc.py) | Extracts a table of contents from a book into `<subject>/_toc/`, the graph builder's only input. Three paths: a PDF's embedded outline, a `pdftotext` scrape for PDFs without one, and an EPUB's `toc.ncx` or XHTML nav document read straight out of the container |
-| [`MEASUREMENTS.md`](MEASUREMENTS.md) | Every figure in a written module, with command, environment and tag |
+| [`MEASUREMENTS.md`](MEASUREMENTS.md) | **A closed archive.** The figures behind the eleven pre-spec modules, citable as sources with their environment named, never extended |
 
 ---
 
@@ -134,24 +139,33 @@ nodes will stay graph-only by design.
 | `26_spring/` | — | 17 | all |
 | every other subject | — | 316 | all |
 
-### Environment blockers
+### Nothing is blocked
 
-Four groups of modules are gated on setup that has not been done — and the graph's own currency
-pass independently confirms why each one matters:
+An earlier version of this file listed five groups of modules as gated on setup — Docker for
+MongoDB and Postgres, `gcloud` for BigQuery, a free-threaded Python build, a current-LTS JDK for
+Java and Spring. Those blockers were a consequence of the measurement rule that
+[`AGENTS.md`](AGENTS.md) §5 has since replaced with attribution, and they went with it. Every
+subject is writable from its shelf plus the primary sources its `Δ current` lines already name:
+`JAVA-14`'s virtual threads from JEP 444, `CONC-05`'s free-threading from PEP 703 and PEP 779,
+`PY-15`'s validation rewrite from the Pydantic 2.0 migration guide.
 
-- **MongoDB** needs the Docker daemon plus `mongo:8`, for real `explain("executionStats")`. Without it every plan claim is `documented`. The graph already carries four `absent` `10_mongodb` nodes (transactions, change streams, time-series collections, the warehouse-ingestion boundary) that the source book never covers regardless.
-- **BigQuery** needs `gcloud`/`bq`. `bq query --dry_run` returns real bytes-processed at **zero cost**, which would make the cost-control module `measured` rather than documented.
-- **SQL 02, 03, 06, 07** are better on Postgres than SQLite and need Docker plus `postgres:17`. Module 03 in particular wants a deadlock reproduced across two live `psql` sessions.
-- **Concurrency 05** needs `uv python install 3.14t` for a measured GIL-versus-free-threaded comparison — one command, and a figure almost nobody has. The graph's `CONC-05` node is tagged `absent` for the same reason: no book on the shelf postdates the feature.
-- **Java and Spring** need a current-LTS JDK installed. `JAVA-14`'s virtual-threads claims don't run at all below Java 21, and the `stale-major` GC/JFR corrections on both subjects want a real JDK to measure against rather than quote from release notes; `26_spring` additionally wants a live Spring Boot 4 project to verify its migration node by running the upgrade.
+The genuine gaps are the ones the currency pass found in the books themselves, and they are
+recorded per subject in [`KNOWLEDGE_GRAPH.md`](KNOWLEDGE_GRAPH.md) §5 rather than here.
 
 ### Known debt in what exists
 
-The three earliest modules — `05_python/01`, `03`, `05` — were written before the no-practice
-rule and open with quiz-style framing ("the questions you cannot answer about it"). All eleven
-modules carry a legacy `## Interview angles` section of spoken answers. Both need a revision
-pass to match [`AGENTS.md`](AGENTS.md) §3: no rhetorical interrogation, and anything genuinely
-explanatory folded into the mechanism or trade-off sections.
+**All eleven modules predate [`_tools/MODULE_SPEC.md`](_tools/MODULE_SPEC.md) and none conforms
+to it.** They share a superseded seven-section skeleton with a quiz-framed second section ("the
+questions you cannot answer about it"), an `## Interview angles` section of spoken answers, and a
+closing section feeding a `RECALL.md` that no longer exists — and none has the reference summary
+the spec requires in its place. Their front matter carries `**Syllabus:**`, `**Measurement:**`
+and `**Roles:**` lines that the current §3.0 replaces or bans outright.
+
+Removing the three non-conforming sections leaves a median of about 2,940 words standing against
+a 6,000-word floor, so each is roughly 3,000 words short — the built-up code progression and the
+reference summary, neither of which the old skeleton asked for. Treat them as rewrites rather
+than revisions; [`AGENTS.md`](AGENTS.md) §9 carries the detail and
+[`_tools/WRITE_MODULE_PROMPT.md`](_tools/WRITE_MODULE_PROMPT.md) carries the procedure.
 
 Diagram coverage is also thinner than the contract now requires. Several written modules have
 one Mermaid diagram or none where the subject has real structure worth drawing.

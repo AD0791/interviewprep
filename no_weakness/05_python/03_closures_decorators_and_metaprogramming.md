@@ -1,501 +1,486 @@
-# Closures, decorators, and metaprogramming
+# Closures, decorators, and metaprogramming — how a function remembers, and how code rewrites code
 
-*Cells, the three-level nesting, and the four tools that all do the same job at different prices.*
+*Cell objects and free variables, what `functools.wraps` actually restores, why a class decorator usually beats a metaclass, and what still needs one when it does not.*
 
-**Level:** L4–L5 · **Prerequisites:** [`01` the object model](01_object_model_and_attribute_lookup.md)
-**Syllabus:** [`PY-12`–`PY-17`](00_knowledge_graph.md) · **Roles:** DE ● FS ●
-**Measurement:** `Measured` — CPython 3.14.6, arm64, 8 cores, macOS 26.5.2. Every output below came out of a terminal on this machine. Claims about SQLAlchemy's and Pydantic's internals are tagged `documented` inline; neither is installed here and I did not read their source.
+**Level:** L5 · **Prerequisites:** [01 object model and attribute lookup](01_object_model_and_attribute_lookup.md), [02 the special-method protocol](02_the_special_method_protocol.md)
+**Covers:** PY-03
+**Sources:** Ramalho, *Fluent Python* 2nd ed. ch.9, 10, 24 (2022) · Beazley, *Advanced Python Mastery* §7 (2024) · Wilson, *Software Design by Example*, ch. "Functions and Closures," ch. "Protocols" §Decorators, ch. "Running Tests" (2026)
 
 ---
 
-## 1. The thing you already do
+## 1. The problem this solves
 
-You have written this decorator, or something close enough:
+A function that needs to remember something between calls looks, at first, like it needs a class:
 
 ```python
-# Gist: deps.py
-def require_role(role: str):
-    def decorator(fn):
-        @functools.wraps(fn)
-        async def wrapper(*args, current_user: User, **kwargs):
-            if current_user.role != role:
-                raise HTTPException(403, "forbidden")
-            return await fn(*args, current_user=current_user, **kwargs)
+def make_fee_calculator(rate):
+    def calculate(amount):
+        return amount * rate
+    return calculate
+
+five_pct = make_fee_calculator(0.05)
+ten_pct = make_fee_calculator(0.10)
+print(five_pct(200), ten_pct(200))     # 10.0 20.0
+```
+
+`make_fee_calculator` runs once, returns, and is gone. `calculate` keeps running long after — `five_pct` and `ten_pct` are both still using a `rate` that only ever existed inside a function call that has already completed. Nothing about this is a special case Python bolted on for convenience; it falls directly out of two facts already established on this shelf: a function is an ordinary object (chapter 2), and a nested function can read names from the scope it was defined in even after that scope has technically returned. What makes the second fact non-obvious is *how* it can possibly be true — the enclosing call's local variables should have been discarded the moment it returned, by the same stack-frame accounting that discards every other function call's locals. They were not discarded, and the mechanism that keeps them alive, and exactly what "keeps them alive" means for a variable that changes after the closure is built, is the first half of this chapter.
+
+The second half starts from a different, equally common need: behavior that should wrap around a function without changing what the function itself does. Retry a flaky network call up to three times. Time how long a computation takes. Register a function in a lookup table the moment it is defined, without a second, separate line of code to add it. Each of these is "run some code before and after calling this function," and each is possible to write by hand — call the real function from inside another function, add the extra behavior around that call — with enough repetition to make doing it by hand for every function actively unpleasant. A decorator is syntax for exactly this pattern, and section 2 shows that the syntax is not doing anything a programmer could not write themselves; `@deco` above a function definition is, character for character, sugar for one assignment statement.
+
+Neither half of this problem is solved by writing a class instead, though a class can express both. A `Retrier` class with a `__call__` method and a `times` attribute would work exactly as well as the function-based version this chapter builds — the choice between them is not correctness, it is which shape makes the intent easiest to read at the call site, and Python's decorator syntax exists because "wrap this function with this behavior" reads far more directly as `@retry(times=3)` sitting directly above the function it modifies than as an instantiation and a manual call somewhere else in the file.
+
+The two halves connect at the point this chapter is actually about: a decorator that needs to remember anything about the function it wraps — how many times it has been called, what its original name was, what argument it should retry with — needs a closure to hold that memory, because the decorator function itself, like `make_fee_calculator`, runs once and returns. Understanding closures is not optional background for understanding decorators; it is the mechanism decorators are built from. The chapter ends with the more drastic tool that shares the same motivation — changing how a class itself behaves, rather than how a function behaves — and with the honest case, made by the very book this chapter draws its metaclass material from, that most of what a metaclass used to be needed for no longer requires one.
+
+Metaprogramming, across both halves, is the umbrella term for all of this: code that operates on other code — functions, classes, or a module's own namespace — as data, rather than simply executing in sequence. A decorator inspects and replaces a function object. A class decorator inspects and modifies a class object. A metaclass controls how a class object is assembled in the first place. And, at the plainest end of the same spectrum, a piece of code that reads `globals()` and picks out every name matching a pattern is metaprogramming with no special syntax at all — just the ordinary fact that a running program's own namespace is, itself, an inspectable dictionary. What separates a well-chosen metaprogramming tool from an over-engineered one, in every case this chapter covers, is whether the problem actually requires operating on the code rather than simply calling it — and section 5 returns to that question directly for each tool in turn.
+
+---
+
+## 2. The mechanism, built up
+
+### 2.1 A closure is a function plus the bindings its body still refers to
+
+`calculate`, from section 1, is not carrying a copy of `rate`. It is carrying a reference to the same variable `make_fee_calculator` created, kept alive specifically because `calculate`'s body still refers to it:
+
+```python
+print(five_pct.__code__.co_freevars)        # ('rate',)
+print(five_pct.__closure__)                 # (<cell at 0x...: float object at 0x...>,)
+print(five_pct.__closure__[0].cell_contents) # 0.05
+print(ten_pct.__closure__[0].cell_contents)  # 0.1
+```
+
+`co_freevars` is the compiler's own record of which names in `calculate`'s body are neither local to `calculate` nor global — a **free variable**, in the technical sense, is a name read inside a function but bound outside it. For each free variable, the returned function object carries a **cell**: a small box holding the actual value, reachable through `__closure__`. `five_pct` and `ten_pct` have separate cells holding `0.05` and `0.1` because each call to `make_fee_calculator` created a fresh local `rate` and a fresh cell to hold it — the closure is per-call, not per-function-definition.
+
+```mermaid
+graph TD
+    subgraph outer["make_fee_calculator(0.05) — one call"]
+        RATE["local variable rate = 0.05"]
+    end
+    subgraph inner["calculate — the returned function"]
+        BODY["body reads 'rate',<br/>a free variable"]
+    end
+    RATE -->|"kept alive by a cell,<br/>reachable via __closure__"| BODY
+```
+
+This is why the enclosing call's locals are not simply discarded: the returned function's `__closure__` holds a reference to the cell, and Python's reference-counting collector — the subject of the next chapter on this shelf — does not free memory still referenced from somewhere reachable. The cell outlives the stack frame it was created in because something still points to it.
+
+### 2.2 A cell can be reassigned, not just read, with `nonlocal`
+
+Reading a free variable works with no special syntax, as `calculate` shows. Assigning to one from inside the nested function does not, by default, do what it looks like it should:
+
+```python
+def make_averager():
+    count = 0
+    total = 0
+    def averager(new_value):
+        count += 1          # this is the same as: count = count + 1
+        total += new_value
+        return total / count
+    return averager
+
+avg = make_averager()
+avg(10)
+```
+
+```text
+UnboundLocalError: cannot access local variable 'count' where it is not associated with a value
+```
+
+The compiler decides, once, at the time it compiles `averager`'s body, whether each name is local to `averager`, free, or global — and it decides this from the *presence of an assignment* anywhere in the function body, not from execution order. `count += 1` is an assignment to `count`, so the compiler marks `count` as local to `averager` for the entire function, which means the read half of `count += 1` is reading a local variable that has never been given a value yet, before the assignment half can run. This is the same static-scoping analysis that makes chapter 1's method-versus-function distinction possible, applied one level down, to variables instead of attributes.
+
+`nonlocal` is the explicit override: it tells the compiler that a specific name, despite being assigned inside this function, should be resolved in the nearest enclosing function's scope instead of treated as local.
+
+```python
+def make_averager():
+    count = 0
+    total = 0
+    def averager(new_value):
+        nonlocal count, total
+        count += 1
+        total += new_value
+        return total / count
+    return averager
+```
+
+With `nonlocal count, total` declared, the same `count += 1` now reads and writes the cell from `make_averager`'s scope, and the running total works correctly across calls. The rule this generalizes to, precisely: if a name is read but never assigned in a function, it is free, and Python looks for it in the nearest enclosing scope, then the module's global scope, then `__builtins__`. If a name is assigned anywhere in the function body, it is local, unless a `global` or `nonlocal` declaration says otherwise. Lists and dictionaries do not run into this at all — `series.append(x)` is a method call, not an assignment to `series`, so the compiler never reclassifies `series` as local, which is why a closure that only ever mutates a mutable free variable in place needs no `nonlocal` declaration at all.
+
+### 2.3 A decorator is one assignment statement, and nothing more
+
+`@decorate` above a function definition is defined, exactly, as running the function body and then rebinding its name to `decorate`'s return value:
+
+```python
+@decorate
+def target():
+    print("running target")
+```
+
+is the same as:
+
+```python
+def target():
+    print("running target")
+target = decorate(target)
+```
+
+A decorator, in the general case, is any callable that accepts a function and returns something — usually, but not necessarily, another callable — and this happens **immediately**, at the moment the module containing the `@decorate`-decorated function is loaded, not the first time `target` is called. The clearest consequence is that a decorator with no closure at all can still change what a name refers to permanently:
+
+```python
+registry = []
+
+def register(func):
+    registry.append(func)
+    return func
+
+@register
+def deposit(amount): ...
+
+@register
+def withdraw(amount): ...
+
+print([f.__name__ for f in registry])   # ['deposit', 'withdraw']
+```
+
+`register` returns `func` unchanged, so `deposit` and `withdraw` still work exactly as written; the side effect — appending to `registry` — is what the decorator is actually for, and it has already happened by the time any other code in the module runs, because decoration happens at *def* time.
+
+### 2.4 A decorator that wraps behavior needs a closure to remember the original function
+
+A decorator that intercepts calls, rather than merely registering the function once, has to hold onto the original function somewhere the replacement can reach it — which is precisely the closure mechanism from section 2.1, applied to a function object instead of a number:
+
+```python
+import time
+
+def clock(func):
+    def clocked(*args, **kwargs):
+        t0 = time.perf_counter()
+        result = func(*args, **kwargs)
+        elapsed = time.perf_counter() - t0
+        print(f"[{elapsed:.6f}s] {func.__name__}(...) -> {result!r}")
+        return result
+    return clocked
+
+@clock
+def apply_interest(balance, rate):
+    return balance * (1 + rate)
+
+apply_interest(1000, 0.05)
+```
+
+`clock(apply_interest)` returns `clocked`, and `apply_interest` is rebound to `clocked` per section 2.3. `func` is a free variable of `clocked`, held in a cell exactly like `rate` was in section 2.1 — the fact that the captured value happens to be a function rather than a float changes nothing about the mechanism. Every subsequent call to `apply_interest(...)` is really a call to `clocked(...)`, which calls the original function through the closure, times it, and returns its result.
+
+### 2.5 `functools.wraps` restores identity that the wrapper otherwise erases
+
+`clocked` from section 2.4 works, but it has quietly become the function that answers to introspection wherever `apply_interest` is inspected:
+
+```python
+print(apply_interest.__name__)     # 'clocked'   — wrong
+print(apply_interest.__doc__)      # None        — lost
+```
+
+Every tool that inspects a function by asking it questions — a debugger, an API-documentation generator, a test framework matching functions by name — is asking `clocked`, not `apply_interest`, and getting `clocked`'s answers. `functools.wraps` fixes this by copying the relevant metadata from the original function onto the wrapper as part of building it:
+
+```python
+import functools
+
+def clock(func):
+    @functools.wraps(func)
+    def clocked(*args, **kwargs):
+        t0 = time.perf_counter()
+        result = func(*args, **kwargs)
+        elapsed = time.perf_counter() - t0
+        print(f"[{elapsed:.6f}s] {func.__name__}(...) -> {result!r}")
+        return result
+    return clocked
+
+@clock
+def apply_interest(balance, rate):
+    """Apply a simple interest rate to a balance."""
+    return balance * (1 + rate)
+
+print(apply_interest.__name__)      # 'apply_interest'
+print(apply_interest.__doc__)       # 'Apply a simple interest rate to a balance.'
+print(apply_interest.__wrapped__ is not None)   # True
+```
+
+`functools.wraps(func)` is itself a decorator — applied to `clocked`, inside `clock` — that copies `__name__`, `__doc__`, `__module__`, and `__dict__` from `func` onto `clocked`, and additionally sets `clocked.__wrapped__ = func`, an explicit escape hatch back to the original that tools like `inspect.signature` know to follow. Without it, a stack of decorators progressively erases the original function's identity one layer at a time; with it, every layer is transparent to introspection, and the underlying function remains reachable no matter how many decorators sit on top of it.
+
+### 2.6 A decorator that takes its own arguments is a function that returns a decorator
+
+`@clock` takes no arguments of its own. `@retry(times=3)` needs to, which adds one more level of nesting rather than a new mechanism:
+
+```python
+def retry(times):
+    def decorator(func):
+        @functools.wraps(func)
+        def wrapper(*args, **kwargs):
+            last_exc = None
+            for attempt in range(1, times + 1):
+                try:
+                    return func(*args, **kwargs)
+                except ConnectionError as e:
+                    last_exc = e
+            raise last_exc
         return wrapper
     return decorator
 
-
-@router.post("/accounts/{account_id}/transfer")
-@require_role("teller")
-async def transfer(account_id: int, amount: float, current_user: User = Depends(auth)):
+@retry(times=3)
+def fetch_balance(account_id):
     ...
 ```
 
-And you have written this model, which is the same machinery from the other side:
+`retry(times=3)` is a plain function call, evaluated first, that returns `decorator` — and `decorator` is what actually receives `fetch_balance` and decorates it, exactly as in section 2.3. `times` is now a free variable of `wrapper`, two closures deep: `wrapper` closes over `func` (from `decorator`'s parameter) and, transitively, `decorator` closes over `times` (from `retry`'s parameter). `@retry(times=3)` above a function definition desugars to `fetch_balance = retry(times=3)(fetch_balance)` — a decorator factory called once to produce the actual decorator, which is then applied once, in the same statement, to the function beneath it.
+
+### 2.7 Stacking decorators nests them, innermost first
+
+Multiple decorators on one function apply bottom-up and unwrap top-down:
+
+```mermaid
+graph TD
+    SRC["@clock<br/>@retry(times=3)<br/>def fetch_balance(...): ..."] --> STEP1["fetch_balance = retry(times=3)(fetch_balance)"]
+    STEP1 --> STEP2["fetch_balance = clock(fetch_balance)"]
+    STEP2 --> CALL["a call to fetch_balance(...)<br/>enters clock's wrapper first,<br/>which calls retry's wrapper,<br/>which calls the original"]
+```
+
+The decorator closest to the function is applied first, so it is the *innermost* layer at call time; the one written above it wraps that already-wrapped function, becoming the *outermost* layer — the first thing that actually runs when the decorated name is called. Getting this backwards is a common source of confusion when a timing decorator is meant to measure a retried call as a whole but ends up, because of stacking order, measuring only the innermost attempt.
+
+### 2.8 Class decorators, and the two hooks that replace most of what metaclasses were for
+
+Everything from section 2.3 onward generalizes directly to classes: a class decorator is a callable that receives a freshly built class and returns one, applied after `class Account: ...` has already executed in full.
 
 ```python
-# Gist: models.py
-class Account(Base):
-    __tablename__ = "accounts"
-    id: Mapped[int] = mapped_column(primary_key=True)
-    owner: Mapped[str] = mapped_column(String(120))
-    balance_cents: Mapped[int] = mapped_column(default=0)
-```
-
-The second one should bother you more than the first. There is no `__init__` in that class, yet `Account(owner="alexandro")` works. There is no code that reads `__tablename__`, yet the table gets named. The annotations — `Mapped[int]` — are doing something, even though annotations are supposed to be inert. Something ran at the moment the `class` statement executed and rewired the class before you ever instantiated it.
-
-That something is metaprogramming, and the decorator above is the entry-level version of it. Both are built from the same three ideas: functions that capture their environment, functions that take functions, and hooks that fire while a class is being built.
-
----
-
-## 2. The questions you cannot answer about it
-
-**What does `functools.wraps` actually restore?** You add it because the docs say to, or because a linter complains. Name the attributes it copies. Then name what breaks without it in a FastAPI application specifically — because the answer is not "the function name looks wrong in a traceback," it is considerably worse than that.
-
-**Why three levels of nesting for a decorator with arguments?** You have written the pattern. Explain why `@retry(times=3)` needs `def retry` → `def decorator` → `def wrapper` while `@retry` needs only two. The `@` symbol applies exactly one thing; knowing what it applies is the whole answer.
-
-**Have you ever written a metaclass?** Almost certainly not. But two of them are running in the code you wrote this month, and being able to say which — and why the library authors chose that over the alternatives — is the difference between using a framework and understanding it.
-
-**And the one that should bother you.** Write the same three-line decorator twice, once with `functools.wraps` and once without. Ask each version for its type annotations:
-
-```text
-  type hints via naive:  {}
-  type hints via proper: {'from_id': <class 'int'>, 'to_id': <class 'int'>, ...}
-```
-
-The naive decorator did not merely lose a cosmetic name. **It erased the type information that FastAPI uses to build the route, parse the request body, and generate the OpenAPI schema.** A missing one-line import silently turns a typed endpoint into an untyped one.
-
-If you can answer all four cleanly, go to §6 and rehearse. Otherwise, section 3.
-
----
-
-## 3. What the machine actually does
-
-### 3.1 The analogy: a cell is a shared mailbox
-
-Here is the image to carry. When an inner function refers to a variable from an enclosing scope, Python does not hand it a copy of the value. It gives both functions a key to the same **mailbox** — a `cell` object. The outer function can drop new contents in; the inner function reads whatever is in there *at the moment it looks*, not what was there when it was handed the key.
-
-Nearly every closure bug in Python is someone assuming they were given a photograph when they were given a mailbox key.
-
-### 3.2 Closures are cells, and you can look inside them
-
-The compiler decides at compile time which variables are free. If an inner function references a name from an enclosing function, that name becomes a **cell variable**, and the inner function object carries a tuple of cells in `__closure__`.
-
-```python
-# Gist: c1_closures.py
-def make_counter():
-    count = 0
-    def increment():
-        nonlocal count
-        count += 1
-        return count
-    return increment
-
-c = make_counter()
-print("  c.__closure__      =", c.__closure__)
-print("  cell contents      =", c.__closure__[0].cell_contents)
-c(); c()
-print("  after two calls    =", c.__closure__[0].cell_contents)
-print("  co_freevars        =", c.__code__.co_freevars)
-```
-
-```text
-  c.__closure__      = (<cell at 0x10550e230: int object at 0x1050d0888>,)
-  cell contents      = 0
-  after two calls    = 2
-  co_freevars        = ('count',)
-```
-
-Three things worth reading carefully ([`PY-CLO-01`](../MEASUREMENTS.md)).
-
-`__closure__` is a real, inspectable tuple of cell objects — closures are not a compiler abstraction, they are data you can print. `co_freevars` on the code object shows the compiler recorded `count` as free *at compile time*, before the function ever ran. And the cell's contents changed from 0 to 2 as the function was called, which proves the cell holds a live reference rather than a snapshot.
-
-`nonlocal` is what permits the *write*. Without it, `count += 1` would treat `count` as local to `increment`, and you would get `UnboundLocalError` — because assignment anywhere in a function body makes the name local for the whole body, which is a rule that catches people who only ever read from the enclosing scope and then add one assignment.
-
-### 3.3 The late-binding bug, and why two different fixes work
-
-Now the consequence. One mailbox, many keys.
-
-```python
-# Gist: c1_closures.py (part 2)
-bad = [lambda: i for i in range(3)]
-print("  [f() for f in bad]           =", [f() for f in bad])
-print("  same cell object in all 3?   =",
-      bad[0].__closure__[0] is bad[1].__closure__[0] is bad[2].__closure__[0])
-
-good = [lambda i=i: i for i in range(3)]
-print("  default-arg fix              =", [f() for f in good])
-print("  good[0].__closure__          =", good[0].__closure__, " <- no closure at all")
-print("  good[0].__defaults__         =", good[0].__defaults__)
-
-good2 = [(lambda x: lambda: x)(i) for i in range(3)]
-print("  factory fix                  =", [f() for f in good2])
-print("  distinct cells now?          =",
-      good2[0].__closure__[0] is not good2[1].__closure__[0])
-```
-
-```text
-  [f() for f in bad]           = [2, 2, 2]
-  same cell object in all 3?   = True
-  default-arg fix              = [0, 1, 2]
-  good[0].__closure__          = None  <- no closure at all
-  good[0].__defaults__         = (0,)
-  factory fix                  = [0, 1, 2]
-  distinct cells now?          = True
-```
-
-`[2, 2, 2]` is the classic, and the second line explains it without ambiguity: **all three functions hold the identical cell object**, so all three see whatever the loop variable ended at ([`PY-CLO-02`](../MEASUREMENTS.md)).
-
-The two fixes are genuinely different mechanisms, and knowing which one you reached for matters.
-
-The default-argument fix works by **not making a closure at all**. `good[0].__closure__` is `None` — there is no cell, no free variable, nothing captured. The value was evaluated at function-definition time and stored in `__defaults__`. It is a snapshot precisely because defaults are evaluated once, at `def` time, which is the same rule that produces the famous mutable-default-argument bug. The same mechanism causes one bug and cures another.
-
-The factory fix works by **making three separate cells**. Each call to the outer lambda creates a fresh frame with its own `x`, so each inner lambda gets its own mailbox — confirmed by the final line.
-
-Prefer the factory when the value should be genuinely private, and the default argument when brevity matters and you can accept that a caller could override it by passing the parameter.
-
-### 3.4 A decorator is function application with syntax
-
-`@decorator` above a `def` means exactly one thing: after the function is created, rebind the name to `decorator(function)`. That is all.
-
-Which is why arguments require a third level. `@retry(times=3)` is not "apply `retry` with an extra argument" — the `@` applies whatever expression follows it, and `retry(times=3)` is a **call** that must therefore *return a decorator*.
-
-```python
-# Gist: c2_wraps.py (part 2)
-def retry(times=3):                       # 1. takes the args
-    def decorator(fn):                    # 2. takes the function
-        @functools.wraps(fn)
-        def wrapper(*a, **kw):            # 3. takes the call
-            for attempt in range(1, times + 1):
-                try:
-                    return fn(*a, **kw)
-                except ValueError as e:
-                    print(f"    attempt {attempt} failed: {e}")
-            raise RuntimeError(f"all {times} attempts failed")
-        return wrapper
-    return decorator
-
-calls = {'n': 0}
-
-@retry(times=3)
-def flaky():
-    calls['n'] += 1
-    if calls['n'] < 3: raise ValueError(f"boom {calls['n']}")
-    return "ok"
-
-print("  flaky() ->", flaky())
-```
-
-```text
-    attempt 1 failed: boom 1
-    attempt 2 failed: boom 2
-  flaky() -> ok
-```
-
-Each level has exactly one job and they are easy to name: the outer takes the configuration, the middle takes the function, the inner takes the call. Note also that `times` is reached from `wrapper` through a closure cell — the retry decorator is the mailbox mechanism from §3.2 doing production work.
-
-### 3.5 What `functools.wraps` restores, and the FastAPI consequence
-
-A wrapper is a different function object from the one it wraps. It has its own name, its own docstring, and — critically — **its own signature**. `functools.wraps` copies the identity across.
-
-```python
-# Gist: c2_wraps.py
-def naive(fn):
-    def wrapper(*a, **kw): return fn(*a, **kw)
-    return wrapper
-
-def proper(fn):
-    @functools.wraps(fn)
-    def wrapper(*a, **kw): return fn(*a, **kw)
-    return wrapper
-
-def transfer(from_id: int, to_id: int, amount: float = 0.0) -> bool:
-    """Move money between two accounts."""
-    return True
-
-n, p = naive(transfer), proper(transfer)
-```
-
-```text
-                     naive            proper
-  __name__     wrapper          transfer
-  __doc__      None             Move money between t
-  __module__   __main__         __main__
-  __qualname__ naive.<locals>.  transfer
-  signature    (*a, **kw)       (from_id: int, to_id: int, amount: float
-  __wrapped__  False            True
-
-  type hints via naive: {}
-  type hints via proper: {'from_id': <class 'int'>, 'to_id': <class 'int'>, 'amount': <class 'float'>, 'return': <class 'bool'>}
-```
-
-The first four rows are cosmetic — better tracebacks, working `help()`. The last three are not ([`PY-CLO-03`](../MEASUREMENTS.md)).
-
-`inspect.signature` reports `(*a, **kw)` for the naive version. `inspect.get_annotations` returns an **empty dictionary**. Every type annotation on the original function is gone.
-
-Now recall what FastAPI does with a route handler. It reads the signature to determine which parameters come from the path, which from the query string, and which from the request body. It reads the annotations to know how to parse and validate each one, and to generate the OpenAPI schema. Hand it `(*a, **kw)` with no annotations and it has nothing to work with — the endpoint either fails to register correctly or silently accepts unvalidated input.
-
-`functools.wraps` restores this because it sets `__wrapped__` to the original function, and `inspect.signature` follows `__wrapped__` by default. That single attribute is what makes introspection see through the wrapper.
-
-The rule: **any decorator applied to a function a framework will introspect must use `functools.wraps`.** That covers FastAPI routes, Pydantic validators, pytest fixtures, Click commands, and Celery tasks.
-
-### 3.6 The class-creation hooks, in the order they actually fire
-
-Executing a `class` statement is a multi-stage process with several hooks. Instrumenting all of them at once settles the ordering questions permanently:
-
-```python
-# Gist: c3_meta.py
-class Tracked:
-    def __set_name__(self, owner, name):
-        print(f"    3. __set_name__     -> {owner.__name__}.{name}")
-        self.name = name
-    def __get__(self, obj, t=None): return self if obj is None else obj.__dict__.get(self.name)
-    def __set__(self, obj, v): obj.__dict__[self.name] = v
-
-class Meta(type):
-    def __new__(mcls, name, bases, ns, **kw):
-        print(f"    1. Meta.__new__     -> building {name}, namespace keys={[k for k in ns if not k.startswith('__')]}")
-        return super().__new__(mcls, name, bases, ns, **kw)
-    def __init__(cls, name, bases, ns, **kw):
-        print(f"    4. Meta.__init__    -> {name} fully built")
-        super().__init__(name, bases, ns, **kw)
-    def __call__(cls, *a, **kw):
-        print(f"    5. Meta.__call__    -> instantiating {cls.__name__}")
-        return super().__call__(*a, **kw)
-
-class Base(metaclass=Meta):
-    def __init_subclass__(cls, **kw):
-        print(f"    2b. __init_subclass__ -> {cls.__name__}")
-        super().__init_subclass__(**kw)
-
-class Account(Base):
-    balance = Tracked()
-
-a = Account()
-a.balance = 500
-```
-
-```text
-    1. Meta.__new__     -> building Base, namespace keys=[]
-    4. Meta.__init__    -> Base fully built
-  Defining Account(Base):
-    1. Meta.__new__     -> building Account, namespace keys=['balance']
-    3. __set_name__     -> Account.balance
-    2b. __init_subclass__ -> Account
-    4. Meta.__init__    -> Account fully built
-
-  Instantiating:
-    5. Meta.__call__    -> instantiating Account
-  a.balance = 500
-```
-
-Read the ordering ([`PY-CLO-04`](../MEASUREMENTS.md)). The metaclass's `__new__` runs **first**, and it receives the class body as an ordinary dictionary before the class object exists — which is what lets a metaclass inspect, rewrite, or reject what was written in the body. Then `__set_name__` fires on every descriptor, then `__init_subclass__` on the parent, then the metaclass's `__init__`. Instantiation later goes through the metaclass's `__call__`, which is the hook that makes singletons and instance caching possible.
-
-The important detail for §5's argument: **`__set_name__` fires before `__init_subclass__`**, so by the time a parent class gets to react to a new subclass, every descriptor in that subclass already knows its own name.
-
-This ordering is the mechanism behind the SQLAlchemy model in §1. The metaclass receives a namespace containing `id`, `owner` and `balance_cents`, collects the ones that are `mapped_column` objects, reads the `Mapped[...]` annotations to determine column types, builds a table definition, and generates an `__init__`. That is why a class with no constructor accepts keyword arguments. *(`documented` — SQLAlchemy is not installed here; I did not read its source. The mechanism is metaclass-plus-descriptor, and the reconstruction above shows the same machinery working.)* Pydantic's model machinery does the equivalent, reading annotations to build validators.
-
----
-
-## 4. Break it on purpose
-
-### 4.1 The decorator that erased the API contract
-
-The §2 result, now as a failure with consequences.
-
-```python
-# Gist: broken_route.py
-def log_calls(fn):                        # no functools.wraps
-    def wrapper(*a, **kw):
-        print(f"calling {fn.__name__}")
-        return fn(*a, **kw)
-    return wrapper
-
-@log_calls
-def transfer(from_id: int, to_id: int, amount: float = 0.0) -> bool:
-    """Move money between two accounts."""
-    return True
-
-print(inspect.signature(transfer))
-print(inspect.get_annotations(transfer))
-```
-
-```text
-  signature    (*a, **kw)
-  type hints via naive: {}
-```
-
-Nothing raised. The function still works when called directly. Tests that invoke `transfer(1, 2, 50.0)` all pass.
-
-But a framework that introspects this function sees a callable taking arbitrary arguments with no types. In FastAPI that means the route's parameters, validation and OpenAPI schema are built from nothing. The failure surfaces as a 422 on a request that should be valid, or worse, as an endpoint that accepts anything.
-
-The fix is one line — `@functools.wraps(fn)` on the wrapper — and the cost is nothing. This is a defect with no trade-off.
-
-**Run this one yourself.** The reason to feel it rather than read it is that the symptom appears nowhere near the cause: you will be looking at a request-parsing error while the bug is in a logging decorator someone added three files away.
-
-### 4.2 The mutable default argument, which is the same mechanism
-
-§3.3 used default arguments as a *fix*. Here is the identical rule causing the language's most notorious bug.
-
-```python
-# Gist: mutable_default.py
-def add_transaction(amount, ledger=[]):
-    ledger.append(amount)
-    return ledger
-
-print(add_transaction(100))
-print(add_transaction(200))
-print(add_transaction(300))
-print("__defaults__ is:", add_transaction.__defaults__)
-```
-
-```text
-[100]
-[100, 200]
-[100, 200, 300]
-__defaults__ is: ([100, 200, 300],)
-```
-
-Three independent calls, and the ledger accumulated across all of them. The last line shows why: `__defaults__` holds **one list object**, created once when the `def` executed, and every call that omits the argument gets that same object.
-
-This is exactly the property that made `lambda i=i: i` work in §3.3 — defaults are evaluated once at definition time. There, evaluating once was the point. Here, it is the bug. The mechanism did not change; only whether the value is immutable did.
-
-The fix is `ledger=None` with `if ledger is None: ledger = []` inside. The cost is two extra lines and one branch, and it is not negotiable for any mutable default.
-
-### 4.3 Two metaclasses, one class, no way forward
-
-This is the failure that decides the tool-choice argument in §5.
-
-```python
-# Gist: c3_meta.py (part 3)
-class MetaA(type): pass
-class MetaB(type): pass
-class A(metaclass=MetaA): pass
-class B(metaclass=MetaB): pass
-class C(A, B): pass
-```
-
-```text
-  TypeError: metaclass conflict: the metaclass of a derived class must be a
-  (non-strict) subclass of the metaclasses of all its bases
-```
-
-`A` and `B` are perfectly good classes. Combining them is impossible ([`PY-CLO-06`](../MEASUREMENTS.md)).
-
-There is no fix available to the person writing `class C(A, B)`. The only resolution is to construct a new metaclass inheriting from both `MetaA` and `MetaB` — which requires the authority to change one of the libraries, and is why combining two frameworks that each use a metaclass can be flatly impossible rather than merely awkward.
-
-This is the strongest practical argument against metaclasses in library code. A metaclass is not a local decision: it constrains every future user of your class in ways they cannot work around. `__init_subclass__` composes cleanly through `super()` and has no equivalent failure.
-
-### 4.4 The decorator that broke the method
-
-Applying a function decorator to a method looks like it works, right up until it does not.
-
-```python
-# Gist: broken_method.py
-import functools
-
-def cache_it(fn):
-    store = {}
-    @functools.wraps(fn)
-    def wrapper(*args):
-        if args not in store:
-            store[args] = fn(*args)
-        return store[args]
-    return wrapper
-
+def add_repr(cls):
+    def __repr__(self):
+        fields = ", ".join(f"{k}={v!r}" for k, v in vars(self).items())
+        return f"{cls.__name__}({fields})"
+    cls.__repr__ = __repr__
+    return cls
+
+@add_repr
 class Account:
-    def __init__(self, owner): self.owner = owner
-    @cache_it
-    def slow_balance(self): return f"balance for {self.owner}"
+    def __init__(self, owner, balance):
+        self.owner, self.balance = owner, balance
 
-a, b = Account("alexandro"), Account("someone else")
-print(a.slow_balance())
-print(b.slow_balance())
+print(Account("alexandro", 100))   # Account(owner='alexandro', balance=100)
+```
+
+This is class-level metaprogramming — code that modifies a class definition — without a metaclass anywhere in sight, and it is simpler to reason about than one for the same reason a decorator is simpler to reason about than overriding `__new__`: it runs once, after the class exists, and cannot affect anything about how the class was assembled in the first place, which rules out an entire category of subtle ordering bugs a metaclass can introduce.
+
+Chapter 1 covers `__init_subclass__` and `__set_name__` in full, as the mechanism behind reacting to subclass creation and descriptor naming without a metaclass; this chapter's addition is naming what kind of tool they are: metaprogramming that operates *through* ordinary class-body syntax rather than by intercepting class construction itself. Between class decorators, `__init_subclass__`, and `__set_name__`, the historical reasons to reach for a metaclass — auto-registering subclasses, validating a class body, naming a descriptor — are covered without one.
+
+### 2.9 What is left that only a metaclass can do
+
+A metaclass is a class whose instances are themselves classes, and the operation it customizes is the one step none of the tools above can reach: **what happens while the class body is still being assembled**, before `class` has produced anything to decorate. `type.__call__` — the same machinery chapter 1 traced for ordinary instance construction — runs `Meta.__new__` and then `Meta.__init__` to produce the class object itself, one level up from `cls.__new__`/`instance.__init__` producing an instance:
+
+```mermaid
+sequenceDiagram
+    participant Src as class Account(metaclass=Meta): ...
+    participant TC as type.__call__
+    participant New as Meta.__new__
+    participant Init as Meta.__init__
+    Src->>TC: build the class
+    TC->>New: __new__(mcls, name, bases, namespace)
+    New-->>TC: the new class object
+    TC->>Init: __init__(cls, name, bases, namespace)
+    Init-->>TC: None
+    TC-->>Src: the finished class
+```
+
+The one thing this reaches that a class decorator cannot: `Meta.__prepare__(name, bases)` can hand back a custom mapping to be used *as* the class namespace while the body executes, before a single line of it has run. Ramalho's own illustration is a namespace that implements `__missing__` to auto-assign an incrementing integer to any name read but not yet defined, which lets a class body list bare names — `banana`, `coconut`, `vanilla` — and have each one become a distinct constant with no right-hand side at all. A class decorator is fundamentally too late for this, because by the time it runs, the namespace has already been read in whatever form it was created.
+
+That power comes with a real, sharp restriction: a class can have exactly one metaclass, and Python computes it as the most derived of the metaclasses of `type` and every base class. When that computation has no single answer, class creation fails immediately:
+
+```python
+import abc
+
+class PersistentMeta(type):
+    pass
+
+class Record(abc.ABC, metaclass=PersistentMeta):
+    pass
 ```
 
 ```text
-balance for alexandro
-balance for someone else
-entries retained in the decorator's dict: 2
-after `del a` + gc.collect(), entries still retained: 2
--> the instance cannot be collected; the cache is holding it
+TypeError: metaclass conflict: the metaclass of a derived class must be a (non-strict) subclass of the metaclasses of all its bases
 ```
 
-This one *works* — and that is what makes it dangerous. The cache key is `args`, which includes `self`, so different instances get different entries. Correct by accident.
+`abc.ABC` is built with `abc.ABCMeta` as its metaclass, and `PersistentMeta` shares no relationship with `ABCMeta` — neither is a subclass of the other — so there is no single class that could serve as `Record`'s metaclass without contradicting one of its bases. The fix is either to avoid combining the two metaclasses at all, or to write a third metaclass inheriting from both and use that instead, which is exactly the kind of code Ramalho's own account of this warns against reaching for near a deadline: it is easy to get subtly wrong and hard for the next reader to follow.
 
-The last two lines are the leak proved rather than asserted ([`PY-CLO-07`](../MEASUREMENTS.md)). After `del a` and a forced `gc.collect()`, the entry is still in the dictionary — so the `Account` object cannot be collected, because `store` holds a strong reference to it as part of the cache key. `store` lives as long as the class does. **Every `Account` instance that ever called `slow_balance` is immortal.** In a long-running service that is an unbounded leak whose retainer path leads back to a decorator nobody suspects.
+One historical reason to reach for `__prepare__` has separately disappeared on its own. Before Python 3.6, a plain `dict` did not preserve the order in which keys were inserted, so a metaclass that needed to process a class body's attributes in the order they were written — to number them, or to preserve declaration order in a generated schema — had no choice but to supply its own ordered mapping via `__prepare__`. Ordinary `dict` objects have preserved insertion order since 3.6, formalized as a language guarantee in 3.7, so that specific reason is gone for any codebase that has dropped support for interpreters older than that; Ramalho's own accounting of this shelf's metaclass material names it directly as one of the two named features — alongside `__set_name__` — that made the historically largest classes of custom metaclass unnecessary rather than merely inconvenient.
 
-`functools.lru_cache` on a method has exactly this problem, and it is the reason `functools.cached_property` exists — it stores the computed value in the *instance's* `__dict__`, so it dies with the instance. The general fix is to key the cache on something other than the object, or to store per-instance rather than in a decorator-level dictionary.
+Two frameworks widely used in the same web-service stack this shelf covers still choose a metaclass for exactly this reason, current as of their present major versions: SQLAlchemy's `DeclarativeBase` is instrumented by a `DeclarativeMeta` metaclass by default — intercepting attribute assignment on mapped classes to wire `mapped_column()` definitions into the ORM's registry — with an explicit `DeclarativeBaseNoMeta` escape hatch documented for the case where a project's own metaclass would conflict with it. Pydantic v2's `BaseModel` is built by a `ModelMetaclass`, which is also why `pydantic.BaseModel` provides its own `__pydantic_init_subclass__` hook rather than relying on the ordinary `__init_subclass__` alone — the metaclass needs to finish building the model's validation schema before that hook fires, an ordering guarantee plain `__init_subclass__` cannot make on its own. Both are examples of the discipline the same source material recommends: the metaclass is an implementation detail sitting behind a plain class that ordinary code subclasses normally, never something application code is expected to write or even notice.
 
-The cost of `cached_property`: it requires the class to have a `__dict__`, so it is incompatible with `__slots__` unless `__dict__` is declared — which links directly back to [module 01's `__slots__` discussion](01_object_model_and_attribute_lookup.md).
+### 2.10 Discovery by introspection needs neither decorators nor metaclasses
 
----
+The last metaprogramming tool in this chapter is the plainest one: scanning an already-built namespace to find things that match a convention, with no decoration and no class machinery at all.
 
-## 5. The judgment call
+```python
+def test_deposit_increases_balance():
+    assert True
 
-### The options, honestly costed
+def test_withdrawal_decreases_balance():
+    assert True
 
-Four tools, one job: react to or modify a class. Ordered cheapest first.
+def helper_not_a_test():
+    pass
 
-| Tool | Use when | Because | Real cost |
-|---|---|---|---|
-| **Function decorator** | Wrapping behaviour around a callable | Simplest thing that works; composes freely | Breaks introspection without `wraps`; stacking order is bottom-up and easy to get wrong |
-| **Class decorator** | Modifying or registering **one specific class** | Explicit at the point of use — a reader sees it on the class | Does not apply to subclasses; must be repeated on each |
-| **`__init_subclass__`** | Every subclass must register, validate, or be configured | Automatic, inherited, composes through `super()`, accepts class keyword arguments | Cannot alter the namespace *during* construction — it runs after the class exists |
-| **`__set_name__`** | A descriptor needs to know its own attribute name | Fires automatically at class creation; removes the repeated-name boilerplate | Only useful on descriptors |
-| **Metaclass** | You must control class **construction** — rewrite the namespace, alter bases, change the type | The only hook that runs before the class object exists | **Metaclass conflicts make your class uncombinable** (§4.3); raises the bar for every future maintainer |
+tests = [name for name, obj in globals().items()
+         if name.startswith("test_") and callable(obj)]
+print(sorted(tests))
+```
 
-### When you would not do this
+```text
+['test_deposit_increases_balance', 'test_withdrawal_decreases_balance']
+```
 
-**Do not write a metaclass.** That is close to an absolute rule for application code, and §4.3 is why: it is not a local decision. A metaclass propagates to every subclass and collides with any other metaclass in the hierarchy, and the person who hits that `TypeError` is usually not the person who chose it. The exceptions are real but narrow — SQLAlchemy and Pydantic need to read the class body and rewrite it before the class exists, which nothing else can do, and they are libraries whose entire purpose justifies the cost. If you are reaching for one, try `__init_subclass__` first; it covers registration, validation and configuration, which is most of what metaclasses get used for.
-
-**Do not decorate what you have not thought about caching.** §4.4 shows a cache decorator quietly making every instance immortal. Any decorator holding a dictionary at module level is a memory retainer, and the question "what keeps this key alive?" has to be answered before it ships. `cached_property` where you want per-instance, an explicit bounded cache where you want shared.
-
-**Do not use closures where a class is clearer.** A closure over mutable state and a small class with one method are the same thing; the class has a name, a docstring, and a place to put a second method later. The counter in §3.2 is fine as a closure. Anything with three captured variables and two returned functions has become an object with extra steps, and `nonlocal` in more than one place is the signal.
-
-**Be careful stacking decorators.** They apply bottom-up — the one nearest the `def` runs first — and in the `@router.post` / `@require_role` pair from §1 the order is load-bearing. Register the route with the *wrapped* function, not the raw one, or the authorisation check never runs. This is the one place where getting the order wrong produces a security hole rather than a crash, and it is worth a comment in the code.
+This is the actual mechanism behind a test runner finding test functions without any of them being registered anywhere: `globals()` returns the module's own namespace as an ordinary dictionary, and any function whose name matches a convention is treated as a test. No decorator marks it, no base class declares it, no metaclass intercepts its creation — the discovery happens entirely after the fact, by reading data the interpreter was already going to produce. This is the least ceremonious metaprogramming technique in the chapter specifically because it asks nothing of the code being discovered; the cost, covered in section 5, is that it asks everything of the naming convention instead.
 
 ---
 
-## 6. Interview angles
+## 3. Diagrams
 
-**"Why do you need `functools.wraps`?"**
-
-> Most people say it preserves the function name for tracebacks, and that's true but it's the least important part. What it actually does is copy `__name__`, `__doc__`, `__module__`, `__qualname__` and `__dict__`, and — the one that matters — set `__wrapped__` to the original function. `inspect.signature` follows `__wrapped__`, so that attribute is what makes introspection see through the wrapper. I checked this rather than trusting it: a naive decorator reports its signature as `(*a, **kw)` and `inspect.get_annotations` on it returns an empty dict. Every type hint is gone. And that's the real consequence, because FastAPI builds the route from the signature and the annotations — which parameters are path versus query versus body, how to validate them, what the OpenAPI schema looks like. So a logging decorator without `wraps` doesn't make your traceback uglier, it silently strips the API contract off the endpoint. Nothing raises, the tests pass because they call the function directly, and it shows up as a 422 on a request that should be valid.
-
-**"Have you ever written a metaclass?"**
-
-> No, and I'd rather say that plainly than pretend. I've never had a problem that needed one. But I can tell you what they do and I've built small ones to make sure I actually understood the ordering. A class statement runs the body into a namespace dict, hands it to the metaclass's `__new__`, and that's the only hook that runs *before* the class object exists — so it's the only place you can inspect or rewrite what was written in the body. I instrumented all the hooks at once to get the sequence straight: metaclass `__new__`, then `__set_name__` on every descriptor, then `__init_subclass__` on the parent, then metaclass `__init__`, and `__call__` later at instantiation. That's what SQLAlchemy's declarative base is doing when a model class with no `__init__` somehow accepts keyword arguments, and Pydantic does the same shape of thing reading annotations to build validators — though I should flag I'm going on documentation for those two specifically rather than having read the source. The part I'd actually argue in a design review is that you usually shouldn't. I reproduced the metaclass conflict — two independent classes with different metaclasses simply cannot be combined, you get a `TypeError` and the person hitting it has no fix available unless they can edit one of the libraries. `__init_subclass__` composes through `super()` and has no equivalent failure, so it's my default for anything that's reacting to class creation rather than controlling it.
-
-**"Explain the classic loop-closure bug and how you'd fix it."**
-
-> The one where you build a list of lambdas in a loop and they all return the last value. The reason is that a closure captures a *cell*, not a value — I like thinking of it as a shared mailbox rather than a photograph. I printed the cells to confirm it: all three functions hold the identical cell object, `is` comparison returns True, so of course they all see whatever the loop variable ended at. There are two fixes and they work by completely different mechanisms, which I think is the interesting part. The default-argument version, `lambda i=i: i`, works by not creating a closure at all — `__closure__` is literally `None` and the value sits in `__defaults__`, because defaults are evaluated once at definition time. The factory version, calling an outer lambda that returns an inner one, creates a genuinely separate cell per iteration. And the thing I find neat is that the default-argument rule — evaluated once at `def` time — is the exact same rule that causes the mutable default argument bug. Same mechanism, and whether it's a fix or a bug depends only on whether the value is mutable. If it's a private value I want nobody able to override, I use the factory; otherwise the default argument is shorter.
-
-**"You've got a memory leak in a long-running Python service. Walk me through it."**
-
-> I'd want the retainer path, not the allocation site — `tracemalloc` tells you where the memory was allocated, which is often not where the bug is. What I'm looking for is what's holding a reference that should have been dropped. And decorators are a place I've learned to check early, because a decorator that keeps a dictionary at module scope holds strong references for the lifetime of the process. I built the case to see it clearly: a caching decorator on a method, keyed on `args`, which includes `self`. It's *correct* — different instances get different cache entries — and that's what makes it nasty, there's no wrong behaviour to notice. But every instance that ever called that method is now immortal, because the module-level dict holds it. That's exactly why `functools.cached_property` exists rather than putting `lru_cache` on methods: it stores the value in the instance's own `__dict__` so it dies with the instance. The trade-off there is it needs the class to have a `__dict__`, so it doesn't work with `__slots__` unless you declare one. The general question I'd ask about any cache is "what keeps this key alive," and if the answer is "the cache does," that's the leak.
+The closure/cell diagram in section 2.1, the decorator-stacking diagram in section 2.7, and the metaclass construction sequence in section 2.9 are integrated into the mechanism build-up above, as this format requires.
 
 ---
 
-## 7. To add to `RECALL.md`
+## 4. Failure modes
 
-- A closure captures a **cell, not a value** — `f.__closure__` is a real tuple you can print; `cell_contents` changes as the outer variable changes
-- `co_freevars` shows the compiler decided which names are free **at compile time**
-- `nonlocal` permits the *write*; without it any assignment makes the name local for the whole body → `UnboundLocalError`
-- Loop-closure bug: **all closures share one cell** (`is` returns True), so they see the final value → `[2, 2, 2]`
-- Fix A, default arg: **creates no closure at all** — `__closure__` is `None`, value lives in `__defaults__`
-- Fix B, factory: creates **distinct cells** per iteration
-- **Same rule, opposite outcome:** defaults evaluated once at `def` time is the fix in A *and* the mutable-default bug
-- `@` applies **exactly one** expression; `@retry(times=3)` is a call whose return value decorates — hence three levels: args → function → call
-- `functools.wraps` copies `__name__`, `__doc__`, `__module__`, `__qualname__`, `__dict__`, and sets **`__wrapped__`**, which `inspect.signature` follows
-- **Without `wraps`: signature becomes `(*a, **kw)` and `get_annotations` returns `{}`** — FastAPI loses parameters, validation and the OpenAPI schema
-- Class-creation order: **metaclass `__new__` → `__set_name__` → `__init_subclass__` → metaclass `__init__` → `__call__`** at instantiation
-- Only metaclass `__new__` runs **before the class exists**, so only it can rewrite the namespace
-- **Metaclass conflict:** two classes with different metaclasses cannot be combined — `TypeError`, and no fix available to the caller
-- Prefer `__init_subclass__` (composes via `super()`) and `__set_name__`; reserve metaclasses for controlling *construction*
-- A module-level cache in a decorator keyed on `self` makes **every instance immortal** — that is why `cached_property` exists
-- Decorators stack **bottom-up**; with `@router.post` above `@require_role`, wrong order means the auth check never runs
+### 4.1 A closure inside a loop captures the variable, not the value it held at that iteration
+
+```python
+# Gist: late_binding.py
+calculators = []
+for rate in (0.05, 0.10, 0.15):
+    calculators.append(lambda amount: amount * rate)
+
+print([f(100) for f in calculators])
+```
+
+```text
+[15.0, 15.0, 15.0]
+```
+
+Every lambda here closes over the same cell — `rate`, from the enclosing scope of the `for` loop, since a loop does not create a new scope on each iteration — and section 2.1 already established that a closure holds a reference to a variable, not a snapshot of its value at the moment the closure was built. By the time any of the three lambdas is actually called, the loop has finished and `rate` holds its final value, `0.15`, which is what every one of them sees. This is not specific to `lambda`; an ordinary nested `def` built inside the same loop would exhibit the identical behavior, because the mechanism is about closures, not about the anonymous-function syntax. The fix is to force the value to be bound at the time each lambda is created rather than looked up when it is called, most commonly by giving it a default argument, whose value is evaluated once, at function-definition time, into a genuinely separate cell per iteration:
+
+```python
+calculators = []
+for rate in (0.05, 0.10, 0.15):
+    calculators.append(lambda amount, rate=rate: amount * rate)
+
+print([f(100) for f in calculators])   # [5.0, 10.0, 15.0]
+```
+
+The cost of the fix is a parameter name that exists purely to shadow the outer one — `rate=rate` reads oddly to someone who has not seen this idiom before — which is why an explicit factory function like `make_fee_calculator` from section 1, called once per iteration with `rate` as a real argument, is often the more readable alternative even though it is a few more lines.
+
+### 4.2 Omitting `functools.wraps` breaks every tool that identifies a function by its metadata
+
+```python
+# Gist: missing_wraps.py
+def log_call(func):
+    def wrapper(*args, **kwargs):
+        return func(*args, **kwargs)
+    return wrapper
+
+@log_call
+def deposit(amount):
+    """Add amount to the account balance."""
+    return amount
+
+print(deposit.__name__)
+print(deposit.__doc__)
+import inspect
+print(inspect.signature(deposit))
+```
+
+```text
+wrapper
+None
+(*args, **kwargs)
+```
+
+Section 2.5 predicted exactly this: `deposit` is now `wrapper` in every way that matters to code inspecting it rather than calling it. The docstring is gone, the name a stack trace will show is `wrapper` instead of `deposit`, and — the entry most likely to cause a real defect — `inspect.signature` reports `(*args, **kwargs)` instead of `deposit`'s real parameter list, which breaks any tool that builds behavior from a function's declared signature: a CLI framework generating arguments from a function, a dependency-injection system matching parameter names, or a testing tool that inspects a fixture's expected arguments. None of this raises an exception anywhere; the wrapped function still runs correctly when called directly, which is exactly why the defect tends to surface far from the decorator that caused it — in whichever downstream tool trusted the now-wrong metadata. The fix is one line, `@functools.wraps(func)` on the inner function, and it costs nothing; there is no legitimate reason for a transparent wrapper to omit it.
+
+### 4.3 Combining two independently metaclassed base classes fails at class-creation time, not at the point of confusion
+
+```python
+# Gist: metaclass_conflict.py
+import abc
+
+class PersistentMeta(type):
+    pass
+
+class Record(abc.ABC, metaclass=PersistentMeta):
+    pass
+```
+
+```text
+TypeError: metaclass conflict: the metaclass of a derived class must be a (non-strict) subclass of the metaclasses of all its bases
+```
+
+Section 2.9 predicted this precisely: Python must compute a single metaclass for `Record` that is compatible with every base's own metaclass, and `PersistentMeta` and `abc.ABCMeta` share no subclass relationship in either direction. This is not a runtime surprise buried in some later call — it is caught the moment the `class` statement executes, which is the metaclass system behaving exactly as intended: an unsatisfiable construction is refused rather than silently resolved by picking one metaclass and ignoring the other's behavior. The fix, when both base behaviors are genuinely needed, is a third metaclass that inherits from both `PersistentMeta` and `abc.ABCMeta` and is used explicitly; the cost, as the source material for this node stresses, is that combined metaclasses of this kind take longer to get right than they look like they should and are correspondingly harder for the next person to safely modify. The lower-cost fix, in most real cases, is to notice that one of the two capabilities — often the ABC's abstract-method enforcement — can be replaced with a plain runtime check in `__init_subclass__` instead, avoiding the combination entirely.
+
+### 4.4 Reassigning a free variable without `nonlocal` silently creates a new local instead of updating the closure
+
+```python
+# Gist: missing_nonlocal.py
+def make_averager():
+    count = 0
+    total = 0
+    def averager(new_value):
+        count += 1
+        total += new_value
+        return total / count
+    return averager
+
+avg = make_averager()
+avg(10)
+```
+
+```text
+UnboundLocalError: cannot access local variable 'count' where it is not associated with a value
+```
+
+Section 2.2 traced the cause: the compiler decides `count` is local to `averager` because `count += 1` assigns to it somewhere in the function body, and that decision applies to the whole function, including the read that happens first inside the same statement. The error fires immediately and loudly here, which is the least dangerous version of this mistake — a quieter variant exists when the outer scope also happens to define a module-level or class-level `count`: without `nonlocal`, the inner function silently reads that outer name (through the normal free-variable lookup) on its first pass but then raises the identical `UnboundLocalError` the instant it tries to assign, because a single function body is classified consistently for every execution, not name-by-name per statement. The fix is the `nonlocal` declaration named in section 2.2, and it costs nothing behaviorally; the only real cost is that it must be added the moment a closure's job changes from reading an enclosing value to accumulating one, a distinction easy to miss when a function starts simple and grows a counter later.
 
 ---
 
-← [Python knowledge graph](00_knowledge_graph.md) · [repo index](../README.md) · [measurement ledger](../MEASUREMENTS.md)
+## 5. Trade-offs
+
+| Approach | Use when | Because | Real cost |
+| --- | --- | --- | --- |
+| **Closure (with `nonlocal` if mutating)** | A single piece of state needs to travel with one function, and no second method is ever needed on it | No class body, no `self`, nothing to instantiate | State is invisible from outside the function; nothing can inspect or reset it without calling the function itself |
+| **Callable class (`__call__`)** | The same state needs to be read or reset from outside, or more than one method needs to share it | State lives in `self`, inspectable and testable directly | An `__init__`, a class body, and an instance to construct — real ceremony for a single piece of memory |
+| **Plain decorator (`@deco`)** | Behavior wraps around a function uniformly, with no per-use configuration | One assignment statement, applied at def time; `functools.wraps` keeps it transparent | Every layer adds one more frame to every traceback and one more hop to every call |
+| **Decorator factory (`@deco(arg)`)** | The wrapping behavior needs to be configured per use (a retry count, a cache size) | The extra call is one line at the use site, and the configuration is visible right there | Two nested closures instead of one; a bug in the outer function is easy to mistake for a bug in the inner one |
+| **Class decorator** | A class needs a fixed, one-time modification after it is fully built | Runs once, after construction; cannot introduce ordering bugs relative to the class body's own execution | Cannot see or change how the class was assembled — only what it looks like once assembly is done |
+| **Metaclass** | The class's *construction* itself must be intercepted — a custom namespace via `__prepare__`, or attribute interception during the class body | The only hook that runs before or during class-body execution, not after it | One metaclass per class, full stop; combining two independently-written metaclasses is real, error-prone work, not a formality |
+| **Introspection-based discovery** | A convention (a name prefix) is enough to identify what matters, and nothing should have to opt in explicitly | Zero ceremony on the discovered code; nothing to import, decorate, or register | The convention itself is the only contract; a typo in a name silently drops something from discovery with no error anywhere |
+
+### When a closure is the wrong tool
+
+The moment external code needs to read, reset, or otherwise interact with the state a closure is holding, the closure has become a class pretending not to be one — `avg.__closure__[0].cell_contents` is a real way to read a closure's state from outside, but it is not something to design an API around. A callable class expresses the same behavior with the state as an ordinary, inspectable attribute, at the cost of the boilerplate a closure avoids. The same reasoning extends to a closure holding more than two or three free variables: at that point the parameter list of the outer factory function is doing the job a dataclass's fields would do more legibly, and the closure has stopped being the lighter-weight option it was chosen for.
+
+### When not to reach for a metaclass
+
+Section 2.9's own conflict is the practical argument: a metaclass is the one customization point that cannot be composed safely with another, independently-written one, because Python allows exactly one per class. A class decorator or `__init_subclass__` composes freely — a class can be decorated any number of times and can inherit from any number of `__init_subclass__`-defining bases — and between them they cover auto-registration, validation, and descriptor naming, which covers the overwhelming majority of real use cases. The narrow case a metaclass still owns — intercepting the namespace before the class body runs, via `__prepare__` — is genuinely rare in application code; both frameworks cited in section 2.9 that still use a metaclass do so to intercept ordinary attribute assignment on the finished class, not to run `__prepare__` tricks, and both ship a documented way to opt out of the metaclass for a project that cannot tolerate it.
+
+### When introspection-based discovery is the wrong tool
+
+A naming convention is an implicit contract, and implicit contracts fail silently: a test function misspelled as `tset_withdrawal` is not run, not flagged, and not missed by anything except a human noticing the coverage gap later. An explicit registration decorator, from chapter 2's `@register` pattern, costs one extra line per function and buys a failure that is at least visible in the source — a function nobody decorated is obviously not in the registry, in a way a function nobody named correctly is not obviously anything. Discovery by convention earns its place specifically where the volume of matching code is high enough that a decorator on every one of them is real friction — a test suite with hundreds of test functions is the standard case — and where a missed function is caught by some other safety net, such as a coverage report, rather than being the only signal that it exists at all.
+
+---
+
+## 6. Reference summary
+
+**A closure is a function plus the free variables its body refers to, kept alive as cells reachable through `__closure__`.** The compiler's own `co_freevars` names them. A cell holds a reference, not a copy, which is why every closure built inside the same loop iteration variable ends up looking at that variable's *final* value rather than the value it held when each closure was created.
+
+**Assigning to a free variable requires `nonlocal`**, because the compiler classifies a name as local to a function the moment any assignment to it appears anywhere in that function's body — a decision made once, statically, not statement by statement — and a `nonlocal` declaration is what overrides that classification back to "resolve this in the nearest enclosing scope." Mutating a free variable in place (`.append`, `+=` on a `dict`) needs no such declaration, because mutation is a method call, not an assignment to the name itself.
+
+**`@decorate` above a function definition is exactly `name = decorate(name)`**, run at the moment the module is loaded, not the first time the function is called. A decorator that wraps rather than merely registers needs a closure to hold the original function; **`functools.wraps` copies `__name__`, `__doc__`, and related metadata onto the wrapper and sets `__wrapped__`**, without which every introspecting tool — debuggers, signature inspectors, documentation generators — sees the wrapper's identity instead of the wrapped function's. **A decorator taking its own arguments is a function that returns a decorator** — one more level of nesting, not a different mechanism — and **stacked decorators apply bottom-up, so the one written closest to the function runs innermost at call time.**
+
+**Class decorators run once, after a class is fully built**, and cover auto-registration, validation, and repr/dunder injection without the risks a metaclass carries. **`__init_subclass__` and `__set_name__`** (chapter 1) cover reacting to subclass creation and naming a descriptor, respectively, also without a metaclass. **A metaclass remains the only tool that can intercept construction itself** — most notably via `__prepare__`, supplying a custom namespace before the class body executes — and **a class may have exactly one metaclass**, computed as the most derived metaclass among `type` and every base; when no single metaclass satisfies every base, class creation raises `TypeError: metaclass conflict` immediately, at definition time. SQLAlchemy's `DeclarativeBase` and Pydantic v2's `BaseModel` both still use a metaclass under the hood for this reason, each shipping a documented way around it for projects that need one.
+
+**Discovery by introspection** — scanning `globals()` or a class's namespace for names matching a convention — needs no decorator, base class, or metaclass at all, at the cost of making a naming convention the only contract; a name that does not match is silently invisible rather than loudly wrong.
+
+**All of it is metaprogramming**, in the specific sense of code that treats other code — a function, a class, a namespace — as data to inspect or rewrite rather than simply calling it. The tools in this chapter form a rough order of increasing power and increasing risk: a closure changes nothing about any function's identity; a decorator replaces a function outright but only after it exists; a class decorator does the same one level up; `__init_subclass__` and `__set_name__` react during construction without controlling it; and a metaclass is the only member of the set that can change how construction itself happens, which is exactly why it is also the one member of the set that cannot be combined with another instance of itself.
+
+---
+
+← [Python knowledge graph](00_knowledge_graph.md) · [repo index](../README.md)

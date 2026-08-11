@@ -6,8 +6,9 @@ themselves, as distinct from the `00_knowledge_graph.md` index files governed by
 Where the two appear to differ, this file is the operative one for module shape and `AGENTS.md`
 for the reasons behind it.
 
-Measurement rules live in [`MEASUREMENT_SPEC.md`](MEASUREMENT_SPEC.md) and are binding here too:
-a module that quotes an untagged figure is not finished.
+Sourcing rules are in §6 and are binding: a module that quotes an unattributed figure is not
+finished. [`MEASUREMENT_SPEC.md`](MEASUREMENT_SPEC.md) and [`MEASUREMENTS.md`](../MEASUREMENTS.md)
+are a closed archive covering the eleven pre-spec modules and govern nothing written from here on.
 
 ---
 
@@ -64,12 +65,15 @@ Every module follows this, in order.
 
 **Level:** L4 · **Prerequisites:** [05_python/05 bytecode](../05_python/05_bytecode_and_the_runtime.md)
 **Covers:** CONC-01 … CONC-07
-**Measurement:** Measured — CPython 3.14.6, 8 cores, macOS 26.5. Every number below
-came out of a terminal.
+**Sources:** Ramalho, *Fluent Python* 2nd ed. ch.19–20 (2022) · Beazley, *Advanced Python
+Mastery* §5 (2024) · PEP 703 (2023) · CPython `Python/ceval_gil.c` documentation
 ```
 
-`Covers:` names knowledge-graph node IDs. The `Measurement:` line is mandatory and carries
-exactly one tag from `MEASUREMENT_SPEC.md` §2.
+`Covers:` names knowledge-graph node IDs. The `Sources:` line is mandatory: it names the books
+and chapters, PEPs, RFCs, release notes or vendor documentation the chapter is written from, and
+it is the same bibliography the node record's own `Sources:` line carries, narrowed to what the
+chapter actually used. There is no `Measurement:` line and no `Roles:` line; both belong to
+superseded versions of this folder.
 
 ### 3.1 The problem this solves (400–700 words)
 
@@ -98,6 +102,10 @@ Narrate in prose between the code blocks: the explanation lives in paragraphs, a
 annotate rather than teach. Trace one concrete execution through the machine in plain words at
 least once per module.
 
+**Code is exposition.** It is on the page to be read and understood there, not to be run. Never
+instruct the reader to try it, install anything, stand up a service, or set up an environment
+before continuing. A chapter that only works for a reader with a terminal open is not a chapter.
+
 ### 3.3 Diagrams — integrated into §3.2, never a section of their own
 
 Where a paragraph would be harder to visualise than a picture, draw the picture. This is a
@@ -118,15 +126,25 @@ alone, the diagram was decoration. If it got noticeably harder, the diagram earn
 
 ### 3.4 Failure modes (1,500–2,200 words)
 
-Three to five ways the mechanism breaks. Each one carries a minimal runnable reproduction named
-`# Gist: name.py`, its **verbatim terminal output** in a fenced block, a prose explanation
-referring back to the §3.2 subsection that predicted it, and the fix with its cost stated.
+Three to five ways the mechanism breaks. Each one carries a minimal reproduction named
+`# Gist: name.py`, the error it produces, a prose explanation referring back to the §3.2
+subsection that predicted it, and the fix with its cost stated.
 
-Terminal output is copy-pasted, never composed by hand, and never approximated.
+**What may be shown as output.** An exception type and message that the language or library
+defines and that does not vary between runs — `TypeError: unhashable type: 'list'`,
+`RuntimeError: dictionary changed size during iteration`, a `psycopg` `SerializationFailure` —
+may be quoted, because it is part of the documented surface rather than a reading taken off a
+machine. Say what the code raises, not what a particular terminal printed.
 
-Failures that could not be reproduced are **reported as negative results**, not invented. A
-nondeterministic failure honestly described is more useful than a fabricated one, and this
-folder already has two good examples of exactly that.
+**What may not.** Anything that varies with the machine: timings, ratios, speed-ups, memory
+figures, row counts from a dataset that exists nowhere, thread interleavings, addresses,
+process IDs. A number in a failure-mode section is subject to §6 like any other, so it is
+attributed to a named source or it is left out. Never compose a plausible-looking traceback and
+never write "would print approximately".
+
+A failure that is nondeterministic is described as nondeterministic — what makes it fire, what
+makes it hide, and why that is the hard part — rather than dressed up with an invented run that
+happened to show it.
 
 ### 3.5 Trade-offs (900–1,300 words)
 
@@ -136,9 +154,9 @@ would not use this, and what you would use instead.
 
 ### 3.6 Reference summary (300–500 words)
 
-A condensed, scannable statement of everything the module established, with measured figures in
-bold. Written as a lookup for someone who read the chapter and wants the facts back — never as a
-self-test.
+A condensed, scannable statement of everything the module established, with the load-bearing
+facts in bold. Written as a lookup for someone who read the chapter and wants the facts back —
+never as a self-test.
 
 ### 3.7 Footer
 
@@ -163,39 +181,67 @@ think", no "most people get this wrong".
 
 1. **Word count** is 6,000–8,000.
 2. **Six sections**, in the §3 order, with the §3.6 reference summary present.
-3. **Verbatim output.** Every failure mode shows real terminal output — zero hand-composed, zero
-   "would print approximately".
-4. **Code progression.** §3.2 starts with a minimal runnable example and builds. No module opens
-   with its most complex listing.
+3. **Attribution.** Every quantitative claim names its source in the same sentence, per §6.
+   Nothing is presented as a reading taken off a machine.
+4. **Code progression.** §3.2 starts with a minimal example and builds. No module opens with its
+   most complex listing.
 5. **Diagrams present where earned**, and every one survives the delete test.
-6. **Measurement density.** At least three claims cite `MEASUREMENTS.md` IDs, and the front
-   matter tag matches the weakest claim in the module.
+6. **Nothing asks the reader to run anything.** No setup steps, no environment prerequisites, no
+   "try this", no toolchain or service the chapter depends on.
 7. **Rejected alternatives.** §3.5 names at least two, with costs.
 8. **The noun-swap test.** No paragraph survives having its subject swapped for a different
    technology. Generic filler does survive it — *"indexes improve read performance at the cost of
    write performance"* works for Postgres, MongoDB and MySQL, which is why it is worthless.
-   Specific writing names a version, a default, a constant, or a measured figure.
+   Specific writing names a version, a default, a constant, or an attributed figure.
 9. **No practice material**, per §2, and no retired section titles.
 10. The node's `**Article:**` line in its subject's `00_knowledge_graph.md` now points at the
     module. Never add that line speculatively.
 
-Then run, from `no_weakness/`:
-
-```
-uv run python _tools/style_check.py <module>.md
-uv run python _tools/check_links.py
-```
-
-`style_check.py` is built for articles rather than graph files; its output is meaningful here in
-a way it is not when pointed at a `00_knowledge_graph.md`.
+`_tools/style_check.py` and `_tools/check_links.py` remain available and are advisory. Neither is
+a gate: a chapter is finished when it passes the ten checks above.
 
 ---
 
-## 6. Before writing at all
+## 6. Sourcing: where a claim is allowed to come from
+
+The rule this folder used to enforce was that a number had to come out of a terminal on a named
+machine. That rule was written to stop an author inventing figures, and the worry behind it is
+sound — an early module quoted vendor query plans and genuinely computed sizes side by side, and
+on the page the two were indistinguishable. What it got wrong was the remedy. It made a
+reference text conditional on a working environment, and it left six subjects unwritable because
+a daemon was not running.
+
+**The remedy is attribution instead.** Every claim a reader could reasonably doubt names where
+it came from, in the sentence that makes it:
+
+- A book and chapter — *"Ramalho's chapter 3 measures the resize threshold at two-thirds load."*
+- A PEP, RFC, or language specification, by number — *"PEP 659 describes the specialising
+  interpreter's quickening step."*
+- A release note or changelog, by version — *"Go 1.22 changed the loop variable to be
+  per-iteration."*
+- Vendor or project documentation, named — *"SQLAlchemy's own 2.0 migration guide documents
+  `Query.get()` as legacy."*
+
+**A claim with no attributable source does not go in.** This applies hardest to numbers, because
+a number reads as authoritative whether or not it has anything behind it. If the fact matters
+and no source states it, write the mechanism without the figure: *"the dictionary is resized
+once it passes a load threshold"* is honest and useful, and an invented percentage is neither.
+
+What needs no attribution is what the code on the page shows directly — that `__getattribute__`
+runs before `__getattr__`, that a generator suspends at `yield` — because the reader can see it
+in the listing. The line falls where a reader would have to take the author's word for it.
+
+Figures in the eleven pre-spec modules trace to [`MEASUREMENTS.md`](../MEASUREMENTS.md), a closed
+archive. Its rows are citable as sources like any other documentation, by ID and with their
+environment named, per [`MEASUREMENT_SPEC.md`](MEASUREMENT_SPEC.md). Nothing new is added to it.
+
+---
+
+## 7. Before writing at all
 
 Check the target node's `Currency` tag and `Δ current` line in its subject's
 `00_knowledge_graph.md`. A `stale-major` or `absent` node means the source books cannot carry
-the module alone — the `Δ current` line already names what to lead with instead, and was written
-for exactly this purpose.
+the module alone — the `Δ current` line already names what to lead with instead, along with the
+PEPs, RFCs and release notes that carry the correction, and was written for exactly this purpose.
 
-← [writing contract](../AGENTS.md) · [graph spec](KG_SPEC.md) · [measurement spec](MEASUREMENT_SPEC.md)
+← [writing contract](../AGENTS.md) · [graph spec](KG_SPEC.md) · [measurement archive](MEASUREMENT_SPEC.md)

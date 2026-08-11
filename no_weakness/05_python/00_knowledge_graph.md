@@ -113,6 +113,7 @@ graph LR
 **Sources:** Ramalho ch.1, 12, 13, 16, 18, 22 (2022) · Beazley, *Advanced Python Mastery* §3 (2024) · Wilson, *Software Design by Example* ch."Protocols" (2026)
 **Edges:** `requires` [`PY-01`]
 **Currency:** `current`
+**Article:** [02_the_special_method_protocol.md](02_the_special_method_protocol.md)
 
 ### `PY-03` · Closures, decorators, and metaprogramming
 **Type:** Mechanism · **Depth:** L5
@@ -129,6 +130,7 @@ graph LR
 **Edges:** `requires` [`PY-01`] · `contrasts` [`JS-14`, `GO-18`]
 **Currency:** `stale-minor`
 **Δ current:** Ramalho's chapter 6 (2022) and the Beazley deck describe reference counting as an ordinary, non-atomic integer increment protected only by the GIL. Under the free-threaded build — experimental in Python 3.13, promoted to officially supported status in Python 3.14 by PEP 779 (released 7 October 2025) — CPython instead uses biased reference counting with per-object locking, and PEP 683 immortal objects (module-level code and type objects in 3.13, narrowed to interned strings and code constants as of 3.14) skip refcounting entirely. An article on this node should present ordinary refcounting as the default-build behaviour and flag the free-threaded divergence explicitly, with the mechanism itself detailed in [`CONC-05`](../06_concurrency/00_knowledge_graph.md).
+**Article:** [04_memory_management_and_the_cyclic_collector.md](04_memory_management_and_the_cyclic_collector.md)
 
 ### `PY-05` · Bytecode and the runtime
 **Type:** Mechanism · **Depth:** L5
@@ -146,6 +148,7 @@ graph LR
 **Edges:** `requires` [`PY-02`] · `contrasts` [`TS-01`]
 **Currency:** `stale-minor`
 **Δ current:** Ramalho's chapters (2022, targeting 3.10) cover `TypeVar`-based generics and PEP 604 unions, both already current in 3.10. Python 3.12 (PEP 695, shipped 2 October 2023) replaced the `TypeVar` boilerplate with native syntax — `class Box[T]:`, `def first[T](xs: list[T]) -> T:`, and a lazily evaluated `type Maybe[T] = T | None` alias — none of which the book shows. Python 3.14 further changed how annotations are evaluated: PEP 649, implemented via PEP 749, makes annotations lazy by default through a new `__annotate__` mechanism, and the `from __future__ import annotations` idiom the book relies on is slated for eventual deprecation once Python 3.13 reaches end of life. An article on this node should lead with PEP 695 syntax and treat the `TypeVar` form as the legacy spelling still required for pre-3.12 compatibility.
+**Article:** [09_the_gradual_type_system.md](09_the_gradual_type_system.md)
 
 ### `PY-07` · Iterators, generators, and lazy evaluation
 **Type:** Mechanism · **Depth:** L4
@@ -153,6 +156,7 @@ graph LR
 **Sources:** Ramalho ch.17 (2022) · Beazley, *Advanced Python Mastery* §8 (2024) · Wilson, *Software Design by Example* ch."Protocols" §Iterators (2026)
 **Edges:** `requires` [`PY-02`] · `contrasts` [`JS-11`]
 **Currency:** `current`
+**Article:** [07_iterators_generators_and_lazy_evaluation.md](07_iterators_generators_and_lazy_evaluation.md)
 
 ### `PY-08` · The import system and packaging
 **Type:** Mechanism · **Depth:** L4
@@ -161,6 +165,7 @@ graph LR
 **Edges:** `requires` [`PY-01`]
 **Currency:** `stale-minor`
 **Δ current:** Beazley's 2024 deck teaches `venv` plus `pip` for environment and dependency management, which still works but is no longer the fastest or most common path: `uv` (Astral, first released as v0.1.0 in February 2024) reimplements the resolver and installer in Rust and is pitched as a single replacement for `pip`, `pip-tools`, `pipx`, `poetry`, `pyenv` and `virtualenv`; this repository's own tooling assumes it via `uv run`. The import machinery itself — finders, loaders, `sys.modules`, the `spawn`-versus-`fork` interaction — is unchanged; only the packaging layer around it has moved.
+**Article:** [08_the_import_system_and_packaging.md](08_the_import_system_and_packaging.md)
 
 ### `PY-09` · Sequence types and their memory layout
 **Type:** Structure · **Depth:** L4
@@ -168,6 +173,7 @@ graph LR
 **Sources:** Ramalho ch.2 (2022) · Beazley, *Advanced Python Mastery* §2 (2024) · Wilson, *Software Design by Example* ch."Performance Profiling" (2026) — row-wise against column-wise storage of the same table, measured
 **Edges:** `contrasts` [`PY-10`]
 **Currency:** `current`
+**Article:** [06_sequences_dicts_and_sets.md](06_sequences_dicts_and_sets.md)
 
 ### `PY-10` · Hash-based collections: dict and set internals
 **Type:** Structure · **Depth:** L4
@@ -175,6 +181,7 @@ graph LR
 **Sources:** Ramalho ch.3 (2022) · Beazley, *Advanced Python Mastery* §2 (2024) · Wilson, *Software Design by Example* ch."Finding Duplicate Files" (2026)
 **Edges:** `contrasts` [`PY-09`, `PY-01`]
 **Currency:** `current`
+**Article:** [06_sequences_dicts_and_sets.md](06_sequences_dicts_and_sets.md)
 
 ### `PY-11` · Unicode text versus bytes
 **Type:** Mechanism · **Depth:** L3
@@ -182,6 +189,7 @@ graph LR
 **Sources:** Ramalho ch.4 (2022)
 **Edges:** `composes` [`PY-14`]
 **Currency:** `current`
+**Article:** [11_text_bytes_and_object_persistence.md](11_text_bytes_and_object_persistence.md)
 
 ### `PY-12` · Data class builders and immutable value objects
 **Type:** Mechanism · **Depth:** L4
@@ -189,6 +197,7 @@ graph LR
 **Sources:** Ramalho ch.5 (2022)
 **Edges:** `requires` [`PY-06`] · `contrasts` [`PY-15`]
 **Currency:** `current`
+**Article:** [10_data_classes_and_pattern_matching.md](10_data_classes_and_pattern_matching.md)
 
 ### `PY-13` · Functions as first-class objects and functional design patterns
 **Type:** Mechanism · **Depth:** L3
@@ -196,6 +205,7 @@ graph LR
 **Sources:** Ramalho ch.7, 10 (2022) · Beazley, *Advanced Python Mastery* §6 (2024)
 **Edges:** `requires` [`PY-01`]
 **Currency:** `current`
+**Article:** [02_the_special_method_protocol.md](02_the_special_method_protocol.md)
 
 ### `PY-14` · ASGI request handling and dependency injection in FastAPI
 **Type:** Mechanism · **Depth:** L4
@@ -204,6 +214,7 @@ graph LR
 **Edges:** `requires` [`PY-02`, `PY-13`] · `requires` [`CONC-04`]
 **Currency:** `stale-minor`
 **Δ current:** Tragura's 2022 chapters use `@app.on_event("startup")`/`"shutdown"` for application lifecycle hooks. FastAPI deprecated that decorator pair starting at release 0.93 in favour of a single `lifespan` async context manager passed to the `FastAPI()` constructor — and setting `lifespan` causes the old event decorators to be silently ignored rather than raising an error, a trap for code migrated chapter by chapter from this book. An article on this node should teach `lifespan` as the only form and mention `on_event` only to name the trap.
+**Article:** [15_asgi_request_handling_and_dependency_injection.md](15_asgi_request_handling_and_dependency_injection.md)
 
 ### `PY-15` · Pydantic validation: schema design, performance, and the v1-to-v2 rewrite
 **Type:** Mechanism · **Depth:** L4
@@ -212,6 +223,7 @@ graph LR
 **Edges:** `requires` [`PY-06`] · `contrasts` [`PY-12`]
 **Currency:** `stale-major`
 **Δ current:** Tragura's 2022 book is written against Pydantic v1. Pydantic 2.0, released June 2023, is a breaking rewrite that moves validation into `pydantic-core`, a Rust extension built on PyO3, reporting 5–50x faster validation than v1; the v1-style `@validator` decorator is replaced by `@field_validator`, and `.dict()`/`.json()` become `.model_dump()`/`.model_dump_json()`. A book teaching bare `@validator` and `.dict()` is teaching an API that a current FastAPI project — which has pinned Pydantic v2 by default since FastAPI 0.100 — will reject outright. An article on this node must lead with v2 syntax and treat v1 as the migration source, never the target.
+**Article:** [16_pydantic_validation.md](16_pydantic_validation.md)
 
 ### `PY-16` · Async database access with SQLAlchemy 2.0
 **Type:** Mechanism · **Depth:** L4
@@ -220,6 +232,7 @@ graph LR
 **Edges:** `requires` [`PY-03`] · `requires` [`CONC-04`] · `contrasts` [`SQL-20`]
 **Currency:** `stale-major`
 **Δ current:** Tragura's chapter 5 (2022) is written against SQLAlchemy 1.x, teaching a `Session`-bound `Query` object for the ORM layer and treating async support as a separate, not-yet-stable path. SQLAlchemy 2.0.0, released 26 January 2023, unifies Core and ORM behind one `select()` construct executed through `Session.execute()` or `AsyncSession.execute()`, and the async extension moved from beta status in 1.4 to fully supported in 2.0. The legacy `Query` object still works as a thin adapter that internally builds a 2.0-style `select()`, but individual methods such as `Query.get()` are documented as legacy in favour of `Session.get()`. An article on this node should teach 2.0 style as the only form and mention 1.x only to explain what an inherited codebase looks like.
+**Article:** [17_async_database_access_with_sqlalchemy.md](17_async_database_access_with_sqlalchemy.md)
 
 ### `PY-17` · Authentication and authorization patterns in a REST API
 **Type:** Practice · **Depth:** L4
@@ -228,6 +241,7 @@ graph LR
 **Edges:** `requires` [`PY-14`]
 **Currency:** `stale-minor`
 **Δ current:** Tragura's chapter (2022) presents the OAuth2 password grant — where the client collects the user's username and password directly and exchanges them for a token — as a standard pattern alongside the authorization code flow. The OAuth 2.1 consolidation, which formalises current best practice, drops both the password grant and the implicit flow entirely and makes PKCE mandatory for the authorization code flow for every client type, not only public clients without a client secret. An article on this node should present the password grant only as a legacy pattern to recognise in existing code, never one to write new.
+**Article:** [18_authentication_and_authorization.md](18_authentication_and_authorization.md)
 
 ### `PY-18` · Microservice decomposition and inter-service communication
 **Type:** Practice · **Depth:** L4
@@ -235,6 +249,7 @@ graph LR
 **Sources:** Tragura, *Building Python Microservices with FastAPI* ch.4, 11 (2022) · Fowler, *Python Concurrency with asyncio* ch.10 (2022)
 **Edges:** `requires` [`PY-14`]
 **Currency:** `current`
+**Article:** [19_microservice_decomposition.md](19_microservice_decomposition.md)
 
 ### `PY-19` · Testing and deploying a Python web service
 **Type:** Practice · **Depth:** L3
@@ -250,6 +265,7 @@ graph LR
 **Sources:** Ramalho ch.2, 3, 5, 11, 18 (2022)
 **Edges:** `requires` [`PY-01`] · `refines` [`PY-12`]
 **Currency:** `current`
+**Article:** [10_data_classes_and_pattern_matching.md](10_data_classes_and_pattern_matching.md)
 
 ### `PY-21` · Building an interpreter and a virtual machine in Python
 **Type:** Mechanism · **Depth:** L5
@@ -257,6 +273,7 @@ graph LR
 **Sources:** Wilson, *Software Design by Example* ch."Parsing Text", ch."An Interpreter", ch."Functions and Closures", ch."A Virtual Machine" (2026)
 **Edges:** `requires` [`PY-05`] · `contrasts` [`PY-23`]
 **Currency:** `current`
+**Article:** [13_building_an_interpreter_and_a_virtual_machine.md](13_building_an_interpreter_and_a_virtual_machine.md)
 
 ### `PY-22` · Object persistence and binary serialisation
 **Type:** Mechanism · **Depth:** L4
@@ -265,6 +282,7 @@ graph LR
 **Edges:** `requires` [`PY-02`]
 **Currency:** `stale-minor`
 **Δ current:** The mechanism — dispatch on type, an identity table for aliases, a length-prefixed binary encoding — is exactly as Wilson builds it and does not date. The standard-library surface around it moved after most of this shelf was written: `pickle` protocol 5 (PEP 574, Python 3.8) added out-of-band buffers so a large array can be transferred without copying it into the pickle stream, and protocol 5 is what `multiprocessing` uses to move arrays between processes, which is why this node connects to `PY-04`'s memory discussion rather than being purely a file-format topic. An article should build the mechanism from scratch as the book does and then map each piece onto the corresponding `pickle` hook.
+**Article:** [11_text_bytes_and_object_persistence.md](11_text_bytes_and_object_persistence.md)
 
 ### `PY-23` · The abstract syntax tree as a program-analysis surface
 **Type:** Mechanism · **Depth:** L4
@@ -273,6 +291,7 @@ graph LR
 **Edges:** `requires` [`PY-05`] · `contrasts` [`PY-21`]
 **Currency:** `stale-minor`
 **Δ current:** The `ast` module's shape is stable, but the tree it returns is versioned with the language and each new syntax addition changes it — `ast.Match` and its pattern nodes arrived with PEP 634 in Python 3.10, and the PEP 695 type-parameter syntax added `ast.TypeAlias`, `ast.TypeVar`, `ast.ParamSpec` and `ast.TypeVarTuple` in 3.12 — so a visitor written against one version silently ignores constructs from a later one rather than failing. `ast.unparse` itself is only available from Python 3.9. A separate development sits outside CPython: the linting tools most projects actually run are no longer written in Python at all, since Ruff reimplements the analysis in Rust, so an article should present the `ast` module as the way to understand and extend analysis rather than as what a fast production linter uses.
+**Article:** [12_the_ast_as_a_program_analysis_surface.md](12_the_ast_as_a_program_analysis_surface.md)
 
 ### `PY-24` · Tracing a running program: profilers, debuggers, and `sys.monitoring`
 **Type:** Mechanism · **Depth:** L4
@@ -281,6 +300,7 @@ graph LR
 **Edges:** `requires` [`PY-05`]
 **Currency:** `stale-major`
 **Δ current:** Every treatment of this subject written before Python 3.12, including the mechanism Wilson builds, rests on `sys.settrace`, which fires a Python callback on every line of every frame and costs enough that a traced program is often an order of magnitude slower. PEP 669 added `sys.monitoring` in Python 3.12, a per-tool event API that hooks the specialising interpreter's quickening machinery instead, allows a tool to disable an event at a specific code location, and is reported in the PEP's own rationale and in tool-vendor writeups as roughly an order of magnitude cheaper than `settrace` for debugger workloads. The consequence for an article is structural, not cosmetic: `settrace` is still the right thing to build first because it is simple and shows the event model plainly, but the article must not leave the reader thinking it is what a current debugger or coverage tool should use.
+**Article:** [14_tracing_a_running_program.md](14_tracing_a_running_program.md)
 
 ---
 
