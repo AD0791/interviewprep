@@ -42,7 +42,7 @@ names, no "what to say when asked". The organising principle is the subject. An 
 of this folder built every chapter around what a CV did and did not claim; that framing was
 removed and must not return.
 
-What replaces all of it is the **reference summary** in §3.6 — a condensed statement of the
+What replaces all of it is the **reference summary** in §3.5 — a condensed statement of the
 module's facts, written to be looked up, not to be quizzed on.
 
 Two section titles are permanently retired because they encode the banned framing: any heading
@@ -54,7 +54,20 @@ debt.
 
 ## 3. The structure
 
-Every module follows this, in order.
+Every module follows this, in order. The written module's own headings are exactly these five,
+and only these five — so the count can never again be inferred from the sub-numbering below:
+
+    ## 1. The problem this solves
+    ## 2. The mechanism, built up
+    ## 3. Failure modes
+    ## 4. Trade-offs
+    ## 5. Reference summary
+
+Front matter and the footer are not sections and carry no heading of their own.
+
+The section minimums below sum to 5,600 words, short of the 6,000-word floor, so a section
+targets the **midpoint** of its range rather than its minimum. The midpoints — 550, 3,000, 1,850,
+1,100, 400 — sum to 6,900, comfortably inside the 6,000–8,000 band.
 
 ### 3.0 Front matter (~120 words)
 
@@ -106,7 +119,7 @@ least once per module.
 instruct the reader to try it, install anything, stand up a service, or set up an environment
 before continuing. A chapter that only works for a reader with a terminal open is not a chapter.
 
-### 3.3 Diagrams — integrated into §3.2, never a section of their own
+**Diagrams belong inside this section.**
 
 Where a paragraph would be harder to visualise than a picture, draw the picture. This is a
 requirement rather than a permission; an earlier version of this folder under-used diagrams
@@ -124,7 +137,7 @@ byte-level layout matters. Banned: a diagram that restates a bulleted list, gene
 **The delete test.** Remove the diagram and reread the paragraph. If the paragraph is fine
 alone, the diagram was decoration. If it got noticeably harder, the diagram earns its place.
 
-### 3.4 Failure modes (1,500–2,200 words)
+### 3.3 Failure modes (1,500–2,200 words)
 
 Three to five ways the mechanism breaks. Each one carries a minimal reproduction named
 `# Gist: name.py`, the error it produces, a prose explanation referring back to the §3.2
@@ -146,19 +159,19 @@ A failure that is nondeterministic is described as nondeterministic — what mak
 makes it hide, and why that is the hard part — rather than dressed up with an invented run that
 happened to show it.
 
-### 3.5 Trade-offs (900–1,300 words)
+### 3.4 Trade-offs (900–1,300 words)
 
 An options table with fixed columns — **Use when · Because · Real cost** — where the cost column
 is not optional. Then prose subsections, one of which is always the case *against*: when you
 would not use this, and what you would use instead.
 
-### 3.6 Reference summary (300–500 words)
+### 3.5 Reference summary (300–500 words)
 
 A condensed, scannable statement of everything the module established, with the load-bearing
 facts in bold. Written as a lookup for someone who read the chapter and wants the facts back —
 never as a self-test.
 
-### 3.7 Footer
+### 3.6 Footer
 
 `← [<Topic> knowledge graph](00_knowledge_graph.md) · [repo index](../README.md)`
 
@@ -180,7 +193,7 @@ think", no "most people get this wrong".
 ## 5. Before a module is marked written
 
 1. **Word count** is 6,000–8,000.
-2. **Six sections**, in the §3 order, with the §3.6 reference summary present.
+2. **Five sections**, in the §3 order, with the §3.5 reference summary present.
 3. **Attribution.** Every quantitative claim names its source in the same sentence, per §6.
    Nothing is presented as a reading taken off a machine.
 4. **Code progression.** §3.2 starts with a minimal example and builds. No module opens with its
@@ -188,7 +201,7 @@ think", no "most people get this wrong".
 5. **Diagrams present where earned**, and every one survives the delete test.
 6. **Nothing asks the reader to run anything.** No setup steps, no environment prerequisites, no
    "try this", no toolchain or service the chapter depends on.
-7. **Rejected alternatives.** §3.5 names at least two, with costs.
+7. **Rejected alternatives.** §3.4 names at least two, with costs.
 8. **The noun-swap test.** No paragraph survives having its subject swapped for a different
    technology. Generic filler does survive it — *"indexes improve read performance at the cost of
    write performance"* works for Postgres, MongoDB and MySQL, which is why it is worthless.

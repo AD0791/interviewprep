@@ -291,8 +291,8 @@ Nothing in the three surveyed books treats the V8 heap profiler, `--cpu-prof`, o
 debugging (`JS-14`) as a subject — *Get Started* and *Scope & Closures* stop at language fundamentals,
 and *The Road to React*'s "Performance in React" chapter is scoped to component re-renders, not the
 underlying engine. Chrome DevTools' own heap-snapshot and CPU-profiling documentation would close this,
-and the measurement plan for `JS-14` is straightforward: grow a deliberate leak, diff two snapshots, and
-capture the retainer path verbatim.
+and the article for `JS-14` should teach the technique by citing that documentation directly: growing a
+deliberate leak, diffing two snapshots, and reading the retainer path DevTools reports.
 
 The Road to React's TOC lists "TypeScript in React" as a chapter (p200) but no chapter naming React 19's
 `use` hook explicitly, despite the book's React-19 branding. Per KG_SPEC §2, only the TOC was read for

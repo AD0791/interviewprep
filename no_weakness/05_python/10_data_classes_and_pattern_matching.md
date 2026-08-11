@@ -69,7 +69,7 @@ graph TD
     DECO --> MATCH["writes __match_args__ =<br/>('owner', 'balance')"]
 ```
 
-Chapter 1's hash contract governs one generated method the diagram above omits deliberately: by default (`eq=True`, `frozen=False`), `@dataclass` sets `__hash__` to `None` explicitly, making every ordinary data class unhashable, for exactly the reason chapter 2 already establishes — a mutable object whose `__eq__` compares by value cannot safely guarantee a stable hash. `hash(Point(1, 2))` raises `TypeError: unhashable type: 'Point'` on a plain `@dataclass`; only `frozen=True` (section 4.3) restores a generated `__hash__`, because only then can the fields be trusted not to change underneath it. `order=True` is a separate opt-in generating `__lt__`, `__le__`, `__gt__`, and `__ge__` from the same field tuple, letting instances be sorted or compared with `<` the moment a project needs it, at no cost to anyone who does not.
+Chapter 1's hash contract governs one generated method the diagram above omits deliberately: by default (`eq=True`, `frozen=False`), `@dataclass` sets `__hash__` to `None` explicitly, making every ordinary data class unhashable, for exactly the reason chapter 2 already establishes — a mutable object whose `__eq__` compares by value cannot safely guarantee a stable hash. `hash(Point(1, 2))` raises `TypeError: unhashable type: 'Point'` on a plain `@dataclass`; only `frozen=True` (section 3.3) restores a generated `__hash__`, because only then can the fields be trusted not to change underneath it. `order=True` is a separate opt-in generating `__lt__`, `__le__`, `__gt__`, and `__ge__` from the same field tuple, letting instances be sorted or compared with `<` the moment a project needs it, at no cost to anyone who does not.
 
 ### 2.2 A mutable default is rejected outright — for three specific types, not for mutability in general
 
@@ -101,7 +101,7 @@ a.guests.append("x")
 print(a.guests, b.guests)   # ['x'] []
 ```
 
-`field()` accepts several other options beyond `default_factory` — `compare` (whether the field participates in `__eq__`), `repr` (whether it appears in `__repr__`), and `hash` (whether it participates in a generated `__hash__`) among them — each letting one field opt out of the behavior `@dataclass` would otherwise generate for it by default. Section 4.1 covers exactly which mutable defaults this protection does **not** catch, which is a narrower set than "mutable" suggests.
+`field()` accepts several other options beyond `default_factory` — `compare` (whether the field participates in `__eq__`), `repr` (whether it appears in `__repr__`), and `hash` (whether it participates in a generated `__hash__`) among them — each letting one field opt out of the behavior `@dataclass` would otherwise generate for it by default. Section 3.1 covers exactly which mutable defaults this protection does **not** catch, which is a narrower set than "mutable" suggests.
 
 ### 2.3 `__post_init__` runs after the generated `__init__`; `ClassVar` and `InitVar` opt specific annotations out of being fields at all
 
@@ -182,7 +182,7 @@ match p:
         print("x is 1, y is", y)
 ```
 
-`Point(1, y)` matches only because `Point.__match_args__` — generated automatically by `@dataclass`, per section 2.4 — is `('x', 'y')`, telling the pattern-matching machinery that the first positional sub-pattern corresponds to the `x` attribute and the second to `y`. A plain class with no `__match_args__` defined has no positional patterns available at all, which section 4.4 demonstrates concretely.
+`Point(1, y)` matches only because `Point.__match_args__` — generated automatically by `@dataclass`, per section 2.4 — is `('x', 'y')`, telling the pattern-matching machinery that the first positional sub-pattern corresponds to the `x` attribute and the second to `y`. A plain class with no `__match_args__` defined has no positional patterns available at all, which section 3.4 demonstrates concretely.
 
 ```mermaid
 graph TD
@@ -195,7 +195,7 @@ graph TD
     MATCHARGS -->|yes| POSITIONAL["map position 0 to<br/>__match_args__[0], etc."]
 ```
 
-A **simple class pattern** — `case float():`, with no arguments at all — is a third, narrower form: it matches purely on `isinstance`, binding nothing. It also hides the single most misread line in the entire feature, which section 4.2 exists specifically to make unmistakable.
+A **simple class pattern** — `case float():`, with no arguments at all — is a third, narrower form: it matches purely on `isinstance`, binding nothing. It also hides the single most misread line in the entire feature, which section 3.2 exists specifically to make unmistakable.
 
 ### 2.7 Or-patterns and guards combine with class and sequence patterns to express real branching logic
 
@@ -241,15 +241,9 @@ This reads naturally as "search for something, and if the search finishes withou
 
 ---
 
-## 3. Diagrams
+## 3. Failure modes
 
-The field-generation diagram in section 2.1, the class-pattern matching flowchart in section 2.6, and the guard-evaluation diagram in section 2.7 are integrated into the mechanism build-up above, as this format requires.
-
----
-
-## 4. Failure modes
-
-### 4.1 `@dataclass` only rejects `list`, `dict`, and `set` as mutable defaults — any other mutable type slips through unguarded
+### 3.1 `@dataclass` only rejects `list`, `dict`, and `set` as mutable defaults — any other mutable type slips through unguarded
 
 ```python
 # Gist: unguarded_mutable_default.py
@@ -274,7 +268,7 @@ True
 
 Section 2.2's `ValueError` protection is real but narrow: it recognizes exactly the three built-in mutable container types, `list`, `dict`, and `set`, and every other mutable type — a custom class, an instance of a third-party library's own mutable container — is accepted as a default with no warning at all, silently reintroducing chapter 3's shared-mutable-default defect one level up. `h1` and `h2` share the identical `Ledger` instance, exactly as two `HauntedBus` instances shared a list in chapter 3, and nothing about `@dataclass`'s own safety net catches it, because that net was built to catch three specific types by name rather than mutability as a general property. The fix is the same `field(default_factory=...)` idiom section 2.2 already introduces, applied deliberately to any default value that is not a plain immutable literal — the safety net not catching a case is not evidence the case is safe.
 
-### 4.2 `case float:` matches everything, because a bare name in a pattern is a capture, not a type check
+### 3.2 `case float:` matches everything, because a bare name in a pattern is a capture, not a type check
 
 ```python
 # Gist: bare_name_pattern_trap.py
@@ -296,7 +290,7 @@ float is just a capture variable here, now bound to 5.0
 
 `case float():` — with parentheses — is a class pattern per section 2.6, genuinely checking `isinstance(x, float)`. `case float:` — with no parentheses — is a **capture pattern**: any bare name in a `case` that is not a dotted attribute reference is treated as a variable to bind the subject to, unconditionally, matching *any* value at all. Python does not special-case `float` here even though it names a real, familiar built-in type; the pattern-matching grammar has no way to distinguish "a name the author means as a type" from "a name the author means as a new local variable" except by the presence of parentheses, so it always chooses the capture interpretation for a bare name. Worse, this silently shadows the built-in: inside that `case` body, `float` no longer refers to the type at all, it refers to `5.0`. The fix — the parenthesized form for every type check — costs nothing and is the only spelling PEP 634 actually treats as a type-checking class pattern; a bare name in a `case` should be read, on sight, as "this binds a variable," never as "this checks a type."
 
-### 4.3 `frozen=True` is a convention enforced by `__setattr__`, not a memory-level guarantee — and it is bypassable on purpose
+### 3.3 `frozen=True` is a convention enforced by `__setattr__`, not a memory-level guarantee — and it is bypassable on purpose
 
 ```python
 # Gist: frozen_bypass.py
@@ -321,7 +315,7 @@ print(m.cents)   # 200 — the "frozen" instance was mutated anyway
 
 `frozen=True` works by generating a `__setattr__` (and `__delattr__`) that raises on every ordinary assignment — chapter 2's dunder mechanism, not a language-level immutability flag comparable to a genuinely immutable type like `tuple`. `object.__setattr__`, called directly, bypasses the class's own overridden `__setattr__` entirely and writes to the instance's `__dict__` the same way any ordinary attribute assignment would if `frozen` were never set. This is, deliberately, not a security boundary — Ramalho's own account of this shelf's material states plainly that a determined, "nosy" piece of code can always work around it, and that the goal of `frozen=True` is protection against *accidental* mutation during ordinary code review and ordinary use, not protection against a caller who has decided to defeat it on purpose. Treating a frozen dataclass as suitable for holding a genuine security invariant — a value that must never change regardless of what any caller attempts — is the actual mistake here, not the bypass technique itself; nothing about `frozen=True` was ever meant to resist a caller willing to call `object.__setattr__` directly.
 
-### 4.4 A positional class pattern against a class with no `__match_args__` raises `TypeError`, not a non-match
+### 3.4 A positional class pattern against a class with no `__match_args__` raises `TypeError`, not a non-match
 
 ```python
 # Gist: missing_match_args.py
@@ -343,7 +337,7 @@ TypeError: Plain() accepts 0 positional sub-patterns (2 given)
 
 Section 2.6 already predicts this precisely: `Plain` is an ordinary hand-written class, never decorated with `@dataclass` and never given `__match_args__` explicitly, so the pattern-matching machinery has no attribute-name mapping to consult for a positional pattern against it. This is not treated as "this pattern simply does not match" the way a keyword pattern or a failed attribute comparison would be — it is a `TypeError`, raised immediately, because a positional pattern against a class with an empty `__match_args__` is a structurally invalid request rather than a legitimately false comparison. The fix is either to add an explicit `__match_args__ = ('x', 'y')` to the class by hand, or, more simply, to build the class with one of section 2.4's builders in the first place, all three of which generate a correct `__match_args__` automatically as a side effect of declaring the fields once.
 
-### 4.5 An ordinary data class cannot be put in a `set` or used as a `dict` key, by design, until it is frozen
+### 3.5 An ordinary data class cannot be put in a `set` or used as a `dict` key, by design, until it is frozen
 
 ```python
 # Gist: unhashable_dataclass.py
@@ -365,7 +359,7 @@ Section 2.1's generated methods quietly include one more than the three usually 
 
 ---
 
-## 5. Trade-offs
+## 4. Trade-offs
 
 | Approach | Use when | Because | Real cost |
 | --- | --- | --- | --- |
@@ -381,7 +375,7 @@ The clearest signal, per section 2.5, is a class whose fields keep gaining more 
 
 ### The case against reaching for `frozen=True` as a security measure
 
-Section 4.3 already demonstrates the bypass; the broader point is architectural. Anywhere a value's immutability is meant to be a genuine invariant another part of the system depends on for correctness — not merely a guard against an accidental typo in code review — `frozen=True` is the wrong tool, because it was never designed to resist a caller acting in bad faith or even simply unaware of the convention. The rejected alternative to reaching for `frozen=True` here is accepting that Python has no fully tamper-proof attribute-level immutability at all, and building the actual invariant elsewhere — validation at every boundary that constructs the value, or simply documenting and trusting the convention the same way the rest of the language already asks callers to respect a single leading underscore.
+Section 3.3 already demonstrates the bypass; the broader point is architectural. Anywhere a value's immutability is meant to be a genuine invariant another part of the system depends on for correctness — not merely a guard against an accidental typo in code review — `frozen=True` is the wrong tool, because it was never designed to resist a caller acting in bad faith or even simply unaware of the convention. The rejected alternative to reaching for `frozen=True` here is accepting that Python has no fully tamper-proof attribute-level immutability at all, and building the actual invariant elsewhere — validation at every boundary that constructs the value, or simply documenting and trusting the convention the same way the rest of the language already asks callers to respect a single leading underscore.
 
 ### The case against choosing `@dataclass` purely to avoid writing three methods
 
@@ -393,7 +387,7 @@ A two- or three-branch decision based on one simple property — `if x < 0:` —
 
 ---
 
-## 6. Reference summary
+## 5. Reference summary
 
 **`@dataclass` reads a class's `__annotations__` (chapter 9's plain runtime dictionary) and generates `__init__`, `__repr__`, `__eq__`, and `__match_args__` from the field list it finds there** — the same class-decorator mechanism chapter 3 covers generally, applied specifically to annotation data.
 

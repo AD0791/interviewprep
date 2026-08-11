@@ -33,7 +33,7 @@ print(len(b))                # 5 — the é took two bytes in UTF-8
 print(b.decode("utf-8"))     # 'café' — back to a str
 ```
 
-`s` has four elements because `"café"` has four Unicode characters, each identified by a numeric **code point** — a number from `U+0000` to `U+10FFFF` — entirely independent of how that character is ever stored as bytes. `b` has five elements because UTF-8 happens to need two bytes to represent the code point for `é`; a different encoding could need a different number. **Encoding** converts code points to bytes; **decoding** converts bytes back to code points, and the two operations are not symmetric inverses of arbitrary data — decoding a byte sequence with the wrong encoding, or encoding a string into an encoding that cannot represent one of its characters, are both real, common failure points, covered fully in section 4.1.
+`s` has four elements because `"café"` has four Unicode characters, each identified by a numeric **code point** — a number from `U+0000` to `U+10FFFF` — entirely independent of how that character is ever stored as bytes. `b` has five elements because UTF-8 happens to need two bytes to represent the code point for `é`; a different encoding could need a different number. **Encoding** converts code points to bytes; **decoding** converts bytes back to code points, and the two operations are not symmetric inverses of arbitrary data — decoding a byte sequence with the wrong encoding, or encoding a string into an encoding that cannot represent one of its characters, are both real, common failure points, covered fully in section 3.1.
 
 `bytes` (and its mutable counterpart, `bytearray`) is a sequence of plain integers from `0` to `255` — indexing a `bytes` object returns an `int`, not a one-character `bytes`, which is the one place its behavior genuinely diverges from `str`'s. Both types share most of `str`'s other methods (`.replace()`, `.split()`, `.strip()`, and so on), deliberately, precisely so that code operating purely on bytes — a binary protocol parser, for instance — is not forced to decode text it may not even know the encoding of.
 
@@ -47,7 +47,7 @@ print(b.decode("utf-8"))     # 'café' — back to a str
 UnicodeEncodeError: 'charmap' codec can't encode character '\xe3' in position 1: character maps to <undefined>
 ```
 
-`cp437` — the original IBM PC character set — simply has no representation for `ã`, and the default error-handling mode (`'strict'`) raises rather than silently dropping or mangling the character. Three alternative modes trade correctness for tolerance in different, explicit ways: `errors='ignore'` drops the unencodable character entirely (real, silent data loss); `errors='replace'` substitutes a visible placeholder (`?`) so a human reading the output at least sees that something was lost; `errors='xmlcharrefreplace'` substitutes an XML numeric entity, which is lossless and reversible when the target format supports it. The decode direction fails with the sibling exception, `UnicodeDecodeError`, the moment a byte sequence is not valid under the assumed encoding — but only sometimes, which section 4.2 covers as its own hazard: several legacy 8-bit encodings can decode *any* byte sequence at all, including outright random noise, without ever raising anything.
+`cp437` — the original IBM PC character set — simply has no representation for `ã`, and the default error-handling mode (`'strict'`) raises rather than silently dropping or mangling the character. Three alternative modes trade correctness for tolerance in different, explicit ways: `errors='ignore'` drops the unencodable character entirely (real, silent data loss); `errors='replace'` substitutes a visible placeholder (`?`) so a human reading the output at least sees that something was lost; `errors='xmlcharrefreplace'` substitutes an XML numeric entity, which is lossless and reversible when the target format supports it. The decode direction fails with the sibling exception, `UnicodeDecodeError`, the moment a byte sequence is not valid under the assumed encoding — but only sometimes, which section 3.2 covers as its own hazard: several legacy 8-bit encodings can decode *any* byte sequence at all, including outright random noise, without ever raising anything.
 
 ### 2.3 A byte-order mark exists because multi-byte encodings have no fixed byte order of their own
 
@@ -204,7 +204,7 @@ b = pickle.loads(pickle.dumps(a))
 print(b.owner, b.balance)   # alexandro 0
 ```
 
-`__getstate__` intercepts what `pickle` treats as "the object's data" before writing it, and `__setstate__` intercepts how that data is written back into a freshly-constructed instance on load — here used to deliberately scrub a field on the way out. `__reduce__` is the more general, lower-level hook underneath both: it returns a callable and the arguments to pass it, and `pickle` reconstructs the object by calling exactly that combination on load rather than using the default class-plus-`__dict__` reconstruction at all — which is both what makes it possible to serialize objects with no ordinary `__init__`-based reconstruction and, as section 4.4 covers, the exact mechanism that turns unpickling into a genuine security boundary.
+`__getstate__` intercepts what `pickle` treats as "the object's data" before writing it, and `__setstate__` intercepts how that data is written back into a freshly-constructed instance on load — here used to deliberately scrub a field on the way out. `__reduce__` is the more general, lower-level hook underneath both: it returns a callable and the arguments to pass it, and `pickle` reconstructs the object by calling exactly that combination on load rather than using the default class-plus-`__dict__` reconstruction at all — which is both what makes it possible to serialize objects with no ordinary `__init__`-based reconstruction and, as section 3.4 covers, the exact mechanism that turns unpickling into a genuine security boundary.
 
 ### 2.9 `struct` packs Python values into a fixed, C-compatible binary layout, with explicit control over byte order
 
@@ -230,15 +230,9 @@ This is precisely why this object-persistence node sits closer to chapter 4's me
 
 ---
 
-## 3. Diagrams
+## 3. Failure modes
 
-The Unicode-sandwich diagram in section 2.3, the identity-table contrast in section 2.6, and the memo-table sequence in section 2.7 are integrated into the mechanism build-up above, as this format requires.
-
----
-
-## 4. Failure modes
-
-### 4.1 Decoding with the wrong encoding raises `UnicodeDecodeError` — but only when the wrong encoding happens to reject the bytes
+### 3.1 Decoding with the wrong encoding raises `UnicodeDecodeError` — but only when the wrong encoding happens to reject the bytes
 
 ```python
 # Gist: wrong_decode.py
@@ -256,7 +250,7 @@ UnicodeDecodeError: 'utf-8' codec can't decode byte 0xe9 in position 5: invalid 
 
 Section 2.2 already names the mechanism: `koi8_r` (a Russian-language 8-bit encoding) can decode *any* byte value at all, because every one of the 256 possible byte values maps to *some* character under it — there is no invalid byte for it to reject, so it happily, silently produces a Cyrillic letter where the actual text meant an accented `é`. Only `utf-8`, which has real structural rules about which byte sequences are even legal, correctly identifies the mismatch and raises. This is the sharper version of the encoding-mismatch hazard: a program that assumes the wrong single-byte legacy encoding may run for a long time producing subtly garbled text with no exception ever appearing to reveal the mistake, while a program making the identical mistake against a stricter encoding fails immediately and loudly. The only real defense is not to guess: know the encoding a byte source actually uses, from a protocol header, a file format's own specification, or an explicit agreement with whatever produced the bytes, rather than assuming one and hoping a decode error will surface if the assumption is wrong.
 
-### 4.2 Normalizing text can silently change which character it contains
+### 3.2 Normalizing text can silently change which character it contains
 
 ```python
 # Gist: normalization_surprise.py
@@ -275,7 +269,7 @@ False
 
 Section 2.4 already covers why: the OHM SIGN is a distinct, legacy code point Unicode preserves purely for compatibility, and NFC's normalization step considers it a compatibility variant of the Greek omega it visually resembles, replacing it outright. Code that normalizes user input before storing it — a reasonable, common practice for reliable comparison — has, in this one specific case, quietly replaced the character the user actually typed with a different one, and nothing about the process raises a warning, because normalization is doing exactly what it is documented to do. This matters most for text meant to be reproduced exactly — a technical symbol in a document, a unit of measurement — where "compares reliably" and "preserves exactly what was typed" are two different, occasionally conflicting goals, and normalizing indiscriminately picks the first at the expense of the second without saying so.
 
-### 4.3 A format with no identity table turns one shared object into several independent ones, silently
+### 3.3 A format with no identity table turns one shared object into several independent ones, silently
 
 ```python
 # Gist: json_aliasing_loss.py
@@ -295,7 +289,7 @@ print(restored["primary"]["balance"])   # still 100 — the sharing is gone
 
 Before serialization, `ledger["checking"]` and `ledger["primary"]` are the identical object — updating one through either name updates the same underlying dictionary. Section 2.6 already shows why the round trip does not preserve this: `json` has no identity table, so it wrote the same dictionary's *value* twice and produced two independent dictionaries on the way back, and the code above, written under the reasonable assumption that the aliasing relationship survived a save-and-reload cycle, silently stops being correct the moment it actually runs against restored data. This is a defect that is completely invisible in any test that only checks values immediately after loading — `restored["checking"] == restored["primary"]` is still `True`, because the two dictionaries hold equal contents; only a mutation-and-recheck test, or an explicit `is` comparison, would reveal that the sharing itself did not survive. The fix, whenever preserving object identity matters and not merely equal values, is a format that maintains its own identity table — `pickle`, or an application-level scheme built the same way — rather than a value-only format like JSON, which was never designed to represent aliasing in the first place.
 
-### 4.4 Unpickling untrusted data is equivalent to executing arbitrary code supplied by whoever produced it
+### 3.4 Unpickling untrusted data is equivalent to executing arbitrary code supplied by whoever produced it
 
 ```python
 # Gist: pickle_is_not_safe.py
@@ -317,14 +311,14 @@ Section 2.8 already names the mechanism this exploits: `__reduce__` returns a ca
 
 ---
 
-## 5. Trade-offs
+## 4. Trade-offs
 
 | Approach | Use when | Because | Real cost |
 | --- | --- | --- | --- |
 | **`str` throughout, encode/decode only at I/O boundaries** | Essentially always, for any text-handling code | The Unicode sandwich keeps encoding concerns out of business logic entirely | None — this is the default correct discipline, not a specialized choice |
 | **A permissive error handler (`errors='replace'`/`'ignore'`)** | The data source is known to be occasionally malformed and partial recovery beats a crash | The program keeps running instead of raising on the first bad byte | Real, silent data loss (`'ignore'`) or visible-but-unrecoverable loss (`'replace'`) — never appropriate for data that must round-trip exactly |
 | **`json` (or another value-only format)** | The data is untrusted, needs to interoperate with non-Python systems, or genuinely has no aliasing/cycles to preserve | Human-readable, safe to load from any source, universally supported | Cannot represent shared references or cycles at all — silently duplicates the former, refuses the latter |
-| **`pickle`** | Fully trusted, Python-to-Python data — caching, `multiprocessing` payloads, checkpointing internal state | Preserves aliasing and cycles correctly via its own identity table; handles arbitrary Python objects | Unsafe against untrusted input by design (section 4.4); not readable by, or meant for, anything outside Python |
+| **`pickle`** | Fully trusted, Python-to-Python data — caching, `multiprocessing` payloads, checkpointing internal state | Preserves aliasing and cycles correctly via its own identity table; handles arbitrary Python objects | Unsafe against untrusted input by design (section 3.4); not readable by, or meant for, anything outside Python |
 | **`struct`** | A fixed binary layout must interoperate with another language or a specified file format | Explicit, compact, byte-for-byte control including endianness | Entirely manual — no object graph support, no identity table, just fixed-width fields |
 
 ### When JSON's limitations are a feature, not a defect
@@ -341,7 +335,7 @@ Building a custom serializer that tracks object identity by hand — the mechani
 
 ---
 
-## 6. Reference summary
+## 5. Reference summary
 
 **`str` is Unicode code points; `bytes` is raw integers 0–255; encoding converts the first to the second, decoding the reverse** — and a mismatch between them fails as one of two specific exceptions, `UnicodeEncodeError` or `UnicodeDecodeError`, except when the target/source encoding happens to be permissive enough to silently accept the wrong data. **The Unicode sandwich — decode at the boundary, operate on `str` throughout, encode at the boundary — is the discipline that keeps encoding concerns out of ordinary logic entirely.**
 

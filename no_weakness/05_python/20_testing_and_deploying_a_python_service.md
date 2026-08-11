@@ -168,7 +168,9 @@ COPY . .
 CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
 ```
 
-A container image bundles the exact Python interpreter version, the exact set of installed dependencies, and the exact application code together into one artifact, built once and run identically wherever it is deployed — which is what actually closes the gap between "passed on the developer's machine" and "passed in CI" and "runs correctly in production," none of which are guaranteed to share the same underlying OS packages, Python patch version, or even CPU architecture otherwise. This is also precisely what makes a container the natural unit a process manager like Kubernetes, or a cloud platform's own container runtime, schedules and restarts — the same image, the same guaranteed-reproducible environment, run as however many replicas the actual load requires, entirely independent of whichever single machine originally built it.
+A container image bundles the exact Python interpreter version, the exact set of installed dependencies, and the exact application code together into one artifact, built once and run identically wherever it is deployed — which is what actually closes the gap between "passed on the developer's machine" and "passed in CI" and "runs correctly in production," none of which are guaranteed to share the same underlying OS packages, Python patch version, or even CPU architecture otherwise.
+
+The `Dockerfile` shown builds every layer above `COPY . .` fresh whenever the application's own source changes, but Docker caches every layer *above* that unchanged, which is exactly why `COPY requirements.txt .` and the `pip install` step are deliberately ordered before `COPY . .` rather than after: a source-code change, the most frequent kind of change during active development, invalidates only the final, cheap `COPY` layer and the command that runs the server, while the comparatively expensive dependency-installation layer is reused unchanged from the previous build. Reversing that order — copying the whole application first, then installing dependencies — would force a full dependency reinstall on every single source change, turning a build that takes seconds into one that takes minutes, for no benefit at all; the ordering is a direct, deliberate exploitation of how Docker's own layer cache decides what needs rebuilding. This is also precisely what makes a container the natural unit a process manager like Kubernetes, or a cloud platform's own container runtime, schedules and restarts — the same image, the same guaranteed-reproducible environment, run as however many replicas the actual load requires, entirely independent of whichever single machine originally built it.
 
 ### 2.9 The OpenAPI schema FastAPI generates automatically can be overridden and extended directly
 
@@ -195,15 +197,9 @@ FastAPI generates its OpenAPI schema automatically from every route's own type a
 
 ---
 
-## 3. Diagrams
+## 3. Failure modes
 
-The `TestClient`-versus-real-transport diagram in section 2.1 and the `uvicorn.workers` deprecation path and process-topology comparison, both in section 2.5, are integrated into the mechanism build-up above, as this format requires.
-
----
-
-## 4. Failure modes
-
-### 4.1 A dependency override left uncleared after one test silently changes the behavior of every test that runs after it
+### 3.1 A dependency override left uncleared after one test silently changes the behavior of every test that runs after it
 
 ```python
 # Gist: leaked_override.py
@@ -222,7 +218,7 @@ def test_account_rejects_bad_input():
 
 Section 2.3 already names the mechanism: `dependency_overrides` lives on the shared `app` object, not on any individual test, so the first test's override remains active for every test that runs afterward in the same session, entirely invisible in the second test's own source — nothing in `test_account_rejects_bad_input` mentions `get_db` at all, and yet it is running against a fake database connection it never asked for. This is a specific, common instance of **test pollution** — one test's setup leaking into another's execution — and it is unusually hard to debug because the two tests, read independently, both look correct; the bug only manifests as test *order* dependence, where a test passes in isolation and fails (or, worse, passes for the wrong reason) only when run after a specific other test. The fix is the fixture-based teardown section 2.3 already recommends: every test that sets an override does so through a fixture whose teardown unconditionally clears it, guaranteeing cleanup runs even if the test itself raises partway through, rather than trusting each test to remember a manual cleanup call at its own end.
 
-### 4.2 A container image built without pinning exact dependency versions is not actually reproducible, despite looking like it is
+### 3.2 A container image built without pinning exact dependency versions is not actually reproducible, despite looking like it is
 
 ```dockerfile
 # Gist: unpinned_requirements.dockerfile
@@ -234,7 +230,7 @@ CMD ["uvicorn", "app:app", "--host", "0.0.0.0"]
 
 Section 2.8 already establishes that a container's entire value is freezing an exact, reproducible runtime — and `pip install fastapi uvicorn sqlalchemy`, with no version pins at all, installs whatever the *latest* compatible versions happen to be **at build time**, which is a different, uncontrolled variable on every single rebuild. An image built today and an image built from the identical `Dockerfile` six months from now can silently receive different versions of every one of those libraries, including a breaking change like chapter 16's own Pydantic v1-to-v2 rewrite, with nothing in the build process flagging that anything changed. This defeats the entire premise of containerizing in the first place: the image looks reproducible — same base image, same `Dockerfile`, same source code — while the actual installed dependency graph is whatever happened to be current on the package index the moment `docker build` ran. The fix is pinning exact versions (a `requirements.txt` generated by `pip freeze`, or a lockfile from a tool that manages this directly) and rebuilding only when those pins are deliberately updated, so that "the same `Dockerfile`" and "the same runtime" are actually the same claim rather than two claims that happen to coincide most of the time.
 
-### 4.3 Setting worker count from the `2 * cores + 1` formula alone, with no measurement, can under- or over-provision an I/O-bound service badly
+### 3.3 Setting worker count from the `2 * cores + 1` formula alone, with no measurement, can under- or over-provision an I/O-bound service badly
 
 ```bash
 # Gist: formula_only_workers.sh
@@ -244,7 +240,7 @@ gunicorn -w 9 -k uvicorn.workers.UvicornWorker app:app
 
 Section 2.7 already names why this can be badly wrong in either direction for a service that spends most of its time awaiting a database or another downstream call rather than computing: nine worker processes, each holding its own full copy of the application's loaded modules, database connection pool (chapter 17's own per-engine pool sizing), and interpreter overhead, can exhaust the host machine's memory or the downstream database's own connection limit — chapter 17's `QueuePool` defaulting to five connections *per engine, per process* means nine worker processes each opening their own pool multiplies that number by nine — long before nine processes' worth of CPU parallelism was ever actually needed for a workload that was never CPU-bound in the first place. The formula is silent about this because it was never designed to account for it; it answers "how many processes saturate the CPU," a question that is close to irrelevant for a service whose bottleneck is somewhere else entirely. The fix is treating the formula as a starting point for measurement, not a final answer: load-testing the actual service under realistic traffic, watching actual CPU utilization, actual memory per worker, and actual downstream connection counts, and adjusting the worker count to what the measured bottleneck actually calls for, which for a genuinely I/O-bound service is very often a number `2 * cores + 1` did not anticipate in either direction.
 
-### 4.4 A `TestClient` used without a `with` block never runs the application's `lifespan`
+### 3.4 A `TestClient` used without a `with` block never runs the application's `lifespan`
 
 ```python
 # Gist: testclient_skips_lifespan.py
@@ -277,7 +273,7 @@ Chapter 15 already establishes `lifespan` as an async context manager running it
 
 ---
 
-## 5. Trade-offs
+## 4. Trade-offs
 
 | Approach | Use when | Because | Real cost |
 | --- | --- | --- | --- |
@@ -286,6 +282,8 @@ Chapter 15 already establishes `lifespan` as an async context manager running it
 | **Uvicorn alone, one process** | Local development, or a workload genuinely light enough that one process is sufficient | Simplest possible setup, easiest to debug directly | No process supervision, no multi-core parallelism |
 | **Gunicorn + Uvicorn workers** | Production, on a platform where Gunicorn's process-supervision model fits the deployment | Battle-tested process management, automatic worker restart on crash | An additional layer and an additional configuration surface beyond Uvicorn alone |
 | **Uvicorn's own `--workers` flag** | Production, especially on Windows, or when avoiding an extra dependency on Gunicorn matters | Built directly into Uvicorn, works uniformly across platforms via `spawn` | Less mature process-supervision behavior than Gunicorn's own, accumulated over a longer history |
+| **`app.dependency_overrides` for unit-style tests** | Testing a route's own logic against a controlled, predictable substitute | Fast, no real infrastructure required, deterministic every run | Proves nothing about whether the real dependency actually behaves the way the substitute assumes |
+| **Pinned dependency versions in a container build** | Any deployment meant to be genuinely reproducible across rebuilds | The same `Dockerfile` produces the same installed dependency graph every time | Requires deliberate, tracked upgrades rather than automatically receiving the latest compatible releases |
 
 ### The case against skipping integration tests entirely in favor of `dependency_overrides` everywhere
 
@@ -297,11 +295,11 @@ A test suite that exercises every endpoint through `TestClient`, with every depe
 
 ### The case against choosing a worker topology without measuring the actual bottleneck
 
-Section 4.3 already demonstrates the concrete cost; the trade-off worth stating plainly is that CPU-core-based formulas answer a question a large fraction of real web services never actually have — most REST APIs spend the overwhelming majority of their time waiting on a database or a downstream call, not computing, which means the CPU-bound assumption the `2 * cores + 1` heuristic is built on frequently does not describe the actual workload at all. The rejected alternative to trusting the formula outright is load-testing the specific service under realistic traffic and tuning from what is actually observed — memory per worker, actual downstream connection pressure, actual latency under concurrent load — which costs real setup time up front and avoids provisioning a production deployment around a number that was never actually measuring the thing that matters for this particular service.
+Section 3.3 already demonstrates the concrete cost; the trade-off worth stating plainly is that CPU-core-based formulas answer a question a large fraction of real web services never actually have — most REST APIs spend the overwhelming majority of their time waiting on a database or a downstream call, not computing, which means the CPU-bound assumption the `2 * cores + 1` heuristic is built on frequently does not describe the actual workload at all. The rejected alternative to trusting the formula outright is load-testing the specific service under realistic traffic and tuning from what is actually observed — memory per worker, actual downstream connection pressure, actual latency under concurrent load — which costs real setup time up front and avoids provisioning a production deployment around a number that was never actually measuring the thing that matters for this particular service.
 
 ---
 
-## 6. Reference summary
+## 5. Reference summary
 
 **`TestClient` drives a real ASGI application directly, in-process, with no server or socket involved** — it is the same request-handling path a running server would use, not a simplified substitute for it. **`app.dependency_overrides` is a plain dictionary, keyed by the original dependency callable**, checked before chapter 15's own dependency resolution ever calls the real one — the mechanism that lets an endpoint's logic be tested in isolation from the real infrastructure its dependencies would otherwise require. **Overrides are scoped to the shared application object, not to any individual test**, and must be cleared explicitly (ideally via a fixture's unconditional teardown) or they silently affect every test that runs afterward in the same session. **`TestClient` only runs the application's `lifespan` when used as its own context manager (`with TestClient(app) as client:`)** — used as a plain object, `startup` and `shutdown` never run at all, which passes silently for any test whose endpoint does not happen to depend on `lifespan`-initialized state.
 
@@ -309,7 +307,9 @@ Section 4.3 already demonstrates the concrete cost; the trade-off worth stating 
 
 **The `2 * cores + 1` worker-count formula is a CPU-bound starting point, not a universal constant** — an I/O-bound service, which describes most ordinary web APIs, can be badly over- or under-provisioned by following it without measuring the actual bottleneck, and each additional worker process multiplies per-process resource costs (a database connection pool among them, chapter 17's own subject) rather than sharing them.
 
-**A container image freezes an exact, reproducible runtime**, closing the gap between "works on one machine" and "works everywhere it is deployed" — but only when dependency versions are actually pinned; an unpinned build looks reproducible while silently installing whatever happens to be current on every rebuild. **FastAPI's OpenAPI schema generation is fully overridable** via `app.openapi`, with the generated schema cached onto `app.openapi_schema` to avoid rebuilding it on every request to the documentation UI.
+**A container image freezes an exact, reproducible runtime**, closing the gap between "works on one machine" and "works everywhere it is deployed" — but only when dependency versions are actually pinned; an unpinned build looks reproducible while silently installing whatever happens to be current on every rebuild. **A `Dockerfile`'s instruction order determines what Docker's own layer cache can reuse** — dependency installation ordered before the application source copy means a source-only change reuses the expensive dependency layer unchanged, rather than reinstalling everything on every build. **FastAPI's OpenAPI schema generation is fully overridable** via `app.openapi`, with the generated schema cached onto `app.openapi_schema` to avoid rebuilding it on every request to the documentation UI.
+
+Every mechanism in this chapter ultimately answers the same question from a different angle: how does a claim about a running service — "this endpoint behaves correctly," "this deployment reproduces the environment it was tested in," "this many workers actually serve this workload" — get verified rather than merely assumed. `TestClient` and `dependency_overrides` verify the first claim cheaply and often; a pinned, reproducible container image verifies the second; a load-tested worker count, not a formula taken on faith, verifies the third. None of the three substitutes for either of the others, and a service that has only ever satisfied one of them is not, in any complete sense, actually ready to run.
 
 ---
 

@@ -152,7 +152,7 @@ recent.appendleft(0)
 print(recent)           # deque([0, 2, 3], maxlen=3)
 ```
 
-`maxlen=3` turns the deque into a fixed-size ring buffer, automatically discarding from the opposite end as new items arrive — genuinely useful for a rolling window of the most recent N events, expressed with no manual trimming logic at all. Section 4.4 covers precisely what a plain list costs when a program treats its *front* the way a deque is built to handle.
+`maxlen=3` turns the deque into a fixed-size ring buffer, automatically discarding from the opposite end as new items arrive — genuinely useful for a rolling window of the most recent N events, expressed with no manual trimming logic at all. Section 3.4 covers precisely what a plain list costs when a program treats its *front* the way a deque is built to handle.
 
 ### 2.6 Pattern matching over a sequence is structural unpacking, made conditional
 
@@ -231,15 +231,9 @@ Section 2.8's insertion-order guarantee is a **dict** guarantee specifically, an
 
 ---
 
-## 3. Diagrams
+## 3. Failure modes
 
-The list-over-allocation layout in section 2.1 and the hash-table lookup diagram in section 2.7 are integrated into the mechanism build-up above, as this format requires.
-
----
-
-## 4. Failure modes
-
-### 4.1 `[[x] * n] * n` builds one row and n references to it, not n independent rows
+### 3.1 `[[x] * n] * n` builds one row and n references to it, not n independent rows
 
 ```python
 # Gist: aliased_board.py
@@ -254,7 +248,7 @@ print(board)
 
 Section 2.4 already traced this exactly: the outer `* 3` copies a reference to the single inner list three times, so every "row" is the same object under three different names, and mutating one mutates all of them simultaneously. This defect is unusually easy to miss during development, because printing the freshly built structure looks completely correct — `[['_', '_', '_'], ['_', '_', '_'], ['_', '_', '_']]` reveals nothing about whether the three inner lists are actually three objects or one — and the defect only becomes visible the first time something writes to a single cell, at which point every row appears to have been written to. The fix is a list comprehension that constructs the inner list fresh on each iteration — `[['_'] * 3 for _ in range(3)]` — which costs nothing beyond writing the comprehension instead of the shorter-looking multiplication.
 
-### 4.2 Augmented assignment on a tuple element can raise and mutate in the same statement
+### 3.2 Augmented assignment on a tuple element can raise and mutate in the same statement
 
 ```python
 # Gist: tuple_puzzler.py
@@ -272,7 +266,7 @@ print(t)   # (1, 2, [30, 40, 50, 60])
 
 Section 2.2 traced the three-step bytecode sequence behind this: load `t[2]`, mutate it in place (which succeeds, because the list itself is mutable), then attempt to store the result back into the tuple (which fails). The exception is real and correctly raised — but it fires *after* the mutation already happened, which means code that catches the `TypeError` and assumes nothing changed is wrong. A caller relying on the assumption that a failed statement leaves state untouched — reasonable for most single expressions in most languages — is specifically wrong here, because `+=` on a sequence element is not one indivisible operation. The practical fix is the one Ramalho's own account of this exact case draws from it: avoid putting a mutable object inside a tuple at all when the tuple is meant to be a genuinely immutable record, since the tuple's own immutability was never protecting that mutable element to begin with.
 
-### 4.3 Mutating a dict while iterating over it (or a view of it) raises mid-loop, not at the point of mutation
+### 3.3 Mutating a dict while iterating over it (or a view of it) raises mid-loop, not at the point of mutation
 
 ```python
 # Gist: mutate_during_iteration.py
@@ -288,7 +282,7 @@ RuntimeError: dictionary changed size during iteration
 
 Section 2.9 established that a view — and the implicit iteration a plain `for key in some_dict` performs is built on the same live mechanism — reads through to the dict's actual current state rather than a frozen copy taken at the start of the loop. CPython detects a change in the dict's size while an iterator over it is still active and raises rather than silently producing skipped or duplicated entries, which is the correct, safe behavior, but it surprises code written under the assumption that a `for` loop over a dict is iterating a fixed list of keys decided once at the top. The fix is to iterate over a genuine copy of the keys taken before the loop begins — `for kind in list(transactions):` — which decouples the loop's iteration from the dict's live state, at the cost of one shallow copy of the key list; removing entries from within the loop by name, after the fact, into a separate list of keys to delete afterward, is the same fix expressed slightly differently.
 
-### 4.4 Repeatedly inserting or removing from the front of a list scales far worse than the same operation on a deque
+### 3.4 Repeatedly inserting or removing from the front of a list scales far worse than the same operation on a deque
 
 ```python
 # Gist: front_insertion_cost.py
@@ -301,7 +295,7 @@ first = queue.pop(0)
 
 `queue.pop(0)` (and `queue.insert(0, x)`) is not the same cost as `queue.pop()` or `queue.append(x)`. Section 2.1 established that a list is a contiguous array of pointers addressed by position — removing the *first* element means every remaining element has to shift down by one slot to close the gap, which is work proportional to however many elements are left in the list, repeated on every single call. A loop that repeatedly pops from the front of a list that stays large throughout the loop is doing that shifting work on every iteration, which is easy to write without noticing, because nothing about `queue.pop(0)` looks more expensive than `queue.pop()` at the call site — the cost difference is entirely in what has to happen underneath, not in anything visible in the code. `collections.deque`, from section 2.5, exists specifically to make both ends of the structure cheap, implemented internally as a structure that never needs to shift existing elements to add or remove at either end. The fix, for any queue-like usage — first-in-first-out processing, a sliding window, a rolling buffer — is to use `deque` from the start rather than a plain list; the cost of switching is limited to the small API differences between the two types, and there is no case where a list used as a front-heavy queue is the better choice once a `deque` is available.
 
-### 4.5 A set's iteration order is not just unspecified — it can differ between separate runs of the identical program
+### 3.5 A set's iteration order is not just unspecified — it can differ between separate runs of the identical program
 
 ```python
 # Gist: set_order_nondeterminism.py
@@ -313,7 +307,7 @@ Running this exact script several times, unmodified, on the same interpreter, on
 
 ---
 
-## 5. Trade-offs
+## 4. Trade-offs
 
 | Approach | Use when | Because | Real cost |
 | --- | --- | --- | --- |
@@ -334,7 +328,7 @@ Both exist specifically for a measured memory or copying bottleneck involving la
 
 ### The case against a list as a general-purpose queue
 
-Treating a plain list as a first-in-first-out queue — appending at one end, popping from the other — is the single most common way section 4.4's cost surfaces in real code, because nothing at either call site looks more expensive than the other. The rejected alternative to `deque` here is not "no alternative exists," it is "a list already does this, so why import something else" — and the answer is that a list only does it cheaply from one end, which is precisely the trade `deque` was built to remove.
+Treating a plain list as a first-in-first-out queue — appending at one end, popping from the other — is the single most common way section 3.4's cost surfaces in real code, because nothing at either call site looks more expensive than the other. The rejected alternative to `deque` here is not "no alternative exists," it is "a list already does this, so why import something else" — and the answer is that a list only does it cheaply from one end, which is precisely the trade `deque` was built to remove.
 
 ### When a tuple record should become something else entirely
 
@@ -342,7 +336,7 @@ A tuple used as a record is readable only as long as its author and every future
 
 ---
 
-## 6. Reference summary
+## 5. Reference summary
 
 **A list, tuple, and array are contiguous, position-addressed structures** — indexing by position is fast regardless of size; searching for a value is not, because nothing about the layout tells the interpreter where a given value would be. **Lists over-allocate on growth**, so most individual `append()` calls write into already-reserved space rather than triggering a new allocation, which is what "amortized constant time" means in practice.
 

@@ -59,7 +59,7 @@ sequenceDiagram
     Tracer-->>Eval: returns tracer
 ```
 
-`sys.settrace(tracer)` installs `tracer` as the interpreter's **global trace function**; from that point on, entering any Python function fires a `call` event, executing each line fires a `line` event, returning fires a `return` event, and an exception propagating through the frame fires an `exception` event. `tracer` receives the actual frame object — chapter 5's frame, not a copy — on every one of these, which is what makes reading `frame.f_locals` at a `line` event a live look at the running function's current variable state, not a reconstruction after the fact. `sys.settrace(None)` turns tracing back off; section 4.2 covers exactly what happens to the rest of the program if that call is forgotten.
+`sys.settrace(tracer)` installs `tracer` as the interpreter's **global trace function**; from that point on, entering any Python function fires a `call` event, executing each line fires a `line` event, returning fires a `return` event, and an exception propagating through the frame fires an `exception` event. `tracer` receives the actual frame object — chapter 5's frame, not a copy — on every one of these, which is what makes reading `frame.f_locals` at a `line` event a live look at the running function's current variable state, not a reconstruction after the fact. `sys.settrace(None)` turns tracing back off; section 3.2 covers exactly what happens to the rest of the program if that call is forgotten.
 
 ### 2.2 A breakpoint is nothing more than a filter on the `line` event
 
@@ -128,7 +128,7 @@ sys.settrace(None)
 call 9
 ```
 
-Only the `call` event ever fires for `add` — no `line` events, no `return` event — because `sys.settrace`'s contract is specifically that a **local** trace function (the value returned from handling a `call` event) is what receives every subsequent event *for that frame*, and returning `None` tells the interpreter this particular frame is not of interest, silencing everything after its `call` event. This is the mechanism section 4.1 turns into a failure mode: forgetting this return-value contract does not raise an error anywhere, it simply produces a debugger that goes silent for a specific function while continuing to work everywhere else, which is a difficult thing to notice precisely because the tool still looks like it is working in general.
+Only the `call` event ever fires for `add` — no `line` events, no `return` event — because `sys.settrace`'s contract is specifically that a **local** trace function (the value returned from handling a `call` event) is what receives every subsequent event *for that frame*, and returning `None` tells the interpreter this particular frame is not of interest, silencing everything after its `call` event. This is the mechanism section 3.1 turns into a failure mode: forgetting this return-value contract does not raise an error anywhere, it simply produces a debugger that goes silent for a specific function while continuing to work everywhere else, which is a difficult thing to notice precisely because the tool still looks like it is working in general.
 
 ### 2.5 `sys.settrace` fires unconditionally, for every line of every frame it is watching — which is exactly what makes it expensive
 
@@ -243,15 +243,9 @@ Chapter 5 already covers `timeit`'s own two central pieces of methodology: disab
 
 ---
 
-## 3. Diagrams
+## 3. Failure modes
 
-The event-dispatch sequence in section 2.1, the `settrace`-versus-`sys.monitoring` scoping diagram in section 2.6, and the deterministic-versus-sampling contrast in section 2.7 are integrated into the mechanism build-up above, as this format requires.
-
----
-
-## 4. Failure modes
-
-### 4.1 Returning the wrong value from a `call` event handler silently stops tracing for that one frame
+### 3.1 Returning the wrong value from a `call` event handler silently stops tracing for that one frame
 
 ```python
 # Gist: wrong_trace_return.py
@@ -284,7 +278,7 @@ return main
 
 `helper`'s own `line` and `return` events never appear at all — only its single `call` event does, and even that is reported by name only because the top-level `tracer` function (still watching `main`) is what prints it, not `helper`'s own local trace function, which was set to `None` and therefore never runs again. Section 2.4 already establishes why: the value returned from a `call` event becomes the local trace function for that frame, and `None` explicitly means "stop watching this frame" — `helper` is entered, does its work, and returns with the debugger completely blind to everything that happened inside it. Nothing raises an exception or prints a warning; the debugger continues to function correctly for every other frame, which is precisely what makes this defect hard to notice — a tool author testing breakpoints in `main` sees them work, and only discovers `helper` is invisible once someone specifically tries to set a breakpoint inside it and finds nothing happens. The fix is to audit every `return` statement inside a trace callback for exactly this contract: returning the trace function itself continues watching a frame, returning anything else — most commonly `None`, reached by falling off the end of a conditional without an explicit final `return` — stops watching it, silently, from that point on.
 
-### 4.2 An un-disabled global trace function keeps taxing every line of every function for the rest of the process
+### 3.2 An un-disabled global trace function keeps taxing every line of every function for the rest of the process
 
 ```python
 # Gist: forgotten_settrace_none.py
@@ -320,7 +314,7 @@ traced: unrelated return
 
 `unrelated`, defined and called with no apparent connection to the debugging session above it, is traced anyway — because `sys.settrace` sets a genuinely global, process-wide trace function that stays active until something explicitly calls `sys.settrace(None)`, and nothing about finishing one debugging task does that automatically. In a short script this is merely noisy; in a long-running process — a web server, a REPL session left open, a test suite that traces one test and forgets to clean up — every line of every function executed afterward pays section 2.5's full per-line overhead indefinitely, for a debugging session that has long since finished being useful. The fix is structural rather than a reminder to type one more line: wrap tracing in a context manager (`__enter__` calling `sys.settrace(tracer)`, `__exit__` calling `sys.settrace(None)` unconditionally, even on an exception) so that "tracing has ended" is guaranteed by the language's own cleanup mechanism rather than by remembering to write the matching call.
 
-### 4.3 Using `sys.monitoring`'s global event registration instead of `set_local_events` reintroduces the exact cost PEP 669 exists to remove
+### 3.3 Using `sys.monitoring`'s global event registration instead of `set_local_events` reintroduces the exact cost PEP 669 exists to remove
 
 ```python
 # Gist: monitoring_without_scoping.py
@@ -349,7 +343,7 @@ hundreds_of_other_functions()   # pays the same LINE-event cost, for nothing
 
 Section 2.6 already shows the correct, scoped alternative — `set_local_events(TOOL_ID, code_object, events.LINE)` — and the mistake here is using `set_events` instead, which is the API's own *global* registration, watching every line of every function in the running program exactly the way `sys.settrace` always has. Nothing about this is a bug in the sense of producing a wrong answer; `on_line` fires correctly for both functions above. It is a missed opportunity with a real performance cost: a tool author who reaches for `sys.monitoring` specifically for its documented, order-of-magnitude cost advantage over `settrace`, and then registers globally instead of scoping to the handful of code objects actually under a breakpoint, has paid to adopt a newer, more complex API while keeping the older API's exact cost profile. The fix is to always scope real usage through `set_local_events` against the specific code objects of interest, reserving `set_events`'s global registration for the rare tool — a full-program coverage collector, for instance — that genuinely needs every line in the process, which is a deliberate design choice rather than the default.
 
-### 4.4 A bug inside the trace callback itself surfaces as an exception from the traced call site, not from the callback
+### 3.4 A bug inside the trace callback itself surfaces as an exception from the traced call site, not from the callback
 
 ```python
 # Gist: buggy_tracer_exception.py
@@ -381,7 +375,7 @@ The real bug is entirely inside `buggy_tracer` — `stats[event] += 1` reads fro
 
 ---
 
-## 5. Trade-offs
+## 4. Trade-offs
 
 | Approach | Use when | Because | Real cost |
 | --- | --- | --- | --- |
@@ -405,7 +399,7 @@ A debugger answers "what is the state at this specific point, right now" — it 
 
 ---
 
-## 6. Reference summary
+## 5. Reference summary
 
 **`sys.settrace` installs a global trace function receiving `call`, `line`, `return`, and `exception` events**, handing it the live frame object chapter 5 already describes — not a snapshot — which is what makes reading `frame.f_locals` at a breakpoint a real look at current state. **A breakpoint is nothing more than a conditional check on the `line` event's line number**; there is no separate "pause" mechanism, only a callback doing more work before returning. **A trace callback's return value is a second contract**: returning the trace function continues watching that frame; returning anything else, most often `None` by accident, silently stops watching it from that point on.
 

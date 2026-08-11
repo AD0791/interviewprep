@@ -309,15 +309,9 @@ The fix this pushes toward is exactly the one section 2.6 already establishes as
 
 ---
 
-## 3. Diagrams
+## 3. Failure modes
 
-The generator lifecycle state diagram in section 2.2, the `yield from` delegation sequence in section 2.6, and the pipeline pull-diagram in section 2.7 are integrated into the mechanism build-up above, as this format requires.
-
----
-
-## 4. Failure modes
-
-### 4.1 An exhausted generator cannot be restarted — a second iteration silently produces nothing
+### 3.1 An exhausted generator cannot be restarted — a second iteration silently produces nothing
 
 ```python
 # Gist: exhausted_generator.py
@@ -339,7 +333,7 @@ print(list(g))    # []
 
 Section 2.1 already established that a generator's frame runs off the end of the function body exactly once and then permanently raises `StopIteration` on every further `next()` call — there is no mechanism to rewind a generator's frame back to its starting instruction, because nothing about the object retains a copy of its own initial state to reset to. The second `list(g)` call is not a bug in `list` or in the generator; it is iterating an object that has already, correctly, finished. This becomes a real defect specifically when a generator is stored in a variable and handed to more than one consumer under the assumption that it behaves like a list — passed to one function that partially consumes it, then to a second function expecting the full sequence, which silently receives whatever was left, or nothing at all, with no exception anywhere to reveal the mistake. The fix is to be explicit about which shape is needed: call the generator function fresh for each independent consumer, or, if the values themselves must be reused, materialize them into a `list` once, deliberately, at the one point they need to be iterated more than once.
 
-### 4.2 Sending a value into a generator before it has been primed is a `TypeError`, not a silent no-op
+### 3.2 Sending a value into a generator before it has been primed is a `TypeError`, not a silent no-op
 
 ```python
 # Gist: unprimed_send.py
@@ -361,7 +355,7 @@ TypeError: can't send non-None value to a just-started generator
 
 Section 2.4 already explains why: a freshly created generator has not yet reached its first `yield`, so there is no suspended `term = yield ...` expression waiting to receive a sent value — `send(10)` has nowhere to deliver the `10`. `send(None)` (equivalently, `next(coro)`) works from this same starting state precisely because `None` is what a `for` loop would implicitly provide anyway, and it is only ever used to advance the generator to its first suspension point, discarding whatever the generator body chose to yield there. The fix is the explicit priming call, `next(coro)`, before the first real `send()` — a pattern common enough that library code wrapping this idiom typically provides a decorator that primes a coroutine-style generator automatically, immediately after construction, so callers cannot forget the step.
 
-### 4.3 A `StopIteration` raised by mistake inside a generator body is reported as a `RuntimeError`, not silent completion
+### 3.3 A `StopIteration` raised by mistake inside a generator body is reported as a `RuntimeError`, not silent completion
 
 ```python
 # Gist: pep479_stopiteration.py
@@ -378,7 +372,7 @@ RuntimeError: generator raised StopIteration
 
 Section 2.8 already covers exactly this shape: `next(matching)` genuinely has nothing to return, because no transaction in the input is a deposit, and its own `StopIteration` — meant to signal "the inner generator `matching` is exhausted" — was never caught before it reached the boundary of `first_deposit`'s own frame. Before Python 3.7 this would have looked, from the outside, exactly like `first_deposit` completing normally with zero results; PEP 479 turns it into an error specifically so that "an inner iterator ran out" and "this generator is done" are never confused with each other again. The fix is to catch the inner `StopIteration` explicitly and decide, in the generator's own code, what "no deposit was found" should actually mean — raising a domain-specific exception, yielding a sentinel value, or `return`-ing early — rather than allowing an unrelated iterator's exhaustion to be interpreted as this generator's own.
 
-### 4.4 A generator abandoned mid-iteration still runs its cleanup, but only once, and only if something actually triggers destruction
+### 3.4 A generator abandoned mid-iteration still runs its cleanup, but only once, and only if something actually triggers destruction
 
 ```python
 # Gist: abandoned_generator.py
@@ -402,7 +396,7 @@ a
 
 Nothing prints `"closing"` in this run, because the generator is still alive — the local variable `g` still references it, so per chapter 4's reference-counting mechanism, nothing has triggered its destruction yet, and therefore nothing has triggered the implicit `close()` CPython issues as part of that destruction. The `finally` block *will* eventually run, but only once the generator object itself becomes unreachable — the end of the enclosing scope, an explicit `del g`, or a rebinding of the name — at which point ordinary refcounting reclaims it and its own destructor calls `close()` on the way out, precisely as section 2.5 describes. In a short-lived script this timing rarely matters, but in a long-running service, a generator wrapping a resource (a database cursor, an open file) that is only ever partially iterated and never explicitly closed or exhausted can hold that resource open for an unpredictable length of time — bounded by whenever the generator object happens to be collected, not by when the program logically finished using it. The fix is the same one that governs any resource with a lifetime a program cares about: exhaust the generator fully, call `.close()` on it explicitly once it is no longer needed, or, more robustly, wrap the generator itself in a `contextlib.closing()` context manager so its cleanup runs deterministically at a point the code controls, rather than whenever the collector happens to get to it.
 
-### 4.5 An iterable that is also its own iterator breaks under concurrent iteration
+### 3.5 An iterable that is also its own iterator breaks under concurrent iteration
 
 ```python
 # Gist: shared_iterator_state.py
@@ -433,7 +427,7 @@ Section 2.1's contrast between a hand-written iterator class and a generator fun
 
 ---
 
-## 5. Trade-offs
+## 4. Trade-offs
 
 | Approach | Use when | Because | Real cost |
 | --- | --- | --- | --- |
@@ -446,7 +440,7 @@ Section 2.1's contrast between a hand-written iterator class and a generator fun
 
 ### When eager beats lazy
 
-Laziness is not free: a generator's per-item overhead — suspending and resuming a frame — is real, and for a small, fixed-size collection that will be iterated more than once, building a plain list once and reusing it is both simpler and, in aggregate, cheaper than reconstructing a generator (or worse, discovering that a stored generator has already been exhausted, per section 4.1) every time the data is needed again. Laziness earns its keep specifically when the input is large, the input may not be needed in full, or the input is conceptually infinite — not as a default reached for out of general principle.
+Laziness is not free: a generator's per-item overhead — suspending and resuming a frame — is real, and for a small, fixed-size collection that will be iterated more than once, building a plain list once and reusing it is both simpler and, in aggregate, cheaper than reconstructing a generator (or worse, discovering that a stored generator has already been exhausted, per section 3.1) every time the data is needed again. Laziness earns its keep specifically when the input is large, the input may not be needed in full, or the input is conceptually infinite — not as a default reached for out of general principle.
 
 ### The case against classic coroutines for new code
 
@@ -458,7 +452,7 @@ A pipeline of five or six chained `itertools` calls is genuinely lazy and genuin
 
 ---
 
-## 6. Reference summary
+## 5. Reference summary
 
 **Any function containing `yield` anywhere in its body is a generator function**, decided at compile time; calling it runs none of the body and returns a generator object, which is itself an iterator per chapter 2's protocol. **A generator suspends its actual stack frame at each `yield`** — the same frame object chapter 5 introduces — and resumes execution from exactly that point on the next `next()` call, which is what lets its local variables serve as the iteration's state with no instance attributes required.
 

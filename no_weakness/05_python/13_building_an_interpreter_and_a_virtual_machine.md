@@ -342,15 +342,9 @@ The virtual machine built above stores intermediate values entirely on an implic
 
 ---
 
-## 3. Diagrams
+## 3. Failure modes
 
-The environment-chain diagram in section 2.3 and the stack-evolution trace in section 2.5 are integrated into the mechanism build-up above, as this format requires.
-
----
-
-## 4. Failure modes
-
-### 4.1 Chaining a call's environment to the caller instead of the definer silently implements dynamic scoping
+### 3.1 Chaining a call's environment to the caller instead of the definer silently implements dynamic scoping
 
 ```python
 # Gist: dynamic_scope_bug.py
@@ -375,7 +369,7 @@ print(call_wrong(double, [21], caller_env))
 
 The result should be `42` — `21 * 2`, using the `factor` in force where `double` was defined — and it is `2100` instead, because `call_wrong` chains the new call frame to whatever environment happened to be active at the *call site* rather than to `fn.env`, the environment active where the function was *defined*. Section 2.4 already names the fix and the reason it matters: lexical scoping — what every mainstream language, Python included, actually implements — resolves free variables by where a function's *source code* sits, never by which other code happens to invoke it. This bug is dangerous specifically because it produces a plausible, non-crashing number every time, and only reveals itself when the same function is called from two places that happen to define a same-named variable differently — exactly the caller_env/outer scenario above — which a test suite calling the function from only one context would never expose. The one-line fix (`parent=fn.env`) is section 2.4's own code exactly as written; the value of naming this failure mode explicitly is that "which environment does a call chain to" is the single decision that separates lexical from dynamic scoping, and getting it backwards produces working-looking code for a long time before it produces a wrong answer.
 
-### 4.2 A forward jump resolved against an incomplete label table jumps to the wrong instruction, silently
+### 3.2 A forward jump resolved against an incomplete label table jumps to the wrong instruction, silently
 
 ```python
 # Gist: incomplete_label_table.py
@@ -402,7 +396,7 @@ Section 2.8 already explains why a single combined pass cannot work for a *forwa
 
 ---
 
-### 4.3 A compiler bug that emits too few operands underflows the stack at run time, far from where the bug actually is
+### 3.3 A compiler bug that emits too few operands underflows the stack at run time, far from where the bug actually is
 
 ```python
 # Gist: stack_underflow.py
@@ -433,7 +427,7 @@ The bug is in the compiler — one recursive call to `compile_expr_buggy` on the
 
 ---
 
-## 5. Trade-offs
+## 4. Trade-offs
 
 | Approach | Use when | Because | Real cost |
 | --- | --- | --- | --- |
@@ -448,7 +442,7 @@ Every mechanism in this chapter exists, already built, debugged, and optimized, 
 
 ### When a tree-walking interpreter is not merely simpler but genuinely correct where a naive compiler is not
 
-A tree walker has one advantage beyond simplicity worth stating plainly: it can never desynchronize from the tree it is walking, because it never produces an intermediate representation to get out of sync with in the first place. Section 4.3's stack-underflow failure is only possible because the compiled form is a *separate* artifact from the tree that produced it, and nothing enforces that the two stay consistent short of the compiler being written correctly. A tree walker sidesteps that entire category of bug by construction — there is no second representation to drift from the first — which is a genuine correctness argument for prototyping a new language feature as a tree-walking addition first, even in a project that will eventually compile the feature, specifically so the *semantics* can be gotten right before the *lowering to instructions* is attempted at all.
+A tree walker has one advantage beyond simplicity worth stating plainly: it can never desynchronize from the tree it is walking, because it never produces an intermediate representation to get out of sync with in the first place. Section 3.3's stack-underflow failure is only possible because the compiled form is a *separate* artifact from the tree that produced it, and nothing enforces that the two stay consistent short of the compiler being written correctly. A tree walker sidesteps that entire category of bug by construction — there is no second representation to drift from the first — which is a genuine correctness argument for prototyping a new language feature as a tree-walking addition first, even in a project that will eventually compile the feature, specifically so the *semantics* can be gotten right before the *lowering to instructions* is attempted at all.
 
 ### The case against a tree-walking interpreter for anything performance-sensitive
 
@@ -456,7 +450,7 @@ A tree walker's simplicity is real, and so is its cost: every single evaluation 
 
 ---
 
-## 6. Reference summary
+## 5. Reference summary
 
 **A tree-walking interpreter evaluates a parsed tree directly and recursively**, with no intermediate form — `evaluate` dispatches on each node's own tag, exactly as chapter 2's protocol dispatch works on a type, and re-examines the tree's shape on every single run. **An environment is a chain of dictionaries linked by a parent pointer**; looking up a name walks that chain outward, which is chapter 3's LEGB scoping rule made into an explicit, inspectable object graph. **A closure is a bundle of parameters, a body, and the environment active where it was *defined*** — chaining a call's new scope to the *definer's* environment, never the caller's, is the one decision that makes scoping lexical rather than dynamic, and getting it backwards produces plausible, silently wrong results rather than an error.
 

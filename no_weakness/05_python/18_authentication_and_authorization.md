@@ -184,15 +184,9 @@ The password grant's fundamental problem was always structural, not merely old-f
 
 ---
 
-## 3. Diagrams
+## 3. Failure modes
 
-The JWT structure diagram in section 2.3, the PKCE sequence in section 2.8, and the OAuth 2.0-to-2.1 comparison in section 2.10 are integrated into the mechanism build-up above, as this format requires.
-
----
-
-## 4. Failure modes
-
-### 4.1 Decoding a token without restricting `algorithms` trusts the token to declare its own verification method
+### 3.1 Decoding a token without restricting `algorithms` trusts the token to declare its own verification method
 
 ```python
 # Gist: unrestricted_algorithms.py
@@ -204,7 +198,7 @@ payload = jwt.decode(token, "some-secret", algorithms=["HS256", "HS384", "HS512"
 
 Including `"none"` in an accepted-algorithms list — copied carelessly from an example, or left over from debugging — reopens exactly the vulnerability class section 2.6 already names: a token can present `alg: none` in its own header, requiring no signature verification at all, and a verifier willing to accept that algorithm as valid will accept a completely unsigned, freely-forgeable token as though it were genuine. This is not a hypothetical; unsigned or algorithm-confused tokens accepted by overly permissive verification code are a well-documented, recurring category of real JWT vulnerability. The fix is a hard rule rather than a case-by-case judgment call: `algorithms=[...]` should name exactly the one algorithm the server itself uses to sign tokens, and nothing else, ever — there is no legitimate reason for a verifier to accept more than the single algorithm its own issuance code actually produces.
 
-### 4.2 Treating a JWT's payload as confidential leaks whatever was placed there, to anyone who ever sees the token
+### 3.2 Treating a JWT's payload as confidential leaks whatever was placed there, to anyone who ever sees the token
 
 ```python
 # Gist: sensitive_payload.py
@@ -223,7 +217,7 @@ print(jwt.decode(token, options={"verify_signature": False}))
 
 Section 2.3 already establishes why this succeeds with no key at all: a JWT's payload is base64, not encryption, and anything placed inside it — a social security number, an internal role name, an email address — is readable by the browser storing the token, by any logging system that happens to capture request headers, and by anyone who ever gains access to the token in transit or at rest, entirely independent of whether they possess the secret key needed to *forge* a new one. This is a genuinely common mistake specifically because a JWT looks opaque — a long string of apparently-random characters — to a developer who has not stopped to decode one by hand. The fix is treating the payload as no more protected than an unencrypted cookie: an identifier and a small amount of non-sensitive claim data (a user ID, a set of scopes) belongs there; anything a party without the secret key should not be able to read belongs in a database, looked up by the identifier the token does carry, never in the token itself.
 
-### 4.3 Building new integrations against the password grant inherits a trust model OAuth 2.1 has already retired
+### 3.3 Building new integrations against the password grant inherits a trust model OAuth 2.1 has already retired
 
 ```python
 # Gist: new_password_grant_integration.py
@@ -235,7 +229,7 @@ def login(form_data: OAuth2PasswordRequestForm = Depends()):
 
 `OAuth2PasswordRequestForm` still works, is still shipped by FastAPI, and still produces a functioning login endpoint — nothing about section 2.2's mechanism has been removed from the library, which is exactly what makes this trap easy to fall into for anyone learning FastAPI security from material written before the OAuth 2.1 consolidation, this node's own source among them. The endpoint runs correctly and the resulting API works exactly as documented; the problem is architectural rather than functional, and invisible from inside the code itself: every client integrating against this endpoint has to collect the user's actual password directly, which is precisely the trust boundary section 2.8's authorization code flow exists to avoid crossing, and precisely the pattern section 2.10's specification revision states plainly does not belong in current practice. A team building a new integration by copying this shape from an older tutorial inherits that trust model without ever making an explicit decision to accept it. The fix is not a code change to the password-grant endpoint itself — it is choosing the authorization code flow with mandatory PKCE for any new integration, and treating `OAuth2PasswordRequestForm` as a pattern to recognize in an inherited codebase, never one to reach for when writing something new.
 
-### 4.4 A short or guessable signing key undermines the signature guarantee the entire scheme depends on
+### 3.4 A short or guessable signing key undermines the signature guarantee the entire scheme depends on
 
 ```python
 # Gist: weak_signing_key.py
@@ -252,7 +246,7 @@ recommended length of 32 bytes for SHA256. See RFC 7518 Section 3.2.
 
 ---
 
-## 5. Trade-offs
+## 4. Trade-offs
 
 | Approach | Use when | Because | Real cost |
 | --- | --- | --- | --- |
@@ -274,7 +268,7 @@ A JWT's entire value proposition — verify without a lookup — is also its sha
 
 ---
 
-## 6. Reference summary
+## 5. Reference summary
 
 **HTTP Basic sends the real credential, base64-encoded — not encrypted — on every request**, which is why it depends entirely on TLS for any real security and has fallen out of favor beyond simple internal tooling. **`OAuth2PasswordBearer` is an ordinary `Depends()`-compatible callable** extracting a bearer token from the request header; it validates nothing about the token's contents on its own.
 

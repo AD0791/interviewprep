@@ -138,7 +138,7 @@ graph LR
 **Sources:** Beazley, *Advanced Python Mastery* §2 (2024) — thin overlap only, on builtin-object layout rather than bytecode directly · Wilson, *Software Design by Example* ch."A Virtual Machine" (2026) — a stack-free register machine, useful as the contrast that makes CPython's stack machine legible, not as a description of it
 **Edges:** `requires` [`PY-01`]
 **Currency:** `stale-minor`
-**Δ current:** None of the four books on this shelf disassembles CPython bytecode directly; the closest material is Beazley's 2024 sections on builtin-object internals, which do not touch the instruction set. That instruction set changed materially across 3.11 (the specialising adaptive interpreter, PEP 659), 3.12, and 3.13/3.14 (continued Tier 2 optimizer work plus the experimental JIT under PEP 744 — disabled by default in 3.13, enabled via `PYTHON_JIT=1` in 3.14 with results ranging from 10% slower to 20% faster depending on workload). The written article on this node already measures CPython 3.14.6 directly rather than leaning on a book, which is the only sound approach for a mechanism this shelf does not really cover.
+**Δ current:** None of the four books on this shelf disassembles CPython bytecode directly; the closest material is Beazley's 2024 sections on builtin-object internals, which do not touch the instruction set. That instruction set changed materially across 3.11 (the specialising adaptive interpreter, PEP 659), 3.12, and 3.13/3.14 (continued Tier 2 optimizer work plus the experimental JIT under PEP 744 — disabled by default in 3.13, enabled via `PYTHON_JIT=1` in 3.14 with results ranging from 10% slower to 20% faster depending on workload). The written article on this node cites PEP 659 for the 3.11+ specialising interpreter and PEP 744 for the 3.14 JIT rather than leaning on a book, which is the only sound approach for a mechanism this shelf does not really cover.
 **Article:** [05_bytecode_and_the_runtime.md](05_bytecode_and_the_runtime.md)
 
 ### `PY-06` · The gradual type system: protocols, generics, and static checking
@@ -258,6 +258,7 @@ graph LR
 **Edges:** `requires` [`PY-14`]
 **Currency:** `stale-minor`
 **Δ current:** Both books recommend running Uvicorn directly or behind Gunicorn without being specific about worker topology. Uvicorn's own deployment documentation now recommends `gunicorn -k uvicorn.workers.UvicornWorker` — or the standalone `uvicorn-worker` package, since the worker class moved out of Uvicorn's own distribution — at roughly 2–4 workers per core behind a reverse proxy as the conservative production choice, while Uvicorn's built-in `--workers` flag offers a comparable multi-process manager built on `spawn` rather than `fork`, relevant on Windows and connected to the `PY-08` import-side-effects discussion. An article on this node should give both paths and name the trade-off rather than asserting one is obsolete.
+**Article:** [20_testing_and_deploying_a_python_service.md](20_testing_and_deploying_a_python_service.md)
 
 ### `PY-20` · Structural pattern matching and the match statement
 **Type:** Mechanism · **Depth:** L3

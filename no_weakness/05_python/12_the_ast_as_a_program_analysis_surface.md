@@ -121,7 +121,7 @@ ShallowVisitor().visit(ast.parse(source))
 found function: outer
 ```
 
-`inner`, nested inside `outer`'s body, is never reported, and nothing about running this code indicates that anything was skipped — the visitor completed normally, having simply never been told to look inside `outer`'s body for more function definitions. This is the same shape of hazard as any other silent, non-erroring omission this shelf has already covered: the visitor pattern's convenience — writing only the node types a particular check cares about — is inseparable from the responsibility of explicitly continuing the walk everywhere that check does not itself terminate it, and section 4.1 returns to exactly this trap in a more realistic setting.
+`inner`, nested inside `outer`'s body, is never reported, and nothing about running this code indicates that anything was skipped — the visitor completed normally, having simply never been told to look inside `outer`'s body for more function definitions. This is the same shape of hazard as any other silent, non-erroring omission this shelf has already covered: the visitor pattern's convenience — writing only the node types a particular check cares about — is inseparable from the responsibility of explicitly continuing the walk everywhere that check does not itself terminate it, and section 3.1 returns to exactly this trap in a more realistic setting.
 
 ### 2.4 A genuinely useful check needs two passes over the tree, tracking `Store` versus `Load` context
 
@@ -178,7 +178,7 @@ print(ast.unparse(tree))
 new_name = new_name + 1
 ```
 
-`ast.unparse` — available since Python 3.9 — converts a tree back into source text, which is what makes a transformation's result usable as a program again rather than only as data to inspect. `ast.copy_location` and `ast.fix_missing_locations` exist because every real node in a tree produced by `ast.parse` carries line and column information the compiler needs for tracebacks and syntax errors, and a brand-new node built by hand — `ast.Name(id="new_name", ...)` on its own — has none of that; omitting the location-fixing step is not a style choice, it produces a tree `compile()` refuses outright, which section 4.2 demonstrates directly.
+`ast.unparse` — available since Python 3.9 — converts a tree back into source text, which is what makes a transformation's result usable as a program again rather than only as data to inspect. `ast.copy_location` and `ast.fix_missing_locations` exist because every real node in a tree produced by `ast.parse` carries line and column information the compiler needs for tracebacks and syntax errors, and a brand-new node built by hand — `ast.Name(id="new_name", ...)` on its own — has none of that; omitting the location-fixing step is not a style choice, it produces a tree `compile()` refuses outright, which section 3.2 demonstrates directly.
 
 ### 2.6 `ast.get_docstring` is a small, purpose-built accessor rather than a generic tree query
 
@@ -263,15 +263,9 @@ One further, separate currency note belongs here rather than being left implicit
 
 ---
 
-## 3. Diagrams
+## 3. Failure modes
 
-The compile-pipeline diagram in section 1, the expression-tree diagram in section 2.1, and the visitor-dispatch diagram in section 2.2 are integrated into the mechanism build-up above, as this format requires.
-
----
-
-## 4. Failure modes
-
-### 4.1 A visitor that forgets `generic_visit` inside a nested-scope handler silently skips everything inside that scope
+### 3.1 A visitor that forgets `generic_visit` inside a nested-scope handler silently skips everything inside that scope
 
 ```python
 # Gist: shallow_docstring_check.py
@@ -297,7 +291,7 @@ DocstringChecker().visit(ast.parse(source))
 
 Nothing prints at all — `inner`, which genuinely lacks a docstring, is never checked, because `visit_FunctionDef` returns without descending into `outer`'s body, and `inner` is defined entirely inside that body. Section 2.3 already names the mechanism: a `NodeVisitor` only continues past a node its own `visit_` method handles if that method explicitly calls `self.generic_visit(node)`, and there is no error, warning, or any other signal that a subtree went unvisited — the check simply runs to completion having silently covered less of the program than its author believed. This defect is dangerous specifically because it is easy to write and easy to test past: a test file with only top-level functions passes cleanly, and the gap only becomes visible once someone happens to nest a function inside another and notices, by other means, that the linter never flagged it. The fix is a one-line addition, `self.generic_visit(node)`, at the end of every `visit_` method whose node type can contain other nodes worth checking — which, for anything besides the simplest leaf nodes, is nearly all of them.
 
-### 4.2 A hand-built replacement node with no location information fails at `compile()`, not at tree-construction time
+### 3.2 A hand-built replacement node with no location information fails at `compile()`, not at tree-construction time
 
 ```python
 # Gist: missing_locations.py
@@ -319,7 +313,7 @@ TypeError: required field "lineno" missing from expr
 
 Building `tree` and even calling `RenameTransformer().visit()` on it both succeed without complaint — the new `Name` node is a perfectly valid Python object the moment it is constructed. The failure only surfaces later, at `compile()`, because every node `ast.parse` itself produces carries `lineno`, `col_offset`, and related attributes the compiler requires to generate correct bytecode and tracebacks, and a node built by hand has none of them unless something sets them explicitly. Section 2.5 already names the fix — `ast.copy_location` (to copy an existing node's position onto a new one) or `ast.fix_missing_locations` (to propagate a parent's position onto any child missing it) — and the error's own delayed timing is the trap: a transformation can look completely successful, right up until the specific moment the result is handed to `compile()`, which may be considerably later in a pipeline than wherever the tree was actually built and modified.
 
-### 4.3 A checker written against one Python version silently undercounts constructs a later version introduced
+### 3.3 A checker written against one Python version silently undercounts constructs a later version introduced
 
 ```python
 # Gist: version_skew_checker.py
@@ -353,7 +347,7 @@ print(counter.branches)
 
 Section 2.10 already traces this exactly: `classify` has three real branches — one `if` and two `match` cases — and `BranchCounter` reports one, because it was written to recognize `ast.If` and has no equivalent handling for `ast.Match`, a node type that did not exist in the language this checker's author was writing against. Nothing raises an error anywhere in this pipeline; the checker runs to completion and produces a plausible-looking, confidently wrong number, which is precisely the shape of failure this book treats as most dangerous — not a crash, but a quiet, systematically wrong answer a reader has every reason to trust. The fix has two layers: immediately, add the missing `visit_Match` handling once the gap is noticed; durably, treat any AST-based tool's node-type coverage as tied to a specific minimum Python version, worth stating explicitly and worth revisiting deliberately whenever the language gains new syntax, rather than assuming a checker that has not been touched in years still sees everything a current codebase can contain.
 
-### 4.4 `ast.literal_eval` rejects ordinary arithmetic, which is easy to assume it would accept
+### 3.4 `ast.literal_eval` rejects ordinary arithmetic, which is easy to assume it would accept
 
 ```python
 # Gist: literal_eval_arithmetic_gap.py
@@ -374,13 +368,13 @@ Section 2.7 already establishes that `literal_eval` walks the tree checking for 
 
 ---
 
-## 5. Trade-offs
+## 4. Trade-offs
 
 | Approach | Use when | Because | Real cost |
 | --- | --- | --- | --- |
 | **Regular expressions over source text** | A genuinely simple, single-line, unambiguous textual pattern | Fast to write, no parsing step, works on any text at all, even invalid syntax | Blind to nesting, multi-line constructs, and the difference between real code and a string or comment that merely looks like it |
 | **`ast.NodeVisitor` (read-only analysis)** | Checking a structural property — shape, naming, presence/absence of a construct | Sees the language's actual grammar, exactly as the compiler does | Cannot see runtime behavior at all; blind to anything computed dynamically |
-| **`ast.NodeTransformer` + `ast.unparse`** | Automated, mechanical source-to-source rewriting (a rename, a migration) | Guarantees the rewrite is syntactically grounded in the real grammar, not a fragile text substitution | Requires careful location-handling (section 4.2) and produces re-formatted, not necessarily style-preserving, output |
+| **`ast.NodeTransformer` + `ast.unparse`** | Automated, mechanical source-to-source rewriting (a rename, a migration) | Guarantees the rewrite is syntactically grounded in the real grammar, not a fragile text substitution | Requires careful location-handling (section 3.2) and produces re-formatted, not necessarily style-preserving, output |
 | **Running the program and observing it (tests, a debugger, a profiler)** | The actual question is about runtime behavior or values, not source shape | The only way to see what dynamically-computed code actually does | Requires the program to actually run, with real or realistic inputs, which a static check never needs |
 | **`ast.literal_eval`** | Parsing a string that is supposed to contain only a literal value (a config value, a cached repr) | Never compiles or executes anything — rejects a non-literal tree before it could run | Deliberately narrow; no general arithmetic, no function calls, no name lookups of any kind |
 | **`eval`/`exec`** | The actual goal is running dynamically-constructed code, by design, in a fully trusted context | The only tool of the group that can, because it is the only one built to execute rather than inspect | Carries chapter 11's arbitrary-code-execution risk in full; never appropriate for untrusted input |
@@ -395,7 +389,7 @@ A project's first instinct on hitting a gap in Ruff's (or any existing linter's)
 
 ---
 
-## 6. Reference summary
+## 5. Reference summary
 
 **`ast.parse` returns a tree of typed node objects mirroring the language's grammar** — the same structural understanding the compiler builds on its way to the bytecode chapter 5 already covers, exposed before compilation continues any further. **`Name` nodes carry a `ctx` of `Store` or `Load`**, distinguishing a write from a read at the same textual position, which is what makes an accurate unused-variable or reassignment check possible at all.
 

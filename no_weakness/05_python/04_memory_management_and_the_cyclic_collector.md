@@ -247,15 +247,9 @@ None of this changes what section 2.1 through 2.6 describe as *observable* behav
 
 ---
 
-## 3. Diagrams
+## 3. Failure modes
 
-The shallow-copy aliasing diagram in section 2.2 and the unreachable-cycle diagram in section 2.4 are integrated into the mechanism build-up above, as this format requires.
-
----
-
-## 4. Failure modes
-
-### 4.1 A mutable default argument is shared across every call that does not override it
+### 3.1 A mutable default argument is shared across every call that does not override it
 
 ```python
 # Gist: haunted_bus.py
@@ -277,7 +271,7 @@ print(bus3.passengers)
 
 `bus3` was never given a passenger, and it already has one. Section 2.3 traced the exact cause: `passengers=[]` creates the empty list once, when `__init__` is compiled, not once per call, and every `HauntedBus` built without an explicit argument receives a reference to that same list. `bus2.pick("Carrie")` mutates it in place, and `bus3`, constructed afterward with no arguments at all, sees the mutation because `bus2.passengers is bus3.passengers` is `True` — they were never two lists to begin with. This defect is unusually good at surviving code review and a first pass of manual testing, because it only manifests once two instances are both built with the default and then used far enough apart in the code that the connection between them is not obvious; a test that only ever constructs one instance at a time will never observe it. The fix is `passengers=None`, checked explicitly and replaced with a freshly constructed list inside the function body, which costs one `if` and is the idiomatic answer to every version of this defect regardless of which mutable type is involved.
 
-### 4.2 A reference cycle keeps two objects alive until the next collector sweep, not until the last name is deleted
+### 3.2 A reference cycle keeps two objects alive until the next collector sweep, not until the last name is deleted
 
 ```python
 # Gist: cycle_timing.py
@@ -297,7 +291,7 @@ del s1, s2
 
 With the collector disabled, both sessions remain allocated indefinitely after `del s1, s2` — unreachable from anywhere the program can still name, per section 2.4, but never at a refcount of zero, because each still holds the other. Nothing raises an error and nothing looks obviously wrong; the program simply accumulates memory it will never use again, at a rate proportional to how often this kind of cycle is created, until either the collector runs or the process exits. This is the shape of a real production memory leak in Python far more often than an ordinary forgotten reference is — a single un-collected list left lying around is easy to spot in a heap profile, while a steady trickle of small, mutually-referencing objects accumulating across thousands of requests looks, from the outside, like ordinary long-run memory growth. The fix, when the cyclic relationship is structural rather than accidental — a parent-child or observer-subject pair that is expected to reference both ways — is to make one direction of the reference a `weakref.ref` instead of an ordinary one, per section 2.6, so the pair is never a true cycle and refcounting alone reclaims it the instant it is truly unreachable; when the cycle is accidental, the fix is simply not to create it, typically by having a child object drop its reference to its parent explicitly once it is done rather than relying on the parent's own lifetime to end first.
 
-### 4.3 A `__del__` method that resurrects `self` produces a warning and a leaked object, not a clean revival
+### 3.3 A `__del__` method that resurrects `self` produces a warning and a leaked object, not a clean revival
 
 ```python
 # Gist: del_resurrection.py
@@ -322,7 +316,7 @@ print(len(undead))
 
 ---
 
-## 5. Trade-offs
+## 4. Trade-offs
 
 | Approach | Use when | Because | Real cost |
 | --- | --- | --- | --- |
@@ -338,11 +332,11 @@ A weak reference is the right tool specifically when the referenced object's lif
 
 ### When not to define `__del__` at all
 
-Section 4.3's resurrection hazard, combined with the fact that `__del__`'s timing is tied to reference counting and collector sweeps rather than to any point a program controls directly, makes it a poor default choice for resource cleanup even though it looks like the natural place to put it. The rejected alternative that should be reached for instead, in nearly every real case, is a context manager (chapter 2): `__exit__` runs at a point the code controls explicitly, every time, with the exception state available if something went wrong, none of which `__del__` can promise. `__del__` earns its place only as a defensive last resort — a safety net that closes a resource if a caller forgot to use the context manager at all — never as the primary cleanup path.
+Section 3.3's resurrection hazard, combined with the fact that `__del__`'s timing is tied to reference counting and collector sweeps rather than to any point a program controls directly, makes it a poor default choice for resource cleanup even though it looks like the natural place to put it. The rejected alternative that should be reached for instead, in nearly every real case, is a context manager (chapter 2): `__exit__` runs at a point the code controls explicitly, every time, with the exception state available if something went wrong, none of which `__del__` can promise. `__del__` earns its place only as a defensive last resort — a safety net that closes a resource if a caller forgot to use the context manager at all — never as the primary cleanup path.
 
 ### The case against disabling the collector for performance
 
-`gc.disable()` is a real, sometimes-recommended technique for a short-lived script that allocates heavily and exits quickly enough that leaked cycles never matter — a batch job, a command-line tool — because every collection pass costs time that a program which never reaches its later generations does not need to spend. It is the wrong default for a long-running service for exactly the reason section 4.2 demonstrates: a service that runs for hours or days and forms even a slow trickle of reference cycles will accumulate them indefinitely with the collector off, turning a bounded, self-correcting overhead into an unbounded one. The rejected alternative to disabling it wholesale is tuning the thresholds — raising generation 0's trigger count so that a program which allocates heavily but briefly still gets full sweeps of the older generations — which keeps the safety net in place while reducing how often the cheapest, most frequent sweep runs.
+`gc.disable()` is a real, sometimes-recommended technique for a short-lived script that allocates heavily and exits quickly enough that leaked cycles never matter — a batch job, a command-line tool — because every collection pass costs time that a program which never reaches its later generations does not need to spend. It is the wrong default for a long-running service for exactly the reason section 3.2 demonstrates: a service that runs for hours or days and forms even a slow trickle of reference cycles will accumulate them indefinitely with the collector off, turning a bounded, self-correcting overhead into an unbounded one. The rejected alternative to disabling it wholesale is tuning the thresholds — raising generation 0's trigger count so that a program which allocates heavily but briefly still gets full sweeps of the older generations — which keeps the safety net in place while reducing how often the cheapest, most frequent sweep runs.
 
 ### When acyclic-by-design beats relying on the collector
 
@@ -350,7 +344,7 @@ For a data structure with a genuinely large number of short-lived nodes — a tr
 
 ---
 
-## 6. Reference summary
+## 5. Reference summary
 
 **CPython destroys an object the instant its reference count reaches zero** — synchronously, not at some later collector pause — which is why `__del__`, when defined, has a precise and traceable moment it runs. `sys.getrefcount` reads one higher than expected because the call itself holds a temporary reference to its argument.
 

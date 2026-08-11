@@ -275,8 +275,9 @@ properly rather than a single derived sentence.
 `BQ-02`'s slot and shuffle treatment is measurable at zero cost through `INFORMATION_SCHEMA.JOBS`
 against a public dataset, and `BQ-06`'s bytes-scanned claims are measurable at zero cost through
 `bq query --dry_run` — both were flagged as the cheapest genuinely measurable claims in this
-subject's now-archived syllabus, and that measurement path remains open for whoever writes the
-article on either node; nothing about the currency pass changes that opportunity.
+subject's now-archived syllabus, and whoever writes the article on either node should cite
+BigQuery's own `INFORMATION_SCHEMA.JOBS` and `bq query --dry_run` documentation for those figures
+rather than a book; nothing about the currency pass changes that opportunity.
 
 The Beam/Dataflow pipeline material that would complete `BQ-20`'s ingestion story — windowing,
 watermarks, triggers, and autoscaling/fusion behaviour on the Dataflow runner specifically — has no

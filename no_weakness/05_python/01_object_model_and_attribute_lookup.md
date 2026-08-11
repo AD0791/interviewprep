@@ -131,7 +131,7 @@ def object_getattribute(obj, name):
     raise AttributeError(name)
 ```
 
-Read as prose, this is: search the type's MRO for the name first, before looking anywhere on the instance. If what was found defines `__get__` **and** either `__set__` or `__delete__` — a **data descriptor** — call it immediately and return, without ever consulting the instance dictionary. Otherwise, check the instance dictionary and return its value if the name is there. Otherwise, if the class search found something with only `__get__` — a **non-data descriptor** — call that. Otherwise return the plain class-level value that was found. And only if none of that produced anything does Python fall back to `__getattr__`, a separate hook that is not part of `object.__getattribute__` at all and is covered in section 4.
+Read as prose, this is: search the type's MRO for the name first, before looking anywhere on the instance. If what was found defines `__get__` **and** either `__set__` or `__delete__` — a **data descriptor** — call it immediately and return, without ever consulting the instance dictionary. Otherwise, check the instance dictionary and return its value if the name is there. Otherwise, if the class search found something with only `__get__` — a **non-data descriptor** — call that. Otherwise return the plain class-level value that was found. And only if none of that produced anything does Python fall back to `__getattr__`, a separate hook that is not part of `object.__getattribute__` at all and is covered in section 3.
 
 ```mermaid
 graph TD
@@ -388,15 +388,9 @@ One caveat belongs to a later chapter rather than this one. CPython does not, in
 
 ---
 
-## 3. Diagrams
+## 3. Failure modes
 
-The lookup-order flowchart in section 2.3, the MRO diagram in section 2.5, and the instance-layout diagram in section 2.7 are integrated into the mechanism build-up above, as this format requires, rather than collected separately here.
-
----
-
-## 4. Failure modes
-
-### 4.1 A class-level mutable attribute is shared by every instance
+### 3.1 A class-level mutable attribute is shared by every instance
 
 ```python
 # Gist: shared_mutable.py
@@ -432,7 +426,9 @@ print('transactions' in a.__dict__)     # True
 
 Assigning `a.transactions = [999]` goes through the write path from section 2.6, which places a genuine entry in `a.__dict__`. From that point on, `a` is fixed and `b` is still silently broken. A developer who "fixes" the symptom for the one account they happened to test will make it disappear from their own testing and leave it live for everyone else. The correct fix is to create the list inside `__init__`, so each instance's `__dict__` gets its own; the cost of that fix is nothing, because sharing the list was never intentional here.
 
-### 4.2 `__getattr__` and `__getattribute__` are one letter apart and not remotely the same hook
+The two-line check that exposed this bug generalizes into the diagnostic worth reaching for whenever a class holds mutable state: comparing `a.transactions is b.transactions` on two freshly constructed instances, before either has written anything, tells the whole story in one expression. `True` means the name currently resolves to the class body's own list — read only, in section 2.3's terms, never yet shadowed by an instance-level write — and `False` means each instance already owns an independent list. The same diagnostic distinguishes the bug from a related-looking but different mistake: replacing `self.transactions.append(amt)` with `self.transactions = self.transactions + [amt]` does not fix the sharing, but it does silence it for the one instance that performs the concatenation. Reading `self.transactions` still returns the class list — nothing about the right-hand side of that expression is any different from before — but assigning the result back to `self.transactions` runs the write path from section 2.6, which places a brand-new list directly into that one instance's dictionary. Every instance that had already deposited through the shared list before that point keeps the contaminated history; only the one instance that rebound the name is isolated going forward. A fix applied to the symptom on a single instance can look complete under manual testing while leaving every other instance of the same class exactly as broken as before — which is why the fix that belongs inside `__init__`, assigning a fresh list once per instance before any deposit can occur, is the only one that actually closes the bug rather than relocating it.
+
+### 3.2 `__getattr__` and `__getattribute__` are one letter apart and not remotely the same hook
 
 ```python
 # Gist: getattr_vs_getattribute.py
@@ -463,9 +459,23 @@ RecursionError: maximum recursion depth exceeded
 
 `__getattr__` is the last box in section 2.3's diagram — a fallback invoked only once the normal search has produced nothing at all. That is why `l.real` prints without ever calling it: `real` is found in the instance dictionary at step two, and the fallback is never consulted. This is what makes `__getattr__` cheap and safe for building a proxy or a lazily-populated configuration object.
 
-`__getattribute__` is a different hook entirely, called at the very top of *every* attribute access on the class, including accesses that happen inside its own body. `self.__dict__` is itself an attribute access, so `Broken`'s override calls itself while trying to evaluate `self.__dict__`, which calls itself again, without ever reaching a base case — a `RecursionError` once the interpreter's recursion limit is hit. The fix is to call `object.__getattribute__(self, name)` directly, which invokes the default implementation from section 2.3 without re-entering the overridden one. The general lesson carries beyond this one hook: overriding something that intercepts a primitive operation is safe only if the override's own body avoids performing that same primitive operation on itself.
+`__getattribute__` is a different hook entirely, called at the very top of *every* attribute access on the class, including accesses that happen inside its own body. `self.__dict__` is itself an attribute access, so `Broken`'s override calls itself while trying to evaluate `self.__dict__`, which calls itself again, without ever reaching a base case — a `RecursionError` once the interpreter's recursion limit is hit. The general lesson carries beyond this one hook: overriding something that intercepts a primitive operation is safe only if the override's own body avoids performing that same primitive operation on itself.
 
-### 4.3 `__slots__` rejects a name that a plain class would have accepted silently
+The trap generalizes beyond `self.__dict__`: any attribute access performed inside an overridden `__getattribute__`'s own body re-enters that same override, because attribute access has exactly one entry point and the override has just made itself that entry point for every name, including its own. `self.name`, `self.__class__`, even `self.__getattribute__` itself inside the method body would each recurse identically — `self.__dict__` in the reproduction above is simply the shortest path to the same wall.
+
+```python
+class Fixed:
+    def __init__(self):
+        self.x = 1
+    def __getattribute__(self, name):
+        return object.__getattribute__(self, name)
+
+Fixed().x   # 1 — no recursion
+```
+
+Calling `object.__getattribute__(self, name)` directly reaches the default implementation from section 2.3 without passing back through the overriding class's own method, which is the general escape hatch for a class that needs to run some logic on every access — logging, an access count, a lazy default — without accidentally intercepting itself. The fix is not free: every single attribute access on the class now runs the full five-step search from section 2.3, descriptor checks included, in place of what would otherwise be a single dictionary lookup, on every read, whether or not the overridden logic has anything useful to add for that particular name. That per-access cost is exactly why the trade-off table below marks `__getattribute__` as a hook to reach for almost never — the two dunders are one letter apart in the name and separated by several orders of magnitude in how often each one actually runs.
+
+### 3.3 `__slots__` rejects a name that a plain class would have accepted silently
 
 ```python
 # Gist: slots_typo.py
@@ -495,7 +505,9 @@ Section 2.7 predicted both halves of this. `NoSlots` has an ordinary `__dict__`,
 
 The costlier version of the same restriction produces no error whatsoever, which is what makes it a genuine failure mode rather than merely a documented limitation: a subclass that omits its own `__slots__` regains a full `__dict__`, and every instance of it silently pays for the exact overhead the base class was written to avoid, with nothing at the point of subclassing signaling that the optimization has been discarded. The fix — declaring `__slots__ = ()` explicitly on every subclass that adds no new attributes of its own, and real slot names on every subclass that does — costs nothing in behavior but has to be applied consistently across an entire hierarchy, which is precisely the kind of rule a reviewer can miss once and never notice again.
 
-### 4.4 Multiple inheritance can make `super()` unrecoverable rather than merely surprising
+The asymmetry between the two failures is itself diagnostic. `NoSlots`'s typo produces a program that runs to completion and prints a wrong-looking but plausible number, the kind of defect that survives a manual test unless whoever is reading the output already knows what the correct balance should be; `WithSlots`'s typo produces an `AttributeError` at the exact line the mistake was made, which is strictly easier to fix precisely because it is impossible to ignore. The subclass version of the bug sits at the opposite end of that spectrum from both: it produces neither a wrong answer nor a crash, only a class that looks slotted and silently costs exactly what `__slots__` on the base class was written to avoid. The reason lies in what section 2.7 already established about the mechanism: `__slots__` generates one member descriptor — a data descriptor, per section 2.3 — for each name it declares, and only for those names. A subclass that declares none of its own contributes nothing to that set, so Python falls back to its ordinary behavior of giving the subclass a `__dict__`, and every name that is not one of the parent's declared slots — which, for an undeclared subclass, is every name at all — routes through that dictionary via the plain write path from section 2.6, exactly as if `__slots__` had never been used on the hierarchy at all. Checking `'__dict__' in dir(instance)` on a supposedly-slotted object is the one-line test that surfaces the regression directly.
+
+### 3.4 Multiple inheritance can make `super()` unrecoverable rather than merely surprising
 
 Section 2.5 showed cooperative multiple inheritance working correctly through a diamond. It can also fail to exist at all.
 
@@ -515,9 +527,11 @@ TypeError: Cannot create a consistent method resolution order (MRO) for bases X,
 
 `A` was declared with `X` before `Y`; `B` was declared with `Y` before `X`. C3's local-precedence guarantee — the order a class declares its own bases must survive into the final linearization — cannot honor both declarations at once for any class inheriting from both `A` and `B`, so the algorithm refuses rather than picking one arbitrarily. This is not a bug report waiting to happen at some later, more confusing point in a running program: it surfaces as a `TypeError` the moment `class C(A, B)` is executed, at import time, which is Python choosing to fail immediately and loudly in one of the few places it can detect an inheritance design as unsound before a single method has been called. The fix is a design change — reordering the bases somewhere in the hierarchy so the declared precedences agree, or removing the multiple inheritance in favor of composition — and it has no cost beyond the redesign itself, because the alternative is a hierarchy nobody could have used correctly regardless of whether Python permitted it.
 
+This is not merely a defensive check added for its own sake. The documentation this chapter draws the algorithm from is explicit that C3 replaced an older, simpler linearization: Python before 2.3 computed a class's method order with a straightforward depth-first, left-to-right traversal of the inheritance graph, the same strategy several other languages still use. That traversal never refuses; given the `X`/`Y`/`A`/`B`/`C` hierarchy above, it would have produced *some* ordering of `X` and `Y` for `C`, silently choosing one of the two contradictory precedences its own base classes had declared, and whichever method actually ran would depend on the traversal order rather than on anything a caller could read off the class declarations. "The Python 2.3 Method Resolution Order" names this as the specific defect C3 was adopted to close: a design that already contained a genuine contradiction used to produce a program that ran, produced an answer, and gave no indication that the answer depended on an arbitrary tie-break buried in the traversal algorithm rather than on anything either `A` or `B`'s author actually intended. Raising `TypeError` at class-creation time is strictly worse than running for anyone who only tests the happy path and never constructs `class C(A, B)` — but for anyone who does, it converts a silent, order-dependent method dispatch into an error that names the two classes in conflict, at the exact line the contradiction was introduced, before a single instance of `C` has been built or a single method call has gone anywhere.
+
 ---
 
-## 5. Trade-offs
+## 4. Trade-offs
 
 | Approach | Use when | Because | Real cost |
 | --- | --- | --- | --- |
@@ -525,7 +539,7 @@ TypeError: Cannot create a consistent method resolution order (MRO) for bases X,
 | **`@property`** | The value is derived, or a write must be validated or transformed | A data descriptor cannot be shadowed by an instance attribute; the call site never has to change | A function call on every access, and — because it looks exactly like a stored attribute — it hides that cost from the reader |
 | **Custom descriptor** | The same access-time logic repeats across several attributes or several classes | Written once, applied by simple assignment; `__set_name__` gives it its own storage name automatically | A reader has to find the descriptor class to know what an attribute actually does — real indirection, not free |
 | **`__getattr__`** | Attributes are genuinely dynamic — a proxy, a lazily populated configuration object | Fires only on lookup failure, so every normal access is unaffected | A typo becomes a silent successful call instead of an error, and it defeats `dir()` and IDE completion |
-| **`__getattribute__`** | Almost never, by design | It intercepts every access without exception | Slows every attribute access on the class, and a body that touches `self.anything` risks the recursion in section 4.2 |
+| **`__getattribute__`** | Almost never, by design | It intercepts every access without exception | Slows every attribute access on the class, and a body that touches `self.anything` risks the recursion in section 3.2 |
 | **`__slots__`** | A small, fixed-shape class instantiated in very large numbers | Removes the per-instance dictionary entirely, per the mechanism in section 2.7 | No dynamic attributes, no default weak-reference support, and silently defeated by any subclass that forgets to declare its own `__slots__` |
 | **`__init_subclass__` / `__set_name__`** | Reacting to a class or descriptor being created | Covers the historical metaclass use case without the metaclass-combination hazard PEP 487 documents | Cannot change *how* the class itself is constructed — only react after `type.__new__` has already run |
 
@@ -533,17 +547,23 @@ TypeError: Cannot create a consistent method resolution order (MRO) for bases X,
 
 `__init_subclass__` and `__set_name__` cover reacting to class creation. A metaclass is still necessary when the class must be built differently in the first place — a non-standard namespace (an ordered, duplicate-detecting dictionary instead of a plain one, for instance), injected base classes, or a type other than `type` used for the class itself. That is a narrower need than most code reaching for a metaclass actually has, and PEP 487's own rationale is the reason to default away from it: two libraries that each define their own metaclass cannot be combined by straightforward inheritance, and a metaclass added to a previously plain class by a later library version can silently break every downstream class that combines it with something else. Rejecting a metaclass in favor of `__init_subclass__` costs the ability to change construction itself; it buys freedom from a conflict that only manifests once, unpredictably, in someone else's inheritance graph.
 
+The duplicate-detecting namespace named above shows precisely where `__init_subclass__`'s timing stops being sufficient. A metaclass's `__prepare__` method returns the mapping that receives every assignment in the class body as it executes, so a custom mapping can raise the moment a name is bound twice — the instant the duplication happens. `__init_subclass__` runs only after the class body has already finished and its plain-dict namespace has already resolved every duplicate assignment down to whichever one ran last, silently, with nothing left by then for it to detect.
+
 ### When `__slots__` is not worth it
 
 The mechanism in section 2.7 pays off specifically when a program holds enormous numbers of small, fixed-shape instances — rows streamed through a parser, points in a simulation. For the few dozen or few hundred objects a typical request handler touches, the saved bytes are immaterial, and what is bought instead is a class that cannot accept an ad hoc debugging attribute, cannot be weakly referenced without extra declaration, and quietly stops saving anything the moment one subclass in the hierarchy forgets to declare its own slots. Rejecting `__slots__` here costs nothing measurable and avoids a rigidity that will eventually surprise whoever extends the class next.
+
+A developer who drops into a REPL to stash a temporary flag on one specific instance — `obj.seen = True`, without touching the class definition — hits precisely the `AttributeError` from section 3.3 the moment the class is slotted, because there is no dictionary anywhere on that instance to receive an undeclared name. For a class instantiated by the millions, losing that flexibility is obviously worth the saving; for the handful of long-lived objects a typical service actually holds, it is a real everyday cost paid for a memory saving too small to matter.
 
 ### When a custom descriptor is not worth it
 
 A descriptor earns its place when the same access-time behavior is needed on three or four attributes or across several classes. Below that, a `@property` says the same thing more plainly, and every Python programmer already recognizes it on sight — the descriptor's reusability is not worth the indirection tax every future reader of the class has to pay to understand what a single attribute does. The case against a custom descriptor here is not that it is wrong, only that it is premature for something a property already expresses in three lines.
 
+Section 2.6's own `Audited` descriptor makes the trade concrete: `balance = Audited()` is the entire class body's worth of ceremony for the attribute, and reading it in isolation reveals nothing about what a read or write actually does, because the validation logic lives in a separate class definition the reader has to go find. A `@property` pair doing the identical job sits directly above the class body that uses it, costing a few more lines to write in exchange for costing nothing to understand later — a trade that inverts only once the same validation needs repeating across a second or third attribute.
+
 ---
 
-## 6. Reference summary
+## 5. Reference summary
 
 The attribute-read order for `obj.x`, implemented by `object.__getattribute__` exactly as the descriptor HowTo guide's own reference function shows: **search `type(obj).__mro__` for `'x'` first; if what is found is a data descriptor (defines `__get__` and either `__set__` or `__delete__`), call it and return immediately — the instance dictionary is never consulted; otherwise check `obj.__dict__` and return its value if present; otherwise, if the class search found a non-data descriptor (only `__get__`), call that; otherwise return the plain class-level value found; only if nothing was found anywhere does `__getattr__` run, and its absence raises `AttributeError`.**
 

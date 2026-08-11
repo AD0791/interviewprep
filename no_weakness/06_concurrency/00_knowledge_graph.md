@@ -87,7 +87,7 @@ graph LR
 **Sources:** Ramalho ch.19 (2022, catalogued under `05_python`) · Fowler ch.1 (2022) · Nguyen ch.15 (2018) · Beazley, *An Introduction to Python Concurrency* (2009)
 **Edges:** `requires` [`PY-05`] · `contrasts` [`CONC-07`, `GO-08`]
 **Currency:** `stale-major`
-**Δ current:** Nguyen (2018) and Fowler (2022) both describe the GIL as a fixed, un-removable feature of CPython. PEP 703, accepted by the Steering Council on 24 October 2023, made a free-threaded build real: Python 3.13 (7 October 2024) shipped it experimentally, and PEP 779 promoted it to officially supported status in Python 3.14 (7 October 2025), with single-thread overhead now roughly 5–10%. The written article on this node measures the GIL-enabled default build, which remains accurate for that build; the free-threaded alternative and its implications belong to `CONC-05`.
+**Δ current:** Nguyen (2018) and Fowler (2022) both describe the GIL as a fixed, un-removable feature of CPython. PEP 703, accepted by the Steering Council on 24 October 2023, made a free-threaded build real: Python 3.13 (7 October 2024) shipped it experimentally, and PEP 779 promoted it to officially supported status in Python 3.14 (7 October 2025), with single-thread overhead now roughly 5–10%. The written article on this node cites its GIL-enabled default-build figures from the `CONC-GIL` rows of the measurement archive, which remain accurate for that build; the free-threaded alternative and its implications belong to `CONC-05`.
 **Article:** [01_the_gil_what_it_protects_and_when_it_lets_go.md](01_the_gil_what_it_protects_and_when_it_lets_go.md)
 
 ### `CONC-02` · Threads, races, and synchronisation

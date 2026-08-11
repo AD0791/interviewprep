@@ -74,7 +74,7 @@ The v1 self-assessment diagnostic, the `RECALL.md` rehearsal script, the compete
 
 ## 3. The module structure
 
-Every module is 6,000–8,000 words across six sections, in a fixed order: the problem this
+Every module is 6,000–8,000 words across five sections, in a fixed order: the problem this
 solves, the mechanism built up from the smallest example, failure modes with the errors they
 produce, trade-offs with a mandatory cost column, and a reference summary. Diagrams are
 integrated into the mechanism section rather than collected into one of their own.
@@ -263,7 +263,7 @@ of this section claimed, but a different structure end to end. Every module uses
 superseded seven-section skeleton: a quiz-framed second section ("the questions you cannot answer
 about it"), an `## Interview angles` section of spoken answers, and a closing section feeding
 `RECALL.md` — a file that no longer exists. None of the eleven has the reference summary that
-`MODULE_SPEC.md` §3.6 requires, which is the contract's deliberate replacement for practice
+`MODULE_SPEC.md` §3.5 requires, which is the contract's deliberate replacement for practice
 material.
 
 The word counts follow from that. Removing the three non-conforming sections leaves 2,675–4,678

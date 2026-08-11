@@ -39,7 +39,7 @@ print(len(combined))
 
 Nothing here subclasses `list` or implements an interface declared anywhere. `Ledger` simply defines three methods with names Python has reserved, and three pieces of builtin syntax start working on it. The `len()` builtin does not know what a `Ledger` is; it looks for a method named `__len__` on the type and calls it. `for` does not know either; it looks for `__iter__`. This is the entire content of "duck typing" in Python: syntax dispatches to a name, not to a type check, and any object supplying that name participates — which is a stronger and more specific claim than "it looks like it would work," because it says precisely which names matter and precisely where Python looks for them.
 
-That specificity has a consequence worth stating before the rest of this chapter builds on it: **where** Python looks for `__len__` is not the same place an ordinary attribute lookup looks, and the difference is not academic — the first failure mode in section 4 is a working monkey-patch that a built-in silently refuses to see, for exactly this reason.
+That specificity has a consequence worth stating before the rest of this chapter builds on it: **where** Python looks for `__len__` is not the same place an ordinary attribute lookup looks, and the difference is not academic — the first failure mode in section 3 is a working monkey-patch that a built-in silently refuses to see, for exactly this reason.
 
 The second question — why plain functions matter — comes from the other direction. A class in the `Strategy` or `Command` shape usually exists to make one piece of behavior swappable: a fee calculation, a sort key, a validation rule. Python does not require a class for that, because a function is already an object: it can be stored in a variable, passed as an argument, put in a dictionary, and returned from another function, with nothing extra defined. A large fraction of the code a Java or C++ background reaches for a class hierarchy to express — an interface with exactly one method, implemented three different ways and selected at runtime — is, in Python, three plain functions and a dictionary. Both threads in this chapter — the protocol that lets built-in syntax work on custom objects, and the fact that a function needs no ceremony to be treated as a value — are really the same idea from two directions: Python's object model treats "the thing that responds to this operation" and "the thing that can be called" as properties an object either has or does not have, checked by looking for a name, not by checking an ancestry.
 
@@ -111,7 +111,7 @@ graph TD
     HASGETITEM -->|no| FAIL["TypeError: object is not iterable"]
 ```
 
-The fallback exists for a historical reason — `__getitem__` predates `__iter__` in the language — and it is still live today rather than deprecated, which is why any class that implements simple integer indexing gets basic iterability for free. It is also, as section 4.3 shows, a trap for a class whose `__getitem__` is keyed on something other than a dense run of integers starting at zero.
+The fallback exists for a historical reason — `__getitem__` predates `__iter__` in the language — and it is still live today rather than deprecated, which is why any class that implements simple integer indexing gets basic iterability for free. It is also, as section 3.3 shows, a trap for a class whose `__getitem__` is keyed on something other than a dense run of integers starting at zero.
 
 The same two-tier structure — a modern protocol with a narrower, older one still recognized underneath it — recurs elsewhere in the special-method surface, and it is worth naming as a pattern rather than a coincidence specific to iteration. Python's descriptor HowTo guide and data model reference are both organized around exactly this idea: a protocol is a small, closed set of names, checked for directly, and when the language adds a more capable version of a protocol it almost always leaves the older spelling recognized rather than removing it, because removing it would silently break every class written against the old contract. Asynchronous iteration, covered on this shelf's concurrency chapters, follows the identical shape one level up: `async for` looks for `__aiter__` and `__anext__` exactly the way `for` looks for `__iter__` and `__next__`, with no equivalent legacy `__getitem__`-style fallback, because the asynchronous protocol was designed after the lesson of the synchronous one's two-tier history was already learned.
 
@@ -201,7 +201,7 @@ class Account:
         return hash((self.acct_no, self.balance))
 ```
 
-`Account` is well-formed by the rule above: `__eq__` and `__hash__` agree at the moment either is called. Section 4.1 covers what happens once `balance` — a field the hash depends on — changes after the object has already been used as a dictionary key.
+`Account` is well-formed by the rule above: `__eq__` and `__hash__` agree at the moment either is called. Section 3.1 covers what happens once `balance` — a field the hash depends on — changes after the object has already been used as a dictionary key.
 
 ### 2.6 `__new__` builds the object; `__init__` only configures it
 
@@ -293,7 +293,7 @@ graph TD
     ROK -->|yes| FAIL["TypeError: unsupported operand type(s)"]
 ```
 
-Returning `None`, raising an exception, or returning some other placeholder instead of the actual `NotImplemented` singleton breaks this fallback outright — section 4.2 demonstrates exactly that mistake and the silently wrong result it produces.
+Returning `None`, raising an exception, or returning some other placeholder instead of the actual `NotImplemented` singleton breaks this fallback outright — section 3.2 demonstrates exactly that mistake and the silently wrong result it produces.
 
 `==` follows the identical two-sided protocol, with one further fallback on top of it. If both `type(a).__eq__(a, b)` and `type(b).__eq__(b, a)` return `NotImplemented`, Python does not raise — it falls back to comparing identity, the same behavior `object.__eq__` provides by default:
 
@@ -406,15 +406,9 @@ print(callable(ten_percent_off))     # True
 
 ---
 
-## 3. Diagrams
+## 3. Failure modes
 
-The iteration-fallback flowchart in section 2.3, the `__new__`/`__init__` sequence diagram in section 2.6, and the operator-fallback flowchart in section 2.7 are integrated into the mechanism build-up above, as this format requires.
-
----
-
-## 4. Failure modes
-
-### 4.1 Mutating a field the hash depends on desyncs the object from its own dictionary bucket
+### 3.1 Mutating a field the hash depends on desyncs the object from its own dictionary bucket
 
 ```python
 # Gist: mutable_hash_key.py
@@ -433,7 +427,7 @@ a.balance = 50          # a field __hash__ depends on, changed after insertion
 
 Section 2.5's contract — "objects which compare equal have the same hash value" — was true when `a` was inserted and is violated the moment `balance` changes, because `hash(a)` is now a different number than the one the dictionary used to choose `a`'s bucket when it was stored. A dictionary does not rehash its existing entries when a key mutates; it has no way to know a mutation happened at all. What comes next is genuinely nondeterministic rather than a single predictable outcome: a lookup for `a` recomputes `hash(a)` using the *current* balance and probes the table starting from the bucket that hash implies. Whether that probe sequence happens to still pass through the bucket where the entry actually lives, before reaching an empty slot, depends on the specific hash values involved and the table's current size — neither of which the program controls or can predict from the source code alone. The same code can appear to work correctly through months of testing on a dictionary that happens to keep colliding into the right bucket, and then silently "lose" an entry the day the dictionary resizes or a different balance value is used. This is precisely why the failure is dangerous rather than merely inconvenient: it does not fail the same way twice, so a fix that seems to work after one manual check is not evidence of anything. The only real fix is prevention — computing `__hash__` exclusively from fields that do not change over the object's lifetime, which for `Account` means hashing only `acct_no` and leaving `balance` out of both `__eq__` and `__hash__`'s equality-relevant fields, or, more simply, only ever using an immutable, frozen value object as a dictionary key.
 
-### 4.2 Returning the wrong thing instead of `NotImplemented` produces a silently wrong result, not an error
+### 3.2 Returning the wrong thing instead of `NotImplemented` produces a silently wrong result, not an error
 
 ```python
 # Gist: wrong_notimplemented.py
@@ -454,7 +448,7 @@ None <class 'NoneType'>
 
 Section 2.7's fallback protocol depends entirely on the *specific* sentinel `NotImplemented` — Python checks for that exact singleton, not for any falsy or exception-raising alternative, to decide whether to try the reflected operator. Returning `None` here is not recognized as "please ask the other operand"; it is recognized as *the actual answer*. `Money(100) + 5` therefore does not raise the `TypeError` a programmer might expect for an unsupported combination — it silently produces `None`, typed as `NoneType`, which will fail much later and much less informatively, wherever that `None` is next used as though it were a `Money`. This is worse than a crash at the point of the mistake, because the traceback that eventually appears points at an unrelated line far from where the real defect is. The fix is one word — return `NotImplemented`, not `None` — and the cost is remembering that the two are unrelated: `NotImplemented` is a singleton object used exactly for this protocol, and it is not falsy in a way that makes `if not isinstance(...): return None` an easy substitute to reach for by habit.
 
-### 4.3 The legacy iteration fallback assumes dense integer indices, and a sparse `__getitem__` breaks it mid-loop
+### 3.3 The legacy iteration fallback assumes dense integer indices, and a sparse `__getitem__` breaks it mid-loop
 
 ```python
 # Gist: sparse_getitem.py
@@ -475,7 +469,7 @@ KeyError: 0
 
 `SparseLog` defines `__getitem__` for a reason that has nothing to do with iteration — indexing by timestamp — and section 2.3's fallback protocol does not know that. `iter()` sees a `__getitem__` and no `__iter__`, assumes the legacy sequence protocol, and starts probing `log[0]`, `log[1]`, `log[2]`, expecting the sequence to be dense and to eventually signal its end with `IndexError`. `SparseLog`'s dictionary has no key `0`, so the very first probe raises `KeyError` instead of the `IndexError` the protocol is listening for, and that exception propagates out of the loop unhandled rather than being interpreted as "iteration is over." The fix is either to define `__iter__` explicitly — the modern protocol, which sidesteps the legacy fallback entirely and is the correct choice for any container not naturally indexed by a dense integer range — or, if `__getitem__` genuinely must double as the container's iteration mechanism, to raise `IndexError` specifically for the termination case rather than letting whatever the underlying lookup happens to raise propagate unexamined.
 
-### 4.4 An instance-level monkey-patch of a dunder is invisible to the syntax it is meant to intercept
+### 3.4 An instance-level monkey-patch of a dunder is invisible to the syntax it is meant to intercept
 
 ```python
 # Gist: instance_dunder_ignored.py
@@ -496,7 +490,7 @@ This is section 2.2's rule surfacing as a debugging trap rather than as a curios
 
 ---
 
-## 5. Trade-offs
+## 4. Trade-offs
 
 | Approach | Use when | Because | Real cost |
 | --- | --- | --- | --- |
@@ -520,7 +514,7 @@ The Strategy and Command patterns exist in languages where a function cannot be 
 
 ---
 
-## 6. Reference summary
+## 5. Reference summary
 
 **Built-in syntax dispatches to a fixed dunder name on the operand's type**, not to a type check: `len(x)` is `type(x).__len__(x)`, `a + b` is `type(a).__add__(a, b)`, and so on. **Implicit dunder lookup goes straight to the type and bypasses the instance dictionary and `__getattribute__` entirely** — assigning `__len__` on an instance changes nothing for `len()`, which only ever looks at the type.
 

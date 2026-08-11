@@ -53,7 +53,7 @@ A module object's own reflective attributes follow directly from this same const
 
 The line `sys.modules[name] = mod` in the pseudocode above appears *before* the module's source is executed, not after, and that ordering is deliberate — section 2.4 depends on it directly. The immediate, simpler consequence is what makes module-level code a safe place to do real work: a database connection opened at module scope, a configuration dictionary built once, a compiled regular expression — none of it re-runs on a second `import` anywhere else in the same process, because the second `import` finds the name already in `sys.modules` and returns the cached object without touching the source file again.
 
-This caching is also why editing a module's source during a long-running process and importing it again changes nothing: the cache is keyed purely by name, with no comparison against the file's contents or modification time. `importlib.reload()` exists specifically to force a re-execution, but it does so by running the new source *into the same, already-existing module dictionary* — which section 4.3 shows is a narrower operation than it sounds, because anything created from the *old* definitions before the reload does not retroactively become an instance of the *new* ones.
+This caching is also why editing a module's source during a long-running process and importing it again changes nothing: the cache is keyed purely by name, with no comparison against the file's contents or modification time. `importlib.reload()` exists specifically to force a re-execution, but it does so by running the new source *into the same, already-existing module dictionary* — which section 3.3 shows is a narrower operation than it sounds, because anything created from the *old* definitions before the reload does not retroactively become an instance of the *new* ones.
 
 ### 2.3 Finding a module is a chain of finders, each trying a different strategy
 
@@ -144,7 +144,7 @@ print(shared.__path__)
 _NamespacePath(['.../locB/shared', '.../locA/shared'])
 ```
 
-Both directories are genuinely separate, physically unrelated locations, and both contribute submodules to the *same* `shared` package, merged transparently the moment neither one declares itself a regular package with an `__init__.py`. This is a deliberate feature — it is what lets a large project split a single logical package's implementation across multiple installed distributions — but it is also, per section 4.4, a real hazard for a directory that was only ever supposed to be self-contained and happened to omit `__init__.py` by accident rather than by design.
+Both directories are genuinely separate, physically unrelated locations, and both contribute submodules to the *same* `shared` package, merged transparently the moment neither one declares itself a regular package with an `__init__.py`. This is a deliberate feature — it is what lets a large project split a single logical package's implementation across multiple installed distributions — but it is also, per section 3.4, a real hazard for a directory that was only ever supposed to be self-contained and happened to omit `__init__.py` by accident rather than by design.
 
 ### 2.6 The `__main__` guard exists because "starting a new process" and "importing a module" are not always different operations
 
@@ -184,7 +184,7 @@ graph TD
     end
 ```
 
-`"module top-level executing"` prints **twice** — once for the parent process's ordinary execution, and once again because the spawned child re-imports `__main__` as its own first act, per section 2.1's mechanism, running every top-level statement in the file a second time in a fresh interpreter. Everything inside the `if __name__ == "__main__":` block does *not* re-run in the child, specifically because the child's re-import checks `__name__` exactly as the parent's original run did, and in the child it evaluates to `"__main__"` only for the process the user actually launched — Python's own multiprocessing documentation states this guard is required specifically to avoid exactly this recursive re-execution turning genuinely dangerous, which section 4.2 makes concrete.
+`"module top-level executing"` prints **twice** — once for the parent process's ordinary execution, and once again because the spawned child re-imports `__main__` as its own first act, per section 2.1's mechanism, running every top-level statement in the file a second time in a fresh interpreter. Everything inside the `if __name__ == "__main__":` block does *not* re-run in the child, specifically because the child's re-import checks `__name__` exactly as the parent's original run did, and in the child it evaluates to `"__main__"` only for the process the user actually launched — Python's own multiprocessing documentation states this guard is required specifically to avoid exactly this recursive re-execution turning genuinely dangerous, which section 3.2 makes concrete.
 
 ### 2.7 Choosing which versions to install is a constraint-satisfaction problem, not a lookup
 
@@ -200,15 +200,9 @@ This is the part of the import-and-packaging subject that has moved the furthest
 
 ---
 
-## 3. Diagrams
+## 3. Failure modes
 
-The finder/loader flowchart in section 2.3, the circular-import timing diagram in section 2.4, and the fork-versus-spawn contrast in section 2.6 are integrated into the mechanism build-up above, as this format requires.
-
----
-
-## 4. Failure modes
-
-### 4.1 A circular import raises `AttributeError` at exactly the line that runs before its dependency has finished initializing
+### 3.1 A circular import raises `AttributeError` at exactly the line that runs before its dependency has finished initializing
 
 ```python
 # Gist: a.py
@@ -234,7 +228,7 @@ AttributeError: module 'a' has no attribute 'VALUE'
 
 Section 2.4 already traces the exact mechanism: `b.py`'s `import a` finds a real, cached, but *incomplete* module object, and `a.VALUE` is simply not there yet. What makes this defect genuinely troublesome in a real codebase is that it is order-sensitive in a way that is easy to fix accidentally without understanding why: moving the `VALUE = "from a"` line to occur *before* `import b` in `a.py` makes the exact same circular import work without error, which can make the defect look "fixed" by a change that only worked by coincidence and will break again the next time either file is reordered. The durable fix is structural rather than positional: move the cross-module attribute access inside a function body (deferring it until both modules have fully finished importing), or extract whatever `a` and `b` both need into a third module neither of them needs the other to define.
 
-### 4.2 An unguarded `multiprocessing.Process` call at module scope spawns children recursively under `spawn`
+### 3.2 An unguarded `multiprocessing.Process` call at module scope spawns children recursively under `spawn`
 
 ```python
 # Gist: unguarded_spawn.py
@@ -251,7 +245,7 @@ p.join()
 
 Section 2.6 already establishes the mechanism this triggers: under `spawn`, the child process re-imports this file as `__main__` from scratch to reconstruct its state. Because the `Process().start()` call here sits at module scope rather than behind `if __name__ == "__main__":`, the child's re-import runs that exact same line again — spawning a second child, which re-imports the file again, spawning a third, in a chain that does not stop on its own. Python's own multiprocessing documentation states plainly that this guard is required for exactly this reason on platforms using `spawn`, and the failure mode it prevents is not a clean crash but a rapidly multiplying set of processes that can exhaust a machine's process table or memory before anyone notices what is launching them. The fix is the guard itself — moving every module-level side effect that should run only once, in the original process, behind `if __name__ == "__main__":` — and it costs nothing beyond remembering that "this file might be re-imported by a process that isn't the one a human launched" is a real possibility on the two most common desktop platforms, not a theoretical edge case.
 
-### 4.3 `importlib.reload()` updates the module's namespace but not any object already built from its old classes
+### 3.3 `importlib.reload()` updates the module's namespace but not any object already built from its old classes
 
 ```python
 # Gist: reload_staleness.py
@@ -282,7 +276,7 @@ v2
 
 Section 2.2 already names the mechanism: `reload()` re-executes the new source into the module's *existing* dictionary, which rebinds the name `Account` to a **new** class object — it does not, and cannot, reach back and modify `a`, an instance built earlier from the *old* `Account`. `a.__class__` still points at the class object that existed before the reload, so `a.describe()` keeps calling the old method, and `isinstance(a, mod.Account)` is `False` because `mod.Account` now names a different object than the one `a` was actually built from. This is precisely why reload-based development workflows are fragile in exactly the way Beazley's own material warns against: any object holding a reference to an old class — including, subtly, any `super()` call inside a method defined on that old class, or any `isinstance` check against the freshly reloaded name — can behave inconsistently after a reload in ways that a fresh process restart would never exhibit. The practical fix is not a smarter reload; it is accepting that `reload()` is a narrow debugging convenience for a REPL session, never a substitute for restarting the process, and reaching for an actual process restart the moment more than the very simplest, instance-free module is involved.
 
-### 4.4 Two unrelated directories with the same name silently merge into a single namespace package
+### 3.4 Two unrelated directories with the same name silently merge into a single namespace package
 
 ```python
 # Gist: accidental_namespace_merge.py
@@ -303,7 +297,7 @@ _NamespacePath(['.../locB/shared', '.../locA/shared'])
 
 Section 2.5 already covers why this succeeds at all: with no `__init__.py` in either directory, both qualify as namespace-package fragments under the identical name `shared`, and the path-based finder combines every matching directory it finds across the whole of `sys.path` into one logical package rather than treating the second one as a conflict or a shadow of the first. This becomes a genuine defect, rather than the intentional multi-distribution feature section 2.5 describes, the moment two *unrelated* projects happen to place a directory with the same name on the same `sys.path` — a vendored dependency's internal `utils/` colliding with a project's own `utils/`, for instance — with neither developer aware the other directory exists, let alone that omitting `__init__.py` would cause the two to blend into one importable namespace holding modules from both. Nothing about this raises an error; `import shared.a_mod` and `import shared.b_mod` both simply work, which is exactly what makes it hard to diagnose when a third module unexpectedly resolves to the wrong directory's file. The fix, once the merge is unwanted, is the traditional guard against it: add an `__init__.py` to whichever directory is meant to be a self-contained regular package, which removes it from namespace-package eligibility entirely and makes any accidental same-name collision on `sys.path` a normal, loud shadowing problem instead of a silent merge.
 
-### 4.5 A same-named local file silently shadows a standard-library module
+### 3.5 A same-named local file silently shadows a standard-library module
 
 ```python
 # Gist: shadow_test/random.py
@@ -325,20 +319,20 @@ Section 2.3's finder pipeline explains exactly why: `PathFinder` walks `sys.path
 
 ---
 
-## 5. Trade-offs
+## 4. Trade-offs
 
 | Approach | Use when | Because | Real cost |
 | --- | --- | --- | --- |
 | **Regular package (`__init__.py`)** | The package is self-contained and should never silently combine with another directory of the same name | Explicit, single-location, matches every reader's default mental model of "a package" | One boilerplate file per directory, easy to forget on a new subpackage |
-| **Namespace package (PEP 420)** | A logical package is deliberately split across multiple separately-installed distributions | No `__init__.py` needed; contributions merge automatically by name | The exact same automatic merging can happen by accident between unrelated projects, per section 4.4 |
-| **`importlib.reload()`** | A quick, throwaway check inside an interactive session | No process restart needed for a fast iteration loop | Existing instances silently keep referencing pre-reload classes, per section 4.3 — not safe once real state exists |
+| **Namespace package (PEP 420)** | A logical package is deliberately split across multiple separately-installed distributions | No `__init__.py` needed; contributions merge automatically by name | The exact same automatic merging can happen by accident between unrelated projects, per section 3.4 |
+| **`importlib.reload()`** | A quick, throwaway check inside an interactive session | No process restart needed for a fast iteration loop | Existing instances silently keep referencing pre-reload classes, per section 3.3 — not safe once real state exists |
 | **Restarting the process** | Anything beyond the simplest single-function edit-and-recheck loop | Every object, class, and cached reference starts genuinely fresh | Slower than a reload, by however long the process takes to start back up |
 | **`pip` + `venv`** | Minimal tooling footprint, or an environment where installing an additional tool is not an option | Ships with every CPython installation; no extra dependency | Slower resolution and installation; separate tools needed for what `uv` unifies |
 | **`uv`** | A new project, or an existing one willing to adopt a single unified tool | One tool for environments, resolution, installation, and locking; a substantially faster resolver | Another external tool to install and to trust; the ecosystem around it is younger than `pip`'s |
 
 ### When `reload()` is actively the wrong choice
 
-The moment a session has created any object from a module's classes — which is most real, non-trivial debugging sessions almost immediately — `reload()` stops being a convenience and starts being a source of exactly the kind of stale-class bugs section 4.3 demonstrates, bugs that exist only because of the debugging technique itself and would not occur in a normal process restart. The rejected alternative to reaching for `reload()` out of habit is simply restarting the interpreter; it costs the time to reach a fresh state again, and it buys back the guarantee that nothing observed afterward is an artifact of the reload mechanism rather than the actual code.
+The moment a session has created any object from a module's classes — which is most real, non-trivial debugging sessions almost immediately — `reload()` stops being a convenience and starts being a source of exactly the kind of stale-class bugs section 3.3 demonstrates, bugs that exist only because of the debugging technique itself and would not occur in a normal process restart. The rejected alternative to reaching for `reload()` out of habit is simply restarting the interpreter; it costs the time to reach a fresh state again, and it buys back the guarantee that nothing observed afterward is an artifact of the reload mechanism rather than the actual code.
 
 ### When a namespace package is the wrong default
 
@@ -346,7 +340,7 @@ Omitting `__init__.py` reflexively, on the reasoning that Python 3.3+ no longer 
 
 ### The case against manual `sys.path` manipulation
 
-Appending to `sys.path` by hand at the top of a script is a tempting, immediate fix for "this import doesn't work from here," and it is also how section 4.5's shadowing hazard and section 4.4's accidental namespace merging most often get introduced — both depend entirely on exactly which directories end up on the path and in what order, and a manual `sys.path.insert(0, ...)` is precisely the kind of change that alters that order without anyone reviewing the consequences for every other import in the program. The rejected alternative to reaching for `sys.path` surgery is fixing the actual structural problem — installing the package properly (even in editable mode during development), or correcting the relative-import paths per section 2.1's package mechanics — which costs the time to understand why the import was failing in the first place, rather than the few seconds a path hack takes to write.
+Appending to `sys.path` by hand at the top of a script is a tempting, immediate fix for "this import doesn't work from here," and it is also how section 3.5's shadowing hazard and section 3.4's accidental namespace merging most often get introduced — both depend entirely on exactly which directories end up on the path and in what order, and a manual `sys.path.insert(0, ...)` is precisely the kind of change that alters that order without anyone reviewing the consequences for every other import in the program. The rejected alternative to reaching for `sys.path` surgery is fixing the actual structural problem — installing the package properly (even in editable mode during development), or correcting the relative-import paths per section 2.1's package mechanics — which costs the time to understand why the import was failing in the first place, rather than the few seconds a path hack takes to write.
 
 ### The case against adopting `uv` without understanding what it replaces
 
@@ -354,7 +348,7 @@ Appending to `sys.path` by hand at the top of a script is a tempting, immediate 
 
 ---
 
-## 6. Reference summary
+## 5. Reference summary
 
 **`import name` checks `sys.modules` first, and caches the module object *before* running its source**, not after — the second fact is what makes a circular import survivable at all, and the first is what makes a module's top-level code run exactly once per process regardless of how many times it is imported.
 

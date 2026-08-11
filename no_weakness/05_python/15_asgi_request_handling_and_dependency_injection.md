@@ -115,7 +115,7 @@ def nocache(a=Depends(get_db), b=Depends(get_db, use_cache=False)):
 {"a": "db-1", "b": "db-2", "same": false}
 ```
 
-`use_cache=False` is scoped to the individual `Depends(...)` call it appears on, not to the underlying callable globally — `a` still benefits from the default caching behavior, while `b` explicitly forces a fresh call. This exists specifically for the case section 4.1 turns into a failure mode: a dependency whose entire purpose is to produce something *new* on every reference — a request-scoped random token, a fresh timestamp — needs this flag, because the framework's default assumption is that calling the same thing twice in one request means the caller wants the same result both times.
+`use_cache=False` is scoped to the individual `Depends(...)` call it appears on, not to the underlying callable globally — `a` still benefits from the default caching behavior, while `b` explicitly forces a fresh call. This exists specifically for the case section 3.1 turns into a failure mode: a dependency whose entire purpose is to produce something *new* on every reference — a request-scoped random token, a fresh timestamp — needs this flag, because the framework's default assumption is that calling the same thing twice in one request means the caller wants the same result both times.
 
 ### 2.6 A dependency's own required parameters are validated before its body ever runs — even before the endpoint's own logic decides anything
 
@@ -188,7 +188,7 @@ preflight from https://evil.example.com     -> 400, no Access-Control-Allow-Orig
 actual GET from https://evil.example.com    -> 200 {"ok": true}  — the server still answers it
 ```
 
-The third line is the one worth pausing on. `CORSMiddleware` does not stop the server from processing a request from an origin that is not in `allow_origins` — the handler runs, and the data goes out over the wire, exactly as it would for any other request. What the middleware controls is a single response header, `Access-Control-Allow-Origin`, and the entire enforcement mechanism lives inside the **browser**, not the server: a browser's own JavaScript running on `https://evil.example.com` will receive the response and then refuse to let the calling script *read* it, because the response is missing permission for that specific origin. A non-browser client — `curl`, another server, this chapter's own test client — is never subject to that restriction at all, because there is no browser-side same-origin policy for it to enforce. CORS is a cooperative safety mechanism between a server and browsers that honor the standard, not an access-control layer the server itself enforces against arbitrary callers; section 4.4 covers what goes wrong when that distinction is missed.
+The third line is the one worth pausing on. `CORSMiddleware` does not stop the server from processing a request from an origin that is not in `allow_origins` — the handler runs, and the data goes out over the wire, exactly as it would for any other request. What the middleware controls is a single response header, `Access-Control-Allow-Origin`, and the entire enforcement mechanism lives inside the **browser**, not the server: a browser's own JavaScript running on `https://evil.example.com` will receive the response and then refuse to let the calling script *read* it, because the response is missing permission for that specific origin. A non-browser client — `curl`, another server, this chapter's own test client — is never subject to that restriction at all, because there is no browser-side same-origin policy for it to enforce. CORS is a cooperative safety mechanism between a server and browsers that honor the standard, not an access-control layer the server itself enforces against arbitrary callers; section 3.4 covers what goes wrong when that distinction is missed.
 
 ```mermaid
 sequenceDiagram
@@ -257,19 +257,13 @@ graph TD
     STARTS -.->|"on_event('startup') handlers"| SILENT["never called — no error, no warning at runtime"]
 ```
 
-An application migrated chapter by chapter from older documentation — a new `lifespan` added for one piece of startup logic, while an existing `@app.on_event("startup")` handler from an earlier version of the same codebase is left in place, believed to still be running — silently loses whatever that handler used to do, with nothing at request time or startup time indicating anything is wrong. Section 4.2 covers this failure directly; the fix at the mechanism level is simply that `lifespan` is not an addition to `on_event`, it is a replacement for it, and the two are never meant to coexist in one application.
+An application migrated chapter by chapter from older documentation — a new `lifespan` added for one piece of startup logic, while an existing `@app.on_event("startup")` handler from an earlier version of the same codebase is left in place, believed to still be running — silently loses whatever that handler used to do, with nothing at request time or startup time indicating anything is wrong. Section 3.2 covers this failure directly; the fix at the mechanism level is simply that `lifespan` is not an addition to `on_event`, it is a replacement for it, and the two are never meant to coexist in one application.
 
 ---
 
-## 3. Diagrams
+## 3. Failure modes
 
-The nested-dependency graph in section 2.4, the CORS browser-enforcement sequence in section 2.10, and the `lifespan`/`on_event` silent-override diagram in section 2.12 are integrated into the mechanism build-up above, as this format requires.
-
----
-
-## 4. Failure modes
-
-### 4.1 A dependency meant to produce a fresh value every time silently returns the same one twice, because caching is the default
+### 3.1 A dependency meant to produce a fresh value every time silently returns the same one twice, because caching is the default
 
 ```python
 # Gist: accidental_shared_id.py
@@ -290,7 +284,7 @@ def report(header_id=Depends(new_request_id), footer_id=Depends(new_request_id))
 
 Both fields should plausibly be two distinct identifiers — a header ID and a footer ID sound like they belong to different things — and section 2.3's caching mechanism gives them the identical value instead, because `new_request_id` is one callable referenced twice, and FastAPI has no way to know this particular dependency was written to be called once per *reference* rather than once per *request*. Nothing raises an error; the response is well-formed and looks entirely plausible unless someone happens to notice the two numbers matching every single time. The fix is section 2.5's own escape hatch — `Depends(new_request_id, use_cache=False)` on every reference meant to produce an independent value — and the broader lesson is that a dependency's author has to decide, explicitly, whether it represents one shared resource per request (the default, and the right choice for a database session or a resolved user) or a value meant to vary per call site, because the framework's default assumption always favors the former.
 
-### 4.2 An `on_event` handler stops running the moment `lifespan` is added, with no error at startup or at request time
+### 3.2 An `on_event` handler stops running the moment `lifespan` is added, with no error at startup or at request time
 
 ```python
 # Gist: silently_dead_on_event.py
@@ -322,11 +316,11 @@ def root():
 
 `'on_event startup'` never appears. Section 2.12 already names the exact mechanism: once `lifespan` is supplied to the `FastAPI()` constructor, the framework's own startup sequence stops dispatching to any `on_event` handlers at all — not because they raise, not because they are skipped with a logged warning at request time, but because the code path that used to call them is simply not exercised anymore once the newer mechanism is in charge. The only signal anything changed is a deprecation warning printed once, at import time, easy to miss in a busy startup log and saying nothing about the handler being nonfunctional rather than merely old-fashioned. This is exactly the trap a codebase migrated incrementally falls into: `lifespan` gets added for one new piece of startup logic, an existing `on_event("startup")` handler from before the migration is left in place on the reasonable assumption that "it still works, it's just deprecated," and whatever that handler used to initialize — a cache warm-up, a connection pool, a background scheduler — silently stops happening. The fix is not a workaround; it is consolidating every `on_event` handler's logic into the single `lifespan` function, which is the only form FastAPI actually still executes.
 
-### 4.3 A background task's exception is invisible to the client, because the response was already sent before the task ever raised
+### 3.3 A background task's exception is invisible to the client, because the response was already sent before the task ever raised
 
 Section 2.9 already establishes the ordering: a background task registered inside a handler runs only after the response has been constructed and handed back up through the pipeline. In a real deployment, "handed back" means the response has genuinely been written to the client's socket by the time the task's own code starts running — which means an exception raised inside that task has no response left to attach itself to. The client that made the request already received `{"status": "accepted"}` with a `200`, in good faith, and has no way to learn — from that response, or from any later one, since there is no later response — that the work it was told was queued actually failed. The failure is real, and it is visible only in server-side logs, if the deployment's logging configuration happens to capture an exception raised outside the ordinary request-handling path at all; a background task pattern adopted without also auditing what happens to an exception raised inside one is adopting a failure mode that produces no client-visible signal whatsoever. The fix is architectural rather than a one-line change: anything a caller genuinely needs confirmation of — not merely "accepted for later processing" but "definitely happened" — does not belong in a background task at all; it belongs either in the handler's own synchronous path, or behind a separate, pollable status endpoint the client can check after the fact, precisely because a background task's success or failure is, by design, invisible to whoever triggered it.
 
-### 4.4 Treating `CORSMiddleware`'s `allow_origins` as access control leaves the API fully reachable by anything that is not a browser
+### 3.4 Treating `CORSMiddleware`'s `allow_origins` as access control leaves the API fully reachable by anything that is not a browser
 
 ```python
 # Gist: cors_is_not_auth.py
@@ -348,7 +342,7 @@ curl https://api.example.com/internal-stats
 
 ---
 
-## 5. Trade-offs
+## 4. Trade-offs
 
 | Approach | Use when | Because | Real cost |
 | --- | --- | --- | --- |
@@ -370,7 +364,7 @@ A value used by exactly one handler, computed from nothing but that handler's ow
 
 ---
 
-## 6. Reference summary
+## 5. Reference summary
 
 **A parameter's declared type on a path or query parameter is a runtime coercion and validation instruction**, not documentation — an unparseable value never reaches the handler at all, and produces a structured `422` response instead. **`Depends(callable)` asks FastAPI to call that callable before the handler runs and bind its return value to the parameter carrying the default** — a plain function and a class are equally valid, because both are simply callables.
 

@@ -126,7 +126,7 @@ unexpected
   Extra inputs are not permitted [type=extra_forbidden, input_value='field', input_type=str]
 ```
 
-`extra="forbid"` is one of several model-wide settings `ConfigDict` exposes — others control whether assignment after construction re-validates (section 4.2), whether string fields are stripped of whitespace automatically, and more — each affecting every field in the model uniformly rather than one field's individual behavior. Without it, the default is to silently drop any field the schema does not declare, which section 4.1 turns into a concrete failure mode.
+`extra="forbid"` is one of several model-wide settings `ConfigDict` exposes — others control whether assignment after construction re-validates (section 3.2), whether string fields are stripped of whitespace automatically, and more — each affecting every field in the model uniformly rather than one field's individual behavior. Without it, the default is to silently drop any field the schema does not declare, which section 3.1 turns into a concrete failure mode.
 
 ### 2.5 Every field is validated independently, and every failure is collected and reported together
 
@@ -163,7 +163,7 @@ print(a.model_dump())        # {'owner': 'alexandro', 'balance_cents': 500}
 print(a.model_dump_json())    # '{"owner":"alexandro","balance_cents":500}'
 ```
 
-`model_dump()` produces a plain Python `dict`; `model_dump_json()` produces a JSON string directly, without an intermediate `dict` and a separate `json.dumps` call. Neither one re-runs any validator — validation happens exclusively at construction (and, if configured, at assignment, per section 4.2), and serialization is a pure, one-directional read of whatever values the model already holds.
+`model_dump()` produces a plain Python `dict`; `model_dump_json()` produces a JSON string directly, without an intermediate `dict` and a separate `json.dumps` call. Neither one re-runs any validator — validation happens exclusively at construction (and, if configured, at assignment, per section 3.2), and serialization is a pure, one-directional read of whatever values the model already holds.
 
 ### 2.7 `Field()` constraints and cross-field `model_validator`s run at two different stages, and a field failure suppresses the later stage entirely
 
@@ -280,15 +280,9 @@ FastAPI's own request handling, chapter 15's subject, is what makes this concret
 
 ---
 
-## 3. Diagrams
+## 3. Failure modes
 
-The field-versus-model validator staging diagram in section 2.7 and the v1-to-v2 architecture diagram in section 2.9 are integrated into the mechanism build-up above, as this format requires.
-
----
-
-## 4. Failure modes
-
-### 4.1 An unexpected field is silently dropped rather than rejected, unless `extra="forbid"` is set explicitly
+### 3.1 An unexpected field is silently dropped rather than rejected, unless `extra="forbid"` is set explicitly
 
 ```python
 # Gist: silently_dropped_field.py
@@ -308,7 +302,7 @@ owner='alexandro' balance_cents=500
 
 `currency="HTG"` vanishes without any error, warning, or trace anywhere in the constructed object — Pydantic's default `extra` behavior is to ignore fields the schema does not declare, which is a defensible default for tolerating additive API changes from an upstream service, and a dangerous one for a schema meant to catch a client sending the wrong shape of data entirely. A client that misspells a field name — `ballance_cents` instead of `balance_cents` — receives no error at all under this default: the misspelled field is silently discarded, `balance_cents` is silently missing (or falls back to a default, if one exists), and the resulting model looks completely valid while representing data the client never actually intended to send. The fix is `model_config = ConfigDict(extra="forbid")` on any model meant to reject data it does not fully recognize, which is nearly every model sitting directly at a request boundary — permissive-by-default is the wrong default specifically for the use case this chapter opened with.
 
-### 4.2 Assigning to a field after construction does not re-validate it, unless `validate_assignment=True` is set
+### 3.2 Assigning to a field after construction does not re-validate it, unless `validate_assignment=True` is set
 
 ```python
 # Gist: unvalidated_assignment.py
@@ -326,11 +320,11 @@ not a number at all <class 'str'>
 
 Construction validated `balance_cents` correctly; the assignment afterward did not, because Pydantic's validation, by default, runs only at `__init__` time — `model_config = ConfigDict(validate_assignment=True)` is required to make every subsequent assignment pass back through the same field validators construction used. This is a genuine and common misconception: a `BaseModel` looks, and is documented, as a *validated* type, which reads naturally as "this object's fields are always valid," when the accurate claim is narrower — "this object's fields were valid the moment it was built." Code that constructs a model once, validates cleanly, and then mutates a field later based on some other computation can silently reintroduce exactly the kind of invalid state the model was built to prevent, with nothing about the assignment itself signaling that anything went wrong. The fix, for any model whose fields might be reassigned after construction, is `validate_assignment=True`; for a model that should never be mutated at all once built, `model_config = ConfigDict(frozen=True)` is the stronger, more explicit guarantee, refusing the assignment outright rather than merely re-checking it.
 
-### 4.3 A v1-style `@validator` continues to run correctly under v2, which hides how much of a rewrite actually happened underneath it
+### 3.3 A v1-style `@validator` continues to run correctly under v2, which hides how much of a rewrite actually happened underneath it
 
 A team that upgrades a dependency pin from Pydantic v1 to v2 and runs its existing test suite will very often see every test pass — section 2.10 already shows why: the v1 `@validator` decorator, `.dict()`, and `.json()` all continue to function exactly as before, under a deprecation warning easy to filter out of test output entirely. This creates a specific, quiet risk: the *validation logic* keeps working, while the *performance characteristics* the rewrite exists to deliver are only realized by code actually written against the v2-native `@field_validator`/`model_validator` surface, and a codebase that stayed on the deprecated v1 shims captures none of the 4x-to-50x improvement section 2.9's own source reports, despite genuinely running on Pydantic 2.0's Rust core underneath. The tests passing is not evidence the migration is complete; it is evidence only that the compatibility shim is doing its job, which is precisely what a shim is for. The fix is treating "tests still pass after the version bump" and "the codebase has actually migrated to v2 idioms" as two separate claims, verified separately — the first by running the suite, the second by an explicit audit (or the `ast`-based tooling chapter 12 already covers) for every remaining `@validator`, `.dict()`, and `.json()` call still in the codebase.
 
-### 4.4 A single-response validation error is not evidence that fixing the reported field is the only fix needed
+### 3.4 A single-response validation error is not evidence that fixing the reported field is the only fix needed
 
 ```python
 # Gist: incomplete_error_picture.py
@@ -358,7 +352,7 @@ Section 2.7 already predicts this exactly: this input has two real problems — 
 
 ---
 
-## 5. Trade-offs
+## 4. Trade-offs
 
 | Approach | Use when | Because | Real cost |
 | --- | --- | --- | --- |
@@ -366,7 +360,7 @@ Section 2.7 already predicts this exactly: this input has two real problems — 
 | **Pydantic `BaseModel`, lax mode (default)** | Validating and coercing external input — a request body, a config file, an environment variable | Forgiving of harmless type mismatches (a numeric string for an int field) while still catching real shape errors | Coercion rules, while principled, are a real thing to learn — "why did this convert and that didn't" is a legitimate question with a specific, documented answer |
 | **Pydantic `BaseModel`, strict mode** | The exact type must be enforced with zero coercion, no exceptions | Removes any ambiguity about what "close enough" means | Rejects perfectly reasonable, harmless inputs (`"42"` for an `int` field) that lax mode would have accepted correctly |
 | **`extra="forbid"`** | The schema is the complete, authoritative contract for what a client may send | Catches a misspelled or unexpected field immediately, as a validation error | Breaks on any additive, backward-compatible change from a client that starts sending one more field than the schema currently declares |
-| **`validate_assignment=True` / `frozen=True`** | The model's fields must remain valid (or immutable) for its entire lifetime, not merely at construction | Closes the exact gap section 4.2 describes | Real, ongoing revalidation cost on every assignment, or the inability to mutate the object at all |
+| **`validate_assignment=True` / `frozen=True`** | The model's fields must remain valid (or immutable) for its entire lifetime, not merely at construction | Closes the exact gap section 3.2 describes | Real, ongoing revalidation cost on every assignment, or the inability to mutate the object at all |
 
 ### When a dataclass is still the right choice over a Pydantic model
 
@@ -374,7 +368,7 @@ Pydantic's validation is not free — every field, on every construction, is gen
 
 ### The case against treating every model as if it validated continuously
 
-Section 4.2 already demonstrates the mechanism; the trade-off worth naming explicitly is what a team gives up by relying on the default. A model that is only ever constructed once and read thereafter loses nothing from the default — validate-at-construction is exactly the right cost for that usage. A model held in memory and mutated repeatedly over its lifetime — accumulating state across a long-running background job, for instance — silently drifts away from its own schema's guarantees the moment `validate_assignment` is left at its default `False`, and the rejected alternative to catching this with a design review is discovering it in production, when a field holds a value no code path ever intended it to hold. The fix costs a real, measurable amount of revalidation overhead on every assignment; the omission costs a class of bug that is difficult to trace back to its origin, because the object *looked* validated at the point someone last checked it directly.
+Section 3.2 already demonstrates the mechanism; the trade-off worth naming explicitly is what a team gives up by relying on the default. A model that is only ever constructed once and read thereafter loses nothing from the default — validate-at-construction is exactly the right cost for that usage. A model held in memory and mutated repeatedly over its lifetime — accumulating state across a long-running background job, for instance — silently drifts away from its own schema's guarantees the moment `validate_assignment` is left at its default `False`, and the rejected alternative to catching this with a design review is discovering it in production, when a field holds a value no code path ever intended it to hold. The fix costs a real, measurable amount of revalidation overhead on every assignment; the omission costs a class of bug that is difficult to trace back to its origin, because the object *looked* validated at the point someone last checked it directly.
 
 ### The case against relying on lax-mode coercion at a security-sensitive boundary
 
@@ -384,7 +378,7 @@ The same reasoning extends past strings and role names to anything a downstream 
 
 ---
 
-## 6. Reference summary
+## 5. Reference summary
 
 **`BaseModel` reads type hints at class-definition time and validates every field on every construction** — chapter 9's otherwise-inert annotations, put to active use a second way alongside chapter 10's `@dataclass`, this time coercing and checking rather than merely documenting.
 

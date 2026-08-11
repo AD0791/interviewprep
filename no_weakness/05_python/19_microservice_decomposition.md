@@ -118,7 +118,7 @@ attempt 2 failed, retrying in 0.020s
 result: success, total calls: 3
 ```
 
-A downstream service that is momentarily overloaded — not dead, just briefly unable to keep up — often succeeds on a second or third attempt, and the delay doubling on each retry (`base_delay * 2**(attempt-1)`) exists specifically so that a retrying client backs off rather than adding to the load on a service already struggling: retrying instantly, in a tight loop, is exactly the wrong response to a service that is failing *because* it is overloaded, since it adds more requests at precisely the moment fewer would help it recover. This is the correct tool for a genuinely transient failure and, as section 4.1 covers, the wrong one applied blindly to every kind of failure a call can produce.
+A downstream service that is momentarily overloaded — not dead, just briefly unable to keep up — often succeeds on a second or third attempt, and the delay doubling on each retry (`base_delay * 2**(attempt-1)`) exists specifically so that a retrying client backs off rather than adding to the load on a service already struggling: retrying instantly, in a tight loop, is exactly the wrong response to a service that is failing *because* it is overloaded, since it adds more requests at precisely the moment fewer would help it recover. This is the correct tool for a genuinely transient failure and, as section 3.1 covers, the wrong one applied blindly to every kind of failure a call can produce.
 
 ### 2.6 A circuit breaker stops calling a service that has already proven it is failing, rather than retrying it forever
 
@@ -194,15 +194,9 @@ Every mechanism from section 2.4 onward assumes a synchronous request-response c
 
 ---
 
-## 3. Diagrams
+## 3. Failure modes
 
-The gateway topology diagram in section 2.2, the circuit-breaker state diagram in section 2.6, and the retry/breaker nesting-order diagram in section 2.7 are integrated into the mechanism build-up above, as this format requires.
-
----
-
-## 4. Failure modes
-
-### 4.1 Retrying a request that already succeeded on the server, but whose response was lost, can duplicate the underlying operation
+### 3.1 Retrying a request that already succeeded on the server, but whose response was lost, can duplicate the underlying operation
 
 ```python
 # Gist: unsafe_retry.py
@@ -215,7 +209,7 @@ call_with_retry(lambda: charge_account(100))
 
 A `ConnectTimeout` on this call means the client never received a response — it does **not** mean the request never reached the server. If the payments service actually processed the charge and the response was simply lost on the way back (a network blip, a load balancer timing out the connection after the backend already committed), a naive retry resends the identical charge request, and a server with no way to recognize "this is the same request as before" processes it a second time, charging the account twice. Section 2.5's retry logic is correct for a call that is safe to repeat — reading data, or writing to an operation the server itself treats as **idempotent** — and actively dangerous for one that is not. The fix is not removing retries; it is making the underlying operation idempotent in the first place, typically via a client-generated idempotency key sent with the request, which the server checks against previously-processed requests before charging anything a second time — retries then remain perfectly safe, because the server itself recognizes and short-circuits the duplicate, regardless of how many times the client resends it.
 
-### 4.2 A retry loop wrapped around a circuit breaker burns through every retry attempt instantly, without ever backing off
+### 3.2 A retry loop wrapped around a circuit breaker burns through every retry attempt instantly, without ever backing off
 
 ```python
 # Gist: retry_wraps_breaker.py
@@ -236,7 +230,7 @@ call_with_retry_wrong(always_fails)
 
 Section 2.7 already names the structural mistake this makes concrete: after the first failure opens the breaker, every remaining retry attempt hits the breaker's own instant `RuntimeError` rejection, and the surrounding `for` loop catches it and immediately tries again with no delay at all — the exponential backoff section 2.5 relies on to actually reduce load on a struggling service never runs, because the breaker's rejection is a different exception, raised before the retry loop's own backoff logic is ever reached. The five attempts complete in effectively zero time, which looks, from a monitoring dashboard, like the call failed fast — a misleading signal, since "failed fast" here means "wasted five attempts checking a breaker that was already known to be open," not "correctly gave up quickly for a good reason." The fix is exactly section 2.7's ordering: the circuit breaker's check must be the outermost decision, made once, before any retry loop begins at all — an open breaker should mean "do not even attempt the retry sequence," not "let the retry sequence keep asking."
 
-### 4.3 A gateway with no timeout of its own inherits the worst-case latency of the slowest service it proxies to
+### 3.3 A gateway with no timeout of its own inherits the worst-case latency of the slowest service it proxies to
 
 ```python
 # Gist: gateway_no_timeout.py
@@ -250,7 +244,7 @@ async def gateway(portal_id: int, path: str, request: Request):
 
 `httpx.AsyncClient()` built with no `timeout` argument uses its own library default rather than failing fast on the gateway's own terms, and a gateway proxying dozens of downstream services has no single correct timeout to inherit from any one of them — a request to a genuinely slow, but otherwise healthy, reporting service and a request to a completely hung service both look identical from the gateway's perspective until one of them actually returns or the default timeout, whatever it happens to be, finally elapses. Every client waiting on the gateway is now waiting on whichever downstream call is slowest, and a single hung backend service can exhaust the gateway's own available connections or worker capacity, degrading requests to every *other* service the gateway proxies to as a side effect — the gateway becomes a single point where one struggling downstream service's problem becomes every client's problem, entirely because nothing at the gateway layer bounded how long it was willing to wait. The fix is an explicit, deliberately chosen timeout at the gateway itself, on every outgoing call, short enough that one slow backend cannot degrade the gateway's ability to serve requests to every other backend it fronts.
 
-### 4.4 A stale registry entry sends traffic to a service instance that has already crashed
+### 3.4 A stale registry entry sends traffic to a service instance that has already crashed
 
 ```text
 1. faculty-service instance A registers itself at startup: 10.0.1.5:8002
@@ -263,14 +257,14 @@ A service registry only reflects reality as accurately as whatever mechanism kee
 
 ---
 
-## 5. Trade-offs
+## 4. Trade-offs
 
 | Approach | Use when | Because | Real cost |
 | --- | --- | --- | --- |
 | **Sub-application mounting (`app.mount()`)** | Structural separation is wanted without the operational cost of separate deployments yet | Independent routers/middleware, zero network calls between them, one process to deploy | No independent scaling or independent failure isolation — one process crash takes down everything mounted inside it |
 | **A single generic API gateway** | Most clients want roughly the same shape of response | One thing to build and operate | Every client pays for whatever compromise shape serves the average case, none particularly well |
 | **A backend-for-frontend per client type** | Genuinely different clients need genuinely different response shapes | Each BFF is optimized for exactly one consumer | More services to build, deploy, and keep consistent with the backends they front |
-| **Retry with backoff** | The failure is plausibly transient and the operation is safe to repeat | Recovers automatically from momentary blips with no caller-visible impact | Actively dangerous on a non-idempotent operation (section 4.1); adds latency on every genuine failure before finally giving up |
+| **Retry with backoff** | The failure is plausibly transient and the operation is safe to repeat | Recovers automatically from momentary blips with no caller-visible impact | Actively dangerous on a non-idempotent operation (section 3.1); adds latency on every genuine failure before finally giving up |
 | **Circuit breaker** | A downstream dependency can fail hard enough that continuing to call it makes things worse | Stops wasted calls immediately once a dependency is known to be failing, and protects it from pointless load while it recovers | A real risk of premature tripping on a dependency that was only briefly, harmlessly slow, cutting it off longer than necessary |
 | **Event-driven messaging** | The caller does not need an immediate answer, and decoupling from a subscriber's availability matters | The publisher never blocks on, or depends on, any specific subscriber succeeding | No synchronous answer at all — the wrong choice whenever the original request genuinely needs a result before it can proceed |
 
@@ -284,7 +278,7 @@ Splitting a system into services along boundaries chosen before real usage patte
 
 ---
 
-## 6. Reference summary
+## 5. Reference summary
 
 **`app.mount()` composes independent ASGI applications within one process** — real structural separation, runnable independently, with zero network calls between the pieces, and a genuinely useful intermediate step before any service is actually deployed separately. **An API gateway is one stable address hiding however many real services sit behind it**, and the natural place for cross-cutting concerns (authentication, chapter 18's subject) to live once rather than duplicated per service; **a backend-for-frontend narrows that same idea to one specific client's needs** rather than serving every client from one generic, compromise shape.
 

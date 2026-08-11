@@ -31,7 +31,7 @@ Neither half of this problem is solved by writing a class instead, though a clas
 
 The two halves connect at the point this chapter is actually about: a decorator that needs to remember anything about the function it wraps — how many times it has been called, what its original name was, what argument it should retry with — needs a closure to hold that memory, because the decorator function itself, like `make_fee_calculator`, runs once and returns. Understanding closures is not optional background for understanding decorators; it is the mechanism decorators are built from. The chapter ends with the more drastic tool that shares the same motivation — changing how a class itself behaves, rather than how a function behaves — and with the honest case, made by the very book this chapter draws its metaclass material from, that most of what a metaclass used to be needed for no longer requires one.
 
-Metaprogramming, across both halves, is the umbrella term for all of this: code that operates on other code — functions, classes, or a module's own namespace — as data, rather than simply executing in sequence. A decorator inspects and replaces a function object. A class decorator inspects and modifies a class object. A metaclass controls how a class object is assembled in the first place. And, at the plainest end of the same spectrum, a piece of code that reads `globals()` and picks out every name matching a pattern is metaprogramming with no special syntax at all — just the ordinary fact that a running program's own namespace is, itself, an inspectable dictionary. What separates a well-chosen metaprogramming tool from an over-engineered one, in every case this chapter covers, is whether the problem actually requires operating on the code rather than simply calling it — and section 5 returns to that question directly for each tool in turn.
+Metaprogramming, across both halves, is the umbrella term for all of this: code that operates on other code — functions, classes, or a module's own namespace — as data, rather than simply executing in sequence. A decorator inspects and replaces a function object. A class decorator inspects and modifies a class object. A metaclass controls how a class object is assembled in the first place. And, at the plainest end of the same spectrum, a piece of code that reads `globals()` and picks out every name matching a pattern is metaprogramming with no special syntax at all — just the ordinary fact that a running program's own namespace is, itself, an inspectable dictionary. What separates a well-chosen metaprogramming tool from an over-engineered one, in every case this chapter covers, is whether the problem actually requires operating on the code rather than simply calling it — and section 4 returns to that question directly for each tool in turn.
 
 ---
 
@@ -330,19 +330,13 @@ print(sorted(tests))
 ['test_deposit_increases_balance', 'test_withdrawal_decreases_balance']
 ```
 
-This is the actual mechanism behind a test runner finding test functions without any of them being registered anywhere: `globals()` returns the module's own namespace as an ordinary dictionary, and any function whose name matches a convention is treated as a test. No decorator marks it, no base class declares it, no metaclass intercepts its creation — the discovery happens entirely after the fact, by reading data the interpreter was already going to produce. This is the least ceremonious metaprogramming technique in the chapter specifically because it asks nothing of the code being discovered; the cost, covered in section 5, is that it asks everything of the naming convention instead.
+This is the actual mechanism behind a test runner finding test functions without any of them being registered anywhere: `globals()` returns the module's own namespace as an ordinary dictionary, and any function whose name matches a convention is treated as a test. No decorator marks it, no base class declares it, no metaclass intercepts its creation — the discovery happens entirely after the fact, by reading data the interpreter was already going to produce. This is the least ceremonious metaprogramming technique in the chapter specifically because it asks nothing of the code being discovered; the cost, covered in section 4, is that it asks everything of the naming convention instead.
 
 ---
 
-## 3. Diagrams
+## 3. Failure modes
 
-The closure/cell diagram in section 2.1, the decorator-stacking diagram in section 2.7, and the metaclass construction sequence in section 2.9 are integrated into the mechanism build-up above, as this format requires.
-
----
-
-## 4. Failure modes
-
-### 4.1 A closure inside a loop captures the variable, not the value it held at that iteration
+### 3.1 A closure inside a loop captures the variable, not the value it held at that iteration
 
 ```python
 # Gist: late_binding.py
@@ -369,7 +363,7 @@ print([f(100) for f in calculators])   # [5.0, 10.0, 15.0]
 
 The cost of the fix is a parameter name that exists purely to shadow the outer one — `rate=rate` reads oddly to someone who has not seen this idiom before — which is why an explicit factory function like `make_fee_calculator` from section 1, called once per iteration with `rate` as a real argument, is often the more readable alternative even though it is a few more lines.
 
-### 4.2 Omitting `functools.wraps` breaks every tool that identifies a function by its metadata
+### 3.2 Omitting `functools.wraps` breaks every tool that identifies a function by its metadata
 
 ```python
 # Gist: missing_wraps.py
@@ -397,7 +391,7 @@ None
 
 Section 2.5 predicted exactly this: `deposit` is now `wrapper` in every way that matters to code inspecting it rather than calling it. The docstring is gone, the name a stack trace will show is `wrapper` instead of `deposit`, and — the entry most likely to cause a real defect — `inspect.signature` reports `(*args, **kwargs)` instead of `deposit`'s real parameter list, which breaks any tool that builds behavior from a function's declared signature: a CLI framework generating arguments from a function, a dependency-injection system matching parameter names, or a testing tool that inspects a fixture's expected arguments. None of this raises an exception anywhere; the wrapped function still runs correctly when called directly, which is exactly why the defect tends to surface far from the decorator that caused it — in whichever downstream tool trusted the now-wrong metadata. The fix is one line, `@functools.wraps(func)` on the inner function, and it costs nothing; there is no legitimate reason for a transparent wrapper to omit it.
 
-### 4.3 Combining two independently metaclassed base classes fails at class-creation time, not at the point of confusion
+### 3.3 Combining two independently metaclassed base classes fails at class-creation time, not at the point of confusion
 
 ```python
 # Gist: metaclass_conflict.py
@@ -416,7 +410,7 @@ TypeError: metaclass conflict: the metaclass of a derived class must be a (non-s
 
 Section 2.9 predicted this precisely: Python must compute a single metaclass for `Record` that is compatible with every base's own metaclass, and `PersistentMeta` and `abc.ABCMeta` share no subclass relationship in either direction. This is not a runtime surprise buried in some later call — it is caught the moment the `class` statement executes, which is the metaclass system behaving exactly as intended: an unsatisfiable construction is refused rather than silently resolved by picking one metaclass and ignoring the other's behavior. The fix, when both base behaviors are genuinely needed, is a third metaclass that inherits from both `PersistentMeta` and `abc.ABCMeta` and is used explicitly; the cost, as the source material for this node stresses, is that combined metaclasses of this kind take longer to get right than they look like they should and are correspondingly harder for the next person to safely modify. The lower-cost fix, in most real cases, is to notice that one of the two capabilities — often the ABC's abstract-method enforcement — can be replaced with a plain runtime check in `__init_subclass__` instead, avoiding the combination entirely.
 
-### 4.4 Reassigning a free variable without `nonlocal` silently creates a new local instead of updating the closure
+### 3.4 Reassigning a free variable without `nonlocal` silently creates a new local instead of updating the closure
 
 ```python
 # Gist: missing_nonlocal.py
@@ -441,7 +435,7 @@ Section 2.2 traced the cause: the compiler decides `count` is local to `averager
 
 ---
 
-## 5. Trade-offs
+## 4. Trade-offs
 
 | Approach | Use when | Because | Real cost |
 | --- | --- | --- | --- |
@@ -467,7 +461,7 @@ A naming convention is an implicit contract, and implicit contracts fail silentl
 
 ---
 
-## 6. Reference summary
+## 5. Reference summary
 
 **A closure is a function plus the free variables its body refers to, kept alive as cells reachable through `__closure__`.** The compiler's own `co_freevars` names them. A cell holds a reference, not a copy, which is why every closure built inside the same loop iteration variable ends up looking at that variable's *final* value rather than the value it held when each closure was created.
 

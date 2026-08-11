@@ -121,7 +121,7 @@ def report(x: SupportsBalance) -> None:
 report(Account())    # type-checks and runs — Account never mentions SupportsBalance
 ```
 
-`Account` does not inherit from `SupportsBalance` and does not register with it in any way; a type checker accepts the call to `report(Account())` purely because `Account` happens to define a `balance` method with a compatible signature. This is **structural typing**: the shape of the class, not its declared ancestry, is what satisfies the type. Marking a `Protocol` with `@runtime_checkable` additionally allows `isinstance()` against it at runtime — but only as a check for the *presence* of the right method names, not their actual signatures, which section 4.3 shows is a real and sharp limitation rather than a minor caveat.
+`Account` does not inherit from `SupportsBalance` and does not register with it in any way; a type checker accepts the call to `report(Account())` purely because `Account` happens to define a `balance` method with a compatible signature. This is **structural typing**: the shape of the class, not its declared ancestry, is what satisfies the type. Marking a `Protocol` with `@runtime_checkable` additionally allows `isinstance()` against it at runtime — but only as a check for the *presence* of the right method names, not their actual signatures, which section 3.3 shows is a real and sharp limitation rather than a minor caveat.
 
 ### 2.5 Goose typing is an ABC's own answer to the same problem, checked at runtime, with the option to opt in from outside a class entirely
 
@@ -150,7 +150,7 @@ True
 (<class '__main__.Square'>, <class 'object'>)
 ```
 
-`isinstance` reports `True`, and the class genuinely satisfies the interface for the purpose a checker or an `isinstance` gate cares about — but `Square.__mro__` shows plainly that `Shape` is not actually one of `Square`'s ancestors. Registration is a one-way promise, not a structural relationship the object model enforces; it makes `Square` recognized *as* a `Shape` without giving it any of `Shape`'s concrete behavior, which section 4.4 demonstrates directly. This is the deliberate trade goose typing makes relative to real subclassing: the flexibility to declare compatibility for a class defined somewhere else, entirely from the outside, at the cost of gaining none of the base class's own machinery in the process.
+`isinstance` reports `True`, and the class genuinely satisfies the interface for the purpose a checker or an `isinstance` gate cares about — but `Square.__mro__` shows plainly that `Shape` is not actually one of `Square`'s ancestors. Registration is a one-way promise, not a structural relationship the object model enforces; it makes `Square` recognized *as* a `Shape` without giving it any of `Shape`'s concrete behavior, which section 3.4 demonstrates directly. This is the deliberate trade goose typing makes relative to real subclassing: the flexibility to declare compatibility for a class defined somewhere else, entirely from the outside, at the cost of gaining none of the base class's own machinery in the process.
 
 ```mermaid
 graph TD
@@ -250,15 +250,9 @@ Only the final, unadorned `def process(x):` actually runs; the two `@overload`-d
 
 ---
 
-## 3. Diagrams
+## 3. Failure modes
 
-The lazy-annotation-evaluation state diagram in section 2.2, the Protocol/ABC decision diagram in section 2.5, and the variance diagram in section 2.7 are integrated into the mechanism build-up above, as this format requires.
-
----
-
-## 4. Failure modes
-
-### 4.1 A type mismatch the checker would not even flag can still produce a silently wrong result
+### 3.1 A type mismatch the checker would not even flag can still produce a silently wrong result
 
 ```python
 # Gist: numeric_tower_mismatch.py
@@ -274,7 +268,7 @@ print(apply_interest(1000, 5))    # meant 0.05 (5%), passed 5 by mistake
 
 Nothing about this call is even a type error a checker would catch, which makes it sharper than an ordinary annotation mismatch: **PEP 484 explicitly makes `int` compatible with `float`** as a deliberate, pragmatic exception rather than an oversight, so `rate: float` accepts the integer `5` cleanly, by design, in both mypy's eyes and the interpreter's. The bug is not a type error at all — it is a units error, `5` meant as a percentage where the function expects a fraction — and the type system, static or dynamic, has no vocabulary for "this float should additionally be less than one." Section 2.1 already establishes that annotations carry no runtime enforcement in any case; this failure mode goes one step further and shows a case where even a fully type-checked, fully passing codebase would not have caught the mistake, because the checker's job is verifying that the *shape* of the data matches, never that the *value* means what the caller intended. The only real defenses are one level up from typing entirely: a narrower, self-documenting type (a small `Percentage` value object that only accepts values in a sane range, validated in its own constructor) or a runtime assertion at the boundary — neither of which this chapter's type-hint vocabulary provides on its own.
 
-### 4.2 A forward reference that never resolves fails at first inspection, not at the point it was written
+### 3.2 A forward reference that never resolves fails at first inspection, not at the point it was written
 
 ```python
 # Gist: lazy_annotation_failure.py
@@ -296,7 +290,7 @@ NameError: name 'EventType' is not defined
 
 Section 2.2 already traces this precisely: PEP 649's deferred evaluation means `EventType` genuinely never has to exist for `register_handler` to be defined and called successfully — the function's actual behavior has nothing to do with its annotations at all. The `NameError` only fires the moment something calls `inspect.signature`, reads `__annotations__` directly, or otherwise triggers `__annotate__` — which, in a real codebase, is often a debugging tool, a documentation generator, or a runtime validation library (Pydantic, covered later on this shelf) rather than anything in the program's own ordinary control flow. This makes the defect's symptom appear far from its cause in a way earlier Python versions did not: before 3.14, the identical typo would have failed loudly at the `def` statement itself, the moment the module was first imported, rather than lying dormant until some later, possibly rare, code path finally asks to see the annotation.
 
-### 4.3 A `runtime_checkable` `Protocol`'s `isinstance` check verifies method names, never their signatures
+### 3.3 A `runtime_checkable` `Protocol`'s `isinstance` check verifies method names, never their signatures
 
 ```python
 # Gist: protocol_signature_gap.py
@@ -322,7 +316,7 @@ TypeError: WeirdLen.__len__() missing 1 required positional argument: 'extra'
 
 Section 2.4 already names the limitation this exposes: a `runtime_checkable` `Protocol`'s `isinstance` check is implemented as a presence check against the type's `__dict__` — does a method with this name exist — and nothing about it inspects that method's parameter list, its return type, or whether it can actually be called the way the protocol implies. `WeirdLen` passes the check cleanly and then fails the very next moment anything actually tries to use it as sized, because `len()` calls `__len__()` with no arguments, and `WeirdLen.__len__` demands one. Code that gates behavior on `isinstance(x, SomeRuntimeCheckableProtocol)` and then trusts the object fully is trusting a check that is real but considerably weaker than it looks; the fix is either to call the method inside a `try`/`except TypeError` at the actual point of use regardless of the `isinstance` result, or to rely on static checking (which does inspect full signatures) rather than the runtime check for anything beyond a coarse, best-effort filter.
 
-### 4.4 Virtual subclass registration grants `isinstance` compatibility without granting any of the base class's actual behavior
+### 3.4 Virtual subclass registration grants `isinstance` compatibility without granting any of the base class's actual behavior
 
 ```python
 # Gist: virtual_subclass_gap.py
@@ -353,20 +347,20 @@ Section 2.5 already shows why: `Shape.register(Square)` makes `isinstance(sq, Sh
 
 ---
 
-## 5. Trade-offs
+## 4. Trade-offs
 
 | Approach | Use when | Because | Real cost |
 | --- | --- | --- | --- |
 | **No annotations** | Small scripts, exploratory code, or a codebase not yet worth the investment | Zero overhead, zero ceremony | No static checking at all; every type mismatch is a runtime surprise or silent wrong result |
 | **Gradual annotation, lenient checker config** | An existing, large, unannotated codebase being improved incrementally | Types can be added file by file with no flag day | Unannotated code remains fully unchecked, `Any`-equivalent, for as long as it stays that way |
-| **`Protocol` (structural)** | The types that should satisfy an interface are not under your control, or are numerous and unrelated | No inheritance or registration needed anywhere | `runtime_checkable` gives only a name-presence check, per section 4.3 — real strength lives in the static checker, not at runtime |
+| **`Protocol` (structural)** | The types that should satisfy an interface are not under your control, or are numerous and unrelated | No inheritance or registration needed anywhere | `runtime_checkable` gives only a name-presence check, per section 3.3 — real strength lives in the static checker, not at runtime |
 | **ABC with real inheritance** | The interface should also provide shared concrete behavior to every implementer | Subclasses genuinely gain the base's methods through the real MRO | Every implementer must be written (or rewritten) to inherit from the ABC |
-| **ABC with virtual registration** | An existing, unmodifiable class should be recognized as satisfying an interface | No changes needed to the registered class at all | Grants `isinstance` compatibility only — none of the base's concrete behavior, per section 4.4 |
+| **ABC with virtual registration** | An existing, unmodifiable class should be recognized as satisfying an interface | No changes needed to the registered class at all | Grants `isinstance` compatibility only — none of the base's concrete behavior, per section 3.4 |
 | **PEP 695 native generics** | New code targeting Python 3.12+ | No separate `TypeVar`, scoped automatically to the class/function | Unusable on any interpreter before 3.12 — the legacy `TypeVar` form remains necessary for that audience |
 
 ### When `Any` is the honest choice, not a shortcut
 
-`Any` is correctly reached for when a value's type genuinely cannot be known statically — the result of `json.loads` on data whose shape is not fixed, for instance — and incorrectly reached for as a way to silence a checker complaint without actually resolving what the real type should be. The difference is not stylistic: an honest `Any` marks a real boundary of what static analysis can know; a defensive `Any` used to make an error go away hides a mismatch a checker would otherwise have caught, exactly as section 4.1 demonstrates going unnoticed at runtime.
+`Any` is correctly reached for when a value's type genuinely cannot be known statically — the result of `json.loads` on data whose shape is not fixed, for instance — and incorrectly reached for as a way to silence a checker complaint without actually resolving what the real type should be. The difference is not stylistic: an honest `Any` marks a real boundary of what static analysis can know; a defensive `Any` used to make an error go away hides a mismatch a checker would otherwise have caught, exactly as section 3.1 demonstrates going unnoticed at runtime.
 
 ### The case against reaching for a metaclass-based or decorator-based validation scheme instead of `Protocol`
 
@@ -378,11 +372,11 @@ The moment shared, non-trivial concrete behavior needs to live in one place and 
 
 ### The case against skipping the type checker in CI because "the code runs fine"
 
-Section 4.1 and section 4.2 both demonstrate the same underlying fact from different angles: a program that runs without raising an exception has not been shown to be correct, only shown not to have crashed on the specific inputs it happened to receive. Treating "it ran" as equivalent to "the types are right" is exactly the assumption gradual typing was built to let a team stop relying on, and skipping the checker in CI — reserving it for occasional, manual, local runs — reintroduces the very risk annotations were added to reduce, while keeping all of the ongoing cost of writing and maintaining them. The rejected alternative to running the checker in CI is trusting that whoever last touched a piece of annotated code also remembered to run mypy locally before committing; the cost of actually gating merges on it is a slower CI pipeline and, occasionally, a legitimately inconvenient wait for a fix to an error the checker was right to raise.
+Section 3.1 and section 3.2 both demonstrate the same underlying fact from different angles: a program that runs without raising an exception has not been shown to be correct, only shown not to have crashed on the specific inputs it happened to receive. Treating "it ran" as equivalent to "the types are right" is exactly the assumption gradual typing was built to let a team stop relying on, and skipping the checker in CI — reserving it for occasional, manual, local runs — reintroduces the very risk annotations were added to reduce, while keeping all of the ongoing cost of writing and maintaining them. The rejected alternative to running the checker in CI is trusting that whoever last touched a piece of annotated code also remembered to run mypy locally before committing; the cost of actually gating merges on it is a slower CI pipeline and, occasionally, a legitimately inconvenient wait for a fix to an error the checker was right to raise.
 
 ---
 
-## 6. Reference summary
+## 5. Reference summary
 
 **An annotation is a plain object (or, since 3.14, a deferred computation) that the interpreter never consults while running code.** `__annotations__` is an ordinary dictionary; a type checker, not the runtime, is what turns that data into an enforced guarantee, and a codebase can be partially, unevenly annotated by design — that partiality is what "gradual" means.
 

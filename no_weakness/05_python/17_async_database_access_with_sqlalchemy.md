@@ -210,15 +210,9 @@ The examples throughout this chapter open a fresh `AsyncSession` per unit of wor
 
 ---
 
-## 3. Diagrams
+## 3. Failure modes
 
-The greenlet bridge diagram in section 2.4 and the lazy-versus-eager loading contrast in section 2.6 are integrated into the mechanism build-up above, as this format requires.
-
----
-
-## 4. Failure modes
-
-### 4.1 Reading a lazy relationship outside the greenlet bridge's scope raises `MissingGreenlet`, and the fix is not "add an `await`"
+### 3.1 Reading a lazy relationship outside the greenlet bridge's scope raises `MissingGreenlet`, and the fix is not "add an `await`"
 
 ```python
 # Gist: missing_greenlet.py
@@ -235,7 +229,7 @@ MissingGreenlet: greenlet_spawn has not been called; can't call await_only() her
 
 The instinctive fix — `await account.transactions` — does not exist, because `.transactions` is a plain attribute, not a coroutine; there is nothing to `await` at the call site at all. Section 2.5 already establishes the actual mechanism: this line needed I/O, and the bridge that makes I/O possible from inside SQLAlchemy's synchronous ORM code was only active during the `session.execute(...)` call already completed above, not at the point this later, ordinary-looking attribute access occurs. The message itself — naming `greenlet_spawn` and `await_only`, neither of which appears anywhere in the calling code — is unusually opaque for exactly this reason: it is describing an internal bridging mechanism the caller never invoked directly, from a line of code that looks like the most ordinary possible Python. The real fix is one of two structural changes, not a syntax tweak: eager-load the relationship with `selectinload`/`joinedload` at query time (section 2.6), or explicitly `await session.refresh(account, ["transactions"])` before the attribute is ever read outside the original session's active operation — both of which move the I/O back inside a scope the bridge can actually see.
 
-### 4.2 A `Query.get()` call inherited from a 1.x-era codebase still runs correctly, which hides how much of the migration to 2.0 idioms actually remains
+### 3.2 A `Query.get()` call inherited from a 1.x-era codebase still runs correctly, which hides how much of the migration to 2.0 idioms actually remains
 
 ```python
 # Gist: silently_still_legacy.py
@@ -244,7 +238,7 @@ account = session.query(Account).get(1)   # works, emits a warning, easy to miss
 
 Exactly like chapter 16's Pydantic v1 shims, this line succeeds, returns the correct object, and passes any test asserting on its result — the only signal anything is outdated is a `LegacyAPIWarning`, filtered out of CI output in any project that has not explicitly configured warnings to fail a build. A codebase that upgraded its `sqlalchemy` pin to 2.0 without also auditing its own query code for `session.query(...)` calls can run correctly, and slowly accumulate more of them over time as new code is written by habit against the familiar `Query` interface, all while never actually adopting the `select()`-based style this node's own currency correction identifies as the only form a current article should teach. The risk is not correctness — the legacy path is a genuine, supported compatibility layer, not a landmine — it is that "the tests pass" is, once again, evidence only that the compatibility shim works, not evidence that a team has captured whatever benefit motivated the 2.0 rewrite in the first place. The fix is the same discipline chapter 16 already recommends: treat "still emits a legacy warning" as a tracked, swept-through category of technical debt, not a passive footnote in build logs nobody reads.
 
-### 4.3 Sharing one long-lived session across unrelated requests lets one request's uncommitted state leak into another's
+### 3.3 Sharing one long-lived session across unrelated requests lets one request's uncommitted state leak into another's
 
 ```python
 # Gist: shared_session_leak.py
@@ -262,7 +256,7 @@ async def handle_request_b():
 
 A session opened once and reused across every request keeps every object it has ever loaded in its own identity map, uncommitted changes included, for as long as the session itself stays open — which means an object one request modified and never committed (because it crashed, or because a bug simply forgot to call `commit()`) is still sitting in that shared session's memory the next time a completely unrelated request asks for the same row, and gets handed the same, still-modified, still-uncommitted Python object instead of a fresh read from the database. Section 2.10 already names the fix as a design principle; here is the concrete shape of what skipping it costs: two logically unrelated requests, served by the same process, observing and potentially corrupting each other's in-progress state through nothing more than sharing one `AsyncSession` that outlived the request it was actually opened for. The fix is structural, not a patch — a session's lifetime must be tied to exactly one unit of work (one request, one background job execution), opened fresh and closed unconditionally at the end of each, which is precisely what chapter 15's `Depends()`-based, `yield`-scoped dependency pattern provides automatically when a session is wired as a per-request dependency rather than a module-level singleton.
 
-### 4.4 `session.execute(select(Account))` returns `Row` tuples, not `Account` instances — the unification section 2.2 describes has a real, easy-to-miss consequence
+### 3.4 `session.execute(select(Account))` returns `Row` tuples, not `Account` instances — the unification section 2.2 describes has a real, easy-to-miss consequence
 
 ```python
 # Gist: forgot_scalars.py
@@ -281,7 +275,7 @@ AttributeError: owner
 
 ---
 
-## 5. Trade-offs
+## 4. Trade-offs
 
 | Approach | Use when | Because | Real cost |
 | --- | --- | --- | --- |
@@ -308,7 +302,7 @@ The same reasoning extends to bulk operations — updating or deleting thousands
 
 ---
 
-## 6. Reference summary
+## 5. Reference summary
 
 **`DeclarativeBase` is a real metaclass (`DeclarativeAttributeIntercept`)**, inspecting a mapped class's body at definition time exactly as chapter 3's metaclass material describes, converting `mapped_column(...)` assignments into real descriptors tracking a specific database column. **Core and ORM both build the identical `Select` object**, executed identically through `Session.execute()` — SQLAlchemy 2.0's unification is a fact about the actual class produced, not merely a stylistic convergence. **`session.execute(stmt)` always returns `Row` objects, even for a query selecting a single ORM entity** — `.scalars()` unwraps each `Row` down to its entity, matching what the pre-2.0 `Query` API returned directly; omitting it is a common, silent-until-accessed migration trap, surfacing as an `AttributeError` naming the field that was actually requested rather than any hint about the missing call.
 

@@ -115,7 +115,7 @@ outer()
 
 `sys._getframe(1)` reaches one level up the call stack from `inner` and returns `outer`'s frame directly, and `f_locals` shows exactly the local-variable state section 2.2's `LOAD_FAST_BORROW` instructions are reading and writing. This is the same call stack chapter 4 relies on implicitly when it describes a reference going out of scope at the end of a function — "the frame is popped" and "the local variable's reference is gone" are the same event, described from two different angles. It is also, concretely, what distinguishes an ordinary local variable from the free variables chapter 3 covers: a closure's cell lives independently of any one frame, specifically so it can outlive the frame that created it, while an ordinary `LOAD_FAST_BORROW` slot exists only for the lifetime of the one call that owns it.
 
-A traceback, the object attached to every caught exception, is built from exactly this chain: each frame the exception passed through on its way up the call stack contributes one entry, in order, which is why a traceback reads as a list of function calls nested inside one another — it is, quite literally, a snapshot of consecutive `f_back` links taken at the moment the exception was raised. Section 4.4 returns to this directly, because a frame kept alive through a retained traceback is kept alive along with every local variable it was holding at the time, whether or not anything about the exception itself needed them.
+A traceback, the object attached to every caught exception, is built from exactly this chain: each frame the exception passed through on its way up the call stack contributes one entry, in order, which is why a traceback reads as a list of function calls nested inside one another — it is, quite literally, a snapshot of consecutive `f_back` links taken at the moment the exception was raised. Section 3.4 returns to this directly, because a frame kept alive through a retained traceback is kept alive along with every local variable it was holding at the time, whether or not anything about the exception itself needed them.
 
 ### 2.4 The eval loop is a dispatch table, executed one instruction at a time
 
@@ -189,7 +189,7 @@ for v in (5, 256, 257, -5, -6):
 -6 False
 ```
 
-Values inside the cached range compare identical across two entirely separate computations; values one step outside it do not, on the same interpreter, with the same code, differing only in the number involved. Nothing about the language specifies this boundary — it is a CPython implementation choice, not part of the language reference, and Ramalho's own account of this shelf's material is explicit that the criteria are undocumented and not something to depend on. `is` answers "are these genuinely the same object," which is a question about the runtime's internal bookkeeping; `==` answers "do these compare equal," which is the question almost every piece of code actually means to ask, and section 4.1 covers exactly what breaks when the two are confused.
+Values inside the cached range compare identical across two entirely separate computations; values one step outside it do not, on the same interpreter, with the same code, differing only in the number involved. Nothing about the language specifies this boundary — it is a CPython implementation choice, not part of the language reference, and Ramalho's own account of this shelf's material is explicit that the criteria are undocumented and not something to depend on. `is` answers "are these genuinely the same object," which is a question about the runtime's internal bookkeeping; `==` answers "do these compare equal," which is the question almost every piece of code actually means to ask, and section 3.1 covers exactly what breaks when the two are confused.
 
 ### 2.9 Measuring any of this honestly means distrusting a single number
 
@@ -199,15 +199,9 @@ Everything in this chapter is a claim about *mechanism* rather than about *how m
 
 ---
 
-## 3. Diagrams
+## 3. Failure modes
 
-The stack-machine execution diagram in section 2.1 and the eval-loop fetch-dispatch cycle in section 2.4 are integrated into the mechanism build-up above, as this format requires.
-
----
-
-## 4. Failure modes
-
-### 4.1 Using `is` on integers or strings works until the value crosses an undocumented boundary
+### 3.1 Using `is` on integers or strings works until the value crosses an undocumented boundary
 
 ```python
 # Gist: interning_trap.py
@@ -232,7 +226,7 @@ treating cached small ints as always identical
 
 Section 2.8 already showed the exact boundary: CPython caches integers from `-5` to `256`, and nothing outside that narrow, undocumented range is guaranteed to be the same object twice, even when computed identically. Code that happens to use small test values during development — account IDs starting at `1`, quantities under a hundred — can pass every manual check while relying on `is` instead of `==`, and then fail silently and intermittently the moment production data includes a value outside the cached range, with no exception anywhere: the `if` branch simply evaluates to `False` when the author expected `True`, and the program continues, wrong. The fix is unconditional: never use `is` to compare values for equality, only to compare identity deliberately (checking for `None`, or checking that two names refer to the literal same object) — `==` is correct in every case `is` happened to work by coincidence, and it is never slower by a margin that matters against the cost of a defect that only appears once numbers get large enough.
 
-### 4.2 Mutating `frame.f_locals` (or `locals()`) does not change the actual local variable
+### 3.2 Mutating `frame.f_locals` (or `locals()`) does not change the actual local variable
 
 ```python
 # Gist: locals_snapshot.py
@@ -251,7 +245,7 @@ print(apply_discount())
 
 Section 2.2 established that a function's locals live in a fixed array of frame slots, addressed by position, read and written by `LOAD_FAST_BORROW`/`STORE_FAST`-family instructions compiled once, at function-definition time. `locals()` (and `frame.f_locals` when inspecting another frame, as in section 2.3) does not hand back that array — it builds and returns an ordinary `dict` snapshot of the array's current contents, freshly synthesized on each call. Mutating the returned dictionary mutates that snapshot, which the compiled `LOAD_FAST_BORROW` instructions inside `apply_discount` have no path back to; `balance` is still read directly from its own frame slot, entirely unaware that a dictionary claiming to represent it was ever changed. This is a common trap for code written under the assumption that a function's local namespace behaves like a mutable dictionary the way a module's global namespace genuinely does — `globals()` really is the live namespace, because module-level code executes against an actual dictionary rather than a fixed slot array, and that asymmetry is precisely what section 2.2 identified as the mechanical difference between the two. There is no supported, portable way to write back into a live frame's fast locals from Python code; the fix is to restructure the function to use an explicit, ordinary mutable container — a dict or object attribute the function actually reads from — rather than relying on `locals()` as if it were one.
 
-### 4.3 Unbounded recursion exhausts the call stack in a fixed, small number of frames
+### 3.3 Unbounded recursion exhausts the call stack in a fixed, small number of frames
 
 ```python
 # Gist: recursion_limit.py
@@ -271,7 +265,7 @@ RecursionError: maximum recursion depth exceeded
 
 Section 2.3 established that every call allocates a real frame object, linked to its caller through `f_back`, and section 2.1 showed that a `RETURN_VALUE` is what eventually lets a frame be released. `recurse` never reaches its `return` — the recursive call is itself the entire return expression, so each call's frame stays live, waiting on the call beneath it, for as long as the chain keeps growing. CPython does not perform tail-call optimization, unlike some functional-language runtimes, so a "tail-recursive-looking" function like this one is not converted into a loop under the hood; every one of the thousand-plus calls genuinely holds its own frame in memory simultaneously. `sys.getrecursionlimit()`'s default exists specifically to turn what would otherwise be an eventual, memory-exhausting crash into a clean, immediate, catchable exception well before the process is actually in danger. Raising the limit with `sys.setrecursionlimit()` treats the symptom rather than the cause and merely moves the eventual crash further out; the structural fix, for an algorithm that is naturally recursive over an input whose size is not bounded in advance, is to rewrite it as an explicit loop with its own stack — a plain Python list — rather than relying on the interpreter's own call stack to hold state proportional to the input size.
 
-### 4.4 A caught exception can hold its own frame alive, forming the reference cycle chapter 4 warns about
+### 3.4 A caught exception can hold its own frame alive, forming the reference cycle chapter 4 warns about
 
 ```python
 # Gist: traceback_cycle.py
@@ -310,7 +304,7 @@ This is why long-lived code that catches exceptions into a variable held for lat
 
 ---
 
-## 5. Trade-offs
+## 4. Trade-offs
 
 | Approach | Use when | Because | Real cost |
 | --- | --- | --- | --- |
@@ -334,7 +328,7 @@ Writing code specifically shaped to help the specializing interpreter specialize
 
 ---
 
-## 6. Reference summary
+## 5. Reference summary
 
 **Python source compiles to bytecode, a fixed instruction set for a per-call stack machine**, and `dis.dis` shows exactly what runs — not a description of it, the actual sequence the eval loop dispatches. **A local variable is read by fixed array index (`LOAD_FAST_BORROW`); a global is read by name, through a dictionary lookup (`LOAD_GLOBAL`)** — the precise mechanism behind "locals are faster than globals," and the reason copying a repeatedly-read global into a local before a loop helps in proportion to how many times the loop re-reads it.
 
