@@ -213,6 +213,11 @@ think", no "most people get this wrong".
 `_tools/style_check.py` and `_tools/check_links.py` remain available and are advisory. Neither is
 a gate: a chapter is finished when it passes the ten checks above.
 
+`_tools/check_module.py` checks the ten items above mechanically wherever a check can be made
+mechanical — headings, word counts, front matter, retired titles, practice material, article
+wiring. A module that fails it is not finished, the same standard `AGENTS.md` §0 already holds
+the graph layer to against `_tools/validate_kg.py`.
+
 ---
 
 ## 6. Sourcing: where a claim is allowed to come from

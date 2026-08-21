@@ -37,8 +37,9 @@ This file states the principles the three specs implement, and is the tiebreaker
 silent or appear to conflict.
 
 **As of this writing, the graph layer is complete for all 26 subjects (482 nodes) and the text
-layer is not** — 11 modules are written. Building a graph node is not a promise that a module
-follows immediately; see §9.
+layer is not** — 28 modules are written, 20 of them in `05_python/`, which is now the first
+complete subject. Building a graph node is not a promise that a module follows immediately; see
+§9.
 
 ---
 
@@ -223,14 +224,15 @@ agreement with the graph, not the other way around.
 ## 9. Status — this work is unfinished
 
 **The knowledge graph is built for all 26 subjects (482 nodes, 0 validator errors).** The
-written-module layer is not: **11 modules are written**, all of them in the two subjects built
-before the graph existed. The repo is incomplete and is expected to stay under active
+written-module layer is not: **28 modules are written**, and 32 of the 482 nodes carry an
+`**Article:**` line (450 do not) — the node count exceeds the module count because four Python
+chapters each cover two nodes. The repo is incomplete and is expected to stay under active
 construction for a long time — 482 nodes does not mean 482 modules are coming; some nodes will
 stay graph-only indefinitely, and which ones is a judgment made per subject, not a quota.
 
 | Topic | Written | Graph nodes | Article gap |
 |---|---|---|---|
-| `05_python/` | 01, 03, 05 | 24 (`PY-01`…`PY-24`) | 21 nodes with no module |
+| `05_python/` | all 20 chapters | 24 (`PY-01`…`PY-24`) | **complete** |
 | `06_concurrency/` | 01, 02, 03, 04 | 17 (`CONC-01`…`CONC-17`) | 13 nodes with no module |
 | `07_javascript/` | 03 | 22 (`JS-01`…`JS-22`) | 21 nodes with no module |
 | `08_typescript/` | 02 | 20 (`TS-01`…`TS-20`) | 19 nodes with no module |
@@ -239,6 +241,9 @@ stay graph-only indefinitely, and which ones is a judgment made per subject, not
 | `25_Java/` | — | 23 (`JAVA-01`…`JAVA-23`) | all of them |
 | `26_spring/` | — | 17 (`SPRG-01`…`SPRG-17`) | all of them |
 | every other subject | — | 316 across 18 subjects | all of them |
+
+`05_python/` is the first complete subject in the repository: all 24 nodes across its 20 chapters
+carry an `**Article:**` line.
 
 Each subject's `00_knowledge_graph.md` node record carries an `**Article:**` line once a module
 exists for it — that is the authoritative record of what is written, not this table, which will
@@ -257,27 +262,30 @@ from JEP 444, `GO-12`'s from the Go 1.25 release notes, `PY-15`'s from the Pydan
 migration guide. A chapter written that way is not a weaker chapter — it is the same chapter
 without a machine-shaped dependency wrapped around it.
 
-**All eleven written modules predate `MODULE_SPEC.md` and none of them conforms to it.** An audit
-of the written layer found this is not partial drift in the earliest three, as an earlier version
-of this section claimed, but a different structure end to end. Every module uses the same
-superseded seven-section skeleton: a quiz-framed second section ("the questions you cannot answer
-about it"), an `## Interview angles` section of spoken answers, and a closing section feeding
-`RECALL.md` — a file that no longer exists. None of the eleven has the reference summary that
-`MODULE_SPEC.md` §3.5 requires, which is the contract's deliberate replacement for practice
-material.
+**`05_python/` has closed its pre-spec debt.** All 20 chapters now carry the exact five-section
+structure `MODULE_SPEC.md` §3 requires, in order, with no retired titles and no `**Syllabus:**`,
+`**Measurement:**` or `**Roles:**` line — `_tools/check_module.py` confirms the structure
+mechanically. What the rewrite did not close is the word floor: **19 of the 20 chapters are still
+below the 6,000-word minimum**, most in the 4,000–5,500 range, pending a deepening pass that adds
+prose within the existing five sections rather than restructuring them again. Only chapter 01
+(`01_object_model_and_attribute_lookup.md`, the DAG root written first as the exemplar) currently
+clears the floor.
 
-The word counts follow from that. Removing the three non-conforming sections leaves 2,675–4,678
-words standing per module, median around 2,940, against a 6,000-word floor. Each therefore needs
-roughly 3,000 new words — about 33,000 across all eleven. That gap is not padding: it is the
-simple-to-complex code progression and the reference summary, neither of which the old skeleton
-asked for.
+**The pre-spec debt that remains is 8 modules, and none of them is Python:**
+`06_concurrency/01`–`04`, `07_javascript/03`, `08_typescript/02`, and `09_sql/01` and `04`. Each
+still uses the superseded seven-section skeleton — a quiz-framed second section ("the questions
+you cannot answer about it"), an `## Interview angles` section of spoken answers, and a closing
+section feeding `RECALL.md`, a file that no longer exists — and none has the reference summary
+`MODULE_SPEC.md` §3.5 requires in its place. Measured with fenced code and Mermaid blocks
+excluded, they run 3,564–4,046 words each, well short of the 6,000-word floor. They also carry
+front matter from the superseded contract: a `**Syllabus:**` line where §3.0 now requires
+`**Covers:**`, a `**Measurement:**` line where it now requires `**Sources:**`, and a
+`**Roles:** DE ● FS ●` line that is the résumé framing §7 bans outright. These eight are queued
+for the same rewrite the three pre-spec Python chapters (01, 03, 05) already received, not
+attempted in this pass.
 
-They also carry front matter from the superseded contract: a `**Syllabus:**` line where §3.0 now
-requires `**Covers:**`, a `**Measurement:**` line where it now requires `**Sources:**`, and a
-`**Roles:** DE ● FS ●` line that is the résumé framing §7 bans outright.
-
-Treat these as **rewrites against `MODULE_SPEC.md`, not revisions.** Fold anything genuinely
-explanatory out of an interview-angles section into the mechanism or trade-offs sections rather
+Treat these eight as **rewrites against `MODULE_SPEC.md`, not revisions.** Fold anything genuinely
+explanatory out of an interview-angles section into the mechanism or trade-offs section rather
 than deleting it outright. Figures the old text quotes bare come out unless they can be
 attributed — either to a source, or to a `MEASUREMENTS.md` row cited by ID with its environment
 named in the sentence, which is what that archive is now for.

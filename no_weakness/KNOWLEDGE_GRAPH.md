@@ -7,10 +7,11 @@ subject's own graph lives in its `00_knowledge_graph.md`; this file assembles th
 map, states how the subjects depend on each other, and reports where the underlying books have
 gone stale against what is true now.*
 
-**Eleven written modules exist, all of them in Python and Concurrency, and all written before this
-graph did.** The graph is the structural layer the directory needed, not a record of what has been
-written: a node's `**Article:**` line is that record, and 471 of the 482 nodes do not carry one.
-See `AGENTS.md` §9 for what remains.
+**28 written modules exist — all 20 of `05_python/`, now complete, plus 8 pre-spec modules in
+Concurrency, JavaScript, TypeScript and SQL written before this graph did.** The graph is the
+structural layer the directory needed, not a record of what has been written: a node's
+`**Article:**` line is that record, and 450 of the 482 nodes do not carry one — 32 do. See
+`AGENTS.md` §9 for what remains.
 
 ---
 

@@ -68,7 +68,27 @@ of a chapter is whether someone who reads it understands the mechanism afterward
 - **Write about the subject, not the reader.** No "you probably think", no "most people get this
   wrong", no second-person challenges.
 
-### Structure — six sections, in this order
+### Structure — five sections, in this order
+
+The written module's own headings are exactly these five, and only these five:
+
+    ## 1. The problem this solves
+    ## 2. The mechanism, built up
+    ## 3. Failure modes
+    ## 4. Trade-offs
+    ## 5. Reference summary
+
+**The section minimums sum to 5,600 words, short of the 6,000-word floor** — a chapter that hits
+every minimum exactly still fails the total. Target the **midpoint** of each section's range, not
+its minimum:
+
+    1. The problem this solves    ~550
+    2. The mechanism, built up  ~3,000
+    3. Failure modes            ~1,850
+    4. Trade-offs               ~1,100
+    5. Reference summary          ~400
+
+The midpoints sum to ~6,900, comfortably inside the 6,000–8,000 band.
 
 **Front matter (~120 words).** The title, a one-line italic subtitle, then:
 
@@ -81,32 +101,33 @@ of a chapter is whether someone who reads it understands the mechanism afterward
 Use `**Covers:**`, never `**Syllabus:**`. Never write a `**Measurement:**` line or a
 `**Roles:**` line; both belong to a superseded version of this folder.
 
-**1. The problem this solves (400–700 words).** Open with the engineering situation the subject
-exists to address, concretely and in code — what goes wrong without this mechanism, or what
-question it answers. Never open with a definition. Never open by asking the reader what they
-know.
+**1. The problem this solves.** Open with the engineering situation the subject exists to
+address, concretely and in code — what goes wrong without this mechanism, or what question it
+answers. Never open with a definition. Never open by asking the reader what they know.
 
-**2. The mechanism, built up (2,500–3,500 words).** The core of the chapter, and the thing drafts
-most often get wrong. Start with the smallest complete example — five to ten lines, one idea —
-and say what it produces. Then extend it one dimension at a time, each step adding exactly one
-concept, so the reader follows the whole chain without a leap. End with the shape the thing takes
-in production code, with the complications that implies. **Never present the complex form first
-and decompose it.** The explanation lives in the paragraphs between the code blocks; comments
-annotate, they do not teach. Trace one concrete execution through the machine in plain words at
-least once.
+**2. The mechanism, built up.** The core of the chapter, and the thing drafts most often get
+wrong. Start with the smallest complete example — five to ten lines, one idea — and say what it
+produces. Then extend it one dimension at a time, each step adding exactly one concept, so the
+reader follows the whole chain without a leap. End with the shape the thing takes in production
+code, with the complications that implies. **Never present the complex form first and decompose
+it.** The explanation lives in the paragraphs between the code blocks; comments annotate, they do
+not teach. Trace one concrete execution through the machine in plain words at least once.
 
-**3. Diagrams — integrated into section 2, never a section of their own.** Where a paragraph
-would be harder to visualise than a picture, draw the picture; this is a requirement, not a
-permission. Mermaid `graph`, `sequenceDiagram`, `stateDiagram-v2`, `erDiagram`, or a fenced ASCII
-block where byte-level layout matters. Two to four per chapter is normal, more when the subject
-is structural. Draw when there is a shape, an ordering or interleave, a lifecycle, a topology, or
-a memory layout. Apply the delete test: remove the diagram and reread the paragraph — if the
-paragraph is fine alone, the diagram was decoration. Never draw a diagram that restates a
-bulleted list, never draw generic architecture boxes, never go past about fifteen nodes.
+Diagrams belong inside this section. Where a paragraph would be harder to visualise than a
+picture, draw the picture; this is a requirement, not a permission. Mermaid `graph`,
+`sequenceDiagram`, `stateDiagram-v2`, `erDiagram`, or a fenced ASCII block where byte-level layout
+matters. Two to four per chapter is normal, more when the subject is structural. Draw when there
+is a shape, an ordering or interleave, a lifecycle, a topology, or a memory layout. Apply the
+delete test: remove the diagram and reread the paragraph — if the paragraph is fine alone, the
+diagram was decoration. Never draw a diagram that restates a bulleted list, never draw generic
+architecture boxes, never go past about fifteen nodes.
 
-**4. Failure modes (1,500–2,200 words).** Three to five ways the mechanism breaks. Each carries a
-minimal reproduction labelled `# Gist: name.py`, the error it produces, a prose explanation
-naming the section-2 subsection that predicted it, and the fix with its cost stated.
+**3. Failure modes.** Three to five ways the mechanism breaks. Each carries a minimal reproduction
+labelled `# Gist: name.py`, the error it produces, a prose explanation naming the section-2
+subsection that predicted it, and the fix with its cost stated — all four elements, every time.
+Each mode runs roughly 450 words; that is what four elements written out in full prose actually
+takes. A mode that comes in under 300 words is missing at least one of the four, and in practice
+the two that go missing are the back-reference to section 2 and the fix's cost.
 
 You may quote an exception type and message that the language or library *defines* and that does
 not vary between runs — `TypeError: unhashable type: 'list'`,
@@ -115,14 +136,14 @@ quote anything that varies with the machine: timings, ratios, memory figures, ro
 addresses, thread interleavings. A nondeterministic failure is described as nondeterministic —
 what makes it fire, what makes it hide, and why that is the hard part.
 
-**5. Trade-offs (900–1,300 words).** A table with fixed columns — **Use when · Because · Real
-cost** — where the cost column is never empty. Then prose subsections, one of which is always the
-case *against*: when you would not use this, and what you would use instead. Name at least two
-rejected alternatives with their costs.
+**4. Trade-offs.** A table with fixed columns — **Use when · Because · Real cost** — where the
+cost column is never empty. Then prose subsections, one of which is always the case *against*:
+when you would not use this, and what you would use instead. Name at least two rejected
+alternatives with their costs.
 
-**6. Reference summary (300–500 words).** A condensed, scannable statement of everything the
-chapter established, with the load-bearing facts in bold. Written as a lookup for someone who
-read it and wants the facts back. Never a self-test.
+**5. Reference summary.** A condensed, scannable statement of everything the chapter established,
+with the load-bearing facts in bold. Written as a lookup for someone who read it and wants the
+facts back. Never a self-test.
 
 **Footer.** `← [<Subject> knowledge graph](00_knowledge_graph.md) · [repo index](../README.md)`
 
@@ -134,7 +155,7 @@ it on purpose* · *5. The judgment call* · *6. Interview angles* · *7. To add 
 Sections 2, 6 and 7 are banned outright, and `RECALL.md` no longer exists.
 
 Treat it as a rewrite, not a revision. Salvage the explanation rather than the shape: fold
-anything genuinely explanatory out of the interview-angles section into section 2 or section 5
+anything genuinely explanatory out of the interview-angles section into section 2 or section 4
 instead of deleting it. Carry the existing code and diagrams across where they still fit, and
 reorder them simple-to-complex if they do not. Replace the `**Measurement:**` front-matter line
 with a `**Sources:**` line, replace `**Syllabus:**` with `**Covers:**`, and delete any
@@ -150,13 +171,13 @@ progression nor the reference summary, so the gap is those two things and not pa
 ### Before you finish
 
 1. Word count is 6,000–8,000.
-2. Six sections in order, with the reference summary present.
+2. Five sections in order, with the reference summary present.
 3. Section 2 opens with the smallest example and builds. No chapter opens with its most complex
    listing.
 4. Every quantitative claim names its source in the same sentence.
 5. Diagrams present where earned, each surviving the delete test.
 6. Nothing asks the reader to run, install or set up anything.
-7. At least two rejected alternatives in section 5, with costs.
+7. At least two rejected alternatives in section 4, with costs.
 8. **The noun-swap test.** No paragraph survives having its subject swapped for a different
    technology. *"Indexes improve read performance at the cost of write performance"* is true of
    Postgres, MongoDB and MySQL, which is exactly why it is worthless. Specific writing names a
@@ -164,9 +185,20 @@ progression nor the reference summary, so the gap is those two things and not pa
 9. No practice material and no retired section titles.
 10. Add the `**Article:**` line to the node's record in the subject's `00_knowledge_graph.md`,
     pointing at the file. Never add it speculatively.
+11. Run `uv run python _tools/check_module.py <file>` and fix everything it reports. Nothing is
+    finished while it reports an error.
 
 Write the whole chapter in one pass. Do not ask which section to start with, and do not stop to
 confirm the outline.
+
+### When a subject's last chapter lands
+
+The step above is per chapter: only the node's `**Article:**` line changes. When the chapter you
+just finished is the *last* one for its subject — every node that is getting a module now has
+one — also update the three records that describe the subject as a whole, in the same session:
+`AGENTS.md` §9's table, `README.md`'s status section, and `KNOWLEDGE_GRAPH.md`'s header counts.
+Skipping this step is why those three records drifted out of date in the first place: chapters
+kept landing and nothing ever went back to update the subject-level tally.
 
 ---
 

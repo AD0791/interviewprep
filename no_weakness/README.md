@@ -13,8 +13,8 @@ depth. Not a course, not a training regimen, not interview prep with exercises.
 The reader is an experienced engineer who wants these subjects understood properly — the object
 model, the GIL, the query planner, the event loop, the type system, the storage engine, the
 execution model. Modules are written the way a good technical book is written: exposition that
-builds, complete code that runs from a minimal example to a realistic one, diagrams wherever a
-picture beats a paragraph, verbatim output from real failures, and honest trade-offs.
+builds, complete code that goes from a minimal example to a realistic one, diagrams wherever a
+picture beats a paragraph, the failures a mechanism actually produces, and honest trade-offs.
 
 **The subject map is a knowledge graph, not a table of contents.** [`KNOWLEDGE_GRAPH.md`](KNOWLEDGE_GRAPH.md)
 is the root index — 482 nodes across 26 subjects, each one a directed edge-labelled graph in
@@ -52,7 +52,7 @@ for the full subject-level DAG.
 | 02 | [Operating Systems](02_os/00_knowledge_graph.md) | 21 | 0 |
 | 03 | [Data Structures & Algorithms](03_dsa/00_knowledge_graph.md) | 24 | 0 |
 | 04 | [Shell and SSH](04_sh/00_knowledge_graph.md) | 19 | 0 |
-| 05 | [Python](05_python/00_knowledge_graph.md) — object model, metaprogramming, runtime | 24 | 01, 03, 05 |
+| 05 | [Python](05_python/00_knowledge_graph.md) — object model, metaprogramming, runtime | 24 | **all 20 — complete** |
 | 06 | [Concurrency](06_concurrency/00_knowledge_graph.md) — the GIL, threads, processes, asyncio | 17 | **01, 02, 03, 04** |
 | 07 | [JavaScript](07_javascript/00_knowledge_graph.md) — closures, prototypes, the event loop | 22 | 03 |
 | 08 | [TypeScript](08_typescript/00_knowledge_graph.md) — structural typing, generics, variance | 20 | 02 |
@@ -122,14 +122,15 @@ against their source books.** Full breakdown, subject by subject, in
 ## Status — unfinished
 
 **The graph is built; the text is not.** All 26 subjects have a validated `00_knowledge_graph.md`
-(482 nodes, 0 validator errors). **11 modules are written**, all in the two subjects — Python
-and Concurrency — built before the graph existed. This is under active construction and is
-expected to stay that way for a long time: 482 nodes is not a promise of 482 modules, since some
-nodes will stay graph-only by design.
+(482 nodes, 0 validator errors). **28 modules are written** — all 20 of `05_python/`, now the
+first complete subject, plus 8 pre-spec modules in Concurrency, JavaScript, TypeScript and SQL
+written before the graph existed. 32 of the 482 nodes carry an `**Article:**` line; 450 do not.
+This is under active construction and is expected to stay that way for a long time: 482 nodes is
+not a promise of 482 modules, since some nodes will stay graph-only by design.
 
 | Topic | Written | Nodes | Remaining |
 |---|---|---|---|
-| `05_python/` | 01, 03, 05 | 24 | 21 |
+| `05_python/` | all 20 — **complete** | 24 | 0 |
 | `06_concurrency/` | 01, 02, 03, 04 | 17 | 13 |
 | `07_javascript/` | 03 | 22 | 21 |
 | `08_typescript/` | 02 | 20 | 19 |
@@ -154,21 +155,28 @@ recorded per subject in [`KNOWLEDGE_GRAPH.md`](KNOWLEDGE_GRAPH.md) §5 rather th
 
 ### Known debt in what exists
 
-**All eleven modules predate [`_tools/MODULE_SPEC.md`](_tools/MODULE_SPEC.md) and none conforms
-to it.** They share a superseded seven-section skeleton with a quiz-framed second section ("the
-questions you cannot answer about it"), an `## Interview angles` section of spoken answers, and a
-closing section feeding a `RECALL.md` that no longer exists — and none has the reference summary
-the spec requires in its place. Their front matter carries `**Syllabus:**`, `**Measurement:**`
-and `**Roles:**` lines that the current §3.0 replaces or bans outright.
+**`05_python/`'s pre-spec debt is closed: all 20 chapters now use the exact five-section structure
+[`_tools/MODULE_SPEC.md`](_tools/MODULE_SPEC.md) §3 requires**, checked mechanically by
+[`_tools/check_module.py`](_tools/check_module.py). What remains for Python is the word floor, not
+the shape: **19 of the 20 chapters are still below 6,000 words**, pending a deepening pass that
+adds prose inside the existing sections. Only chapter 01 currently clears it.
 
-Removing the three non-conforming sections leaves a median of about 2,940 words standing against
-a 6,000-word floor, so each is roughly 3,000 words short — the built-up code progression and the
-reference summary, neither of which the old skeleton asked for. Treat them as rewrites rather
-than revisions; [`AGENTS.md`](AGENTS.md) §9 carries the detail and
-[`_tools/WRITE_MODULE_PROMPT.md`](_tools/WRITE_MODULE_PROMPT.md) carries the procedure.
+**8 modules — none of them Python — still predate `MODULE_SPEC.md` and conform to none of it:**
+`06_concurrency/01`–`04`, `07_javascript/03`, `08_typescript/02`, and `09_sql/01` and `04`. They
+share the same superseded seven-section skeleton as Python's original eleven did — a quiz-framed
+second section ("the questions you cannot answer about it"), an `## Interview angles` section of
+spoken answers, and a closing section feeding a `RECALL.md` that no longer exists — and none has
+the reference summary the spec requires in its place. Their front matter carries `**Syllabus:**`,
+`**Measurement:**` and `**Roles:**` lines that the current §3.0 replaces or bans outright.
 
-Diagram coverage is also thinner than the contract now requires. Several written modules have
-one Mermaid diagram or none where the subject has real structure worth drawing.
+Measured with code and Mermaid blocks excluded, they run 3,564–4,046 words each against the
+6,000-word floor. Treat them as rewrites rather than revisions, the same treatment Python's three
+pre-spec chapters (01, 03, 05) already received; [`AGENTS.md`](AGENTS.md) §9 carries the detail
+and [`_tools/WRITE_MODULE_PROMPT.md`](_tools/WRITE_MODULE_PROMPT.md) carries the procedure. This
+pass records them accurately and leaves them queued, not rewritten.
+
+Diagram coverage is also thinner than the contract now requires in these eight. All of them have
+zero Mermaid diagrams where the subject has real structure worth drawing.
 
 ---
 
