@@ -1,8 +1,8 @@
 # interviewprep — job hunt tracks
 
-Four independent preparation tracks, one per role pursued. Each has its own README with a reading order; **start there, not here**.
+Five independent preparation tracks, one per role pursued. Each has its own README with a reading order; **start there, not here**.
 
-Each track is written in the language of its interview. The two humanitarian tracks are in French, the two commercial ones in English. This README and the agent instructions are in English.
+Each track is written in the language of its interview. The three humanitarian tracks are in French, the two commercial ones in English. This README and the agent instructions are in English.
 
 ---
 
@@ -10,6 +10,7 @@ Each track is written in the language of its interview. The two humanitarian tra
 
 | Track | Role | Language | Status |
 |---|---|---|---|
+| [`cmmb_meal_officer/`](cmmb_meal_officer/README.md) | M&E Officer — CMMB Haïti (VIH, santé publique) | Français (+ annexe anglaise) | **Entretien à venir — pas d'examen** |
 | [`remote_leverage_data_analyst/`](remote_leverage_data_analyst/README.md) | Data Analyst — Remote Leverage (VA placement agency, Florida) | English | **Interview Mon 3 Aug 2026** |
 | [`acted_bdd/`](acted_bdd/README.md) | Assistant(e) Base de Données — ACTED Haïti, réf. ASSISTBDD_2607 | Français | Dossier déposé, examen à venir |
 | [`assitant_pmel/`](assitant_pmel/README.md) | Assistant PMEL — Parole et Action | Français | Entretien et examen passés |
@@ -27,6 +28,8 @@ They are not independent bodies of knowledge. Three of them describe the **same 
 
 `remote_leverage_data_analyst/` translates the same method into commercial vocabulary — funnel conversion, time to fill, CAC, cohort censoring — because the analysis is identical and only the words change.
 
+`cmmb_meal_officer/` carries the method into public health, and is the only track whose employer's domain (HIV) has its own measurement apparatus. It deliberately does **not** restate the MEAL theory, statistics or indicator design already written in `assitant_pmel/`; it links back to those modules and adds what health puts on top — the cascade of care and the 95-95-95 arithmetic, PEPFAR MER indicators, cohort retention and the discipline of the denominator, Haiti's health information systems (SISNU, iSanté, MESI, SALVH, DATIM), results-based financing, and the health-facility reporting chain from paper register to donor.
+
 `python_bairesdev/` is the engineering track, and it supplies two anecdotes the others reuse: the N+1 optimisation (36 seconds to under 0.5) and the composite-index deadlock fix.
 
 **Keep shared stories worded consistently across tracks.** The same anecdote told two different ways is worse than either version alone.
@@ -35,7 +38,7 @@ They are not independent bodies of knowledge. Three of them describe the **same 
 
 ## Practice datasets
 
-Every track ships data you can actually query, and every figure quoted in the modules was produced by running the query shown.
+The three tracks below ship data you can actually query, and every figure quoted in their modules was produced by running the query shown. `cmmb_meal_officer/` is the exception: its interview has no written exam, so it ships no dataset — every figure in it comes from a public source cited in its own `sources.md`. `python_bairesdev/` ships runnable apps rather than a dataset.
 
 | Dataset | Track | Contents |
 |---|---|---|
