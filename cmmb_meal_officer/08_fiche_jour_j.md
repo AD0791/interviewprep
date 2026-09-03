@@ -36,6 +36,26 @@ Cascade **95-95-95** de l'ONUSIDA pour 2025 ; les taux sont **conditionnels et s
 donc 95-95-95 équivaut à environ **86 %** de toutes les personnes vivant avec le VIH
 virologiquement supprimées.
 
+**LES SIX 95, à réciter :** **(1)** connaissent leur statut · **(2)** sous traitement durable ·
+**(3)** **charge virale supprimée** — dis « supprimée », pas « indétectable » · **(4)** personnes
+à haut risque sous **prévention combinée** (PrEP, préservatifs) · **(5)** **femmes en âge de
+procréer**, besoins en santé sexuelle et reproductive satisfaits · **(6)** accès aux services
+d'**élimination de la transmission mère-enfant**. Les points **5 et 6 sont le métier de CMMB**.
+
+**Le cadre derrière.** Le 95-95-95 n'est que **le premier des trois objectifs de
+services VIH** ; 1-2-3 = objectif n° 1, le point 4 = objectif n° 3, les points 5-6 = objectif n° 2. **Objectif 1** : la cascade, mais **atteinte dans TOUTES les sous-populations et
+tous les groupes d'âge** — une moyenne nationale à 95 % qui cache 60 % chez les adolescents ne
+remplit pas la cible, donc **la désagrégation est obligatoire par définition**. **Objectif 2**,
+trois 95 et c'est le métier de CMMB : 95 % des femmes en âge de procréer avec leurs besoins en
+santé sexuelle et reproductive satisfaits ; 95 % des femmes enceintes et allaitantes vivant avec
+le VIH **supprimées avant l'accouchement** ; 95 % des **enfants exposés testés**, avec les
+**résultats remis aux parents avant deux mois** — le rendu est dans la cible. **Objectif 3** :
+95 % des personnes à risque sous prévention combinée. Bonus, les **10-10-10** sur les obstacles
+légaux, la stigmatisation, et les violences de genre.
+
+**Décompte :** en énumérant tout, il y en a **sept** (3 + 3 + 1) ; « six 95 » est un raccourci dont
+le compte varie. **Donne la structure, pas le nombre.**
+
 Haïti : prévalence **1,8 %** selon **HAPHIA**, **2,2 % chez les femmes** contre **1,4 % chez les
 hommes**. Environ **154 000** personnes vivant avec le VIH, cascade de l'ordre de **89 – 93 – 87**.
 HAPHIA avait mesuré un premier étage à **41 %** : le pays traitait bien et dépistait mal.
@@ -61,33 +81,49 @@ résultat** — un résultat exact qui arrive trop tard est un échec de program
 
 ## Les indicateurs MER
 
-**HTS_TST** dépistés **ayant reçu leur résultat** ; **HTS_TST_POS** les positifs ; leur rapport
-est la **positivité**. **TX_NEW** nouvelles mises sous traitement, un flux. **TX_CURR** effectif
-actuellement sous traitement, un stock. **TX_ML** les sorties par devenir, **TX_RTT** les
-reprises. **TX_PVLS** la suppression : dénominateur = patients sous traitement avec **une charge
-virale documentée dans les douze mois**, numérateur = ceux sous 1 000 copies.
+**L'architecture en une phrase.** **Quatre portes trouvent les positifs — dépistage, PTME, EID,
+tuberculose — et elles débouchent toutes dans TX_NEW.** Ensuite une seule cohorte se gère, et un
+seul indicateur mesure le résultat : **TX_PVLS**.
 
-**L'équation de cohorte :** stock final = stock initial + nouveaux + retours − décès − transferts
-− interruptions. C'est le premier contrôle à mettre en place.
+**Porte 1, dépistage.** **HTS_TST** dépistés **ayant reçu leur résultat** ; **HTS_TST_POS** les
+positifs. **Yield = HTS_TST_POS ÷ HTS_TST** : il mesure le **ciblage**, pas l'épidémie, et se lit
+**par modalité**.
 
-**La phrase à ne jamais oublier :** on ne commente jamais un taux de suppression sans annoncer sa
-**couverture** dans la même phrase.
+**La charnière : le LINKAGE = enrôlés ÷ positifs trouvés.** La marche entre *savoir* et *soigner*.
+**PMTCT_ART et TB_ART SONT des indicateurs de linkage**, pas des indicateurs de traitement
+ordinaires. Et **un linkage bas est d'abord une hypothèse de problème de données** — l'identifiant
+qui relie les deux registres — avant d'être un problème de service.
 
-PTME : **PMTCT_STAT** → **PMTCT_ART** → **PMTCT_EID** → **PMTCT_HEI_POS**, puis **PMTCT_FO** au
-statut final vers 18 mois. Autour : **TX_TB**, **TB_PREV**, **TB_STAT**, **TB_ART**, **OVC_SERV**,
-**AGYW_PREV** (DREAMS), **PrEP_NEW**, **PrEP_CT**, **POST_RESP**, **CXCA_SCRN**, **LAB_PTCQI**,
-**SC_ARVDISP**.
+**La cohorte.** **TX_NEW** nouvelles mises sous ARV, un flux. **TX_CURR** effectif sous ARV, un
+stock — il pilote les **commandes de médicaments**. **TX_ML** les sorties **ventilées par devenir**
+(décès, transfert, arrêt, perdu de vue). **TX_RTT** les retours en soin.
 
-**Version 2.8.2, FY25 Q1/Q2 : 27 indicateurs, 5 familles, un seul indicateur de résultat —
-TX_PVLS.** Plus de KP_PREV ni VMMC_CIRC. Trimestriels : la famille TX, la famille PMTCT, HTS,
-PrEP, TB_STAT. Semestriels : AGYW_PREV, OVC, CXCA, TB_PREV, TX_TB, SC_ARVDISP. Annuels :
-LAB_PTCQI, PMTCT_FO, TB_ART. **La fréquence suit la nature de la mesure** : TX_CURR pilote les
-commandes de médicaments donc trimestriel ; PMTCT_FO attend 18 mois donc annuel.
+> **TX_CURR final = TX_CURR initial + TX_NEW + TX_RTT − TX_ML**
 
-**Si on te lance un code inconnu** : préfixe (le domaine), suffixe (ce qu'on compte), place dans
-le parcours, numérateur sur dénominateur, ce qui le casse. Puis : « je vérifierais sa fiche dans
-le guide de référence MER avant de vous donner une définition de mémoire. » **Ne bluffe jamais un
-numérateur.**
+Si ça ne tombe pas juste, **il manque des sorties documentées** — et alors la rétention **brille**
+pendant que la qualité se dégrade. C'est le premier contrôle à mettre en place.
+
+**Le résultat.** **TX_PVLS_D** = patients sous ARV avec une charge virale documentée sur 12 mois.
+**TX_PVLS_N** = parmi eux, ceux **sous 1 000 copies**. **Couverture = D ÷ TX_CURR. Suppression =
+N ÷ D.** **On ne commente jamais l'une sans l'autre dans la même phrase.**
+
+**Porte 2 et 3, PTME et EID.** **PMTCT_STAT** (statut connu) → **PMTCT_STAT_POS** (les positives)
+→ **PMTCT_ART** (mises sous ARV) → **PMTCT_EID** (enfants nés d'elles, **PCR** avant 2 mois) →
+**PMTCT_HEI_POS** (nourrissons exposés positifs) → **PMTCT_FO** (statut final vers 18 mois,
+annuel). Pas de test rapide sur un nourrisson : **anticorps maternels jusqu'à 18 mois, donc PCR**.
+Et le **délai de rendu** compte autant que la couverture.
+
+**Porte 4, tuberculose.** **TB_STAT** (tuberculeux au statut VIH connu) → **TB_ART** (positifs mis
+sous ARV). Vus depuis le programme VIH : **TX_TB** et **TB_PREV**. La distinction est celle du
+**point de vue**, donc du dénominateur.
+
+**Les cinq ratios se lisent dans l'ordre, chacun expliquant le suivant** : yield, linkage,
+équation de cohorte, couverture, suppression.
+
+**Si on te lance un code inconnu** : préfixe (le domaine), suffixe (ce qu'on compte — et `_STAT`
+compte un **statut connu**, pas un test), place dans la chaîne, numérateur sur dénominateur, ce
+qui le casse. Puis : « je vérifierais sa fiche dans le guide de référence MER avant de vous donner
+une définition de mémoire. » **Ne bluffe jamais un numérateur.**
 
 ---
 

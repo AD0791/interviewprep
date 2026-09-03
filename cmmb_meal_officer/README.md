@@ -23,7 +23,7 @@ quantité.
 
 **Commence par [`FICHE_SYNTHESE.md`](FICHE_SYNTHESE.md)** — une heure, l'intégralité de la
 préparation : organisation, pitch, questions RH, salaire, VIH, MEAL, statistiques, système
-d'information. **Enchaîne sur [`FICHE_MER_27_INDICATEURS.md`](FICHE_MER_27_INDICATEURS.md)** —
+d'information. **Enchaîne sur [`FICHE_MER_INDICATEURS.md`](FICHE_MER_INDICATEURS.md)** —
 trente minutes, les vingt-sept indicateurs MER avec leurs schémas. Après ces deux fiches, les
 modules deviennent de la lecture légère, dans n'importe quel ordre et sans obligation : ils sont
 la profondeur derrière chaque paragraphe.
@@ -34,7 +34,7 @@ Le matin de l'entretien, on ne relit que **`FICHE_SYNTHESE.md`** et
 | Fiche ou module | Sujet | Pourquoi il existe |
 |---|---|---|
 | [`FICHE_SYNTHESE.md`](FICHE_SYNTHESE.md) | **La passe d'une heure — commence ici** | Tout le contenu, condensé, dans l'ordre de l'entretien |
-| [`FICHE_MER_27_INDICATEURS.md`](FICHE_MER_27_INDICATEURS.md) | **Les 27 indicateurs MER v2.8.2, avec schémas — 30 min** | CMMB rapporte vraisemblablement sur la dernière version ; à faire juste après la fiche de synthèse |
+| [`FICHE_MER_INDICATEURS.md`](FICHE_MER_INDICATEURS.md) | **Les indicateurs MER réellement suivis par CMMB, avec schémas — 30 min** | Les cinq chaînes, la définition rapide de chacun, et le *linkage* qui les relie ; liste communiquée par un futur collègue de CMMB, référentiel complet en annexe |
 | [`00_cmmb_organisation.md`](00_cmmb_organisation.md) | Historique et structure de CMMB, en Haïti et dans le monde | La question « que savez-vous de nous ? » est quasi certaine, et la réponse contient un fait décisif |
 | [`01_pitch_et_questions_rh.md`](01_pitch_et_questions_rh.md) | Le pitch, le parcours question par question, les questions RH et comportementales | C'est le premier tiers de l'entretien et il décide de la suite |
 | [`02_negociation_salariale.md`](02_negociation_salariale.md) | Prétentions salariales, méthode et chiffres | La question tombe toujours, et une mauvaise réponse coûte réellement de l'argent |

@@ -129,6 +129,16 @@ instead of *monitoring and evaluation* signals that they learned the field in on
 > because it stays measurable on the platforms available in resource-limited settings, including
 > dried blood spot samples.
 >
+> It's also worth saying that 95-95-95 is only the **first** of UNAIDS's three HIV services
+> targets for 2025 — what people often call the "six 95s". And the first one is stated as
+> achieved *within all sub-populations and age groups*, which is an equity requirement: a national
+> average of 95% hiding 60% among adolescents does not meet the target. That's what makes
+> disaggregation part of the definition rather than good practice. The second target carries three
+> more 95s and is essentially your portfolio — sexual and reproductive health needs met for women
+> of reproductive age, viral suppression in pregnant and breastfeeding women before delivery, and
+> HIV-exposed infants tested with **results returned to the parents** by two months. The third is
+> combination prevention for people at risk.
+>
 > There's also an asymmetry worth naming. The denominator of the first 95 — the total number of
 > people living with HIV — isn't counted, it's modelled from population surveys. The other two
 > come from program registers. So a country's first 95 can move without anything changing in the

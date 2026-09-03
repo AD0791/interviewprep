@@ -199,6 +199,113 @@ pays peut voir son premier 95 se dégrader sans que rien n'ait changé sur le te
 parce que le modèle a révisé son estimation à la hausse. C'est un point que tu peux placer, et
 qui montre que tu sais lire un indicateur avant de le commenter.
 
+### Les six 95 — ce que 95-95-95 ne dit pas
+
+Le 95-95-95 que tout le monde cite n'est que **le premier des trois objectifs de services VIH**
+fixés par l'ONUSIDA dans son document *2025 AIDS Targets*. Presque aucun candidat ne connaît la
+suite, et **elle tombe exactement dans le portefeuille de CMMB**.
+
+**La formulation à mémoriser, en six points.** C'est la version consolidée qui circule dans le
+secteur, et c'est celle à dire à voix haute — elle est plus mémorisable que la structure du
+document source, à laquelle elle se ramène exactement.
+
+| | Le 95 |
+|---|---|
+| **1** | 95 % des personnes vivant avec le VIH **connaissent leur statut sérologique** |
+| **2** | 95 % des personnes diagnostiquées **reçoivent un traitement antirétroviral durable** |
+| **3** | 95 % des personnes sous traitement atteignent une **charge virale supprimée** |
+| **4** | 95 % des personnes **à haut risque** ont accès à des services de **prévention combinée** efficaces — PrEP, préservatifs, réduction des risques |
+| **5** | 95 % des **femmes en âge de procréer** voient leurs besoins en **santé sexuelle et reproductive** satisfaits |
+| **6** | 95 % des personnes concernées ont accès aux services permettant d'**éliminer la transmission mère-enfant** |
+
+**Une seule correction à faire sur cette liste, et c'est la même que d'habitude.** On énonce
+souvent le troisième comme « atteindre une charge virale **indétectable**, et donc ne plus
+transmettre ». Le document ONUSIDA écrit *« suppressed viral loads »* — **charge virale
+supprimée**, moins de 1 000 copies par millilitre. L'**indétectabilité**, autour de 50 copies, est
+un seuil plus bas, et c'est lui qui porte rigoureusement le message *U=U*.
+
+Ce n'est pas de la pédanterie : le seuil de 1 000 a été retenu parce qu'il reste mesurable dans
+les laboratoires à ressources limitées, y compris sur goutte de sang séché, alors qu'exiger 50
+partout rendrait la cible inapplicable là où elle sert le plus. **Dis donc « supprimée » comme
+définition, et garde *U=U* comme conséquence** : *« 95 % des personnes sous traitement ont une
+charge virale supprimée — et quand la suppression est durable et profonde, on entre dans le U=U,
+indétectable égale intransmissible. »* Tu es juste sur les deux plans, et tu montres que tu
+connais la différence.
+
+**Comment les six se ramènent aux trois objectifs du document source**, si l'on te pousse : les
+points **1, 2 et 3** sont l'**objectif n° 1** ; le point **4** est l'**objectif n° 3** ; et les
+points **5 et 6** sont les deux moitiés de l'**objectif n° 2**. C'est ce regroupement qui explique
+pourquoi certaines publications comptent six et d'autres sept — le sixième point ci-dessus bundle
+deux cibles distinctes du document, la suppression virale des femmes enceintes et le test des
+enfants exposés.
+
+**Objectif de services VIH n° 1** — *« 95–95–95 testing and treatment targets achieved among
+people living with HIV within all sub-populations and age groups by 2025. »* Les cibles de
+dépistage, de traitement et de suppression atteintes **dans toutes les sous-populations et tous
+les groupes d'âge**.
+
+**Cette dernière phrase est la plus importante du cadre, et c'est un point de suivi-évaluation
+pur.** L'objectif n'est pas d'atteindre 95-95-95 **au niveau national** : il est de l'atteindre
+**dans chaque sous-population** — enfants de 0 à 14 ans, adolescents et jeunes hommes de 15 à 24
+ans, femmes adultes de 25 ans et plus, personnes transgenres, professionnelles du sexe, personnes
+déplacées. Autrement dit, **une moyenne nationale à 95 % qui cache 60 % chez les adolescents ne
+remplit pas l'objectif.** C'est une exigence d'équité, et elle rend la **désagrégation obligatoire
+par construction** — ce n'est plus une bonne pratique de rapportage, c'est la définition même de
+la cible.
+
+**Objectif n° 2** — celui qui contient trois 95 d'un coup, et qui est **entièrement le métier de
+CMMB** : *« 95 % des femmes en âge de procréer voient leurs besoins en services VIH et de santé
+sexuelle et reproductive satisfaits ; 95 % des femmes enceintes et allaitantes vivant avec le VIH
+ont une charge virale supprimée ; et 95 % des enfants exposés au VIH sont testés, d'ici 2025. »*
+
+Le détail des sous-cibles vaut d'être connu, parce qu'il valide tout ce qui est écrit en
+[section 5](#5-la-ptme-et-leid--le-programme-que-cmmb-porte-depuis-2002). Le document précise que
+95 % des femmes enceintes doivent être testées pour le VIH, la syphilis et l'hépatite B au moins
+une fois et le plus tôt possible, avec un retest en fin de grossesse dans les contextes à forte
+prévalence ; que toutes les femmes enceintes vivant avec le VIH soient diagnostiquées et sous
+traitement, **95 % atteignant la suppression virale avant l'accouchement** ; et — voici le point
+décisif — que **95 % des nourrissons exposés reçoivent un test virologique *et que les parents
+reçoivent les résultats* avant l'âge de deux mois**, puis de nouveau entre neuf et dix-huit mois.
+
+**Le fait que « les parents reçoivent les résultats » soit écrit dans la cible elle-même est une
+chose à savoir dire.** Cela confirme que dans l'EID, **le délai de rendu fait partie de
+l'objectif**, et non d'une bonne pratique optionnelle : un test réalisé dont le résultat n'atteint
+pas la mère ne compte pas.
+
+**Objectif n° 3** — *« 95 % des personnes à risque d'infection utilisent des options de prévention
+combinée appropriées, priorisées, centrées sur la personne et efficaces. »* C'est le versant
+prévention, celui qui couvre la PrEP, le préservatif et les services aux populations clés.
+
+**Et deux compléments que personne ne cite jamais.** Un objectif d'**intégration** : au moins 90 %
+des personnes vivant avec le VIH et des personnes à risque orientées vers les services dont elles
+ont besoin pour les autres maladies transmissibles et non transmissibles, les violences sexuelles
+et de genre, et la santé mentale. Et les **objectifs 10-10-10**, sur les obstacles sociaux et
+juridiques : moins de 10 % de pays ayant un environnement légal punitif qui limite l'accès aux
+services ; moins de 10 % de personnes vivant avec le VIH et de populations clés subissant
+stigmatisation et discrimination ; moins de 10 % de femmes, de filles, de personnes vivant avec le
+VIH et de populations clés subissant inégalité de genre et violence.
+
+**Sur le décompte, sois honnête et précis**, parce que les sources ne comptent pas toutes pareil.
+Si l'on énumère tous les 95 du cadre, on en trouve **sept** : trois dans l'objectif 1, trois dans
+l'objectif 2, un dans l'objectif 3. L'expression « six 95 » est un raccourci courant, et selon les
+publications elle omet soit le test des enfants exposés, soit un autre élément. **La réponse sûre
+consiste à donner la structure plutôt que le nombre** :
+
+> « Le 95-95-95 qu'on cite tout le temps n'est que le premier des trois objectifs de services VIH
+> de l'ONUSIDA pour 2025. Le premier, c'est la cascade — mais atteinte dans **toutes** les
+> sous-populations, ce qui est une exigence d'équité et rend la désagrégation obligatoire. Le
+> deuxième porte trois 95 sur les femmes et les enfants : besoins en santé sexuelle et
+> reproductive satisfaits, suppression virale chez les femmes enceintes et allaitantes, et
+> dépistage des enfants exposés. Le troisième porte sur la prévention combinée chez les personnes
+> à risque. On parle souvent de "six 95" ; si on les énumère tous il y en a sept, et le décompte
+> varie selon les publications — ce qui compte, c'est la structure. Et pour une organisation comme
+> la vôtre, c'est le deuxième objectif qui est le cœur du métier. »
+
+**Pourquoi cela vaut la peine devant CMMB.** L'objectif n° 2 est littéralement leur portefeuille :
+la PTME depuis Born to Live en 2002, la santé maternelle et infantile, l'EID. Savoir que
+l'ONUSIDA a fixé une cible chiffrée sur exactement ce qu'ils font — et savoir que le **rendu du
+résultat aux parents** en fait partie — te place dans leur conversation, pas à côté.
+
 ---
 
 ## 5. La PTME et l'EID : le programme que CMMB porte depuis 2002
@@ -448,7 +555,7 @@ indicateurs**, et elle **ne contient ni KP_PREV ni VMMC_CIRC**, qui figuraient d
 antérieures. C'est un rappel utile : les référentiels MER changent d'une version à l'autre, ce qui
 casse la comparabilité entre années si on ne le documente pas. La liste complète, les fréquences
 de rapportage et les niveaux sont dans
-[`FICHE_MER_27_INDICATEURS.md`](FICHE_MER_27_INDICATEURS.md), avec les schémas.
+[`FICHE_MER_INDICATEURS.md`](FICHE_MER_INDICATEURS.md), avec les schémas.
 
 ### La règle de désagrégation
 

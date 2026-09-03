@@ -245,6 +245,52 @@ supprimées. Répondre « 95 % des malades » est une erreur de structure.
 n'est **pas compté, il est estimé par modélisation** ; les deux autres viennent des registres. Un
 pays peut donc voir son premier 95 bouger sans que rien n'ait changé sur le terrain.
 
+### Les six 95 — le cadre complet, que presque personne ne connaît
+
+**La liste à réciter :** **(1)** 95 % des personnes vivant avec le VIH connaissent leur statut ;
+**(2)** 95 % des diagnostiquées reçoivent un traitement antirétroviral durable ; **(3)** 95 % des
+personnes sous traitement ont une **charge virale supprimée** ; **(4)** 95 % des personnes à haut
+risque ont accès à une **prévention combinée** efficace — PrEP, préservatifs ; **(5)** 95 % des
+**femmes en âge de procréer** voient leurs besoins en santé sexuelle et reproductive satisfaits ;
+**(6)** 95 % des personnes concernées ont accès aux services d'**élimination de la transmission
+mère-enfant**.
+
+**La seule correction sur cette liste :** on énonce souvent le n° 3 comme « charge virale
+**indétectable**, donc plus de transmission ». Le document ONUSIDA écrit **« supprimée »**, soit
+moins de 1 000 copies. L'indétectabilité, autour de 50, est plus bas et porte le *U=U*. **Dis
+« supprimée » comme définition, et garde U=U comme conséquence** — tu es juste sur les deux plans.
+
+**Le mapping, si on te pousse :** les points 1-2-3 sont l'**objectif n° 1** du document ; le point
+4 est l'**objectif n° 3** ; les points 5 et 6 sont les deux moitiés de l'**objectif n° 2**. C'est
+ce regroupement qui explique que certaines publications comptent six et d'autres sept.
+
+Le 95-95-95 n'est donc que **le premier des trois objectifs de services VIH** de l'ONUSIDA pour
+2025.
+
+**Objectif 1 — la cascade, mais « atteinte dans TOUTES les sous-populations et tous les groupes
+d'âge ».** C'est la phrase la plus importante du cadre : l'objectif n'est **pas** national. Une
+moyenne à 95 % qui cache 60 % chez les adolescents **ne remplit pas la cible**. C'est une exigence
+d'équité qui rend **la désagrégation obligatoire par définition**, et non par bonne pratique.
+
+**Objectif 2 — trois 95 d'un coup, et c'est littéralement le métier de CMMB :** 95 % des femmes en
+âge de procréer voient leurs besoins en santé sexuelle et reproductive satisfaits ; 95 % des femmes
+enceintes et allaitantes vivant avec le VIH ont une **charge virale supprimée** ; 95 % des
+**enfants exposés sont testés**. Le détail précise : suppression virale **avant l'accouchement**,
+et test virologique du nourrisson **avec les résultats remis aux parents avant deux mois**. **Le
+rendu du résultat est dans la cible elle-même** — donc le délai fait partie de l'objectif, pas
+d'une bonne pratique.
+
+**Objectif 3 — la prévention :** 95 % des personnes à risque utilisent des options de prévention
+combinée appropriées et efficaces.
+
+**En bonus, les 10-10-10** sur les obstacles sociaux et juridiques : moins de 10 % de pays à
+environnement légal punitif, moins de 10 % de personnes subissant stigmatisation et
+discrimination, moins de 10 % subissant inégalité de genre et violence.
+
+**Sur le décompte, sois honnête :** si on énumère tous les 95, il y en a **sept** (3 + 3 + 1).
+« Six 95 » est un raccourci répandu dont le décompte varie selon les publications. **Donne la
+structure, pas le nombre** — et souligne que **l'objectif 2 est le cœur du portefeuille CMMB**.
+
 **Les seuils, et la correction à savoir faire.** **Suppression : moins de 1 000 copies par
 millilitre** — seuil OMS et seuil de l'indicateur PEPFAR. **Indétectabilité : environ 50 copies** —
 seuil de ***U=U***, indétectable égale intransmissible. **Le troisième 95 porte sur la suppression,
@@ -339,18 +385,34 @@ Un site qui ne teste que ses meilleurs patients affiche un taux magnifique sur u
 minuscule. **On ne commente jamais un taux de suppression sans annoncer sa couverture dans la même
 phrase** — couverture obtenue en rapportant le dénominateur de TX_PVLS à TX_CURR.
 
-**PTME** : **PMTCT_STAT**, **PMTCT_ART**, **PMTCT_EID**, **PMTCT_HEI_POS** pour les nourrissons
-exposés dépistés positifs, et **PMTCT_FO** pour le statut final vers 18 mois — annuel, parce que
-sa définition impose ce délai. **Autour** : TX_TB, TB_PREV, TB_STAT, TB_ART, OVC_SERV,
-OVC_HIVSTAT, AGYW_PREV (DREAMS), PrEP_NEW, PrEP_CT, POST_RESP, CXCA_SCRN, CXCA_TX, et deux
-indicateurs de systèmes, LAB_PTCQI et SC_ARVDISP.
+**PTME et EID, la chaîne complète** : **PMTCT_STAT** (statut connu) → **PMTCT_STAT_POS** (les
+positives) → **PMTCT_ART** (celles mises sous ARV) → **PMTCT_EID** (les enfants nés d'elles, testés
+par PCR avant 2 mois) → **PMTCT_HEI_POS** (les nourrissons exposés positifs) → **PMTCT_FO** (statut
+final vers 18 mois, annuel parce que sa définition impose ce délai).
 
-**La version en vigueur est la 2.8.2**, liste FY25 Q1/Q2, **vingt-sept indicateurs** en cinq
-familles — prévention, dépistage, traitement, suppression, systèmes — et **un seul indicateur de
-résultat dans tout le lot, TX_PVLS**. Elle **ne contient plus KP_PREV ni VMMC_CIRC**. La liste
-complète avec les fréquences, les niveaux et les schémas est dans
-[`FICHE_MER_27_INDICATEURS.md`](FICHE_MER_27_INDICATEURS.md) — **fiche à faire si tu as trente
-minutes de plus**, c'est le sujet le plus probable du bloc technique.
+**Tuberculose** : **TB_STAT** (patients tuberculeux au statut VIH connu) → **TB_ART** (ceux qui
+sont positifs et mis sous ARV). Et vus depuis le programme VIH : **TX_TB** et **TB_PREV**.
+
+### L'architecture, en une phrase
+
+**Quatre portes trouvent les positifs — dépistage, PTME, EID, tuberculose — et elles débouchent
+toutes dans TX_NEW.** Ensuite une seule cohorte se gère, et un seul indicateur mesure le résultat.
+
+**Et le mot qui relie tout, c'est le *linkage* : enrôlés ÷ positifs trouvés**, la marche entre
+*savoir* et *soigner*. **PMTCT_ART et TB_ART sont des indicateurs de linkage**, pas des indicateurs
+de traitement ordinaires — ils répondent à la même question que le linkage du dépistage, seule la
+porte change. Et **un linkage bas est d'abord une hypothèse de problème de données** — l'identifiant
+qui relie le registre de dépistage au registre de traitement — avant d'être un problème de service.
+
+**Les cinq ratios se lisent dans l'ordre, chacun expliquant le suivant** : yield, linkage, équation
+de cohorte, couverture en charge virale, taux de suppression. On ne diagnostique jamais le dernier
+sans avoir regardé les quatre premiers.
+
+**Tout ceci est développé avec les cinq schémas dans
+[`FICHE_MER_INDICATEURS.md`](FICHE_MER_INDICATEURS.md) — trente minutes, à faire juste après cette
+fiche.** C'est le sujet le plus probable du bloc technique, et la liste vient d'un futur collègue
+de CMMB : ce sont les indicateurs réellement suivis. Le référentiel complet **v2.8.2** compte
+**vingt-sept indicateurs** en cinq familles et **ne contient plus KP_PREV ni VMMC_CIRC**.
 
 **Désagrégation** par sexe et par tranche d'âge fine — c'est aussi la première source d'erreur à la
 soumission, la somme des désagrégats devant égaler le total.
