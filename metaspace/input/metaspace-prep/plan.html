@@ -1,0 +1,805 @@
+<title>Metaspace Interview Runway</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+
+<style>
+  :root {
+    --ground:   #f5f7f6;
+    --surface:  #ffffff;
+    --surface-2:#eef2f0;
+    --ink:      #16201e;
+    --ink-2:    #4e605b;
+    --ink-3:    #7c8d88;
+    --rule:     #dbe3e0;
+    --rule-2:   #c3cfcb;
+    --accent:   #0f6a5d;
+    --accent-2: #d6ece7;
+    --bid:      #1c7a58;
+    --ask:      #ab3550;
+    --warm:     #96631a;
+    --shadow:   0 1px 2px rgba(22,32,30,.06);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:   #0f1412;
+      --surface:  #161d1b;
+      --surface-2:#1c2523;
+      --ink:      #e5ece9;
+      --ink-2:    #a3b3ae;
+      --ink-3:    #7d8f8a;
+      --rule:     #26322e;
+      --rule-2:   #3a4a45;
+      --accent:   #56c4b0;
+      --accent-2: #17332e;
+      --bid:      #4bb88b;
+      --ask:      #e5808f;
+      --warm:     #d9a758;
+      --shadow:   0 1px 2px rgba(0,0,0,.4);
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground:   #0f1412;
+    --surface:  #161d1b;
+    --surface-2:#1c2523;
+    --ink:      #e5ece9;
+    --ink-2:    #a3b3ae;
+    --ink-3:    #7d8f8a;
+    --rule:     #26322e;
+    --rule-2:   #3a4a45;
+    --accent:   #56c4b0;
+    --accent-2: #17332e;
+    --bid:      #4bb88b;
+    --ask:      #e5808f;
+    --warm:     #d9a758;
+    --shadow:   0 1px 2px rgba(0,0,0,.4);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.62;
+    margin: 0;
+    padding-inline: 16px;
+    padding-block: 0 72px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 860px; margin-inline: auto; }
+  .prose { max-width: 64ch; }
+
+  /* ---------- header ---------- */
+  header.top {
+    border-bottom: 1px solid var(--rule);
+    padding-block: 34px 22px;
+    margin-bottom: 30px;
+  }
+  .eyebrow {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 11.5px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin: 0 0 12px;
+  }
+  h1 {
+    font-family: "IBM Plex Sans Condensed", "IBM Plex Sans", sans-serif;
+    font-weight: 700;
+    font-size: clamp(30px, 6.5vw, 44px);
+    line-height: 1.08;
+    letter-spacing: -.012em;
+    margin: 0 0 14px;
+    text-wrap: balance;
+  }
+  .standfirst { color: var(--ink-2); font-size: 16px; margin: 0 0 22px; max-width: 58ch; }
+
+  .meter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .stat {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    padding: 10px 14px;
+    box-shadow: var(--shadow);
+  }
+  .stat .k {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10.5px; letter-spacing: .09em; text-transform: uppercase;
+    color: var(--ink-3); display: block;
+  }
+  .stat .v {
+    font-family: "IBM Plex Sans Condensed", sans-serif;
+    font-weight: 700; font-size: 21px; line-height: 1.25;
+    font-variant-numeric: tabular-nums;
+  }
+  .stat.hot .v { color: var(--ask); }
+
+  /* ---------- sections ---------- */
+  section { margin-block: 46px; }
+  h2 {
+    font-family: "IBM Plex Sans Condensed", sans-serif;
+    font-weight: 700;
+    font-size: 23px;
+    letter-spacing: -.005em;
+    margin: 0 0 6px;
+    display: flex; align-items: baseline; gap: 12px;
+    text-wrap: balance;
+  }
+  h2 .num {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12px; font-weight: 500;
+    color: var(--accent);
+    letter-spacing: .06em;
+  }
+  .deck { color: var(--ink-2); margin: 0 0 22px; max-width: 62ch; font-size: 14.5px; }
+  h3 {
+    font-family: "IBM Plex Sans Condensed", sans-serif;
+    font-weight: 600; font-size: 17px; margin: 30px 0 8px;
+  }
+  p { margin: 0 0 14px; }
+  a { color: var(--accent); }
+
+  /* ---------- the 3-hour panel ---------- */
+  .triage {
+    background: var(--accent-2);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 3px 3px 0;
+    padding: 20px 22px;
+  }
+  .triage h3 { margin-top: 0; }
+  .triage ol { margin: 0; padding-left: 20px; }
+  .triage li { margin-bottom: 9px; }
+  .triage li:last-child { margin-bottom: 0; }
+
+  /* ---------- leverage table ---------- */
+  .scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  table { border-collapse: collapse; width: 100%; min-width: 560px; font-size: 14px; }
+  th {
+    text-align: left;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10.5px; font-weight: 500; letter-spacing: .09em; text-transform: uppercase;
+    color: var(--ink-3);
+    border-bottom: 1px solid var(--rule-2);
+    padding: 0 12px 8px 0;
+    white-space: nowrap;
+  }
+  td { border-bottom: 1px solid var(--rule); padding: 11px 12px 11px 0; vertical-align: top; }
+  tbody tr:last-child td { border-bottom: none; }
+  td.topic { font-weight: 500; }
+  td.note { color: var(--ink-2); font-size: 13.5px; }
+  .bar { display: flex; align-items: center; gap: 8px; }
+  .bar i {
+    display: block; height: 7px; border-radius: 1px; background: var(--accent);
+    min-width: 3px;
+  }
+  .bar i.mid  { background: var(--warm); }
+  .bar i.low  { background: var(--rule-2); }
+  .bar span {
+    font-family: "IBM Plex Mono", monospace; font-size: 11px;
+    color: var(--ink-3); font-variant-numeric: tabular-nums;
+  }
+
+  /* ---------- diagram ---------- */
+  figure { margin: 0; }
+  figure svg { display: block; width: 100%; max-width: 100%; height: auto; color: var(--ink-2); }
+  figcaption { color: var(--ink-3); font-size: 13px; margin-top: 12px; max-width: 60ch; }
+  .legend {
+    display: flex; flex-wrap: wrap; gap: 16px;
+    font-family: "IBM Plex Mono", monospace; font-size: 11px; color: var(--ink-3);
+    margin-bottom: 16px;
+  }
+  .legend em { font-style: normal; display: inline-flex; align-items: center; gap: 6px; }
+  .swatch { width: 16px; height: 0; border-top: 2px solid var(--ink-2); display: inline-block; }
+  .swatch.dash { border-top-style: dashed; }
+  .swatch.acc { border-top-color: var(--accent); }
+
+  /* ---------- schedule ---------- */
+  .days { display: grid; gap: 12px; }
+  .day {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    padding: 16px 18px;
+    box-shadow: var(--shadow);
+  }
+  .day.peak { border-color: var(--accent); }
+  .day.final { border-color: var(--ask); }
+  .day-head {
+    display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;
+    margin-bottom: 4px;
+  }
+  .day-date {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--ink-3); white-space: nowrap;
+  }
+  .day-title {
+    font-family: "IBM Plex Sans Condensed", sans-serif;
+    font-weight: 600; font-size: 17px;
+  }
+  .budget {
+    margin-left: auto;
+    font-family: "IBM Plex Mono", monospace; font-size: 11px;
+    color: var(--ink-3); white-space: nowrap;
+  }
+  .day > p { color: var(--ink-2); font-size: 13.5px; margin: 0 0 12px; }
+  ul.checks { list-style: none; margin: 0; padding: 0; display: grid; gap: 7px; }
+  ul.checks li { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; }
+  ul.checks input {
+    margin: 4px 0 0; width: 15px; height: 15px; flex: none;
+    accent-color: var(--accent); cursor: pointer;
+  }
+  ul.checks label { cursor: pointer; }
+  ul.checks input:checked + label { color: var(--ink-3); text-decoration: line-through; }
+  input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  code, .mono {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: .89em;
+    background: var(--surface-2);
+    padding: 1px 5px;
+    border-radius: 2px;
+  }
+
+  .callout {
+    border: 1px solid var(--rule);
+    border-top: 2px solid var(--ask);
+    background: var(--surface);
+    border-radius: 0 0 3px 3px;
+    padding: 18px 20px;
+  }
+  .callout h3 { margin-top: 0; }
+  .callout p:last-child { margin-bottom: 0; }
+
+  footer {
+    border-top: 1px solid var(--rule);
+    margin-top: 52px; padding-top: 20px;
+    color: var(--ink-3); font-size: 13px;
+  }
+
+  @media (max-width: 520px) {
+    .budget { margin-left: 0; width: 100%; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+</style>
+
+<div class="wrap">
+
+<header class="top">
+  <p class="eyebrow">Technical interview · Metaspace · Polygon game studio, RAK DAO licensed</p>
+  <h1>Eleven days to the Tech Lead call</h1>
+  <p class="standfirst">
+    Backend role with some frontend, at a studio whose product happens to settle on
+    a blockchain. The plan treats it that way: most of the preparation is backend
+    architecture you already own, and the chain-specific part is a bounded syllabus.
+  </p>
+  <div class="meter">
+    <div class="stat hot"><span class="k">Interview</span><span class="v" id="countdown">Wed 30 Sep</span></div>
+    <div class="stat"><span class="k">Study budget</span><span class="v">≈22 h</span></div>
+    <div class="stat"><span class="k">Checklist done</span><span class="v"><span id="done">0</span>/<span id="total">0</span></span></div>
+  </div>
+</header>
+
+<section>
+  <h2><span class="num">01</span> The read</h2>
+  <div class="prose">
+    <p>
+      They sourced you from a Kotlin repository and their outreach email asks for
+      Solidity. You've confirmed the actual role is backend with some frontend. Those
+      two facts together tell you what the hour will be: a backend interview with a
+      web3 literacy check attached, run by someone who probably wrote the contracts
+      themselves.
+    </p>
+    <p>
+      So the goal is not to pass as a blockchain engineer. It's to be <em>obviously
+      strong</em> on backend and data, and <em>precisely credible</em> on chain
+      mechanics — fluent in the vocabulary, honest about the edges. A senior engineer
+      will trust a candidate who says "I haven't shipped a production contract, but
+      here's the integration layer I built" far more than one who bluffs and folds on
+      the second follow-up.
+    </p>
+    <p>
+      The leverage is concentrated. Two ideas — a reorg-safe indexer and a
+      server-signed mint voucher — cover most of what a game backend actually does
+      on-chain. Everything else on this page is support for those two.
+    </p>
+  </div>
+</section>
+
+<section>
+  <h2><span class="num">02</span> If you only get three hours</h2>
+  <p class="deck">The honest 80/20. Do these in this order and you are already in the top half of their candidate pool.</p>
+  <div class="triage prose">
+    <h3>The irreducible core</h3>
+    <ol>
+      <li><strong>Rehearse the 60-second positioning answer out loud, five times.</strong>
+        It is asked in every interview and it sets your level for the whole hour.
+        It's written for you in <code>notes/positioning.md</code>.</li>
+      <li><strong>Be able to draw the indexer on a whiteboard.</strong> Checkpoint,
+        confirmations, block-hash comparison, rollback, idempotent upsert. Narrate why
+        <code>contract.on("Transfer")</code> is the wrong answer.</li>
+      <li><strong>Explain the signed mint voucher and name its four replay defences</strong>
+        — chainId, verifyingContract, nonce, deadline.</li>
+      <li><strong>Narrate a transaction's full lifecycle</strong>, from wallet signature
+        to your database updating. Smoothness here reads as experience.</li>
+      <li><strong>Say the boundary out loud:</strong> the server is authoritative, the
+        chain is a settlement layer, not a rules engine.</li>
+    </ol>
+  </div>
+</section>
+
+<section>
+  <h2><span class="num">03</span> Leverage ranking</h2>
+  <p class="deck">
+    Scored as likelihood they ask × the size of your gap. Strengths you already have
+    still rank high when they're likely to come up — those are where you win the
+    interview, not just survive it.
+  </p>
+  <div class="scroll">
+    <table>
+      <thead>
+        <tr><th>Topic</th><th>Leverage</th><th>Why it ranks there</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="topic">Reorg-safe indexer design</td>
+          <td><span class="bar"><i style="width:96px"></i><span>96</span></span></td>
+          <td class="note">Near-certain to be asked at a game studio, and almost every candidate gets it wrong. Highest single point of difference available to you.</td>
+        </tr>
+        <tr>
+          <td class="topic">The positioning answer</td>
+          <td><span class="bar"><i style="width:92px"></i><span>92</span></span></td>
+          <td class="note">Guaranteed. Frames everything after it. Cheap to fix, expensive to fumble.</td>
+        </tr>
+        <tr>
+          <td class="topic">EIP-712 signed voucher / minting</td>
+          <td><span class="bar"><i style="width:84px"></i><span>84</span></span></td>
+          <td class="note">The standard pattern for rewarding off-chain play. Shows you understand <em>their</em> problem, not blockchain in general.</td>
+        </tr>
+        <tr>
+          <td class="topic">Idempotency &amp; Postgres constraints</td>
+          <td><span class="bar"><i style="width:80px"></i><span>80</span></span></td>
+          <td class="note">Already a strength. High likelihood, so polish it until it's effortless — this is where a data engineer outclasses a typical app developer.</td>
+        </tr>
+        <tr>
+          <td class="topic">Nonces, gas, stuck transactions</td>
+          <td><span class="bar"><i class="mid" style="width:72px"></i><span>72</span></span></td>
+          <td class="note">The classic write-path question. Your order-flow background gives you a better mental model than most candidates have.</td>
+        </tr>
+        <tr>
+          <td class="topic">On-chain vs off-chain boundary</td>
+          <td><span class="bar"><i class="mid" style="width:68px"></i><span>68</span></span></td>
+          <td class="note">One sentence, huge signal. Cheap to learn, and it's the architecture question underneath most others.</td>
+        </tr>
+        <tr>
+          <td class="topic">Node / TypeScript fluency</td>
+          <td><span class="bar"><i class="mid" style="width:64px"></i><span>64</span></span></td>
+          <td class="note">Your real gap coming from Python. Event loop, promise semantics, strict typing. Likely a live exercise.</td>
+        </tr>
+        <tr>
+          <td class="topic">Reentrancy &amp; checks-effects-interactions</td>
+          <td><span class="bar"><i class="mid" style="width:52px"></i><span>52</span></span></td>
+          <td class="note">The one Solidity security topic you cannot skip. Everything else in contracts is optional at your claimed level.</td>
+        </tr>
+        <tr>
+          <td class="topic">ERC-20 / 721 / 1155 trade-offs</td>
+          <td><span class="bar"><i class="low" style="width:40px"></i><span>40</span></span></td>
+          <td class="note">Likely asked, quick to learn, low differentiation — everyone gets this one right.</td>
+        </tr>
+        <tr>
+          <td class="topic">Staking accumulator pattern</td>
+          <td><span class="bar"><i class="low" style="width:34px"></i><span>34</span></span></td>
+          <td class="note">They do have NFT staking, so it may come up. Worth understanding, not worth a whole evening.</td>
+        </tr>
+        <tr>
+          <td class="topic">MEV, ERC-4337, account abstraction</td>
+          <td><span class="bar"><i class="low" style="width:18px"></i><span>18</span></span></td>
+          <td class="note">Know the names and one line each. Depth here buys almost nothing for this role.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2><span class="num">04</span> The dependency map</h2>
+  <p class="deck">
+    What has to be understood before what. The left column is the part you already
+    own from a decade of pipelines — it connects straight into the hardest node on
+    the right, which is the whole argument of your candidacy.
+  </p>
+
+  <div class="legend">
+    <em><span class="swatch dash"></span> already yours</em>
+    <em><span class="swatch"></span> learn in order</em>
+    <em><span class="swatch acc"></span> know cold</em>
+  </div>
+
+  <figure>
+    <div class="scroll">
+    <svg viewBox="0 0 920 500" role="img" aria-label="Dependency map: transaction lifecycle leads to nonces, gas fees and reorgs; hashing leads to EIP-712 typed data; these feed the relayer, the indexer and the voucher and login services, which together establish that the server is authoritative and the chain settles. Existing skills in idempotent ETL, checkpointed pipelines and Postgres constraints connect directly into the indexer.">
+      <defs>
+        <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"></path>
+        </marker>
+        <marker id="ar-acc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--accent)"></path>
+        </marker>
+      </defs>
+
+      <!-- LEFT: what you already have -->
+      <rect x="14" y="120" width="196" height="238" rx="3" fill="var(--surface-2)" stroke="var(--rule-2)" stroke-width="1" stroke-dasharray="5 4"></rect>
+      <text x="112" y="145" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" letter-spacing="1.4" fill="var(--ink-3)">ALREADY YOURS</text>
+
+      <rect x="34" y="162" width="156" height="42" rx="3" fill="var(--surface)" stroke="var(--rule-2)" stroke-dasharray="5 4"></rect>
+      <text x="112" y="180" text-anchor="middle" font-size="12.5" fill="var(--ink)">Idempotent ETL</text>
+      <text x="112" y="195" text-anchor="middle" font-size="11" fill="var(--ink-3)">ONA.io, mWater</text>
+
+      <rect x="34" y="218" width="156" height="42" rx="3" fill="var(--surface)" stroke="var(--rule-2)" stroke-dasharray="5 4"></rect>
+      <text x="112" y="236" text-anchor="middle" font-size="12.5" fill="var(--ink)">Checkpointed</text>
+      <text x="112" y="251" text-anchor="middle" font-size="12.5" fill="var(--ink)">pipelines</text>
+
+      <rect x="34" y="274" width="156" height="42" rx="3" fill="var(--surface)" stroke="var(--rule-2)" stroke-dasharray="5 4"></rect>
+      <text x="112" y="292" text-anchor="middle" font-size="12.5" fill="var(--ink)">Postgres</text>
+      <text x="112" y="307" text-anchor="middle" font-size="12.5" fill="var(--ink)">constraints</text>
+
+      <!-- TIER 1 -->
+      <rect x="284" y="36" width="182" height="42" rx="3" fill="var(--surface)" stroke="currentColor"></rect>
+      <text x="375" y="54" text-anchor="middle" font-size="12.5" fill="var(--ink)">Transaction lifecycle</text>
+      <text x="375" y="69" text-anchor="middle" font-size="11" fill="var(--ink-3)">sign → mempool → receipt</text>
+
+      <rect x="620" y="36" width="182" height="42" rx="3" fill="var(--surface)" stroke="currentColor"></rect>
+      <text x="711" y="54" text-anchor="middle" font-size="12.5" fill="var(--ink)">Hashing &amp; signatures</text>
+      <text x="711" y="69" text-anchor="middle" font-size="11" fill="var(--ink-3)">keccak, ecrecover</text>
+
+      <!-- TIER 2 -->
+      <rect x="252" y="150" width="140" height="42" rx="3" fill="var(--surface)" stroke="currentColor"></rect>
+      <text x="322" y="168" text-anchor="middle" font-size="12.5" fill="var(--ink)">Nonces</text>
+      <text x="322" y="183" text-anchor="middle" font-size="11" fill="var(--ink-3)">ordering, gaps</text>
+
+      <rect x="408" y="150" width="140" height="42" rx="3" fill="var(--surface)" stroke="currentColor"></rect>
+      <text x="478" y="168" text-anchor="middle" font-size="12.5" fill="var(--ink)">EIP-1559 fees</text>
+      <text x="478" y="183" text-anchor="middle" font-size="11" fill="var(--ink-3)">base · priority · max</text>
+
+      <rect x="564" y="150" width="150" height="42" rx="3" fill="var(--surface)" stroke="currentColor"></rect>
+      <text x="639" y="168" text-anchor="middle" font-size="12.5" fill="var(--ink)">Reorgs &amp; finality</text>
+      <text x="639" y="183" text-anchor="middle" font-size="11" fill="var(--ink-3)">confirmation depth</text>
+
+      <rect x="730" y="150" width="150" height="42" rx="3" fill="var(--surface)" stroke="currentColor"></rect>
+      <text x="805" y="168" text-anchor="middle" font-size="12.5" fill="var(--ink)">EIP-712</text>
+      <text x="805" y="183" text-anchor="middle" font-size="11" fill="var(--ink-3)">typed data, domain</text>
+
+      <!-- TIER 3 -->
+      <rect x="252" y="264" width="170" height="46" rx="3" fill="var(--surface)" stroke="currentColor"></rect>
+      <text x="337" y="283" text-anchor="middle" font-size="12.5" fill="var(--ink)">Relayer</text>
+      <text x="337" y="298" text-anchor="middle" font-size="11" fill="var(--ink-3)">outbox, fee bumping</text>
+
+      <rect x="440" y="264" width="180" height="46" rx="3" fill="var(--surface)" stroke="var(--accent)" stroke-width="2"></rect>
+      <text x="530" y="283" text-anchor="middle" font-size="12.5" font-weight="600" fill="var(--accent)">Indexer + rollback</text>
+      <text x="530" y="298" text-anchor="middle" font-size="11" fill="var(--ink-3)">know this cold</text>
+
+      <rect x="638" y="264" width="180" height="46" rx="3" fill="var(--surface)" stroke="var(--accent)" stroke-width="2"></rect>
+      <text x="728" y="283" text-anchor="middle" font-size="12.5" font-weight="600" fill="var(--accent)">Voucher + SIWE</text>
+      <text x="728" y="298" text-anchor="middle" font-size="11" fill="var(--ink-3)">know this cold</text>
+
+      <!-- TIER 4 -->
+      <rect x="352" y="392" width="416" height="52" rx="3" fill="var(--accent-2)" stroke="var(--accent)" stroke-width="1.5"></rect>
+      <text x="560" y="414" text-anchor="middle" font-size="13.5" font-weight="600" fill="var(--ink)">The server is authoritative · the chain settles</text>
+      <text x="560" y="431" text-anchor="middle" font-size="11.5" fill="var(--ink-2)">the sentence the whole interview is really asking about</text>
+
+      <!-- EDGES: tier1 → tier2 -->
+      <path d="M 375 78 L 375 118 L 322 118 L 322 146" fill="none" stroke="currentColor" stroke-width="1.2" marker-end="url(#ar)"></path>
+      <path d="M 375 78 L 375 118 L 478 118 L 478 146" fill="none" stroke="currentColor" stroke-width="1.2" marker-end="url(#ar)"></path>
+      <path d="M 375 78 L 375 118 L 639 118 L 639 146" fill="none" stroke="currentColor" stroke-width="1.2" marker-end="url(#ar)"></path>
+      <path d="M 711 78 L 711 112 L 805 112 L 805 146" fill="none" stroke="currentColor" stroke-width="1.2" marker-end="url(#ar)"></path>
+
+      <!-- EDGES: tier2 → tier3 -->
+      <path d="M 322 192 L 322 232 L 337 232 L 337 260" fill="none" stroke="currentColor" stroke-width="1.2" marker-end="url(#ar)"></path>
+      <path d="M 478 192 L 478 232 L 352 232 L 352 260" fill="none" stroke="currentColor" stroke-width="1.2" marker-end="url(#ar)"></path>
+      <path d="M 639 192 L 639 232 L 545 232 L 545 260" fill="none" stroke="var(--accent)" stroke-width="1.6" marker-end="url(#ar-acc)"></path>
+      <path d="M 805 192 L 805 232 L 745 232 L 745 260" fill="none" stroke="var(--accent)" stroke-width="1.6" marker-end="url(#ar-acc)"></path>
+
+      <!-- EDGE: left column → indexer -->
+      <path d="M 210 239 L 420 239 L 420 280 L 436 280" fill="none" stroke="var(--accent)" stroke-width="1.6" stroke-dasharray="6 4" marker-end="url(#ar-acc)"></path>
+      <rect x="266" y="209" width="104" height="17" rx="2" fill="var(--ground)"></rect>
+      <text x="318" y="222" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" fill="var(--accent)">same problem</text>
+
+      <!-- EDGES: tier3 → tier4 -->
+      <path d="M 337 310 L 337 418 L 348 418" fill="none" stroke="currentColor" stroke-width="1.2" marker-end="url(#ar)"></path>
+      <path d="M 530 310 L 530 388" fill="none" stroke="var(--accent)" stroke-width="1.6" marker-end="url(#ar-acc)"></path>
+      <path d="M 728 310 L 728 388" fill="none" stroke="var(--accent)" stroke-width="1.6" marker-end="url(#ar-acc)"></path>
+    </svg>
+    </div>
+    <figcaption>
+      Read it bottom-up in the interview: every chain-side concept exists to support
+      one architectural claim. Read it top-down when studying — nothing below a node
+      makes sense until the node above it does.
+    </figcaption>
+  </figure>
+</section>
+
+<section>
+  <h2><span class="num">05</span> Day by day</h2>
+  <p class="deck">
+    Budgeted around a full-time job: roughly 90 minutes on weeknights, longer at the
+    weekend. Boxes persist in this browser, so you can tick them off as you go.
+  </p>
+
+  <div class="days">
+
+    <div class="day">
+      <div class="day-head">
+        <span class="day-date">Sat 19 Sep · Day 0</span>
+        <span class="day-title">Lock the logistics</span>
+        <span class="budget">≈2 h</span>
+      </div>
+      <p>Do this today. Everything else is worthless if the meeting doesn't happen cleanly.</p>
+      <ul class="checks">
+        <li><input type="checkbox" id="d0a"><label for="d0a">Book the Calendly slot — confirm which time zone it's showing (Haiti UTC−4, UAE UTC+4)</label></li>
+        <li><input type="checkbox" id="d0b"><label for="d0b">Send the recruiter email asking about the stack and whether there's a live coding exercise</label></li>
+        <li><input type="checkbox" id="d0c"><label for="d0c">Test camera, mic and screen share on the laptop you'll actually use</label></li>
+        <li><input type="checkbox" id="d0d"><label for="d0d">Read <code>notes/positioning.md</code> end to end</label></li>
+        <li><input type="checkbox" id="d0e"><label for="d0e">Skim <code>GameItems.sol</code> and <code>indexer.ts</code> — no depth yet, just orientation</label></li>
+      </ul>
+    </div>
+
+    <div class="day peak">
+      <div class="day-head">
+        <span class="day-date">Sun 20 Sep · Day 1</span>
+        <span class="day-title">Chain fundamentals, all at once</span>
+        <span class="budget">≈4 h</span>
+      </div>
+      <p>The one long session that makes every later evening cheap. Section D of the drill sheet.</p>
+      <ul class="checks">
+        <li><input type="checkbox" id="d1a"><label for="d1a">Work through drill section D (D1–D12), scoring each 🟢🟡🔴</label></li>
+        <li><input type="checkbox" id="d1b"><label for="d1b">Narrate the transaction lifecycle out loud without notes, twice</label></li>
+        <li><input type="checkbox" id="d1c"><label for="d1c">Write the 60-second positioning answer in your own words — not mine</label></li>
+        <li><input type="checkbox" id="d1d"><label for="d1d">Record yourself saying it on your phone. Listen back once. It will be uncomfortable and it works</label></li>
+      </ul>
+    </div>
+
+    <div class="day peak">
+      <div class="day-head">
+        <span class="day-date">Mon 21 Sep · Day 2</span>
+        <span class="day-title">The indexer, line by line</span>
+        <span class="budget">≈1.5 h</span>
+      </div>
+      <p>The highest-leverage single item on the whole plan.</p>
+      <ul class="checks">
+        <li><input type="checkbox" id="d2a"><label for="d2a">Read <code>indexer.ts</code> properly, including every comment</label></li>
+        <li><input type="checkbox" id="d2b"><label for="d2b">Draw it on paper from memory: checkpoint → confirmations → hash check → rollback → upsert</label></li>
+        <li><input type="checkbox" id="d2c"><label for="d2c">Be able to say why <code>(block_hash, log_index)</code> beats <code>(tx_hash, log_index)</code></label></li>
+        <li><input type="checkbox" id="d2d"><label for="d2d">Practise the answer to "why not just use <code>contract.on()</code>?"</label></li>
+      </ul>
+    </div>
+
+    <div class="day peak">
+      <div class="day-head">
+        <span class="day-date">Tue 22 Sep · Day 3</span>
+        <span class="day-title">Signed vouchers and EIP-712</span>
+        <span class="budget">≈1.5 h</span>
+      </div>
+      <p>The second must-know-cold item.</p>
+      <ul class="checks">
+        <li><input type="checkbox" id="d3a"><label for="d3a">Read <code>GameItems.sol</code> and <code>voucher.ts</code> side by side</label></li>
+        <li><input type="checkbox" id="d3b"><label for="d3b">Run the tests — <code>node --experimental-strip-types --test src/voucher.test.ts</code></label></li>
+        <li><input type="checkbox" id="d3c"><label for="d3c">Memorise the four replay defences and what each one stops</label></li>
+        <li><input type="checkbox" id="d3d"><label for="d3d">Explain why the nonce is burned <em>before</em> <code>_mint</code>, not after</label></li>
+      </ul>
+    </div>
+
+    <div class="day">
+      <div class="day-head">
+        <span class="day-date">Wed 23 Sep · Day 4</span>
+        <span class="day-title">The write path</span>
+        <span class="budget">≈1.5 h</span>
+      </div>
+      <p>Where your trading background quietly does the work for you.</p>
+      <ul class="checks">
+        <li><input type="checkbox" id="d4a"><label for="d4a">Read <code>relayer.ts</code>: nonce allocation, fee suggestion, the bump watchdog</label></li>
+        <li><input type="checkbox" id="d4b"><label for="d4b">Practise the order-book analogy aloud until it sounds like yours, not a line you read</label></li>
+        <li><input type="checkbox" id="d4c"><label for="d4c">Prepare the answer to "and if you run three replicas?" before it's asked</label></li>
+      </ul>
+    </div>
+
+    <div class="day">
+      <div class="day-head">
+        <span class="day-date">Thu 24 Sep · Day 5</span>
+        <span class="day-title">Close the Node/TypeScript gap</span>
+        <span class="budget">≈1.5 h</span>
+      </div>
+      <p>Your actual weak spot coming from Python. Drill section C.</p>
+      <ul class="checks">
+        <li><input type="checkbox" id="d5a"><label for="d5a">Drill section C (C1–C10) out loud</label></li>
+        <li><input type="checkbox" id="d5b"><label for="d5b">Write one small async script from scratch — no copying, fight the syntax</label></li>
+        <li><input type="checkbox" id="d5c"><label for="d5c">Be ready to name three concrete differences from Python's asyncio</label></li>
+      </ul>
+    </div>
+
+    <div class="day">
+      <div class="day-head">
+        <span class="day-date">Fri 25 Sep · Day 6</span>
+        <span class="day-title">Touch a real chain</span>
+        <span class="budget">≈1.5 h</span>
+      </div>
+      <p>One deployment converts several textbook answers into first-hand ones. Throwaway wallet, testnet funds only.</p>
+      <ul class="checks">
+        <li><input type="checkbox" id="d6a"><label for="d6a">Get Amoy testnet MATIC from a faucet into a fresh wallet</label></li>
+        <li><input type="checkbox" id="d6b"><label for="d6b">Deploy <code>GameItems.sol</code> via Remix in the browser</label></li>
+        <li><input type="checkbox" id="d6c"><label for="d6c">Redeem one voucher and watch the event appear in the block explorer</label></li>
+      </ul>
+    </div>
+
+    <div class="day peak">
+      <div class="day-head">
+        <span class="day-date">Sat 26 Sep · Day 7</span>
+        <span class="day-title">Make your strengths effortless</span>
+        <span class="budget">≈4 h</span>
+      </div>
+      <p>Sections A and B. This is where the interview is actually won — don't under-invest because it feels like revision.</p>
+      <ul class="checks">
+        <li><input type="checkbox" id="d7a"><label for="d7a">Drill section A (backend architecture), scoring as you go</label></li>
+        <li><input type="checkbox" id="d7b"><label for="d7b">Drill section B (databases and data)</label></li>
+        <li><input type="checkbox" id="d7c"><label for="d7c">Rehearse the A1 "walk me through an architecture you built" story three times, to two minutes</label></li>
+        <li><input type="checkbox" id="d7d"><label for="d7d">Prepare one production-incident story with a real root cause and a real fix</label></li>
+      </ul>
+    </div>
+
+    <div class="day peak">
+      <div class="day-head">
+        <span class="day-date">Sun 27 Sep · Day 8</span>
+        <span class="day-title">Full mock, timed and out loud</span>
+        <span class="budget">≈4 h</span>
+      </div>
+      <p>Alone is fine. Speaking is the skill being trained, and it's the one that degrades under pressure.</p>
+      <ul class="checks">
+        <li><input type="checkbox" id="d8a"><label for="d8a">60-minute self-run mock: 20 random questions across A–F, answered aloud, timed</label></li>
+        <li><input type="checkbox" id="d8b"><label for="d8b">Record it. Listen for filler, hedging and answers that run past 90 seconds</label></li>
+        <li><input type="checkbox" id="d8c"><label for="d8c">Drill section F (game-backend specific)</label></li>
+        <li><input type="checkbox" id="d8d"><label for="d8d">Re-score every 🔴 from earlier in the week</label></li>
+      </ul>
+    </div>
+
+    <div class="day">
+      <div class="day-head">
+        <span class="day-date">Mon 28 Sep · Day 9</span>
+        <span class="day-title">Solidity, to credible depth</span>
+        <span class="budget">≈1.5 h</span>
+      </div>
+      <p>Enough to be taken seriously. No more than that — you've told them backend.</p>
+      <ul class="checks">
+        <li><input type="checkbox" id="d9a"><label for="d9a">Drill section E (E1–E8)</label></li>
+        <li><input type="checkbox" id="d9b"><label for="d9b">Derive the staking accumulator on paper without looking at the code</label></li>
+        <li><input type="checkbox" id="d9c"><label for="d9c">Rehearse the honest-limits answer (G3) so it lands as confidence, not apology</label></li>
+      </ul>
+    </div>
+
+    <div class="day">
+      <div class="day-head">
+        <span class="day-date">Tue 29 Sep · Day 10</span>
+        <span class="day-title">Red items only</span>
+        <span class="budget">≈1.5 h</span>
+      </div>
+      <p>No new material from here. New material the day before an interview buys anxiety, not knowledge.</p>
+      <ul class="checks">
+        <li><input type="checkbox" id="d10a"><label for="d10a">Drill only the 🔴 and 🟡 items left on the sheet</label></li>
+        <li><input type="checkbox" id="d10b"><label for="d10b">Decide which two or three things you'll say "I haven't worked with that" about — and be at peace with it</label></li>
+        <li><input type="checkbox" id="d10c"><label for="d10c">Write your six questions for them on a card you can see during the call</label></li>
+        <li><input type="checkbox" id="d10d"><label for="d10d">Push the repo to GitHub — they recruited you from there and they will look again</label></li>
+        <li><input type="checkbox" id="d10e"><label for="d10e">Charge everything. Confirm the hotspot works. Confirm the time one final time</label></li>
+      </ul>
+    </div>
+
+    <div class="day final">
+      <div class="day-head">
+        <span class="day-date">Wed 30 Sep · Interview</span>
+        <span class="day-title">Day of</span>
+        <span class="budget">≈1 h prep</span>
+      </div>
+      <p>Light. The work is done.</p>
+      <ul class="checks">
+        <li><input type="checkbox" id="d11a"><label for="d11a">Morning: re-read the positioning answer and the six questions. Nothing else</label></li>
+        <li><input type="checkbox" id="d11b"><label for="d11b">60 minutes before: hardware check, repo open in the editor, water on the desk</label></li>
+        <li><input type="checkbox" id="d11c"><label for="d11c">Open with their names and roles — normal, and it confirms who you're talking to</label></li>
+        <li><input type="checkbox" id="d11d"><label for="d11d">When you don't know something, say so and ask what they do. It reads as seniority</label></li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2><span class="num">06</span> Two things worth being careful about</h2>
+  <div class="callout prose">
+    <h3>Don't run interview code on your main machine</h3>
+    <p>
+      Metaspace checks out on the public record — licensed by RAK DAO in Ras Al
+      Khaimah, a live Polygon mobile game, and the <code>.org</code> domain in the
+      email redirects to their real site. This doesn't look like an impersonation.
+    </p>
+    <p>
+      But there's an active, well-documented campaign that targets developers with
+      malicious "technical interview" repositories, aimed specifically at people with
+      crypto on their machines — and your GitHub makes you exactly the profile it
+      looks for. So treat it as ordinary hygiene rather than suspicion: if they send
+      a take-home, read it before running it, run it in a container or a throwaway VM,
+      and never connect a wallet holding real funds to anything that arrives during a
+      hiring process. Nobody legitimate will mind.
+    </p>
+    <p>
+      The one small oddity: the scheduling link is a personal Calendly handle rather
+      than a company-branded one. Common at small studios, and asking for names and
+      roles at the start of the call settles it either way.
+    </p>
+  </div>
+</section>
+
+<footer>
+  Built 19 September 2026. Pairs with <code>metaspace-prep/</code> — the practice
+  repo, the drill sheet and the positioning notes.
+</footer>
+
+</div>
+
+<script>
+(function () {
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('ul.checks input[type=checkbox]'));
+  var doneEl = document.getElementById('done');
+  var totalEl = document.getElementById('total');
+  var KEY = 'metaspace-prep-v1';
+
+  totalEl.textContent = String(boxes.length);
+
+  function load() {
+    try {
+      var raw = window.localStorage.getItem(KEY);
+      if (!raw) return {};
+      return JSON.parse(raw) || {};
+    } catch (e) { return {}; }
+  }
+
+  function save(state) {
+    try { window.localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) { /* private mode */ }
+  }
+
+  function render() {
+    var n = 0;
+    for (var i = 0; i < boxes.length; i++) { if (boxes[i].checked) n++; }
+    doneEl.textContent = String(n);
+  }
+
+  var state = load();
+  boxes.forEach(function (box) {
+    if (state[box.id]) box.checked = true;
+    box.addEventListener('change', function () {
+      var s = load();
+      if (box.checked) { s[box.id] = 1; } else { delete s[box.id]; }
+      save(s);
+      render();
+    });
+  });
+  render();
+
+  // Countdown. The interview is 30 Sep 2026; the exact hour depends on the
+  // Calendly slot, so this counts whole days remaining.
+  try {
+    var target = new Date(2026, 8, 30);
+    var today = new Date();
+    today.setHours(0, 0, 0, 0);
+    var days = Math.round((target - today) / 86400000);
+    var el = document.getElementById('countdown');
+    if (days > 1) { el.textContent = days + ' days'; }
+    else if (days === 1) { el.textContent = 'Tomorrow'; }
+    else if (days === 0) { el.textContent = 'Today'; }
+  } catch (e) { /* leave the static date */ }
+})();
+</script>
