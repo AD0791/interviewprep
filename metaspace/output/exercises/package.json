@@ -1,0 +1,34 @@
+{
+  "name": "metaspace-exercises",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "The twelve-level exercise ladder for the Metaspace technical interview. Node/TS path: Express 5 + viem 2.",
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "l1": "node --experimental-strip-types solutions/01_hash_and_address.ts",
+    "l2": "node --experimental-strip-types solutions/02_read_the_chain.ts",
+    "l3": "node --experimental-strip-types solutions/03_read_a_contract.ts",
+    "l4": "node --experimental-strip-types solutions/04_sign_and_recover.ts",
+    "l5": "node --experimental-strip-types solutions/05_siwe_express.ts",
+    "l6": "node --experimental-strip-types solutions/06_read_events.ts",
+    "l7": "node --experimental-strip-types solutions/07_indexer.ts",
+    "l8": "node --experimental-strip-types solutions/08_reorg.ts",
+    "l9": "node --experimental-strip-types solutions/09_relayer.ts",
+    "l10": "node --experimental-strip-types solutions/10_voucher_eip712.ts",
+    "l11": "node --experimental-strip-types solutions/11_reentrancy.ts",
+    "l12": "node --experimental-strip-types solutions/12_full_loop.ts"
+  },
+  "dependencies": {
+    "@ethereumjs/common": "^10.1.3",
+    "@ethereumjs/evm": "^10.1.3",
+    "@ethereumjs/util": "^10.1.3",
+    "express": "^5.2.1",
+    "viem": "^2.56.8"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^24.0.0",
+    "typescript": "^5.7.2"
+  }
+}
