@@ -1,0 +1,3 @@
+# Build output: regenerate with `node compile.mjs`. Levels 10, 11 and 12 read
+# this file and tell you how to produce it if it is missing.
+artifacts.json

@@ -1,0 +1,9 @@
+{
+  "name": "metaspace-exercise-contracts",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "The three progressive contracts from article 06. `npm install && node compile.mjs`.",
+  "scripts": { "build": "node compile.mjs" },
+  "dependencies": { "solc": "0.8.37" }
+}
