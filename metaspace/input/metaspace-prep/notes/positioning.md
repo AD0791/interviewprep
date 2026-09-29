@@ -1,5 +1,12 @@
 # Positioning — how to pitch this without overclaiming
 
+> **Corrected 29 September 2026.** The original script in this note claimed "I built the integration
+> layer" and "I've written ERC-1155 and staking contracts". Neither is true: the practice work was
+> never done, the exercise repository was generated rather than written by you, and the studio
+> already has your CV. The script has been replaced with one that claims only what the CV
+> supports. The version to rehearse is in
+> [output/00_tonight.md](../../../output/00_tonight.md) §2.
+
 ## The problem you're solving in the room
 
 They found you through a Kotlin course on GitHub. The outreach email asks for
@@ -25,30 +32,30 @@ decade.**
 
 ## The 60-second answer — rehearse this until it's natural
 
-> "I'm a backend and data engineer — Python and FastAPI mostly, async SQLAlchemy,
-> pipelines, a lot of systems that have to stay correct against a data source I
-> don't control and can't fully trust.
+> "I'm a backend and data engineer. For about ten years I've built APIs and data
+> systems — FastAPI services with JWT and OAuth2, SQLAlchemy on Postgres, ETL
+> pipelines like a MongoDB-to-BigQuery migration on Apache Beam, all in Docker —
+> and right now I'm leading a React Native modernisation at Tekkod, so I'm in
+> JavaScript every day as well as Python.
 >
-> When I looked at what a Web3 game backend actually has to do, most of it is
-> that same problem. You're keeping a database in sync with an append-only log
-> whose tail can be rewritten underneath you, you need idempotent ingestion
-> because delivery is at-least-once, and you need a write path that handles
-> retries without double-spending. I've built checkpointed, reorg-equivalent
-> pipelines before — the source was survey data arriving in unreliable batches
-> rather than a chain, but the failure modes are the same ones.
+> A lot of those systems had one thing in common: they had to stay correct
+> against a data source I didn't control — field platforms like ODK,
+> KoboToolbox and mWater, where data arrives late, twice, or out of order.
 >
-> So I built the integration layer to check myself: an indexer with reorg
-> rollback, an EIP-712 voucher service for server-authorised minting, and a
-> relayer with proper nonce management and fee bumping. Happy to walk through any
-> of it.
+> I haven't shipped anything on a blockchain — you've seen my CV. But preparing
+> for this, what struck me is that most of a Web3 game backend is that same
+> problem: keeping a database in sync with a chain whose last few blocks can be
+> rewritten, ingesting events idempotently because delivery is at-least-once,
+> and a write path that survives retries without paying a player twice.
 >
-> What I'm not is a contract security expert. I've written ERC-1155 and staking
-> contracts and I understand reentrancy and the standard patterns, but I wouldn't
-> want to be the only pair of eyes on a contract holding real value."
+> The part I'd be ramping on is Solidity and contract security, and I'd want to
+> pair with whoever owns your contracts while I do. The backend and data side I
+> can carry from day one."
 
-Why this works: it's true, it's specific, it ends with a concrete offer, and the
-last sentence makes everything before it more credible rather than less. Senior
-engineers trust people who know the edge of their own competence.
+Why this works: every sentence is true and checkable against the CV, it is
+specific, and the admission sits in the middle, followed by the bridge, rather
+than at the end where it would be the last thing they hear. Senior engineers
+trust people who know the edge of their own competence.
 
 ---
 
@@ -61,10 +68,9 @@ engineers trust people who know the edge of their own competence.
 | Reconciling against a source of truth you don't own | mWater, ONA, survey backends — the whole M&E job |
 | Async backend architecture | FastAPI, async SQLAlchemy — same event-loop model as Node |
 | Postgres depth: constraints, indexes, transactions | Years of it, plus SQL scripting for bulk operations |
-| Realtime | Socket.io work in your interview prep |
 | Docker, DigitalOcean, Linux | Arch/Manjaro sysadmin, deployments |
 | Designing for bad connectivity | Building for Haiti. Not a metaphor — a real design constraint you've lived with |
-| Token economy analysis | Applied Economics degree. Nobody else in their pipeline has this |
+| Token economy analysis | Applied-economics training (CTPEA) and eight years as an economist at the Ministry of Planning. Nobody else in their pipeline has this |
 
 **Two of these are genuinely differentiating and you should make sure they land:**
 
@@ -76,7 +82,7 @@ cancel, because you can't cancel, you can only outbid. Most backend engineers
 learn this vocabulary painfully from documentation. You already think in it. Use
 the analogy when fee mechanics come up; it will land, and it's memorable.
 
-**The economics degree.** A play-to-earn game with two tokens has an inflation
+**The applied-economics training.** A play-to-earn game with two tokens has an inflation
 problem the day it launches. When F8 comes up (token economy), you're the only
 candidate who can talk about sinks, faucets and velocity as an economist rather
 than as someone repeating a blog post.
@@ -115,10 +121,10 @@ than as someone repeating a blog post.
 - **Power and connectivity.** Have a backup: charged laptop, a mobile hotspot
   ready, and a plan if the power goes. If it does go, message them immediately —
   handled well, that's a non-event; handled by disappearing, it isn't.
-- **Have the repo open in an editor**, not just on GitHub, so you can navigate it
-  quickly if asked to show something.
-- **Push the practice repo to GitHub before the interview.** They already
-  recruited you off your GitHub, so they will look again.
+- **Do not present the practice repository as your own work.** It was generated
+  for you to study, not written by you, and a Tech Lead who asks you to change one
+  line of it will find that out in a minute. If the conversation turns to code,
+  talk through the design in your own words instead.
 
 ---
 

@@ -219,9 +219,9 @@ The chain is consulted when you need to *write*, not when you need to *read* —
 Yes, and it is worth being emphatic because a lot of people answer no. Only one line of my
 JavaScript runs at a time, but every `await` is a suspension point: the function stops, the event
 loop runs other work to completion, and the function resumes into state that may have changed.
-So any check-then-act sequence with an `await` between the check and the act is a race. I built
-this deliberately in a Sign-In With Ethereum endpoint — a nonce store that checked the nonce
-existed, awaited the signature verification, then deleted it, which lets two concurrent requests
+So any check-then-act sequence with an `await` between the check and the act is a race. The
+classic Web3 example is a Sign-In With Ethereum endpoint — a nonce store that checks the nonce
+exists, awaits the signature verification, then deletes it, which lets two concurrent requests
 both pass. The fix is not a lock, because a lock only protects one process and you will run
 several; it is to collapse the check and the act into a single statement the database
 adjudicates, like `DELETE … RETURNING`, and trust the row count. The same pattern covers

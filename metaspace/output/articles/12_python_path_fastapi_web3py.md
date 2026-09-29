@@ -165,11 +165,10 @@ while the chain is the source of truth for ownership.
 
 **"You're a Python engineer. How much of a problem is that here?"**
 
-Small and specific, which I can show rather than assert. I built this track's exercises in
-TypeScript with viem and Express, and I built four of them again in Python with web3.py and
-FastAPI, and the interesting result is that the EIP-712 type hash comes out as the same 32 bytes
-in viem, in `eth_utils`, and in the constant solc embedded in the contract — so the contract
-cannot tell what signed its voucher. The interoperability is at the protocol, not the library.
+Small and specific. The chain does not care what language signed a transaction: an EIP-712 type
+hash comes out as the same 32 bytes whether viem, Python's `eth_utils`, or solc computes it, so
+a contract cannot tell what produced its voucher. The interoperability is at the protocol, not
+the library.
 Where TypeScript genuinely wins is the typing: viem infers types from the ABI, so a misspelled
 event field is a compile error, whereas web3.py hands you dictionaries and you find out at
 runtime. In code that moves assets I think that is worth having, which is why I would write it

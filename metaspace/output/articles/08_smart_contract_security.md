@@ -226,10 +226,11 @@ boundary is what makes the rest credible. Something like: I know the standard fa
 well enough to review a contract and to avoid writing them — reentrancy and CEI ordering, access
 control including the `tx.origin` trap and unprotected initialisers, signature replay across
 nonces, deadlines, domains and malleability, the fact that on-chain randomness does not exist,
-and storage collisions in upgradeable proxies. I have written ERC-1155 and staking contracts and
-I would be comfortable being a second reviewer on a change. What I am not is an auditor: I do
-not do formal verification or invariant fuzzing at a professional level, and I would not want to
-be the only pair of eyes on a contract holding real value. For anything with money in it I would
+and storage collisions in upgradeable proxies. I have not written production contracts, so
+today that is knowledge rather than experience, and I would expect my reviews to be supervised
+until I had earned otherwise. What I am certainly not is an auditor: I do not do formal
+verification or invariant fuzzing, and I would not want to be the only pair of eyes on a
+contract holding real value. For anything with money in it I would
 expect an external audit, and my own contribution would be on the integration side — making sure
 the backend does not become the weak point through a leaked signing key, a non-idempotent
 voucher, or an indexer that credits items from a block that gets reorganised.

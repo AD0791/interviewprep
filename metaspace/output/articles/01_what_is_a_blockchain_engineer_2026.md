@@ -201,11 +201,11 @@ engineer — Python and FastAPI mostly, a lot of systems that have to stay corre
 source I don't control. When I looked at what a Web3 game backend actually does, most of it is
 that same problem: you're keeping a database in sync with an append-only log whose tail can be
 rewritten underneath you, ingestion is at-least-once so it has to be idempotent, and the write
-path has to survive retries without double-spending. I built the integration layer to check
-myself — an indexer with reorg rollback, an EIP-712 voucher service for server-authorised
-minting, and a relayer with nonce management and fee bumping. What I'm not is a contract
-security expert; I've written ERC-1155 and staking contracts and I know the standard patterns,
-but I wouldn't want to be the only pair of eyes on a contract holding real value."
+path has to survive retries without double-spending. I haven't shipped anything on a chain —
+you've seen my CV — but in preparing for this I studied how the integration layer fits
+together: an indexer with reorg rollback, server-signed EIP-712 vouchers for minting, and a
+relayer with nonce management and fee bumping. The part I would be ramping on is Solidity and
+contract security, and I'd want to pair with whoever owns the contracts while I do."
 
 That last sentence is not a weakness. Senior engineers trust people who can locate the edge of
 their own competence, and the sentence makes everything before it more credible.

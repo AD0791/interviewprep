@@ -132,7 +132,7 @@ These were read from the npm and PyPI registries on the day, not from memory.
 | viem | **2.56.8** | The exercises' client library |
 | wagmi | **3.7.7** | React hooks; v2+ is built on viem, not ethers |
 | ethers | **6.17.0** | Still the most common production choice |
-| web3.js | 4.16.0 | **Carries an official sunset notice** — do not start new work on it |
+| web3.js | 4.16.0 | **Already sunset** — ChainSafe announced it on 15 Jan 2025 and archived the repo on 4 Mar 2025, pointing users to ethers or viem ([ChainSafe blog](https://blog.chainsafe.io/web3-js-sunset/)) |
 | web3.py | **8.0.0** | Major version; most Python tutorials predate it |
 | Express | 5.2.1 | v5 finally changed async error handling |
 | FastAPI | 0.141.1 | The Python path in article 12 |
@@ -140,9 +140,16 @@ These were read from the npm and PyPI registries on the day, not from memory.
 Ethereum's recent forks, in order: **Pectra** (May 2025, brought EIP-7702 and EIP-7623),
 **Fusaka** (3 December 2025, brought PeerDAS), and **Glamsterdam** next — Amsterdam on the
 execution layer and Gloas on the consensus layer, still unshipped as of today, carrying
-enshrined proposer-builder separation and block-level access lists. Polygon's own recent
-upgrades are **Rio** (October 2025, the throughput and fast-finality release) and **Ithaca**
-(July 2026, reliability and failover).
+enshrined proposer-builder separation and block-level access lists. (Update, 29 September
+2026: Glamsterdam activates on the Sepolia testnet on 6 October 2026, and no mainnet date has
+been set.) Polygon's own recent upgrades are **Rio** (October 2025, the throughput and
+fast-finality release), **Giugliano** (activated on mainnet on 8 April 2026 at block
+85,268,500, letting block producers announce blocks earlier to shorten time to finality, per
+[The Block](https://www.theblock.co/post/396488/polygon-giugliano-hardfork)), **Ithaca**
+(July 2026, reliability and failover), and **Lugano**, which the Polygon Foundation's 46th
+governance call (25 September 2026) reported live on Amoy with mainnet targeted for
+**1 October 2026**. The Foundation has not published Lugano's technical contents in detail, so
+do not claim to know them.
 
 ## 7. The five sentences to have ready
 

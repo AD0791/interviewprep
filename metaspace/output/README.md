@@ -22,6 +22,10 @@ pitch yourself honestly.
 
 ## Start here
 
+**One night left? Read [00_tonight.md](00_tonight.md) and nothing else.** It is the
+Pareto cut of this whole track for the evening of 29 September and the morning of the 30th, and
+its opening answer supersedes every earlier version of the pitch.
+
 1. **[KNOWLEDGE_GRAPH.md](KNOWLEDGE_GRAPH.md)** — the sixteen topics from
    [../metaspace.md](../metaspace.md) arranged as the dependency graph they actually form,
    marked for what earns its place in a thirty-minute conversation.
@@ -108,11 +112,12 @@ process; the reasoning is in
 
 ## The two things this track will not do
 
-It will not help you claim to be a smart contract security specialist. You have written
-ERC-1155 and staking contracts and you can discuss reentrancy and the standard patterns, and
-the honest limit — that you would not want to be the only reviewer of a contract holding real
-value — is what makes the rest of your claims credible to a Tech Lead who has shipped audited
-code.
+It will not help you claim blockchain experience you do not have. You have never shipped a
+contract or worked on a chain, the studio has your CV, and the exercises in this folder were
+generated for you to study, not written by you — so they are never presented as your work. You
+can discuss reentrancy and the standard patterns as knowledge, and the honest limit — that
+Solidity and contract security are what you would be ramping on — is what makes the rest of
+your claims credible to a Tech Lead who has shipped audited code.
 
 It will not organise your preparation around your CV. The subject is the organising principle.
 What you have done is settled elsewhere — the source of truth is

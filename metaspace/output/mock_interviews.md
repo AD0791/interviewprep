@@ -25,11 +25,12 @@ is boring.
 > **"So, tell me about yourself and how much blockchain you've actually done."**
 
 The answer is in [article 01](articles/01_what_is_a_blockchain_engineer_2026.md) and in
-[positioning.md](../input/metaspace-prep/notes/positioning.md), and its shape is: backend and
-data engineer, a decade of keeping systems correct against sources you do not control, the
-observation that a Web3 game backend is mostly that same problem, the repository you built to
-check yourself, and the explicit limit — not a contract security expert, would not want to be
-the only reviewer of a contract holding real value.
+[positioning.md](../input/metaspace-prep/notes/positioning.md), and the current wording is in
+[00_tonight.md](00_tonight.md). Its shape is: backend and data engineer, a decade of keeping
+systems correct against sources you do not control, the observation that a Web3 game backend is
+mostly that same problem, the plain statement that you have not shipped anything on a chain and
+have studied the integration layer to prepare, and the explicit edge — Solidity and contract
+security are what you would be ramping on.
 
 Two things to time yourself on. It should take **sixty seconds, not three minutes**. And it
 should end with an offer — "happy to walk through any of it" — rather than trailing off.
@@ -89,8 +90,9 @@ broken ordering and nothing against the fixed one.
 **The trap in this set** is question 6, and it is a trap in both directions. Overclaim and the
 next question exposes you, in front of someone who has probably written the contracts.
 Underclaim and you have handed them a reason to say no. The calibrated answer names the classes
-you know, the contracts you have written, and the specific limit: no professional-level formal
-verification or invariant fuzzing, and not the only reviewer on anything holding real value.
+you know, says plainly that this is studied knowledge rather than production experience, and
+gives the specific limit: no formal verification or invariant fuzzing, and never the only
+reviewer on anything holding real value.
 
 ---
 

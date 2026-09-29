@@ -16,6 +16,12 @@ consacré.
 
 ---
 
+> **Mardi 29 septembre 2026, 13 h — deux heures de préparation seulement ?** Lis
+> [`jours_J/08_prep_2h_revue_20min.md`](jours_J/08_prep_2h_revue_20min.md) et rien d'autre : il se
+> suffit à lui-même, avec son minutage et sa révision de vingt minutes. Il ajoute ce qui manquait
+> ici, la fiche complète d'`AGYW_PREV` tirée du guide MER v2.8.2, dont un point qui change la
+> formulation : cet indicateur est saisi dans DATIM par l'équipe USG, pas par les partenaires.
+
 ## L'ordre de lecture
 
 **Ce soir, dans cet ordre.** [`FICHE_SYNTHESE.md`](FICHE_SYNTHESE.md) d'abord, une heure, toute la
