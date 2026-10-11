@@ -10,7 +10,9 @@ Each track is written in the language of its interview. The humanitarian tracks 
 
 | Track | Role | Language | Status |
 |---|---|---|---|
-| [`panos_mel_acq/`](panos_mel_acq/README.md) | Responsable MEL/ACQ — Institut Panos, programme AFGHS-PANOS (VIH, paiement sur jalons) | Français (+ pitch anglais) | **Entretien Zoom ven. 25 sept. 2026, 13 h** |
+| [`crs_spo_meal/`](crs_spo_meal/README.md) | Senior Project Officer MEAL — CRS Haïti, projet RAPID (urgence, Département d'État) | Français (+ pitch anglais) | **Entretien en ligne annoncé le 11 oct. 2026 — date à confirmer** |
+| [`panos_mel_acq/`](panos_mel_acq/README.md) | Responsable MEL/ACQ — Institut Panos, programme AFGHS-PANOS (VIH, paiement sur jalons) | Français (+ pitch anglais) | Entretien Zoom du mar. 29 sept. 2026 (reporté du 25) |
+| [`metaspace/`](metaspace/output/README.md) | Blockchain Engineer — Metaspace (UAE game studio, Polygon) | English | Interview 30 Sept 2026, 16:00 Haiti time |
 | [`cmmb_meal_officer/`](cmmb_meal_officer/README.md) | M&E Officer — CMMB Haïti (VIH, santé publique) | Français (+ annexe anglaise) | **Entretien à venir — pas d'examen** |
 | [`remote_leverage_data_analyst/`](remote_leverage_data_analyst/README.md) | Data Analyst — Remote Leverage (VA placement agency, Florida) | English | **Interview Mon 3 Aug 2026** |
 | [`acted_bdd/`](acted_bdd/README.md) | Assistant(e) Base de Données — ACTED Haïti, réf. ASSISTBDD_2607 | Français | Dossier déposé, examen à venir |
@@ -32,6 +34,8 @@ They are not independent bodies of knowledge. Three of them describe the **same 
 `cmmb_meal_officer/` carries the method into public health, and is the only track whose employer's domain (HIV) has its own measurement apparatus. It deliberately does **not** restate the MEAL theory, statistics or indicator design already written in `assitant_pmel/`; it links back to those modules and adds what health puts on top — the cascade of care and the 95-95-95 arithmetic, PEPFAR MER indicators, cohort retention and the discipline of the denominator, Haiti's health information systems (SISNU, iSanté, MESI, SALVH, DATIM), results-based financing, and the health-facility reporting chain from paper register to donor.
 
 `panos_mel_acq/` builds on `cmmb_meal_officer/` rather than repeating it — the same HIV and MER material, re-read from the mandate of a community sub-partner (treatment interruption, return to care, adherence) — and adds what that post turns on: a funding mechanism whose payments depend on verified milestones (very likely the State Department's America First Global Health Strategy), independent verification, and reconciliation with Haiti's national systems. It ships a small fictional tracing dataset in `exercices/` so the module's SQL figures are real query outputs.
+
+`crs_spo_meal/` is the first emergency-response track. It reuses `panos_mel_acq/` for milestone payments, verification and the pressure stories, and `cmmb_meal_officer/` for HR and salary, then adds CRS's own MEAL method (SMILER+), the humanitarian toolkit (food-security indices, distribution and post-distribution monitoring, MUAC, the feedback and complaints mechanism, the CHS), and twelve management scenarios. Its module 00 also records the donor shift visible on the ground: the State Department replacing USAID, shown by Acted's Artibonite consortium moving from BHA to ECHO plus State funding.
 
 `python_bairesdev/` is the engineering track, and it supplies two anecdotes the others reuse: the N+1 optimisation (36 seconds to under 0.5) and the composite-index deadlock fix.
 
